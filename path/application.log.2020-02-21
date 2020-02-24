@@ -1,0 +1,50 @@
+[2020-02-21 15:22:58]  INFO (airquality.GetIvstg - main:37) - firstLine start..
+[2020-02-21 15:22:59]  INFO (airquality.GetIvstg - main:578) - parsing complete!
+[2020-02-21 15:24:09] DEBUG (airquality.GetIvstg - main:655) - 파라미터 개수 에러!!
+[2020-02-21 15:24:19] DEBUG (airquality.GetIvstg - main:655) - 파라미터 개수 에러!!
+[2020-02-21 15:41:30]  INFO (airquality.GetIvstg - main:37) - firstLine start..
+[2020-02-21 15:41:31]  INFO (airquality.GetIvstg - main:578) - parsing complete!
+[2020-02-21 15:41:52]  INFO (airquality.GetIvstg - main:640) - sftp transfer complete!
+[2020-02-21 15:42:05]  INFO (airquality.GetPredict - main:36) - firstLine start..
+[2020-02-21 15:42:06]  INFO (airquality.GetPredict - main:384) - sftp transfer complete!
+[2020-02-21 15:48:45]  INFO (airquality.GetStackStdr - main:37) - firstLine start..
+[2020-02-21 15:52:26]  INFO (airquality.GetStackStdr - main:37) - firstLine start..
+[2020-02-21 16:03:41]  INFO (greenhouseGas.GetInfo - main:36) - firstLine start..
+[2020-02-21 16:03:41] DEBUG (greenhouseGas.GetInfo - main:251) - mgtNo :ME2011A003
+[2020-02-21 16:04:51]  INFO (greenhouseGas.GetInfo - main:36) - firstLine start..
+[2020-02-21 16:04:52]  INFO (greenhouseGas.GetInfo - main:178) - parsing complete!
+[2020-02-21 16:12:15]  INFO (foulsmell.GetIvstg - main:37) - firstLine start..
+[2020-02-21 16:12:15]  INFO (foulsmell.GetIvstg - main:390) - mgtNo :GG2008B014
+[2020-02-21 16:12:15]  INFO (foulsmell.GetIvstg - main:394) - parsing complete!
+[2020-02-21 16:17:38]  INFO (foulsmell.GetPredict - main:36) - firstLine start..
+[2020-02-21 16:17:38]  INFO (foulsmell.GetPredict - main:295) - parsing complete!
+[2020-02-21 16:24:07]  INFO (sntPbh.GetInfo - main:37) - firstLine start..
+[2020-02-21 16:24:08] DEBUG (sntPbh.GetInfo - main:378) - data not exist!! mgtNo :PS2009A007
+[2020-02-21 16:24:51]  INFO (sntPbh.GetInfo - main:37) - firstLine start..
+[2020-02-21 16:24:52]  INFO (sntPbh.GetInfo - main:312) - parsing complete!
+[2020-02-21 16:33:23]  INFO (waterquality.GetInfo - main:36) - firstLine start..
+[2020-02-21 16:33:24]  INFO (waterquality.GetInfo - main:402) - parsing complete!
+[2020-02-21 16:46:30]  INFO (waterquality.GetIvstg - main:37) - firstLine start..
+[2020-02-21 16:46:32]  INFO (waterquality.GetIvstg - main:566) - parsing complete!
+[2020-02-21 16:55:30]  INFO (hydraulics.GetArea - main:35) - firstLine start..
+[2020-02-21 16:55:30]  INFO (hydraulics.GetArea - main:212) - parsing complete!
+[2020-02-21 17:00:37]  INFO (hydraulics.GetRiver - main:37) - firstLine start..
+[2020-02-21 17:00:37]  INFO (hydraulics.GetRiver - main:213) - parsing complete!
+[2020-02-21 17:08:02]  INFO (maritime.GetModel - main:36) - firstLine start..
+[2020-02-21 17:08:02]  INFO (maritime.GetModel - main:154) - parsing complete!
+[2020-02-21 17:12:53]  INFO (maritime.GetIvstg - main:37) - firstLine start..
+[2020-02-21 17:12:55]  INFO (maritime.GetIvstg - main:427) - parsing complete!
+[2020-02-21 17:17:35]  INFO (maritime.GetAmplt - main:37) - firstLine start..
+[2020-02-21 17:17:35]  INFO (maritime.GetAmplt - main:223) - parsing complete!
+[2020-02-21 17:23:03]  INFO (maritime.GetAmpltNm - main:37) - firstLine start..
+[2020-02-21 17:23:03]  INFO (maritime.GetAmpltNm - main:227) - parsing complete!
+[2020-02-21 17:30:27]  INFO (maritime.GetAmpltNm - main:37) - firstLine start..
+[2020-02-21 17:30:27]  INFO (maritime.GetAmpltNm - main:227) - parsing complete!
+[2020-02-21 17:30:41]  INFO (maritime.GetAmpltNm - main:37) - firstLine start..
+[2020-02-21 17:30:41]  INFO (maritime.GetAmpltNm - main:227) - parsing complete!
+[2020-02-21 17:40:50]  INFO (landUse.GetInfo - main:36) - firstLine start..
+[2020-02-21 17:40:50]  INFO (landUse.GetInfo - main:287) - parsing complete!
+[2020-02-21 17:45:14]  INFO (landUse.GetSpfc - main:37) - firstLine start..
+[2020-02-21 17:45:15]  INFO (landUse.GetSpfc - main:139) - parsing complete!
+[2020-02-21 17:48:54]  INFO (landUse.GetCategory - main:37) - firstLine start..
+[2020-02-21 17:48:54]  INFO (landUse.GetCategory - main:131) - parsing complete!
