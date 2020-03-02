@@ -2,12 +2,9 @@ package eia.airquality;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -16,12 +13,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import com.jcraft.jsch.Channel;
-import com.jcraft.jsch.ChannelSftp;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.Session;
-
 import common.JsonParser;
+import common.TransSftp;
 
 public class GetStackStdr {
 
@@ -42,11 +35,8 @@ public class GetStackStdr {
 			String service_key = JsonParser.getProperty("airquality_service_key");
 
 			// step 1.파일의 첫 행 작성
-			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-			Date thisDate = new Date();
-			String strDate = format.format(thisDate);
 
-			File file = new File(JsonParser.getProperty("file_path") + "AirqualityService_getStackStdr_" + strDate + ".dat");
+			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_01_" + mgtNo + ".dat");
 
 			try {
 				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
@@ -98,7 +88,7 @@ public class GetStackStdr {
 
 			String json = "";
 
-			json = JsonParser.parseJson(service_url, service_key, mgtNo);
+			json = JsonParser.parseEiaJson(service_url, service_key, mgtNo);
 
 			// step 3.필요에 맞게 파싱
 
@@ -112,7 +102,7 @@ public class GetStackStdr {
 				JSONObject header = (JSONObject) response.get("header");
 				JSONObject body = (JSONObject) response.get("body");
 
-				String resultCode = header.get("resultCode").toString();
+				String resultCode = header.get("resultCode").toString().trim();
 
 				if (resultCode.equals("00")) {
 
@@ -149,58 +139,58 @@ public class GetStackStdr {
 							String keyname = iter.next();
 
 							if (keyname.equals("stackNm")) {
-								stackNm = stack.get(keyname).toString();
+								stackNm = stack.get(keyname).toString().trim();
 							}
 							if (keyname.equals("adres")) {
-								adres = stack.get(keyname).toString();
+								adres = stack.get(keyname).toString().trim();
 							}
 							if (keyname.equals("xcnts")) {
-								xcnts = stack.get(keyname).toString();
+								xcnts = stack.get(keyname).toString().trim();
 							}
 							if (keyname.equals("ydnts")) {
-								ydnts = stack.get(keyname).toString();
+								ydnts = stack.get(keyname).toString().trim();
 							}
 							if (keyname.equals("stackHg")) {
-								stackHg = stack.get(keyname).toString();
+								stackHg = stack.get(keyname).toString().trim();
 							}
 							if (keyname.equals("stackDm")) {
-								stackDm = stack.get(keyname).toString();
+								stackDm = stack.get(keyname).toString().trim();
 							}
 							if (keyname.equals("stackIndm")) {
-								stackIndm = stack.get(keyname).toString();
+								stackIndm = stack.get(keyname).toString().trim();
 							}
 							if (keyname.equals("stackTp")) {
-								stackTp = stack.get(keyname).toString();
+								stackTp = stack.get(keyname).toString().trim();
 							}
 							if (keyname.equals("dgsnStdrPm10Val")) {
-								dgsnStdrPm10Val = stack.get(keyname).toString();
+								dgsnStdrPm10Val = stack.get(keyname).toString().trim();
 							}
 							if (keyname.equals("dgsnStdrPm25Val")) {
-								dgsnStdrPm25Val = stack.get(keyname).toString();
+								dgsnStdrPm25Val = stack.get(keyname).toString().trim();
 							}
 							if (keyname.equals("dgsnStdrNo2Val")) {
-								dgsnStdrNo2Val = stack.get(keyname).toString();
+								dgsnStdrNo2Val = stack.get(keyname).toString().trim();
 							}
 							if (keyname.equals("dgsnStdrSo2Val")) {
-								dgsnStdrSo2Val = stack.get(keyname).toString();
+								dgsnStdrSo2Val = stack.get(keyname).toString().trim();
 							}
 							if (keyname.equals("dgsnStdrCoVal")) {
-								dgsnStdrCoVal = stack.get(keyname).toString();
+								dgsnStdrCoVal = stack.get(keyname).toString().trim();
 							}
 							if (keyname.equals("dscamtPm10Val")) {
-								dscamtPm10Val = stack.get(keyname).toString();
+								dscamtPm10Val = stack.get(keyname).toString().trim();
 							}
 							if (keyname.equals("dscamtPm25Val")) {
-								dscamtPm25Val = stack.get(keyname).toString();
+								dscamtPm25Val = stack.get(keyname).toString().trim();
 							}
 							if (keyname.equals("dscamtNo2Val")) {
-								dscamtNo2Val = stack.get(keyname).toString();
+								dscamtNo2Val = stack.get(keyname).toString().trim();
 							}
 							if (keyname.equals("dscamtSo20Val")) {
-								dscamtSo20Val = stack.get(keyname).toString();
+								dscamtSo20Val = stack.get(keyname).toString().trim();
 							}
 							if (keyname.equals("dscamtCoVal")) {
-								dscamtCoVal = stack.get(keyname).toString();
+								dscamtCoVal = stack.get(keyname).toString().trim();
 							}
 
 						}
@@ -258,69 +248,10 @@ public class GetStackStdr {
 					
 					logger.info("parsing complete!");
 
-					// step 5. 대상 서버에 sftp로 보냄
+					// step 5. 대상 서버에 sftp로 보냄 (대상 파일 경로, 목적지 폴더명)
 
-					Session session = null;
-					Channel channel = null;
-					ChannelSftp channelSftp = null;
-					File f = new File(JsonParser.getProperty("file_path") + "AirqualityService_getStackStdr_" + strDate + ".dat");
-					FileInputStream in = null;
-
-					logger.info("preparing the host information for sftp.");
-
-					try {
-
-						JSch jsch = new JSch();
-						session = jsch.getSession("agntuser", "172.29.129.11", 28);
-						session.setPassword("Dpdlwjsxm1@");
-
-						// host 연결
-						java.util.Properties config = new java.util.Properties();
-						config.put("StrictHostKeyChecking", "no");
-						session.setConfig(config);
-						session.connect();
-
-						// sftp 채널 연결
-						channel = session.openChannel("sftp");
-						channel.connect();
-
-						// 파일 업로드 처리
-						channelSftp = (ChannelSftp) channel;
-
-						logger.info("=> Connected to host");
-						in = new FileInputStream(f);
-
-						// channelSftp.cd("/data1/if_data/WEI"); //as-is, 연계서버에
-						// 떨어지는 위치
-						channelSftp.cd(JsonParser.getProperty("dest_path")); // test
-
-						String fileName = f.getName();
-						channelSftp.put(in, fileName);
-
-						logger.info("=> Uploaded : " + f.getPath());
-
-					} catch (Exception e) {
-						e.printStackTrace();
-					} finally {
-						try {
-
-							in.close();
-
-							// sftp 채널을 닫음
-							channelSftp.exit();
-
-							// 채널 연결 해제
-							channel.disconnect();
-
-							// 호스트 세션 종료
-							session.disconnect();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-
-					logger.info("sftp transfer complete!");
-
+					TransSftp.transSftp(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_01_" + mgtNo + ".dat", "EIA");
+					
 				} else if (resultCode.equals("03")) {
 					logger.debug("data not exist!! mgtNo :" + mgtNo);
 				} else {

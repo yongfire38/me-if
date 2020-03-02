@@ -2,12 +2,9 @@ package eia.maritime;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -16,12 +13,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import com.jcraft.jsch.Channel;
-import com.jcraft.jsch.ChannelSftp;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.Session;
-
 import common.JsonParser;
+import common.TransSftp;
 
 public class GetAmpltNm {
 
@@ -42,11 +35,7 @@ public class GetAmpltNm {
 			String service_key = JsonParser.getProperty("maritime_service_key");
 
 			// step 1.파일의 첫 행 작성
-			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-			Date thisDate = new Date();
-			String strDate = format.format(thisDate);
-
-			File file = new File(JsonParser.getProperty("file_path") + "MaritimeService_getAmpltNm_" + strDate + ".dat");
+			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_16_" + mgtNo + ".dat");
 
 			try {
 				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
@@ -80,7 +69,7 @@ public class GetAmpltNm {
 
 			String json = "";
 
-			json = JsonParser.parseJson(service_url, service_key, mgtNo);
+			json = JsonParser.parseEiaJson(service_url, service_key, mgtNo);
 
 			// step 3.필요에 맞게 파싱
 
@@ -94,7 +83,7 @@ public class GetAmpltNm {
 				JSONObject header = (JSONObject) response.get("header");
 				JSONObject body = (JSONObject) response.get("body");
 
-				String resultCode = header.get("resultCode").toString();
+				String resultCode = header.get("resultCode").toString().trim();
 
 				if (resultCode.equals("00")) {
 
@@ -107,7 +96,7 @@ public class GetAmpltNm {
 						String ivstgSpotNm_str = " "; // 조사지점명
 
 						if (ivstgs_Json.get("ivstgSpotNm") != null) {
-							ivstgSpotNm_str = ivstgs_Json.get("ivstgSpotNm").toString();
+							ivstgSpotNm_str = ivstgs_Json.get("ivstgSpotNm").toString().trim();
 						} else {
 							ivstgSpotNm_str = " ";
 						}
@@ -121,7 +110,7 @@ public class GetAmpltNm {
 							String ivstgOdr_str = " "; // 조사차수
 
 							if (odrs_Json.get("ivstgOdr") != null) {
-								ivstgOdr_str = odrs_Json.get("ivstgOdr").toString();
+								ivstgOdr_str = odrs_Json.get("ivstgOdr").toString().trim();
 							} else {
 								ivstgOdr_str = " ";
 							}
@@ -153,25 +142,25 @@ public class GetAmpltNm {
 									String keyname = iter.next();
 
 									if (keyname.equals("id")) {
-										id = ids_Json.get(keyname).toString();
+										id = ids_Json.get(keyname).toString().trim();
 									}
 									if (keyname.equals("mediolittoralKornm")) {
-										mediolittoralKornm = ids_Json.get(keyname).toString();
+										mediolittoralKornm = ids_Json.get(keyname).toString().trim();
 									}
 									if (keyname.equals("mediolittoralScncenm")) {
-										mediolittoralScncenm = ids_Json.get(keyname).toString();
+										mediolittoralScncenm = ids_Json.get(keyname).toString().trim();
 									}
 									if (keyname.equals("infralittoralKornm")) {
-										infralittoralKornm = ids_Json.get(keyname).toString();
+										infralittoralKornm = ids_Json.get(keyname).toString().trim();
 									}
 									if (keyname.equals("infralittoralScncenm")) {
-										infralittoralScncenm = ids_Json.get(keyname).toString();
+										infralittoralScncenm = ids_Json.get(keyname).toString().trim();
 									}
 									if (keyname.equals("seawidsKorname")) {
-										seawidsKorname = ids_Json.get(keyname).toString();
+										seawidsKorname = ids_Json.get(keyname).toString().trim();
 									}
 									if (keyname.equals("seawidsScncenm")) {
-										seawidsScncenm = ids_Json.get(keyname).toString();
+										seawidsScncenm = ids_Json.get(keyname).toString().trim();
 									}
 								}
 								// step 4. 파일에 쓰기
@@ -227,66 +216,7 @@ public class GetAmpltNm {
 
 					// step 5. 대상 서버에 sftp로 보냄
 
-					Session session = null;
-					Channel channel = null;
-					ChannelSftp channelSftp = null;
-					File f = new File(JsonParser.getProperty("file_path") + "MaritimeService_getAmpltNm_" + strDate + ".dat");
-					FileInputStream in = null;
-
-					logger.info("preparing the host information for sftp.");
-
-					try {
-
-						JSch jsch = new JSch();
-						session = jsch.getSession("agntuser", "172.29.129.11", 28);
-						session.setPassword("Dpdlwjsxm1@");
-
-						// host 연결
-						java.util.Properties config = new java.util.Properties();
-						config.put("StrictHostKeyChecking", "no");
-						session.setConfig(config);
-						session.connect();
-
-						// sftp 채널 연결
-						channel = session.openChannel("sftp");
-						channel.connect();
-
-						// 파일 업로드 처리
-						channelSftp = (ChannelSftp) channel;
-
-						logger.info("=> Connected to host");
-						in = new FileInputStream(f);
-
-						// channelSftp.cd("/data1/if_data/WEI"); //as-is, 연계서버에
-						// 떨어지는 위치
-						channelSftp.cd(JsonParser.getProperty("dest_path")); // test
-
-						String fileName = f.getName();
-						channelSftp.put(in, fileName);
-
-						logger.info("=> Uploaded : " + f.getPath());
-
-					} catch (Exception e) {
-						e.printStackTrace();
-					} finally {
-						try {
-
-							in.close();
-
-							// sftp 채널을 닫음
-							channelSftp.exit();
-
-							// 채널 연결 해제
-							channel.disconnect();
-
-							// 호스트 세션 종료
-							session.disconnect();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-
-					logger.info("sftp transfer complete!");
+					TransSftp.transSftp(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_16_" + mgtNo + ".dat", "EIA");
 
 				} else if (resultCode.equals("03")) {
 					logger.debug("data not exist!! mgtNo :" + mgtNo);

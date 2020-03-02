@@ -1,0 +1,112 @@
+[2020-02-24 09:10:41]  INFO (soil.GetInfo - main:37) - firstLine start..
+[2020-02-24 09:10:42]  INFO (soil.GetInfo - main:421) - parsing complete!
+[2020-02-24 09:10:42]  INFO (soil.GetInfo - main:484) - sftp transfer complete!
+[2020-02-24 09:16:25]  INFO (soil.GetInfo - main:37) - firstLine start..
+[2020-02-24 09:16:26]  INFO (soil.GetInfo - main:423) - parsing complete!
+[2020-02-24 09:16:26]  INFO (soil.GetInfo - main:486) - sftp transfer complete!
+[2020-02-24 09:18:01]  INFO (soil.GetInfo - main:37) - firstLine start..
+[2020-02-24 09:18:02]  INFO (soil.GetInfo - main:423) - parsing complete!
+[2020-02-24 09:18:02]  INFO (soil.GetInfo - main:486) - sftp transfer complete!
+[2020-02-24 09:20:34]  INFO (soil.GetInfo - main:37) - firstLine start..
+[2020-02-24 09:20:34]  INFO (soil.GetInfo - main:425) - parsing complete!
+[2020-02-24 09:20:34]  INFO (soil.GetInfo - main:488) - sftp transfer complete!
+[2020-02-24 09:22:28]  INFO (soil.GetInfo - main:37) - firstLine start..
+[2020-02-24 09:22:28]  INFO (soil.GetInfo - main:425) - parsing complete!
+[2020-02-24 09:22:28]  INFO (soil.GetInfo - main:488) - sftp transfer complete!
+[2020-02-24 09:25:07]  INFO (soil.GetInfo - main:37) - firstLine start..
+[2020-02-24 09:25:08]  INFO (soil.GetInfo - main:425) - parsing complete!
+[2020-02-24 09:25:08]  INFO (soil.GetInfo - main:488) - sftp transfer complete!
+[2020-02-24 09:33:50]  INFO (soil.GetInfo - main:37) - firstLine start..
+[2020-02-24 09:33:50]  INFO (soil.GetInfo - main:426) - parsing complete!
+[2020-02-24 09:33:50]  INFO (soil.GetInfo - main:489) - sftp transfer complete!
+[2020-02-24 09:54:26]  INFO (soil.GetInfo - main:37) - firstLine start..
+[2020-02-24 09:54:27]  INFO (soil.GetInfo - main:426) - parsing complete!
+[2020-02-24 09:54:27]  INFO (soil.GetInfo - main:489) - sftp transfer complete!
+[2020-02-24 10:10:47]  INFO (geological.GetInfo - main:36) - firstLine start..
+[2020-02-24 10:10:47]  INFO (geological.GetInfo - main:194) - parsing complete!
+[2020-02-24 10:10:47]  INFO (geological.GetInfo - main:257) - sftp transfer complete!
+[2020-02-24 10:16:57]  INFO (geological.GetInfo - main:36) - firstLine start..
+[2020-02-24 10:16:57]  INFO (geological.GetInfo - main:194) - parsing complete!
+[2020-02-24 10:16:57]  INFO (geological.GetInfo - main:257) - sftp transfer complete!
+[2020-02-24 10:21:56]  INFO (geological.getIvstg - main:37) - firstLine start..
+[2020-02-24 10:21:59]  INFO (geological.getIvstg - main:234) - parsing complete!
+[2020-02-24 10:21:59]  INFO (geological.getIvstg - main:297) - sftp transfer complete!
+[2020-02-24 10:26:08]  INFO (geological.GetIvstg - main:37) - firstLine start..
+[2020-02-24 10:26:08]  INFO (geological.GetIvstg - main:232) - parsing complete!
+[2020-02-24 10:26:08]  INFO (geological.GetIvstg - main:242) - preparing the host information for sftp.
+[2020-02-24 10:26:52]  INFO (geological.GetIvstg - main:37) - firstLine start..
+[2020-02-24 10:26:54]  INFO (geological.GetIvstg - main:232) - parsing complete!
+[2020-02-24 10:26:54]  INFO (geological.GetIvstg - main:295) - sftp transfer complete!
+[2020-02-24 10:35:04]  INFO (geological.GetMine - main:37) - firstLine start..
+[2020-02-24 10:35:05]  INFO (geological.GetMine - main:148) - parsing complete!
+[2020-02-24 10:35:05]  INFO (geological.GetMine - main:211) - sftp transfer complete!
+[2020-02-24 10:40:11]  INFO (geological.GetNtrfs - main:37) - firstLine start..
+[2020-02-24 10:40:11]  INFO (geological.GetNtrfs - main:132) - parsing complete!
+[2020-02-24 10:40:11]  INFO (geological.GetNtrfs - main:195) - sftp transfer complete!
+[2020-02-24 10:45:51]  INFO (geological.GetRidge - main:35) - firstLine start..
+[2020-02-24 10:45:52]  INFO (geological.GetRidge - main:130) - parsing complete!
+[2020-02-24 10:45:52]  INFO (geological.GetRidge - main:193) - sftp transfer complete!
+[2020-02-24 10:54:10]  INFO (geological.GetRidge - main:37) - firstLine start..
+[2020-02-24 10:54:10]  INFO (geological.GetRidge - main:132) - parsing complete!
+[2020-02-24 10:54:10]  INFO (geological.GetRidge - main:142) - preparing the host information for sftp.
+[2020-02-24 10:54:54]  INFO (geological.GetAl - main:37) - firstLine start..
+[2020-02-24 10:54:55]  INFO (geological.GetAl - main:140) - parsing complete!
+[2020-02-24 10:54:55]  INFO (geological.GetAl - main:203) - sftp transfer complete!
+[2020-02-24 11:01:32]  INFO (geological.GetSlt - main:37) - firstLine start..
+[2020-02-24 11:01:32]  INFO (geological.GetSlt - main:140) - parsing complete!
+[2020-02-24 11:01:32]  INFO (geological.GetSlt - main:203) - sftp transfer complete!
+[2020-02-24 11:09:07]  INFO (geological.GetSlr - main:37) - firstLine start..
+[2020-02-24 11:09:08]  INFO (geological.GetSlr - main:221) - parsing complete!
+[2020-02-24 11:09:08]  INFO (geological.GetSlr - main:284) - sftp transfer complete!
+[2020-02-24 11:17:04]  INFO (floraFauna.GetGreen - main:36) - firstLine start..
+[2020-02-24 11:17:04]  INFO (floraFauna.GetGreen - main:504) - parsing complete!
+[2020-02-24 11:17:04]  INFO (floraFauna.GetGreen - main:567) - sftp transfer complete!
+[2020-02-24 11:19:32]  INFO (floraFauna.GetGreen - main:36) - firstLine start..
+[2020-02-24 11:19:32]  INFO (floraFauna.GetGreen - main:506) - parsing complete!
+[2020-02-24 11:19:32]  INFO (floraFauna.GetGreen - main:569) - sftp transfer complete!
+[2020-02-24 11:26:01]  INFO (floraFauna.GetScope - main:37) - firstLine start..
+[2020-02-24 11:26:01] DEBUG (floraFauna.GetScope - main:265) - mgtNo :ME2007E010
+[2020-02-24 11:27:01]  INFO (floraFauna.GetScope - main:37) - firstLine start..
+[2020-02-24 11:27:02]  INFO (floraFauna.GetScope - main:192) - parsing complete!
+[2020-02-24 11:27:02]  INFO (floraFauna.GetScope - main:255) - sftp transfer complete!
+[2020-02-24 13:24:18]  INFO (floraFauna.GetScope - main:37) - firstLine start..
+[2020-02-24 13:24:18]  INFO (floraFauna.GetScope - main:192) - parsing complete!
+[2020-02-24 13:24:18]  INFO (floraFauna.GetScope - main:202) - preparing the host information for sftp.
+[2020-02-24 13:24:39]  INFO (floraFauna.GetScope - main:255) - sftp transfer complete!
+[2020-02-24 13:24:52]  INFO (floraFauna.GetScope - main:37) - firstLine start..
+[2020-02-24 13:24:52]  INFO (floraFauna.GetScope - main:192) - parsing complete!
+[2020-02-24 13:24:52]  INFO (floraFauna.GetScope - main:202) - preparing the host information for sftp.
+[2020-02-24 13:25:13]  INFO (floraFauna.GetScope - main:255) - sftp transfer complete!
+[2020-02-24 13:36:53]  INFO (floraFauna.GetScope - main:37) - firstLine start..
+[2020-02-24 13:36:53]  INFO (floraFauna.GetScope - main:192) - parsing complete!
+[2020-02-24 13:36:53]  INFO (floraFauna.GetScope - main:202) - preparing the host information for sftp.
+[2020-02-24 13:38:10]  INFO (floraFauna.GetIvstg - main:37) - firstLine start..
+[2020-02-24 13:38:17]  INFO (floraFauna.GetIvstg - main:228) - parsing complete!
+[2020-02-24 13:40:00]  INFO (floraFauna.GetIvstg - main:37) - firstLine start..
+[2020-02-24 13:40:09]  INFO (floraFauna.GetIvstg - main:228) - parsing complete!
+[2020-02-24 13:44:44]  INFO (floraFauna.GetIvstg - main:37) - firstLine start..
+[2020-02-24 13:44:50]  INFO (floraFauna.GetIvstg - main:231) - parsing complete!
+[2020-02-24 14:28:10]  INFO (ecoCycle.GetInfo - main:36) - firstLine start..
+[2020-02-24 14:28:10]  INFO (ecoCycle.GetInfo - main:226) - parsing complete!
+[2020-02-24 15:29:55]  INFO (noiseVibration.GetInfo - main:37) - firstLine start..
+[2020-02-24 15:29:57]  INFO (noiseVibration.GetInfo - main:225) - parsing complete!
+[2020-02-24 15:30:52]  INFO (noiseVibration.GetInfo - main:37) - firstLine start..
+[2020-02-24 15:30:54]  INFO (noiseVibration.GetInfo - main:225) - parsing complete!
+[2020-02-24 16:29:17]  INFO (noiseVibration.GetInfo - main:37) - firstLine start..
+[2020-02-24 16:29:18]  INFO (noiseVibration.GetInfo - main:225) - parsing complete!
+[2020-02-24 16:29:18]  INFO (noiseVibration.GetInfo - main:236) - preparing the host information for sftp.
+[2020-02-24 16:29:39]  INFO (noiseVibration.GetInfo - main:289) - sftp transfer complete!
+[2020-02-24 16:29:44] DEBUG (monPurification_api.MonPurification - main:24) - 파라미터 개수 에러!!
+[2020-02-24 16:29:56] DEBUG (monPurification_api.MonPurification - main:18) - 파라미터 형식 에러!!
+[2020-02-24 16:30:20] DEBUG (monPurification_api.MonPurification - main:18) - 파라미터 형식 에러!!
+[2020-02-24 16:30:32] DEBUG (monPurification_api.MonPurification - main:24) - 파라미터 개수 에러!!
+[2020-02-24 17:45:13]  INFO (monPurification_api.MonPurification - main:28) - firstLine start..
+[2020-02-24 17:45:45]  INFO (monPurification_api.MonPurification - main:28) - firstLine start..
+[2020-02-24 17:46:57]  INFO (monPurification_api.MonPurification - main:28) - firstLine start..
+[2020-02-24 17:48:01]  INFO (monPurification_api.MonPurification - main:28) - firstLine start..
+[2020-02-24 17:48:30]  INFO (monPurification_api.MonPurification - main:28) - firstLine start..
+[2020-02-24 17:51:01]  INFO (monPurification_api.MonPurification - main:28) - firstLine start..
+[2020-02-24 17:51:56]  INFO (monPurification_api.MonPurification - main:28) - firstLine start..
+[2020-02-24 17:52:21]  INFO (monPurification_api.MonPurification - main:28) - firstLine start..
+[2020-02-24 17:53:04]  INFO (monPurification_api.MonPurification - main:28) - firstLine start..
+[2020-02-24 17:56:18]  INFO (monPurification_api.MonPurification - main:28) - firstLine start..

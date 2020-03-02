@@ -2,12 +2,9 @@ package eia.floraFauna;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -15,12 +12,8 @@ import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import com.jcraft.jsch.Channel;
-import com.jcraft.jsch.ChannelSftp;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.Session;
-
 import common.JsonParser;
+import common.TransSftp;
 
 public class GetGreen {
 
@@ -41,11 +34,7 @@ public class GetGreen {
 			String service_key = JsonParser.getProperty("florafauna_service_key");
 
 			// step 1.파일의 첫 행 작성
-			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-			Date thisDate = new Date();
-			String strDate = format.format(thisDate);
-
-			File file = new File(JsonParser.getProperty("file_path") + "FlorafaunaService_getGreen_" + strDate + ".dat");
+			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_29_" + mgtNo + ".dat");
 
 			try {
 				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
@@ -161,7 +150,7 @@ public class GetGreen {
 
 			String json = "";
 
-			json = JsonParser.parseJson(service_url, service_key, mgtNo);
+			json = JsonParser.parseEiaJson(service_url, service_key, mgtNo);
 
 			// step 3.필요에 맞게 파싱
 
@@ -175,7 +164,7 @@ public class GetGreen {
 				JSONObject header = (JSONObject) response.get("header");
 				JSONObject body = (JSONObject) response.get("body");
 
-				String resultCode = header.get("resultCode").toString();
+				String resultCode = header.get("resultCode").toString().trim();
 
 				if (resultCode.equals("00")) {
 
@@ -238,154 +227,154 @@ public class GetGreen {
 						String keyname = iter.next();
 
 						if (keyname.equals("bfeGreens0gAr")) {
-							bfeGreens0gAr = body.get(keyname).toString();
+							bfeGreens0gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens1gAr")) {
-							bfeGreens1gAr = body.get(keyname).toString();
+							bfeGreens1gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens2gAr")) {
-							bfeGreens2gAr = body.get(keyname).toString();
+							bfeGreens2gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens3gAr")) {
-							bfeGreens3gAr = body.get(keyname).toString();
+							bfeGreens3gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens4gAr")) {
-							bfeGreens4gAr = body.get(keyname).toString();
+							bfeGreens4gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens5gAr")) {
-							bfeGreens5gAr = body.get(keyname).toString();
+							bfeGreens5gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens6gAr")) {
-							bfeGreens6gAr = body.get(keyname).toString();
+							bfeGreens6gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens7gAr")) {
-							bfeGreens7gAr = body.get(keyname).toString();
+							bfeGreens7gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens8gAr")) {
-							bfeGreens8gAr = body.get(keyname).toString();
+							bfeGreens8gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens9gAr")) {
-							bfeGreens9gAr = body.get(keyname).toString();
+							bfeGreens9gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens10gAr")) {
-							bfeGreens10gAr = body.get(keyname).toString();
+							bfeGreens10gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens0gAr")) {
-							aftGreens0gAr = body.get(keyname).toString();
+							aftGreens0gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens1gAr")) {
-							aftGreens1gAr = body.get(keyname).toString();
+							aftGreens1gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens2gAr")) {
-							aftGreens2gAr = body.get(keyname).toString();
+							aftGreens2gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens3gAr")) {
-							aftGreens3gAr = body.get(keyname).toString();
+							aftGreens3gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens4gAr")) {
-							aftGreens4gAr = body.get(keyname).toString();
+							aftGreens4gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens5gAr")) {
-							aftGreens5gAr = body.get(keyname).toString();
+							aftGreens5gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens6gAr")) {
-							aftGreens6gAr = body.get(keyname).toString();
+							aftGreens6gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens7gAr")) {
-							aftGreens7gAr = body.get(keyname).toString();
+							aftGreens7gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens8gAr")) {
-							aftGreens8gAr = body.get(keyname).toString();
+							aftGreens8gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens9gAr")) {
-							aftGreens9gAr = body.get(keyname).toString();
+							aftGreens9gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens10gAr")) {
-							aftGreens10gAr = body.get(keyname).toString();
+							aftGreens10gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens0gRt")) {
-							bfeGreens0gRt = body.get(keyname).toString();
+							bfeGreens0gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens1gRt")) {
-							bfeGreens1gRt = body.get(keyname).toString();
+							bfeGreens1gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens2gRt")) {
-							bfeGreens2gRt = body.get(keyname).toString();
+							bfeGreens2gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens3gRt")) {
-							bfeGreens3gRt = body.get(keyname).toString();
+							bfeGreens3gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens4gRt")) {
-							bfeGreens4gRt = body.get(keyname).toString();
+							bfeGreens4gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens5gRt")) {
-							bfeGreens5gRt = body.get(keyname).toString();
+							bfeGreens5gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens6gRt")) {
-							bfeGreens6gRt = body.get(keyname).toString();
+							bfeGreens6gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens7gRt")) {
-							bfeGreens7gRt = body.get(keyname).toString();
+							bfeGreens7gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens8gRt")) {
-							bfeGreens8gRt = body.get(keyname).toString();
+							bfeGreens8gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens9gRt")) {
-							bfeGreens9gRt = body.get(keyname).toString();
+							bfeGreens9gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens10gRt")) {
-							bfeGreens10gRt = body.get(keyname).toString();
+							bfeGreens10gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens0gRt")) {
-							aftGreens0gRt = body.get(keyname).toString();
+							aftGreens0gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens1gRt")) {
-							aftGreens1gRt = body.get(keyname).toString();
+							aftGreens1gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens2gRt")) {
-							aftGreens2gRt = body.get(keyname).toString();
+							aftGreens2gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens3gRt")) {
-							aftGreens3gRt = body.get(keyname).toString();
+							aftGreens3gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens4gRt")) {
-							aftGreens4gRt = body.get(keyname).toString();
+							aftGreens4gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens5gRt")) {
-							aftGreens5gRt = body.get(keyname).toString();
+							aftGreens5gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens6gRt")) {
-							aftGreens6gRt = body.get(keyname).toString();
+							aftGreens6gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens7gRt")) {
-							aftGreens7gRt = body.get(keyname).toString();
+							aftGreens7gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens8gRt")) {
-							aftGreens8gRt = body.get(keyname).toString();
+							aftGreens8gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens9gRt")) {
-							aftGreens9gRt = body.get(keyname).toString();
+							aftGreens9gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens10gRt")) {
-							aftGreens10gRt = body.get(keyname).toString();
+							aftGreens10gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("damageWdptCnt")) {
-							damageWdptCnt = body.get(keyname).toString();
+							damageWdptCnt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("ruseTrnspntWdptCnt")) {
-							ruseTrnspntWdptCnt = body.get(keyname).toString();
+							ruseTrnspntWdptCnt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("eclgy1gAr")) {
-							eclgy1gAr = body.get(keyname).toString();
+							eclgy1gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("eclgy2gAr")) {
-							eclgy2gAr = body.get(keyname).toString();
+							eclgy2gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("eclgy3gAr")) {
-							eclgy3gAr = body.get(keyname).toString();
+							eclgy3gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("ivstgInfo")) {
-							ivstgInfo = body.get(keyname).toString();
+							ivstgInfo = body.get(keyname).toString().trim();
 						}
 
 					}
@@ -507,66 +496,7 @@ public class GetGreen {
 
 					// step 5. 대상 서버에 sftp로 보냄
 
-					Session session = null;
-					Channel channel = null;
-					ChannelSftp channelSftp = null;
-					File f = new File(JsonParser.getProperty("file_path") + "FlorafaunaService_getGreen_" + strDate + ".dat");
-					FileInputStream in = null;
-
-					logger.info("preparing the host information for sftp.");
-
-					try {
-
-						JSch jsch = new JSch();
-						session = jsch.getSession("agntuser", "172.29.129.11", 28);
-						session.setPassword("Dpdlwjsxm1@");
-
-						// host 연결
-						java.util.Properties config = new java.util.Properties();
-						config.put("StrictHostKeyChecking", "no");
-						session.setConfig(config);
-						session.connect();
-
-						// sftp 채널 연결
-						channel = session.openChannel("sftp");
-						channel.connect();
-
-						// 파일 업로드 처리
-						channelSftp = (ChannelSftp) channel;
-
-						logger.info("=> Connected to host");
-						in = new FileInputStream(f);
-
-						// channelSftp.cd("/data1/if_data/WEI"); //as-is, 연계서버에
-						// 떨어지는 위치
-						channelSftp.cd(JsonParser.getProperty("dest_path")); // test
-
-						String fileName = f.getName();
-						channelSftp.put(in, fileName);
-
-						logger.info("=> Uploaded : " + f.getPath());
-
-					} catch (Exception e) {
-						e.printStackTrace();
-					} finally {
-						try {
-
-							in.close();
-
-							// sftp 채널을 닫음
-							channelSftp.exit();
-
-							// 채널 연결 해제
-							channel.disconnect();
-
-							// 호스트 세션 종료
-							session.disconnect();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-
-					logger.info("sftp transfer complete!");
+					TransSftp.transSftp(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_29_" + mgtNo + ".dat", "EIA");
 
 				} else if (resultCode.equals("03")) {
 					logger.debug("data not exist!! mgtNo :" + mgtNo);

@@ -2,12 +2,9 @@ package eia.ecoCycle;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -15,12 +12,8 @@ import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import com.jcraft.jsch.Channel;
-import com.jcraft.jsch.ChannelSftp;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.Session;
-
 import common.JsonParser;
+import common.TransSftp;
 
 public class GetInfo {
 
@@ -41,11 +34,7 @@ public class GetInfo {
 			String service_key = JsonParser.getProperty("ecoCycle_service_key");
 
 			// step 1.파일의 첫 행 작성
-			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-			Date thisDate = new Date();
-			String strDate = format.format(thisDate);
-
-			File file = new File(JsonParser.getProperty("file_path") + "EcoCycle_getInfo_" + strDate + ".dat");
+			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_33_" + mgtNo + ".dat");
 
 			try {
 				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
@@ -91,7 +80,7 @@ public class GetInfo {
 
 			String json = "";
 
-			json = JsonParser.parseJson(service_url, service_key, mgtNo);
+			json = JsonParser.parseEiaJson(service_url, service_key, mgtNo);
 
 			// step 3.필요에 맞게 파싱
 
@@ -105,7 +94,7 @@ public class GetInfo {
 				JSONObject header = (JSONObject) response.get("header");
 				JSONObject body = (JSONObject) response.get("body");
 
-				String resultCode = header.get("resultCode").toString();
+				String resultCode = header.get("resultCode").toString().trim();
 
 				if (resultCode.equals("00")) {
 
@@ -133,49 +122,49 @@ public class GetInfo {
 						String keyname = iter.next();
 
 						if (keyname.equals("gmemodomwsteOcty")) {
-							gmemodomwsteOcty = body.get(keyname).toString();
+							gmemodomwsteOcty = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("umemoDomwsteOcty")) {
-							umemoDomwsteOcty = body.get(keyname).toString();
+							umemoDomwsteOcty = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("domwsteOcty")) {
-							domwsteOcty = body.get(keyname).toString();
+							domwsteOcty = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("cnstrcwsteBryng")) {
-							cnstrcwsteBryng = body.get(keyname).toString();
+							cnstrcwsteBryng = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("cnstrcwsteIncnr")) {
-							cnstrcwsteIncnr = body.get(keyname).toString();
+							cnstrcwsteIncnr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("cnstrcwsteRuse")) {
-							cnstrcwsteRuse = body.get(keyname).toString();
+							cnstrcwsteRuse = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("indswsteBryng")) {
-							indswsteBryng = body.get(keyname).toString();
+							indswsteBryng = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("indswsteIncnr")) {
-							indswsteIncnr = body.get(keyname).toString();
+							indswsteIncnr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("indswsteRuse")) {
-							indswsteRuse = body.get(keyname).toString();
+							indswsteRuse = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("indswsteSarea")) {
-							indswsteSarea = body.get(keyname).toString();
+							indswsteSarea = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("appnwsteBryng")) {
-							appnwsteBryng = body.get(keyname).toString();
+							appnwsteBryng = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("appnwsteIncnr")) {
-							appnwsteIncnr = body.get(keyname).toString();
+							appnwsteIncnr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("appnwsteRuse")) {
-							appnwsteRuse = body.get(keyname).toString();
+							appnwsteRuse = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("appnwsteEtc")) {
-							appnwsteEtc = body.get(keyname).toString();
+							appnwsteEtc = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("sggemdNm")) {
-							sggemdNm = body.get(keyname).toString();
+							sggemdNm = body.get(keyname).toString().trim();
 						}
 
 					}
@@ -227,66 +216,7 @@ public class GetInfo {
 
 					// step 5. 대상 서버에 sftp로 보냄
 
-					Session session = null;
-					Channel channel = null;
-					ChannelSftp channelSftp = null;
-					File f = new File(JsonParser.getProperty("file_path") + "파일명_" + strDate + ".dat");
-					FileInputStream in = null;
-
-					logger.info("preparing the host information for sftp.");
-
-					try {
-
-						JSch jsch = new JSch();
-						session = jsch.getSession("agntuser", "172.29.129.11", 28);
-						session.setPassword("Dpdlwjsxm1@");
-
-						// host 연결
-						java.util.Properties config = new java.util.Properties();
-						config.put("StrictHostKeyChecking", "no");
-						session.setConfig(config);
-						session.connect();
-
-						// sftp 채널 연결
-						channel = session.openChannel("sftp");
-						channel.connect();
-
-						// 파일 업로드 처리
-						channelSftp = (ChannelSftp) channel;
-
-						logger.info("=> Connected to host");
-						in = new FileInputStream(f);
-
-						// channelSftp.cd("/data1/if_data/WEI"); //as-is, 연계서버에
-						// 떨어지는 위치
-						channelSftp.cd(JsonParser.getProperty("dest_path")); // test
-
-						String fileName = f.getName();
-						channelSftp.put(in, fileName);
-
-						logger.info("=> Uploaded : " + f.getPath());
-
-					} catch (Exception e) {
-						e.printStackTrace();
-					} finally {
-						try {
-
-							in.close();
-
-							// sftp 채널을 닫음
-							channelSftp.exit();
-
-							// 채널 연결 해제
-							channel.disconnect();
-
-							// 호스트 세션 종료
-							session.disconnect();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-
-					logger.info("sftp transfer complete!");
+					TransSftp.transSftp(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_33_" + mgtNo + ".dat", "EIA");
 
 				} else if (resultCode.equals("03")) {
 					logger.debug("data not exist!! mgtNo :" + mgtNo);

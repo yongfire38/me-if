@@ -1,0 +1,26 @@
+[2020-02-26 13:55:42]  INFO (population.GetIvstg - main:30) - firstLine start..
+[2020-02-26 13:55:43] DEBUG (population.GetIvstg - main:201) - mgtNo :ND2015B002
+[2020-02-26 13:56:24]  INFO (population.GetIvstg - main:30) - firstLine start..
+[2020-02-26 13:56:25] DEBUG (population.GetIvstg - main:201) - mgtNo :ND2015B002
+[2020-02-26 13:57:04]  INFO (population.GetIvstg - main:30) - firstLine start..
+[2020-02-26 13:57:04]  INFO (population.GetIvstg - main:183) - mgtNo :ND2015B002
+[2020-02-26 13:57:04]  INFO (population.GetIvstg - main:187) - parsing complete!
+[2020-02-26 14:06:15] DEBUG (population.GetIvstg - main:205) - 파라미터 개수 에러!!
+[2020-02-26 14:06:39]  INFO (monPurification_api.MonPurification - main:32) - firstLine start..
+[2020-02-26 14:06:55]  INFO (monPurification_api.MonPurification - main:714) - parsing complete!
+[2020-02-26 14:09:13]  INFO (monPurification_api.MonPurification - main:32) - firstLine start..
+[2020-02-26 14:09:32]  INFO (monPurification_api.MonPurification - main:714) - parsing complete!
+[2020-02-26 14:18:44]  INFO (fcltySvc_api.GetItkFclty - main:30) - firstLine start..
+[2020-02-26 14:20:07]  INFO (fcltySvc_api.GetItkFclty - main:247) - parsing complete!
+[2020-02-26 14:21:13]  INFO (fcltySvc_api.GetItkFclty - main:29) - firstLine start..
+[2020-02-26 14:22:34]  INFO (fcltySvc_api.GetItkFclty - main:246) - parsing complete!
+[2020-02-26 14:40:10]  INFO (fcltySvc_api.GetCwpFclty - main:30) - firstLine start..
+[2020-02-26 14:41:33]  INFO (fcltySvc_api.GetCwpFclty - main:267) - parsing complete!
+[2020-02-26 14:46:47]  INFO (fcltySvc_api.GetCwpFclty - main:30) - firstLine start..
+[2020-02-26 14:48:09]  INFO (fcltySvc_api.GetCwpFclty - main:267) - parsing complete!
+[2020-02-26 15:08:16]  INFO (fcltySvc_api.GetPressFclty - main:30) - firstLine start..
+[2020-02-26 15:21:19]  INFO (fcltySvc_api.GetPressFclty - main:248) - parsing complete!
+[2020-02-26 17:12:03]  INFO (fcltySvc_api.GetPressFclty_test - main:30) - firstLine start..
+[2020-02-26 17:14:39]  INFO (fcltySvc_api.GetPressFclty_test - main:30) - firstLine start..
+[2020-02-26 17:15:44]  INFO (fcltySvc_api.GetPressFclty_test - main:30) - firstLine start..
+[2020-02-26 17:17:26]  INFO (fcltySvc_api.GetPressFclty_test - main:30) - firstLine start..

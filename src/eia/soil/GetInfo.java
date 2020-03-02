@@ -2,12 +2,9 @@ package eia.soil;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -16,12 +13,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import com.jcraft.jsch.Channel;
-import com.jcraft.jsch.ChannelSftp;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.Session;
-
 import common.JsonParser;
+import common.TransSftp;
 
 public class GetInfo {
 
@@ -42,11 +35,7 @@ public class GetInfo {
 			String service_key = JsonParser.getProperty("soil_service_key");
 
 			// step 1.파일의 첫 행 작성
-			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-			Date thisDate = new Date();
-			String strDate = format.format(thisDate);
-
-			File file = new File(JsonParser.getProperty("file_path") + "SoilService_getInfo_" + strDate + ".dat");
+			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_20_" + mgtNo + ".dat");
 
 			try {
 				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
@@ -126,7 +115,7 @@ public class GetInfo {
 
 			String json = "";
 
-			json = JsonParser.parseJson(service_url, service_key, mgtNo);
+			json = JsonParser.parseEiaJson(service_url, service_key, mgtNo);
 
 			// step 3.필요에 맞게 파싱
 
@@ -140,7 +129,7 @@ public class GetInfo {
 				JSONObject header = (JSONObject) response.get("header");
 				JSONObject body = (JSONObject) response.get("body");
 
-				String resultCode = header.get("resultCode").toString();
+				String resultCode = header.get("resultCode").toString().trim();
 
 				if (resultCode.equals("00")) {
 
@@ -151,7 +140,7 @@ public class GetInfo {
 
 						JSONObject ivstgGb_Json = (JSONObject) ivstgGbs.get(i);
 
-						String ivstgGb_str = ivstgGb_Json.get("ivstgGb").toString(); // 조사구분
+						String ivstgGb_str = ivstgGb_Json.get("ivstgGb").toString().trim(); // 조사구분
 
 						JSONArray ivstgs = (JSONArray) ivstgGb_Json.get("ivstgs");
 
@@ -172,19 +161,19 @@ public class GetInfo {
 							}
 
 							if (ivstg.get("ivstgSpotNm") != null) {
-								ivstg_ivstgSpotNm_str = ivstg.get("ivstgSpotNm").toString();
+								ivstg_ivstgSpotNm_str = ivstg.get("ivstgSpotNm").toString().trim();
 							} else {
 								ivstg_ivstgSpotNm_str = " ";
 							}
 
 							if (ivstg.get("xcnts") != null) {
-								ivstg_xcnts_str = ivstg.get("xcnts").toString();
+								ivstg_xcnts_str = ivstg.get("xcnts").toString().trim();
 							} else {
 								ivstg_xcnts_str = " ";
 							}
 
 							if (ivstg.get("ydnts") != null) {
-								ivstg_ydnts_str = ivstg.get("ydnts").toString();
+								ivstg_ydnts_str = ivstg.get("ydnts").toString().trim();
 							} else {
 								ivstg_ydnts_str = " ";
 							}
@@ -200,19 +189,19 @@ public class GetInfo {
 								String ivstgEndde_str = " "; // 조사종료일
 
 								if (ivstg.get("ivstgOdr") != null) {
-									ivstgOdr_str = odr.get("ivstgOdr").toString();
+									ivstgOdr_str = odr.get("ivstgOdr").toString().trim();
 								} else {
 									ivstgOdr_str = " ";
 								}
 
 								if (ivstg.get("ivstgBgnde") != null) {
-									ivstgBgnde_str = odr.get("ivstgBgnde").toString();
+									ivstgBgnde_str = odr.get("ivstgBgnde").toString().trim();
 								} else {
 									ivstgBgnde_str = " ";
 								}
 
 								if (ivstg.get("ivstgEndde") != null) {
-									ivstgEndde_str = odr.get("ivstgEndde").toString();
+									ivstgEndde_str = odr.get("ivstgEndde").toString().trim();
 								} else {
 									ivstgEndde_str = " ";
 								}
@@ -257,76 +246,76 @@ public class GetInfo {
 										String keyname = iter.next();
 
 										if (keyname.equals("sdNm")) {
-											sdNm = sdNm_Json.get(keyname).toString();
+											sdNm = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("slrDph")) {
-											slrDph = sdNm_Json.get(keyname).toString();
+											slrDph = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("spoil")) {
-											spoil = sdNm_Json.get(keyname).toString();
+											spoil = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("cmdVal")) {
-											cmdVal = sdNm_Json.get(keyname).toString();
+											cmdVal = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("cuVal")) {
-											cuVal = sdNm_Json.get(keyname).toString();
+											cuVal = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("asVal")) {
-											asVal = sdNm_Json.get(keyname).toString();
+											asVal = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("hgVal")) {
-											hgVal = sdNm_Json.get(keyname).toString();
+											hgVal = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("pbVal")) {
-											pbVal = sdNm_Json.get(keyname).toString();
+											pbVal = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("cr6Val")) {
-											cr6Val = sdNm_Json.get(keyname).toString();
+											cr6Val = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("znVal")) {
-											znVal = sdNm_Json.get(keyname).toString();
+											znVal = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("niVal")) {
-											niVal = sdNm_Json.get(keyname).toString();
+											niVal = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("fVal")) {
-											fVal = sdNm_Json.get(keyname).toString();
+											fVal = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("ugnhVal")) {
-											ugnhVal = sdNm_Json.get(keyname).toString();
+											ugnhVal = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("pcbVal")) {
-											pcbVal = sdNm_Json.get(keyname).toString();
+											pcbVal = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("cnVal")) {
-											cnVal = sdNm_Json.get(keyname).toString();
+											cnVal = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("pnVal")) {
-											pnVal = sdNm_Json.get(keyname).toString();
+											pnVal = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("bzVal")) {
-											bzVal = sdNm_Json.get(keyname).toString();
+											bzVal = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("tuVal")) {
-											tuVal = sdNm_Json.get(keyname).toString();
+											tuVal = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("ebVal")) {
-											ebVal = sdNm_Json.get(keyname).toString();
+											ebVal = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("xyVal")) {
-											xyVal = sdNm_Json.get(keyname).toString();
+											xyVal = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("tphVal")) {
-											tphVal = sdNm_Json.get(keyname).toString();
+											tphVal = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("tceVal")) {
-											tceVal = sdNm_Json.get(keyname).toString();
+											tceVal = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("pceVal")) {
-											pceVal = sdNm_Json.get(keyname).toString();
+											pceVal = sdNm_Json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("bpVal")) {
-											bpVal = sdNm_Json.get(keyname).toString();
+											bpVal = sdNm_Json.get(keyname).toString().trim();
 										}
 
 									}
@@ -423,66 +412,7 @@ public class GetInfo {
 
 					// step 5. 대상 서버에 sftp로 보냄
 
-					Session session = null;
-					Channel channel = null;
-					ChannelSftp channelSftp = null;
-					File f = new File(JsonParser.getProperty("file_path") + "SoilService_getInfo_" + strDate + ".dat");
-					FileInputStream in = null;
-
-					logger.info("preparing the host information for sftp.");
-
-					try {
-
-						JSch jsch = new JSch();
-						session = jsch.getSession("agntuser", "172.29.129.11", 28);
-						session.setPassword("Dpdlwjsxm1@");
-
-						// host 연결
-						java.util.Properties config = new java.util.Properties();
-						config.put("StrictHostKeyChecking", "no");
-						session.setConfig(config);
-						session.connect();
-
-						// sftp 채널 연결
-						channel = session.openChannel("sftp");
-						channel.connect();
-
-						// 파일 업로드 처리
-						channelSftp = (ChannelSftp) channel;
-
-						logger.info("=> Connected to host");
-						in = new FileInputStream(f);
-
-						// channelSftp.cd("/data1/if_data/WEI"); //as-is, 연계서버에
-						// 떨어지는 위치
-						channelSftp.cd(JsonParser.getProperty("dest_path")); // test
-
-						String fileName = f.getName();
-						channelSftp.put(in, fileName);
-
-						logger.info("=> Uploaded : " + f.getPath());
-
-					} catch (Exception e) {
-						e.printStackTrace();
-					} finally {
-						try {
-
-							in.close();
-
-							// sftp 채널을 닫음
-							channelSftp.exit();
-
-							// 채널 연결 해제
-							channel.disconnect();
-
-							// 호스트 세션 종료
-							session.disconnect();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-
-					logger.info("sftp transfer complete!");
+					TransSftp.transSftp(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_20_" + mgtNo + ".dat", "EIA");
 
 				} else if (resultCode.equals("03")) {
 					logger.debug("data not exist!! mgtNo :" + mgtNo);

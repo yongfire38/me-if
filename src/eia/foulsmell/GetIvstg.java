@@ -2,12 +2,9 @@ package eia.foulsmell;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -16,12 +13,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import com.jcraft.jsch.Channel;
-import com.jcraft.jsch.ChannelSftp;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.Session;
-
 import common.JsonParser;
+import common.TransSftp;
 
 public class GetIvstg {
 
@@ -42,11 +35,7 @@ public class GetIvstg {
 			String service_key = JsonParser.getProperty("foulsmell_service_key");
 
 			// step 1.파일의 첫 행 작성
-			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-			Date thisDate = new Date();
-			String strDate = format.format(thisDate);
-
-			File file = new File(JsonParser.getProperty("file_path") + "FoulsmellService_getIvstg_" + strDate + ".dat");
+			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_05_" + mgtNo + ".dat");
 
 			try {
 				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
@@ -124,7 +113,7 @@ public class GetIvstg {
 
 			String json = "";
 
-			json = JsonParser.parseJson(service_url, service_key, mgtNo);
+			json = JsonParser.parseEiaJson(service_url, service_key, mgtNo);
 
 			// step 3.필요에 맞게 파싱
 
@@ -138,7 +127,7 @@ public class GetIvstg {
 				JSONObject header = (JSONObject) response.get("header");
 				JSONObject body = (JSONObject) response.get("body");
 
-				String resultCode = header.get("resultCode").toString();
+				String resultCode = header.get("resultCode").toString().trim();
 
 				if (resultCode.equals("00")) {
 
@@ -149,7 +138,7 @@ public class GetIvstg {
 
 						JSONObject ivstgGb_Json = (JSONObject) ivstgGbs.get(i);
 
-						String ivstgGb_str = ivstgGb_Json.get("ivstgGb").toString(); // 조사구분
+						String ivstgGb_str = ivstgGb_Json.get("ivstgGb").toString().trim(); // 조사구분
 
 						JSONArray ivstgs = (JSONArray) ivstgGb_Json.get("ivstgs");
 
@@ -163,25 +152,25 @@ public class GetIvstg {
 							String ivstg_ydnts_str = " "; // Y좌표
 
 							if (ivstg.get("adres") != null) {
-								ivstg_adres_str = ivstg.get("adres").toString();
+								ivstg_adres_str = ivstg.get("adres").toString().trim();
 							} else {
 								ivstg_adres_str = " ";
 							}
 
 							if (ivstg.get("ivstgSpotNm") != null) {
-								ivstg_ivstgSpotNm_str = ivstg.get("ivstgSpotNm").toString();
+								ivstg_ivstgSpotNm_str = ivstg.get("ivstgSpotNm").toString().trim();
 							} else {
 								ivstg_ivstgSpotNm_str = " ";
 							}
 
 							if (ivstg.get("xcnts") != null) {
-								ivstg_xcnts_str = ivstg.get("xcnts").toString();
+								ivstg_xcnts_str = ivstg.get("xcnts").toString().trim();
 							} else {
 								ivstg_xcnts_str = " ";
 							}
 
 							if (ivstg.get("ydnts") != null) {
-								ivstg_ydnts_str = ivstg.get("ydnts").toString();
+								ivstg_ydnts_str = ivstg.get("ydnts").toString().trim();
 							} else {
 								ivstg_ydnts_str = " ";
 							}
@@ -227,82 +216,82 @@ public class GetIvstg {
 									String keyname = iter.next();
 
 									if (keyname.equals("ivstgOdr")) {
-										ivstgOdr = odr.get(keyname).toString();
+										ivstgOdr = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("ivstgBgnde")) {
-										ivstgBgnde = odr.get(keyname).toString();
+										ivstgBgnde = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("ivstgEndde")) {
-										ivstgEndde = odr.get(keyname).toString();
+										ivstgEndde = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("cmpndBsmlVal")) {
-										cmpndBsmlVal = odr.get(keyname).toString();
+										cmpndBsmlVal = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("nh3Val")) {
-										nh3Val = odr.get(keyname).toString();
+										nh3Val = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("ch4sVal")) {
-										ch4sVal = odr.get(keyname).toString();
+										ch4sVal = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("h2sVal")) {
-										h2sVal = odr.get(keyname).toString();
+										h2sVal = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("ch3sch3Val")) {
-										ch3sch3Val = odr.get(keyname).toString();
+										ch3sch3Val = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("ch3ssch3Val")) {
-										ch3ssch3Val = odr.get(keyname).toString();
+										ch3ssch3Val = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("ch33nVal")) {
-										ch33nVal = odr.get(keyname).toString();
+										ch33nVal = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("c2h4oVal")) {
-										c2h4oVal = odr.get(keyname).toString();
+										c2h4oVal = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("c8h8Val")) {
-										c8h8Val = odr.get(keyname).toString();
+										c8h8Val = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("c3h6oVal")) {
-										c3h6oVal = odr.get(keyname).toString();
+										c3h6oVal = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("ch3ch22choVal")) {
-										ch3ch22choVal = odr.get(keyname).toString();
+										ch3ch22choVal = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("ch3ch23choVal")) {
-										ch3ch23choVal = odr.get(keyname).toString();
+										ch3ch23choVal = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("ch32chch2choVal")) {
-										ch32chch2choVal = odr.get(keyname).toString();
+										ch32chch2choVal = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("c7h8Val")) {
-										c7h8Val = odr.get(keyname).toString();
+										c7h8Val = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("c8h10Val")) {
-										c8h10Val = odr.get(keyname).toString();
+										c8h10Val = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("c4h8oVal")) {
-										c4h8oVal = odr.get(keyname).toString();
+										c4h8oVal = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("c6h12oVal")) {
-										c6h12oVal = odr.get(keyname).toString();
+										c6h12oVal = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("c6h12o2Val")) {
-										c6h12o2Val = odr.get(keyname).toString();
+										c6h12o2Val = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("c2h5coohVal")) {
-										c2h5coohVal = odr.get(keyname).toString();
+										c2h5coohVal = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("ch3ch22choohVal")) {
-										ch3ch22choohVal = odr.get(keyname).toString();
+										ch3ch22choohVal = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("ch3ch23coohVal")) {
-										ch3ch23coohVal = odr.get(keyname).toString();
+										ch3ch23coohVal = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("ch32chch2coohVal")) {
-										ch32chch2coohVal = odr.get(keyname).toString();
+										ch32chch2coohVal = odr.get(keyname).toString().trim();
 									}
 									if (keyname.equals("ch32chch2ohVal")) {
-										ch32chch2ohVal = odr.get(keyname).toString();
+										ch32chch2ohVal = odr.get(keyname).toString().trim();
 									}
 
 								}
@@ -392,66 +381,7 @@ public class GetIvstg {
 
 					// step 5. 대상 서버에 sftp로 보냄
 
-					Session session = null;
-					Channel channel = null;
-					ChannelSftp channelSftp = null;
-					File f = new File(JsonParser.getProperty("file_path") + "FoulsmellService_getIvstg_" + strDate + ".dat");
-					FileInputStream in = null;
-
-					logger.info("preparing the host information for sftp.");
-
-					try {
-
-						JSch jsch = new JSch();
-						session = jsch.getSession("agntuser", "172.29.129.11", 28);
-						session.setPassword("Dpdlwjsxm1@");
-
-						// host 연결
-						java.util.Properties config = new java.util.Properties();
-						config.put("StrictHostKeyChecking", "no");
-						session.setConfig(config);
-						session.connect();
-
-						// sftp 채널 연결
-						channel = session.openChannel("sftp");
-						channel.connect();
-
-						// 파일 업로드 처리
-						channelSftp = (ChannelSftp) channel;
-
-						logger.info("=> Connected to host");
-						in = new FileInputStream(f);
-
-						// channelSftp.cd("/data1/if_data/WEI"); //as-is, 연계서버에
-						// 떨어지는 위치
-						channelSftp.cd(JsonParser.getProperty("dest_path")); // test
-
-						String fileName = f.getName();
-						channelSftp.put(in, fileName);
-
-						logger.info("=> Uploaded : " + f.getPath());
-
-					} catch (Exception e) {
-						e.printStackTrace();
-					} finally {
-						try {
-
-							in.close();
-
-							// sftp 채널을 닫음
-							channelSftp.exit();
-
-							// 채널 연결 해제
-							channel.disconnect();
-
-							// 호스트 세션 종료
-							session.disconnect();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-
-					logger.info("sftp transfer complete!");
+					TransSftp.transSftp(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_05_" + mgtNo + ".dat", "EIA");
 
 				} else if (resultCode.equals("03")) {
 					logger.debug("data not exist!! mgtNo :" + mgtNo);

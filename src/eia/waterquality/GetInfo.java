@@ -2,12 +2,9 @@ package eia.waterquality;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -15,12 +12,8 @@ import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import com.jcraft.jsch.Channel;
-import com.jcraft.jsch.ChannelSftp;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.Session;
-
 import common.JsonParser;
+import common.TransSftp;
 
 public class GetInfo {
 
@@ -41,11 +34,7 @@ public class GetInfo {
 			String service_key = JsonParser.getProperty("waterquality_service_key");
 
 			// step 1.파일의 첫 행 작성
-			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-			Date thisDate = new Date();
-			String strDate = format.format(thisDate);
-
-			File file = new File(JsonParser.getProperty("file_path") + "WaterqualityService_getInfo_" + strDate + ".dat");
+			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_08_" + mgtNo + ".dat");
 
 			try {
 				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
@@ -135,7 +124,7 @@ public class GetInfo {
 
 			String json = "";
 
-			json = JsonParser.parseJson(service_url, service_key, mgtNo);
+			json = JsonParser.parseEiaJson(service_url, service_key, mgtNo);
 
 			// step 3.필요에 맞게 파싱
 
@@ -149,7 +138,7 @@ public class GetInfo {
 				JSONObject header = (JSONObject) response.get("header");
 				JSONObject body = (JSONObject) response.get("body");
 
-				String resultCode = header.get("resultCode").toString();
+				String resultCode = header.get("resultCode").toString().trim();
 
 				if (resultCode.equals("00")) {
 
@@ -200,115 +189,115 @@ public class GetInfo {
 						String keyname = iter.next();
 
 						if (keyname.equals("bfeBodPlulod")) {
-							bfeBodPlulod = body.get(keyname).toString();
+							bfeBodPlulod = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeTpPlulod")) {
-							bfeTpPlulod = body.get(keyname).toString();
+							bfeTpPlulod = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftBodPlulod")) {
-							aftBodPlulod = body.get(keyname).toString();
+							aftBodPlulod = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftTpPlulod")) {
-							aftTpPlulod = body.get(keyname).toString();
+							aftTpPlulod = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("wtrReuseYn")) {
-							wtrReuseYn = body.get(keyname).toString();
+							wtrReuseYn = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("ptfctCntcYn")) {
-							ptfctCntcYn = body.get(keyname).toString();
+							ptfctCntcYn = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("itfctBodDnsty")) {
-							itfctBodDnsty = body.get(keyname).toString();
+							itfctBodDnsty = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("itfctBodQy")) {
-							itfctBodQy = body.get(keyname).toString();
+							itfctBodQy = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("itfctCodDnsty")) {
-							itfctCodDnsty = body.get(keyname).toString();
+							itfctCodDnsty = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("itfctCodQy")) {
-							itfctCodQy = body.get(keyname).toString();
+							itfctCodQy = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("itfctSsDnsty")) {
-							itfctSsDnsty = body.get(keyname).toString();
+							itfctSsDnsty = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("itfctSsQy")) {
-							itfctSsQy = body.get(keyname).toString();
+							itfctSsQy = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("itfctTnDnsty")) {
-							itfctTnDnsty = body.get(keyname).toString();
+							itfctTnDnsty = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("itfctTnQy")) {
-							itfctTnQy = body.get(keyname).toString();
+							itfctTnQy = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("itfctTpDnsty")) {
-							itfctTpDnsty = body.get(keyname).toString();
+							itfctTpDnsty = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("itfctTpQy")) {
-							itfctTpQy = body.get(keyname).toString();
+							itfctTpQy = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("jrjYn")) {
-							jrjYn = body.get(keyname).toString();
+							jrjYn = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("jjrjYn")) {
-							jjrjYn = body.get(keyname).toString();
+							jjrjYn = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("igsjYn")) {
-							igsjYn = body.get(keyname).toString();
+							igsjYn = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("ygpjYn")) {
-							ygpjYn = body.get(keyname).toString();
+							ygpjYn = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("ctjrjYn")) {
-							ctjrjYn = body.get(keyname).toString();
+							ctjrjYn = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("ctdrYn")) {
-							ctdrYn = body.get(keyname).toString();
+							ctdrYn = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("ssygdYn")) {
-							ssygdYn = body.get(keyname).toString();
+							ssygdYn = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("sssrYn")) {
-							sssrYn = body.get(keyname).toString();
+							sssrYn = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("sscrjYn")) {
-							sscrjYn = body.get(keyname).toString();
+							sscrjYn = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("smjbhbYn")) {
-							smjbhbYn = body.get(keyname).toString();
+							smjbhbYn = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("nmygsjYn")) {
-							nmygsjYn = body.get(keyname).toString();
+							nmygsjYn = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("yghssYn")) {
-							yghssYn = body.get(keyname).toString();
+							yghssYn = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("yrhssYn")) {
-							yrhssYn = body.get(keyname).toString();
+							yrhssYn = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("scrhssYn")) {
-							scrhssYn = body.get(keyname).toString();
+							scrhssYn = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("ajcjcrhssYn")) {
-							ajcjcrhssYn = body.get(keyname).toString();
+							ajcjcrhssYn = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("ugrwtrQy")) {
-							ugrwtrQy = body.get(keyname).toString();
+							ugrwtrQy = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("ugrwtrDevlopqy")) {
-							ugrwtrDevlopqy = body.get(keyname).toString();
+							ugrwtrDevlopqy = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("ugrwtrWpqy")) {
-							ugrwtrWpqy = body.get(keyname).toString();
+							ugrwtrWpqy = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("ugrwtrAffcra")) {
-							ugrwtrAffcra = body.get(keyname).toString();
+							ugrwtrAffcra = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("ugrwtrAnalsYn")) {
-							ugrwtrAnalsYn = body.get(keyname).toString();
+							ugrwtrAnalsYn = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("ugrwtrRm")) {
-							ugrwtrRm = body.get(keyname).toString();
+							ugrwtrRm = body.get(keyname).toString().trim();
 						}
 					}
 
@@ -403,66 +392,7 @@ public class GetInfo {
 
 					// step 5. 대상 서버에 sftp로 보냄
 
-					Session session = null;
-					Channel channel = null;
-					ChannelSftp channelSftp = null;
-					File f = new File(JsonParser.getProperty("file_path") + "WaterqualityService_getInfo_" + strDate + ".dat");
-					FileInputStream in = null;
-
-					logger.info("preparing the host information for sftp.");
-
-					try {
-
-						JSch jsch = new JSch();
-						session = jsch.getSession("agntuser", "172.29.129.11", 28);
-						session.setPassword("Dpdlwjsxm1@");
-
-						// host 연결
-						java.util.Properties config = new java.util.Properties();
-						config.put("StrictHostKeyChecking", "no");
-						session.setConfig(config);
-						session.connect();
-
-						// sftp 채널 연결
-						channel = session.openChannel("sftp");
-						channel.connect();
-
-						// 파일 업로드 처리
-						channelSftp = (ChannelSftp) channel;
-
-						logger.info("=> Connected to host");
-						in = new FileInputStream(f);
-
-						// channelSftp.cd("/data1/if_data/WEI"); //as-is, 연계서버에
-						// 떨어지는 위치
-						channelSftp.cd(JsonParser.getProperty("dest_path")); // test
-
-						String fileName = f.getName();
-						channelSftp.put(in, fileName);
-
-						logger.info("=> Uploaded : " + f.getPath());
-
-					} catch (Exception e) {
-						e.printStackTrace();
-					} finally {
-						try {
-
-							in.close();
-
-							// sftp 채널을 닫음
-							channelSftp.exit();
-
-							// 채널 연결 해제
-							channel.disconnect();
-
-							// 호스트 세션 종료
-							session.disconnect();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-
-					logger.info("sftp transfer complete!");
+					TransSftp.transSftp(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_08_" + mgtNo + ".dat", "EIA");
 
 				} else if (resultCode.equals("03")) {
 					logger.debug("data not exist!! mgtNo :" + mgtNo);
