@@ -354,6 +354,202 @@ public class JsonParser {
 		return json;
 	}
 
+	// 전일 날짜, 전년날짜, 검색날짜 (yyyyMMdd), 검색 시간(2자리)를 받아서 파싱
+	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
+	public static String parseWriJson(String service_url, String service_key, String pageNo, String tdate, String ldate,
+			String vdate, String vtime) {
+
+		BufferedReader br = null;
+		String json = "";
+
+		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		try {
+
+			Date origin_tdate = originFormat.parse(tdate);
+			Date origin_ldate = originFormat.parse(ldate);
+			Date origin_vdate = originFormat.parse(vdate);
+
+			String parse_tdate = parseFormat.format(origin_tdate);
+			String parse_ldate = parseFormat.format(origin_ldate);
+			String parse_vdate = parseFormat.format(origin_vdate);
+
+			String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&tdate=" + parse_tdate
+					+ "&ldate=" + parse_ldate + "&vdate=" + parse_vdate + "&vtime=" + vtime + "&numOfRows=999";
+			try {
+
+				URL url = new URL(urlstr);
+				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+				urlconnection.setRequestMethod("GET");
+				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+
+				String line;
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				// 테스트 출력
+				// logger.info(json);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return json;
+	}
+
+	// 조회시작일 (yyyyMMdd), 조회시작시각 2자리, 조회 종료일 (yyyyMMdd), 조회종료 시각 2자리, 우량관측소 코드를
+	// 받아서 파싱
+	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
+	public static String parseWriJson(String service_url, String service_key, String pageNo, String sdate, String stime,
+			String edate, String etime, String excll) {
+
+		BufferedReader br = null;
+		String json = "";
+
+		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		try {
+
+			Date origin_sdate = originFormat.parse(sdate);
+			Date origin_edate = originFormat.parse(edate);
+
+			String parse_sdate = parseFormat.format(origin_sdate);
+			String parse_edate = parseFormat.format(origin_edate);
+
+			String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&sdate=" + parse_sdate
+					+ "&stime=" + stime + "&edate=" + parse_edate + "&etime=" + etime + "&excll=" + excll
+					+ "&numOfRows=999";
+			try {
+
+				URL url = new URL(urlstr);
+				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+				urlconnection.setRequestMethod("GET");
+				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+
+				String line;
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				// 테스트 출력
+				// logger.info(json);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return json;
+	}
+
+	// 조회시작일 (yyyyMMdd), 조회시작시각 2자리, 조회 종료일 (yyyyMMdd), 조회종료 시각 2자리, 댐코드, 우량관측소
+	// 코드를 받아서 파싱
+	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
+	public static String parseWriJson_excll(String service_url, String service_key, String pageNo, String sdate,
+			String stime, String edate, String etime, String damcode, String excll) {
+
+		BufferedReader br = null;
+		String json = "";
+
+		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		try {
+
+			Date origin_sdate = originFormat.parse(sdate);
+			Date origin_edate = originFormat.parse(edate);
+
+			String parse_sdate = parseFormat.format(origin_sdate);
+			String parse_edate = parseFormat.format(origin_edate);
+
+			String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&sdate=" + parse_sdate
+					+ "&stime=" + stime + "&edate=" + parse_edate + "&etime=" + etime + "&excll=" + excll + "&damcode="
+					+ damcode + "&numOfRows=999";
+			try {
+
+				URL url = new URL(urlstr);
+				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+				urlconnection.setRequestMethod("GET");
+				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+
+				String line;
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				// 테스트 출력
+				// logger.info(json);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return json;
+	}
+
+	// 조회시작일 (yyyyMMdd), 조회시작시각 2자리, 조회 종료일 (yyyyMMdd), 조회종료 시각 2자리, 댐코드, 수위관측소
+	// 코드를 받아서 파싱
+	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
+	public static String parseWriJson_wal(String service_url, String service_key, String pageNo, String sdate,
+			String stime, String edate, String etime, String damcode, String wal) {
+
+		BufferedReader br = null;
+		String json = "";
+
+		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		try {
+
+			Date origin_sdate = originFormat.parse(sdate);
+			Date origin_edate = originFormat.parse(edate);
+
+			String parse_sdate = parseFormat.format(origin_sdate);
+			String parse_edate = parseFormat.format(origin_edate);
+
+			String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&sdate=" + parse_sdate
+					+ "&stime=" + stime + "&edate=" + parse_edate + "&etime=" + etime + "&wal=" + wal + "&damcode="
+					+ damcode + "&numOfRows=999";
+			try {
+
+				URL url = new URL(urlstr);
+				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+				urlconnection.setRequestMethod("GET");
+				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+
+				String line;
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				// 테스트 출력
+				// logger.info(json);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return json;
+	}
+
 	// url과 서비스 키 이외 추가 파라미터 없이 파싱
 	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
 	public static String parseWriJson(String service_url, String service_key) {
@@ -364,6 +560,86 @@ public class JsonParser {
 		// logger.info("mgtNo :" + mgtNo);
 
 		String urlstr = service_url + "&serviceKey=" + service_key;
+		try {
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+			urlconnection.setRequestMethod("GET");
+			br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+
+			String line;
+			while ((line = br.readLine()) != null) {
+				json = json + line + "\n";
+			}
+
+			// 테스트 출력
+			// logger.info(json);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return json;
+	}
+
+	// 조회시작일 (yyyyMMdd), 조회시작시각 2자리, 조회 종료일 (yyyyMMdd), 조회종료 시각 2자리
+	// 코드를 받아서 파싱
+	// 수도통합(WIS)-운영통합시스템(댐보발전통합)
+	public static String parseWrsJson(String service_url, String service_key, String pageNo, String stDt, String stTm,
+			String edDt, String edTm) {
+
+		BufferedReader br = null;
+		String json = "";
+
+		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		try {
+
+			Date origin_stDt = originFormat.parse(stDt);
+			Date origin_edDt = originFormat.parse(edDt);
+
+			String parse_stDt = parseFormat.format(origin_stDt);
+			String parse_edDt = parseFormat.format(origin_edDt);
+
+			String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stDt=" + parse_stDt
+					+ "&stTm=" + stTm + "&edDt=" + parse_edDt + "&edTm=" + edTm + "&numOfRows=999";
+			try {
+
+				URL url = new URL(urlstr);
+				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+				urlconnection.setRequestMethod("GET");
+				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+
+				String line;
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				// 테스트 출력
+				// logger.info(json);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return json;
+	}
+
+	// 구분코드 와 페이지 번호를 받아서 파싱
+	// 수도통합(WIS)-운영통합시스템(댐보발전통합)
+	public static String parseWrsJson(String service_url, String service_key, String pageNo, String fcltyDivCode) {
+
+		BufferedReader br = null;
+		String json = "";
+
+		// logger.info("mgtNo :" + mgtNo);
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&fcltyDivCode="+ fcltyDivCode +"&numOfRows=999";
 		try {
 
 			URL url = new URL(urlstr);
