@@ -1,4 +1,4 @@
-package wri.sluicePresentCondition;
+package wrs.dailwater;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,45 +16,49 @@ import org.json.simple.parser.JSONParser;
 import common.JsonParser;
 import common.TransSftp;
 
-public class Hour {
+public class Wikwater {
 
-	final static Logger logger = Logger.getLogger(Hour.class);
+	final static Logger logger = Logger.getLogger(Wikwater.class);
 
-	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합) - 수문현황정보(시간)
+	// 광역정수장 수질정보 조회 서비스 - 광역주간 수돗물 수질 조회
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
 
-		// 댐코드 1개, 날짜를 yyyymmdd로 2개 받는다. 파라미터 유효성 체크는 파싱 때 체크
+		// 요청 파라미터는 조회시작일(yyyyMMdd), 조회종료일(yyyyMMdd), 정수장 코드의 3개
+		// 정수장 코드는 정수장 코드 조회 api에서 조회 가능
 		if (args.length == 3) {
 
-			if (args[1].length() == 8 && args[2].length() == 8) {
+			if (args[1].length() == 6 && args[2].length() == 6) {
 
 				logger.info("firstLine start..");
 				long start = System.currentTimeMillis(); // 시작시간
 
 				// step 0.open api url과 서비스 키.
-				String service_url = JsonParser.getProperty("sluicePresentCondition_hour_url");
-				String service_key = JsonParser.getProperty("sluicePresentCondition_service_key");
+				String service_url = JsonParser.getProperty("dailwater_Wikwater_url");
+				String service_key = JsonParser.getProperty("dailwater_service_key");
 
 				// step 1.파일의 첫 행 작성
-				File file = new File(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_05.dat");
+				File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_20_" + args[0] + "_" + args[1]
+						+ "_" + args[2] + ".dat");
 
 				try {
-					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-					pw.write("obsrdt"); // 일시
+					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+					pw.write("mesurede"); // 측정시간
 					pw.write("|^");
-					pw.write("lowlevel"); // 댐수위
+					pw.write("item1"); // 일반세균(CFU/mL)
 					pw.write("|^");
-					pw.write("rf"); // 강우량
+					pw.write("item2"); // 총대장균군(/100mL)
 					pw.write("|^");
-					pw.write("inflowqy"); // 유입량
+					pw.write("item3"); // 대장균/분원성대장균(/100mL)
 					pw.write("|^");
-					pw.write("totdcwtrqy"); // 총방류량
+					pw.write("item4"); // 암모니아성질소(mg/L)
 					pw.write("|^");
-					pw.write("rsvwtqy"); // 저수량
+					pw.write("item5"); // 질산성질소(mg/L)
 					pw.write("|^");
-					pw.write("rsvwtrt"); // 저수율
+					pw.write("item6"); // 탁도(NTU) 침전수
+					pw.write("|^");
+					pw.write("item7"); // 증발잔류물(mg/L)
 					pw.write("|^");
 					pw.write("numOfRows"); // 줄수
 					pw.write("|^");
@@ -72,9 +76,8 @@ public class Hour {
 
 				int pageNo = 0;
 				int pageCount = 0;
-				String numberOfRows_str = "";
 
-				json = JsonParser.parseWriJson(service_url, service_key, String.valueOf(pageNo), args[0], args[1],
+				json = JsonParser.parseWriJson_month(service_url, service_key, String.valueOf(pageNo), args[0], args[1],
 						args[2]);
 
 				try {
@@ -87,7 +90,6 @@ public class Hour {
 
 					int numOfRows = ((Long) body.get("numOfRows")).intValue();
 					int totalCount = ((Long) body.get("totalCount")).intValue();
-					numberOfRows_str = Integer.toString(numOfRows);
 
 					pageCount = (totalCount / numOfRows) + 1;
 
@@ -99,17 +101,18 @@ public class Hour {
 
 				StringBuffer resultSb = new StringBuffer("");
 
-				StringBuffer obsrdt = new StringBuffer(" "); // 일시
-				StringBuffer lowlevel = new StringBuffer(" "); // 댐수위
-				StringBuffer rf = new StringBuffer(" "); // 강우량
-				StringBuffer inflowqy = new StringBuffer(" "); // 유입량
-				StringBuffer totdcwtrqy = new StringBuffer(" "); // 총방류량
-				StringBuffer rsvwtqy = new StringBuffer(" "); // 저수량
-				StringBuffer rsvwtrt = new StringBuffer(" "); // 저수율
+				StringBuffer mesurede = new StringBuffer(" "); // 측정시간
+				StringBuffer item1 = new StringBuffer(" "); // 일반세균(CFU/mL)
+				StringBuffer item2 = new StringBuffer(" "); // 총대장균군(/100mL)
+				StringBuffer item3 = new StringBuffer(" "); // 대장균/분원성대장균(/100mL)
+				StringBuffer item4 = new StringBuffer(" "); // 암모니아성질소(mg/L)
+				StringBuffer item5 = new StringBuffer(" "); // 질산성질소(mg/L)
+				StringBuffer item6 = new StringBuffer(" "); // 탁도(NTU) 침전수
+				StringBuffer item7 = new StringBuffer(" "); // 증발잔류물(mg/L)
 
-				for (int i = 1; i <= pageCount; ++i) {
+				for (int i = 1; i <= pageCount; i++) {
 
-					json = JsonParser.parseWriJson(service_url, service_key, String.valueOf(i), args[0], args[1],
+					json = JsonParser.parseWriJson_month(service_url, service_key, String.valueOf(i), args[0], args[1],
 							args[2]);
 
 					try {
@@ -123,6 +126,8 @@ public class Hour {
 						JSONObject items = (JSONObject) body.get("items");
 
 						String resultCode = header.get("resultCode").toString().trim();
+
+						String numOfRows_str = body.get("numOfRows").toString();
 
 						if (resultCode.equals("00")) {
 
@@ -139,32 +144,35 @@ public class Hour {
 
 									String keyname = iter.next();
 
-									JsonParser.colWrite(obsrdt, keyname, "obsrdt", items_jsonObject);
-									JsonParser.colWrite(lowlevel, keyname, "lowlevel", items_jsonObject);
-									JsonParser.colWrite(rf, keyname, "rf", items_jsonObject);
-									JsonParser.colWrite(inflowqy, keyname, "inflowqy", items_jsonObject);
-									JsonParser.colWrite(totdcwtrqy, keyname, "totdcwtrqy", items_jsonObject);
-									JsonParser.colWrite(rsvwtqy, keyname, "rsvwtqy", items_jsonObject);
-									JsonParser.colWrite(rsvwtrt, keyname, "rsvwtrt", items_jsonObject);
+									JsonParser.colWrite(mesurede, keyname, "mesurede", items_jsonObject);
+									JsonParser.colWrite(item1, keyname, "item1", items_jsonObject);
+									JsonParser.colWrite(item2, keyname, "item2", items_jsonObject);
+									JsonParser.colWrite(item3, keyname, "item3", items_jsonObject);
+									JsonParser.colWrite(item4, keyname, "item4", items_jsonObject);
+									JsonParser.colWrite(item5, keyname, "item5", items_jsonObject);
+									JsonParser.colWrite(item6, keyname, "item6", items_jsonObject);
+									JsonParser.colWrite(item7, keyname, "item7", items_jsonObject);
 
 								}
 
 								// 한번에 문자열 합침
-								resultSb.append(obsrdt);
+								resultSb.append(mesurede);
 								resultSb.append("|^");
-								resultSb.append(lowlevel);
+								resultSb.append(item1);
 								resultSb.append("|^");
-								resultSb.append(rf);
+								resultSb.append(item2);
 								resultSb.append("|^");
-								resultSb.append(inflowqy);
+								resultSb.append(item3);
 								resultSb.append("|^");
-								resultSb.append(totdcwtrqy);
+								resultSb.append(item4);
 								resultSb.append("|^");
-								resultSb.append(rsvwtqy);
+								resultSb.append(item5);
 								resultSb.append("|^");
-								resultSb.append(rsvwtrt);
+								resultSb.append(item6);
 								resultSb.append("|^");
-								resultSb.append(numberOfRows_str);
+								resultSb.append(item7);
+								resultSb.append("|^");
+								resultSb.append(numOfRows_str);
 								resultSb.append("|^");
 								resultSb.append(String.valueOf(i));
 								resultSb.append(System.getProperty("line.separator"));
@@ -185,32 +193,35 @@ public class Hour {
 
 										String keyname = iter.next();
 
-										JsonParser.colWrite(obsrdt, keyname, "obsrdt", item_obj);
-										JsonParser.colWrite(lowlevel, keyname, "lowlevel", item_obj);
-										JsonParser.colWrite(rf, keyname, "rf", item_obj);
-										JsonParser.colWrite(inflowqy, keyname, "inflowqy", item_obj);
-										JsonParser.colWrite(totdcwtrqy, keyname, "totdcwtrqy", item_obj);
-										JsonParser.colWrite(rsvwtqy, keyname, "rsvwtqy", item_obj);
-										JsonParser.colWrite(rsvwtrt, keyname, "rsvwtrt", item_obj);
+										JsonParser.colWrite(mesurede, keyname, "mesurede", item_obj);
+										JsonParser.colWrite(item1, keyname, "item1", item_obj);
+										JsonParser.colWrite(item2, keyname, "item2", item_obj);
+										JsonParser.colWrite(item3, keyname, "item3", item_obj);
+										JsonParser.colWrite(item4, keyname, "item4", item_obj);
+										JsonParser.colWrite(item5, keyname, "item5", item_obj);
+										JsonParser.colWrite(item6, keyname, "item6", item_obj);
+										JsonParser.colWrite(item7, keyname, "item7", item_obj);
 
 									}
 
 									// 한번에 문자열 합침
-									resultSb.append(obsrdt);
+									resultSb.append(mesurede);
 									resultSb.append("|^");
-									resultSb.append(lowlevel);
+									resultSb.append(item1);
 									resultSb.append("|^");
-									resultSb.append(rf);
+									resultSb.append(item2);
 									resultSb.append("|^");
-									resultSb.append(inflowqy);
+									resultSb.append(item3);
 									resultSb.append("|^");
-									resultSb.append(totdcwtrqy);
+									resultSb.append(item4);
 									resultSb.append("|^");
-									resultSb.append(rsvwtqy);
+									resultSb.append(item5);
 									resultSb.append("|^");
-									resultSb.append(rsvwtrt);
+									resultSb.append(item6);
 									resultSb.append("|^");
-									resultSb.append(numberOfRows_str);
+									resultSb.append(item7);
+									resultSb.append("|^");
+									resultSb.append(numOfRows_str);
 									resultSb.append("|^");
 									resultSb.append(String.valueOf(i));
 									resultSb.append(System.getProperty("line.separator"));
@@ -253,21 +264,17 @@ public class Hour {
 
 				// step 5. 대상 서버에 sftp로 보냄
 
-				 TransSftp.transSftp(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_05.dat", "WRI");
+				TransSftp.transSftp(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_20_" + args[0] + "_" + args[1]
+						+ "_" + args[2] + ".dat", "WRS");
 
 				long end = System.currentTimeMillis();
 				logger.info("실행 시간 : " + (end - start) / 1000.0 + "초");
-
-			} else {
-				logger.debug("파라미터 형식 에러!!");
-				System.exit(-1);
 			}
 
 		} else {
 			logger.debug("파라미터 개수 에러!!");
 			System.exit(-1);
 		}
-
 	}
 
 }

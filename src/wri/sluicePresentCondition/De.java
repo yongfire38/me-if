@@ -126,13 +126,12 @@ public class De {
 
 						if (resultCode.equals("00")) {
 
-							JSONArray items_jsonArray = (JSONArray) items.get("item");
+							// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
+							if (items.get("item") instanceof JSONObject) {
 
-							for (int r = 0; r < items_jsonArray.size(); r++) {
+								JSONObject items_jsonObject = (JSONObject) items.get("item");
 
-								JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
-
-								Set<String> key = item_obj.keySet();
+								Set<String> key = items_jsonObject.keySet();
 
 								Iterator<String> iter = key.iterator();
 
@@ -140,13 +139,13 @@ public class De {
 
 									String keyname = iter.next();
 
-									JsonParser.colWrite(obsryymtde, keyname, "obsryymtde", item_obj);
-									JsonParser.colWrite(lowlevel, keyname, "lowlevel", item_obj);
-									JsonParser.colWrite(prcptqy, keyname, "prcptqy", item_obj);
-									JsonParser.colWrite(inflowqy, keyname, "inflowqy", item_obj);
-									JsonParser.colWrite(totdcwtrqy, keyname, "totdcwtrqy", item_obj);
-									JsonParser.colWrite(rsvwtqy, keyname, "rsvwtqy", item_obj);
-									JsonParser.colWrite(rsvwtrt, keyname, "rsvwtrt", item_obj);
+									JsonParser.colWrite(obsryymtde, keyname, "obsryymtde", items_jsonObject);
+									JsonParser.colWrite(lowlevel, keyname, "lowlevel", items_jsonObject);
+									JsonParser.colWrite(prcptqy, keyname, "prcptqy", items_jsonObject);
+									JsonParser.colWrite(inflowqy, keyname, "inflowqy", items_jsonObject);
+									JsonParser.colWrite(totdcwtrqy, keyname, "totdcwtrqy", items_jsonObject);
+									JsonParser.colWrite(rsvwtqy, keyname, "rsvwtqy", items_jsonObject);
+									JsonParser.colWrite(rsvwtrt, keyname, "rsvwtrt", items_jsonObject);
 
 								}
 
@@ -170,6 +169,56 @@ public class De {
 								resultSb.append(String.valueOf(i));
 								resultSb.append(System.getProperty("line.separator"));
 
+							} else if (items.get("item") instanceof JSONArray) {
+
+								JSONArray items_jsonArray = (JSONArray) items.get("item");
+
+								for (int r = 0; r < items_jsonArray.size(); r++) {
+
+									JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
+
+									Set<String> key = item_obj.keySet();
+
+									Iterator<String> iter = key.iterator();
+
+									while (iter.hasNext()) {
+
+										String keyname = iter.next();
+
+										JsonParser.colWrite(obsryymtde, keyname, "obsryymtde", item_obj);
+										JsonParser.colWrite(lowlevel, keyname, "lowlevel", item_obj);
+										JsonParser.colWrite(prcptqy, keyname, "prcptqy", item_obj);
+										JsonParser.colWrite(inflowqy, keyname, "inflowqy", item_obj);
+										JsonParser.colWrite(totdcwtrqy, keyname, "totdcwtrqy", item_obj);
+										JsonParser.colWrite(rsvwtqy, keyname, "rsvwtqy", item_obj);
+										JsonParser.colWrite(rsvwtrt, keyname, "rsvwtrt", item_obj);
+
+									}
+
+									// 한번에 문자열 합침
+									resultSb.append(obsryymtde);
+									resultSb.append("|^");
+									resultSb.append(lowlevel);
+									resultSb.append("|^");
+									resultSb.append(prcptqy);
+									resultSb.append("|^");
+									resultSb.append(inflowqy);
+									resultSb.append("|^");
+									resultSb.append(totdcwtrqy);
+									resultSb.append("|^");
+									resultSb.append(rsvwtqy);
+									resultSb.append("|^");
+									resultSb.append(rsvwtrt);
+									resultSb.append("|^");
+									resultSb.append(numberOfRows_str);
+									resultSb.append("|^");
+									resultSb.append(String.valueOf(i));
+									resultSb.append(System.getProperty("line.separator"));
+
+								}
+
+							} else {
+								logger.debug("parsing error!!");
 							}
 
 						} else if (resultCode.equals("03")) {
@@ -204,7 +253,7 @@ public class De {
 
 				// step 5. 대상 서버에 sftp로 보냄
 
-				TransSftp.transSftp(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_06.dat", "WRI");
+				 TransSftp.transSftp(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_06.dat", "WRI");
 
 				long end = System.currentTimeMillis();
 				logger.info("실행 시간 : " + (end - start) / 1000.0 + "초");

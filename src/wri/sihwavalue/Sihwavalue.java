@@ -109,13 +109,12 @@ public class Sihwavalue {
 
 						if (resultCode.equals("00")) {
 
-							JSONArray items_jsonArray = (JSONArray) items.get("item");
+							// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
+							if (items.get("item") instanceof JSONObject) {
 
-							for (int r = 0; r < items_jsonArray.size(); r++) {
+								JSONObject items_jsonObject = (JSONObject) items.get("item");
 
-								JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
-
-								Set<String> key = item_obj.keySet();
+								Set<String> key = items_jsonObject.keySet();
 
 								Iterator<String> iter = key.iterator();
 
@@ -123,10 +122,10 @@ public class Sihwavalue {
 
 									String keyname = iter.next();
 
-									JsonParser.colWrite(bidno, keyname, "bidno", item_obj);
-									JsonParser.colWrite(obsdt, keyname, "obsdt", item_obj);
-									JsonParser.colWrite(lakeRwl, keyname, "lakeRwl", item_obj);
-									JsonParser.colWrite(seaRwl, keyname, "seaRwl", item_obj);
+									JsonParser.colWrite(bidno, keyname, "bidno", items_jsonObject);
+									JsonParser.colWrite(obsdt, keyname, "obsdt", items_jsonObject);
+									JsonParser.colWrite(lakeRwl, keyname, "lakeRwl", items_jsonObject);
+									JsonParser.colWrite(seaRwl, keyname, "seaRwl", items_jsonObject);
 
 								}
 
@@ -140,6 +139,43 @@ public class Sihwavalue {
 								resultSb.append(seaRwl);
 								resultSb.append(System.getProperty("line.separator"));
 
+							} else if (items.get("item") instanceof JSONArray) {
+
+								JSONArray items_jsonArray = (JSONArray) items.get("item");
+
+								for (int r = 0; r < items_jsonArray.size(); r++) {
+
+									JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
+
+									Set<String> key = item_obj.keySet();
+
+									Iterator<String> iter = key.iterator();
+
+									while (iter.hasNext()) {
+
+										String keyname = iter.next();
+
+										JsonParser.colWrite(bidno, keyname, "bidno", item_obj);
+										JsonParser.colWrite(obsdt, keyname, "obsdt", item_obj);
+										JsonParser.colWrite(lakeRwl, keyname, "lakeRwl", item_obj);
+										JsonParser.colWrite(seaRwl, keyname, "seaRwl", item_obj);
+
+									}
+
+									// 한번에 문자열 합침
+									resultSb.append(bidno);
+									resultSb.append("|^");
+									resultSb.append(obsdt);
+									resultSb.append("|^");
+									resultSb.append(lakeRwl);
+									resultSb.append("|^");
+									resultSb.append(seaRwl);
+									resultSb.append(System.getProperty("line.separator"));
+
+								}
+
+							} else {
+								logger.debug("parsing error!!");
 							}
 
 						} else if (resultCode.equals("03")) {

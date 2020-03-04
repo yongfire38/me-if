@@ -128,13 +128,12 @@ public class WaterPressureList {
 
 						if (resultCode.equals("00")) {
 
-							JSONArray items_jsonArray = (JSONArray) items.get("item");
+							// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
+							if (items.get("item") instanceof JSONObject) {
 
-							for (int r = 0; r < items_jsonArray.size(); r++) {
+								JSONObject items_jsonObject = (JSONObject) items.get("item");
 
-								JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
-
-								Set<String> key = item_obj.keySet();
+								Set<String> key = items_jsonObject.keySet();
 
 								Iterator<String> iter = key.iterator();
 
@@ -142,15 +141,15 @@ public class WaterPressureList {
 
 									String keyname = iter.next();
 
-									JsonParser.colWrite(no, keyname, "no", item_obj);
-									JsonParser.colWrite(occrrncDt, keyname, "occrrncDt", item_obj);
-									JsonParser.colWrite(fcltyNm, keyname, "fcltyNm", item_obj);
-									JsonParser.colWrite(fcltyMngNo, keyname, "fcltyMngNo", item_obj);
-									JsonParser.colWrite(dataVal, keyname, "dataVal", item_obj);
-									JsonParser.colWrite(itemUnit, keyname, "itemUnit", item_obj);
-									JsonParser.colWrite(dataItemDesc, keyname, "dataItemDesc", item_obj);
-									JsonParser.colWrite(dataItemTagsn, keyname, "dataItemTagsn", item_obj);
-									JsonParser.colWrite(dataItemDiv, keyname, "dataItemDiv", item_obj);
+									JsonParser.colWrite(no, keyname, "no", items_jsonObject);
+									JsonParser.colWrite(occrrncDt, keyname, "occrrncDt", items_jsonObject);
+									JsonParser.colWrite(fcltyNm, keyname, "fcltyNm", items_jsonObject);
+									JsonParser.colWrite(fcltyMngNo, keyname, "fcltyMngNo", items_jsonObject);
+									JsonParser.colWrite(dataVal, keyname, "dataVal", items_jsonObject);
+									JsonParser.colWrite(itemUnit, keyname, "itemUnit", items_jsonObject);
+									JsonParser.colWrite(dataItemDesc, keyname, "dataItemDesc", items_jsonObject);
+									JsonParser.colWrite(dataItemTagsn, keyname, "dataItemTagsn", items_jsonObject);
+									JsonParser.colWrite(dataItemDiv, keyname, "dataItemDiv", items_jsonObject);
 								}
 
 								// 한번에 문자열 합침
@@ -173,6 +172,57 @@ public class WaterPressureList {
 								resultSb.append(dataItemDiv);
 								resultSb.append(System.getProperty("line.separator"));
 
+							} else if (items.get("item") instanceof JSONArray) {
+
+								JSONArray items_jsonArray = (JSONArray) items.get("item");
+
+								for (int r = 0; r < items_jsonArray.size(); r++) {
+
+									JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
+
+									Set<String> key = item_obj.keySet();
+
+									Iterator<String> iter = key.iterator();
+
+									while (iter.hasNext()) {
+
+										String keyname = iter.next();
+
+										JsonParser.colWrite(no, keyname, "no", item_obj);
+										JsonParser.colWrite(occrrncDt, keyname, "occrrncDt", item_obj);
+										JsonParser.colWrite(fcltyNm, keyname, "fcltyNm", item_obj);
+										JsonParser.colWrite(fcltyMngNo, keyname, "fcltyMngNo", item_obj);
+										JsonParser.colWrite(dataVal, keyname, "dataVal", item_obj);
+										JsonParser.colWrite(itemUnit, keyname, "itemUnit", item_obj);
+										JsonParser.colWrite(dataItemDesc, keyname, "dataItemDesc", item_obj);
+										JsonParser.colWrite(dataItemTagsn, keyname, "dataItemTagsn", item_obj);
+										JsonParser.colWrite(dataItemDiv, keyname, "dataItemDiv", item_obj);
+									}
+
+									// 한번에 문자열 합침
+									resultSb.append(no);
+									resultSb.append("|^");
+									resultSb.append(occrrncDt);
+									resultSb.append("|^");
+									resultSb.append(fcltyNm);
+									resultSb.append("|^");
+									resultSb.append(fcltyMngNo);
+									resultSb.append("|^");
+									resultSb.append(dataVal);
+									resultSb.append("|^");
+									resultSb.append(itemUnit);
+									resultSb.append("|^");
+									resultSb.append(dataItemDesc);
+									resultSb.append("|^");
+									resultSb.append(dataItemTagsn);
+									resultSb.append("|^");
+									resultSb.append(dataItemDiv);
+									resultSb.append(System.getProperty("line.separator"));
+
+								}
+
+							} else {
+								logger.debug("parsing error!!");
 							}
 
 						} else if (resultCode.equals("03")) {

@@ -1,4 +1,4 @@
-package wri.excllncobsrvt;
+package wrs.dailwater;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,43 +16,51 @@ import org.json.simple.parser.JSONParser;
 import common.JsonParser;
 import common.TransSftp;
 
-public class Hourrf {
+public class Dailwater {
 
-	final static Logger logger = Logger.getLogger(Hourrf.class);
+	final static Logger logger = Logger.getLogger(Dailwater.class);
 
-	// 우량 관측정보 조회 서비스 - 우량 시강우량 조회
+	// 광역정수장 수질정보 조회 서비스 - 광역일일 수돗물 수질 조회
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
 
-		// 필요한 파라미터는 조회시작일 (yyyyMMdd), 조회시작시각 2자리, 조회 종료일 (yyyyMMdd), 조회종료 시각
-		// 2자리, 댐 코드, 우량관측소 코드
-		// 댐코드는 수문제원현황 코드조회 api에서 조회, 우량관측소 코드는 우량관측소 코드 조회 api에서 조회
+		// 요청 파라미터는 조회시작일(yyyyMMdd), 조회종료일(yyyyMMdd), 정수장 코드의 3개
+		// 정수장 코드는 정수장 코드 조회 api에서 조회 가능
+		if (args.length == 3) {
 
-		if (args.length == 6) {
-
-			if (args[0].length() == 8 && args[1].length() == 2 && args[2].length() == 8 && args[3].length() == 2) {
+			if (args[1].length() == 8 && args[2].length() == 8) {
 
 				logger.info("firstLine start..");
 				long start = System.currentTimeMillis(); // 시작시간
 
 				// step 0.open api url과 서비스 키.
-				String service_url = JsonParser.getProperty("excllncobsrvt_hourrf_url");
-				String service_key = JsonParser.getProperty("excllncobsrvt_service_key");
+				String service_url = JsonParser.getProperty("dailwater_Dailwater_url");
+				String service_key = JsonParser.getProperty("dailwater_service_key");
 
 				// step 1.파일의 첫 행 작성
-				File file = new File(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_13_" + args[0] + "_" + args[1]
-						+ "_" + args[2] + "_" + args[3] + "_" + args[4] + "_" + args[5] + ".dat");
+				File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_18_" + args[0] + "_" + args[1]
+						+ "_" + args[2] + ".dat");
 
 				try {
 
 					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-					pw.write("no"); // 순번
+					pw.write("mesurede"); // 측정시간
 					pw.write("|^");
-					pw.write("obsrdt"); // 시간
+					pw.write("item1"); // 맛
 					pw.write("|^");
-					pw.write("hourrf"); // 시강우량
+					pw.write("item2"); // 냄새
 					pw.write("|^");
-					pw.write("acmtlrf"); // 누적우량
+					pw.write("item3"); // 색도(도)
+					pw.write("|^");
+					pw.write("item4"); // pH(-)
+					pw.write("|^");
+					pw.write("item5"); // 탁도(NTU)
+					pw.write("|^");
+					pw.write("item6"); // 잔류염소(mg/L)
+					pw.write("|^");
+					pw.write("numOfRows"); // 줄수
+					pw.write("|^");
+					pw.write("pageNo"); // 페이지번호
 					pw.println();
 					pw.flush();
 					pw.close();
@@ -67,8 +75,8 @@ public class Hourrf {
 				int pageNo = 0;
 				int pageCount = 0;
 
-				json = JsonParser.parseWriJson_excll(service_url, service_key, String.valueOf(pageNo), args[0], args[1],
-						args[2], args[3], args[4], args[5]);
+				json = JsonParser.parseWriJson(service_url, service_key, String.valueOf(pageNo), args[0], args[1],
+						args[2]);
 
 				try {
 
@@ -91,15 +99,18 @@ public class Hourrf {
 
 				StringBuffer resultSb = new StringBuffer("");
 
-				StringBuffer no = new StringBuffer(" "); // 순번
-				StringBuffer obsrdt = new StringBuffer(" "); // 시간
-				StringBuffer hourrf = new StringBuffer(" "); // 시강우량
-				StringBuffer acmtlrf = new StringBuffer(" "); // 누적우량
+				StringBuffer mesurede = new StringBuffer(" "); // 측정시간
+				StringBuffer item1 = new StringBuffer(" "); // 맛
+				StringBuffer item2 = new StringBuffer(" "); // 냄새
+				StringBuffer item3 = new StringBuffer(" "); // 색도(도)
+				StringBuffer item4 = new StringBuffer(" "); // pH(-)
+				StringBuffer item5 = new StringBuffer(" "); // 탁도(NTU)
+				StringBuffer item6 = new StringBuffer(" "); // 잔류염소(mg/L)
 
 				for (int i = 1; i <= pageCount; i++) {
 
-					json = JsonParser.parseWriJson_excll(service_url, service_key, String.valueOf(i), args[0], args[1],
-							args[2], args[3], args[4], args[5]);
+					json = JsonParser.parseWriJson(service_url, service_key, String.valueOf(i), args[0], args[1],
+							args[2]);
 
 					try {
 
@@ -112,6 +123,8 @@ public class Hourrf {
 						JSONObject items = (JSONObject) body.get("items");
 
 						String resultCode = header.get("resultCode").toString().trim();
+
+						String numOfRows_str = body.get("numOfRows").toString();
 
 						if (resultCode.equals("00")) {
 
@@ -128,21 +141,34 @@ public class Hourrf {
 
 									String keyname = iter.next();
 
-									JsonParser.colWrite(no, keyname, "no", items_jsonObject);
-									JsonParser.colWrite(obsrdt, keyname, "obsrdt", items_jsonObject);
-									JsonParser.colWrite(hourrf, keyname, "hourrf", items_jsonObject);
-									JsonParser.colWrite(acmtlrf, keyname, "acmtlrf", items_jsonObject);
+									JsonParser.colWrite(mesurede, keyname, "mesurede", items_jsonObject);
+									JsonParser.colWrite(item1, keyname, "item1", items_jsonObject);
+									JsonParser.colWrite(item2, keyname, "item2", items_jsonObject);
+									JsonParser.colWrite(item3, keyname, "item3", items_jsonObject);
+									JsonParser.colWrite(item4, keyname, "item4", items_jsonObject);
+									JsonParser.colWrite(item5, keyname, "item5", items_jsonObject);
+									JsonParser.colWrite(item6, keyname, "item6", items_jsonObject);
 
 								}
 
 								// 한번에 문자열 합침
-								resultSb.append(no);
+								resultSb.append(mesurede);
 								resultSb.append("|^");
-								resultSb.append(obsrdt);
+								resultSb.append(item1);
 								resultSb.append("|^");
-								resultSb.append(hourrf);
+								resultSb.append(item2);
 								resultSb.append("|^");
-								resultSb.append(acmtlrf);
+								resultSb.append(item3);
+								resultSb.append("|^");
+								resultSb.append(item4);
+								resultSb.append("|^");
+								resultSb.append(item5);
+								resultSb.append("|^");
+								resultSb.append(item6);
+								resultSb.append("|^");
+								resultSb.append(numOfRows_str);
+								resultSb.append("|^");
+								resultSb.append(String.valueOf(i));
 								resultSb.append(System.getProperty("line.separator"));
 
 							} else if (items.get("item") instanceof JSONArray) {
@@ -161,21 +187,34 @@ public class Hourrf {
 
 										String keyname = iter.next();
 
-										JsonParser.colWrite(no, keyname, "no", item_obj);
-										JsonParser.colWrite(obsrdt, keyname, "obsrdt", item_obj);
-										JsonParser.colWrite(hourrf, keyname, "hourrf", item_obj);
-										JsonParser.colWrite(acmtlrf, keyname, "acmtlrf", item_obj);
+										JsonParser.colWrite(mesurede, keyname, "mesurede", item_obj);
+										JsonParser.colWrite(item1, keyname, "item1", item_obj);
+										JsonParser.colWrite(item2, keyname, "item2", item_obj);
+										JsonParser.colWrite(item3, keyname, "item3", item_obj);
+										JsonParser.colWrite(item4, keyname, "item4", item_obj);
+										JsonParser.colWrite(item5, keyname, "item5", item_obj);
+										JsonParser.colWrite(item6, keyname, "item6", item_obj);
 
 									}
 
 									// 한번에 문자열 합침
-									resultSb.append(no);
+									resultSb.append(mesurede);
 									resultSb.append("|^");
-									resultSb.append(obsrdt);
+									resultSb.append(item1);
 									resultSb.append("|^");
-									resultSb.append(hourrf);
+									resultSb.append(item2);
 									resultSb.append("|^");
-									resultSb.append(acmtlrf);
+									resultSb.append(item3);
+									resultSb.append("|^");
+									resultSb.append(item4);
+									resultSb.append("|^");
+									resultSb.append(item5);
+									resultSb.append("|^");
+									resultSb.append(item6);
+									resultSb.append("|^");
+									resultSb.append(numOfRows_str);
+									resultSb.append("|^");
+									resultSb.append(String.valueOf(i));
 									resultSb.append(System.getProperty("line.separator"));
 
 								}
@@ -216,8 +255,8 @@ public class Hourrf {
 
 				// step 5. 대상 서버에 sftp로 보냄
 
-				TransSftp.transSftp(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_13_" + args[0] + "_" + args[1]
-						+ "_" + args[2] + "_" + args[3] + "_" + args[4] + "_" + args[5] + ".dat", "WRI");
+				TransSftp.transSftp(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_18_" + args[0] + "_" + args[1]
+						+ "_" + args[2] + ".dat", "WRS");
 
 				long end = System.currentTimeMillis();
 				logger.info("실행 시간 : " + (end - start) / 1000.0 + "초");

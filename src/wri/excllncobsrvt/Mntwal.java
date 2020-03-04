@@ -115,13 +115,12 @@ public class Mntwal {
 
 						if (resultCode.equals("00")) {
 
-							JSONArray items_jsonArray = (JSONArray) items.get("item");
+							// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
+							if (items.get("item") instanceof JSONObject) {
 
-							for (int r = 0; r < items_jsonArray.size(); r++) {
+								JSONObject items_jsonObject = (JSONObject) items.get("item");
 
-								JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
-
-								Set<String> key = item_obj.keySet();
+								Set<String> key = items_jsonObject.keySet();
 
 								Iterator<String> iter = key.iterator();
 
@@ -129,10 +128,10 @@ public class Mntwal {
 
 									String keyname = iter.next();
 
-									JsonParser.colWrite(no, keyname, "no", item_obj);
-									JsonParser.colWrite(obsrdtmnt, keyname, "obsrdtmnt", item_obj);
-									JsonParser.colWrite(flux, keyname, "flux", item_obj);
-									JsonParser.colWrite(wal, keyname, "wal", item_obj);
+									JsonParser.colWrite(no, keyname, "no", items_jsonObject);
+									JsonParser.colWrite(obsrdtmnt, keyname, "obsrdtmnt", items_jsonObject);
+									JsonParser.colWrite(flux, keyname, "flux", items_jsonObject);
+									JsonParser.colWrite(wal, keyname, "wal", items_jsonObject);
 
 								}
 
@@ -146,6 +145,43 @@ public class Mntwal {
 								resultSb.append(wal);
 								resultSb.append(System.getProperty("line.separator"));
 
+							} else if (items.get("item") instanceof JSONArray) {
+
+								JSONArray items_jsonArray = (JSONArray) items.get("item");
+
+								for (int r = 0; r < items_jsonArray.size(); r++) {
+
+									JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
+
+									Set<String> key = item_obj.keySet();
+
+									Iterator<String> iter = key.iterator();
+
+									while (iter.hasNext()) {
+
+										String keyname = iter.next();
+
+										JsonParser.colWrite(no, keyname, "no", item_obj);
+										JsonParser.colWrite(obsrdtmnt, keyname, "obsrdtmnt", item_obj);
+										JsonParser.colWrite(flux, keyname, "flux", item_obj);
+										JsonParser.colWrite(wal, keyname, "wal", item_obj);
+
+									}
+
+									// 한번에 문자열 합침
+									resultSb.append(no);
+									resultSb.append("|^");
+									resultSb.append(obsrdtmnt);
+									resultSb.append("|^");
+									resultSb.append(flux);
+									resultSb.append("|^");
+									resultSb.append(wal);
+									resultSb.append(System.getProperty("line.separator"));
+
+								}
+
+							} else {
+								logger.debug("parsing error!!");
 							}
 
 						} else if (resultCode.equals("03")) {

@@ -1,153 +1,170 @@
-[2020-03-03 09:37:21] DEBUG (multiPoseDam.MultiPoseDam - main:297) - 파라미터 형식 에러!!
-[2020-03-03 09:37:44]  INFO (multiPoseDam.MultiPoseDam - main:32) - firstLine start..
-[2020-03-03 09:37:44]  INFO (multiPoseDam.MultiPoseDam - main:286) - parsing complete!
-[2020-03-03 09:37:44]  INFO (multiPoseDam.MultiPoseDam - main:294) - 실행 시간 : 0.337초
-[2020-03-03 09:39:02]  INFO (multiPoseDam.MultiPoseDam - main:32) - firstLine start..
-[2020-03-03 09:39:03]  INFO (multiPoseDam.MultiPoseDam - main:288) - parsing complete!
-[2020-03-03 09:39:03]  INFO (multiPoseDam.MultiPoseDam - main:296) - 실행 시간 : 0.791초
-[2020-03-03 09:40:58]  INFO (multiPoseDam.MultiPoseDam - main:32) - firstLine start..
-[2020-03-03 09:41:00]  INFO (multiPoseDam.MultiPoseDam - main:270) - 진행도::::::1/1
-[2020-03-03 09:41:01]  INFO (multiPoseDam.MultiPoseDam - main:288) - parsing complete!
-[2020-03-03 09:41:01]  INFO (multiPoseDam.MultiPoseDam - main:296) - 실행 시간 : 2.783초
-[2020-03-03 09:59:05]  INFO (waterDam.WaterDam - main:32) - firstLine start..
-[2020-03-03 09:59:08]  INFO (waterDam.WaterDam - main:257) - 진행도::::::1/1
-[2020-03-03 09:59:09]  INFO (waterDam.WaterDam - main:275) - parsing complete!
-[2020-03-03 09:59:09]  INFO (waterDam.WaterDam - main:283) - 실행 시간 : 4.139초
-[2020-03-03 10:17:24]  INFO (multiFunctionBarrier.MultiFunctionBarrier - main:32) - firstLine start..
-[2020-03-03 10:17:27]  INFO (multiFunctionBarrier.MultiFunctionBarrier - main:238) - 진행도::::::1/1
-[2020-03-03 10:17:28]  INFO (multiFunctionBarrier.MultiFunctionBarrier - main:256) - parsing complete!
-[2020-03-03 10:17:28]  INFO (multiFunctionBarrier.MultiFunctionBarrier - main:264) - 실행 시간 : 3.387초
-[2020-03-03 10:20:46]  INFO (multiFunctionBarrier.MultiFunctionBarrier - main:32) - firstLine start..
-[2020-03-03 10:20:51]  INFO (multiFunctionBarrier.MultiFunctionBarrier - main:238) - 진행도::::::1/1
-[2020-03-03 10:20:52]  INFO (multiFunctionBarrier.MultiFunctionBarrier - main:256) - parsing complete!
-[2020-03-03 10:20:52]  INFO (multiFunctionBarrier.MultiFunctionBarrier - main:264) - 실행 시간 : 5.689초
-[2020-03-03 10:21:52]  INFO (multiFunctionBarrier.MultiFunctionBarrier - main:32) - firstLine start..
-[2020-03-03 10:21:54]  INFO (multiFunctionBarrier.MultiFunctionBarrier - main:242) - 진행도::::::1/1
-[2020-03-03 10:21:55]  INFO (multiFunctionBarrier.MultiFunctionBarrier - main:260) - parsing complete!
-[2020-03-03 10:21:55]  INFO (multiFunctionBarrier.MultiFunctionBarrier - main:268) - 실행 시간 : 2.5초
-[2020-03-03 11:03:30]  INFO (excllncobsrvt.Mntrf - main:33) - firstLine start..
-[2020-03-03 11:04:22]  INFO (excllncobsrvt.Mntrf - main:33) - firstLine start..
-[2020-03-03 11:04:24]  INFO (excllncobsrvt.Mntrf - main:159) - 진행도::::::1/1
-[2020-03-03 11:04:25]  INFO (excllncobsrvt.Mntrf - main:177) - parsing complete!
-[2020-03-03 11:04:25]  INFO (excllncobsrvt.Mntrf - main:185) - 실행 시간 : 2.407초
-[2020-03-03 11:16:54]  INFO (excllncobsrvt.Hourrf - main:36) - firstLine start..
-[2020-03-03 11:16:55]  INFO (excllncobsrvt.Hourrf - main:160) - 진행도::::::1/1
-[2020-03-03 11:16:56]  INFO (excllncobsrvt.Hourrf - main:178) - parsing complete!
-[2020-03-03 11:16:56]  INFO (common.TransSftp - transSftp:27) - preparing the host information for sftp.
-[2020-03-03 11:17:17]  INFO (common.TransSftp - transSftp:80) - sftp transfer complete!
-[2020-03-03 11:17:17]  INFO (excllncobsrvt.Hourrf - main:186) - 실행 시간 : 22.955초
-[2020-03-03 11:17:31]  INFO (excllncobsrvt.Hourrf - main:36) - firstLine start..
-[2020-03-03 11:17:32]  INFO (excllncobsrvt.Hourrf - main:160) - 진행도::::::1/1
-[2020-03-03 11:17:33]  INFO (excllncobsrvt.Hourrf - main:178) - parsing complete!
-[2020-03-03 11:17:33]  INFO (excllncobsrvt.Hourrf - main:186) - 실행 시간 : 1.609초
-[2020-03-03 11:18:36]  INFO (excllncobsrvt.Hourrf - main:36) - firstLine start..
-[2020-03-03 11:18:37]  INFO (excllncobsrvt.Hourrf - main:160) - 진행도::::::1/1
-[2020-03-03 11:18:38]  INFO (excllncobsrvt.Hourrf - main:178) - parsing complete!
-[2020-03-03 11:18:38]  INFO (excllncobsrvt.Hourrf - main:186) - 실행 시간 : 1.954초
-[2020-03-03 13:28:48]  INFO (excllncobsrvt.Mntwal - main:35) - firstLine start..
-[2020-03-03 13:28:49]  INFO (excllncobsrvt.Mntwal - main:161) - 진행도::::::1/1
-[2020-03-03 13:28:50]  INFO (excllncobsrvt.Mntwal - main:179) - parsing complete!
-[2020-03-03 13:28:50]  INFO (common.TransSftp - transSftp:27) - preparing the host information for sftp.
-[2020-03-03 13:29:11]  INFO (common.TransSftp - transSftp:80) - sftp transfer complete!
-[2020-03-03 13:29:11]  INFO (excllncobsrvt.Mntwal - main:187) - 실행 시간 : 23.113초
-[2020-03-03 13:29:35]  INFO (excllncobsrvt.Mntwal - main:35) - firstLine start..
-[2020-03-03 13:29:36]  INFO (excllncobsrvt.Mntwal - main:161) - 진행도::::::1/1
-[2020-03-03 13:29:37]  INFO (excllncobsrvt.Mntwal - main:179) - parsing complete!
-[2020-03-03 13:29:37]  INFO (excllncobsrvt.Mntwal - main:187) - 실행 시간 : 1.545초
-[2020-03-03 13:34:18]  INFO (excllncobsrvt.Mntwal - main:35) - firstLine start..
-[2020-03-03 13:34:18]  INFO (excllncobsrvt.Mntwal - main:161) - 진행도::::::1/1
-[2020-03-03 13:34:19]  INFO (excllncobsrvt.Mntwal - main:179) - parsing complete!
-[2020-03-03 13:34:19]  INFO (common.TransSftp - transSftp:27) - preparing the host information for sftp.
-[2020-03-03 13:34:40]  INFO (common.TransSftp - transSftp:80) - sftp transfer complete!
-[2020-03-03 13:34:40]  INFO (excllncobsrvt.Mntwal - main:187) - 실행 시간 : 22.884초
-[2020-03-03 13:34:48]  INFO (excllncobsrvt.Hourwal - main:35) - firstLine start..
-[2020-03-03 13:34:49]  INFO (excllncobsrvt.Hourwal - main:161) - 진행도::::::1/1
-[2020-03-03 13:34:50]  INFO (excllncobsrvt.Hourwal - main:179) - parsing complete!
-[2020-03-03 13:34:50]  INFO (excllncobsrvt.Hourwal - main:187) - 실행 시간 : 1.489초
-[2020-03-03 13:35:04]  INFO (excllncobsrvt.Hourwal - main:35) - firstLine start..
-[2020-03-03 13:35:04]  INFO (excllncobsrvt.Hourwal - main:161) - 진행도::::::1/1
-[2020-03-03 13:35:05]  INFO (excllncobsrvt.Hourwal - main:179) - parsing complete!
-[2020-03-03 13:35:05]  INFO (excllncobsrvt.Hourwal - main:187) - 실행 시간 : 1.475초
-[2020-03-03 13:55:07]  INFO (excllncobsrvt.Excllcode - main:31) - firstLine start..
-[2020-03-03 13:55:07]  INFO (excllncobsrvt.Excllcode - main:131) - parsing complete!
-[2020-03-03 13:55:07]  INFO (excllncobsrvt.Excllcode - main:138) - 실행 시간 : 0.244초
-[2020-03-03 13:56:47]  INFO (excllncobsrvt.Excllcode - main:31) - firstLine start..
-[2020-03-03 13:56:47]  INFO (excllncobsrvt.Excllcode - main:131) - parsing complete!
-[2020-03-03 13:56:47]  INFO (excllncobsrvt.Excllcode - main:138) - 실행 시간 : 0.256초
-[2020-03-03 14:00:58]  INFO (excllncobsrvt.Walcode - main:31) - firstLine start..
-[2020-03-03 14:00:58]  INFO (excllncobsrvt.Walcode - main:132) - parsing complete!
-[2020-03-03 14:00:58]  INFO (excllncobsrvt.Walcode - main:139) - 실행 시간 : 0.238초
-[2020-03-03 14:39:57]  INFO (waterFlux.WaterFluxList - main:32) - firstLine start..
-[2020-03-03 14:40:01]  INFO (waterFlux.WaterFluxList - main:188) - 진행도::::::1/9
-[2020-03-03 14:40:05]  INFO (waterFlux.WaterFluxList - main:188) - 진행도::::::2/9
-[2020-03-03 14:40:08]  INFO (waterFlux.WaterFluxList - main:188) - 진행도::::::3/9
-[2020-03-03 14:40:11]  INFO (waterFlux.WaterFluxList - main:188) - 진행도::::::4/9
-[2020-03-03 14:40:14]  INFO (waterFlux.WaterFluxList - main:188) - 진행도::::::5/9
-[2020-03-03 14:40:16]  INFO (waterFlux.WaterFluxList - main:188) - 진행도::::::6/9
-[2020-03-03 14:40:21]  INFO (waterFlux.WaterFluxList - main:188) - 진행도::::::7/9
-[2020-03-03 14:40:24]  INFO (waterFlux.WaterFluxList - main:188) - 진행도::::::8/9
-[2020-03-03 14:40:27]  INFO (waterFlux.WaterFluxList - main:188) - 진행도::::::9/9
-[2020-03-03 14:40:28]  INFO (waterFlux.WaterFluxList - main:206) - parsing complete!
-[2020-03-03 14:40:28]  INFO (waterFlux.WaterFluxList - main:214) - 실행 시간 : 30.211초
-[2020-03-03 15:05:00]  INFO (waterFlux.FcltyList - main:31) - firstLine start..
-[2020-03-03 15:05:01]  INFO (waterFlux.FcltyList - main:129) - parsing complete!
-[2020-03-03 15:05:01]  INFO (waterFlux.FcltyList - main:136) - 실행 시간 : 0.763초
-[2020-03-03 15:05:19]  INFO (waterFlux.FcltyList - main:31) - firstLine start..
-[2020-03-03 15:05:19]  INFO (waterFlux.FcltyList - main:129) - parsing complete!
-[2020-03-03 15:05:19]  INFO (waterFlux.FcltyList - main:136) - 실행 시간 : 0.439초
-[2020-03-03 15:22:23]  INFO (waterPressure.WaterPressureList - main:32) - firstLine start..
-[2020-03-03 15:22:26]  INFO (waterPressure.WaterPressureList - main:188) - 진행도::::::1/5
-[2020-03-03 15:22:29]  INFO (waterPressure.WaterPressureList - main:188) - 진행도::::::2/5
-[2020-03-03 15:22:37]  INFO (waterPressure.WaterPressureList - main:188) - 진행도::::::3/5
-[2020-03-03 15:22:41]  INFO (waterPressure.WaterPressureList - main:188) - 진행도::::::4/5
-[2020-03-03 15:22:43]  INFO (waterPressure.WaterPressureList - main:188) - 진행도::::::5/5
-[2020-03-03 15:22:44]  INFO (waterPressure.WaterPressureList - main:206) - parsing complete!
-[2020-03-03 15:22:44]  INFO (waterPressure.WaterPressureList - main:214) - 실행 시간 : 21.315초
-[2020-03-03 15:46:55]  INFO (waterPressure.FcltyList - main:31) - firstLine start..
-[2020-03-03 15:46:56]  INFO (waterPressure.FcltyList - main:160) - parsing complete!
-[2020-03-03 15:46:56]  INFO (waterPressure.FcltyList - main:167) - 실행 시간 : 0.542초
-[2020-03-03 15:47:54]  INFO (waterPressure.FcltyList - main:31) - firstLine start..
-[2020-03-03 15:47:54]  INFO (waterPressure.FcltyList - main:142) - 진행도::::::1/1
-[2020-03-03 15:47:55]  INFO (waterPressure.FcltyList - main:160) - parsing complete!
-[2020-03-03 15:47:55]  INFO (waterPressure.FcltyList - main:167) - 실행 시간 : 1.462초
-[2020-03-03 15:50:39]  INFO (waterPressure.FcltyList - main:31) - firstLine start..
-[2020-03-03 15:50:40]  INFO (waterPressure.FcltyList - main:142) - 진행도::::::1/1
-[2020-03-03 15:50:41]  INFO (waterPressure.FcltyList - main:160) - parsing complete!
-[2020-03-03 15:50:41]  INFO (waterPressure.FcltyList - main:167) - 실행 시간 : 2.376초
-[2020-03-03 15:51:22]  INFO (waterPressure.FcltyList - main:31) - firstLine start..
-[2020-03-03 15:51:23]  INFO (waterPressure.FcltyList - main:142) - 진행도::::::1/1
-[2020-03-03 15:51:24]  INFO (waterPressure.FcltyList - main:160) - parsing complete!
-[2020-03-03 15:51:24]  INFO (waterPressure.FcltyList - main:167) - 실행 시간 : 1.723초
-[2020-03-03 16:03:49]  INFO (waterLevel.WaterLevelList - main:32) - firstLine start..
-[2020-03-03 16:03:52]  INFO (waterLevel.WaterLevelList - main:188) - 진행도::::::1/4
-[2020-03-03 16:04:20]  INFO (waterLevel.WaterLevelList - main:32) - firstLine start..
-[2020-03-03 16:04:22]  INFO (waterLevel.WaterLevelList - main:188) - 진행도::::::1/4
-[2020-03-03 16:04:24]  INFO (waterLevel.WaterLevelList - main:188) - 진행도::::::2/4
-[2020-03-03 16:04:27]  INFO (waterLevel.WaterLevelList - main:188) - 진행도::::::3/4
-[2020-03-03 16:04:28]  INFO (waterLevel.WaterLevelList - main:188) - 진행도::::::4/4
-[2020-03-03 16:04:29]  INFO (waterLevel.WaterLevelList - main:206) - parsing complete!
-[2020-03-03 16:04:29]  INFO (waterLevel.WaterLevelList - main:214) - 실행 시간 : 9.5초
-[2020-03-03 16:10:48]  INFO (waterLevel.FcltyList - main:31) - firstLine start..
-[2020-03-03 16:10:48]  INFO (waterLevel.FcltyList - main:160) - parsing complete!
-[2020-03-03 16:10:48]  INFO (common.TransSftp - transSftp:27) - preparing the host information for sftp.
-[2020-03-03 16:11:52]  INFO (waterLevel.FcltyList - main:31) - firstLine start..
-[2020-03-03 16:11:53]  INFO (waterLevel.FcltyList - main:142) - 진행도::::::1/1
-[2020-03-03 16:11:54]  INFO (waterLevel.FcltyList - main:160) - parsing complete!
-[2020-03-03 16:11:54]  INFO (waterLevel.FcltyList - main:167) - 실행 시간 : 1.65초
-[2020-03-03 16:13:32]  INFO (waterLevel.FcltyList - main:31) - firstLine start..
-[2020-03-03 16:13:32]  INFO (waterLevel.FcltyList - main:142) - 진행도::::::1/1
-[2020-03-03 16:13:33]  INFO (waterLevel.FcltyList - main:160) - parsing complete!
-[2020-03-03 16:13:33]  INFO (waterLevel.FcltyList - main:167) - 실행 시간 : 1.494초
-[2020-03-03 16:52:58]  INFO (waterQuality.WaterQualityList - main:31) - firstLine start..
-[2020-03-03 16:53:00]  INFO (waterQuality.WaterQualityList - main:205) - 진행도::::::1/2
-[2020-03-03 16:53:02]  INFO (waterQuality.WaterQualityList - main:205) - 진행도::::::2/2
-[2020-03-03 16:53:03]  INFO (waterQuality.WaterQualityList - main:223) - parsing complete!
-[2020-03-03 16:53:03]  INFO (waterQuality.WaterQualityList - main:231) - 실행 시간 : 5.006초
-[2020-03-03 17:01:22]  INFO (waterQuality.FcltyList - main:31) - firstLine start..
-[2020-03-03 17:01:23]  INFO (waterQuality.FcltyList - main:142) - 진행도::::::1/1
-[2020-03-03 17:01:24]  INFO (waterQuality.FcltyList - main:160) - parsing complete!
-[2020-03-03 17:01:24]  INFO (waterQuality.FcltyList - main:167) - 실행 시간 : 1.76초
-[2020-03-03 17:20:50]  INFO (waterQuality.SupplyLgldCodeList - main:30) - firstLine start..
-[2020-03-03 17:20:52]  INFO (waterQuality.SupplyLgldCodeList - main:171) - 진행도::::::1/1
-[2020-03-03 17:20:53]  INFO (waterQuality.SupplyLgldCodeList - main:189) - parsing complete!
-[2020-03-03 17:20:53]  INFO (waterQuality.SupplyLgldCodeList - main:196) - 실행 시간 : 2.894초
+[2020-03-04 09:18:15]  INFO (waterinfos.Winfossgccode - main:30) - firstLine start..
+[2020-03-04 09:18:16]  INFO (waterinfos.Winfossgccode - main:128) - parsing complete!
+[2020-03-04 09:18:16]  INFO (waterinfos.Winfossgccode - main:135) - 실행 시간 : 1.206초
+[2020-03-04 09:32:56]  INFO (waterinfos.Winfossitecode - main:32) - firstLine start..
+[2020-03-04 09:32:58]  INFO (waterinfos.Winfossitecode - main:130) - parsing complete!
+[2020-03-04 09:32:58]  INFO (waterinfos.Winfossitecode - main:137) - 실행 시간 : 1.729초
+[2020-03-04 09:35:18]  INFO (waterinfos.Winfossitecode - main:32) - firstLine start..
+[2020-03-04 09:35:19]  INFO (waterinfos.Winfossitecode - main:128) - parsing complete!
+[2020-03-04 09:35:19]  INFO (waterinfos.Winfossitecode - main:135) - 실행 시간 : 1.238초
+[2020-03-04 09:35:42]  INFO (waterinfos.Winfossitecode - main:32) - firstLine start..
+[2020-03-04 09:35:44]  INFO (waterinfos.Winfossitecode - main:128) - parsing complete!
+[2020-03-04 09:35:44]  INFO (waterinfos.Winfossitecode - main:135) - 실행 시간 : 2.513초
+[2020-03-04 09:36:16]  INFO (waterinfos.Winfossitecode - main:32) - firstLine start..
+[2020-03-04 09:36:18]  INFO (waterinfos.Winfossitecode - main:128) - parsing complete!
+[2020-03-04 09:36:18]  INFO (waterinfos.Winfossitecode - main:135) - 실행 시간 : 1.498초
+[2020-03-04 09:39:55]  INFO (waterinfos.Winfossitecode - main:32) - firstLine start..
+[2020-03-04 09:39:57]  INFO (waterinfos.Winfossitecode - main:136) - parsing complete!
+[2020-03-04 09:39:57]  INFO (waterinfos.Winfossitecode - main:143) - 실행 시간 : 1.947초
+[2020-03-04 09:42:32]  INFO (waterinfos.Winfossitecode - main:32) - firstLine start..
+[2020-03-04 09:42:33]  INFO (waterinfos.Winfossitecode - main:130) - parsing complete!
+[2020-03-04 09:42:33]  INFO (waterinfos.Winfossitecode - main:137) - 실행 시간 : 1.157초
+[2020-03-04 10:02:38]  INFO (waterinfos.Winfosdaywater - main:32) - firstLine start..
+[2020-03-04 10:02:43]  INFO (waterinfos.Winfosdaywater - main:186) - 진행도::::::1/1
+[2020-03-04 10:02:44]  INFO (waterinfos.Winfosdaywater - main:204) - parsing complete!
+[2020-03-04 10:02:44]  INFO (waterinfos.Winfosdaywater - main:213) - 실행 시간 : 6.351초
+[2020-03-04 10:11:24]  INFO (waterinfos.Winfosweekwater - main:32) - firstLine start..
+[2020-03-04 10:11:27]  INFO (waterinfos.Winfosweekwater - main:192) - 진행도::::::1/1
+[2020-03-04 10:11:28]  INFO (waterinfos.Winfosweekwater - main:210) - parsing complete!
+[2020-03-04 10:11:28]  INFO (waterinfos.Winfosweekwater - main:219) - 실행 시간 : 3.601초
+[2020-03-04 10:49:28] DEBUG (waterinfos.Winfosmonthwater - main:540) - 파라미터 개수 에러!!
+[2020-03-04 10:49:40]  INFO (waterinfos.Winfosmonthwater - main:32) - firstLine start..
+[2020-03-04 10:49:43]  INFO (waterinfos.Winfosmonthwater - main:505) - 진행도::::::1/1
+[2020-03-04 10:49:44]  INFO (waterinfos.Winfosmonthwater - main:523) - parsing complete!
+[2020-03-04 10:49:44]  INFO (waterinfos.Winfosmonthwater - main:532) - 실행 시간 : 4.634초
+[2020-03-04 11:13:06]  INFO (waterinfos.Winfosmonthqtrwater - main:28) - firstLine start..
+[2020-03-04 11:15:50]  INFO (waterinfos.Winfosmonthqtrwater - main:28) - firstLine start..
+[2020-03-04 11:15:56]  INFO (waterinfos.Winfosmonthqtrwater - main:141) - 진행도::::::1/1
+[2020-03-04 11:17:03]  INFO (waterinfos.Winfosmonthqtrwater - main:28) - firstLine start..
+[2020-03-04 11:17:10]  INFO (waterinfos.Winfosmonthqtrwater - main:141) - 진행도::::::1/1
+[2020-03-04 11:17:23]  INFO (waterinfos.Winfosmonthqtrwater - main:28) - firstLine start..
+[2020-03-04 11:17:31]  INFO (waterinfos.Winfosmonthqtrwater - main:141) - 진행도::::::1/1
+[2020-03-04 11:18:11]  INFO (waterinfos.Winfosmonthqtrwater - main:28) - firstLine start..
+[2020-03-04 11:18:15]  INFO (waterinfos.Winfosmonthqtrwater - main:141) - 진행도::::::1/1
+[2020-03-04 11:19:03]  INFO (waterinfos.Winfosmonthqtrwater - main:28) - firstLine start..
+[2020-03-04 11:19:07]  INFO (waterinfos.Winfosmonthqtrwater - main:141) - 진행도::::::1/1
+[2020-03-04 11:26:05]  INFO (waterinfos.Winfosmonthqtrwater - main:29) - firstLine start..
+[2020-03-04 11:26:23]  INFO (waterinfos.Winfosmonthqtrwater - main:29) - firstLine start..
+[2020-03-04 11:26:28]  INFO (waterinfos.Winfosmonthqtrwater - main:149) - 진행도::::::1/1
+[2020-03-04 11:27:14]  INFO (waterinfos.Winfosmonthqtrwater - main:29) - firstLine start..
+[2020-03-04 11:27:18]  INFO (waterinfos.Winfosmonthqtrwater - main:149) - 진행도::::::1/1
+[2020-03-04 11:28:43]  INFO (waterinfos.Winfosmonthqtrwater - main:29) - firstLine start..
+[2020-03-04 11:28:50]  INFO (waterinfos.Winfosmonthqtrwater - main:151) - 진행도::::::1/1
+[2020-03-04 11:29:00]  INFO (waterinfos.Winfosmonthqtrwater - main:29) - firstLine start..
+[2020-03-04 11:29:03]  INFO (waterinfos.Winfosmonthqtrwater - main:151) - 진행도::::::1/1
+[2020-03-04 11:29:21]  INFO (waterinfos.Winfosmonthqtrwater - main:29) - firstLine start..
+[2020-03-04 11:29:36]  INFO (waterinfos.Winfosmonthqtrwater - main:29) - firstLine start..
+[2020-03-04 11:29:41]  INFO (waterinfos.Winfosmonthqtrwater - main:151) - 진행도::::::1/1
+[2020-03-04 11:37:44]  INFO (waterinfos.Winfosmonthqtrwater - main:32) - firstLine start..
+[2020-03-04 11:37:52]  INFO (waterinfos.Winfosmonthqtrwater - main:243) - 진행도::::::1/1
+[2020-03-04 11:37:53]  INFO (waterinfos.Winfosmonthqtrwater - main:261) - parsing complete!
+[2020-03-04 11:37:53]  INFO (waterinfos.Winfosmonthqtrwater - main:270) - 실행 시간 : 9.117초
+[2020-03-04 11:39:23]  INFO (waterinfos.Winfosmonthqtrwater - main:32) - firstLine start..
+[2020-03-04 11:39:28]  INFO (waterinfos.Winfosmonthqtrwater - main:261) - parsing complete!
+[2020-03-04 11:39:28]  INFO (waterinfos.Winfosmonthqtrwater - main:270) - 실행 시간 : 5.418초
+[2020-03-04 11:39:44]  INFO (waterinfos.Winfosmonthqtrwater - main:32) - firstLine start..
+[2020-03-04 11:39:55]  INFO (waterinfos.Winfosmonthqtrwater - main:243) - 진행도::::::1/1
+[2020-03-04 11:39:56]  INFO (waterinfos.Winfosmonthqtrwater - main:261) - parsing complete!
+[2020-03-04 11:39:56]  INFO (waterinfos.Winfosmonthqtrwater - main:270) - 실행 시간 : 11.504초
+[2020-03-04 11:40:19]  INFO (waterinfos.Winfosmonthqtrwater - main:32) - firstLine start..
+[2020-03-04 11:40:22]  INFO (waterinfos.Winfosmonthqtrwater - main:243) - 진행도::::::1/1
+[2020-03-04 11:40:23]  INFO (waterinfos.Winfosmonthqtrwater - main:261) - parsing complete!
+[2020-03-04 11:40:23]  INFO (waterinfos.Winfosmonthqtrwater - main:270) - 실행 시간 : 4.041초
+[2020-03-04 14:01:28]  INFO (effluent.DamEffluent - main:32) - firstLine start..
+[2020-03-04 14:01:30]  INFO (effluent.DamEffluent - main:218) - 진행도::::::1/1
+[2020-03-04 14:01:31]  INFO (effluent.DamEffluent - main:236) - parsing complete!
+[2020-03-04 14:01:31]  INFO (effluent.DamEffluent - main:245) - 실행 시간 : 3.276초
+[2020-03-04 14:14:34]  INFO (effluent.DamCode - main:30) - firstLine start..
+[2020-03-04 14:14:35]  INFO (effluent.DamCode - main:151) - 진행도::::::1/1
+[2020-03-04 14:14:36]  INFO (effluent.DamCode - main:169) - parsing complete!
+[2020-03-04 14:14:36]  INFO (effluent.DamCode - main:176) - 실행 시간 : 1.308초
+[2020-03-04 14:54:51] DEBUG (sluicePresentCondition.De - main:213) - 파라미터 형식 에러!!
+[2020-03-04 14:55:17]  INFO (sluicePresentCondition.De - main:32) - firstLine start..
+[2020-03-04 14:55:17]  INFO (sluicePresentCondition.De - main:185) - 진행도::::::1/1
+[2020-03-04 14:55:18]  INFO (sluicePresentCondition.De - main:203) - parsing complete!
+[2020-03-04 14:55:18]  INFO (sluicePresentCondition.De - main:210) - 실행 시간 : 1.339초
+[2020-03-04 14:55:39]  INFO (sluicePresentCondition.De - main:32) - firstLine start..
+[2020-03-04 14:55:39]  INFO (sluicePresentCondition.De - main:185) - 진행도::::::1/1
+[2020-03-04 14:55:40]  INFO (sluicePresentCondition.De - main:203) - parsing complete!
+[2020-03-04 14:55:40]  INFO (sluicePresentCondition.De - main:210) - 실행 시간 : 1.34초
+[2020-03-04 15:00:22]  INFO (sluicePresentCondition.De - main:32) - firstLine start..
+[2020-03-04 15:00:22]  INFO (sluicePresentCondition.De - main:234) - 진행도::::::1/1
+[2020-03-04 15:00:23]  INFO (sluicePresentCondition.De - main:252) - parsing complete!
+[2020-03-04 15:00:23]  INFO (sluicePresentCondition.De - main:260) - 실행 시간 : 1.329초
+[2020-03-04 15:01:20]  INFO (sluicePresentCondition.De - main:32) - firstLine start..
+[2020-03-04 15:01:20]  INFO (sluicePresentCondition.De - main:234) - 진행도::::::1/1
+[2020-03-04 15:01:21]  INFO (sluicePresentCondition.De - main:252) - parsing complete!
+[2020-03-04 15:01:21]  INFO (sluicePresentCondition.De - main:260) - 실행 시간 : 1.317초
+[2020-03-04 15:02:19]  INFO (sluicePresentCondition.Hour - main:32) - firstLine start..
+[2020-03-04 15:02:20]  INFO (sluicePresentCondition.Hour - main:185) - 진행도::::::1/1
+[2020-03-04 15:02:21]  INFO (sluicePresentCondition.Hour - main:203) - parsing complete!
+[2020-03-04 15:02:21]  INFO (common.TransSftp - transSftp:27) - preparing the host information for sftp.
+[2020-03-04 15:02:49]  INFO (sluicePresentCondition.Hour - main:32) - firstLine start..
+[2020-03-04 15:02:49]  INFO (sluicePresentCondition.Hour - main:185) - 진행도::::::1/1
+[2020-03-04 15:02:50]  INFO (sluicePresentCondition.Hour - main:203) - parsing complete!
+[2020-03-04 15:02:50]  INFO (sluicePresentCondition.Hour - main:210) - 실행 시간 : 1.443초
+[2020-03-04 15:51:24]  INFO (dailwater.Dailwater - main:33) - firstLine start..
+[2020-03-04 15:51:30]  INFO (dailwater.Dailwater - main:246) - 진행도::::::1/1
+[2020-03-04 15:51:31]  INFO (dailwater.Dailwater - main:264) - parsing complete!
+[2020-03-04 15:51:31]  INFO (dailwater.Dailwater - main:272) - 실행 시간 : 6.803초
+[2020-03-04 15:52:03]  INFO (dailwater.Dailwater - main:33) - firstLine start..
+[2020-03-04 15:52:10]  INFO (dailwater.Dailwater - main:246) - 진행도::::::1/1
+[2020-03-04 15:52:11]  INFO (dailwater.Dailwater - main:264) - parsing complete!
+[2020-03-04 15:52:11]  INFO (dailwater.Dailwater - main:272) - 실행 시간 : 7.205초
+[2020-03-04 15:55:39]  INFO (dailwater.Dailwater - main:33) - firstLine start..
+[2020-03-04 15:55:44]  INFO (dailwater.Dailwater - main:246) - 진행도::::::1/1
+[2020-03-04 15:55:45]  INFO (dailwater.Dailwater - main:264) - parsing complete!
+[2020-03-04 15:55:45]  INFO (dailwater.Dailwater - main:272) - 실행 시간 : 6.418초
+[2020-03-04 15:56:49]  INFO (dailwater.Dailwater - main:33) - firstLine start..
+[2020-03-04 15:56:55]  INFO (dailwater.Dailwater - main:246) - 진행도::::::1/1
+[2020-03-04 15:56:56]  INFO (dailwater.Dailwater - main:264) - parsing complete!
+[2020-03-04 15:56:56]  INFO (dailwater.Dailwater - main:272) - 실행 시간 : 6.489초
+[2020-03-04 16:08:06]  INFO (dailwater.Dailindwater - main:33) - firstLine start..
+[2020-03-04 16:08:14]  INFO (dailwater.Dailindwater - main:272) - 진행도::::::1/1
+[2020-03-04 16:08:15]  INFO (dailwater.Dailindwater - main:290) - parsing complete!
+[2020-03-04 16:08:15]  INFO (dailwater.Dailindwater - main:298) - 실행 시간 : 8.71초
+[2020-03-04 16:09:42]  INFO (dailwater.Dailindwater - main:33) - firstLine start..
+[2020-03-04 16:09:42]  INFO (dailwater.Dailindwater - main:290) - parsing complete!
+[2020-03-04 16:09:42]  INFO (dailwater.Dailindwater - main:298) - 실행 시간 : 0.305초
+[2020-03-04 16:09:51]  INFO (dailwater.Dailindwater - main:33) - firstLine start..
+[2020-03-04 16:09:51]  INFO (dailwater.Dailindwater - main:290) - parsing complete!
+[2020-03-04 16:09:51]  INFO (dailwater.Dailindwater - main:298) - 실행 시간 : 0.251초
+[2020-03-04 16:12:02]  INFO (dailwater.Dailindwater - main:33) - firstLine start..
+[2020-03-04 16:12:09]  INFO (dailwater.Dailindwater - main:272) - 진행도::::::1/1
+[2020-03-04 16:12:10]  INFO (dailwater.Dailindwater - main:290) - parsing complete!
+[2020-03-04 16:12:10]  INFO (dailwater.Dailindwater - main:298) - 실행 시간 : 7.465초
+[2020-03-04 16:27:05]  INFO (dailwater.Wikwater - main:33) - firstLine start..
+[2020-03-04 16:27:07]  INFO (dailwater.Wikwater - main:245) - 진행도::::::1/1
+[2020-03-04 16:27:08]  INFO (dailwater.Wikwater - main:263) - parsing complete!
+[2020-03-04 16:27:08]  INFO (dailwater.Wikwater - main:271) - 실행 시간 : 2.711초
+[2020-03-04 16:34:43]  INFO (dailwater.Wikindwater - main:33) - firstLine start..
+[2020-03-04 16:34:45]  INFO (dailwater.Wikindwater - main:237) - 진행도::::::1/1
+[2020-03-04 16:34:46]  INFO (dailwater.Wikindwater - main:255) - parsing complete!
+[2020-03-04 16:34:46]  INFO (dailwater.Wikindwater - main:263) - 실행 시간 : 3.16초
+[2020-03-04 17:06:54]  INFO (dailwater.Dmntwater - main:33) - firstLine start..
+[2020-03-04 17:06:56]  INFO (dailwater.Dmntwater - main:713) - 진행도::::::1/1
+[2020-03-04 17:06:57]  INFO (dailwater.Dmntwater - main:731) - parsing complete!
+[2020-03-04 17:06:57]  INFO (dailwater.Dmntwater - main:739) - 실행 시간 : 2.45초
+[2020-03-04 17:07:16]  INFO (dailwater.Dmntwater - main:33) - firstLine start..
+[2020-03-04 17:07:16]  INFO (dailwater.Dmntwater - main:713) - 진행도::::::1/1
+[2020-03-04 17:07:17]  INFO (dailwater.Dmntwater - main:731) - parsing complete!
+[2020-03-04 17:07:17]  INFO (dailwater.Dmntwater - main:739) - 실행 시간 : 1.783초
+[2020-03-04 17:14:58]  INFO (dailwater.Dmntindstry - main:33) - firstLine start..
+[2020-03-04 17:14:59]  INFO (dailwater.Dmntindstry - main:236) - 진행도::::::1/1
+[2020-03-04 17:15:00]  INFO (dailwater.Dmntindstry - main:254) - parsing complete!
+[2020-03-04 17:15:00]  INFO (dailwater.Dmntindstry - main:262) - 실행 시간 : 2.311초
+[2020-03-04 17:15:49]  INFO (dailwater.Dmntindstry - main:33) - firstLine start..
+[2020-03-04 17:15:52]  INFO (dailwater.Dmntindstry - main:236) - 진행도::::::1/1
+[2020-03-04 17:15:53]  INFO (dailwater.Dmntindstry - main:254) - parsing complete!
+[2020-03-04 17:15:53]  INFO (dailwater.Dmntindstry - main:262) - 실행 시간 : 3.841초
+[2020-03-04 17:28:53]  INFO (dailwater.Waterfltplt - main:30) - firstLine start..
+[2020-03-04 17:28:53]  INFO (dailwater.Waterfltplt - main:168) - parsing complete!
+[2020-03-04 17:28:53]  INFO (dailwater.Waterfltplt - main:175) - 실행 시간 : 0.351초
+[2020-03-04 17:30:28]  INFO (dailwater.Waterfltplt - main:30) - firstLine start..
+[2020-03-04 17:30:30]  INFO (dailwater.Waterfltplt - main:150) - 진행도::::::1/1
+[2020-03-04 17:30:31]  INFO (dailwater.Waterfltplt - main:168) - parsing complete!
+[2020-03-04 17:30:31]  INFO (dailwater.Waterfltplt - main:175) - 실행 시간 : 3.394초
+[2020-03-04 17:35:02]  INFO (dailwater.Indfltplt - main:30) - firstLine start..
+[2020-03-04 17:35:03]  INFO (dailwater.Indfltplt - main:150) - 진행도::::::1/1
+[2020-03-04 17:35:04]  INFO (dailwater.Indfltplt - main:168) - parsing complete!
+[2020-03-04 17:35:04]  INFO (dailwater.Indfltplt - main:175) - 실행 시간 : 1.566초
