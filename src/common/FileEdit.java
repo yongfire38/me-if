@@ -7,11 +7,11 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
-import org.apache.log4j.Logger;
+
 
 public class FileEdit {
 	
-	final static Logger logger = Logger.getLogger(FileEdit.class);
+	
 
 	/**
 	 * 파일내의 모든 라인의 마지막 두 글자(특정 구분자) 삭제
@@ -60,7 +60,7 @@ public class FileEdit {
 			// 임시파일을 원래 파일명으로 변경
 			outFile.renameTo(inFile);
 
-			logger.info("CHANGE OK~~~");
+			System.out.println("CHANGE OK~~~");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

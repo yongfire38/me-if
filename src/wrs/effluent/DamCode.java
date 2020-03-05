@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -18,7 +18,7 @@ import common.TransSftp;
 
 public class DamCode {
 
-	final static Logger logger = Logger.getLogger(DamCode.class);
+	
 
 	// 다목적댐 방류수 수질 조회 서비스 - 댐코드 조회 서비스
 	@SuppressWarnings("unchecked")
@@ -27,7 +27,7 @@ public class DamCode {
 		// 서비스 키만 요구함, 실행시 필수 매개변수 없음
 		if (args.length == 0) {
 
-			logger.info("firstLine start..");
+			System.out.println("firstLine start..");
 			long start = System.currentTimeMillis(); // 시작시간
 
 			// step 0.open api url과 서비스 키.
@@ -142,13 +142,17 @@ public class DamCode {
 							resultSb.append(System.getProperty("line.separator"));
 
 						}
+					}  else if (resultCode.equals("03")) {
+						System.out.println("data not exist!!");
+					} else {
+						System.out.println("parsing error!!");
 					}
 
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 
-				logger.info("진행도::::::" + i + "/" + pageCount);
+				System.out.println("진행도::::::" + i + "/" + pageCount);
 
 				Thread.sleep(1000);
 
@@ -166,17 +170,17 @@ public class DamCode {
 				e.printStackTrace();
 			}
 
-			logger.info("parsing complete!");
+			System.out.println("parsing complete!");
 
 			// step 5. 대상 서버에 sftp로 보냄
 
 			TransSftp.transSftp(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_17.dat", "WRS");
 
 			long end = System.currentTimeMillis();
-			logger.info("실행 시간 : " + (end - start) / 1000.0 + "초");
+			System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
 
 		} else {
-			logger.debug("파라미터 개수 에러!!");
+			System.out.println("파라미터 개수 에러!!");
 			System.exit(-1);
 		}
 

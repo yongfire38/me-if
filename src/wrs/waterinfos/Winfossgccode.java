@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -18,7 +18,7 @@ import common.TransSftp;
 
 public class Winfossgccode {
 
-	final static Logger logger = Logger.getLogger(Winfossgccode.class);
+	
 
 	// 지방정수장 수질정보 조회 서비스 - 지방상수도 지자체코드 조회 서비스
 	@SuppressWarnings("unchecked")
@@ -27,7 +27,7 @@ public class Winfossgccode {
 		// 요청 파라미터 없음
 		if (args.length == 0) {
 
-			logger.info("firstLine start..");
+			System.out.println("firstLine start..");
 			long start = System.currentTimeMillis(); // 시작시간
 
 			// step 0.open api url과 서비스 키.
@@ -130,13 +130,13 @@ public class Winfossgccode {
 						}
 
 					} else {
-						logger.debug("parsing error!!");
+						System.out.println("parsing error!!");
 					}
 
 				} else if (resultCode.equals("03")) {
-					logger.debug("data not exist!!");
+					System.out.println("data not exist!!");
 				} else {
-					logger.debug("parsing error!!");
+					System.out.println("parsing error!!");
 				}
 
 			} catch (Exception e) {
@@ -155,17 +155,17 @@ public class Winfossgccode {
 				e.printStackTrace();
 			}
 
-			logger.info("parsing complete!");
+			System.out.println("parsing complete!");
 
 			// step 5. 대상 서버에 sftp로 보냄
 
 			TransSftp.transSftp(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_10.dat", "WRS");
 
 			long end = System.currentTimeMillis();
-			logger.info("실행 시간 : " + (end - start) / 1000.0 + "초");
+			System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
 
 		} else {
-			logger.debug("파라미터 개수 에러!!");
+			System.out.println("파라미터 개수 에러!!");
 			System.exit(-1);
 		}
 	}

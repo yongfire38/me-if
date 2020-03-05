@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -17,7 +17,7 @@ import common.JsonParser;
 
 public class GetPressFclty {
 	
-	final static Logger logger = Logger.getLogger(GetPressFclty.class);
+	
 
 	// 국가 상수도 정보 시스템 - 가압시설정보 조회
 	@SuppressWarnings("unchecked")
@@ -27,7 +27,7 @@ public class GetPressFclty {
 		
 		if (args.length == 0) {
 			
-			logger.info("firstLine start..");
+			System.out.println("firstLine start..");
 			long start = System.currentTimeMillis(); //시작시간
 
 			// step 0.open api url과 서비스 키.
@@ -98,7 +98,7 @@ public class GetPressFclty {
 
 				pageCount = (totalCount / numberOfRows) + 1;
 
-				// logger.info("pageCount:::::" + pageCount);
+				// System.out.println("pageCount:::::" + pageCount);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -261,7 +261,7 @@ public class GetPressFclty {
 							resultSb.append(EMGNC_DVLP_TY_NM);
 							resultSb.append(System.getProperty("line.separator"));
 							
-							logger.info("진행도::::"+String.valueOf(i));
+							System.out.println("진행도::::"+String.valueOf(i));
 							
 							
 						}
@@ -270,9 +270,9 @@ public class GetPressFclty {
 						
 		
 					} else if (resultCode.equals("03")) {
-						logger.debug("data not exist!!");
+						System.out.println("data not exist!!");
 					} else {
-						logger.debug("parsing error!!");
+						System.out.println("parsing error!!");
 					}
 					
 				} catch (Exception e) {
@@ -295,14 +295,14 @@ public class GetPressFclty {
 				e.printStackTrace();
 			}
 			
-			logger.info("parsing complete!");
+			System.out.println("parsing complete!");
 			
 			long end = System.currentTimeMillis();
-			logger.info("실행 시간 : " + ( end - start )/1000.0 +"초");
+			System.out.println("실행 시간 : " + ( end - start )/1000.0 +"초");
 			
 			
 		} else {
-			logger.debug("파라미터 개수 에러!!");
+			System.out.println("파라미터 개수 에러!!");
 			System.exit(-1);
 		}
 

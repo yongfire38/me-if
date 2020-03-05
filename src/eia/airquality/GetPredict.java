@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -17,7 +17,7 @@ import common.TransSftp;
 
 public class GetPredict {
 	
-	final static Logger logger = Logger.getLogger(GetPredict.class);
+	
 
 	// 대기질 정보 조회 - 조사속성조회
 	@SuppressWarnings("unchecked")
@@ -26,7 +26,7 @@ public class GetPredict {
 		// 필수 파라미터로 사업 코드를 넣으면 그 사업 코드에 대한 데이터를 파싱해서 출력한다. 사업코드는 1개만 넣을 수 있다.
 				if (args.length == 1) {
 
-					logger.info("firstLine start..");
+					System.out.println("firstLine start..");
 					String mgtNo = args[0];
 
 					// step 0.open api url과 서비스 키.
@@ -309,25 +309,25 @@ public class GetPredict {
 								e.printStackTrace();
 							}
 
-							logger.info("parsing complete!");
+							System.out.println("parsing complete!");
 							
 							// step 5. 대상 서버에 sftp로 보냄
 
 							TransSftp.transSftp(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_03_" + mgtNo + ".dat", "EIA");
 
 						} else if (resultCode.equals("03")) {
-							logger.debug("data not exist!! mgtNo :" + mgtNo);
+							System.out.println("data not exist!! mgtNo :" + mgtNo);
 						} else {
-							logger.debug("parsing error!! mgtNo :" + mgtNo);
+							System.out.println("parsing error!! mgtNo :" + mgtNo);
 						}
 
 					} catch (Exception e) {
 						e.printStackTrace();
-						logger.debug("mgtNo :" + mgtNo);
+						System.out.println("mgtNo :" + mgtNo);
 					}
 
 				} else {
-					logger.debug("파라미터 개수 에러!!");
+					System.out.println("파라미터 개수 에러!!");
 					System.exit(-1);
 				}
 		

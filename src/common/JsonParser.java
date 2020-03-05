@@ -17,17 +17,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 
 public class JsonParser {
 
-	final static Logger logger = Logger.getLogger(JsonParser.class);
+	
 
 	public static String getProperty(String keyName) {
 
+		
+		String os = System.getProperty("os.name").toLowerCase();
+		
 		String value = "";
-		String resource = "properties/apiConfig.properties";
+		String resource = "";
+		
+		if(os.indexOf("windows") > -1){
+			//윈도우면 현재 실행위치 내 conf 폴더 안
+			resource = System.getProperty("user.dir") + "\\conf\\apiConfig.properties";
+		} else {
+			//윈도우 외에는 (사실상 리눅스 서버) 서버 절대경로를 하드코딩
+			resource = "/home/chkusr/EIBP2/conf/apiConfig.properties";
+		}
 
 		try {
 			Properties props = new Properties();
@@ -137,7 +147,7 @@ public class JsonParser {
 		BufferedReader br = null;
 		String json = "";
 
-		// logger.info("mgtNo :" + mgtNo);
+		// System.out.println("mgtNo :" + mgtNo);
 
 		String urlstr = service_url + mgtNo + "&serviceKey=" + service_key;
 		try {
@@ -153,7 +163,7 @@ public class JsonParser {
 			}
 
 			// 테스트 출력
-			// logger.info(json);
+			// System.out.println(json);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -169,7 +179,7 @@ public class JsonParser {
 		BufferedReader br = null;
 		String json = "";
 
-		// logger.info("mgtNo :" + mgtNo);
+		// System.out.println("mgtNo :" + mgtNo);
 
 		String urlstr = service_url + "&serviceKey=" + service_key + "&year=" + year + "&month=" + month + "&pageNo="
 				+ pageNo;
@@ -186,7 +196,7 @@ public class JsonParser {
 			}
 
 			// 테스트 출력
-			// logger.info(json);
+			// System.out.println(json);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -202,7 +212,7 @@ public class JsonParser {
 		BufferedReader br = null;
 		String json = "";
 
-		// logger.info("mgtNo :" + mgtNo);
+		// System.out.println("mgtNo :" + mgtNo);
 
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
 		try {
@@ -218,7 +228,7 @@ public class JsonParser {
 			}
 
 			// 테스트 출력
-			// logger.info(json);
+			// System.out.println(json);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -235,7 +245,7 @@ public class JsonParser {
 		BufferedReader br = null;
 		String json = "";
 
-		// logger.info("mgtNo :" + mgtNo);
+		// System.out.println("mgtNo :" + mgtNo);
 
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&siteId=" + siteId
 				+ "&ptNoList=" + ptNoList + "&numOfRows=999";
@@ -252,7 +262,7 @@ public class JsonParser {
 			}
 
 			// 테스트 출력
-			// logger.info(json);
+			// System.out.println(json);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -294,7 +304,7 @@ public class JsonParser {
 				}
 
 				// 테스트 출력
-				// logger.info(json);
+				// System.out.println(json);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -341,7 +351,7 @@ public class JsonParser {
 				}
 
 				// 테스트 출력
-				// logger.info(json);
+				// System.out.println(json);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -388,7 +398,7 @@ public class JsonParser {
 				}
 
 				// 테스트 출력
-				// logger.info(json);
+				// System.out.println(json);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -437,7 +447,7 @@ public class JsonParser {
 				}
 
 				// 테스트 출력
-				// logger.info(json);
+				// System.out.println(json);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -486,7 +496,7 @@ public class JsonParser {
 				}
 
 				// 테스트 출력
-				// logger.info(json);
+				// System.out.println(json);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -535,7 +545,7 @@ public class JsonParser {
 				}
 
 				// 테스트 출력
-				// logger.info(json);
+				// System.out.println(json);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -584,7 +594,7 @@ public class JsonParser {
 				}
 
 				// 테스트 출력
-				// logger.info(json);
+				// System.out.println(json);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -604,7 +614,7 @@ public class JsonParser {
 		BufferedReader br = null;
 		String json = "";
 
-		// logger.info("mgtNo :" + mgtNo);
+		// System.out.println("mgtNo :" + mgtNo);
 
 		String urlstr = service_url + "&serviceKey=" + service_key;
 		try {
@@ -620,7 +630,7 @@ public class JsonParser {
 			}
 
 			// 테스트 출력
-			// logger.info(json);
+			// System.out.println(json);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -664,7 +674,7 @@ public class JsonParser {
 				}
 
 				// 테스트 출력
-				// logger.info(json);
+				// System.out.println(json);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -684,7 +694,7 @@ public class JsonParser {
 		BufferedReader br = null;
 		String json = "";
 
-		// logger.info("mgtNo :" + mgtNo);
+		// System.out.println("mgtNo :" + mgtNo);
 
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&fcltyDivCode="
 				+ fcltyDivCode + "&numOfRows=999";
@@ -701,7 +711,7 @@ public class JsonParser {
 			}
 
 			// 테스트 출력
-			// logger.info(json);
+			// System.out.println(json);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -743,7 +753,7 @@ public class JsonParser {
 				}
 
 				// 테스트 출력
-				// logger.info(json);
+				// System.out.println(json);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -790,7 +800,7 @@ public class JsonParser {
 				}
 
 				// 테스트 출력
-				// logger.info(json);
+				// System.out.println(json);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -811,7 +821,7 @@ public class JsonParser {
 		BufferedReader br = null;
 		String json = "";
 
-		// logger.info("mgtNo :" + mgtNo);
+		// System.out.println("mgtNo :" + mgtNo);
 
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + stdt + "&damcd="
 				+ damcd + "&numOfRows=999";
@@ -828,7 +838,7 @@ public class JsonParser {
 			}
 
 			// 테스트 출력
-			// logger.info(json);
+			// System.out.println(json);
 
 		} catch (Exception e) {
 			e.printStackTrace();

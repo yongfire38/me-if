@@ -3,7 +3,7 @@ package common;
 import java.io.File;
 import java.io.FileInputStream;
 
-import org.apache.log4j.Logger;
+
 
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
@@ -12,7 +12,7 @@ import com.jcraft.jsch.Session;
 
 public class TransSftp {
 	
-	final static Logger logger = Logger.getLogger(TransSftp.class);
+	
 	
 	//대상서버에 sftp로 보냄 
 	public static void transSftp(String filePath, String sysName) {
@@ -24,7 +24,7 @@ public class TransSftp {
 		File f = new File(filePath);
 		FileInputStream in = null;
 
-		logger.info("preparing the host information for sftp.");
+		System.out.println("preparing the host information for sftp.");
 
 		try {
 
@@ -45,7 +45,7 @@ public class TransSftp {
 			// 파일 업로드 처리
 			channelSftp = (ChannelSftp) channel;
 
-			logger.info("=> Connected to host");
+			System.out.println("=> Connected to host");
 			in = new FileInputStream(f);
 
 			// channelSftp.cd("/data1/if_data/WEI"); //as-is, 연계서버에 떨어지는 위치
@@ -54,7 +54,7 @@ public class TransSftp {
 			String fileName = f.getName();
 			channelSftp.put(in, fileName);
 
-			logger.info("=> Uploaded : " + f.getPath());
+			System.out.println("=> Uploaded : " + f.getPath());
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -77,7 +77,7 @@ public class TransSftp {
 			}
 		}
 
-		logger.info("sftp transfer complete!");
+		System.out.println("sftp transfer complete!");
 
 	}
 	
