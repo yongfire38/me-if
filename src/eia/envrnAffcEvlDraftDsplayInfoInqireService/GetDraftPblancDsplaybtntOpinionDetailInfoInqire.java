@@ -34,7 +34,7 @@ public class GetDraftPblancDsplaybtntOpinionDetailInfoInqire {
 
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") +
-					 "EIA/TIF_EIA_40_" + args[0] + ".dat");
+					 "EIA/TIF_EIA_40.dat");
 
 			try {
 
@@ -304,7 +304,7 @@ public class GetDraftPblancDsplaybtntOpinionDetailInfoInqire {
 			// step 5. 대상 서버에 sftp로 보냄
 
 			 TransSftp.transSftp(JsonParser.getProperty("file_path") +
-			 "EIA/TIF_EIA_40_" + args[0] + ".dat", "EIA");
+			 "EIA/TIF_EIA_40.dat", "EIA");
 
 			long end = System.currentTimeMillis();
 			System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");

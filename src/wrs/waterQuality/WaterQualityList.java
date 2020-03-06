@@ -36,8 +36,7 @@ public class WaterQualityList {
 				String service_key = JsonParser.getProperty("waterQuality_service_key");
 
 				// step 1.파일의 첫 행 작성
-				File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_07_" + args[0] + "_" + args[1]
-						+ "_" + args[2] + "_" + args[3] + ".dat");
+				File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_07.dat");
 
 				try {
 
@@ -284,8 +283,7 @@ public class WaterQualityList {
 
 				// step 5. 대상 서버에 sftp로 보냄
 
-				TransSftp.transSftp(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_07_" + args[0] + "_" + args[1]
-						+ "_" + args[2] + "_" + args[3] + ".dat", "WRS");
+				TransSftp.transSftp(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_07.dat", "WRS");
 
 				long end = System.currentTimeMillis();
 				System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");

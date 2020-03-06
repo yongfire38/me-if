@@ -21,21 +21,18 @@ import org.json.simple.JSONObject;
 
 public class JsonParser {
 
-	
-
 	public static String getProperty(String keyName) {
 
-		
 		String os = System.getProperty("os.name").toLowerCase();
-		
+
 		String value = "";
 		String resource = "";
-		
-		if(os.indexOf("windows") > -1){
-			//윈도우면 현재 실행위치 내 conf 폴더 안
+
+		if (os.indexOf("windows") > -1) {
+			// 윈도우면 현재 실행위치 내 conf 폴더 안
 			resource = System.getProperty("user.dir") + "\\conf\\apiConfig.properties";
 		} else {
-			//윈도우 외에는 (사실상 리눅스 서버) 서버 절대경로를 하드코딩
+			// 윈도우 외에는 (사실상 리눅스 서버) 서버 절대경로를 하드코딩
 			resource = "/home/chkusr/EIBP2/conf/apiConfig.properties";
 		}
 
@@ -150,6 +147,104 @@ public class JsonParser {
 		// System.out.println("mgtNo :" + mgtNo);
 
 		String urlstr = service_url + mgtNo + "&serviceKey=" + service_key;
+		
+		try {
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+			urlconnection.setRequestMethod("GET");
+			br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+
+			String line;
+			while ((line = br.readLine()) != null) {
+				json = json + line + "\n";
+			}
+
+			// 테스트 출력
+			// System.out.println(json);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return json;
+	}
+
+	// 환경영향평가 파싱 (타입 구분자와 코드 하나를 파라미터로 받아서 파싱)
+	public static String parseEiaJson(String service_url, String service_key, String code, String type) {
+
+		BufferedReader br = null;
+		String json = "";
+
+		// System.out.println("mgtNo :" + mgtNo);
+
+		String urlstr = service_url + code + "&serviceKey=" + service_key + "&type=" + type;
+		try {
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+			urlconnection.setRequestMethod("GET");
+			br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+
+			String line;
+			while ((line = br.readLine()) != null) {
+				json = json + line + "\n";
+			}
+
+			// 테스트 출력
+			// System.out.println(json);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return json;
+	}
+	
+	// 환경영향평가 파싱 (반경 수치와 페이지 번호를 받아서 파싱)
+		public static String parseEiaJson_distance(String service_url, String service_key, String pageNo, String code) {
+
+			BufferedReader br = null;
+			String json = "";
+
+			// System.out.println("mgtNo :" + mgtNo);
+
+			String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
+			try {
+
+				URL url = new URL(urlstr);
+				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+				urlconnection.setRequestMethod("GET");
+				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+
+				String line;
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				// 테스트 출력
+				// System.out.println(json);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return json;
+		}
+
+	// 페이지 번호와 x,y 좌표를 받아서 조회
+	// 환경영향평가 정보 서비스
+	public static String parseEiaJson(String service_url, String service_key, String pageNo, String center_X,
+			String center_Y) {
+
+		BufferedReader br = null;
+		String json = "";
+
+		// System.out.println("mgtNo :" + mgtNo);
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&centerX=" + center_X
+				+ "&centerY=" + center_Y + "&numOfRows=999" + "&pageNo=" + pageNo ;
+		
 		try {
 
 			URL url = new URL(urlstr);
@@ -689,15 +784,12 @@ public class JsonParser {
 
 	// 구분코드 와 페이지 번호를 받아서 파싱
 	// 수도통합(WIS)-운영통합시스템(댐보발전통합)
-	public static String parseWrsJson(String service_url, String service_key, String pageNo, String fcltyDivCode) {
+	public static String parseWrsJson(String service_url, String service_key, String pageNo, String code) {
 
 		BufferedReader br = null;
 		String json = "";
 
-		// System.out.println("mgtNo :" + mgtNo);
-
-		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&fcltyDivCode="
-				+ fcltyDivCode + "&numOfRows=999";
+		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
 		try {
 
 			URL url = new URL(urlstr);

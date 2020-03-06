@@ -38,7 +38,7 @@ public class DamEffluent {
 
 				// step 1.파일의 첫 행 작성
 				File file = new File(
-						JsonParser.getProperty("file_path") + "WRS/TIF_WRS_16_" + args[0] + "_" + args[1] + ".dat");
+						JsonParser.getProperty("file_path") + "WRS/TIF_WRS_16.dat");
 
 				try {
 
@@ -239,7 +239,7 @@ public class DamEffluent {
 				// step 5. 대상 서버에 sftp로 보냄
 
 				TransSftp.transSftp(
-						JsonParser.getProperty("file_path") + "WRS/TIF_WRS_16_" + args[0] + "_" + args[1] + ".dat",
+						JsonParser.getProperty("file_path") + "WRS/TIF_WRS_16.dat",
 						"WRS");
 
 				long end = System.currentTimeMillis();

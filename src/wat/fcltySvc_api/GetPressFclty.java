@@ -14,6 +14,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import common.JsonParser;
+import common.TransSftp;
 
 public class GetPressFclty {
 	
@@ -35,7 +36,7 @@ public class GetPressFclty {
 			String service_key = JsonParser.getProperty("fcltySvc_service_key");
 
 			// step 1.파일의 첫 행 작성
-			File file = new File("TIF_WAT_03_StringBuffer_test.dat");
+			File file = new File(JsonParser.getProperty("file_path") + "WAT/TIF_WAT_03.dat");
 
 			try {
 				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
@@ -296,6 +297,10 @@ public class GetPressFclty {
 			}
 			
 			System.out.println("parsing complete!");
+			
+			// step 5. 대상 서버에 sftp로 보냄
+
+			TransSftp.transSftp(JsonParser.getProperty("file_path") + "WAT/TIF_WAT_03.dat", "WAT");
 			
 			long end = System.currentTimeMillis();
 			System.out.println("실행 시간 : " + ( end - start )/1000.0 +"초");

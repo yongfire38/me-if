@@ -37,8 +37,7 @@ public class WaterFluxList {
 				String service_key = JsonParser.getProperty("waterFlux_service_key");
 
 				// step 1.파일의 첫 행 작성
-				File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_01_" + args[0] + "_" + args[1]
-						+ "_" + args[2] + "_" + args[3] + ".dat");
+				File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_01.dat");
 
 				try {
 
@@ -257,8 +256,7 @@ public class WaterFluxList {
 
 				// step 5. 대상 서버에 sftp로 보냄
 
-				TransSftp.transSftp(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_01_" + args[0] + "_" + args[1]
-						+ "_" + args[2] + "_" + args[3] + ".dat", "WRS");
+				TransSftp.transSftp(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_01.dat", "WRS");
 
 				long end = System.currentTimeMillis();
 				System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");

@@ -37,7 +37,7 @@ public class MonPurification {
 				String service_key = JsonParser.getProperty("monPurification_service_key");
 
 				// step 1.파일의 첫 행 작성
-				File file = new File(JsonParser.getProperty("file_path") + "WAT/TIF_WAT_04_" + args[0] + "_" + args[1] +".dat");
+				File file = new File(JsonParser.getProperty("file_path") + "WAT/TIF_WAT_04.dat");
 
 				try {
 
@@ -582,7 +582,7 @@ public class MonPurification {
 
 				// step 5. 대상 서버에 sftp로 보냄
 
-				TransSftp.transSftp(JsonParser.getProperty("file_path") + "WAT/TIF_WAT_04_" + args[0] + "_" + args[1] +".dat", "WAT");
+				TransSftp.transSftp(JsonParser.getProperty("file_path") + "WAT/TIF_WAT_04.dat", "WAT");
 				
 				long end = System.currentTimeMillis();
 				System.out.println("실행 시간 : " + ( end - start )/1000.0 +"초");

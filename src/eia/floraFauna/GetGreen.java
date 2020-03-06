@@ -27,6 +27,7 @@ public class GetGreen {
 		if (args.length == 1) {
 
 			System.out.println("firstLine start..");
+			long start = System.currentTimeMillis(); // 시작시간
 			String mgtNo = args[0];
 
 			// step 0.open api url과 서비스 키.
@@ -34,7 +35,7 @@ public class GetGreen {
 			String service_key = JsonParser.getProperty("florafauna_service_key");
 
 			// step 1.파일의 첫 행 작성
-			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_29_" + mgtNo + ".dat");
+			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_29.dat");
 
 			try {
 				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
@@ -496,8 +497,11 @@ public class GetGreen {
 
 					// step 5. 대상 서버에 sftp로 보냄
 
-					TransSftp.transSftp(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_29_" + mgtNo + ".dat", "EIA");
+					TransSftp.transSftp(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_29.dat", "EIA");
 
+					long end = System.currentTimeMillis();
+					System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
+					
 				} else if (resultCode.equals("03")) {
 					System.out.println("data not exist!! mgtNo :" + mgtNo);
 				} else {

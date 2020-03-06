@@ -38,8 +38,7 @@ public class Dmntwater {
 				String service_key = JsonParser.getProperty("dailwater_service_key");
 
 				// step 1.파일의 첫 행 작성
-				File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_22_" + args[0] + "_" + args[1]
-						+ "_" + args[2] + ".dat");
+				File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_22.dat");
 
 				try {
 					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
