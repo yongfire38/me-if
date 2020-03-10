@@ -8,7 +8,6 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Set;
 
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -17,8 +16,6 @@ import common.JsonParser;
 import common.TransSftp;
 
 public class GetIvstg {
-
-	
 
 	// 대기질 정보 조회 - 조사속성조회
 	@SuppressWarnings("unchecked")
@@ -29,7 +26,7 @@ public class GetIvstg {
 
 			System.out.println("firstLine start..");
 			long start = System.currentTimeMillis(); // 시작시간
-			
+
 			String mgtNo = args[0];
 
 			// step 0.open api url과 서비스 키.
@@ -38,13 +35,13 @@ public class GetIvstg {
 
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") + "TIF_EIA_02.dat");
-			
-			if(file.exists()){
-				
+
+			if (file.exists()) {
+
 				System.out.println("파일이 이미 존재하므로 이어쓰기..");
-				
+
 			} else {
-				
+
 				try {
 					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 					pw.write("mgtNo"); // 사업 코드
@@ -163,9 +160,8 @@ public class GetIvstg {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			
+
 			}
-			
 
 			String json = "";
 
@@ -582,6 +578,18 @@ public class GetIvstg {
 					TransSftp.transSftp(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_02.dat", "EIA");
 					long end = System.currentTimeMillis();
 					System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
+
+					// step 6. 원본 파일은 삭제
+					if (file.exists()) {
+						if (file.delete()) {
+							System.out.println("원본파일 삭제 처리 완료");
+						} else {
+							System.out.println("원본 파일 삭제 처리 시패");
+						}
+
+					} else {
+						System.out.println("파일이 존재하지 않습니다.");
+					}
 
 				} else if (resultCode.equals("03")) {
 					System.out.println("data not exist!! mgtNo :" + mgtNo);

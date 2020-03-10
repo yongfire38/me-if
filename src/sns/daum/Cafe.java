@@ -17,7 +17,7 @@ import org.json.simple.parser.JSONParser;
 import common.JsonParser;
 import common.TransSftp;
 
-public class Blog {
+public class Cafe {
 
 	// 다음검색 - 블로그
 	@SuppressWarnings("unchecked")
@@ -33,12 +33,12 @@ public class Blog {
 
 			// step 0.open api url과 서비스 키.
 
-			String service_url = JsonParser.getProperty("daum_blog_url");
+			String service_url = JsonParser.getProperty("daum_cafe_url");
 			String daum_api_key = JsonParser.getProperty("daum_api_key");
 
 			// step 1.파일의 첫 행 작성
 
-			File file = new File(JsonParser.getProperty("file_path") + "SNS/TIF_SNS_201.dat");
+			File file = new File(JsonParser.getProperty("file_path") + "SNS/TIF_SNS_202.dat");
 
 			if (file.exists()) {
 
@@ -53,17 +53,17 @@ public class Blog {
 					pw.write("|^");
 					pw.write("query"); // 검색어
 					pw.write("|^");
-					pw.write("title"); // 블로그 제목
+					pw.write("title"); // 카페 글 제목
 					pw.write("|^");
-					pw.write("contents"); // 블로그 내용
+					pw.write("contents"); // 카페 글 내용
 					pw.write("|^");
-					pw.write("url"); // 블로그 글 url
+					pw.write("url"); // 카페 글 url
 					pw.write("|^");
-					pw.write("blogname"); // 블로그 이름
+					pw.write("cafename"); // 카페 이름
 					pw.write("|^");
-					pw.write("thumbnail"); // 블로그 대표 썸네일
+					pw.write("thumbnail"); // 카페 글 대표 썸네일
 					pw.write("|^");
-					pw.write("datetime"); // 블로그 글 작성시간
+					pw.write("datetime"); // 카페 글 작성시간
 					pw.println();
 					pw.flush();
 					pw.close();
@@ -95,29 +95,25 @@ public class Blog {
 
 				pageCount = (totalCount / display) + 1;
 
-				// System.out.println("totalCount::::"+totalCount);
-				// System.out.println("pageCount::::"+pageCount);
-
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
 			StringBuffer resultSb = new StringBuffer("");
 
-			StringBuffer title = new StringBuffer(" "); // 블로그 제목
-			StringBuffer contents = new StringBuffer(" "); // 블로그 글 요약
-			StringBuffer url = new StringBuffer(" "); // 블로그 글 url
-			StringBuffer blogname = new StringBuffer(" "); // 블로그 이름
+			StringBuffer title = new StringBuffer(" "); // 카페 제목
+			StringBuffer contents = new StringBuffer(" "); // 카페 글 요약
+			StringBuffer url = new StringBuffer(" "); // 카페 글 url
+			StringBuffer cafename = new StringBuffer(" "); // 카페 이름
 			StringBuffer thumbnail = new StringBuffer(" "); // 대표썸네일
-			StringBuffer datetime = new StringBuffer(" "); // 블로그 작성일시
+			StringBuffer datetime = new StringBuffer(" "); // 카페 글 작성일시
 
 			// step 3. 페이지 숫자만큼 반복하면서 파싱
 
 			for (int i = 1; i <= pageCount; i++) {
 
+				// 블로그와 다른 건 url 하나 뿐이므로 블로그 쪽 메서드 사용 가능
 				json = JsonParser.parseBlogJson_daum(service_url, daum_api_key, args[0], Integer.toString(i));
-
-				// System.out.println("json::::::" + json);
 
 				try {
 
@@ -141,7 +137,7 @@ public class Blog {
 							JsonParser.colWrite(title, keyname, "title", document);
 							JsonParser.colWrite(contents, keyname, "contents", document);
 							JsonParser.colWrite(url, keyname, "url", document);
-							JsonParser.colWrite(blogname, keyname, "blogname", document);
+							JsonParser.colWrite(cafename, keyname, "cafename", document);
 							JsonParser.colWrite(thumbnail, keyname, "thumbnail", document);
 							JsonParser.colWrite(datetime, keyname, "datetime", document);
 
@@ -158,12 +154,13 @@ public class Blog {
 						resultSb.append("|^");
 						resultSb.append(url);
 						resultSb.append("|^");
-						resultSb.append(blogname);
+						resultSb.append(cafename);
 						resultSb.append("|^");
 						resultSb.append(thumbnail);
 						resultSb.append("|^");
 						resultSb.append(datetime);
 						resultSb.append(System.getProperty("line.separator"));
+
 					}
 
 				} catch (Exception e) {
@@ -174,7 +171,6 @@ public class Blog {
 				System.out.println("진행도::::::" + i + "/" + pageCount);
 
 				Thread.sleep(1000);
-
 			}
 
 			// step 4. 파일에 쓰기
@@ -193,7 +189,7 @@ public class Blog {
 
 			// step 5. 대상 서버에 sftp로 보냄
 
-			TransSftp.transSftp(JsonParser.getProperty("file_path") + "SNS/TIF_SNS_201.dat", "SNS");
+			TransSftp.transSftp(JsonParser.getProperty("file_path") + "SNS/TIF_SNS_202.dat", "SNS");
 
 			long end = System.currentTimeMillis();
 			System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
@@ -216,6 +212,7 @@ public class Blog {
 			System.exit(-1);
 		}
 
+		
 	}
 
 }

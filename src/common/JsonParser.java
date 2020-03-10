@@ -93,6 +93,18 @@ public class JsonParser {
 		return list;
 	}
 
+	// 문자열 utf 8 인코딩
+	public static String encode_UTF8(String param) {
+
+		try {
+			param = URLEncoder.encode(param, "utf-8");
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException("검색어 인코딩 실패", e);
+		}
+
+		return param;
+	}
+
 	// 공백 또는 null 체크
 	public static boolean isEmpty(Object obj) {
 
@@ -123,13 +135,13 @@ public class JsonParser {
 
 	}
 
-	// 파싱한 데이터를 StringBuffer에 씀(null 체크, trim처리와 줄바꿈 없애는 것도 같이)
+	// 파싱한 데이터를 StringBuffer에 씀(null 체크, trim처리와 줄바꿈 없애는 것, utf8 인코딩 처리도 같이)
 	public static StringBuffer colWrite(StringBuffer sb, String keyname, String chkCol, JSONObject item) {
 
 		if (keyname.equals(chkCol)) {
 			if (!(JsonParser.isEmpty(item.get(keyname)))) {
 				sb.setLength(0);
-				sb.append(item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " "));
+				sb.append(item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ").replace("'", "").replace("&#39;","").replace("&#34;", ""));
 			} else {
 				sb.setLength(0);
 				sb.append(" ");
@@ -149,7 +161,7 @@ public class JsonParser {
 		// System.out.println("mgtNo :" + mgtNo);
 
 		String urlstr = service_url + mgtNo + "&serviceKey=" + service_key;
-		
+
 		try {
 
 			URL url = new URL(urlstr);
@@ -202,37 +214,37 @@ public class JsonParser {
 
 		return json;
 	}
-	
+
 	// 환경영향평가 파싱 (반경 수치와 페이지 번호를 받아서 파싱)
-		public static String parseEiaJson_distance(String service_url, String service_key, String pageNo, String code) {
+	public static String parseEiaJson_distance(String service_url, String service_key, String pageNo, String code) {
 
-			BufferedReader br = null;
-			String json = "";
+		BufferedReader br = null;
+		String json = "";
 
-			// System.out.println("mgtNo :" + mgtNo);
+		// System.out.println("mgtNo :" + mgtNo);
 
-			String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
-			try {
+		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
+		try {
 
-				URL url = new URL(urlstr);
-				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-				urlconnection.setRequestMethod("GET");
-				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+			urlconnection.setRequestMethod("GET");
+			br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
 
-				String line;
-				while ((line = br.readLine()) != null) {
-					json = json + line + "\n";
-				}
-
-				// 테스트 출력
-				// System.out.println(json);
-
-			} catch (Exception e) {
-				e.printStackTrace();
+			String line;
+			while ((line = br.readLine()) != null) {
+				json = json + line + "\n";
 			}
 
-			return json;
+			// 테스트 출력
+			// System.out.println(json);
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+
+		return json;
+	}
 
 	// 페이지 번호와 x,y 좌표를 받아서 조회
 	// 환경영향평가 정보 서비스
@@ -244,9 +256,9 @@ public class JsonParser {
 
 		// System.out.println("mgtNo :" + mgtNo);
 
-		String urlstr = service_url + "&serviceKey=" + service_key + "&centerX=" + center_X
-				+ "&centerY=" + center_Y + "&numOfRows=999" + "&pageNo=" + pageNo ;
-		
+		String urlstr = service_url + "&serviceKey=" + service_key + "&centerX=" + center_X + "&centerY=" + center_Y
+				+ "&numOfRows=999" + "&pageNo=" + pageNo;
+
 		try {
 
 			URL url = new URL(urlstr);
@@ -942,94 +954,89 @@ public class JsonParser {
 	}
 
 	// 네이버 블로그 파싱 (검색어 하나를 파라미터로 받아서 파싱)
-		public static String parseBlogJson_naver(String service_url, String naver_client_id, String naver_client_secret, String query, String start) {
+	public static String parseBlogJson_naver(String service_url, String naver_client_id, String naver_client_secret,
+			String query, String start) {
 
-			BufferedReader br = null;
-			
-			try{
-				query = URLEncoder.encode(query, "utf-8");
-			}catch(UnsupportedEncodingException e){
-				throw new RuntimeException("검색어 인코딩 실패",e);
-			}
-			
-			String json = "";
+		BufferedReader br = null;
 
-			String urlstr = service_url + query +"&start=" + start;
-			
-			try {
+		// utf8 인코딩
+		query = encode_UTF8(query);
 
-				URL url = new URL(urlstr);
-				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-				urlconnection.setRequestMethod("GET");
-				urlconnection.setRequestProperty("X-Naver-Client-Id", naver_client_id);
-				urlconnection.setRequestProperty("X-Naver-Client-Secret", naver_client_secret);
+		String json = "";
 
-				int responseCode = urlconnection.getResponseCode();
-	
-				if (responseCode == 200) { 
-	                br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
-	            } else { 
-	                br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream()));
-	            }
-				
-				String line;
-				while ((line = br.readLine()) != null) {
-					json = json + line + "\n";
-				}
+		String urlstr = service_url + query + "&start=" + start;
 
-				// 테스트 출력
-				//System.out.println(json);
+		try {
 
-			} catch (Exception e) {
-				e.printStackTrace();
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+			urlconnection.setRequestMethod("GET");
+			urlconnection.setRequestProperty("X-Naver-Client-Id", naver_client_id);
+			urlconnection.setRequestProperty("X-Naver-Client-Secret", naver_client_secret);
+
+			int responseCode = urlconnection.getResponseCode();
+
+			if (responseCode == 200) {
+				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
+			} else {
+				br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream()));
 			}
 
-			return json;
+			String line;
+			while ((line = br.readLine()) != null) {
+				json = json + line + "\n";
+			}
+
+			// 테스트 출력
+			// System.out.println(json);
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
-		// 다음 블로그 파싱 (검색어 하나를 파라미터로 받아서 파싱)
-				public static String parseBlogJson_daum(String service_url, String daum_api_key, String query, String page) {
+		return json;
+	}
 
-					BufferedReader br = null;
-					
-					try{
-						query = URLEncoder.encode(query, "utf-8");
-					}catch(UnsupportedEncodingException e){
-						throw new RuntimeException("검색어 인코딩 실패",e);
-					}
-					
-					String json = "";
+	// 다음 블로그 파싱 (검색어 하나를 파라미터로 받아서 파싱)
+	public static String parseBlogJson_daum(String service_url, String daum_api_key, String query, String page) {
 
-					String urlstr = service_url + query + "&page=" + page;
-					
-					try {
+		BufferedReader br = null;
 
-						URL url = new URL(urlstr);
-						HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-						urlconnection.setRequestMethod("GET");
-						urlconnection.setRequestProperty("Authorization", "KakaoAK " + daum_api_key);
+		// utf8 인코딩
+		query = encode_UTF8(query);
 
-						int responseCode = urlconnection.getResponseCode();
-			
-						if (responseCode == 200) { 
-			                br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
-			            } else { 
-			                br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream()));
-			            }
-						
-						String line;
-						while ((line = br.readLine()) != null) {
-							json = json + line + "\n";
-						}
+		String json = "";
 
-						// 테스트 출력
-						//System.out.println(json);
+		String urlstr = service_url + query + "&page=" + page;
 
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+		try {
 
-					return json;
-				}
-	
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+			urlconnection.setRequestMethod("GET");
+			urlconnection.setRequestProperty("Authorization", "KakaoAK " + daum_api_key);
+
+			int responseCode = urlconnection.getResponseCode();
+
+			if (responseCode == 200) {
+				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
+			} else {
+				br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream()));
+			}
+
+			String line;
+			while ((line = br.readLine()) != null) {
+				json = json + line + "\n";
+			}
+
+			// 테스트 출력
+			// System.out.println(json);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return json;
+	}
+
 }
