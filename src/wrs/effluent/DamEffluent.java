@@ -40,44 +40,52 @@ public class DamEffluent {
 				File file = new File(
 						JsonParser.getProperty("file_path") + "WRS/TIF_WRS_16.dat");
 
-				try {
+				if(file.exists()){
+					
+					System.out.println("파일이 이미 존재하므로 이어쓰기..");
+					
+				} else {
+				
+					try {
 
-					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-					pw.write("resultCode"); // 결과코드
-					pw.write("|^");
-					pw.write("resultMsg"); // 결과메세지
-					pw.write("|^");
-					pw.write("srymd"); // 측정월
-					pw.write("|^");
-					pw.write("dgr"); // 수온(℃)
-					pw.write("|^");
-					pw.write("ph"); // pH
-					pw.write("|^");
-					pw.write("do1"); // DO(mg/L)
-					pw.write("|^");
-					pw.write("bod"); // BOD(mg/L)
-					pw.write("|^");
-					pw.write("cod"); // COD(mg/L)
-					pw.write("|^");
-					pw.write("ss"); // SS(mg/L)
-					pw.write("|^");
-					pw.write("tn"); // T-N(mg/L)
-					pw.write("|^");
-					pw.write("tp"); // T-P(mg/L)
-					pw.write("|^");
-					pw.write("pop"); // PO4-P(mg/L)
-					pw.write("|^");
-					pw.write("td"); // 탁도(NTU)
-					pw.write("|^");
-					pw.write("ec"); // 전기전도도
-					pw.write("|^");
-					pw.write("seqno"); // 순번
-					pw.println();
-					pw.flush();
-					pw.close();
+						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						pw.write("resultCode"); // 결과코드
+						pw.write("|^");
+						pw.write("resultMsg"); // 결과메세지
+						pw.write("|^");
+						pw.write("srymd"); // 측정월
+						pw.write("|^");
+						pw.write("dgr"); // 수온(℃)
+						pw.write("|^");
+						pw.write("ph"); // pH
+						pw.write("|^");
+						pw.write("do1"); // DO(mg/L)
+						pw.write("|^");
+						pw.write("bod"); // BOD(mg/L)
+						pw.write("|^");
+						pw.write("cod"); // COD(mg/L)
+						pw.write("|^");
+						pw.write("ss"); // SS(mg/L)
+						pw.write("|^");
+						pw.write("tn"); // T-N(mg/L)
+						pw.write("|^");
+						pw.write("tp"); // T-P(mg/L)
+						pw.write("|^");
+						pw.write("pop"); // PO4-P(mg/L)
+						pw.write("|^");
+						pw.write("td"); // 탁도(NTU)
+						pw.write("|^");
+						pw.write("ec"); // 전기전도도
+						pw.write("|^");
+						pw.write("seqno"); // 순번
+						pw.println();
+						pw.flush();
+						pw.close();
 
-				} catch (IOException e) {
-					e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				
 				}
 
 				// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱

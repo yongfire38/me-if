@@ -37,73 +37,81 @@ public class GetPredict {
 					// step 1.파일의 첫 행 작성
 					File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_03.dat");
 
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+					if(file.exists()){
+						
+						System.out.println("파일이 이미 존재하므로 이어쓰기..");
+						
+					} else {
+					
+						try {
+							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-						pw.write("mgtNo"); // 사업 코드
-						pw.write("|^");
-						pw.write("greenArVal"); // 공원 및 녹지계획면적
-						pw.write("|^");
-						pw.write("gmenoPm10Val"); // 공사시 미세먼지(10) 배출량
-						pw.write("|^");
-						pw.write("gmenoPm25Val"); // 공사시 미세먼지(2.5) 배출량
-						pw.write("|^");
-						pw.write("gmenoNo2Val"); // 공사시 이산화질소 배출량
-						pw.write("|^");
-						pw.write("umenoPm10Val"); // 운영시 미세먼지(10) 배출량
-						pw.write("|^");
-						pw.write("umenoPm25Val"); // 운영시 미세먼지(2.5) 배출량
-						pw.write("|^");
-						pw.write("umenoNo2Val"); // 운영시 이산화질소 배출량
-						pw.write("|^");
-						pw.write("umenoSo2Val"); // 운영시 아황산가스 배출량
-						pw.write("|^");
-						pw.write("umenoCoVal"); // 운영시 일산화탄소 배출량
-						pw.write("|^");
-						pw.write("umenoHclVal"); // 운영시 염화수소(HCL) 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoHgVal"); // 운영시 수은(Hg) 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoNiVal"); // 운영시 니켈(Ni) 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoCr6Val"); // 운영시 6가크롬(Cr6+) 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoCdVal"); // 운영시 카드뮴(Cd) 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoAsVal"); // 운영시 비소(As) 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoBzVal"); // 운영시 벤젠 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoHchoVal"); // 운영시 포름알데히드 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoVcVal"); // 운영시 염화비닐 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoDioxinVal"); // 운영시 다이옥신 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoBeVal"); // 운영시 베릴륨(Be) 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoEbVal"); // 운영시 에틸벤젠 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoC6h14Val"); // 운영시 n-헥산 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoC6h12Val"); // 운영시 시클로헥산 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoDeVal"); // 운영시 1,-2디클로로에탄 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoCfVal"); // 운영시 클로로포름 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoTceVal"); // 운영시 트리클로로에틸렌 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoCtVal"); // 운영시 사염화탄소 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoHcnVal"); // 운영시 시안화수소 배출(발생)량
-						pw.println();
-						pw.flush();
-						pw.close();
+							pw.write("mgtNo"); // 사업 코드
+							pw.write("|^");
+							pw.write("greenArVal"); // 공원 및 녹지계획면적
+							pw.write("|^");
+							pw.write("gmenoPm10Val"); // 공사시 미세먼지(10) 배출량
+							pw.write("|^");
+							pw.write("gmenoPm25Val"); // 공사시 미세먼지(2.5) 배출량
+							pw.write("|^");
+							pw.write("gmenoNo2Val"); // 공사시 이산화질소 배출량
+							pw.write("|^");
+							pw.write("umenoPm10Val"); // 운영시 미세먼지(10) 배출량
+							pw.write("|^");
+							pw.write("umenoPm25Val"); // 운영시 미세먼지(2.5) 배출량
+							pw.write("|^");
+							pw.write("umenoNo2Val"); // 운영시 이산화질소 배출량
+							pw.write("|^");
+							pw.write("umenoSo2Val"); // 운영시 아황산가스 배출량
+							pw.write("|^");
+							pw.write("umenoCoVal"); // 운영시 일산화탄소 배출량
+							pw.write("|^");
+							pw.write("umenoHclVal"); // 운영시 염화수소(HCL) 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoHgVal"); // 운영시 수은(Hg) 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoNiVal"); // 운영시 니켈(Ni) 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoCr6Val"); // 운영시 6가크롬(Cr6+) 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoCdVal"); // 운영시 카드뮴(Cd) 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoAsVal"); // 운영시 비소(As) 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoBzVal"); // 운영시 벤젠 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoHchoVal"); // 운영시 포름알데히드 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoVcVal"); // 운영시 염화비닐 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoDioxinVal"); // 운영시 다이옥신 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoBeVal"); // 운영시 베릴륨(Be) 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoEbVal"); // 운영시 에틸벤젠 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoC6h14Val"); // 운영시 n-헥산 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoC6h12Val"); // 운영시 시클로헥산 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoDeVal"); // 운영시 1,-2디클로로에탄 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoCfVal"); // 운영시 클로로포름 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoTceVal"); // 운영시 트리클로로에틸렌 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoCtVal"); // 운영시 사염화탄소 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoHcnVal"); // 운영시 시안화수소 배출(발생)량
+							pw.println();
+							pw.flush();
+							pw.close();
 
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					
+					}	
 
 					String json = "";
 

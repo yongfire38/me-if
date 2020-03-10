@@ -38,22 +38,30 @@ public class GetAl {
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_26.dat");
 
-			try {
-				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+			if(file.exists()){
+				
+				System.out.println("파일이 이미 존재하므로 이어쓰기..");
+				
+			} else {
+			
+				try {
+					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-				pw.write("mgtNo"); // 사업 코드
-				pw.write("|^");
-				pw.write("alGrad"); // 사업지구 표고구분
-				pw.write("|^");
-				pw.write("alAreaRate"); // 표고별 면적비율
-				pw.write("|^");
-				pw.write("alArea"); // 표고별 면적
-				pw.println();
-				pw.flush();
-				pw.close();
+					pw.write("mgtNo"); // 사업 코드
+					pw.write("|^");
+					pw.write("alGrad"); // 사업지구 표고구분
+					pw.write("|^");
+					pw.write("alAreaRate"); // 표고별 면적비율
+					pw.write("|^");
+					pw.write("alArea"); // 표고별 면적
+					pw.println();
+					pw.flush();
+					pw.close();
 
-			} catch (IOException e) {
-				e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 			}
 
 			String json = "";

@@ -38,22 +38,30 @@ public class GetSpfc {
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_18.dat");
 
-			try {
-				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+			if(file.exists()){
+				
+				System.out.println("파일이 이미 존재하므로 이어쓰기..");
+				
+			} else {
+			
+				try {
+					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-				pw.write("mgtNo"); // 사업 코드
-				pw.write("|^");
-				pw.write("spfcNm"); // 용도지역명
-				pw.write("|^");
-				pw.write("bfeSpfcAr"); // 용도지역 변경전면적
-				pw.write("|^");
-				pw.write("aftSpfcAr"); // 용도지역 변경후면적
-				pw.println();
-				pw.flush();
-				pw.close();
+					pw.write("mgtNo"); // 사업 코드
+					pw.write("|^");
+					pw.write("spfcNm"); // 용도지역명
+					pw.write("|^");
+					pw.write("bfeSpfcAr"); // 용도지역 변경전면적
+					pw.write("|^");
+					pw.write("aftSpfcAr"); // 용도지역 변경후면적
+					pw.println();
+					pw.flush();
+					pw.close();
 
-			} catch (IOException e) {
-				e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 			}
 
 			String json = "";

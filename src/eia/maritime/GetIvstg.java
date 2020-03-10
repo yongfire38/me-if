@@ -38,84 +38,92 @@ public class GetIvstg {
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_14.dat");
 
-			try {
-				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+			if(file.exists()){
+				
+				System.out.println("파일이 이미 존재하므로 이어쓰기..");
+				
+			} else {
+			
+				try {
+					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-				pw.write("mgtNo"); // 사업 코드
-				pw.write("|^");
-				pw.write("ivstgSpotNm"); // 조사지점명
-				pw.write("|^");
-				pw.write("ivstgGb"); // 조사구분
-				pw.write("|^");
-				pw.write("adres"); // 주소
-				pw.write("|^");
-				pw.write("xcnts"); // X좌표
-				pw.write("|^");
-				pw.write("ydnts"); // Y좌표
-				pw.write("|^");
-				pw.write("ivstgOdr"); // 조사차수
-				pw.write("|^");
-				pw.write("ivstgBgnde"); // 조사시작일
-				pw.write("|^");
-				pw.write("ivstgEndde"); // 조사종료일
-				pw.write("|^");
-				pw.write("wlr"); // 수층구분
-				pw.write("|^");
-				pw.write("qltwtrCodVal"); // 해양수질_화학적산소요구량
-				pw.write("|^");
-				pw.write("qltwtrTocVal"); // 해양수질_총유기탄소
-				pw.write("|^");
-				pw.write("qltwtrDoVal"); // 해양수질_용존산소량
-				pw.write("|^");
-				pw.write("qltwtrTnVal"); // 총질소
-				pw.write("|^");
-				pw.write("qltwtrTpVal"); // 해양수질_총인
-				pw.write("|^");
-				pw.write("qltwtrEvlGrad"); // 해양수질평가지수 등급
-				pw.write("|^");
-				pw.write("qltwtrEnvrnGrad"); // 해양수질 환경기준등급
-				pw.write("|^");
-				pw.write("igntLossVal"); // 강열감량
-				pw.write("|^");
-				pw.write("destCodVal"); // 해양저질_화학적산소요구량
-				pw.write("|^");
-				pw.write("destTocVal"); // 해양저질_총유기탄소
-				pw.write("|^");
-				pw.write("destCrVal"); // 해양저질_크롬
-				pw.write("|^");
-				pw.write("destZnVal"); // 해양저질_아연
-				pw.write("|^");
-				pw.write("destCuVal"); // 해양저질_구리
-				pw.write("|^");
-				pw.write("destCdVal"); // 해양저질_카드뮴
-				pw.write("|^");
-				pw.write("destHgVal"); // 해양저질_수은
-				pw.write("|^");
-				pw.write("destAsVal"); // 해양저질_비소
-				pw.write("|^");
-				pw.write("destPbVal"); // 해양저질_납
-				pw.write("|^");
-				pw.write("destNiVal"); // 해양저질_니켈
-				pw.write("|^");
-				pw.write("destPcbVal"); // 해양저질_총 폴리염화비페닐
-				pw.write("|^");
-				pw.write("destTnVal"); // 해양저질_총질소
-				pw.write("|^");
-				pw.write("destTpVal"); // 해양저질_총인
-				pw.write("|^");
-				pw.write("destFeVal"); // 해양저질_철
-				pw.write("|^");
-				pw.write("destMnVal"); // 해양저질_망간
-				pw.write("|^");
-				pw.write("destAlVal"); // 해양저질_알루미늄
-				pw.println();
-				pw.flush();
-				pw.close();
+					pw.write("mgtNo"); // 사업 코드
+					pw.write("|^");
+					pw.write("ivstgSpotNm"); // 조사지점명
+					pw.write("|^");
+					pw.write("ivstgGb"); // 조사구분
+					pw.write("|^");
+					pw.write("adres"); // 주소
+					pw.write("|^");
+					pw.write("xcnts"); // X좌표
+					pw.write("|^");
+					pw.write("ydnts"); // Y좌표
+					pw.write("|^");
+					pw.write("ivstgOdr"); // 조사차수
+					pw.write("|^");
+					pw.write("ivstgBgnde"); // 조사시작일
+					pw.write("|^");
+					pw.write("ivstgEndde"); // 조사종료일
+					pw.write("|^");
+					pw.write("wlr"); // 수층구분
+					pw.write("|^");
+					pw.write("qltwtrCodVal"); // 해양수질_화학적산소요구량
+					pw.write("|^");
+					pw.write("qltwtrTocVal"); // 해양수질_총유기탄소
+					pw.write("|^");
+					pw.write("qltwtrDoVal"); // 해양수질_용존산소량
+					pw.write("|^");
+					pw.write("qltwtrTnVal"); // 총질소
+					pw.write("|^");
+					pw.write("qltwtrTpVal"); // 해양수질_총인
+					pw.write("|^");
+					pw.write("qltwtrEvlGrad"); // 해양수질평가지수 등급
+					pw.write("|^");
+					pw.write("qltwtrEnvrnGrad"); // 해양수질 환경기준등급
+					pw.write("|^");
+					pw.write("igntLossVal"); // 강열감량
+					pw.write("|^");
+					pw.write("destCodVal"); // 해양저질_화학적산소요구량
+					pw.write("|^");
+					pw.write("destTocVal"); // 해양저질_총유기탄소
+					pw.write("|^");
+					pw.write("destCrVal"); // 해양저질_크롬
+					pw.write("|^");
+					pw.write("destZnVal"); // 해양저질_아연
+					pw.write("|^");
+					pw.write("destCuVal"); // 해양저질_구리
+					pw.write("|^");
+					pw.write("destCdVal"); // 해양저질_카드뮴
+					pw.write("|^");
+					pw.write("destHgVal"); // 해양저질_수은
+					pw.write("|^");
+					pw.write("destAsVal"); // 해양저질_비소
+					pw.write("|^");
+					pw.write("destPbVal"); // 해양저질_납
+					pw.write("|^");
+					pw.write("destNiVal"); // 해양저질_니켈
+					pw.write("|^");
+					pw.write("destPcbVal"); // 해양저질_총 폴리염화비페닐
+					pw.write("|^");
+					pw.write("destTnVal"); // 해양저질_총질소
+					pw.write("|^");
+					pw.write("destTpVal"); // 해양저질_총인
+					pw.write("|^");
+					pw.write("destFeVal"); // 해양저질_철
+					pw.write("|^");
+					pw.write("destMnVal"); // 해양저질_망간
+					pw.write("|^");
+					pw.write("destAlVal"); // 해양저질_알루미늄
+					pw.println();
+					pw.flush();
+					pw.close();
 
-			} catch (IOException e) {
-				e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 			}
-
+			
 			String json = "";
 
 			json = JsonParser.parseEiaJson(service_url, service_key, mgtNo);

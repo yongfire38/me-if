@@ -34,42 +34,50 @@ public class GetDecsnCnIngbtntOpinionDetailInfoInqire {
 				// step 1.파일의 첫 행 작성
 				File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_46.dat");
 				
-				try {
+				if(file.exists()){
+					
+					System.out.println("파일이 이미 존재하므로 이어쓰기..");
+					
+				} else {
+					
+					try {
 
-					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-					pw.write("resultCode"); // 결과코드
-					pw.write("|^");
-					pw.write("resultMsg"); // 결과메시지
-					pw.write("|^");
-					pw.write("resultCd"); // 결정내용코드
-					pw.write("|^");
-					pw.write("bizNm"); // 사업명
-					pw.write("|^");
-					pw.write("approvOrganTeam"); // 승인기관
-					pw.write("|^");
-					pw.write("openPclDt"); // 공고일
-					pw.write("|^");
-					pw.write("openTmdtStartDt"); // 공람기간시작일
-					pw.write("|^");
-					pw.write("openTmdtEndDt"); // 공람기간종료일
-					pw.write("|^");
-					pw.write("openOpnEndDt"); // 의견종료일
-					pw.write("|^");
-					pw.write("openOpnStartDt"); // 의견시작일
-					pw.write("|^");
-					pw.write("openOpnEtc"); // 결정내용
-					pw.write("|^");
-					pw.write("openTeamNm"); // 부서명
-					pw.write("|^");
-					pw.write("bizManTxt"); // 사업자
-					pw.write("|^");
-					pw.write("discOrganNm"); // 협의기관	
-					pw.println();
-					pw.flush();
-					pw.close();
+						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						pw.write("resultCode"); // 결과코드
+						pw.write("|^");
+						pw.write("resultMsg"); // 결과메시지
+						pw.write("|^");
+						pw.write("resultCd"); // 결정내용코드
+						pw.write("|^");
+						pw.write("bizNm"); // 사업명
+						pw.write("|^");
+						pw.write("approvOrganTeam"); // 승인기관
+						pw.write("|^");
+						pw.write("openPclDt"); // 공고일
+						pw.write("|^");
+						pw.write("openTmdtStartDt"); // 공람기간시작일
+						pw.write("|^");
+						pw.write("openTmdtEndDt"); // 공람기간종료일
+						pw.write("|^");
+						pw.write("openOpnEndDt"); // 의견종료일
+						pw.write("|^");
+						pw.write("openOpnStartDt"); // 의견시작일
+						pw.write("|^");
+						pw.write("openOpnEtc"); // 결정내용
+						pw.write("|^");
+						pw.write("openTeamNm"); // 부서명
+						pw.write("|^");
+						pw.write("bizManTxt"); // 사업자
+						pw.write("|^");
+						pw.write("discOrganNm"); // 협의기관	
+						pw.println();
+						pw.flush();
+						pw.close();
 
-				} catch (IOException e) {
-					e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				
 				}
 				
 				String json = "";

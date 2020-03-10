@@ -38,40 +38,48 @@ public class GetAmplt {
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_15.dat");
 
-			try {
-				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+			if(file.exists()){
+				
+				System.out.println("파일이 이미 존재하므로 이어쓰기..");
+				
+			} else {
+			
+				try {
+					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-				pw.write("mgtNo"); // 사업 코드
-				pw.write("|^");
-				pw.write("ivstgSpotNm"); // 조사지점명
-				pw.write("|^");
-				pw.write("ivstgOdr"); // 조사차수
-				pw.write("|^");
-				pw.write("ivstgBgnde"); // 조사시작일
-				pw.write("|^");
-				pw.write("ivstgEndde"); // 조사종료일
-				pw.write("|^");
-				pw.write("mediolittoralKnd"); // 조간대 저서동물 출현종수
-				pw.write("|^");
-				pw.write("mediolittoralDn"); // 조간대 저서동물 서식밀도
-				pw.write("|^");
-				pw.write("mediolittoralBiomass"); // 조간대 저서동물 생체량
-				pw.write("|^");
-				pw.write("infralittoralKnd"); // 조하대 저서동물 출현종수
-				pw.write("|^");
-				pw.write("infralittoralDn"); // 조하대 저서동물 서식밀도
-				pw.write("|^");
-				pw.write("infralittoralBiomass"); // 조하대 저서동물 생체량
-				pw.write("|^");
-				pw.write("seawidsKnd"); // 해조류 출현종수
-				pw.write("|^");
-				pw.write("ascidiansYn"); // 해초류(잘피) 서식여부(사업지 주변)
-				pw.println();
-				pw.flush();
-				pw.close();
+					pw.write("mgtNo"); // 사업 코드
+					pw.write("|^");
+					pw.write("ivstgSpotNm"); // 조사지점명
+					pw.write("|^");
+					pw.write("ivstgOdr"); // 조사차수
+					pw.write("|^");
+					pw.write("ivstgBgnde"); // 조사시작일
+					pw.write("|^");
+					pw.write("ivstgEndde"); // 조사종료일
+					pw.write("|^");
+					pw.write("mediolittoralKnd"); // 조간대 저서동물 출현종수
+					pw.write("|^");
+					pw.write("mediolittoralDn"); // 조간대 저서동물 서식밀도
+					pw.write("|^");
+					pw.write("mediolittoralBiomass"); // 조간대 저서동물 생체량
+					pw.write("|^");
+					pw.write("infralittoralKnd"); // 조하대 저서동물 출현종수
+					pw.write("|^");
+					pw.write("infralittoralDn"); // 조하대 저서동물 서식밀도
+					pw.write("|^");
+					pw.write("infralittoralBiomass"); // 조하대 저서동물 생체량
+					pw.write("|^");
+					pw.write("seawidsKnd"); // 해조류 출현종수
+					pw.write("|^");
+					pw.write("ascidiansYn"); // 해초류(잘피) 서식여부(사업지 주변)
+					pw.println();
+					pw.flush();
+					pw.close();
 
-			} catch (IOException e) {
-				e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 			}
 
 			String json = "";

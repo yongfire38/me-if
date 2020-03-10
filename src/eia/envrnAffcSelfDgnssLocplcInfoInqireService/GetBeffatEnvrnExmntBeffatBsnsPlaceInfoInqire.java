@@ -34,38 +34,47 @@ public class GetBeffatEnvrnExmntBeffatBsnsPlaceInfoInqire {
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_51.dat");
 
-			try {
+			if(file.exists()){
+				
+				System.out.println("파일이 이미 존재하므로 이어쓰기..");
+				
+			} else {
+			
+				try {
 
-				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-				pw.write("resultCode"); // 결과코드
-				pw.write("|^");
-				pw.write("resultMsg"); // 결과메시지
-				pw.write("|^");
-				pw.write("numOfRows"); // 한 페이지 결과 수
-				pw.write("|^");
-				pw.write("pageNo"); // 페이지 번호
-				pw.write("|^");
-				pw.write("totalCount"); // 전체 결과 수
-				pw.write("|^");
-				pw.write("rnum"); // 소팅넘버링
-				pw.write("|^");
-				pw.write("num"); // 번호
-				pw.write("|^");
-				pw.write("name"); // 사업명
-				pw.write("|^");
-				pw.write("centerx"); // 좌표 X
-				pw.write("|^");
-				pw.write("centery"); // 좌표 Y
-				pw.write("|^");
-				pw.write("distance"); // 반경
+					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+					pw.write("resultCode"); // 결과코드
+					pw.write("|^");
+					pw.write("resultMsg"); // 결과메시지
+					pw.write("|^");
+					pw.write("numOfRows"); // 한 페이지 결과 수
+					pw.write("|^");
+					pw.write("pageNo"); // 페이지 번호
+					pw.write("|^");
+					pw.write("totalCount"); // 전체 결과 수
+					pw.write("|^");
+					pw.write("rnum"); // 소팅넘버링
+					pw.write("|^");
+					pw.write("num"); // 번호
+					pw.write("|^");
+					pw.write("name"); // 사업명
+					pw.write("|^");
+					pw.write("centerx"); // 좌표 X
+					pw.write("|^");
+					pw.write("centery"); // 좌표 Y
+					pw.write("|^");
+					pw.write("distance"); // 반경
 
-				pw.println();
-				pw.flush();
-				pw.close();
+					pw.println();
+					pw.flush();
+					pw.close();
 
-			} catch (IOException e) {
-				e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 			}
+			
 
 			// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
 			String json = "";

@@ -35,26 +35,34 @@ public class GetEnvrnExmntInfoInqire {
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_52.dat");
 
-			try {
+			if(file.exists()){
+				
+				System.out.println("파일이 이미 존재하므로 이어쓰기..");
+				
+			} else {
+			
+				try {
 
-				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-				pw.write("resultCode"); // 결과코드
-				pw.write("|^");
-				pw.write("resultMsg"); // 결과메시지
-				pw.write("|^");
-				pw.write("pnu"); // PNU
-				pw.write("|^");
-				pw.write("jibun"); // 지분
-				pw.write("|^");
-				pw.write("centerx"); // 좌표 X
-				pw.write("|^");
-				pw.write("centery"); // 좌표 Y
-				pw.println();
-				pw.flush();
-				pw.close();
+					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+					pw.write("resultCode"); // 결과코드
+					pw.write("|^");
+					pw.write("resultMsg"); // 결과메시지
+					pw.write("|^");
+					pw.write("pnu"); // PNU
+					pw.write("|^");
+					pw.write("jibun"); // 지분
+					pw.write("|^");
+					pw.write("centerx"); // 좌표 X
+					pw.write("|^");
+					pw.write("centery"); // 좌표 Y
+					pw.println();
+					pw.flush();
+					pw.close();
 
-			} catch (IOException e) {
-				e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 			}
 
 			String json = "";

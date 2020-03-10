@@ -40,32 +40,40 @@ public class Winfosdaywater {
 				File file = new File(
 						JsonParser.getProperty("file_path") + "WRS/TIF_WRS_12.dat");
 
-				try {
+				if(file.exists()){
+					
+					System.out.println("파일이 이미 존재하므로 이어쓰기..");
+					
+				} else {
+				
+					try {
 
-					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-					pw.write("sgcnm"); // 지자체명
-					pw.write("|^");
-					pw.write("sitenm"); // 정수장명
-					pw.write("|^");
-					pw.write("cltdt"); // 측정일자
-					pw.write("|^");
-					pw.write("data1"); // 맛
-					pw.write("|^");
-					pw.write("data2"); // 냄새
-					pw.write("|^");
-					pw.write("data3"); // 색도(도)
-					pw.write("|^");
-					pw.write("data4"); // pH(-)
-					pw.write("|^");
-					pw.write("data5"); // 탁도(NTU)
-					pw.write("|^");
-					pw.write("data6"); // 잔류염소(mg/L)
-					pw.println();
-					pw.flush();
-					pw.close();
+						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						pw.write("sgcnm"); // 지자체명
+						pw.write("|^");
+						pw.write("sitenm"); // 정수장명
+						pw.write("|^");
+						pw.write("cltdt"); // 측정일자
+						pw.write("|^");
+						pw.write("data1"); // 맛
+						pw.write("|^");
+						pw.write("data2"); // 냄새
+						pw.write("|^");
+						pw.write("data3"); // 색도(도)
+						pw.write("|^");
+						pw.write("data4"); // pH(-)
+						pw.write("|^");
+						pw.write("data5"); // 탁도(NTU)
+						pw.write("|^");
+						pw.write("data6"); // 잔류염소(mg/L)
+						pw.println();
+						pw.flush();
+						pw.close();
 
-				} catch (IOException e) {
-					e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					
 				}
 
 				// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱

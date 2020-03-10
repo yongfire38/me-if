@@ -37,38 +37,46 @@ public class Multidamdilist {
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_01.dat");
 			
-			try {
-				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+			if(file.exists()){
+				
+				System.out.println("파일이 이미 존재하므로 이어쓰기..");
+				
+			} else {
+			
+				try {
+					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-				pw.write("obsymd"); // 측정일자
-				pw.write("|^");
-				pw.write("damcdcrd"); // 댐코드
-				pw.write("|^");
-				pw.write("rsqtysum"); // 저수량합계(백만m3)
-				pw.write("|^");
-				pw.write("stagenow"); // 현재저수지가뭄단계명
-				pw.write("|^");
-				pw.write("limobsymd"); // 용수공급가능일
-				pw.write("|^");
-				pw.write("stage_0"); // 정상공급환원단계저수량
-				pw.write("|^");
-				pw.write("stage_1"); // 관심단계저수량
-				pw.write("|^");
-				pw.write("stage_2"); // 주의단계저수량
-				pw.write("|^");
-				pw.write("stage_3"); // 경계단계저수량
-				pw.write("|^");
-				pw.write("stage_4"); // 심각단계저수량
-				pw.write("|^");
-				pw.write("damnm"); // 댐명칭
-				pw.write("|^");
-				pw.write("seqno"); // 순번
-				pw.println();
-				pw.flush();
-				pw.close();
+					pw.write("obsymd"); // 측정일자
+					pw.write("|^");
+					pw.write("damcdcrd"); // 댐코드
+					pw.write("|^");
+					pw.write("rsqtysum"); // 저수량합계(백만m3)
+					pw.write("|^");
+					pw.write("stagenow"); // 현재저수지가뭄단계명
+					pw.write("|^");
+					pw.write("limobsymd"); // 용수공급가능일
+					pw.write("|^");
+					pw.write("stage_0"); // 정상공급환원단계저수량
+					pw.write("|^");
+					pw.write("stage_1"); // 관심단계저수량
+					pw.write("|^");
+					pw.write("stage_2"); // 주의단계저수량
+					pw.write("|^");
+					pw.write("stage_3"); // 경계단계저수량
+					pw.write("|^");
+					pw.write("stage_4"); // 심각단계저수량
+					pw.write("|^");
+					pw.write("damnm"); // 댐명칭
+					pw.write("|^");
+					pw.write("seqno"); // 순번
+					pw.println();
+					pw.flush();
+					pw.close();
 
-			} catch (IOException e) {
-				e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 			}
 			
 			// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱

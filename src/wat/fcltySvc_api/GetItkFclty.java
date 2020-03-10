@@ -37,38 +37,46 @@ public class GetItkFclty {
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") + "WAT/TIF_WAT_01.dat");
 
-			try {
-				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+			if(file.exists()){
+				
+				System.out.println("파일이 이미 존재하므로 이어쓰기..");
+				
+			} else {
+			
+				try {
+					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-				pw.write("numOfRows"); // 한 페이지 결과 수
-				pw.write("|^");
-				pw.write("pageNo"); // 페이지 수
-				pw.write("|^");
-				pw.write("totalCount"); // 데이터 총 개수
-				pw.write("|^");
-				pw.write("RNUM"); // 순번
-				pw.write("|^");
-				pw.write("WILO_NAM"); // 수도구분
-				pw.write("|^");
-				pw.write("WBIZ_NAM"); // 수도사업자
-				pw.write("|^");
-				pw.write("FCLT_NAM"); // 취수장명
-				pw.write("|^");
-				pw.write("WSYS_NM"); // 대표수계
-				pw.write("|^");
-				pw.write("WSRC_NM"); // 수원(취수원형태)
-				pw.write("|^");
-				pw.write("PHONE_NUM"); // 전화번호
-				pw.write("|^");
-				pw.write("COMPL_DAT"); // 준공일
-				pw.write("|^");
-				pw.write("FCLT_VOL"); // 시설용량(㎥/일)
-				pw.println();
-				pw.flush();
-				pw.close();
+					pw.write("numOfRows"); // 한 페이지 결과 수
+					pw.write("|^");
+					pw.write("pageNo"); // 페이지 수
+					pw.write("|^");
+					pw.write("totalCount"); // 데이터 총 개수
+					pw.write("|^");
+					pw.write("RNUM"); // 순번
+					pw.write("|^");
+					pw.write("WILO_NAM"); // 수도구분
+					pw.write("|^");
+					pw.write("WBIZ_NAM"); // 수도사업자
+					pw.write("|^");
+					pw.write("FCLT_NAM"); // 취수장명
+					pw.write("|^");
+					pw.write("WSYS_NM"); // 대표수계
+					pw.write("|^");
+					pw.write("WSRC_NM"); // 수원(취수원형태)
+					pw.write("|^");
+					pw.write("PHONE_NUM"); // 전화번호
+					pw.write("|^");
+					pw.write("COMPL_DAT"); // 준공일
+					pw.write("|^");
+					pw.write("FCLT_VOL"); // 시설용량(㎥/일)
+					pw.println();
+					pw.flush();
+					pw.close();
 
-			} catch (IOException e) {
-				e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 			}
 
 			// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱

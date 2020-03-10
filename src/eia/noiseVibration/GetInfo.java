@@ -35,38 +35,46 @@ public class GetInfo {
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_34.dat");
 
-			try {
-				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+			if(file.exists()){
+				
+				System.out.println("파일이 이미 존재하므로 이어쓰기..");
+				
+			} else {
+			
+				try {
+					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-				pw.write("mgtNo"); // 사업 코드
-				pw.write("|^");
-				pw.write("ivstgSpotNm"); // 조사지점명
-				pw.write("|^");
-				pw.write("ivstgGb"); // 조사구분
-				pw.write("|^");
-				pw.write("adres"); // 주소
-				pw.write("|^");
-				pw.write("xcnts"); // X좌표
-				pw.write("|^");
-				pw.write("ydnts"); // Y좌표
-				pw.write("|^");
-				pw.write("ivstgOdr"); // 조사차수
-				pw.write("|^");
-				pw.write("ivstgBgnde"); // 조사시작일
-				pw.write("|^");
-				pw.write("ivstgEndde"); // 조사종료일
-				pw.write("|^");
-				pw.write("noiseVal"); // 소음
-				pw.write("|^");
-				pw.write("vibratVal"); // 진동
-				pw.println();
-				pw.flush();
-				pw.close();
+					pw.write("mgtNo"); // 사업 코드
+					pw.write("|^");
+					pw.write("ivstgSpotNm"); // 조사지점명
+					pw.write("|^");
+					pw.write("ivstgGb"); // 조사구분
+					pw.write("|^");
+					pw.write("adres"); // 주소
+					pw.write("|^");
+					pw.write("xcnts"); // X좌표
+					pw.write("|^");
+					pw.write("ydnts"); // Y좌표
+					pw.write("|^");
+					pw.write("ivstgOdr"); // 조사차수
+					pw.write("|^");
+					pw.write("ivstgBgnde"); // 조사시작일
+					pw.write("|^");
+					pw.write("ivstgEndde"); // 조사종료일
+					pw.write("|^");
+					pw.write("noiseVal"); // 소음
+					pw.write("|^");
+					pw.write("vibratVal"); // 진동
+					pw.println();
+					pw.flush();
+					pw.close();
 
-			} catch (IOException e) {
-				e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 			}
-
+			
 			String json = "";
 
 			json = JsonParser.parseEiaJson(service_url, service_key, mgtNo);

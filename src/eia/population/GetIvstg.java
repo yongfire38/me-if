@@ -38,35 +38,43 @@ public class GetIvstg {
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_36.dat");
 
-			try {
-				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+			if(file.exists()){
+				
+				System.out.println("파일이 이미 존재하므로 이어쓰기..");
+				
+			} else {
+				
+				try {
+					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-				pw.write("mgtNo"); // 사업 코드
-				pw.write("|^");
-				pw.write("sggemdNm"); // 시군구읍면동 명칭
-				pw.write("|^");
-				pw.write("popltnYr"); // 년도
-				pw.write("|^");
-				pw.write("totPopltnMale"); // 인구수_남자
-				pw.write("|^");
-				pw.write("totPopltnFemale"); // 인구수_여자
-				pw.write("|^");
-				pw.write("totPopltn"); // 인구수_합계
-				pw.write("|^");
-				pw.write("totHshldCo"); // 총 가구수
-				pw.write("|^");
-				pw.write("totHouseCo"); // 총 주택수
-				pw.write("|^");
-				pw.write("houseSupplyRate"); // 주택보급율
-				pw.write("|^");
-				pw.println();
-				pw.flush();
-				pw.close();
+					pw.write("mgtNo"); // 사업 코드
+					pw.write("|^");
+					pw.write("sggemdNm"); // 시군구읍면동 명칭
+					pw.write("|^");
+					pw.write("popltnYr"); // 년도
+					pw.write("|^");
+					pw.write("totPopltnMale"); // 인구수_남자
+					pw.write("|^");
+					pw.write("totPopltnFemale"); // 인구수_여자
+					pw.write("|^");
+					pw.write("totPopltn"); // 인구수_합계
+					pw.write("|^");
+					pw.write("totHshldCo"); // 총 가구수
+					pw.write("|^");
+					pw.write("totHouseCo"); // 총 주택수
+					pw.write("|^");
+					pw.write("houseSupplyRate"); // 주택보급율
+					pw.write("|^");
+					pw.println();
+					pw.flush();
+					pw.close();
 
-			} catch (IOException e) {
-				e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 			}
-
+			
 			String json = "";
 
 			json = JsonParser.parseEiaJson(service_url, service_key, mgtNo);

@@ -39,34 +39,42 @@ public class Winfosmonthqtrwater {
 				// step 1.파일의 첫 행 작성
 				File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_15.dat");
 
-				try {
+				if(file.exists()){
+					
+					System.out.println("파일이 이미 존재하므로 이어쓰기..");
+					
+				} else {
+				
+					try {
 
-					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-					pw.write("sgcnm"); // 지자체명
-					pw.write("|^");
-					pw.write("sitenm"); // 지점명
-					pw.write("|^");
-					pw.write("cltdt"); // 측정일자
-					pw.write("|^");
-					pw.write("data1"); // 수소이온농도(pH)
-					pw.write("|^");
-					pw.write("data2"); // BOD(호소수:COD)
-					pw.write("|^");
-					pw.write("data3"); // 부유물질(SS)
-					pw.write("|^");
-					pw.write("data4"); // 용존산소량(DO)
-					pw.write("|^");
-					pw.write("data5"); // 총대장균군(원수)
-					pw.write("|^");
-					pw.write("data6"); // 분원성대장균군수(원수-CFU)
-					pw.println();
-					pw.flush();
-					pw.close();
+						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						pw.write("sgcnm"); // 지자체명
+						pw.write("|^");
+						pw.write("sitenm"); // 지점명
+						pw.write("|^");
+						pw.write("cltdt"); // 측정일자
+						pw.write("|^");
+						pw.write("data1"); // 수소이온농도(pH)
+						pw.write("|^");
+						pw.write("data2"); // BOD(호소수:COD)
+						pw.write("|^");
+						pw.write("data3"); // 부유물질(SS)
+						pw.write("|^");
+						pw.write("data4"); // 용존산소량(DO)
+						pw.write("|^");
+						pw.write("data5"); // 총대장균군(원수)
+						pw.write("|^");
+						pw.write("data6"); // 분원성대장균군수(원수-CFU)
+						pw.println();
+						pw.flush();
+						pw.close();
 
-				} catch (IOException e) {
-					e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				
 				}
-
+	
 				// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
 				String json = "";
 

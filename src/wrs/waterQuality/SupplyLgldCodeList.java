@@ -37,28 +37,36 @@ public class SupplyLgldCodeList {
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_09.dat", "WRS");
 
-			try {
+			if(file.exists()){
+				
+				System.out.println("파일이 이미 존재하므로 이어쓰기..");
+				
+			} else {
+			
+				try {
 
-				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-				pw.write("addrName"); // 법정동명
-				pw.write("|^");
-				pw.write("fcltyMngNm"); // 시설관리명
-				pw.write("|^");
-				pw.write("fcltyMngNo"); // 시설관리번호
-				pw.write("|^");
-				pw.write("lgldCode"); // 법정동코드
-				pw.write("|^");
-				pw.write("lgldFullAddr"); // 법정동 상세 주소
-				pw.write("|^");
-				pw.write("sujCode"); // 사업장코드
-				pw.write("|^");
-				pw.write("upprLgldCode"); // 상위법정동코드
-				pw.println();
-				pw.flush();
-				pw.close();
+					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+					pw.write("addrName"); // 법정동명
+					pw.write("|^");
+					pw.write("fcltyMngNm"); // 시설관리명
+					pw.write("|^");
+					pw.write("fcltyMngNo"); // 시설관리번호
+					pw.write("|^");
+					pw.write("lgldCode"); // 법정동코드
+					pw.write("|^");
+					pw.write("lgldFullAddr"); // 법정동 상세 주소
+					pw.write("|^");
+					pw.write("sujCode"); // 사업장코드
+					pw.write("|^");
+					pw.write("upprLgldCode"); // 상위법정동코드
+					pw.println();
+					pw.flush();
+					pw.close();
 
-			} catch (IOException e) {
-				e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 			}
 
 			// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱

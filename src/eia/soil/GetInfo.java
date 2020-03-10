@@ -38,82 +38,90 @@ public class GetInfo {
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_20.dat");
 
-			try {
-				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+			if(file.exists()){
+				
+				System.out.println("파일이 이미 존재하므로 이어쓰기..");
+				
+			} else {
+			
+				try {
+					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-				pw.write("mgtNo"); // 사업 코드
-				pw.write("|^");
-				pw.write("ivstgSpotNm"); // 조사지점명
-				pw.write("|^");
-				pw.write("ivstgGb"); // 조사구분
-				pw.write("|^");
-				pw.write("adres"); // 주소
-				pw.write("|^");
-				pw.write("xcnts"); // X좌표
-				pw.write("|^");
-				pw.write("ydnts"); // Y좌표
-				pw.write("|^");
-				pw.write("ivstgOdr"); // 조사차수
-				pw.write("|^");
-				pw.write("ivstgBgnde"); // 조사시작일
-				pw.write("|^");
-				pw.write("ivstgEndde"); // 조사종료일
-				pw.write("|^");
-				pw.write("sdNm"); // 토층구분(예 : 표토, 중토, 심토 등)
-				pw.write("|^");
-				pw.write("slrDph"); // 토층별 심도
-				pw.write("|^");
-				pw.write("spoil"); // 준설토
-				pw.write("|^");
-				pw.write("cmdVal"); // 카드뮴
-				pw.write("|^");
-				pw.write("cuVal"); // 구리
-				pw.write("|^");
-				pw.write("asVal"); // 비소
-				pw.write("|^");
-				pw.write("hgVal"); // 수은
-				pw.write("|^");
-				pw.write("pbVal"); // 납
-				pw.write("|^");
-				pw.write("cr6Val"); // 6가크롬(Cr6+)
-				pw.write("|^");
-				pw.write("znVal"); // 아연
-				pw.write("|^");
-				pw.write("niVal"); // 니켈
-				pw.write("|^");
-				pw.write("fVal"); // 불소
-				pw.write("|^");
-				pw.write("ugnhVal"); // 유기인화합물
-				pw.write("|^");
-				pw.write("pcbVal"); // 폴리클로리네이티드비페닐
-				pw.write("|^");
-				pw.write("cnVal"); // 시안
-				pw.write("|^");
-				pw.write("pnVal"); // 페놀
-				pw.write("|^");
-				pw.write("bzVal"); // 벤젠
-				pw.write("|^");
-				pw.write("tuVal"); // 톨루엔
-				pw.write("|^");
-				pw.write("ebVal"); // 에틸벤젠
-				pw.write("|^");
-				pw.write("xyVal"); // 크실렌
-				pw.write("|^");
-				pw.write("tphVal"); // 석유계총탄화수소
-				pw.write("|^");
-				pw.write("tceVal"); // 트리클로로에틸렌
-				pw.write("|^");
-				pw.write("pceVal"); // 테트라클로로에틸렌
-				pw.write("|^");
-				pw.write("bpVal"); // 벤조(a)피렌
-				pw.println();
-				pw.flush();
-				pw.close();
+					pw.write("mgtNo"); // 사업 코드
+					pw.write("|^");
+					pw.write("ivstgSpotNm"); // 조사지점명
+					pw.write("|^");
+					pw.write("ivstgGb"); // 조사구분
+					pw.write("|^");
+					pw.write("adres"); // 주소
+					pw.write("|^");
+					pw.write("xcnts"); // X좌표
+					pw.write("|^");
+					pw.write("ydnts"); // Y좌표
+					pw.write("|^");
+					pw.write("ivstgOdr"); // 조사차수
+					pw.write("|^");
+					pw.write("ivstgBgnde"); // 조사시작일
+					pw.write("|^");
+					pw.write("ivstgEndde"); // 조사종료일
+					pw.write("|^");
+					pw.write("sdNm"); // 토층구분(예 : 표토, 중토, 심토 등)
+					pw.write("|^");
+					pw.write("slrDph"); // 토층별 심도
+					pw.write("|^");
+					pw.write("spoil"); // 준설토
+					pw.write("|^");
+					pw.write("cmdVal"); // 카드뮴
+					pw.write("|^");
+					pw.write("cuVal"); // 구리
+					pw.write("|^");
+					pw.write("asVal"); // 비소
+					pw.write("|^");
+					pw.write("hgVal"); // 수은
+					pw.write("|^");
+					pw.write("pbVal"); // 납
+					pw.write("|^");
+					pw.write("cr6Val"); // 6가크롬(Cr6+)
+					pw.write("|^");
+					pw.write("znVal"); // 아연
+					pw.write("|^");
+					pw.write("niVal"); // 니켈
+					pw.write("|^");
+					pw.write("fVal"); // 불소
+					pw.write("|^");
+					pw.write("ugnhVal"); // 유기인화합물
+					pw.write("|^");
+					pw.write("pcbVal"); // 폴리클로리네이티드비페닐
+					pw.write("|^");
+					pw.write("cnVal"); // 시안
+					pw.write("|^");
+					pw.write("pnVal"); // 페놀
+					pw.write("|^");
+					pw.write("bzVal"); // 벤젠
+					pw.write("|^");
+					pw.write("tuVal"); // 톨루엔
+					pw.write("|^");
+					pw.write("ebVal"); // 에틸벤젠
+					pw.write("|^");
+					pw.write("xyVal"); // 크실렌
+					pw.write("|^");
+					pw.write("tphVal"); // 석유계총탄화수소
+					pw.write("|^");
+					pw.write("tceVal"); // 트리클로로에틸렌
+					pw.write("|^");
+					pw.write("pceVal"); // 테트라클로로에틸렌
+					pw.write("|^");
+					pw.write("bpVal"); // 벤조(a)피렌
+					pw.println();
+					pw.flush();
+					pw.close();
 
-			} catch (IOException e) {
-				e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 			}
-
+			
 			String json = "";
 
 			json = JsonParser.parseEiaJson(service_url, service_key, mgtNo);

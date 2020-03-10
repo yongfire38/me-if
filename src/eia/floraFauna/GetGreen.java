@@ -37,116 +37,124 @@ public class GetGreen {
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_29.dat");
 
-			try {
-				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+			if(file.exists()){
+				
+				System.out.println("파일이 이미 존재하므로 이어쓰기..");
+				
+			} else {
+			
+				try {
+					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-				pw.write("mgtNo"); // 사업 코드
-				pw.write("|^");
-				pw.write("bfeGreens0gAr"); // 사업시행 전 녹지자연도(면적)_0등급
-				pw.write("|^");
-				pw.write("bfeGreens1gAr"); // 사업시행 전 녹지자연도(면적)_1등급
-				pw.write("|^");
-				pw.write("bfeGreens2gAr"); // 사업시행 전 녹지자연도(면적)_2등급
-				pw.write("|^");
-				pw.write("bfeGreens3gAr"); // 사업시행 전 녹지자연도(면적)_3등급
-				pw.write("|^");
-				pw.write("bfeGreens4gAr"); // 사업시행 전 녹지자연도(면적)_4등급
-				pw.write("|^");
-				pw.write("bfeGreens5gAr"); // 사업시행 전 녹지자연도(면적)_5등급
-				pw.write("|^");
-				pw.write("bfeGreens6gAr"); // 사업시행 전 녹지자연도(면적)_6등급
-				pw.write("|^");
-				pw.write("bfeGreens7gAr"); // 사업시행 전 녹지자연도(면적)_7등급
-				pw.write("|^");
-				pw.write("bfeGreens8gAr"); // 사업시행 전 녹지자연도(면적)_8등급
-				pw.write("|^");
-				pw.write("bfeGreens9gAr"); // 사업시행 전 녹지자연도(면적)_9등급
-				pw.write("|^");
-				pw.write("bfeGreens10gAr"); // 사업시행 전 녹지자연도(면적)_10등급
-				pw.write("|^");
-				pw.write("aftGreens0gAr"); // 사업시행 후 녹지자연도(면적)_0등급
-				pw.write("|^");
-				pw.write("aftGreens1gAr"); // 사업시행 후 녹지자연도(면적)_1등급
-				pw.write("|^");
-				pw.write("aftGreens2gAr"); // 사업시행 후 녹지자연도(면적)_2등급
-				pw.write("|^");
-				pw.write("aftGreens3gAr"); // 사업시행 후 녹지자연도(면적)_3등급
-				pw.write("|^");
-				pw.write("aftGreens4gAr"); // 사업시행 후 녹지자연도(면적)_4등급
-				pw.write("|^");
-				pw.write("aftGreens5gAr"); // 사업시행 후 녹지자연도(면적)_5등급
-				pw.write("|^");
-				pw.write("aftGreens6gAr"); // 사업시행 후 녹지자연도(면적)_6등급
-				pw.write("|^");
-				pw.write("aftGreens7gAr"); // 사업시행 후 녹지자연도(면적)_7등급
-				pw.write("|^");
-				pw.write("aftGreens8gAr"); // 사업시행 후 녹지자연도(면적)_8등급
-				pw.write("|^");
-				pw.write("aftGreens9gAr"); // 사업시행 후 녹지자연도(면적)_9등급
-				pw.write("|^");
-				pw.write("aftGreens10gAr"); // 사업시행 후 녹지자연도(면적)_10등급
-				pw.write("|^");
-				pw.write("bfeGreens0gRt"); // 사업시행 전 녹지자연도(비율)_0등급
-				pw.write("|^");
-				pw.write("bfeGreens1gRt"); // 사업시행 전 녹지자연도(비율)_1등급
-				pw.write("|^");
-				pw.write("bfeGreens2gRt"); // 사업시행 전 녹지자연도(비율)_2등급
-				pw.write("|^");
-				pw.write("bfeGreens3gRt"); // 사업시행 전 녹지자연도(비율)_3등급
-				pw.write("|^");
-				pw.write("bfeGreens4gRt"); // 사업시행 전 녹지자연도(비율)_4등급
-				pw.write("|^");
-				pw.write("bfeGreens5gRt"); // 사업시행 전 녹지자연도(비율)_5등급
-				pw.write("|^");
-				pw.write("bfeGreens6gRt"); // 사업시행 전 녹지자연도(비율)_6등급
-				pw.write("|^");
-				pw.write("bfeGreens7gRt"); // 사업시행 전 녹지자연도(비율)_7등급
-				pw.write("|^");
-				pw.write("bfeGreens8gRt"); // 사업시행 전 녹지자연도(비율)_8등급
-				pw.write("|^");
-				pw.write("bfeGreens9gRt"); // 사업시행 전 녹지자연도(비율)_9등급
-				pw.write("|^");
-				pw.write("bfeGreens10gRt"); // 사업시행 전 녹지자연도(비율)_10등급
-				pw.write("|^");
-				pw.write("aftGreens0gRt"); // 사업시행 후 녹지자연도(비율)_0등급
-				pw.write("|^");
-				pw.write("aftGreens1gRt"); // 사업시행 후 녹지자연도(비율)_1등급
-				pw.write("|^");
-				pw.write("aftGreens2gRt"); // 사업시행 후 녹지자연도(비율)_2등급
-				pw.write("|^");
-				pw.write("aftGreens3gRt"); // 사업시행 후 녹지자연도(비율)_3등급
-				pw.write("|^");
-				pw.write("aftGreens4gRt"); // 사업시행 후 녹지자연도(비율)_4등급
-				pw.write("|^");
-				pw.write("aftGreens5gRt"); // 사업시행 후 녹지자연도(비율)_5등급
-				pw.write("|^");
-				pw.write("aftGreens6gRt"); // 사업시행 후 녹지자연도(비율)_6등급
-				pw.write("|^");
-				pw.write("aftGreens7gRt"); // 사업시행 후 녹지자연도(비율)_7등급
-				pw.write("|^");
-				pw.write("aftGreens8gRt"); // 사업시행 후 녹지자연도(비율)_8등급
-				pw.write("|^");
-				pw.write("aftGreens9gRt"); // 사업시행 후 녹지자연도(비율)_9등급
-				pw.write("|^");
-				pw.write("aftGreens10gRt"); // 사업시행 후 녹지자연도(비율)_10등급
-				pw.write("|^");
-				pw.write("damageWdptCnt"); // 훼손수목량
-				pw.write("|^");
-				pw.write("ruseTrnspntWdptCnt"); // 재활용 이식수목량
-				pw.write("|^");
-				pw.write("eclgy1gAr"); // 생태자연도분포(1등급)
-				pw.write("|^");
-				pw.write("eclgy2gAr"); // 생태자연도분포(2등급)
-				pw.write("|^");
-				pw.write("eclgy3gAr"); // 생태자연도분포(3등급)
-				pw.write("|^");
-				pw.write("ivstgInfo"); // 조사지점 및 조사경로
-				pw.println();
-				pw.flush();
-				pw.close();
+					pw.write("mgtNo"); // 사업 코드
+					pw.write("|^");
+					pw.write("bfeGreens0gAr"); // 사업시행 전 녹지자연도(면적)_0등급
+					pw.write("|^");
+					pw.write("bfeGreens1gAr"); // 사업시행 전 녹지자연도(면적)_1등급
+					pw.write("|^");
+					pw.write("bfeGreens2gAr"); // 사업시행 전 녹지자연도(면적)_2등급
+					pw.write("|^");
+					pw.write("bfeGreens3gAr"); // 사업시행 전 녹지자연도(면적)_3등급
+					pw.write("|^");
+					pw.write("bfeGreens4gAr"); // 사업시행 전 녹지자연도(면적)_4등급
+					pw.write("|^");
+					pw.write("bfeGreens5gAr"); // 사업시행 전 녹지자연도(면적)_5등급
+					pw.write("|^");
+					pw.write("bfeGreens6gAr"); // 사업시행 전 녹지자연도(면적)_6등급
+					pw.write("|^");
+					pw.write("bfeGreens7gAr"); // 사업시행 전 녹지자연도(면적)_7등급
+					pw.write("|^");
+					pw.write("bfeGreens8gAr"); // 사업시행 전 녹지자연도(면적)_8등급
+					pw.write("|^");
+					pw.write("bfeGreens9gAr"); // 사업시행 전 녹지자연도(면적)_9등급
+					pw.write("|^");
+					pw.write("bfeGreens10gAr"); // 사업시행 전 녹지자연도(면적)_10등급
+					pw.write("|^");
+					pw.write("aftGreens0gAr"); // 사업시행 후 녹지자연도(면적)_0등급
+					pw.write("|^");
+					pw.write("aftGreens1gAr"); // 사업시행 후 녹지자연도(면적)_1등급
+					pw.write("|^");
+					pw.write("aftGreens2gAr"); // 사업시행 후 녹지자연도(면적)_2등급
+					pw.write("|^");
+					pw.write("aftGreens3gAr"); // 사업시행 후 녹지자연도(면적)_3등급
+					pw.write("|^");
+					pw.write("aftGreens4gAr"); // 사업시행 후 녹지자연도(면적)_4등급
+					pw.write("|^");
+					pw.write("aftGreens5gAr"); // 사업시행 후 녹지자연도(면적)_5등급
+					pw.write("|^");
+					pw.write("aftGreens6gAr"); // 사업시행 후 녹지자연도(면적)_6등급
+					pw.write("|^");
+					pw.write("aftGreens7gAr"); // 사업시행 후 녹지자연도(면적)_7등급
+					pw.write("|^");
+					pw.write("aftGreens8gAr"); // 사업시행 후 녹지자연도(면적)_8등급
+					pw.write("|^");
+					pw.write("aftGreens9gAr"); // 사업시행 후 녹지자연도(면적)_9등급
+					pw.write("|^");
+					pw.write("aftGreens10gAr"); // 사업시행 후 녹지자연도(면적)_10등급
+					pw.write("|^");
+					pw.write("bfeGreens0gRt"); // 사업시행 전 녹지자연도(비율)_0등급
+					pw.write("|^");
+					pw.write("bfeGreens1gRt"); // 사업시행 전 녹지자연도(비율)_1등급
+					pw.write("|^");
+					pw.write("bfeGreens2gRt"); // 사업시행 전 녹지자연도(비율)_2등급
+					pw.write("|^");
+					pw.write("bfeGreens3gRt"); // 사업시행 전 녹지자연도(비율)_3등급
+					pw.write("|^");
+					pw.write("bfeGreens4gRt"); // 사업시행 전 녹지자연도(비율)_4등급
+					pw.write("|^");
+					pw.write("bfeGreens5gRt"); // 사업시행 전 녹지자연도(비율)_5등급
+					pw.write("|^");
+					pw.write("bfeGreens6gRt"); // 사업시행 전 녹지자연도(비율)_6등급
+					pw.write("|^");
+					pw.write("bfeGreens7gRt"); // 사업시행 전 녹지자연도(비율)_7등급
+					pw.write("|^");
+					pw.write("bfeGreens8gRt"); // 사업시행 전 녹지자연도(비율)_8등급
+					pw.write("|^");
+					pw.write("bfeGreens9gRt"); // 사업시행 전 녹지자연도(비율)_9등급
+					pw.write("|^");
+					pw.write("bfeGreens10gRt"); // 사업시행 전 녹지자연도(비율)_10등급
+					pw.write("|^");
+					pw.write("aftGreens0gRt"); // 사업시행 후 녹지자연도(비율)_0등급
+					pw.write("|^");
+					pw.write("aftGreens1gRt"); // 사업시행 후 녹지자연도(비율)_1등급
+					pw.write("|^");
+					pw.write("aftGreens2gRt"); // 사업시행 후 녹지자연도(비율)_2등급
+					pw.write("|^");
+					pw.write("aftGreens3gRt"); // 사업시행 후 녹지자연도(비율)_3등급
+					pw.write("|^");
+					pw.write("aftGreens4gRt"); // 사업시행 후 녹지자연도(비율)_4등급
+					pw.write("|^");
+					pw.write("aftGreens5gRt"); // 사업시행 후 녹지자연도(비율)_5등급
+					pw.write("|^");
+					pw.write("aftGreens6gRt"); // 사업시행 후 녹지자연도(비율)_6등급
+					pw.write("|^");
+					pw.write("aftGreens7gRt"); // 사업시행 후 녹지자연도(비율)_7등급
+					pw.write("|^");
+					pw.write("aftGreens8gRt"); // 사업시행 후 녹지자연도(비율)_8등급
+					pw.write("|^");
+					pw.write("aftGreens9gRt"); // 사업시행 후 녹지자연도(비율)_9등급
+					pw.write("|^");
+					pw.write("aftGreens10gRt"); // 사업시행 후 녹지자연도(비율)_10등급
+					pw.write("|^");
+					pw.write("damageWdptCnt"); // 훼손수목량
+					pw.write("|^");
+					pw.write("ruseTrnspntWdptCnt"); // 재활용 이식수목량
+					pw.write("|^");
+					pw.write("eclgy1gAr"); // 생태자연도분포(1등급)
+					pw.write("|^");
+					pw.write("eclgy2gAr"); // 생태자연도분포(2등급)
+					pw.write("|^");
+					pw.write("eclgy3gAr"); // 생태자연도분포(3등급)
+					pw.write("|^");
+					pw.write("ivstgInfo"); // 조사지점 및 조사경로
+					pw.println();
+					pw.flush();
+					pw.close();
 
-			} catch (IOException e) {
-				e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 			}
 
 			String json = "";

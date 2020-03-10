@@ -38,232 +38,240 @@ public class GetRealTimeWaterQualityList_all {
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") + "PRI/TIF_PRI_03.dat");
 
-			try {
-				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+			if(file.exists()){
+				
+				System.out.println("파일이 이미 존재하므로 이어쓰기..");
+				
+			} else {
+			
+				try {
+					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-				pw.write("resultCode"); // 결과코드
-				pw.write("|^");
-				pw.write("resultMsg"); // 결과메시지
-				pw.write("|^");
-				pw.write("rowno"); // 행번호
-				pw.write("|^");
-				pw.write("siteId"); // 조사지점번호
-				pw.write("|^");
-				pw.write("siteName"); // 조사지점명
-				pw.write("|^");
-				pw.write("msrDate"); // 조사시간
-				pw.write("|^");
-				pw.write("m01"); // 통신상태
-				pw.write("|^");
-				pw.write("m02"); // 수온1
-				pw.write("|^");
-				pw.write("m03"); // 수소이온농도
-				pw.write("|^");
-				pw.write("m04"); // 전기전도도1
-				pw.write("|^");
-				pw.write("m05"); // 용존산소1
-				pw.write("|^");
-				pw.write("m06"); // 총유기탄소1
-				pw.write("|^");
-				pw.write("m07"); // 임펄스
-				pw.write("|^");
-				pw.write("m08"); // 수조pH
-				pw.write("|^");
-				pw.write("m09"); // 수온
-				pw.write("|^");
-				pw.write("m10"); // 수조 산소량
-				pw.write("|^");
-				pw.write("m11"); // 활동여부
-				pw.write("|^");
-				pw.write("m12"); // 염화메틸렌
-				pw.write("|^");
-				pw.write("m13"); // 1.1.1-트리클로로에테인
-				pw.write("|^");
-				pw.write("m14"); // 벤젠
-				pw.write("|^");
-				pw.write("m15"); // 사염화탄소
-				pw.write("|^");
-				pw.write("m16"); // 트리클로로에틸렌
-				pw.write("|^");
-				pw.write("m17"); // 톨루엔
-				pw.write("|^");
-				pw.write("m18"); // 테트라클로로에틸렌
-				pw.write("|^");
-				pw.write("m19"); // 에틸벤젠
-				pw.write("|^");
-				pw.write("m20"); // m,p-자일렌
-				pw.write("|^");
-				pw.write("m21"); // o-자일렌
-				pw.write("|^");
-				pw.write("m22"); // [ECD]염화메틸렌
-				pw.write("|^");
-				pw.write("m23"); // [ECD]1.1.1-트리클로로에테인
-				pw.write("|^");
-				pw.write("m24"); // [ECD]사염화탄소
-				pw.write("|^");
-				pw.write("m25"); // [ECD]트리클로로에틸렌
-				pw.write("|^");
-				pw.write("m26"); // [ECD}테트라클로로에틸렌
-				pw.write("|^");
-				pw.write("m27"); // 총질소
-				pw.write("|^");
-				pw.write("m28"); // 총인
-				pw.write("|^");
-				pw.write("m29"); // 클로로필-a
-				pw.write("|^");
-				pw.write("m30"); // 투과도
-				pw.write("|^");
-				pw.write("m31"); // 임펄스(우)
-				pw.write("|^");
-				pw.write("m32"); // 임펄스(좌)
-				pw.write("|^");
-				pw.write("m33"); // 수조수온(우)
-				pw.write("|^");
-				pw.write("m34"); // 수조수온(좌)
-				pw.write("|^");
-				pw.write("m35"); // 인산염인
-				pw.write("|^");
-				pw.write("m36"); // 암모니아성질소
-				pw.write("|^");
-				pw.write("m37"); // 질산성질소
-				pw.write("|^");
-				pw.write("m38"); // 수온2
-				pw.write("|^");
-				pw.write("m39"); // 수소이온농도2
-				pw.write("|^");
-				pw.write("m40"); // 전기전도도2
-				pw.write("|^");
-				pw.write("m41"); // 용존산소2
-				pw.write("|^");
-				pw.write("m42"); // 실내온도
-				pw.write("|^");
-				pw.write("m43"); // UPS전압
-				pw.write("|^");
-				pw.write("m44"); // 출입문 상태
-				pw.write("|^");
-				pw.write("m45"); // 유속
-				pw.write("|^");
-				pw.write("m46"); // 유압
-				pw.write("|^");
-				pw.write("m47"); // 채수펌프(우)
-				pw.write("|^");
-				pw.write("m48"); // 채수펌프(좌)
-				pw.write("|^");
-				pw.write("m49"); // 여과장치
-				pw.write("|^");
-				pw.write("m50"); // 항온항습기
-				pw.write("|^");
-				pw.write("m51"); // 자탐기
-				pw.write("|^");
-				pw.write("m52"); // 실내습도
-				pw.write("|^");
-				pw.write("m53"); // 전원상태
-				pw.write("|^");
-				pw.write("m54"); // 일반채수기
-				pw.write("|^");
-				pw.write("m55"); // VOCs 채수기
-				pw.write("|^");
-				pw.write("m56"); // 자일렌
-				pw.write("|^");
-				pw.write("m57"); // 독성지수(좌)
-				pw.write("|^");
-				pw.write("m58"); // 유영속도(좌)
-				pw.write("|^");
-				pw.write("m59"); // 개체수(좌)
-				pw.write("|^");
-				pw.write("m60"); // 유영속도 분포지수(좌)
-				pw.write("|^");
-				pw.write("m61"); // 프렉탈 차수(좌)
-				pw.write("|^");
-				pw.write("m62"); // 시료온도(좌)
-				pw.write("|^");
-				pw.write("m63"); // 독성지수(우)
-				pw.write("|^");
-				pw.write("m64"); // 유영속도(우)
-				pw.write("|^");
-				pw.write("m65"); // 개체수(우)
-				pw.write("|^");
-				pw.write("m66"); // 유영속도 분포지수(우)
-				pw.write("|^");
-				pw.write("m67"); // 프렉탈 차수(우)
-				pw.write("|^");
-				pw.write("m68"); // 시료온도(우)
-				pw.write("|^");
-				pw.write("m69"); // 수온3
-				pw.write("|^");
-				pw.write("m70"); // 수소이온농도3
-				pw.write("|^");
-				pw.write("m71"); // 전기전도도3
-				pw.write("|^");
-				pw.write("m72"); // 용존산소3
-				pw.write("|^");
-				pw.write("m73"); // 탁도3
-				pw.write("|^");
-				pw.write("m74"); // 카드뮴
-				pw.write("|^");
-				pw.write("m75"); // 납
-				pw.write("|^");
-				pw.write("m76"); // 구리
-				pw.write("|^");
-				pw.write("m77"); // 아연
-				pw.write("|^");
-				pw.write("m78"); // 페놀
-				pw.write("|^");
-				pw.write("m79"); // 탁도1
-				pw.write("|^");
-				pw.write("m80"); // 탁도2
-				pw.write("|^");
-				pw.write("m81"); // 총유기탄소
-				pw.write("|^");
-				pw.write("m82"); // 수소가스노출
-				pw.write("|^");
-				pw.write("m83"); // 펌프수명
-				pw.write("|^");
-				pw.write("m84"); // 미생물 독성지수
-				pw.write("|^");
-				pw.write("m85"); // 전극(A)
-				pw.write("|^");
-				pw.write("m86"); // 전극(B)
-				pw.write("|^");
-				pw.write("m87"); // 조류 독성지수
-				pw.write("|^");
-				pw.write("m88"); // 조류 형광량(시료)
-				pw.write("|^");
-				pw.write("m89"); // 조류 최대형광량(시료)
-				pw.write("|^");
-				pw.write("m90"); // 조류 형광량(바탕시료)
-				pw.write("|^");
-				pw.write("m91"); // 조류 최대형광량(바탕시료)
-				pw.write("|^");
-				pw.write("m92"); // 조류 형광산출량(시료)
-				pw.write("|^");
-				pw.write("m93"); // 조류 형광산출량(바탕시료)
-				pw.write("|^");
-				pw.write("m94"); // 채수펌프 원격제어
-				pw.write("|^");
-				pw.write("m95"); // 강우량
-				pw.write("|^");
-				pw.write("m96"); // 저류수조수위
-				pw.write("|^");
-				pw.write("m97"); // 여과수조수위
-				pw.write("|^");
-				pw.write("m98"); // 필터유입압력
-				pw.write("|^");
-				pw.write("m99"); // 유량
-				pw.write("|^");
-				pw.write("m100"); // 페놀2
-				pw.write("|^");
-				pw.write("numOfRows"); // 한 페이지 결과 수
-				pw.write("|^");
-				pw.write("pageNo"); // 페이지 번호
-				pw.write("|^");
-				pw.write("totalCount"); // 전체 결과 수
-				pw.println();
-				pw.flush();
-				pw.close();
+					pw.write("resultCode"); // 결과코드
+					pw.write("|^");
+					pw.write("resultMsg"); // 결과메시지
+					pw.write("|^");
+					pw.write("rowno"); // 행번호
+					pw.write("|^");
+					pw.write("siteId"); // 조사지점번호
+					pw.write("|^");
+					pw.write("siteName"); // 조사지점명
+					pw.write("|^");
+					pw.write("msrDate"); // 조사시간
+					pw.write("|^");
+					pw.write("m01"); // 통신상태
+					pw.write("|^");
+					pw.write("m02"); // 수온1
+					pw.write("|^");
+					pw.write("m03"); // 수소이온농도
+					pw.write("|^");
+					pw.write("m04"); // 전기전도도1
+					pw.write("|^");
+					pw.write("m05"); // 용존산소1
+					pw.write("|^");
+					pw.write("m06"); // 총유기탄소1
+					pw.write("|^");
+					pw.write("m07"); // 임펄스
+					pw.write("|^");
+					pw.write("m08"); // 수조pH
+					pw.write("|^");
+					pw.write("m09"); // 수온
+					pw.write("|^");
+					pw.write("m10"); // 수조 산소량
+					pw.write("|^");
+					pw.write("m11"); // 활동여부
+					pw.write("|^");
+					pw.write("m12"); // 염화메틸렌
+					pw.write("|^");
+					pw.write("m13"); // 1.1.1-트리클로로에테인
+					pw.write("|^");
+					pw.write("m14"); // 벤젠
+					pw.write("|^");
+					pw.write("m15"); // 사염화탄소
+					pw.write("|^");
+					pw.write("m16"); // 트리클로로에틸렌
+					pw.write("|^");
+					pw.write("m17"); // 톨루엔
+					pw.write("|^");
+					pw.write("m18"); // 테트라클로로에틸렌
+					pw.write("|^");
+					pw.write("m19"); // 에틸벤젠
+					pw.write("|^");
+					pw.write("m20"); // m,p-자일렌
+					pw.write("|^");
+					pw.write("m21"); // o-자일렌
+					pw.write("|^");
+					pw.write("m22"); // [ECD]염화메틸렌
+					pw.write("|^");
+					pw.write("m23"); // [ECD]1.1.1-트리클로로에테인
+					pw.write("|^");
+					pw.write("m24"); // [ECD]사염화탄소
+					pw.write("|^");
+					pw.write("m25"); // [ECD]트리클로로에틸렌
+					pw.write("|^");
+					pw.write("m26"); // [ECD}테트라클로로에틸렌
+					pw.write("|^");
+					pw.write("m27"); // 총질소
+					pw.write("|^");
+					pw.write("m28"); // 총인
+					pw.write("|^");
+					pw.write("m29"); // 클로로필-a
+					pw.write("|^");
+					pw.write("m30"); // 투과도
+					pw.write("|^");
+					pw.write("m31"); // 임펄스(우)
+					pw.write("|^");
+					pw.write("m32"); // 임펄스(좌)
+					pw.write("|^");
+					pw.write("m33"); // 수조수온(우)
+					pw.write("|^");
+					pw.write("m34"); // 수조수온(좌)
+					pw.write("|^");
+					pw.write("m35"); // 인산염인
+					pw.write("|^");
+					pw.write("m36"); // 암모니아성질소
+					pw.write("|^");
+					pw.write("m37"); // 질산성질소
+					pw.write("|^");
+					pw.write("m38"); // 수온2
+					pw.write("|^");
+					pw.write("m39"); // 수소이온농도2
+					pw.write("|^");
+					pw.write("m40"); // 전기전도도2
+					pw.write("|^");
+					pw.write("m41"); // 용존산소2
+					pw.write("|^");
+					pw.write("m42"); // 실내온도
+					pw.write("|^");
+					pw.write("m43"); // UPS전압
+					pw.write("|^");
+					pw.write("m44"); // 출입문 상태
+					pw.write("|^");
+					pw.write("m45"); // 유속
+					pw.write("|^");
+					pw.write("m46"); // 유압
+					pw.write("|^");
+					pw.write("m47"); // 채수펌프(우)
+					pw.write("|^");
+					pw.write("m48"); // 채수펌프(좌)
+					pw.write("|^");
+					pw.write("m49"); // 여과장치
+					pw.write("|^");
+					pw.write("m50"); // 항온항습기
+					pw.write("|^");
+					pw.write("m51"); // 자탐기
+					pw.write("|^");
+					pw.write("m52"); // 실내습도
+					pw.write("|^");
+					pw.write("m53"); // 전원상태
+					pw.write("|^");
+					pw.write("m54"); // 일반채수기
+					pw.write("|^");
+					pw.write("m55"); // VOCs 채수기
+					pw.write("|^");
+					pw.write("m56"); // 자일렌
+					pw.write("|^");
+					pw.write("m57"); // 독성지수(좌)
+					pw.write("|^");
+					pw.write("m58"); // 유영속도(좌)
+					pw.write("|^");
+					pw.write("m59"); // 개체수(좌)
+					pw.write("|^");
+					pw.write("m60"); // 유영속도 분포지수(좌)
+					pw.write("|^");
+					pw.write("m61"); // 프렉탈 차수(좌)
+					pw.write("|^");
+					pw.write("m62"); // 시료온도(좌)
+					pw.write("|^");
+					pw.write("m63"); // 독성지수(우)
+					pw.write("|^");
+					pw.write("m64"); // 유영속도(우)
+					pw.write("|^");
+					pw.write("m65"); // 개체수(우)
+					pw.write("|^");
+					pw.write("m66"); // 유영속도 분포지수(우)
+					pw.write("|^");
+					pw.write("m67"); // 프렉탈 차수(우)
+					pw.write("|^");
+					pw.write("m68"); // 시료온도(우)
+					pw.write("|^");
+					pw.write("m69"); // 수온3
+					pw.write("|^");
+					pw.write("m70"); // 수소이온농도3
+					pw.write("|^");
+					pw.write("m71"); // 전기전도도3
+					pw.write("|^");
+					pw.write("m72"); // 용존산소3
+					pw.write("|^");
+					pw.write("m73"); // 탁도3
+					pw.write("|^");
+					pw.write("m74"); // 카드뮴
+					pw.write("|^");
+					pw.write("m75"); // 납
+					pw.write("|^");
+					pw.write("m76"); // 구리
+					pw.write("|^");
+					pw.write("m77"); // 아연
+					pw.write("|^");
+					pw.write("m78"); // 페놀
+					pw.write("|^");
+					pw.write("m79"); // 탁도1
+					pw.write("|^");
+					pw.write("m80"); // 탁도2
+					pw.write("|^");
+					pw.write("m81"); // 총유기탄소
+					pw.write("|^");
+					pw.write("m82"); // 수소가스노출
+					pw.write("|^");
+					pw.write("m83"); // 펌프수명
+					pw.write("|^");
+					pw.write("m84"); // 미생물 독성지수
+					pw.write("|^");
+					pw.write("m85"); // 전극(A)
+					pw.write("|^");
+					pw.write("m86"); // 전극(B)
+					pw.write("|^");
+					pw.write("m87"); // 조류 독성지수
+					pw.write("|^");
+					pw.write("m88"); // 조류 형광량(시료)
+					pw.write("|^");
+					pw.write("m89"); // 조류 최대형광량(시료)
+					pw.write("|^");
+					pw.write("m90"); // 조류 형광량(바탕시료)
+					pw.write("|^");
+					pw.write("m91"); // 조류 최대형광량(바탕시료)
+					pw.write("|^");
+					pw.write("m92"); // 조류 형광산출량(시료)
+					pw.write("|^");
+					pw.write("m93"); // 조류 형광산출량(바탕시료)
+					pw.write("|^");
+					pw.write("m94"); // 채수펌프 원격제어
+					pw.write("|^");
+					pw.write("m95"); // 강우량
+					pw.write("|^");
+					pw.write("m96"); // 저류수조수위
+					pw.write("|^");
+					pw.write("m97"); // 여과수조수위
+					pw.write("|^");
+					pw.write("m98"); // 필터유입압력
+					pw.write("|^");
+					pw.write("m99"); // 유량
+					pw.write("|^");
+					pw.write("m100"); // 페놀2
+					pw.write("|^");
+					pw.write("numOfRows"); // 한 페이지 결과 수
+					pw.write("|^");
+					pw.write("pageNo"); // 페이지 번호
+					pw.write("|^");
+					pw.write("totalCount"); // 전체 결과 수
+					pw.println();
+					pw.flush();
+					pw.close();
 
-			} catch (IOException e) {
-				e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 			}
 
 			// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱

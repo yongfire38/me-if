@@ -38,122 +38,130 @@ public class GetIvstg {
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_09.dat");
 
-			try {
-				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+			if(file.exists()){
+				
+				System.out.println("파일이 이미 존재하므로 이어쓰기..");
+				
+			} else {
+			
+				try {
+					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-				pw.write("mgtNo"); // 사업 코드
-				pw.write("|^");
-				pw.write("ivstgGb"); // 조사구분
-				pw.write("|^");
-				pw.write("ivstgSpotNm"); // 조사지점명
-				pw.write("|^");
-				pw.write("adres"); // 주소
-				pw.write("|^");
-				pw.write("xcnts"); // X좌표
-				pw.write("|^");
-				pw.write("ydnts"); // Y좌표
-				pw.write("|^");
-				pw.write("ivstgOdr"); // 조사차수
-				pw.write("|^");
-				pw.write("ivstgBgnde"); // 조사시작일
-				pw.write("|^");
-				pw.write("ivstgEndde"); // 조사종료일
-				pw.write("|^");
-				pw.write("waterTp"); // 수온
-				pw.write("|^");
-				pw.write("phVal"); // 수소이온농도
-				pw.write("|^");
-				pw.write("doVal"); // 용존산소량
-				pw.write("|^");
-				pw.write("ssVal"); // 부유물질량
-				pw.write("|^");
-				pw.write("codVal"); // 화학적산소요구량
-				pw.write("|^");
-				pw.write("ftcVal"); // 총대장균군
-				pw.write("|^");
-				pw.write("fcVal"); // 분원성 대장균군
-				pw.write("|^");
-				pw.write("tnVal"); // 총질소
-				pw.write("|^");
-				pw.write("tpVal"); // 총인
-				pw.write("|^");
-				pw.write("bodVal"); // 생물화학적산소요구량
-				pw.write("|^");
-				pw.write("tocVal"); // 총유기탄소
-				pw.write("|^");
-				pw.write("cpaVal"); // 클로로필-a
-				pw.write("|^");
-				pw.write("fluxVal"); // 유량
-				pw.write("|^");
-				pw.write("ugnVal"); // 유기인
-				pw.write("|^");
-				pw.write("absVal"); // 음이온계면활성제
-				pw.write("|^");
-				pw.write("cdmVal"); // 카드뮴
-				pw.write("|^");
-				pw.write("pbVal"); // 납
-				pw.write("|^");
-				pw.write("pcbVal"); // 폴리클로리네이티드비페닐
-				pw.write("|^");
-				pw.write("cnVal"); // 시안
-				pw.write("|^");
-				pw.write("hgVal"); // 수은
-				pw.write("|^");
-				pw.write("cr6Val"); // 6가크롬
-				pw.write("|^");
-				pw.write("asVal"); // 비소
-				pw.write("|^");
-				pw.write("ctVal"); // 사염화탄소
-				pw.write("|^");
-				pw.write("deVal"); // 1,2-디클로로에탄
-				pw.write("|^");
-				pw.write("teVal"); // 테트라디크로로에탄
-				pw.write("|^");
-				pw.write("dmVal"); // 디클로로메탄
-				pw.write("|^");
-				pw.write("bzVal"); // 벤젠
-				pw.write("|^");
-				pw.write("cfVal"); // 클로로포름
-				pw.write("|^");
-				pw.write("dehfVal"); // 디에틸헥실프탈레이트
-				pw.write("|^");
-				pw.write("amVal"); // 안티몬
-				pw.write("|^");
-				pw.write("dxVal"); // 1,4-다이옥세인
-				pw.write("|^");
-				pw.write("faVal"); // 포름알데히드
-				pw.write("|^");
-				pw.write("hbVal"); // 핵사클로로벤젠
-				pw.write("|^");
-				pw.write("kmno4Cnsmpqy"); // KMnO4소비량
-				pw.write("|^");
-				pw.write("tssVal"); // 증발잔류물
-				pw.write("|^");
-				pw.write("no3Val"); // 질산성질소
-				pw.write("|^");
-				pw.write("nhVal"); // 암모니아성질소
-				pw.write("|^");
-				pw.write("soVal"); // 황산이온
-				pw.write("|^");
-				pw.write("fVal"); // 불소
-				pw.write("|^");
-				pw.write("feVal"); // 철
-				pw.write("|^");
-				pw.write("znVal"); // 아연
-				pw.write("|^");
-				pw.write("pnVal"); // 페놀
-				pw.write("|^");
-				pw.write("envrnGrad"); // 환경기준등급
-				pw.write("|^");
-				pw.write("ugrwtrPrpos"); // 지하수용도
-				pw.write("|^");
-				pw.write("ugrwtrDkps"); // 음용여부
-				pw.println();
-				pw.flush();
-				pw.close();
+					pw.write("mgtNo"); // 사업 코드
+					pw.write("|^");
+					pw.write("ivstgGb"); // 조사구분
+					pw.write("|^");
+					pw.write("ivstgSpotNm"); // 조사지점명
+					pw.write("|^");
+					pw.write("adres"); // 주소
+					pw.write("|^");
+					pw.write("xcnts"); // X좌표
+					pw.write("|^");
+					pw.write("ydnts"); // Y좌표
+					pw.write("|^");
+					pw.write("ivstgOdr"); // 조사차수
+					pw.write("|^");
+					pw.write("ivstgBgnde"); // 조사시작일
+					pw.write("|^");
+					pw.write("ivstgEndde"); // 조사종료일
+					pw.write("|^");
+					pw.write("waterTp"); // 수온
+					pw.write("|^");
+					pw.write("phVal"); // 수소이온농도
+					pw.write("|^");
+					pw.write("doVal"); // 용존산소량
+					pw.write("|^");
+					pw.write("ssVal"); // 부유물질량
+					pw.write("|^");
+					pw.write("codVal"); // 화학적산소요구량
+					pw.write("|^");
+					pw.write("ftcVal"); // 총대장균군
+					pw.write("|^");
+					pw.write("fcVal"); // 분원성 대장균군
+					pw.write("|^");
+					pw.write("tnVal"); // 총질소
+					pw.write("|^");
+					pw.write("tpVal"); // 총인
+					pw.write("|^");
+					pw.write("bodVal"); // 생물화학적산소요구량
+					pw.write("|^");
+					pw.write("tocVal"); // 총유기탄소
+					pw.write("|^");
+					pw.write("cpaVal"); // 클로로필-a
+					pw.write("|^");
+					pw.write("fluxVal"); // 유량
+					pw.write("|^");
+					pw.write("ugnVal"); // 유기인
+					pw.write("|^");
+					pw.write("absVal"); // 음이온계면활성제
+					pw.write("|^");
+					pw.write("cdmVal"); // 카드뮴
+					pw.write("|^");
+					pw.write("pbVal"); // 납
+					pw.write("|^");
+					pw.write("pcbVal"); // 폴리클로리네이티드비페닐
+					pw.write("|^");
+					pw.write("cnVal"); // 시안
+					pw.write("|^");
+					pw.write("hgVal"); // 수은
+					pw.write("|^");
+					pw.write("cr6Val"); // 6가크롬
+					pw.write("|^");
+					pw.write("asVal"); // 비소
+					pw.write("|^");
+					pw.write("ctVal"); // 사염화탄소
+					pw.write("|^");
+					pw.write("deVal"); // 1,2-디클로로에탄
+					pw.write("|^");
+					pw.write("teVal"); // 테트라디크로로에탄
+					pw.write("|^");
+					pw.write("dmVal"); // 디클로로메탄
+					pw.write("|^");
+					pw.write("bzVal"); // 벤젠
+					pw.write("|^");
+					pw.write("cfVal"); // 클로로포름
+					pw.write("|^");
+					pw.write("dehfVal"); // 디에틸헥실프탈레이트
+					pw.write("|^");
+					pw.write("amVal"); // 안티몬
+					pw.write("|^");
+					pw.write("dxVal"); // 1,4-다이옥세인
+					pw.write("|^");
+					pw.write("faVal"); // 포름알데히드
+					pw.write("|^");
+					pw.write("hbVal"); // 핵사클로로벤젠
+					pw.write("|^");
+					pw.write("kmno4Cnsmpqy"); // KMnO4소비량
+					pw.write("|^");
+					pw.write("tssVal"); // 증발잔류물
+					pw.write("|^");
+					pw.write("no3Val"); // 질산성질소
+					pw.write("|^");
+					pw.write("nhVal"); // 암모니아성질소
+					pw.write("|^");
+					pw.write("soVal"); // 황산이온
+					pw.write("|^");
+					pw.write("fVal"); // 불소
+					pw.write("|^");
+					pw.write("feVal"); // 철
+					pw.write("|^");
+					pw.write("znVal"); // 아연
+					pw.write("|^");
+					pw.write("pnVal"); // 페놀
+					pw.write("|^");
+					pw.write("envrnGrad"); // 환경기준등급
+					pw.write("|^");
+					pw.write("ugrwtrPrpos"); // 지하수용도
+					pw.write("|^");
+					pw.write("ugrwtrDkps"); // 음용여부
+					pw.println();
+					pw.flush();
+					pw.close();
 
-			} catch (IOException e) {
-				e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 			}
 
 			String json = "";

@@ -39,30 +39,38 @@ public class GetFileInfoInqire {
 				File file = new File(
 						JsonParser.getProperty("file_path") + "EIA/TIF_EIA_47.dat");
 
-				try {
+				if(file.exists()){
+					
+					System.out.println("파일이 이미 존재하므로 이어쓰기..");
+					
+				} else {
+				
+					try {
 
-					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-					pw.write("resultCode"); // 결과코드
-					pw.write("|^");
-					pw.write("resultMsg"); // 결과메시지
-					pw.write("|^");
-					pw.write("fileSeq"); // 파일고유번호
-					pw.write("|^");
-					pw.write("fileVNm"); // 표출파일명
-					pw.write("|^");
-					pw.write("fileNm"); // 파일명
-					pw.write("|^");
-					pw.write("fileSize"); // 파일사이즈
-					pw.write("|^");
-					pw.write("fileExt"); // 파일 확장자
-					pw.write("|^");
-					pw.write("fileUrl"); // 파일 다운로드 경로
-					pw.println();
-					pw.flush();
-					pw.close();
+						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						pw.write("resultCode"); // 결과코드
+						pw.write("|^");
+						pw.write("resultMsg"); // 결과메시지
+						pw.write("|^");
+						pw.write("fileSeq"); // 파일고유번호
+						pw.write("|^");
+						pw.write("fileVNm"); // 표출파일명
+						pw.write("|^");
+						pw.write("fileNm"); // 파일명
+						pw.write("|^");
+						pw.write("fileSize"); // 파일사이즈
+						pw.write("|^");
+						pw.write("fileExt"); // 파일 확장자
+						pw.write("|^");
+						pw.write("fileUrl"); // 파일 다운로드 경로
+						pw.println();
+						pw.flush();
+						pw.close();
 
-				} catch (IOException e) {
-					e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				
 				}
 
 				String json = "";

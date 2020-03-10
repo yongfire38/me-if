@@ -36,38 +36,46 @@ public class GetStrategyDraftPblancDsplayListInfoInqire {
 				// step 1.파일의 첫 행 작성
 				File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_37.dat");
 
-				try {
+				if(file.exists()){
+					
+					System.out.println("파일이 이미 존재하므로 이어쓰기..");
+					
+				} else {
+				
+					try {
 
-					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-					pw.write("resultCode"); // 결과코드
-					pw.write("|^");
-					pw.write("resultMsg"); // 결과메세지
-					pw.write("|^");
-					pw.write("numOfRows"); // 한 페이지 결과 수
-					pw.write("|^");
-					pw.write("pageNo"); // 페이지 번호
-					pw.write("|^");
-					pw.write("totalCount"); // 전체 결과 수
-					pw.write("|^");
-					pw.write("rnum"); // 정렬순서
-					pw.write("|^");
-					pw.write("perCd"); // 사전환경성 검토 코드
-					pw.write("|^");
-					pw.write("bizSeq"); // 사업고유 번호
-					pw.write("|^");
-					pw.write("bizNm"); // 사업명
-					pw.write("|^");
-					pw.write("ccilOrganCd"); // 협의기관
-					pw.write("|^");
-					pw.write("drfopTmdt"); // 초안공람 기간
-					pw.println();
-					pw.flush();
-					pw.close();
+						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						pw.write("resultCode"); // 결과코드
+						pw.write("|^");
+						pw.write("resultMsg"); // 결과메세지
+						pw.write("|^");
+						pw.write("numOfRows"); // 한 페이지 결과 수
+						pw.write("|^");
+						pw.write("pageNo"); // 페이지 번호
+						pw.write("|^");
+						pw.write("totalCount"); // 전체 결과 수
+						pw.write("|^");
+						pw.write("rnum"); // 정렬순서
+						pw.write("|^");
+						pw.write("perCd"); // 사전환경성 검토 코드
+						pw.write("|^");
+						pw.write("bizSeq"); // 사업고유 번호
+						pw.write("|^");
+						pw.write("bizNm"); // 사업명
+						pw.write("|^");
+						pw.write("ccilOrganCd"); // 협의기관
+						pw.write("|^");
+						pw.write("drfopTmdt"); // 초안공람 기간
+						pw.println();
+						pw.flush();
+						pw.close();
 
-				} catch (IOException e) {
-					e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				
 				}
-
+				
 				// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
 				String json = "";
 

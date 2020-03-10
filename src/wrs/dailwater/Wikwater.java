@@ -40,34 +40,42 @@ public class Wikwater {
 				// step 1.파일의 첫 행 작성
 				File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_20.dat");
 
-				try {
+				if(file.exists()){
+					
+					System.out.println("파일이 이미 존재하므로 이어쓰기..");
+					
+				} else {
+				
+					try {
 
-					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-					pw.write("mesurede"); // 측정시간
-					pw.write("|^");
-					pw.write("item1"); // 일반세균(CFU/mL)
-					pw.write("|^");
-					pw.write("item2"); // 총대장균군(/100mL)
-					pw.write("|^");
-					pw.write("item3"); // 대장균/분원성대장균(/100mL)
-					pw.write("|^");
-					pw.write("item4"); // 암모니아성질소(mg/L)
-					pw.write("|^");
-					pw.write("item5"); // 질산성질소(mg/L)
-					pw.write("|^");
-					pw.write("item6"); // 탁도(NTU) 침전수
-					pw.write("|^");
-					pw.write("item7"); // 증발잔류물(mg/L)
-					pw.write("|^");
-					pw.write("numOfRows"); // 줄수
-					pw.write("|^");
-					pw.write("pageNo"); // 페이지번호
-					pw.println();
-					pw.flush();
-					pw.close();
+						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						pw.write("mesurede"); // 측정시간
+						pw.write("|^");
+						pw.write("item1"); // 일반세균(CFU/mL)
+						pw.write("|^");
+						pw.write("item2"); // 총대장균군(/100mL)
+						pw.write("|^");
+						pw.write("item3"); // 대장균/분원성대장균(/100mL)
+						pw.write("|^");
+						pw.write("item4"); // 암모니아성질소(mg/L)
+						pw.write("|^");
+						pw.write("item5"); // 질산성질소(mg/L)
+						pw.write("|^");
+						pw.write("item6"); // 탁도(NTU) 침전수
+						pw.write("|^");
+						pw.write("item7"); // 증발잔류물(mg/L)
+						pw.write("|^");
+						pw.write("numOfRows"); // 줄수
+						pw.write("|^");
+						pw.write("pageNo"); // 페이지번호
+						pw.println();
+						pw.flush();
+						pw.close();
 
-				} catch (IOException e) {
-					e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				
 				}
 
 				// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱

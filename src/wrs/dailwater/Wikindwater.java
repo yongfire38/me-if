@@ -40,32 +40,40 @@ public class Wikindwater {
 				// step 1.파일의 첫 행 작성
 				File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_21.dat");
 
-				try {
+				if(file.exists()){
+					
+					System.out.println("파일이 이미 존재하므로 이어쓰기..");
+					
+				} else {
+				
+					try {
 
-					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-					pw.write("mesurede"); // 측정시간
-					pw.write("|^");
-					pw.write("item1"); // COD(mg/L) 원수
-					pw.write("|^");
-					pw.write("item2"); // KMnO4소비량(mg/L) 침전수
-					pw.write("|^");
-					pw.write("item3"); // TDS(mg/L) 원수
-					pw.write("|^");
-					pw.write("item4"); // TDS(mg/L) 침전수
-					pw.write("|^");
-					pw.write("item5"); // 경도(mg/L) 원수
-					pw.write("|^");
-					pw.write("item6"); // 경도(mg/L) 침전수
-					pw.write("|^");
-					pw.write("numOfRows"); // 줄수
-					pw.write("|^");
-					pw.write("pageNo"); // 페이지번호
-					pw.println();
-					pw.flush();
-					pw.close();
+						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						pw.write("mesurede"); // 측정시간
+						pw.write("|^");
+						pw.write("item1"); // COD(mg/L) 원수
+						pw.write("|^");
+						pw.write("item2"); // KMnO4소비량(mg/L) 침전수
+						pw.write("|^");
+						pw.write("item3"); // TDS(mg/L) 원수
+						pw.write("|^");
+						pw.write("item4"); // TDS(mg/L) 침전수
+						pw.write("|^");
+						pw.write("item5"); // 경도(mg/L) 원수
+						pw.write("|^");
+						pw.write("item6"); // 경도(mg/L) 침전수
+						pw.write("|^");
+						pw.write("numOfRows"); // 줄수
+						pw.write("|^");
+						pw.write("pageNo"); // 페이지번호
+						pw.println();
+						pw.flush();
+						pw.close();
 
-				} catch (IOException e) {
-					e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				
 				}
 
 				// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱

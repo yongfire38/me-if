@@ -38,41 +38,49 @@ public class GetRiver {
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_12.dat");
 
-			try {
-				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+			if(file.exists()){
+				
+				System.out.println("파일이 이미 존재하므로 이어쓰기..");
+				
+			} else {
+			
+				try {
+					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-				pw.write("mgtNo"); // 사업 코드
-				pw.write("|^");
-				pw.write("id"); // 아이디
-				pw.write("|^");
-				pw.write("dtlclfc"); // 사업세분류
-				pw.write("|^");
-				pw.write("lc"); // 사업위치
-				pw.write("|^");
-				pw.write("totalEt"); // 총연장
-				pw.write("|^");
-				pw.write("dstrcNm"); // 지구구분
-				pw.write("|^");
-				pw.write("gubun1"); // 사업구분1 (사업내용구분)
-				pw.write("|^");
-				pw.write("gubun2"); // 사업구분2 (사업내용구분)
-				pw.write("|^");
-				pw.write("gubun3"); // 사업구분3 (사업내용구분)
-				pw.write("|^");
-				pw.write("co"); // 개수
-				pw.write("|^");
-				pw.write("et"); // 연장
-				pw.write("|^");
-				pw.write("ar"); // 면적
-				pw.write("|^");
-				pw.write("vl"); // 부피
-				pw.println();
-				pw.flush();
-				pw.close();
+					pw.write("mgtNo"); // 사업 코드
+					pw.write("|^");
+					pw.write("id"); // 아이디
+					pw.write("|^");
+					pw.write("dtlclfc"); // 사업세분류
+					pw.write("|^");
+					pw.write("lc"); // 사업위치
+					pw.write("|^");
+					pw.write("totalEt"); // 총연장
+					pw.write("|^");
+					pw.write("dstrcNm"); // 지구구분
+					pw.write("|^");
+					pw.write("gubun1"); // 사업구분1 (사업내용구분)
+					pw.write("|^");
+					pw.write("gubun2"); // 사업구분2 (사업내용구분)
+					pw.write("|^");
+					pw.write("gubun3"); // 사업구분3 (사업내용구분)
+					pw.write("|^");
+					pw.write("co"); // 개수
+					pw.write("|^");
+					pw.write("et"); // 연장
+					pw.write("|^");
+					pw.write("ar"); // 면적
+					pw.write("|^");
+					pw.write("vl"); // 부피
+					pw.println();
+					pw.flush();
+					pw.close();
 
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+			}	
 
 			String json = "";
 

@@ -35,29 +35,39 @@ public class GetBsnsStrtgySmallScaleDscssBsnsDetailIngInfoInqire {
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_55.dat");
 
-			try {
+			if(file.exists()){
+				
+				System.out.println("파일이 이미 존재하므로 이어쓰기..");
+				
+			} else {
+				
 
-				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-				pw.write("resultCode"); // 결과코드
-				pw.write("|^");
-				pw.write("resultMsg"); // 결과메시지
-				pw.write("|^");
-				pw.write("ccilStep1Nm"); // 단계명
-				pw.write("|^");
-				pw.write("applyDt"); // 접수일
-				pw.write("|^");
-				pw.write("exaDt"); // 검토의뢰일
-				pw.write("|^");
-				pw.write("resApplyDt"); // 검토결과 접수일
-				pw.write("|^");
-				pw.write("resReplyDt"); // 통보일
-				pw.println();
-				pw.flush();
-				pw.close();
+				try {
 
-			} catch (IOException e) {
-				e.printStackTrace();
+					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+					pw.write("resultCode"); // 결과코드
+					pw.write("|^");
+					pw.write("resultMsg"); // 결과메시지
+					pw.write("|^");
+					pw.write("ccilStep1Nm"); // 단계명
+					pw.write("|^");
+					pw.write("applyDt"); // 접수일
+					pw.write("|^");
+					pw.write("exaDt"); // 검토의뢰일
+					pw.write("|^");
+					pw.write("resApplyDt"); // 검토결과 접수일
+					pw.write("|^");
+					pw.write("resReplyDt"); // 통보일
+					pw.println();
+					pw.flush();
+					pw.close();
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 			}
+			
 
 			String json = "";
 

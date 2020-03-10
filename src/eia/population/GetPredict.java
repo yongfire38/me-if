@@ -37,26 +37,34 @@ public class GetPredict {
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_35.dat");
 
-			try {
-				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+			if(file.exists()){
+				
+				System.out.println("파일이 이미 존재하므로 이어쓰기..");
+				
+			} else {
+			
+				try {
+					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-				pw.write("mgtNo"); // 사업 코드
-				pw.write("|^");
-				pw.write("aftFtePopltn"); // 사업 후 상근인구
-				pw.write("|^");
-				pw.write("aftUsePopltn"); // 사업 후 이용인구
-				pw.write("|^");
-				pw.write("aftHousePopltn"); // 사업 후 주택계획인구
-				pw.write("|^");
-				pw.write("nearbyAreaDevlopSttus"); // 인근지역 개발 현황(건수)
-				pw.println();
-				pw.flush();
-				pw.close();
+					pw.write("mgtNo"); // 사업 코드
+					pw.write("|^");
+					pw.write("aftFtePopltn"); // 사업 후 상근인구
+					pw.write("|^");
+					pw.write("aftUsePopltn"); // 사업 후 이용인구
+					pw.write("|^");
+					pw.write("aftHousePopltn"); // 사업 후 주택계획인구
+					pw.write("|^");
+					pw.write("nearbyAreaDevlopSttus"); // 인근지역 개발 현황(건수)
+					pw.println();
+					pw.flush();
+					pw.close();
 
-			} catch (IOException e) {
-				e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 			}
-
+			
 			String json = "";
 
 			json = JsonParser.parseEiaJson(service_url, service_key, mgtNo);

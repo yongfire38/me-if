@@ -40,32 +40,40 @@ public class Dmntindstry {
 				// step 1.파일의 첫 행 작성
 				File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_23.dat");
 
-				try {
-					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+				if(file.exists()){
+					
+					System.out.println("파일이 이미 존재하므로 이어쓰기..");
+					
+				} else {
+				
+					try {
+						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-					pw.write("mesurede"); // 측정시간
-					pw.write("|^");
-					pw.write("item1"); // 부유물질(mg/L)
-					pw.write("|^");
-					pw.write("item2"); // 용존산소(mg/L)
-					pw.write("|^");
-					pw.write("item3"); // 총인(mg/L)
-					pw.write("|^");
-					pw.write("item4"); // 총질소(mg/L)
-					pw.write("|^");
-					pw.write("item5"); // 클로로필-a(mg/㎥)
-					pw.write("|^");
-					pw.write("item6"); // 총대장균군(/100mL)
-					pw.write("|^");
-					pw.write("numOfRows"); // 줄수
-					pw.write("|^");
-					pw.write("pageNo"); // 페이지번호
-					pw.println();
-					pw.flush();
-					pw.close();
+						pw.write("mesurede"); // 측정시간
+						pw.write("|^");
+						pw.write("item1"); // 부유물질(mg/L)
+						pw.write("|^");
+						pw.write("item2"); // 용존산소(mg/L)
+						pw.write("|^");
+						pw.write("item3"); // 총인(mg/L)
+						pw.write("|^");
+						pw.write("item4"); // 총질소(mg/L)
+						pw.write("|^");
+						pw.write("item5"); // 클로로필-a(mg/㎥)
+						pw.write("|^");
+						pw.write("item6"); // 총대장균군(/100mL)
+						pw.write("|^");
+						pw.write("numOfRows"); // 줄수
+						pw.write("|^");
+						pw.write("pageNo"); // 페이지번호
+						pw.println();
+						pw.flush();
+						pw.close();
 
-				} catch (IOException e) {
-					e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				
 				}
 
 				// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱

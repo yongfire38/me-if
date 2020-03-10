@@ -36,28 +36,36 @@ public class GetSelfDgnssLocplcInfoLegaldongAdstrdManageInfoInqire {
 				File file = new File(
 						JsonParser.getProperty("file_path") + "EIA/TIF_EIA_50.dat");
 
-				try {
+				if(file.exists()){
+					
+					System.out.println("파일이 이미 존재하므로 이어쓰기..");
+					
+				} else {
+				
+					try {
 
-					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-					pw.write("resultCode"); // 결과코드
-					pw.write("|^");
-					pw.write("resultMsg"); // 결과메시지
-					pw.write("|^");
-					pw.write("sido"); // 시도
-					pw.write("|^");
-					pw.write("sgg"); // 시/군/구
-					pw.write("|^");
-					pw.write("emd"); // 읍/면/동
-					pw.write("|^");
-					pw.write("ri"); // 리
-					pw.println();
-					pw.flush();
-					pw.close();
+						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						pw.write("resultCode"); // 결과코드
+						pw.write("|^");
+						pw.write("resultMsg"); // 결과메시지
+						pw.write("|^");
+						pw.write("sido"); // 시도
+						pw.write("|^");
+						pw.write("sgg"); // 시/군/구
+						pw.write("|^");
+						pw.write("emd"); // 읍/면/동
+						pw.write("|^");
+						pw.write("ri"); // 리
+						pw.println();
+						pw.flush();
+						pw.close();
 
-				} catch (IOException e) {
-					e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				
 				}
-
+				
 				String json = "";
 
 				json = JsonParser.parseEiaJson(service_url, service_key, args[0], args[1]);

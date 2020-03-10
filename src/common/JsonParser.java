@@ -3,8 +3,10 @@ package common;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -939,4 +941,95 @@ public class JsonParser {
 		return json;
 	}
 
+	// 네이버 블로그 파싱 (검색어 하나를 파라미터로 받아서 파싱)
+		public static String parseBlogJson_naver(String service_url, String naver_client_id, String naver_client_secret, String query, String start) {
+
+			BufferedReader br = null;
+			
+			try{
+				query = URLEncoder.encode(query, "utf-8");
+			}catch(UnsupportedEncodingException e){
+				throw new RuntimeException("검색어 인코딩 실패",e);
+			}
+			
+			String json = "";
+
+			String urlstr = service_url + query +"&start=" + start;
+			
+			try {
+
+				URL url = new URL(urlstr);
+				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("X-Naver-Client-Id", naver_client_id);
+				urlconnection.setRequestProperty("X-Naver-Client-Secret", naver_client_secret);
+
+				int responseCode = urlconnection.getResponseCode();
+	
+				if (responseCode == 200) { 
+	                br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
+	            } else { 
+	                br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream()));
+	            }
+				
+				String line;
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				// 테스트 출력
+				//System.out.println(json);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return json;
+		}
+
+		// 다음 블로그 파싱 (검색어 하나를 파라미터로 받아서 파싱)
+				public static String parseBlogJson_daum(String service_url, String daum_api_key, String query, String page) {
+
+					BufferedReader br = null;
+					
+					try{
+						query = URLEncoder.encode(query, "utf-8");
+					}catch(UnsupportedEncodingException e){
+						throw new RuntimeException("검색어 인코딩 실패",e);
+					}
+					
+					String json = "";
+
+					String urlstr = service_url + query + "&page=" + page;
+					
+					try {
+
+						URL url = new URL(urlstr);
+						HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+						urlconnection.setRequestMethod("GET");
+						urlconnection.setRequestProperty("Authorization", "KakaoAK " + daum_api_key);
+
+						int responseCode = urlconnection.getResponseCode();
+			
+						if (responseCode == 200) { 
+			                br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
+			            } else { 
+			                br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream()));
+			            }
+						
+						String line;
+						while ((line = br.readLine()) != null) {
+							json = json + line + "\n";
+						}
+
+						// 테스트 출력
+						//System.out.println(json);
+
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+					return json;
+				}
+	
 }

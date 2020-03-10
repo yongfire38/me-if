@@ -35,30 +35,38 @@ public class GetDscssSttusDscssIngDetailInfoInqire {
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_43.dat");
 
-			try {
+			if(file.exists()){
+				
+				System.out.println("파일이 이미 존재하므로 이어쓰기..");
+				
+			} else {
+			
+				try {
 
-				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-				pw.write("stateNm"); // 단계명
-				pw.write("|^");
-				pw.write("applyDt"); // 접수일
-				pw.write("|^");
-				pw.write("reviExaDt"); // 검토의뢰일
-				pw.write("|^");
-				pw.write("resApplyDt"); // 검토결과접수일
-				pw.write("|^");
-				pw.write("resReplyDt"); // 통보일
-				pw.write("|^");
-				pw.write("rtnDt"); // 반려일
-				pw.write("|^");
-				pw.write("wdwlDt"); // 취하
-				pw.println();
-				pw.flush();
-				pw.close();
+					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+					pw.write("stateNm"); // 단계명
+					pw.write("|^");
+					pw.write("applyDt"); // 접수일
+					pw.write("|^");
+					pw.write("reviExaDt"); // 검토의뢰일
+					pw.write("|^");
+					pw.write("resApplyDt"); // 검토결과접수일
+					pw.write("|^");
+					pw.write("resReplyDt"); // 통보일
+					pw.write("|^");
+					pw.write("rtnDt"); // 반려일
+					pw.write("|^");
+					pw.write("wdwlDt"); // 취하
+					pw.println();
+					pw.flush();
+					pw.close();
 
-			} catch (IOException e) {
-				e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 			}
-
+			
 			// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
 			String json = "";
 

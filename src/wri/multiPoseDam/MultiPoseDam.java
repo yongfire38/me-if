@@ -39,60 +39,68 @@ public class MultiPoseDam {
 				// step 1.파일의 첫 행 작성
 				File file = new File(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_09.dat");
 
-				try {
+				if(file.exists()){
+					
+					System.out.println("파일이 이미 존재하므로 이어쓰기..");
+					
+				} else {
+				
+					try {
 
-					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-					pw.write("suge"); // 수계
-					pw.write("|^");
-					pw.write("damnm"); // 댐이름
-					pw.write("|^");
-					pw.write("zerosevenhourprcptqy"); // 강우량(금일)
-					pw.write("|^");
-					pw.write("prcptqy"); // 강우량(전일)
-					pw.write("|^");
-					pw.write("pyacurf"); // 누계(금년)
-					pw.write("|^");
-					pw.write("vyacurf"); // 누계(전년)
-					pw.write("|^");
-					pw.write("oyaacurf"); // 누계(예년)
-					pw.write("|^");
-					pw.write("inflowqy"); // 일유입량
-					pw.write("|^");
-					pw.write("totdcwtrqy"); // 전일 방류량(본댐)
-					pw.write("|^");
-					pw.write("totdcwtrqyjo"); // 전일 방류량(조정치)
-					pw.write("|^");
-					pw.write("nowlowlevel"); // 저수위(현재)
-					pw.write("|^");
-					pw.write("lastlowlevel"); // 저수위(전년)
-					pw.write("|^");
-					pw.write("nyearlowlevel"); // 저수위(예년)
-					pw.write("|^");
-					pw.write("nowrsvwtqy"); // 저수량(현재)
-					pw.write("|^");
-					pw.write("lastrsvwtqy"); // 저수량(전년)
-					pw.write("|^");
-					pw.write("nyearrsvwtqy"); // 저수량(예년)
-					pw.write("|^");
-					pw.write("rsvwtrt"); // 현재저수율
-					pw.write("|^");
-					pw.write("dvlpqyacmtlacmslt"); // 발전량(실적)
-					pw.write("|^");
-					pw.write("dvlpqyacmtlplan"); // 발전량(계획)
-					pw.write("|^");
-					pw.write("dvlpqyacmtlversus"); // 발전량(대비)
-					pw.write("|^");
-					pw.write("dvlpqyfyerplan"); // 연간(계획)
-					pw.write("|^");
-					pw.write("dvlpqyfyerversus"); // 연간(대비)
-					pw.println();
-					pw.flush();
-					pw.close();
+						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						pw.write("suge"); // 수계
+						pw.write("|^");
+						pw.write("damnm"); // 댐이름
+						pw.write("|^");
+						pw.write("zerosevenhourprcptqy"); // 강우량(금일)
+						pw.write("|^");
+						pw.write("prcptqy"); // 강우량(전일)
+						pw.write("|^");
+						pw.write("pyacurf"); // 누계(금년)
+						pw.write("|^");
+						pw.write("vyacurf"); // 누계(전년)
+						pw.write("|^");
+						pw.write("oyaacurf"); // 누계(예년)
+						pw.write("|^");
+						pw.write("inflowqy"); // 일유입량
+						pw.write("|^");
+						pw.write("totdcwtrqy"); // 전일 방류량(본댐)
+						pw.write("|^");
+						pw.write("totdcwtrqyjo"); // 전일 방류량(조정치)
+						pw.write("|^");
+						pw.write("nowlowlevel"); // 저수위(현재)
+						pw.write("|^");
+						pw.write("lastlowlevel"); // 저수위(전년)
+						pw.write("|^");
+						pw.write("nyearlowlevel"); // 저수위(예년)
+						pw.write("|^");
+						pw.write("nowrsvwtqy"); // 저수량(현재)
+						pw.write("|^");
+						pw.write("lastrsvwtqy"); // 저수량(전년)
+						pw.write("|^");
+						pw.write("nyearrsvwtqy"); // 저수량(예년)
+						pw.write("|^");
+						pw.write("rsvwtrt"); // 현재저수율
+						pw.write("|^");
+						pw.write("dvlpqyacmtlacmslt"); // 발전량(실적)
+						pw.write("|^");
+						pw.write("dvlpqyacmtlplan"); // 발전량(계획)
+						pw.write("|^");
+						pw.write("dvlpqyacmtlversus"); // 발전량(대비)
+						pw.write("|^");
+						pw.write("dvlpqyfyerplan"); // 연간(계획)
+						pw.write("|^");
+						pw.write("dvlpqyfyerversus"); // 연간(대비)
+						pw.println();
+						pw.flush();
+						pw.close();
 
-				} catch (IOException e) {
-					e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				
 				}
-
+				
 				// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
 				String json = "";
 

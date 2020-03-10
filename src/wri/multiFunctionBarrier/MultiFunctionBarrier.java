@@ -39,48 +39,56 @@ public class MultiFunctionBarrier {
 				// step 1.파일의 첫 행 작성
 				File file = new File(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_11.dat");
 
-				try {
+				if(file.exists()){
+					
+					System.out.println("파일이 이미 존재하므로 이어쓰기..");
+					
+				} else {
+				
+					try {
 
-					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-					pw.write("rsvwtqy"); // 저수현황 현저수량
-					pw.write("|^");
-					pw.write("rsvwtrt"); // 저수현황 저수율
-					pw.write("|^");
-					pw.write("managewalrsvwtqy"); // 저수현황 관리수위 저수량
-					pw.write("|^");
-					pw.write("suge"); // 수계
-					pw.write("|^");
-					pw.write("brrernm"); // 보이름
-					pw.write("|^");
-					pw.write("rf"); // 강우량 금일
-					pw.write("|^");
-					pw.write("prcptqy"); // 강우량 전일
-					pw.write("|^");
-					pw.write("nowprcptqy"); // 누계 금년
-					pw.write("|^");
-					pw.write("lastprcptqy"); // 누계 전년
-					pw.write("|^");
-					pw.write("nyearprcptqy"); // 누계 예년
-					pw.write("|^");
-					pw.write("inflowqy"); // 전입유입량
-					pw.write("|^");
-					pw.write("totdcwtrqy"); // 방류량 계
-					pw.write("|^");
-					pw.write("fishway"); // 방류량 어도
-					pw.write("|^");
-					pw.write("dvlpdcwtrqy"); // 방류량 소수력
-					pw.write("|^");
-					pw.write("spilldcwtrqy"); // 방류량 가동보
-					pw.write("|^");
-					pw.write("etcdcwtrqyone"); // 방류량 고정보
-					pw.write("|^");
-					pw.write("lowlevel"); // 수위 금일현재
-					pw.println();
-					pw.flush();
-					pw.close();
+						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						pw.write("rsvwtqy"); // 저수현황 현저수량
+						pw.write("|^");
+						pw.write("rsvwtrt"); // 저수현황 저수율
+						pw.write("|^");
+						pw.write("managewalrsvwtqy"); // 저수현황 관리수위 저수량
+						pw.write("|^");
+						pw.write("suge"); // 수계
+						pw.write("|^");
+						pw.write("brrernm"); // 보이름
+						pw.write("|^");
+						pw.write("rf"); // 강우량 금일
+						pw.write("|^");
+						pw.write("prcptqy"); // 강우량 전일
+						pw.write("|^");
+						pw.write("nowprcptqy"); // 누계 금년
+						pw.write("|^");
+						pw.write("lastprcptqy"); // 누계 전년
+						pw.write("|^");
+						pw.write("nyearprcptqy"); // 누계 예년
+						pw.write("|^");
+						pw.write("inflowqy"); // 전입유입량
+						pw.write("|^");
+						pw.write("totdcwtrqy"); // 방류량 계
+						pw.write("|^");
+						pw.write("fishway"); // 방류량 어도
+						pw.write("|^");
+						pw.write("dvlpdcwtrqy"); // 방류량 소수력
+						pw.write("|^");
+						pw.write("spilldcwtrqy"); // 방류량 가동보
+						pw.write("|^");
+						pw.write("etcdcwtrqyone"); // 방류량 고정보
+						pw.write("|^");
+						pw.write("lowlevel"); // 수위 금일현재
+						pw.println();
+						pw.flush();
+						pw.close();
 
-				} catch (IOException e) {
-					e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				
 				}
 
 				// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱

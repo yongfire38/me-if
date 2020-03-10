@@ -37,64 +37,73 @@ public class GetPredict {
 					// step 1.파일의 첫 행 작성
 					File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_06.dat");
 
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+					if(file.exists()){
+						
+						System.out.println("파일이 이미 존재하므로 이어쓰기..");
+						
+					} else {
+					
+						try {
+							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-						pw.write("mgtNo"); // 사업 코드
-						pw.write("|^");
-						pw.write("umenoCmpndBsmlVal"); // 운영시 복합악취 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoNh3Val"); // 운영시 암모니아 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoCh4sVal"); // 운영시 메틸메르캅탄 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoH2sVal"); // 운영시 황화수소 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoCh3sch3Val"); // 운영시 다이메틸설파이드 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoCh3ssch3Val"); // 운영시 다이메틸다이설파이드 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoCh33nVal"); // 운영시 트라이메틸아민 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoC2h4oVal"); // 운영시 아세트알데하이드 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoC8h8Val"); // 운영시 스타이렌(스티렌) 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoC3h6oVal"); // 운영시 프로피온알데하이드 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoCh3ch22choVal"); // 운영시 뷰틸알데하이드 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoCh3ch23choVal"); // 운영시 n-발레르알데하이드 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoCh32chch2choVal"); // 운영시 i-발레르알데하이드 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoC7h8Val"); // 운영시 톨루엔 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoC8h10Val"); // 운영시 자일렌 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoC4h8oVal"); // 운영시 메틸에틸케톤 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoC6h12oVal"); // 운영시 메틸아이소뷰틸케톤 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoC6h12o2Val"); // 운영시 뷰틸아세테이트 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoC2h5coohVal"); // 운영시 프로피온산 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoCh3ch22choohVal"); // 운영시 n-뷰틸산 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoCh3ch23coohVal"); // 운영시 n-발레르산 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoCh32chch2coohVal"); // 운영시 i-발레르산 배출(발생)량
-						pw.write("|^");
-						pw.write("umenoCh32chch2ohVal"); // 운영시 i-뷰틸알코올 배출(발생)량
-						pw.println();
-						pw.flush();
-						pw.close();
+							pw.write("mgtNo"); // 사업 코드
+							pw.write("|^");
+							pw.write("umenoCmpndBsmlVal"); // 운영시 복합악취 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoNh3Val"); // 운영시 암모니아 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoCh4sVal"); // 운영시 메틸메르캅탄 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoH2sVal"); // 운영시 황화수소 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoCh3sch3Val"); // 운영시 다이메틸설파이드 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoCh3ssch3Val"); // 운영시 다이메틸다이설파이드 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoCh33nVal"); // 운영시 트라이메틸아민 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoC2h4oVal"); // 운영시 아세트알데하이드 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoC8h8Val"); // 운영시 스타이렌(스티렌) 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoC3h6oVal"); // 운영시 프로피온알데하이드 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoCh3ch22choVal"); // 운영시 뷰틸알데하이드 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoCh3ch23choVal"); // 운영시 n-발레르알데하이드 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoCh32chch2choVal"); // 운영시 i-발레르알데하이드 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoC7h8Val"); // 운영시 톨루엔 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoC8h10Val"); // 운영시 자일렌 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoC4h8oVal"); // 운영시 메틸에틸케톤 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoC6h12oVal"); // 운영시 메틸아이소뷰틸케톤 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoC6h12o2Val"); // 운영시 뷰틸아세테이트 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoC2h5coohVal"); // 운영시 프로피온산 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoCh3ch22choohVal"); // 운영시 n-뷰틸산 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoCh3ch23coohVal"); // 운영시 n-발레르산 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoCh32chch2coohVal"); // 운영시 i-발레르산 배출(발생)량
+							pw.write("|^");
+							pw.write("umenoCh32chch2ohVal"); // 운영시 i-뷰틸알코올 배출(발생)량
+							pw.println();
+							pw.flush();
+							pw.close();
 
-					} catch (IOException e) {
-						e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					
 					}
-
+					
+					
 					String json = "";
 
 					json = JsonParser.parseEiaJson(service_url, service_key, mgtNo);

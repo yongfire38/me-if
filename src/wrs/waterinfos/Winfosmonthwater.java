@@ -40,140 +40,148 @@ public class Winfosmonthwater {
 				File file = new File(
 						JsonParser.getProperty("file_path") + "WRS/TIF_WRS_14.dat");
 
-				try {
+				if(file.exists()){
+					
+					System.out.println("파일이 이미 존재하므로 이어쓰기..");
+					
+				} else {
+				
+					try {
 
-					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-					pw.write("sgcnm"); // 지자체명
-					pw.write("|^");
-					pw.write("sitenm"); // 정수장명
-					pw.write("|^");
-					pw.write("cltdt"); // 측정일자
-					pw.write("|^");
-					pw.write("data1"); // 일반세균
-					pw.write("|^");
-					pw.write("data2"); // 총대장균군
-					pw.write("|^");
-					pw.write("data3"); // 대장균(E.coil)
-					pw.write("|^");
-					pw.write("data4"); // 납(Pb)
-					pw.write("|^");
-					pw.write("data5"); // 불소(F)
-					pw.write("|^");
-					pw.write("data6"); // 비소
-					pw.write("|^");
-					pw.write("data7"); // 셀레늄(Se)
-					pw.write("|^");
-					pw.write("data8"); // 수은(Hg)
-					pw.write("|^");
-					pw.write("data9"); // 시안(CN)
-					pw.write("|^");
-					pw.write("data10"); // 크롬(Cr)
-					pw.write("|^");
-					pw.write("data11"); // 암모니아성질소
-					pw.write("|^");
-					pw.write("data12"); // 질산성질소
-					pw.write("|^");
-					pw.write("data13"); // 보론(B)
-					pw.write("|^");
-					pw.write("data14"); // 카드뮴(Cd)
-					pw.write("|^");
-					pw.write("data15"); // 페놀
-					pw.write("|^");
-					pw.write("data16"); // 총트리할로메탄(THMs)
-					pw.write("|^");
-					pw.write("data17"); // 클로로포름
-					pw.write("|^");
-					pw.write("data18"); // 다이아지논
-					pw.write("|^");
-					pw.write("data19"); // 파라티온
-					pw.write("|^");
-					pw.write("data20"); // 페니트로티온
-					pw.write("|^");
-					pw.write("data21"); // 카바릴
-					pw.write("|^");
-					pw.write("data22"); // 1,1,1-트리클로로에탄
-					pw.write("|^");
-					pw.write("data23"); // 테트라클로로에틸렌(PCE)
-					pw.write("|^");
-					pw.write("data24"); // 트리클로로에틸렌(TCE)
-					pw.write("|^");
-					pw.write("data25"); // 디클로로메탄
-					pw.write("|^");
-					pw.write("data26"); // 벤젠
-					pw.write("|^");
-					pw.write("data27"); // 톨루엔
-					pw.write("|^");
-					pw.write("data28"); // 에틸벤젠
-					pw.write("|^");
-					pw.write("data29"); // 크실렌
-					pw.write("|^");
-					pw.write("data30"); // 1,1디클로로에틸렌
-					pw.write("|^");
-					pw.write("data31"); // 사염화탄소
-					pw.write("|^");
-					pw.write("data32"); // 1,2-디브로모-3-클로로프로판
-					pw.write("|^");
-					pw.write("data33"); // 잔류염소
-					pw.write("|^");
-					pw.write("data34"); // 클로랄하이드레이트(CH)
-					pw.write("|^");
-					pw.write("data35"); // 디브로모아세토니트릴
-					pw.write("|^");
-					pw.write("data36"); // 디클로로아세토니트릴
-					pw.write("|^");
-					pw.write("data37"); // 트리클로로아세토니트릴
-					pw.write("|^");
-					pw.write("data38"); // 할로아세틱에시드(HAAs)
-					pw.write("|^");
-					pw.write("data39"); // 경도
-					pw.write("|^");
-					pw.write("data40"); // 과망간산칼륨소비량
-					pw.write("|^");
-					pw.write("data41"); // 냄새
-					pw.write("|^");
-					pw.write("data42"); // 맛
-					pw.write("|^");
-					pw.write("data43"); // 구리(Cu)
-					pw.write("|^");
-					pw.write("data44"); // 색도
-					pw.write("|^");
-					pw.write("data45"); // 세제(음이온계면활성제:ABS)
-					pw.write("|^");
-					pw.write("data46"); // 수소이온농도(pH)
-					pw.write("|^");
-					pw.write("data47"); // 아연(Zn)
-					pw.write("|^");
-					pw.write("data48"); // 염소이온
-					pw.write("|^");
-					pw.write("data49"); // 증발잔류물(Totalsolids)
-					pw.write("|^");
-					pw.write("data50"); // 철(Fe)
-					pw.write("|^");
-					pw.write("data51"); // 망간(Mn)
-					pw.write("|^");
-					pw.write("data52"); // 탁도(Turbidity)
-					pw.write("|^");
-					pw.write("data53"); // 황산이온
-					pw.write("|^");
-					pw.write("data54"); // 알루미늄(Al)
-					pw.write("|^");
-					pw.write("data55"); // 브로모디클로로메탄
-					pw.write("|^");
-					pw.write("data56"); // 디브로모클로로메탄
-					pw.write("|^");
-					pw.write("data57"); // 1,4-다이옥산
-					pw.write("|^");
-					pw.write("data58"); // 포름알데히드
-					pw.write("|^");
-					pw.write("data59"); // 브롬산염
-					pw.println();
-					pw.flush();
-					pw.close();
+						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						pw.write("sgcnm"); // 지자체명
+						pw.write("|^");
+						pw.write("sitenm"); // 정수장명
+						pw.write("|^");
+						pw.write("cltdt"); // 측정일자
+						pw.write("|^");
+						pw.write("data1"); // 일반세균
+						pw.write("|^");
+						pw.write("data2"); // 총대장균군
+						pw.write("|^");
+						pw.write("data3"); // 대장균(E.coil)
+						pw.write("|^");
+						pw.write("data4"); // 납(Pb)
+						pw.write("|^");
+						pw.write("data5"); // 불소(F)
+						pw.write("|^");
+						pw.write("data6"); // 비소
+						pw.write("|^");
+						pw.write("data7"); // 셀레늄(Se)
+						pw.write("|^");
+						pw.write("data8"); // 수은(Hg)
+						pw.write("|^");
+						pw.write("data9"); // 시안(CN)
+						pw.write("|^");
+						pw.write("data10"); // 크롬(Cr)
+						pw.write("|^");
+						pw.write("data11"); // 암모니아성질소
+						pw.write("|^");
+						pw.write("data12"); // 질산성질소
+						pw.write("|^");
+						pw.write("data13"); // 보론(B)
+						pw.write("|^");
+						pw.write("data14"); // 카드뮴(Cd)
+						pw.write("|^");
+						pw.write("data15"); // 페놀
+						pw.write("|^");
+						pw.write("data16"); // 총트리할로메탄(THMs)
+						pw.write("|^");
+						pw.write("data17"); // 클로로포름
+						pw.write("|^");
+						pw.write("data18"); // 다이아지논
+						pw.write("|^");
+						pw.write("data19"); // 파라티온
+						pw.write("|^");
+						pw.write("data20"); // 페니트로티온
+						pw.write("|^");
+						pw.write("data21"); // 카바릴
+						pw.write("|^");
+						pw.write("data22"); // 1,1,1-트리클로로에탄
+						pw.write("|^");
+						pw.write("data23"); // 테트라클로로에틸렌(PCE)
+						pw.write("|^");
+						pw.write("data24"); // 트리클로로에틸렌(TCE)
+						pw.write("|^");
+						pw.write("data25"); // 디클로로메탄
+						pw.write("|^");
+						pw.write("data26"); // 벤젠
+						pw.write("|^");
+						pw.write("data27"); // 톨루엔
+						pw.write("|^");
+						pw.write("data28"); // 에틸벤젠
+						pw.write("|^");
+						pw.write("data29"); // 크실렌
+						pw.write("|^");
+						pw.write("data30"); // 1,1디클로로에틸렌
+						pw.write("|^");
+						pw.write("data31"); // 사염화탄소
+						pw.write("|^");
+						pw.write("data32"); // 1,2-디브로모-3-클로로프로판
+						pw.write("|^");
+						pw.write("data33"); // 잔류염소
+						pw.write("|^");
+						pw.write("data34"); // 클로랄하이드레이트(CH)
+						pw.write("|^");
+						pw.write("data35"); // 디브로모아세토니트릴
+						pw.write("|^");
+						pw.write("data36"); // 디클로로아세토니트릴
+						pw.write("|^");
+						pw.write("data37"); // 트리클로로아세토니트릴
+						pw.write("|^");
+						pw.write("data38"); // 할로아세틱에시드(HAAs)
+						pw.write("|^");
+						pw.write("data39"); // 경도
+						pw.write("|^");
+						pw.write("data40"); // 과망간산칼륨소비량
+						pw.write("|^");
+						pw.write("data41"); // 냄새
+						pw.write("|^");
+						pw.write("data42"); // 맛
+						pw.write("|^");
+						pw.write("data43"); // 구리(Cu)
+						pw.write("|^");
+						pw.write("data44"); // 색도
+						pw.write("|^");
+						pw.write("data45"); // 세제(음이온계면활성제:ABS)
+						pw.write("|^");
+						pw.write("data46"); // 수소이온농도(pH)
+						pw.write("|^");
+						pw.write("data47"); // 아연(Zn)
+						pw.write("|^");
+						pw.write("data48"); // 염소이온
+						pw.write("|^");
+						pw.write("data49"); // 증발잔류물(Totalsolids)
+						pw.write("|^");
+						pw.write("data50"); // 철(Fe)
+						pw.write("|^");
+						pw.write("data51"); // 망간(Mn)
+						pw.write("|^");
+						pw.write("data52"); // 탁도(Turbidity)
+						pw.write("|^");
+						pw.write("data53"); // 황산이온
+						pw.write("|^");
+						pw.write("data54"); // 알루미늄(Al)
+						pw.write("|^");
+						pw.write("data55"); // 브로모디클로로메탄
+						pw.write("|^");
+						pw.write("data56"); // 디브로모클로로메탄
+						pw.write("|^");
+						pw.write("data57"); // 1,4-다이옥산
+						pw.write("|^");
+						pw.write("data58"); // 포름알데히드
+						pw.write("|^");
+						pw.write("data59"); // 브롬산염
+						pw.println();
+						pw.flush();
+						pw.close();
 
-				} catch (IOException e) {
-					e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				
 				}
-
+				
 				// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
 				String json = "";
 
