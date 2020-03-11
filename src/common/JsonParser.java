@@ -18,6 +18,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.json.simple.JSONObject;
 
@@ -137,11 +139,26 @@ public class JsonParser {
 
 	// 파싱한 데이터를 StringBuffer에 씀(null 체크, trim처리와 줄바꿈 없애는 것, utf8 인코딩 처리도 같이)
 	public static StringBuffer colWrite(StringBuffer sb, String keyname, String chkCol, JSONObject item) {
+		
+		
+		
+		
+		
+		
+		
 
 		if (keyname.equals(chkCol)) {
+			
+			String content = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ").replace("'", "").replace("&#39;","").replace("&#34;", "");
+			
+			//에러 유발자들인 emoji 제거..
+			Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
+			Matcher emoticonsMatcher = emoticons.matcher( content );
+			content = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "").replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
+
 			if (!(JsonParser.isEmpty(item.get(keyname)))) {
 				sb.setLength(0);
-				sb.append(item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ").replace("'", "").replace("&#39;","").replace("&#34;", ""));
+				sb.append(content);
 			} else {
 				sb.setLength(0);
 				sb.append(" ");
