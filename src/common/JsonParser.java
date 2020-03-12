@@ -139,24 +139,20 @@ public class JsonParser {
 
 	// 파싱한 데이터를 StringBuffer에 씀(null 체크, trim처리와 줄바꿈 없애는 것, utf8 인코딩 처리도 같이)
 	public static StringBuffer colWrite(StringBuffer sb, String keyname, String chkCol, JSONObject item) {
-		
-		
-		
-		
-		
-		
-		
 
 		if (keyname.equals(chkCol)) {
-			
-			String content = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ").replace("'", "").replace("&#39;","").replace("&#34;", "");
-			
-			//에러 유발자들인 emoji 제거..
-			Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
-			Matcher emoticonsMatcher = emoticons.matcher( content );
-			content = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "").replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
 
 			if (!(JsonParser.isEmpty(item.get(keyname)))) {
+
+				String content = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+						.replace("'", "").replace("&#39;", "").replace("&#34;", "");
+
+				// 에러 유발자들인 emoji 제거..
+				Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
+				Matcher emoticonsMatcher = emoticons.matcher(content);
+				content = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
+						.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
+
 				sb.setLength(0);
 				sb.append(content);
 			} else {
@@ -1055,5 +1051,46 @@ public class JsonParser {
 
 		return json;
 	}
+	
+	// 다음 블로그 파싱 (검색어 하나를 파라미터로 받아서 파싱)
+		public static String parseJson_google(String service_url, String google_api_key, String google_api_cx, String query, String start) {
+
+			BufferedReader br = null;
+
+			// utf8 인코딩
+			query = encode_UTF8(query);
+
+			String json = "";
+
+			String urlstr = service_url + query + "&key=" + google_api_key + "&cx=" +  google_api_cx + "&start=" + start;
+
+			try {
+
+				URL url = new URL(urlstr);
+				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+				urlconnection.setRequestMethod("GET");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream()));
+				}
+
+				String line;
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				// 테스트 출력
+				// System.out.println(json);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return json;
+		}
 
 }

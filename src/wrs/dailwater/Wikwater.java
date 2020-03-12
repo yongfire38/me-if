@@ -24,7 +24,7 @@ public class Wikwater {
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
 
-		// 요청 파라미터는 조회시작일(yyyyMMdd), 조회종료일(yyyyMMdd), 정수장 코드의 3개
+		// 요청 파라미터는 조회시작일(yyyyMM), 조회종료일(yyyyMM), 정수장 코드의 3개
 		// 정수장 코드는 정수장 코드 조회 api에서 조회 가능
 		if (args.length == 3) {
 
@@ -276,17 +276,6 @@ public class Wikwater {
 				long end = System.currentTimeMillis();
 				System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
 				
-				// step 6. 원본 파일은 삭제
-				if(file.exists()){
-					if(file.delete()){
-						System.out.println("원본파일 삭제 처리 완료");
-					}else{
-						System.out.println("원본 파일 삭제 처리 실패");
-					}
-					
-				} else {
-					System.out.println("파일이 존재하지 않습니다.");
-				}
 			}
 
 		} else {

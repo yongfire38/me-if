@@ -35,7 +35,7 @@ public class SupplyLgldCodeList {
 			String service_key = JsonParser.getProperty("waterQuality_service_key");
 
 			// step 1.파일의 첫 행 작성
-			File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_09.dat", "WRS");
+			File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_09.dat");
 
 			if(file.exists()){
 				
@@ -202,18 +202,6 @@ public class SupplyLgldCodeList {
 
 			long end = System.currentTimeMillis();
 			System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
-			
-			// step 6. 원본 파일은 삭제
-			if(file.exists()){
-				if(file.delete()){
-					System.out.println("원본파일 삭제 처리 완료");
-				}else{
-					System.out.println("원본 파일 삭제 처리 실패");
-				}
-				
-			} else {
-				System.out.println("파일이 존재하지 않습니다.");
-			}
 
 		} else {
 			System.out.println("파라미터 개수 에러!!");
