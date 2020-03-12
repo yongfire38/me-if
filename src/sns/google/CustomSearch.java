@@ -50,15 +50,25 @@ public class CustomSearch {
 				try {
 
 					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+					pw.write("'");
 					pw.write("job_dt"); // 시스템 일자
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("query"); // 검색어
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("title"); // 문서 제목
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("snippet"); // 문서 내용
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("link"); // 링크
+					pw.write("'");
 					pw.println();
 					pw.flush();
 					pw.close();
@@ -121,15 +131,25 @@ public class CustomSearch {
 							}
 
 							// 한번에 문자열 합침
+							resultSb.append("'");
 							resultSb.append(job_dt); // 시스템 일자
+							resultSb.append("'");
 							resultSb.append("|^");
+							resultSb.append("'");
 							resultSb.append(args[0]); // 검색어
+							resultSb.append("'");
 							resultSb.append("|^");
+							resultSb.append("'");
 							resultSb.append(title);
+							resultSb.append("'");
 							resultSb.append("|^");
+							resultSb.append("'");
 							resultSb.append(snippet);
+							resultSb.append("'");
 							resultSb.append("|^");
+							resultSb.append("'");
 							resultSb.append(link);
+							resultSb.append("'");
 							resultSb.append(System.getProperty("line.separator"));
 
 						}

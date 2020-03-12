@@ -49,21 +49,37 @@ public class Cafe {
 				try {
 
 					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+					pw.write("'");
 					pw.write("job_dt"); // 시스템 일자
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("query"); // 검색어
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("title"); // 카페 글 제목
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("contents"); // 카페 글 내용
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("url"); // 카페 글 url
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("cafename"); // 카페 이름
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("thumbnail"); // 카페 글 대표 썸네일
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("datetime"); // 카페 글 작성시간
+					pw.write("'");
 					pw.println();
 					pw.flush();
 					pw.close();
@@ -144,21 +160,37 @@ public class Cafe {
 						}
 
 						// 한번에 문자열 합침
+						resultSb.append("'");
 						resultSb.append(job_dt); // 시스템 일자
+						resultSb.append("'");
 						resultSb.append("|^");
+						resultSb.append("'");
 						resultSb.append(args[0]); // 검색어
+						resultSb.append("'");
 						resultSb.append("|^");
+						resultSb.append("'");
 						resultSb.append(title);
+						resultSb.append("'");
 						resultSb.append("|^");
+						resultSb.append("'");
 						resultSb.append(contents);
+						resultSb.append("'");
 						resultSb.append("|^");
+						resultSb.append("'");
 						resultSb.append(url);
+						resultSb.append("'");
 						resultSb.append("|^");
+						resultSb.append("'");
 						resultSb.append(cafename);
+						resultSb.append("'");
 						resultSb.append("|^");
+						resultSb.append("'");
 						resultSb.append(thumbnail);
+						resultSb.append("'");
 						resultSb.append("|^");
+						resultSb.append("'");
 						resultSb.append(datetime);
+						resultSb.append("'");
 						resultSb.append(System.getProperty("line.separator"));
 
 					}

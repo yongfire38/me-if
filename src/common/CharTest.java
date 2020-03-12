@@ -20,12 +20,14 @@ public class CharTest {
 		File file = new File("charTest.dat");
 		
 		String testStr = "韓国で新型コロナ感染拡大、首都圏を中心に「3次ピーク」迎える可能性も―中国メディア";
+		//String testStr2 = "\u0001";
 		
 		try {
 
 			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+			
 			pw.write(StringReplace(testStr)); 
-			pw.println();
+			pw.println(StringReplace(testStr));
 			pw.flush();
 			pw.close();
 

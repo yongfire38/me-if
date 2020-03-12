@@ -49,17 +49,29 @@ public class Web {
 				try {
 
 					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+					pw.write("'");
 					pw.write("job_dt"); // 시스템 일자
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("query"); // 검색어
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("title"); // 문서 제목
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("contents"); // 문서 본문 중 일부
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("url"); // 문서 url
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("datetime"); // 문서 글 작성시간
+					pw.write("'");
 					pw.println();
 					pw.flush();
 					pw.close();
@@ -136,17 +148,29 @@ public class Web {
 						}
 
 						// 한번에 문자열 합침
+						resultSb.append("'");
 						resultSb.append(job_dt); // 시스템 일자
+						resultSb.append("'");
 						resultSb.append("|^");
+						resultSb.append("'");
 						resultSb.append(args[0]); // 검색어
+						resultSb.append("'");
 						resultSb.append("|^");
+						resultSb.append("'");
 						resultSb.append(title);
+						resultSb.append("'");
 						resultSb.append("|^");
+						resultSb.append("'");
 						resultSb.append(contents);
+						resultSb.append("'");
 						resultSb.append("|^");
+						resultSb.append("'");
 						resultSb.append(url);
+						resultSb.append("'");
 						resultSb.append("|^");
+						resultSb.append("'");
 						resultSb.append(datetime);
+						resultSb.append("'");
 						resultSb.append(System.getProperty("line.separator"));
 
 					}

@@ -51,21 +51,37 @@ public class Blog {
 				try {
 
 					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+					pw.write("'");
 					pw.write("job_dt"); // 시스템 일자
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("query"); // 검색어
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("postdate"); // 작성날짜
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("title"); // 블로그 제목
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("link"); // 블로그 링크
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("description"); // 블로그 내용
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("bloggername"); // 블로거 이름
+					pw.write("'");
 					pw.write("|^");
+					pw.write("'");
 					pw.write("bloggerlink"); // 블로거 링크
+					pw.write("'");
 					pw.println();
 					pw.flush();
 					pw.close();
@@ -149,21 +165,37 @@ public class Blog {
 							}
 
 							// 한번에 문자열 합침
+							resultSb.append("'");
 							resultSb.append(job_dt); // 시스템 일자
+							resultSb.append("'");
 							resultSb.append("|^");
+							resultSb.append("'");
 							resultSb.append(args[0]); // 검색어
+							resultSb.append("'");
 							resultSb.append("|^");
+							resultSb.append("'");
 							resultSb.append(postdate);
+							resultSb.append("'");
 							resultSb.append("|^");
+							resultSb.append("'");
 							resultSb.append(title);
+							resultSb.append("'");
 							resultSb.append("|^");
+							resultSb.append("'");
 							resultSb.append(link);
+							resultSb.append("'");
 							resultSb.append("|^");
+							resultSb.append("'");
 							resultSb.append(description);
+							resultSb.append("'");
 							resultSb.append("|^");
+							resultSb.append("'");
 							resultSb.append(bloggername);
+							resultSb.append("'");
 							resultSb.append("|^");
+							resultSb.append("'");
 							resultSb.append(bloggerlink);
+							resultSb.append("'");
 							resultSb.append(System.getProperty("line.separator"));
 
 						}
