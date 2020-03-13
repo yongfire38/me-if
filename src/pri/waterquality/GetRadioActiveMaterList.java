@@ -168,10 +168,10 @@ public class GetRadioActiveMaterList {
 								JsonParser.colWrite(rn, keyname, "RN", item);
 								JsonParser.colWrite(ptNo, keyname, "PT_NO", item);
 								JsonParser.colWrite(ptNm, keyname, "PT_NM", item);
+								JsonParser.colWrite(wmcymd, keyname, "WMCYMD", item);
 								JsonParser.colWrite(act1, keyname, "ACT1", item);
 								JsonParser.colWrite(act2, keyname, "ACT2", item);
 								JsonParser.colWrite(act3, keyname, "ACT3", item);
-								JsonParser.colWrite(wmcymd, keyname, "WMCYMD", item);
 								JsonParser.colWrite(numOfRows, keyname, "numOfRows", item);
 								JsonParser.colWrite(pageNo_str, keyname, "pageNo", item);
 								JsonParser.colWrite(totalCount, keyname, "totalCount", item);
@@ -188,6 +188,8 @@ public class GetRadioActiveMaterList {
 							resultSb.append(ptNo);
 							resultSb.append("|^");
 							resultSb.append(ptNm);
+							resultSb.append("|^");
+							resultSb.append(wmcymd);
 							resultSb.append("|^");
 							resultSb.append(act1);
 							resultSb.append("|^");

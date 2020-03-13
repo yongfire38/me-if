@@ -137,7 +137,7 @@ public class JsonParser {
 
 	}
 	
-	// 파싱한 데이터를 StringBuffer에 씀(null 체크, trim처리와 줄바꿈 없애는 것, utf8 인코딩 처리도 같이)
+	// 파싱한 데이터를 StringBuffer에 씀(null 체크, trim처리와 줄바꿈 없애는 것, 연속된 공백 치환도 같이)
 	// sns와 같은 로직이면 음수값이 없어져 버리는 이슈로 분리
 	public static StringBuffer colWrite(StringBuffer sb, String keyname, String chkCol, JSONObject item) {
 
@@ -145,7 +145,9 @@ public class JsonParser {
 
 			if (!(JsonParser.isEmpty(item.get(keyname)))) {
 
-				String content = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ");
+				
+				String content = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ").replaceAll("(\\s{2,}|\\t{2,})", " ");
+				
 
 				sb.setLength(0);
 				sb.append(content);
@@ -168,7 +170,7 @@ public class JsonParser {
 			if (!(JsonParser.isEmpty(item.get(keyname)))) {
 
 				String content = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-						.replace("'", "").replace("&#39;", "").replace("&#34;", "");
+						.replace("'", "").replace("&#39;", "").replace("&#34;", "").replaceAll("(\\s{2,}|\\t{2,})", " ");
 
 				// 에러 유발자들인 emoji 제거..
 				Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
