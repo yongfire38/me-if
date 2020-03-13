@@ -80,6 +80,8 @@ public class GetWaterMeasuringList {
 					pw.write("|^");
 					pw.write("latSec"); // 위도-초
 					pw.write("|^");
+					pw.write("wmcymd"); // 검사일자
+					pw.write("|^");
 					pw.write("itemLvl"); // 측정값(수위) (단위 : m)	
 					pw.write("|^");
 					pw.write("itemAmnt"); // 측정값(유량) (단위 : ㎥/sec)
@@ -251,6 +253,7 @@ public class GetWaterMeasuringList {
 			StringBuffer latDgr = new StringBuffer(" "); // 위도-도
 			StringBuffer latMin = new StringBuffer(" "); // 위도-분
 			StringBuffer latSec = new StringBuffer(" "); // 위도-초
+			StringBuffer wmcymd = new StringBuffer(" "); // 검사일자
 			StringBuffer itemLvl = new StringBuffer(" "); // 측정값(수위) (단위 : m)
 			StringBuffer itemAmnt = new StringBuffer(" "); // 측정값(유량) (단위 : ㎥/sec)
 			StringBuffer itemTemp = new StringBuffer(" "); // 측정값(수온) (단위 : ℃)
@@ -370,6 +373,7 @@ public class GetWaterMeasuringList {
 								JsonParser.colWrite(latDgr, keyname, "LAT_DGR", item);
 								JsonParser.colWrite(latMin, keyname, "LAT_MIN", item);
 								JsonParser.colWrite(latSec, keyname, "LAT_SEC", item);
+								JsonParser.colWrite(wmcymd, keyname, "WMCYMD", item);
 								JsonParser.colWrite(itemLvl, keyname, "ITEM_LVL", item);
 								JsonParser.colWrite(itemAmnt, keyname, "ITEM_AMNT", item);
 								JsonParser.colWrite(itemTemp, keyname, "ITEM_TEMP", item);
@@ -465,6 +469,8 @@ public class GetWaterMeasuringList {
 							resultSb.append(latMin);
 							resultSb.append("|^");
 							resultSb.append(latSec);
+							resultSb.append("|^");
+							resultSb.append(wmcymd);
 							resultSb.append("|^");
 							resultSb.append(itemLvl);
 							resultSb.append("|^");
