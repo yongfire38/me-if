@@ -141,9 +141,9 @@ public class Webkr {
 
 								String keyname = iter.next();
 
-								JsonParser.colWrite(title, keyname, "title", item);
-								JsonParser.colWrite(link, keyname, "link", item);
-								JsonParser.colWrite(description, keyname, "description", item);
+								JsonParser.colWrite_sns(title, keyname, "title", item);
+								JsonParser.colWrite_sns(link, keyname, "link", item);
+								JsonParser.colWrite_sns(description, keyname, "description", item);
 
 							}
 

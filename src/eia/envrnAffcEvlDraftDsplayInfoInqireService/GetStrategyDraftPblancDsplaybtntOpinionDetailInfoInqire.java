@@ -97,6 +97,10 @@ public class GetStrategyDraftPblancDsplaybtntOpinionDetailInfoInqire {
 					pw.write("drfopSite"); // 공람장소
 					pw.write("|^");
 					pw.write("drfopExpSite"); // 설명회 장소
+					pw.write("|^");
+					pw.write("drfopTeamNm"); // 부서명
+					pw.write("|^");
+					pw.write("drfopTel"); // 전화번호
 					pw.println();
 					pw.flush();
 					pw.close();
@@ -111,7 +115,7 @@ public class GetStrategyDraftPblancDsplaybtntOpinionDetailInfoInqire {
 
 			json = JsonParser.parseEiaJson(service_url, service_key, args[0]);
 			
-			
+			System.out.println("json::::"+json);
 			// step 2. 전체 파싱
 
 			StringBuffer resultSb = new StringBuffer("");
@@ -143,6 +147,8 @@ public class GetStrategyDraftPblancDsplaybtntOpinionDetailInfoInqire {
 			StringBuffer drfopOpnEndDt = new StringBuffer(" "); // 의견제출기간 종료일
 			StringBuffer drfopSite = new StringBuffer(" "); // 공람장소
 			StringBuffer drfopExpSite = new StringBuffer(" "); // 설명회 장소
+			StringBuffer drfopTeamNm = new StringBuffer(" "); // 부서명
+			StringBuffer drfopTel = new StringBuffer(" "); // 전화번호
 
 
 				try {
@@ -197,6 +203,8 @@ public class GetStrategyDraftPblancDsplaybtntOpinionDetailInfoInqire {
 								JsonParser.colWrite(drfopOpnEndDt, keyname, "drfopOpnEndDt", items_jsonObject);
 								JsonParser.colWrite(drfopSite, keyname, "drfopSite", items_jsonObject);
 								JsonParser.colWrite(drfopExpSite, keyname, "drfopExpSite", items_jsonObject);
+								JsonParser.colWrite(drfopTeamNm, keyname, "drfopTeamNm", items_jsonObject);
+								JsonParser.colWrite(drfopTel, keyname, "drfopTel", items_jsonObject);
 								
 
 							}
@@ -255,6 +263,10 @@ public class GetStrategyDraftPblancDsplaybtntOpinionDetailInfoInqire {
 							resultSb.append(drfopSite);
 							resultSb.append("|^");
 							resultSb.append(drfopExpSite);
+							resultSb.append("|^");
+							resultSb.append(drfopTeamNm);
+							resultSb.append("|^");
+							resultSb.append(drfopTel);
 							resultSb.append(System.getProperty("line.separator"));
 
 						} else if (body.get("item") instanceof JSONArray) {
@@ -300,6 +312,8 @@ public class GetStrategyDraftPblancDsplaybtntOpinionDetailInfoInqire {
 									JsonParser.colWrite(drfopOpnEndDt, keyname, "drfopOpnEndDt", item_obj);
 									JsonParser.colWrite(drfopSite, keyname, "drfopSite", item_obj);
 									JsonParser.colWrite(drfopExpSite, keyname, "drfopExpSite", item_obj);
+									JsonParser.colWrite(drfopTeamNm, keyname, "drfopTeamNm", item_obj);
+									JsonParser.colWrite(drfopTel, keyname, "drfopTel", item_obj);
 
 								}
 
@@ -357,6 +371,10 @@ public class GetStrategyDraftPblancDsplaybtntOpinionDetailInfoInqire {
 								resultSb.append(drfopSite);
 								resultSb.append("|^");
 								resultSb.append(drfopExpSite);
+								resultSb.append("|^");
+								resultSb.append(drfopTeamNm);
+								resultSb.append("|^");
+								resultSb.append(drfopTel);
 								resultSb.append(System.getProperty("line.separator"));
 							}
 

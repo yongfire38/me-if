@@ -152,11 +152,11 @@ public class News {
 
 								String keyname = iter.next();
 
-								JsonParser.colWrite(title, keyname, "title", item);
-								JsonParser.colWrite(originallink, keyname, "originallink", item);
-								JsonParser.colWrite(link, keyname, "link", item);
-								JsonParser.colWrite(description, keyname, "description", item);
-								JsonParser.colWrite(pubDate, keyname, "pubDate", item);
+								JsonParser.colWrite_sns(title, keyname, "title", item);
+								JsonParser.colWrite_sns(originallink, keyname, "originallink", item);
+								JsonParser.colWrite_sns(link, keyname, "link", item);
+								JsonParser.colWrite_sns(description, keyname, "description", item);
+								JsonParser.colWrite_sns(pubDate, keyname, "pubDate", item);
 
 							}
 

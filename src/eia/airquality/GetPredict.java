@@ -138,7 +138,8 @@ public class GetPredict {
 							Iterator<String> iter = key.iterator();
 
 							String greenArVal = " "; // 공원 및 녹지계획면적
-							String gmenoPm10Val = " "; // 공사시 미세먼지(2.5) 배출량
+							String gmenoPm10Val = " "; // 공사시 미세먼지(10) 배출량
+							String gmenoPm25Val = " "; // 공사시 미세먼지(2.5) 배출량
 							String gmenoNo2Val = " "; // 공사시 이산화질소 배출량
 							String umenoPm10Val = " "; // 운영시 미세먼지(10) 배출량
 							String umenoPm25Val = " "; // 운영시 미세먼지(2.5) 배출량
@@ -173,6 +174,9 @@ public class GetPredict {
 								}
 								if (keyname.equals("gmenoPm10Val")) {
 									gmenoPm10Val = body.get(keyname).toString().trim();
+								}
+								if (keyname.equals("gmenoPm25Val")) {
+									gmenoPm25Val = body.get(keyname).toString().trim();
 								}
 								if (keyname.equals("gmenoNo2Val")) {
 									gmenoNo2Val = body.get(keyname).toString().trim();
@@ -255,11 +259,13 @@ public class GetPredict {
 							try {
 								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-								pw.write(mgtNo); // 사업코드
+								pw.write(mgtNo); // 사업 코드
 								pw.write("|^");
 								pw.write(greenArVal); // 공원 및 녹지계획면적
 								pw.write("|^");
-								pw.write(gmenoPm10Val); // 공사시 미세먼지(2.5) 배출량
+								pw.write(gmenoPm10Val); // 공사시 미세먼지(10) 배출량
+								pw.write("|^");
+								pw.write(gmenoPm25Val); // 공사시 미세먼지(2.5) 배출량
 								pw.write("|^");
 								pw.write(gmenoNo2Val); // 공사시 이산화질소 배출량
 								pw.write("|^");

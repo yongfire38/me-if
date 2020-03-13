@@ -155,12 +155,12 @@ public class Blog {
 
 								String keyname = iter.next();
 
-								JsonParser.colWrite(postdate, keyname, "postdate", item);
-								JsonParser.colWrite(title, keyname, "title", item);
-								JsonParser.colWrite(link, keyname, "link", item);
-								JsonParser.colWrite(description, keyname, "description", item);
-								JsonParser.colWrite(bloggername, keyname, "bloggername", item);
-								JsonParser.colWrite(bloggerlink, keyname, "bloggerlink", item);
+								JsonParser.colWrite_sns(postdate, keyname, "postdate", item);
+								JsonParser.colWrite_sns(title, keyname, "title", item);
+								JsonParser.colWrite_sns(link, keyname, "link", item);
+								JsonParser.colWrite_sns(description, keyname, "description", item);
+								JsonParser.colWrite_sns(bloggername, keyname, "bloggername", item);
+								JsonParser.colWrite_sns(bloggerlink, keyname, "bloggerlink", item);
 
 							}
 

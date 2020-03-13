@@ -689,7 +689,9 @@ public class GetSgisDrinkWaterList {
 					e.printStackTrace();
 				}
 
-				Thread.sleep(3000);
+				System.out.println("진행도::::::" + i + "/" + pageCount);
+				
+				Thread.sleep(3500);
 
 			}
 

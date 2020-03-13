@@ -37,7 +37,7 @@ public class JsonParser {
 			resource = System.getProperty("user.dir") + "\\conf\\apiConfig.properties";
 		} else {
 			// 윈도우 외에는 (사실상 리눅스 서버) 서버 절대경로를 하드코딩
-			resource = "/home/chkusr/EIBP2/conf/apiConfig.properties";
+			resource = "/home/chkusr/EIBP2_APP/conf/apiConfig.properties";
 		}
 
 		try {
@@ -136,9 +136,32 @@ public class JsonParser {
 		return false;
 
 	}
+	
+	// 파싱한 데이터를 StringBuffer에 씀(null 체크, trim처리와 줄바꿈 없애는 것, utf8 인코딩 처리도 같이)
+	// sns와 같은 로직이면 음수값이 없어져 버리는 이슈로 분리
+	public static StringBuffer colWrite(StringBuffer sb, String keyname, String chkCol, JSONObject item) {
+
+		if (keyname.equals(chkCol)) {
+
+			if (!(JsonParser.isEmpty(item.get(keyname)))) {
+
+				String content = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ");
+
+				sb.setLength(0);
+				sb.append(content);
+			} else {
+				sb.setLength(0);
+				sb.append(" ");
+			}
+
+		}
+
+		return sb;
+	}
 
 	// 파싱한 데이터를 StringBuffer에 씀(null 체크, trim처리와 줄바꿈 없애는 것, utf8 인코딩 처리도 같이)
-	public static StringBuffer colWrite(StringBuffer sb, String keyname, String chkCol, JSONObject item) {
+	// sns 쪽 데이터에서 문제되는 emoji와 홑따옴표도 제거함
+	public static StringBuffer colWrite_sns(StringBuffer sb, String keyname, String chkCol, JSONObject item) {
 
 		if (keyname.equals(chkCol)) {
 
@@ -1051,46 +1074,47 @@ public class JsonParser {
 
 		return json;
 	}
-	
+
 	// 다음 블로그 파싱 (검색어 하나를 파라미터로 받아서 파싱)
-		public static String parseJson_google(String service_url, String google_api_key, String google_api_cx, String query, String start) {
+	public static String parseJson_google(String service_url, String google_api_key, String google_api_cx, String query,
+			String start) {
 
-			BufferedReader br = null;
+		BufferedReader br = null;
 
-			// utf8 인코딩
-			query = encode_UTF8(query);
+		// utf8 인코딩
+		query = encode_UTF8(query);
 
-			String json = "";
+		String json = "";
 
-			String urlstr = service_url + query + "&key=" + google_api_key + "&cx=" +  google_api_cx + "&start=" + start;
+		String urlstr = service_url + query + "&key=" + google_api_key + "&cx=" + google_api_cx + "&start=" + start;
 
-			try {
+		try {
 
-				URL url = new URL(urlstr);
-				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-				urlconnection.setRequestMethod("GET");
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+			urlconnection.setRequestMethod("GET");
 
-				int responseCode = urlconnection.getResponseCode();
+			int responseCode = urlconnection.getResponseCode();
 
-				if (responseCode == 200) {
-					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
-				} else {
-					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream()));
-				}
-
-				String line;
-				while ((line = br.readLine()) != null) {
-					json = json + line + "\n";
-				}
-
-				// 테스트 출력
-				// System.out.println(json);
-
-			} catch (Exception e) {
-				e.printStackTrace();
+			if (responseCode == 200) {
+				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream()));
+			} else {
+				br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream()));
 			}
 
-			return json;
+			String line;
+			while ((line = br.readLine()) != null) {
+				json = json + line + "\n";
+			}
+
+			// 테스트 출력
+			// System.out.println(json);
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+
+		return json;
+	}
 
 }

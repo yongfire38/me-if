@@ -33,8 +33,6 @@ public class GetWaterMeasuringList {
 			// step 0.open api url과 서비스 키.
 			String service_url = JsonParser.getProperty("PRI_WaterQualityService_getWaterMeasuringList_url");
 			String service_key = JsonParser.getProperty("PRI_WaterQualityService_key");
-
-			System.out.println("service_url"+service_url);
 			
 			// step 1.파일의 첫 행 작성
 			File file = new File(JsonParser.getProperty("file_path") + "PRI/TIF_PRI_01.dat");

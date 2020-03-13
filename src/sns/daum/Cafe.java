@@ -150,12 +150,12 @@ public class Cafe {
 
 							String keyname = iter.next();
 
-							JsonParser.colWrite(title, keyname, "title", document);
-							JsonParser.colWrite(contents, keyname, "contents", document);
-							JsonParser.colWrite(url, keyname, "url", document);
-							JsonParser.colWrite(cafename, keyname, "cafename", document);
-							JsonParser.colWrite(thumbnail, keyname, "thumbnail", document);
-							JsonParser.colWrite(datetime, keyname, "datetime", document);
+							JsonParser.colWrite_sns(title, keyname, "title", document);
+							JsonParser.colWrite_sns(contents, keyname, "contents", document);
+							JsonParser.colWrite_sns(url, keyname, "url", document);
+							JsonParser.colWrite_sns(cafename, keyname, "cafename", document);
+							JsonParser.colWrite_sns(thumbnail, keyname, "thumbnail", document);
+							JsonParser.colWrite_sns(datetime, keyname, "datetime", document);
 
 						}
 

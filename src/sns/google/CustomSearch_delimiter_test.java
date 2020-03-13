@@ -124,9 +124,9 @@ public class CustomSearch_delimiter_test {
 
 								String keyname = iter.next();
 
-								JsonParser.colWrite(title, keyname, "title", item);
-								JsonParser.colWrite(snippet, keyname, "snippet", item);
-								JsonParser.colWrite(link, keyname, "link", item);
+								JsonParser.colWrite_sns(title, keyname, "title", item);
+								JsonParser.colWrite_sns(snippet, keyname, "snippet", item);
+								JsonParser.colWrite_sns(link, keyname, "link", item);
 
 							}
 
