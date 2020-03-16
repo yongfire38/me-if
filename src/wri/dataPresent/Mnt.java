@@ -54,6 +54,8 @@ public class Mnt {
 					pw.write("|^");
 					pw.write("damnm"); // 댐이름
 					pw.write("|^");
+					pw.write("dgrar"); // 유역면적
+					pw.write("|^");
 					pw.write("floodadjstCpcty"); // 홍수조절용량
 					pw.write("|^");
 					pw.write("floodseLmttWal"); // 상시만수위
@@ -126,6 +128,7 @@ public class Mnt {
 						String damFom = " "; // 형식
 						String damdgr = " "; // 하천
 						String damnm = " "; // 댐이름
+						String dgrar = " "; // 유역면적
 						String floodadjstCpcty = " "; // 홍수조절용량
 						String floodseLmttWal = " "; // 상시만수위
 						String fyerUswtrsuplyplanqy = " "; // 연간용수공급량
@@ -157,6 +160,9 @@ public class Mnt {
 							}
 							if (keyname.equals("damnm")) {
 								damnm = item_obj.get(keyname).toString().trim();
+							}
+							if (keyname.equals("dgrar")) {
+								dgrar = item_obj.get(keyname).toString().trim();
 							}
 							if (keyname.equals("floodadjstCpcty")) {
 								floodadjstCpcty = item_obj.get(keyname).toString().trim();
@@ -217,6 +223,8 @@ public class Mnt {
 							pw.write(damdgr); // 하천
 							pw.write("|^");
 							pw.write(damnm); // 댐이름
+							pw.write("|^");
+							pw.write(dgrar); // 유역면적
 							pw.write("|^");
 							pw.write(floodadjstCpcty); // 홍수조절용량
 							pw.write("|^");

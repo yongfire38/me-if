@@ -48,12 +48,7 @@ public class MultiFunctionBarrier {
 					try {
 
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-						pw.write("rsvwtqy"); // 저수현황 현저수량
-						pw.write("|^");
-						pw.write("rsvwtrt"); // 저수현황 저수율
-						pw.write("|^");
-						pw.write("managewalrsvwtqy"); // 저수현황 관리수위 저수량
-						pw.write("|^");
+						
 						pw.write("suge"); // 수계
 						pw.write("|^");
 						pw.write("brrernm"); // 보이름
@@ -81,6 +76,12 @@ public class MultiFunctionBarrier {
 						pw.write("etcdcwtrqyone"); // 방류량 고정보
 						pw.write("|^");
 						pw.write("lowlevel"); // 수위 금일현재
+						pw.write("|^");
+						pw.write("rsvwtqy"); // 저수현황 현저수량
+						pw.write("|^");
+						pw.write("rsvwtrt"); // 저수현황 저수율
+						pw.write("|^");
+						pw.write("managewalrsvwtqy"); // 저수현황 관리수위 저수량
 						pw.println();
 						pw.flush();
 						pw.close();
@@ -121,11 +122,6 @@ public class MultiFunctionBarrier {
 
 				StringBuffer resultSb = new StringBuffer("");
 
-				StringBuffer rsvwtqy = new StringBuffer(" "); // 저수현황 현저수량
-				StringBuffer rsvwtrt = new StringBuffer(" "); // 저수현황 저수율
-				StringBuffer managewalrsvwtqy = new StringBuffer(" "); // 저수현황
-																		// 관리수위
-																		// 저수량
 				StringBuffer suge = new StringBuffer(" "); // 수계
 				StringBuffer brrernm = new StringBuffer(" "); // 보이름
 				StringBuffer rf = new StringBuffer(" "); // 강우량 금일
@@ -140,6 +136,10 @@ public class MultiFunctionBarrier {
 				StringBuffer spilldcwtrqy = new StringBuffer(" "); // 방류량 가동보
 				StringBuffer etcdcwtrqyone = new StringBuffer(" "); // 방류량 고정보
 				StringBuffer lowlevel = new StringBuffer(" "); // 수위 금일현재
+				StringBuffer rsvwtqy = new StringBuffer(" "); // 저수현황 현저수량
+				StringBuffer rsvwtrt = new StringBuffer(" "); // 저수현황 저수율
+				StringBuffer managewalrsvwtqy = new StringBuffer(" "); // 저수현황 관리수위 저수량
+																		
 
 				for (int i = 1; i <= pageCount; i++) {
 
@@ -174,9 +174,6 @@ public class MultiFunctionBarrier {
 
 									String keyname = iter.next();
 
-									JsonParser.colWrite(rsvwtqy, keyname, "rsvwtqy", item_obj);
-									JsonParser.colWrite(rsvwtrt, keyname, "rsvwtrt", item_obj);
-									JsonParser.colWrite(managewalrsvwtqy, keyname, "managewalrsvwtqy", item_obj);
 									JsonParser.colWrite(suge, keyname, "suge", item_obj);
 									JsonParser.colWrite(brrernm, keyname, "brrernm", item_obj);
 									JsonParser.colWrite(rf, keyname, "rf", item_obj);
@@ -191,16 +188,13 @@ public class MultiFunctionBarrier {
 									JsonParser.colWrite(spilldcwtrqy, keyname, "spilldcwtrqy", item_obj);
 									JsonParser.colWrite(etcdcwtrqyone, keyname, "etcdcwtrqyone", item_obj);
 									JsonParser.colWrite(lowlevel, keyname, "lowlevel", item_obj);
+									JsonParser.colWrite(rsvwtqy, keyname, "rsvwtqy", item_obj);
+									JsonParser.colWrite(rsvwtrt, keyname, "rsvwtrt", item_obj);
+									JsonParser.colWrite(managewalrsvwtqy, keyname, "managewalrsvwtqy", item_obj);
 
 								}
 
 								// 한번에 문자열 합침
-								resultSb.append(rsvwtqy);
-								resultSb.append("|^");
-								resultSb.append(rsvwtrt);
-								resultSb.append("|^");
-								resultSb.append(managewalrsvwtqy);
-								resultSb.append("|^");
 								resultSb.append(suge);
 								resultSb.append("|^");
 								resultSb.append(brrernm);
@@ -228,6 +222,12 @@ public class MultiFunctionBarrier {
 								resultSb.append(etcdcwtrqyone);
 								resultSb.append("|^");
 								resultSb.append(lowlevel);
+								resultSb.append("|^");
+								resultSb.append(rsvwtqy);
+								resultSb.append("|^");
+								resultSb.append(rsvwtrt);
+								resultSb.append("|^");
+								resultSb.append(managewalrsvwtqy);
 								resultSb.append(System.getProperty("line.separator"));
 
 							}
