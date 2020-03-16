@@ -161,87 +161,16 @@ public class GetPressFclty {
 								
 								String keyname = iter.next();
 								
-								if (keyname.equals("RNUM")) {
-									if (!(JsonParser.isEmpty(item.get(keyname)))) {
-										RNUM.setLength(0);
-										RNUM.append(item.get(keyname).toString().trim());	
-									} else {
-										RNUM.setLength(0);
-										RNUM.append(" ");
-									}	
-								}
-								if (keyname.equals("WBIZ_NAM")) {
-									if (!(JsonParser.isEmpty(item.get(keyname)))) {
-										WBIZ_NAM.setLength(0);
-										WBIZ_NAM.append(item.get(keyname).toString().trim());	
-									} else {
-										WBIZ_NAM.setLength(0);
-										WBIZ_NAM.append(" ");
-									}	
-								}
-								if (keyname.equals("FCLT_NAM")) {
-									if (!(JsonParser.isEmpty(item.get(keyname)))) {
-										FCLT_NAM.setLength(0);
-										FCLT_NAM.append(item.get(keyname).toString().trim());	
-									} else {
-										FCLT_NAM.setLength(0);
-										FCLT_NAM.append(" ");
-									}	
-								}
-								if (keyname.equals("DTL_ADR")) {
-									if (!(JsonParser.isEmpty(item.get(keyname)))) {
-										DTL_ADR.setLength(0);
-										DTL_ADR.append(item.get(keyname).toString().trim());	
-									} else {
-										DTL_ADR.setLength(0);
-										DTL_ADR.append(" ");
-									}	
-								}
-								if (keyname.equals("PHONE_NUM")) {
-									if (!(JsonParser.isEmpty(item.get(keyname)))) {
-										PHONE_NUM.setLength(0);
-										PHONE_NUM.append(item.get(keyname).toString().trim());	
-									} else {
-										PHONE_NUM.setLength(0);
-										PHONE_NUM.append(" ");
-									}	
-								}
-								if (keyname.equals("DSGNF_VOL")) {
-									if (!(JsonParser.isEmpty(item.get(keyname)))) {
-										DSGNF_VOL.setLength(0);
-										DSGNF_VOL.append(item.get(keyname).toString().trim());	
-									} else {
-										DSGNF_VOL.setLength(0);
-										DSGNF_VOL.append(" ");
-									}	
-								}
-								if (keyname.equals("COMPL_DAT")) {
-									if (!(JsonParser.isEmpty(item.get(keyname)))) {
-										COMPL_DAT.setLength(0);
-										COMPL_DAT.append(item.get(keyname).toString().trim());	
-									} else {
-										COMPL_DAT.setLength(0);
-										COMPL_DAT.append(" ");
-									}	
-								}
-								if (keyname.equals("MNTRG_CTRL_YN")) {
-									if (!(JsonParser.isEmpty(item.get(keyname)))) {
-										MNTRG_CTRL_YN.setLength(0);
-										MNTRG_CTRL_YN.append(item.get(keyname).toString().trim());	
-									} else {
-										MNTRG_CTRL_YN.setLength(0);
-										MNTRG_CTRL_YN.append(" ");
-									}	
-								}
-								if (keyname.equals("EMGNC_DVLP_TY_NM")) {
-									if (!(JsonParser.isEmpty(item.get(keyname)))) {
-										EMGNC_DVLP_TY_NM.setLength(0);
-										EMGNC_DVLP_TY_NM.append(item.get(keyname).toString().trim());	
-									} else {
-										EMGNC_DVLP_TY_NM.setLength(0);
-										EMGNC_DVLP_TY_NM.append(" ");
-									}	
-								}
+								JsonParser.colWrite(RNUM, keyname, "RNUM", item);
+								JsonParser.colWrite(WBIZ_NAM, keyname, "WBIZ_NAM", item);
+								JsonParser.colWrite(FCLT_NAM, keyname, "FCLT_NAM", item);
+								JsonParser.colWrite(DTL_ADR, keyname, "DTL_ADR", item);
+								JsonParser.colWrite(PHONE_NUM, keyname, "PHONE_NUM", item);
+								JsonParser.colWrite(DSGNF_VOL, keyname, "DSGNF_VOL", item);
+								JsonParser.colWrite(COMPL_DAT, keyname, "COMPL_DAT", item);
+								JsonParser.colWrite(MNTRG_CTRL_YN, keyname, "MNTRG_CTRL_YN", item);
+								JsonParser.colWrite(EMGNC_DVLP_TY_NM, keyname, "EMGNC_DVLP_TY_NM", item);
+								
 							}
 							
 							//한방에  한 줄

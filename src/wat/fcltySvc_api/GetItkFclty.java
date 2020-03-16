@@ -57,9 +57,11 @@ public class GetItkFclty {
 					pw.write("WILO_NAM"); // 수도구분
 					pw.write("|^");
 					pw.write("WBIZ_NAM"); // 수도사업자
-					pw.write("|^");
+					pw.write("|^");		
 					pw.write("FCLT_NAM"); // 취수장명
-					pw.write("|^");
+					pw.write("|^");				
+					pw.write("DTL_ADR"); // 취수장 주소
+					pw.write("|^");	
 					pw.write("WSYS_NM"); // 대표수계
 					pw.write("|^");
 					pw.write("WSRC_NM"); // 수원(취수원형태)
@@ -120,6 +122,7 @@ public class GetItkFclty {
 			StringBuffer WILO_NAM = new StringBuffer(" "); // 수도구분
 			StringBuffer WBIZ_NAM = new StringBuffer(" "); // 수도사업자
 			StringBuffer FCLT_NAM = new StringBuffer(" "); // 취수장명
+			StringBuffer DTL_ADR = new StringBuffer(" "); // 취수장명
 			StringBuffer WSYS_NM = new StringBuffer(" "); // 대표수계
 			StringBuffer WSRC_NM = new StringBuffer(" "); // 수원(취수원형태)
 			StringBuffer PHONE_NUM = new StringBuffer(" "); // 전화번호
@@ -161,6 +164,7 @@ public class GetItkFclty {
 								JsonParser.colWrite(WILO_NAM, keyname, "WILO_NAM", item);
 								JsonParser.colWrite(WBIZ_NAM, keyname, "WBIZ_NAM", item);
 								JsonParser.colWrite(FCLT_NAM, keyname, "FCLT_NAM", item);
+								JsonParser.colWrite(DTL_ADR, keyname, "DTL_ADR", item);
 								JsonParser.colWrite(WSYS_NM, keyname, "WSYS_NM", item);
 								JsonParser.colWrite(WSRC_NM, keyname, "WSRC_NM", item);
 								JsonParser.colWrite(PHONE_NUM, keyname, "PHONE_NUM", item);
@@ -183,6 +187,8 @@ public class GetItkFclty {
 							resultSb.append(WBIZ_NAM);
 							resultSb.append("|^");
 							resultSb.append(FCLT_NAM);
+							resultSb.append("|^");
+							resultSb.append(DTL_ADR);
 							resultSb.append("|^");
 							resultSb.append(WSYS_NM);
 							resultSb.append("|^");

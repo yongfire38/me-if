@@ -100,7 +100,7 @@ public class MonPurification {
 						pw.write("|^");
 						pw.write("BRO"); // 브롬산염
 						pw.write("|^");
-						pw.write("D-URNM"); // 우라늄
+						pw.write("D_URNM"); // 우라늄
 						pw.write("|^");
 						pw.write("PHEN"); // 페놀
 						pw.write("|^");

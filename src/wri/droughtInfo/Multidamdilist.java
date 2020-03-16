@@ -45,18 +45,20 @@ public class Multidamdilist {
 			
 				try {
 					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-					pw.write("obsymd"); // 측정일자
+					
+					pw.write("seqno"); // 순번
 					pw.write("|^");
 					pw.write("damcdcrd"); // 댐코드
+					pw.write("|^");
+					pw.write("damnm"); // 댐명칭
+					pw.write("|^");
+					pw.write("obsymd"); // 측정일자
 					pw.write("|^");
 					pw.write("rsqtysum"); // 저수량합계(백만m3)
 					pw.write("|^");
 					pw.write("stagenow"); // 현재저수지가뭄단계명
 					pw.write("|^");
 					pw.write("limobsymd"); // 용수공급가능일
-					pw.write("|^");
-					pw.write("stage_0"); // 정상공급환원단계저수량
 					pw.write("|^");
 					pw.write("stage_1"); // 관심단계저수량
 					pw.write("|^");
@@ -66,9 +68,7 @@ public class Multidamdilist {
 					pw.write("|^");
 					pw.write("stage_4"); // 심각단계저수량
 					pw.write("|^");
-					pw.write("damnm"); // 댐명칭
-					pw.write("|^");
-					pw.write("seqno"); // 순번
+					pw.write("stage_0"); // 정상공급환원단계저수량
 					pw.println();
 					pw.flush();
 					pw.close();
@@ -109,18 +109,19 @@ public class Multidamdilist {
 			
 			StringBuffer resultSb = new StringBuffer("");
 			
-			StringBuffer obsymd = new StringBuffer(" "); // 측정일자
+			StringBuffer seqno = new StringBuffer(" "); // 순번
 			StringBuffer damcdcrd = new StringBuffer(" "); // 댐코드
+			StringBuffer damnm = new StringBuffer(" "); // 댐명칭
+			StringBuffer obsymd = new StringBuffer(" "); // 측정일자
 			StringBuffer rsqtysum = new StringBuffer(" "); // 저수량합계(백만m3)
 			StringBuffer stagenow = new StringBuffer(" "); // 현재저수지가뭄단계명
-			StringBuffer limobsymd = new StringBuffer(" "); // 용수공급가능일
-			StringBuffer stage_0 = new StringBuffer(" "); // 정상공급환원단계저수량
+			StringBuffer limobsymd = new StringBuffer(" "); // 용수공급가능일	
 			StringBuffer stage_1 = new StringBuffer(" "); // 관심단계저수량
 			StringBuffer stage_2 = new StringBuffer(" "); // 주의단계저수량
 			StringBuffer stage_3 = new StringBuffer(" "); // 경계단계저수량
 			StringBuffer stage_4 = new StringBuffer(" "); // 심각단계저수량
-			StringBuffer damnm = new StringBuffer(" "); // 댐명칭
-			StringBuffer seqno = new StringBuffer(" "); // 순번
+			StringBuffer stage_0 = new StringBuffer(" "); // 정상공급환원단계저수량
+			
 				
 			for (int i = 1; i <= pageCount; ++i) {
 				
@@ -154,33 +155,36 @@ public class Multidamdilist {
 								
 								String keyname = iter.next();
 								
-								JsonParser.colWrite(obsymd, keyname, "obsymd", item_obj);
+								JsonParser.colWrite(seqno, keyname, "seqno", item_obj);
 								JsonParser.colWrite(damcdcrd, keyname, "damcdcrd", item_obj);
+								JsonParser.colWrite(damnm, keyname, "damnm", item_obj);
+								JsonParser.colWrite(obsymd, keyname, "obsymd", item_obj);
 								JsonParser.colWrite(rsqtysum, keyname, "rsqtysum", item_obj);
 								JsonParser.colWrite(stagenow, keyname, "stagenow", item_obj);
 								JsonParser.colWrite(limobsymd, keyname, "limobsymd", item_obj);
-								JsonParser.colWrite(stage_0, keyname, "stage_0", item_obj);
 								JsonParser.colWrite(stage_1, keyname, "stage_1", item_obj);
 								JsonParser.colWrite(stage_2, keyname, "stage_2", item_obj);
 								JsonParser.colWrite(stage_3, keyname, "stage_3", item_obj);
 								JsonParser.colWrite(stage_4, keyname, "stage_4", item_obj);
-								JsonParser.colWrite(damnm, keyname, "damnm", item_obj);
-								JsonParser.colWrite(seqno, keyname, "seqno", item_obj);
+								JsonParser.colWrite(stage_0, keyname, "stage_0", item_obj);
+								
 										
 							}
 							
 							//한번에 문자열 합침
-							resultSb.append(obsymd);
+							resultSb.append(seqno);
 							resultSb.append("|^");
 							resultSb.append(damcdcrd);
+							resultSb.append("|^");
+							resultSb.append(damnm);
+							resultSb.append("|^");
+							resultSb.append(obsymd);
 							resultSb.append("|^");
 							resultSb.append(rsqtysum);
 							resultSb.append("|^");
 							resultSb.append(stagenow);
 							resultSb.append("|^");
 							resultSb.append(limobsymd);
-							resultSb.append("|^");
-							resultSb.append(stage_0);
 							resultSb.append("|^");
 							resultSb.append(stage_1);
 							resultSb.append("|^");
@@ -190,9 +194,7 @@ public class Multidamdilist {
 							resultSb.append("|^");
 							resultSb.append(stage_4);
 							resultSb.append("|^");
-							resultSb.append(damnm);
-							resultSb.append("|^");
-							resultSb.append(seqno);
+							resultSb.append(stage_0);
 							resultSb.append(System.getProperty("line.separator"));
 							
 						}
