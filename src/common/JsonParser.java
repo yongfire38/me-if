@@ -993,7 +993,7 @@ public class JsonParser {
 
 	// 네이버 블로그 파싱 (검색어 하나를 파라미터로 받아서 파싱)
 	public static String parseBlogJson_naver(String service_url, String naver_client_id, String naver_client_secret,
-			String query, String start) {
+			String query, String job_dt, String start) {
 
 		BufferedReader br = null;
 
@@ -1036,7 +1036,7 @@ public class JsonParser {
 	}
 
 	// 다음 블로그 파싱 (검색어 하나를 파라미터로 받아서 파싱)
-	public static String parseBlogJson_daum(String service_url, String daum_api_key, String query, String page) {
+	public static String parseBlogJson_daum(String service_url, String daum_api_key, String query, String job_dt, String page) {
 
 		BufferedReader br = null;
 
@@ -1077,8 +1077,8 @@ public class JsonParser {
 		return json;
 	}
 
-	// 다음 블로그 파싱 (검색어 하나를 파라미터로 받아서 파싱)
-	public static String parseJson_google(String service_url, String google_api_key, String google_api_cx, String query,
+	// 구글 블로그 파싱 (검색어 하나를 파라미터로 받아서 파싱)
+	public static String parseJson_google(String service_url, String google_api_key, String google_api_cx, String query, String job_dt,
 			String start) {
 
 		BufferedReader br = null;

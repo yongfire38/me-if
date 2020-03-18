@@ -23,13 +23,18 @@ public class Cafearticle {
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
 		
-		if (args.length == 1) {
+		if (args.length == 1 || args.length == 2) {
 			
 			System.out.println("firstLine start..");
 			long start = System.currentTimeMillis(); // 시작시간
 			SimpleDateFormat dayTime = new SimpleDateFormat("yyyyMMdd");
 
 			String job_dt = dayTime.format(new Date(start));
+			
+			//파라미터를 하나만 넣으면 검색어 (작업일은 시스템 날짜), 2개 넣으면 검색어 & 작업일(수동으로 입력한)
+			if(args.length == 2){
+				job_dt = args[1];
+			}
 
 			// step 0.open api url과 서비스 키.
 
@@ -51,7 +56,7 @@ public class Cafearticle {
 
 					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 					pw.write("'");
-					pw.write("job_dt"); // 시스템 일자
+					pw.write("job_dt"); // 시스템 일자 (파라미터로 준 경우는 입력값)
 					pw.write("'");
 					pw.write("|^");
 					pw.write("'");
@@ -90,7 +95,7 @@ public class Cafearticle {
 			String json = "";
 
 			// step 2. 전체 페이지 파악을 위한 샘플 파싱
-			json = JsonParser.parseBlogJson_naver(service_url, naver_client_id, naver_client_secret, args[0], "1");
+			json = JsonParser.parseBlogJson_naver(service_url, naver_client_id, naver_client_secret, args[0], job_dt, "1");
 
 			int pageCount = 0;
 
@@ -129,7 +134,7 @@ public class Cafearticle {
 
 					System.out.println("페이지 검색 시작 위치는:::" + i);
 
-					json = JsonParser.parseBlogJson_naver(service_url, naver_client_id, naver_client_secret, args[0],
+					json = JsonParser.parseBlogJson_naver(service_url, naver_client_id, naver_client_secret, args[0], job_dt,
 							Integer.toString(i));
 
 					try {
@@ -161,7 +166,7 @@ public class Cafearticle {
 
 							// 한번에 문자열 합침
 							resultSb.append("'");
-							resultSb.append(job_dt); // 시스템 일자
+							resultSb.append(job_dt); // 시스템 일자 (파라미터로 준 경우는 입력값)
 							resultSb.append("'");
 							resultSb.append("|^");
 							resultSb.append("'");

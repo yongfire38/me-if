@@ -23,13 +23,18 @@ public class Blog {
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
 		
-		if (args.length == 1) {
+		if (args.length == 1 || args.length == 2) {
 			
 			System.out.println("firstLine start..");
 			long start = System.currentTimeMillis(); // 시작시간
 			SimpleDateFormat dayTime = new SimpleDateFormat("yyyyMMdd");
 
 			String job_dt = dayTime.format(new Date(start));
+			
+			//파라미터를 하나만 넣으면 검색어 (작업일은 시스템 날짜), 2개 넣으면 검색어 & 작업일(수동으로 입력한)
+			if(args.length == 2){
+				job_dt = args[1];
+			}
 
 			// step 0.open api url과 서비스 키.
 
@@ -50,7 +55,7 @@ public class Blog {
 
 					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 					pw.write("'");
-					pw.write("job_dt"); // 시스템 일자
+					pw.write("job_dt"); // 시스템 일자 (파라미터로 준 경우는 입력값)
 					pw.write("'");
 					pw.write("|^");
 					pw.write("'");
@@ -94,7 +99,7 @@ public class Blog {
 
 			String json = "";
 
-			json = JsonParser.parseBlogJson_daum(service_url, daum_api_key, args[0], "1");
+			json = JsonParser.parseBlogJson_daum(service_url, daum_api_key, args[0], job_dt, "1");
 
 			// System.out.println("json::::::" + json);
 
@@ -131,7 +136,7 @@ public class Blog {
 
 			for (int i = 1; i <= pageCount; i++) {
 
-				json = JsonParser.parseBlogJson_daum(service_url, daum_api_key, args[0], Integer.toString(i));
+				json = JsonParser.parseBlogJson_daum(service_url, daum_api_key, args[0], job_dt, Integer.toString(i));
 
 				// System.out.println("json::::::" + json);
 
@@ -165,7 +170,7 @@ public class Blog {
 
 						// 한번에 문자열 합침
 						resultSb.append("'");
-						resultSb.append(job_dt); // 시스템 일자
+						resultSb.append(job_dt); // 시스템 일자 (파라미터로 준 경우는 입력값)
 						resultSb.append("'");
 						resultSb.append("|^");
 						resultSb.append("'");
