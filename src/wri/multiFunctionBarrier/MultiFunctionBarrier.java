@@ -14,6 +14,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import common.JsonParser;
+//import common.TransSftp;
 
 
 public class MultiFunctionBarrier {
