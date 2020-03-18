@@ -14,7 +14,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import common.JsonParser;
-import common.TransSftp;
+
 
 public class GetStackStdr {
 
@@ -259,7 +259,7 @@ public class GetStackStdr {
 
 					// step 5. 대상 서버에 sftp로 보냄 (대상 파일 경로, 목적지 폴더명)
 
-					TransSftp.transSftp(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_01.dat", "EIA");
+					//TransSftp.transSftp(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_01.dat", "EIA");
 					long end = System.currentTimeMillis();
 					System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
 					

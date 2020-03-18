@@ -14,7 +14,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import common.JsonParser;
-import common.TransSftp;
+
 
 public class GetWaterMeasuringList {
 	
@@ -221,10 +221,10 @@ public class GetWaterMeasuringList {
 				JSONParser parser = new JSONParser();
 				JSONObject obj = (JSONObject) parser.parse(json);
 	
-				JSONObject getRealTimeWaterQualityList = (JSONObject) obj.get("getWaterMeasuringList");
+				JSONObject getWaterMeasuringList = (JSONObject) obj.get("getWaterMeasuringList");
 	
-				int numOfRows = ((Long) getRealTimeWaterQualityList.get("numOfRows")).intValue();
-				int totalCount = ((Long) getRealTimeWaterQualityList.get("totalCount")).intValue();
+				int numOfRows = ((Long) getWaterMeasuringList.get("numOfRows")).intValue();
+				int totalCount = ((Long) getWaterMeasuringList.get("totalCount")).intValue();
 	
 				pageCount = (totalCount / numOfRows) + 1;
 	
@@ -323,9 +323,9 @@ public class GetWaterMeasuringList {
 					JSONParser parser = new JSONParser();
 					JSONObject obj = (JSONObject) parser.parse(json);
 
-					JSONObject getRealTimeWaterQualityList = (JSONObject) obj.get("getWaterMeasuringList");
+					JSONObject getWaterMeasuringList = (JSONObject) obj.get("getWaterMeasuringList");
 
-					JSONObject header = (JSONObject) getRealTimeWaterQualityList.get("header");
+					JSONObject header = (JSONObject) getWaterMeasuringList.get("header");
 
 					resultCode_col.setLength(0);
 					resultCode_col.append(header.get("code").toString().trim()); // 결과
@@ -334,17 +334,17 @@ public class GetWaterMeasuringList {
 					resultMsg_col.append(header.get("message").toString().trim()); // 결과
 																					// 메시지
 					numOfRows.setLength(0);
-					numOfRows.append(getRealTimeWaterQualityList.get("numOfRows").toString().trim());
+					numOfRows.append(getWaterMeasuringList.get("numOfRows").toString().trim());
 
 					pageNo_str.setLength(0);
 					pageNo_str.append(String.valueOf(i).trim());
 
 					totalCount.setLength(0);
-					totalCount.append(getRealTimeWaterQualityList.get("totalCount").toString().trim());
+					totalCount.append(getWaterMeasuringList.get("totalCount").toString().trim());
 					
 					if (resultCode_col.toString().equals("00")) {
 						
-						JSONArray items = (JSONArray) getRealTimeWaterQualityList.get("item");
+						JSONArray items = (JSONArray) getWaterMeasuringList.get("item");
 						
 						for (int r = 0; r < items.size(); r++) {
 							
@@ -624,7 +624,7 @@ public class GetWaterMeasuringList {
 	
 			// step 5. 대상 서버에 sftp로 보냄
 	
-			TransSftp.transSftp(JsonParser.getProperty("file_path") + "PRI/TIF_PRI_01.dat", "PRI");
+			//TransSftp.transSftp(JsonParser.getProperty("file_path") + "PRI/TIF_PRI_01.dat", "PRI");
 	
 			long end = System.currentTimeMillis();
 			System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");

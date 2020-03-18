@@ -14,7 +14,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import common.JsonParser;
-import common.TransSftp;
+
 
 public class MultiPoseDam {
 
@@ -294,7 +294,7 @@ public class MultiPoseDam {
 
 				// step 5. 대상 서버에 sftp로 보냄
 
-				TransSftp.transSftp(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_09.dat", "WRI");
+				//TransSftp.transSftp(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_09.dat", "WRI");
 
 				long end = System.currentTimeMillis();
 				System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
