@@ -46,9 +46,9 @@ public class GetIvstg {
 					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 					pw.write("mgtNo"); // 사업 코드
 					pw.write("|^");
-					pw.write("ivstgGb"); // 조사구분
-					pw.write("|^");
 					pw.write("ivstgSpotNm"); // 조사지점명
+					pw.write("|^");
+					pw.write("ivstgGb"); // 조사구분
 					pw.write("|^");
 					pw.write("adres"); // 주소
 					pw.write("|^");
@@ -449,9 +449,9 @@ public class GetIvstg {
 
 									pw.write(mgtNo); // 사업코드
 									pw.write("|^");
-									pw.write(ivstgGb_str); // 조사구분
-									pw.write("|^");
 									pw.write(ivstg_ivstgSpotNm_str); // 조사지점명
+									pw.write("|^");
+									pw.write(ivstgGb_str); // 조사구분
 									pw.write("|^");
 									pw.write(ivstg_adres_str); // 주소
 									pw.write("|^");
