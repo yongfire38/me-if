@@ -18,7 +18,7 @@ import common.JsonParser;
 
 public class GetEnvrnExmntInfoInqire {
 
-	// 자가진단 소재지 정보 서비스 - 사전환경 영향평가서 정보를 조회
+	// 자가진단 소재지 정보 서비스 - PNU,지번, 중심점, X좌표, Y좌표 정보를 조회하는 기능제공
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
 		
@@ -45,6 +45,8 @@ public class GetEnvrnExmntInfoInqire {
 				try {
 
 					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+					pw.write("buBun"); // 지분2
+					pw.write("|^");
 					pw.write("resultCode"); // 결과코드
 					pw.write("|^");
 					pw.write("resultMsg"); // 결과메시지
@@ -119,6 +121,8 @@ public class GetEnvrnExmntInfoInqire {
 						}
 
 						// 한번에 문자열 합침
+						resultSb.append(args[0]);
+						resultSb.append("|^");
 						resultSb.append(resultCode);
 						resultSb.append("|^");
 						resultSb.append(resultMsg);
@@ -156,6 +160,8 @@ public class GetEnvrnExmntInfoInqire {
 							}
 
 							// 한번에 문자열 합침
+							resultSb.append(args[0]);
+							resultSb.append("|^");
 							resultSb.append(resultCode);
 							resultSb.append("|^");
 							resultSb.append(resultMsg);

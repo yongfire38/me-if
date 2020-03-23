@@ -50,6 +50,11 @@ public class DamEffluent {
 					try {
 
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						
+						pw.write("stdt"); // 검색년도
+						pw.write("|^");
+						pw.write("damcd"); // 댐코드
+						pw.write("|^");
 						pw.write("resultCode"); // 결과코드
 						pw.write("|^");
 						pw.write("resultMsg"); // 결과메세지
@@ -182,6 +187,10 @@ public class DamEffluent {
 								}
 
 								// 한번에 문자열 합침
+								resultSb.append(args[0]);
+								resultSb.append("|^");
+								resultSb.append(args[1]);
+								resultSb.append("|^");
 								resultSb.append(resultCode);
 								resultSb.append("|^");
 								resultSb.append(resultMsg);

@@ -48,6 +48,8 @@ public class FcltyList {
 				try {
 
 					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+					pw.write("fcltyDivCode"); // 시설구분코드
+					pw.write("|^");
 					pw.write("fcltyMngNm"); // 시설관리명
 					pw.write("|^");
 					pw.write("sujCode"); // 사업장코드
@@ -131,6 +133,8 @@ public class FcltyList {
 							}
 
 							// 한번에 문자열 합침
+							resultSb.append(args[0]);
+							resultSb.append("|^");
 							resultSb.append(fcltyMngNm);
 							resultSb.append("|^");
 							resultSb.append(sujCode);

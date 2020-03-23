@@ -49,6 +49,12 @@ public class Hour {
 					try {
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
+						pw.write("damcode"); // 댐코드
+						pw.write("|^");
+						pw.write("stdt"); // 조회시작일
+						pw.write("|^");
+						pw.write("eddt"); // 조회종료일
+						pw.write("|^");
 						pw.write("obsrdt"); // 일시
 						pw.write("|^");
 						pw.write("lowlevel"); // 댐수위
@@ -159,6 +165,12 @@ public class Hour {
 								}
 
 								// 한번에 문자열 합침
+								resultSb.append(args[0]);
+								resultSb.append("|^");
+								resultSb.append(args[1]);
+								resultSb.append("|^");
+								resultSb.append(args[2]);
+								resultSb.append("|^");
 								resultSb.append(obsrdt);
 								resultSb.append("|^");
 								resultSb.append(lowlevel);
@@ -205,6 +217,12 @@ public class Hour {
 									}
 
 									// 한번에 문자열 합침
+									resultSb.append(args[0]);
+									resultSb.append("|^");
+									resultSb.append(args[1]);
+									resultSb.append("|^");
+									resultSb.append(args[2]);
+									resultSb.append("|^");
 									resultSb.append(obsrdt);
 									resultSb.append("|^");
 									resultSb.append(lowlevel);

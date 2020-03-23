@@ -47,6 +47,9 @@ public class GetDecsnCnListInfoInqire {
 					try {
 
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						
+						pw.write("type"); // 구분
+						pw.write("|^");
 						pw.write("resultCode"); // 결과코드
 						pw.write("|^");
 						pw.write("resultMsg"); // 결과메시지
@@ -159,6 +162,8 @@ public class GetDecsnCnListInfoInqire {
 								}
 
 								// 한번에 문자열 합침
+								resultSb.append(args[0]);
+								resultSb.append("|^");
 								resultSb.append(resultCode);
 								resultSb.append("|^");
 								resultSb.append(resultMsg);
@@ -205,6 +210,8 @@ public class GetDecsnCnListInfoInqire {
 									}
 
 									// 한번에 문자열 합침
+									resultSb.append(args[0]);
+									resultSb.append("|^");
 									resultSb.append(resultCode);
 									resultSb.append("|^");
 									resultSb.append(resultMsg);

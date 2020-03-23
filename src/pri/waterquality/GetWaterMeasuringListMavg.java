@@ -43,6 +43,8 @@ public class GetWaterMeasuringListMavg {
 				try {
 					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
+					pw.write("ptNoList"); // 검색조건 기관
+					pw.write("|^");
 					pw.write("resultCode"); // 결과코드
 					pw.write("|^");
 					pw.write("resultMsg"); // 결과메시지
@@ -434,6 +436,8 @@ public class GetWaterMeasuringListMavg {
 							}
 
 							// 한번에 문자열 합침
+							resultSb.append(args[0]);
+							resultSb.append("|^");
 							resultSb.append(resultCode_col);
 							resultSb.append("|^");
 							resultSb.append(resultMsg_col);

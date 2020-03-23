@@ -45,6 +45,8 @@ public class GetDscssSttusDscssIngDetailInfoInqire {
 				try {
 
 					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+					pw.write("eiaCd"); // 환경영향평가 코드
+					pw.write("|^");
 					pw.write("stateNm"); // 단계명
 					pw.write("|^");
 					pw.write("applyDt"); // 접수일
@@ -167,6 +169,8 @@ public class GetDscssSttusDscssIngDetailInfoInqire {
 							try {
 								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
+								pw.write(args[0]); // 환경영향평가 코드
+								pw.write("|^");
 								pw.write(stateNm); // 단계명
 								pw.write("|^");
 								pw.write(applyDt); // 접수일
@@ -240,6 +244,8 @@ public class GetDscssSttusDscssIngDetailInfoInqire {
 								try {
 									PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
+									pw.write(args[0]); // 환경영향평가 코드
+									pw.write("|^");
 									pw.write(stateNm); // 단계명
 									pw.write("|^");
 									pw.write(applyDt); // 접수일

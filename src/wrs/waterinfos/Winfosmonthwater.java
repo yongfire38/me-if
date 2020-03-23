@@ -50,6 +50,11 @@ public class Winfosmonthwater {
 					try {
 
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						
+						pw.write("stdt"); // 조회시작월
+						pw.write("|^");
+						pw.write("eddt"); // 조회종료월
+						pw.write("|^");
 						pw.write("sgcnm"); // 지자체명
 						pw.write("|^");
 						pw.write("sitenm"); // 정수장명
@@ -373,6 +378,10 @@ public class Winfosmonthwater {
 								}
 
 								// 한번에 문자열 합침
+								resultSb.append(args[0]);
+								resultSb.append("|^");
+								resultSb.append(args[1]);
+								resultSb.append("|^");
 								resultSb.append(sgcnm);
 								resultSb.append("|^");
 								resultSb.append(sitenm);
@@ -580,6 +589,10 @@ public class Winfosmonthwater {
 									}
 
 									// 한번에 문자열 합침
+									resultSb.append(args[0]);
+									resultSb.append("|^");
+									resultSb.append(args[1]);
+									resultSb.append("|^");
 									resultSb.append(sgcnm);
 									resultSb.append("|^");
 									resultSb.append(sitenm);

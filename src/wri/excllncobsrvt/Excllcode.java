@@ -48,6 +48,9 @@ public class Excllcode {
 				try {
 
 					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+					
+					pw.write("damcode"); // 댐코드
+					pw.write("|^");
 					pw.write("excllncobsrvtcode"); // 우량 관측소코드
 					pw.write("|^");
 					pw.write("obsrvtNm"); // 관측소이름
@@ -111,6 +114,8 @@ public class Excllcode {
 						}
 						
 						// 한번에 문자열 합침
+						resultSb.append(args[0]);
+						resultSb.append("|^");
 						resultSb.append(excllncobsrvtcode);
 						resultSb.append("|^");
 						resultSb.append(obsrvtNm);

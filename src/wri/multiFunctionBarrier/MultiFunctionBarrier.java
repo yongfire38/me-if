@@ -50,6 +50,14 @@ public class MultiFunctionBarrier {
 
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 						
+						pw.write("tdate"); // 전일 날짜
+						pw.write("|^");
+						pw.write("ldate"); // 현재년도 마지막 날짜
+						pw.write("|^");
+						pw.write("vdate"); // 조회날짜
+						pw.write("|^");
+						pw.write("vtime"); // 조회시간
+						pw.write("|^");
 						pw.write("suge"); // 수계
 						pw.write("|^");
 						pw.write("brrernm"); // 보이름
@@ -196,6 +204,13 @@ public class MultiFunctionBarrier {
 								}
 
 								// 한번에 문자열 합침
+								resultSb.append(args[0]);
+								resultSb.append("|^");
+								resultSb.append(args[1]);
+								resultSb.append("|^");
+								resultSb.append(args[2]);
+								resultSb.append("|^");
+								resultSb.append(args[3]);
 								resultSb.append(suge);
 								resultSb.append("|^");
 								resultSb.append(brrernm);

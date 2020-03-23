@@ -47,6 +47,8 @@ public class GetWaterMeasuringList {
 				try {
 					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
+					pw.write("ptNoList"); // 검색조건 기관
+					pw.write("|^");
 					pw.write("resultCode"); // 결과코드
 					pw.write("|^");
 					pw.write("resultMsg"); // 결과메시지
@@ -374,7 +376,7 @@ public class GetWaterMeasuringList {
 								JsonParser.colWrite(latDgr, keyname, "LAT_DGR", item);
 								JsonParser.colWrite(latMin, keyname, "LAT_MIN", item);
 								JsonParser.colWrite(latSec, keyname, "LAT_SEC", item);
-								JsonParser.colWrite(wmcymd, keyname, "WMCYMD", item);
+								JsonParser.colWrite_waterMeasuring(wmcymd, keyname, "WMCYMD", item);
 								JsonParser.colWrite(itemLvl, keyname, "ITEM_LVL", item);
 								JsonParser.colWrite(itemAmnt, keyname, "ITEM_AMNT", item);
 								JsonParser.colWrite(itemTemp, keyname, "ITEM_TEMP", item);
@@ -437,6 +439,8 @@ public class GetWaterMeasuringList {
 							}
 							
 							// 한번에 문자열 합침
+							resultSb.append(args[0]);
+							resultSb.append("|^");
 							resultSb.append(resultCode_col);
 							resultSb.append("|^");
 							resultSb.append(resultMsg_col);

@@ -46,6 +46,11 @@ public class GetSelfDgnssLocplcInfoLegaldongAdstrdManageInfoInqire {
 					try {
 
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						
+						pw.write("addr"); // 조회 구분
+						pw.write("|^");
+						pw.write("type"); // 상담 소재지 구분
+						pw.write("|^");
 						pw.write("resultCode"); // 결과코드
 						pw.write("|^");
 						pw.write("resultMsg"); // 결과메시지
@@ -119,6 +124,10 @@ public class GetSelfDgnssLocplcInfoLegaldongAdstrdManageInfoInqire {
 							}
 
 							// 한번에 문자열 합침
+							resultSb.append(args[0]);
+							resultSb.append("|^");
+							resultSb.append(args[1]);
+							resultSb.append("|^");
 							resultSb.append(resultCode);
 							resultSb.append("|^");
 							resultSb.append(resultMsg);
@@ -156,6 +165,10 @@ public class GetSelfDgnssLocplcInfoLegaldongAdstrdManageInfoInqire {
 								}
 
 								// 한번에 문자열 합침
+								resultSb.append(args[0]);
+								resultSb.append("|^");
+								resultSb.append(args[1]);
+								resultSb.append("|^");
 								resultSb.append(resultCode);
 								resultSb.append("|^");
 								resultSb.append(resultMsg);

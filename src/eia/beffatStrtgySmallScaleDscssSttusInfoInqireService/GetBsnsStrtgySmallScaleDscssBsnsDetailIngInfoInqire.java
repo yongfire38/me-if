@@ -46,6 +46,8 @@ public class GetBsnsStrtgySmallScaleDscssBsnsDetailIngInfoInqire {
 				try {
 
 					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+					pw.write("perCd"); // 사전환경성검토코드
+					pw.write("|^");
 					pw.write("resultCode"); // 결과코드
 					pw.write("|^");
 					pw.write("resultMsg"); // 결과메시지
@@ -135,6 +137,8 @@ public class GetBsnsStrtgySmallScaleDscssBsnsDetailIngInfoInqire {
 						try {
 							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
+							pw.write(args[0]); // 사전환경성검토코드
+							pw.write("|^");
 							pw.write(resultCode); // 결과코드
 							pw.write("|^");
 							pw.write(resultMsg); // 결과메시지
@@ -200,6 +204,8 @@ public class GetBsnsStrtgySmallScaleDscssBsnsDetailIngInfoInqire {
 							try {
 								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
+								pw.write(args[0]); // 사전환경성검토코드
+								pw.write("|^");
 								pw.write(resultCode); // 결과코드
 								pw.write("|^");
 								pw.write(resultMsg); // 결과메시지

@@ -52,6 +52,19 @@ public class Mntwal {
 					try {
 
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						
+						pw.write("sdate"); // 조회시작일
+						pw.write("|^");
+						pw.write("stime"); // 조회시작 시각
+						pw.write("|^");
+						pw.write("edate"); // 조회종료일
+						pw.write("|^");
+						pw.write("etime"); // 조회종료 시각
+						pw.write("|^");
+						pw.write("damcode"); // 댐코드
+						pw.write("|^");
+						pw.write("wal"); // 수위관측소 코드
+						pw.write("|^");
 						pw.write("no"); // 순번
 						pw.write("|^");
 						pw.write("obsrdtmnt"); // 시간
@@ -148,6 +161,18 @@ public class Mntwal {
 								}
 
 								// 한번에 문자열 합침
+								resultSb.append(args[0]);
+								resultSb.append("|^");
+								resultSb.append(args[1]);
+								resultSb.append("|^");
+								resultSb.append(args[2]);
+								resultSb.append("|^");
+								resultSb.append(args[3]);
+								resultSb.append("|^");
+								resultSb.append(args[4]);
+								resultSb.append("|^");
+								resultSb.append(args[5]);
+								resultSb.append("|^");
 								resultSb.append(no);
 								resultSb.append("|^");
 								resultSb.append(obsrdtmnt);
@@ -181,6 +206,18 @@ public class Mntwal {
 									}
 
 									// 한번에 문자열 합침
+									resultSb.append(args[0]);
+									resultSb.append("|^");
+									resultSb.append(args[1]);
+									resultSb.append("|^");
+									resultSb.append(args[2]);
+									resultSb.append("|^");
+									resultSb.append(args[3]);
+									resultSb.append("|^");
+									resultSb.append(args[4]);
+									resultSb.append("|^");
+									resultSb.append(args[5]);
+									resultSb.append("|^");
 									resultSb.append(no);
 									resultSb.append("|^");
 									resultSb.append(obsrdtmnt);

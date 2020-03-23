@@ -49,6 +49,10 @@ public class Sihwavalue {
 					try {
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
+						pw.write("stdt"); // 조회시작일자
+						pw.write("|^");
+						pw.write("eddt"); // 조회종료일자
+						pw.write("|^");
 						pw.write("bidno"); // 번호
 						pw.write("|^");
 						pw.write("obsdt"); // 일자
@@ -139,6 +143,10 @@ public class Sihwavalue {
 								}
 
 								// 한번에 문자열 합침
+								resultSb.append(args[0]);
+								resultSb.append("|^");
+								resultSb.append(args[1]);
+								resultSb.append("|^");
 								resultSb.append(bidno);
 								resultSb.append("|^");
 								resultSb.append(obsdt);
@@ -172,6 +180,10 @@ public class Sihwavalue {
 									}
 
 									// 한번에 문자열 합침
+									resultSb.append(args[0]);
+									resultSb.append("|^");
+									resultSb.append(args[1]);
+									resultSb.append("|^");
 									resultSb.append(bidno);
 									resultSb.append("|^");
 									resultSb.append(obsdt);

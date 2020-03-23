@@ -49,6 +49,11 @@ public class MonPurification {
 					try {
 
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						
+						pw.write("year"); // 검사년도
+						pw.write("|^");
+						pw.write("month"); // 검사월
+						pw.write("|^");
 						pw.write("numOfRows"); // 한 페이지 결과 수
 						pw.write("|^");
 						pw.write("pageNo"); // 페이지 수
@@ -414,6 +419,10 @@ public class MonPurification {
 								}
 								
 								//한번에 문자열 합침
+								resultSb.append(args[0]);
+								resultSb.append("|^");
+								resultSb.append(args[1]);
+								resultSb.append("|^");
 								resultSb.append(numberOfRows_str);
 								resultSb.append("|^");
 								resultSb.append(String.valueOf(i));

@@ -50,6 +50,14 @@ public class Dailwater {
 					try {
 
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						
+						
+						pw.write("fcode"); // 정수장코드
+						pw.write("|^");
+						pw.write("stdt"); // 조회시작일
+						pw.write("|^");
+						pw.write("eddt"); // 조회종료일
+						pw.write("|^");
 						pw.write("mesurede"); // 측정시간
 						pw.write("|^");
 						pw.write("item1"); // 맛
@@ -160,6 +168,12 @@ public class Dailwater {
 								}
 
 								// 한번에 문자열 합침
+								resultSb.append(args[0]);
+								resultSb.append("|^");
+								resultSb.append(args[1]);
+								resultSb.append("|^");
+								resultSb.append(args[2]);
+								resultSb.append("|^");
 								resultSb.append(mesurede);
 								resultSb.append("|^");
 								resultSb.append(item1);
@@ -206,6 +220,12 @@ public class Dailwater {
 									}
 
 									// 한번에 문자열 합침
+									resultSb.append(args[0]);
+									resultSb.append("|^");
+									resultSb.append(args[1]);
+									resultSb.append("|^");
+									resultSb.append(args[2]);
+									resultSb.append("|^");
 									resultSb.append(mesurede);
 									resultSb.append("|^");
 									resultSb.append(item1);

@@ -48,6 +48,8 @@ public class Walcode {
 				try {
 
 					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+					pw.write("damcode"); // 댐코드
+					pw.write("|^");
 					pw.write("walobsrvtcode"); // 수위 관측소코드
 					pw.write("|^");
 					pw.write("obsrvtNm"); // 관측소이름
@@ -110,6 +112,8 @@ public class Walcode {
 						}
 
 						// 한번에 문자열 합침
+						resultSb.append(args[0]);
+						resultSb.append("|^");
 						resultSb.append(walobsrvtcode);
 						resultSb.append("|^");
 						resultSb.append(obsrvtNm);

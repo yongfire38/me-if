@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Matcher;
@@ -136,6 +137,52 @@ public class JsonParser {
 		return false;
 
 	}
+	
+	// 특문 제거하고 결과가 8글자 아니면 공백 처리
+	// ex) 1984.10.06 -> 19841006, 1984.10. -> " "
+	
+	public static StringBuffer colWrite_waterMeasuring(StringBuffer sb, String keyname, String chkCol, JSONObject item) {
+
+		if (keyname.equals(chkCol)) {
+
+			if (!(JsonParser.isEmpty(item.get(keyname)))) {
+
+				
+				String content = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ").replaceAll("(\\s{2,}|\\t{2,})", " ").replace(".", "");
+				
+				//System.out.println(content);
+				
+				SimpleDateFormat dateFormatParser = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
+		        dateFormatParser.setLenient(false);
+
+				try{
+					dateFormatParser.parse(content);
+					
+					sb.setLength(0);
+					sb.append(content);
+				} catch(Exception e){
+					e.printStackTrace();
+					System.out.println("잘못된 날짜 형식!");
+					
+					sb.setLength(0);
+					sb.append(" ");
+					
+				}
+				
+				//System.out.println(sb.toString());
+
+				
+			} else {
+				sb.setLength(0);
+				sb.append(" ");
+			}
+
+		}
+
+		return sb;
+	}
+	
+	
 	
 	// 파싱한 데이터를 StringBuffer에 씀(null 체크, trim처리와 줄바꿈 없애는 것, 연속된 공백 치환도 같이)
 	// sns와 같은 로직이면 음수값이 없어져 버리는 이슈로 분리

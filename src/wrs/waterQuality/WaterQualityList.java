@@ -48,6 +48,14 @@ public class WaterQualityList {
 					try {
 
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						pw.write("stDt"); // 조회시작일자
+						pw.write("|^");
+						pw.write("stTm"); // 조회시작시간
+						pw.write("|^");
+						pw.write("edDt"); // 조회종료일자
+						pw.write("|^");
+						pw.write("edTm"); // 조회종료시간
+						pw.write("|^");
 						pw.write("no"); // 번호
 						pw.write("|^");
 						pw.write("occrrncDt"); // 발생일시
@@ -172,6 +180,14 @@ public class WaterQualityList {
 								}
 
 								// 한번에 문자열 합침
+								resultSb.append(args[0]);
+								resultSb.append("|^");
+								resultSb.append(args[1]);
+								resultSb.append("|^");
+								resultSb.append(args[2]);
+								resultSb.append("|^");
+								resultSb.append(args[3]);
+								resultSb.append("|^");
 								resultSb.append(no);
 								resultSb.append("|^");
 								resultSb.append(occrrncDt);
@@ -229,6 +245,14 @@ public class WaterQualityList {
 									}
 
 									// 한번에 문자열 합침
+									resultSb.append(args[0]);
+									resultSb.append("|^");
+									resultSb.append(args[1]);
+									resultSb.append("|^");
+									resultSb.append(args[2]);
+									resultSb.append("|^");
+									resultSb.append(args[3]);
+									resultSb.append("|^");
 									resultSb.append(no);
 									resultSb.append("|^");
 									resultSb.append(occrrncDt);
