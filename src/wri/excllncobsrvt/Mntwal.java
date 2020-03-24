@@ -63,7 +63,7 @@ public class Mntwal {
 						pw.write("|^");
 						pw.write("damcode"); // 댐코드
 						pw.write("|^");
-						pw.write("wal"); // 수위관측소 코드
+						pw.write("walcode"); // 수위관측소 코드
 						pw.write("|^");
 						pw.write("no"); // 순번
 						pw.write("|^");
