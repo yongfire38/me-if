@@ -211,6 +211,7 @@ public class MultiFunctionBarrier {
 								resultSb.append(args[2]);
 								resultSb.append("|^");
 								resultSb.append(args[3]);
+								resultSb.append("|^");
 								resultSb.append(suge);
 								resultSb.append("|^");
 								resultSb.append(brrernm);
