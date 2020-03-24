@@ -86,7 +86,7 @@ public class MonPurification {
 						pw.write("|^");
 						pw.write("FL"); // 불소
 						pw.write("|^");
-						pw.write("AS"); // 비소
+						pw.write("WAT_AS"); // 비소
 						pw.write("|^");
 						pw.write("SE"); // 셀레늄
 						pw.write("|^");
