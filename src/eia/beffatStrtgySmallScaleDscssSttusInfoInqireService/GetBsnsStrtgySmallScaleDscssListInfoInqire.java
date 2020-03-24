@@ -135,7 +135,7 @@ public class GetBsnsStrtgySmallScaleDscssListInfoInqire {
 
 					if (body.get("items") instanceof String) {
 						System.out.println("data not exist!!");
-					} else if (resultCode.equals("00")) {
+					} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 
 						JSONObject items = (JSONObject) body.get("items");
 

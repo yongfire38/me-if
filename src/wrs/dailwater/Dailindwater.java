@@ -147,13 +147,16 @@ public class Dailindwater {
 
 						JSONObject body = (JSONObject) response.get("body");
 						JSONObject header = (JSONObject) response.get("header");
-						JSONObject items = (JSONObject) body.get("items");
 
 						String resultCode = header.get("resultCode").toString().trim();
 
 						String numOfRows_str = body.get("numOfRows").toString();
-
-						if (resultCode.equals("00")) {
+						
+						if (body.get("items") instanceof String) {
+							System.out.println("data not exist!!");
+						} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
+							
+							JSONObject items = (JSONObject) body.get("items");
 
 							// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 							if (items.get("item") instanceof JSONObject) {
