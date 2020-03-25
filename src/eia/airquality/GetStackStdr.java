@@ -113,6 +113,7 @@ public class GetStackStdr {
 				JSONObject body = (JSONObject) response.get("body");
 
 				String resultCode = header.get("resultCode").toString().trim();
+				String resultMsg = header.get("resultMsg").toString().trim();
 
 				if (resultCode.equals("00")) {
 
@@ -267,7 +268,7 @@ public class GetStackStdr {
 				} else if (resultCode.equals("03")) {
 					System.out.println("data not exist!! mgtNo :" + mgtNo);
 				} else {
-					System.out.println("parsing error!! mgtNo :" + mgtNo);
+					System.out.println("parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg + "::mgtNo::" + mgtNo);
 				}
 
 			} catch (Exception e) {

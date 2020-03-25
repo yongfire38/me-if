@@ -57,6 +57,8 @@ public class JsonParser {
 		return value;
 	}
 
+	// mysql 커넥션 
+	// 로컬 설정, 설정은 프로퍼티 파일에서 변경
 	public static Connection getConnection() throws SQLException, ClassNotFoundException {
 
 		Class.forName(getProperty("driver"));
@@ -66,18 +68,30 @@ public class JsonParser {
 
 		return connection;
 	}
+	
+	// postgreSQL 커넥션
+	// 로컬 설정, 설정은 프로퍼티 파일에서 변경
+	
+	public static Connection getPostGreSqlConnection() throws SQLException, ClassNotFoundException {
 
-	// 사업코드 값을 DB에서 읽어 와 리스트에 저장 후 리턴
+		Class.forName(getProperty("post_driver"));
+
+		Connection connection = DriverManager.getConnection(getProperty("post_url"), getProperty("post_username"),
+				getProperty("1234"));
+
+		return connection;
+	}
+	
+	
+	// 사업코드 값을 DB에서 읽어 와 리스트에 저장 후 리턴 (mySql)
+	// 로컬 설정, 설정은 프로퍼티 파일에서 변경
 	public static List<String> getBusinnessCodeList() throws SQLException, ClassNotFoundException {
 		List<String> list = new ArrayList<String>();
 
 		try {
-
-			// DB Connection
-			Class.forName(getProperty("driver"));
-			Connection con = DriverManager.getConnection(getProperty("url"), getProperty("username"),
-					getProperty("password"));
-
+			
+			Connection con =  getConnection();
+			
 			// statement 생성
 			Statement st = con.createStatement();
 
@@ -95,6 +109,58 @@ public class JsonParser {
 
 		return list;
 	}
+	
+	// 해당 테이블에 컬럼 개수 조회해서 리턴 (postgreSQL)
+	
+	public static int getColumnCount(String table_name) throws SQLException, ClassNotFoundException {
+		
+		int colCount = 0;
+		
+		Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
+		
+		try {
+			
+			con = getPostGreSqlConnection();
+			
+			// statement 생성
+			st = con.createStatement();
+			
+			// 테입ㄹ 이름은 파라미터로 받더라도 하드 코딩한 스키마는 변경해줘야 됨
+			rs = st.executeQuery(getProperty("post_colCount_query") + "'" + table_name + "'");
+		
+			if (rs.next()){
+				colCount = rs.getInt(1);
+			}
+			
+			
+		} catch (SQLException sqlEX) {
+            System.out.println(sqlEX);
+        } finally {
+            try {
+                rs.close();
+                st.close();
+                con.close();
+            } catch (SQLException sqlEX) {
+                System.out.println(sqlEX);
+            }
+        }
+		
+		return colCount;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// 문자열 utf 8 인코딩
 	public static String encode_UTF8(String param) {
@@ -161,8 +227,7 @@ public class JsonParser {
 					sb.setLength(0);
 					sb.append(content);
 				} catch(Exception e){
-					e.printStackTrace();
-					System.out.println("잘못된 날짜 형식!");
+					System.out.println("잘못된 날짜 형식이므로 빈 값으로 바꿉니다.");
 					
 					sb.setLength(0);
 					sb.append(" ");

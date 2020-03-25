@@ -81,11 +81,20 @@ public class DamCode {
 				JSONObject response = (JSONObject) obj.get("response");
 
 				JSONObject body = (JSONObject) response.get("body");
+				JSONObject header = (JSONObject) response.get("header");
+				
+				String resultCode = header.get("resultCode").toString().trim();
+				String resultMsg = header.get("resultMsg").toString().trim();
+				
+				if(!(resultCode.equals("00"))){
+					System.out.println("parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
+				} else {
+					
+					int numOfRows = ((Long) body.get("numOfRows")).intValue();
+					int totalCount = ((Long) body.get("totalCount")).intValue();
 
-				int numOfRows = ((Long) body.get("numOfRows")).intValue();
-				int totalCount = ((Long) body.get("totalCount")).intValue();
-
-				pageCount = (totalCount / numOfRows) + 1;
+					pageCount = (totalCount / numOfRows) + 1;
+				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -111,30 +120,35 @@ public class DamCode {
 
 					JSONObject body = (JSONObject) response.get("body");
 					JSONObject header = (JSONObject) response.get("header");
-					JSONObject items = (JSONObject) body.get("items");
+					
 
 					String resultCode = header.get("resultCode").toString().trim();
 					String resultMsg = header.get("resultMsg").toString().trim();
+					
+					if(!(resultCode.equals("00"))){
+						System.out.println("parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
+					} else if (resultCode.equals("00") && body.get("items") instanceof String) {
+						System.out.println("data not exist!!");
+					} else if (resultCode.equals("00")) {
 
-					if (resultCode.equals("00")) {
+						JSONObject items = (JSONObject) body.get("items");
+						
+						// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
+						if (items.get("item") instanceof JSONObject) {
+							
+							JSONObject items_jsonObject = (JSONObject) items.get("item");
 
-						JSONArray items_jsonArray = (JSONArray) items.get("item");
-
-						for (int r = 0; r < items_jsonArray.size(); r++) {
-
-							JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
-
-							Set<String> key = item_obj.keySet();
+							Set<String> key = items_jsonObject.keySet();
 
 							Iterator<String> iter = key.iterator();
-
+							
 							while (iter.hasNext()) {
 
 								String keyname = iter.next();
 
-								JsonParser.colWrite(damcd, keyname, "damcd", item_obj);
-								JsonParser.colWrite(damnm, keyname, "damnm", item_obj);
-								JsonParser.colWrite(seqno, keyname, "seqno", item_obj);
+								JsonParser.colWrite(damcd, keyname, "damcd", items_jsonObject);
+								JsonParser.colWrite(damnm, keyname, "damnm", items_jsonObject);
+								JsonParser.colWrite(seqno, keyname, "seqno", items_jsonObject);
 
 							}
 
@@ -149,8 +163,51 @@ public class DamCode {
 							resultSb.append("|^");
 							resultSb.append(seqno);
 							resultSb.append(System.getProperty("line.separator"));
+							
+							
+							
+							
+						} else if (items.get("item") instanceof JSONArray) {
+							
+							JSONArray items_jsonArray = (JSONArray) items.get("item");
 
+							for (int r = 0; r < items_jsonArray.size(); r++) {
+
+								JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
+
+								Set<String> key = item_obj.keySet();
+
+								Iterator<String> iter = key.iterator();
+
+								while (iter.hasNext()) {
+
+									String keyname = iter.next();
+
+									JsonParser.colWrite(damcd, keyname, "damcd", item_obj);
+									JsonParser.colWrite(damnm, keyname, "damnm", item_obj);
+									JsonParser.colWrite(seqno, keyname, "seqno", item_obj);
+
+								}
+
+								// 한번에 문자열 합침
+								resultSb.append(resultCode);
+								resultSb.append("|^");
+								resultSb.append(resultMsg);
+								resultSb.append("|^");
+								resultSb.append(damcd);
+								resultSb.append("|^");
+								resultSb.append(damnm);
+								resultSb.append("|^");
+								resultSb.append(seqno);
+								resultSb.append(System.getProperty("line.separator"));
+
+							}
+							
+							
 						}
+
+						
+					
 					}  else if (resultCode.equals("03")) {
 						System.out.println("data not exist!!");
 					} else {

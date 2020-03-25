@@ -102,11 +102,21 @@ public class Wikwater {
 					JSONObject response = (JSONObject) obj.get("response");
 
 					JSONObject body = (JSONObject) response.get("body");
+					JSONObject header = (JSONObject) response.get("header");
+					
+					String resultCode = header.get("resultCode").toString().trim();
+					String resultMsg = header.get("resultMsg").toString().trim();
+					
+					if(!(resultCode.equals("00"))){
+						System.out.println("parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
+					} else {
+						
+						int numOfRows = ((Long) body.get("numOfRows")).intValue();
+						int totalCount = ((Long) body.get("totalCount")).intValue();
 
-					int numOfRows = ((Long) body.get("numOfRows")).intValue();
-					int totalCount = ((Long) body.get("totalCount")).intValue();
-
-					pageCount = (totalCount / numOfRows) + 1;
+						pageCount = (totalCount / numOfRows) + 1;
+						
+					}		
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -139,12 +149,15 @@ public class Wikwater {
 						JSONObject body = (JSONObject) response.get("body");
 						JSONObject header = (JSONObject) response.get("header");
 						
-
-						String resultCode = header.get("resultCode").toString().trim();
-
 						String numOfRows_str = body.get("numOfRows").toString();
-
-						if (body.get("items") instanceof String) {
+						
+						
+						String resultCode = header.get("resultCode").toString().trim();
+						String resultMsg = header.get("resultMsg").toString().trim();
+						
+						if(!(resultCode.equals("00"))){
+							System.out.println("parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
+						} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 							System.out.println("data not exist!!");
 						} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 							
@@ -263,8 +276,6 @@ public class Wikwater {
 								System.out.println("parsing error!!");
 							}
 
-						} else if (resultCode.equals("03")) {
-							System.out.println("data not exist!!");
 						} else {
 							System.out.println("parsing error!!");
 						}

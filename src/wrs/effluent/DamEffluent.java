@@ -109,11 +109,20 @@ public class DamEffluent {
 					JSONObject response = (JSONObject) obj.get("response");
 
 					JSONObject body = (JSONObject) response.get("body");
+					JSONObject header = (JSONObject) response.get("header");
+					
+					String resultCode = header.get("resultCode").toString().trim();
+					String resultMsg = header.get("resultMsg").toString().trim();
+					
+					if(!(resultCode.equals("00"))){
+						System.out.println("parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
+					} else {
+						int numOfRows = ((Long) body.get("numOfRows")).intValue();
+						int totalCount = ((Long) body.get("totalCount")).intValue();
 
-					int numOfRows = ((Long) body.get("numOfRows")).intValue();
-					int totalCount = ((Long) body.get("totalCount")).intValue();
-
-					pageCount = (totalCount / numOfRows) + 1;
+						pageCount = (totalCount / numOfRows) + 1;
+					}
+	
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -149,40 +158,45 @@ public class DamEffluent {
 
 						JSONObject body = (JSONObject) response.get("body");
 						JSONObject header = (JSONObject) response.get("header");
-						JSONObject items = (JSONObject) body.get("items");
+						
 
 						String resultCode = header.get("resultCode").toString().trim();
 						String resultMsg = header.get("resultMsg").toString().trim();
+						
+						if(!(resultCode.equals("00"))){
+							System.out.println("parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
+						} else if (resultCode.equals("00") && body.get("items") instanceof String) {
+							System.out.println("data not exist!!");
+						} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
+							
+							JSONObject items = (JSONObject) body.get("items");
+							
+							// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
+							if (items.get("item") instanceof JSONObject) {
+								
+								JSONObject items_jsonObject = (JSONObject) items.get("item");
 
-						if (resultCode.equals("00")) {
-
-							JSONArray items_jsonArray = (JSONArray) items.get("item");
-
-							for (int r = 0; r < items_jsonArray.size(); r++) {
-
-								JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
-
-								Set<String> key = item_obj.keySet();
+								Set<String> key = items_jsonObject.keySet();
 
 								Iterator<String> iter = key.iterator();
-
+								
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
 
-									JsonParser.colWrite(srymd, keyname, "srymd", item_obj);
-									JsonParser.colWrite(dgr, keyname, "dgr", item_obj);
-									JsonParser.colWrite(ph, keyname, "ph", item_obj);
-									JsonParser.colWrite(do1, keyname, "do1", item_obj);
-									JsonParser.colWrite(bod, keyname, "bod", item_obj);
-									JsonParser.colWrite(cod, keyname, "cod", item_obj);
-									JsonParser.colWrite(ss, keyname, "ss", item_obj);
-									JsonParser.colWrite(tn, keyname, "tn", item_obj);
-									JsonParser.colWrite(tp, keyname, "tp", item_obj);
-									JsonParser.colWrite(pop, keyname, "pop", item_obj);
-									JsonParser.colWrite(td, keyname, "td", item_obj);
-									JsonParser.colWrite(ec, keyname, "ec", item_obj);
-									JsonParser.colWrite(seqno, keyname, "seqno", item_obj);
+									JsonParser.colWrite(srymd, keyname, "srymd", items_jsonObject);
+									JsonParser.colWrite(dgr, keyname, "dgr", items_jsonObject);
+									JsonParser.colWrite(ph, keyname, "ph", items_jsonObject);
+									JsonParser.colWrite(do1, keyname, "do1", items_jsonObject);
+									JsonParser.colWrite(bod, keyname, "bod", items_jsonObject);
+									JsonParser.colWrite(cod, keyname, "cod", items_jsonObject);
+									JsonParser.colWrite(ss, keyname, "ss", items_jsonObject);
+									JsonParser.colWrite(tn, keyname, "tn", items_jsonObject);
+									JsonParser.colWrite(tp, keyname, "tp", items_jsonObject);
+									JsonParser.colWrite(pop, keyname, "pop", items_jsonObject);
+									JsonParser.colWrite(td, keyname, "td", items_jsonObject);
+									JsonParser.colWrite(ec, keyname, "ec", items_jsonObject);
+									JsonParser.colWrite(seqno, keyname, "seqno", items_jsonObject);
 
 								}
 
@@ -221,11 +235,82 @@ public class DamEffluent {
 								resultSb.append("|^");
 								resultSb.append(seqno);
 								resultSb.append(System.getProperty("line.separator"));
+				
+								
+							} else if (items.get("item") instanceof JSONArray) {
+								
+								JSONArray items_jsonArray = (JSONArray) items.get("item");
 
+								for (int r = 0; r < items_jsonArray.size(); r++) {
+
+									JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
+
+									Set<String> key = item_obj.keySet();
+
+									Iterator<String> iter = key.iterator();
+
+									while (iter.hasNext()) {
+
+										String keyname = iter.next();
+
+										JsonParser.colWrite(srymd, keyname, "srymd", item_obj);
+										JsonParser.colWrite(dgr, keyname, "dgr", item_obj);
+										JsonParser.colWrite(ph, keyname, "ph", item_obj);
+										JsonParser.colWrite(do1, keyname, "do1", item_obj);
+										JsonParser.colWrite(bod, keyname, "bod", item_obj);
+										JsonParser.colWrite(cod, keyname, "cod", item_obj);
+										JsonParser.colWrite(ss, keyname, "ss", item_obj);
+										JsonParser.colWrite(tn, keyname, "tn", item_obj);
+										JsonParser.colWrite(tp, keyname, "tp", item_obj);
+										JsonParser.colWrite(pop, keyname, "pop", item_obj);
+										JsonParser.colWrite(td, keyname, "td", item_obj);
+										JsonParser.colWrite(ec, keyname, "ec", item_obj);
+										JsonParser.colWrite(seqno, keyname, "seqno", item_obj);
+
+									}
+
+									// 한번에 문자열 합침
+									resultSb.append(args[0]);
+									resultSb.append("|^");
+									resultSb.append(args[1]);
+									resultSb.append("|^");
+									resultSb.append(resultCode);
+									resultSb.append("|^");
+									resultSb.append(resultMsg);
+									resultSb.append("|^");
+									resultSb.append(srymd);
+									resultSb.append("|^");
+									resultSb.append(dgr);
+									resultSb.append("|^");
+									resultSb.append(ph);
+									resultSb.append("|^");
+									resultSb.append(do1);
+									resultSb.append("|^");
+									resultSb.append(bod);
+									resultSb.append("|^");
+									resultSb.append(cod);
+									resultSb.append("|^");
+									resultSb.append(ss);
+									resultSb.append("|^");
+									resultSb.append(tn);
+									resultSb.append("|^");
+									resultSb.append(tp);
+									resultSb.append("|^");
+									resultSb.append(pop);
+									resultSb.append("|^");
+									resultSb.append(td);
+									resultSb.append("|^");
+									resultSb.append(ec);
+									resultSb.append("|^");
+									resultSb.append(seqno);
+									resultSb.append(System.getProperty("line.separator"));
+
+								}
+								
+								
 							}
+								
 
-						} else if (resultCode.equals("03")) {
-							System.out.println("data not exist!!");
 						} else {
 							System.out.println("parsing error!!");
 						}

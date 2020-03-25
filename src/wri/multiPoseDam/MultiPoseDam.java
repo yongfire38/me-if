@@ -38,7 +38,7 @@ public class MultiPoseDam {
 				String service_key = JsonParser.getProperty("multiPoseDam_service_key");
 
 				// step 1.파일의 첫 행 작성
-				File file = new File(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_09.dat");
+				File file = new File("TIF_WRI_09.dat");
 
 				if(file.exists()){
 					
@@ -127,12 +127,20 @@ public class MultiPoseDam {
 					JSONObject response = (JSONObject) obj.get("response");
 
 					JSONObject body = (JSONObject) response.get("body");
+					JSONObject header = (JSONObject) response.get("header");
 					
-					int numOfRows = ((Long) body.get("numOfRows")).intValue();
-					int totalCount = ((Long) body.get("totalCount")).intValue();
+					String resultCode = header.get("resultCode").toString().trim();
+					String resultMsg = header.get("resultMsg").toString().trim();
+					
+					if(!(resultCode.equals("00"))){
+						System.out.println("parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
+					} else {
+						int numOfRows = ((Long) body.get("numOfRows")).intValue();
+						int totalCount = ((Long) body.get("totalCount")).intValue();
 
-					pageCount = (totalCount / numOfRows) + 1;
-
+						pageCount = (totalCount / numOfRows) + 1;
+					}
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -178,11 +186,17 @@ public class MultiPoseDam {
 
 						JSONObject body = (JSONObject) response.get("body");
 						JSONObject header = (JSONObject) response.get("header");
-						JSONObject items = (JSONObject) body.get("items");
-
+						
 						String resultCode = header.get("resultCode").toString().trim();
-
-						if (resultCode.equals("00")) {
+						String resultMsg = header.get("resultMsg").toString().trim();
+						
+						if(!(resultCode.equals("00"))){
+							System.out.println("parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
+						} else if (resultCode.equals("00") && body.get("items") instanceof String) {
+							System.out.println("data not exist!!");
+						} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
+							
+							JSONObject items = (JSONObject) body.get("items");
 
 							JSONArray items_jsonArray = (JSONArray) items.get("item");
 
@@ -280,8 +294,6 @@ public class MultiPoseDam {
 
 							}
 
-						} else if (resultCode.equals("03")) {
-							System.out.println("data not exist!!");
 						} else {
 							System.out.println("parsing error!!");
 						}

@@ -75,8 +75,11 @@ public class DamCode {
 				JSONObject items = (JSONObject) body.get("items");
 
 				String resultCode = header.get("resultCode").toString().trim();
-
-				if (resultCode.equals("00")) {
+				String resultMsg = header.get("resultMsg").toString().trim();
+				
+				if(!(resultCode.equals("00"))){
+					System.out.println("parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
+				} else if (resultCode.equals("00")) {
 
 					JSONArray items_jsonArray = (JSONArray) items.get("item");
 
@@ -120,8 +123,6 @@ public class DamCode {
 
 					}
 
-				} else if (resultCode.equals("03")) {
-					System.out.println("data not exist!!");
 				} else {
 					System.out.println("parsing error!!");
 				}

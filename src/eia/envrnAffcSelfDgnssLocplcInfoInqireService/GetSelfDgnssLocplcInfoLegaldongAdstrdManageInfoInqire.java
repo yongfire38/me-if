@@ -97,7 +97,9 @@ public class GetSelfDgnssLocplcInfoLegaldongAdstrdManageInfoInqire {
 					String resultCode = header.get("resultCode").toString().trim();
 					String resultMsg = header.get("resultMsg").toString().trim();
 
-					if (body.get("items") instanceof String) {
+					if(!(resultCode.equals("00"))){
+						System.out.println("parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
+					} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 
@@ -187,8 +189,6 @@ public class GetSelfDgnssLocplcInfoLegaldongAdstrdManageInfoInqire {
 							System.out.println("parsing error!!");
 						}
 
-					} else if (resultCode.equals("03")) {
-						System.out.println("data not exist!!");
 					} else {
 						System.out.println("parsing error!!");
 					}

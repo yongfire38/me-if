@@ -198,11 +198,19 @@ public class GetWaterMeasuringListMavg {
 				JSONObject obj = (JSONObject) parser.parse(json);
 
 				JSONObject getWaterMeasuringListMavgList = (JSONObject) obj.get("getWaterMeasuringListMavg");
+				
+				JSONObject header = (JSONObject) getWaterMeasuringListMavgList.get("header");
+				String resultCode = header.get("code").toString().trim();
+				String resultMsg = header.get("message").toString().trim();
+				
+				if(!(resultCode.equals("00"))){
+					System.out.println("parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
+				} else {
+					int numOfRows = ((Long) getWaterMeasuringListMavgList.get("numOfRows")).intValue();
+					int totalCount = ((Long) getWaterMeasuringListMavgList.get("totalCount")).intValue();
 
-				int numOfRows = ((Long) getWaterMeasuringListMavgList.get("numOfRows")).intValue();
-				int totalCount = ((Long) getWaterMeasuringListMavgList.get("totalCount")).intValue();
-
-				pageCount = (totalCount / numOfRows) + 1;
+					pageCount = (totalCount / numOfRows) + 1;
+				}		
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -353,8 +361,10 @@ public class GetWaterMeasuringListMavg {
 
 					totalCount.setLength(0);
 					totalCount.append(getWaterMeasuringListMavgList.get("totalCount").toString().trim());
-
-					if (resultCode_col.toString().equals("00")) {
+					
+					if(!(resultCode_col.toString().equals("00"))){
+						System.out.println("parsing error!!::resultCode::" + resultCode_col.toString() + "::resultMsg::" + resultMsg_col.toString());
+					} else if (resultCode_col.toString().equals("00")) {
 
 						JSONArray items = (JSONArray) getWaterMeasuringListMavgList.get("item");
 
@@ -568,8 +578,6 @@ public class GetWaterMeasuringListMavg {
 							resultSb.append(System.getProperty("line.separator"));
 						}
 
-					} else if (resultCode_col.toString().equals("03")) {
-						System.out.println("data not exist!!");
 					} else {
 						System.out.println("parsing error!! :::" + resultCode_col.toString());
 					}

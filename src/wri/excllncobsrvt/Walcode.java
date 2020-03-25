@@ -85,29 +85,31 @@ public class Walcode {
 				
 
 				String resultCode = header.get("resultCode").toString().trim();
+				String resultMsg = header.get("resultMsg").toString().trim();
 
-				if (body.get("items") instanceof String) {
+				if(!(resultCode.equals("00"))){
+					System.out.println("parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
+				} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 					System.out.println("data not exist!!");
 				} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 					
 					JSONObject items = (JSONObject) body.get("items");
-
-					JSONArray items_jsonArray = (JSONArray) items.get("item");
-
-					for (int r = 0; r < items_jsonArray.size(); r++) {
-
-						JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
-
-						Set<String> key = item_obj.keySet();
+					
+					// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
+					if (items.get("item") instanceof JSONObject) {
+						
+						JSONObject items_jsonObject = (JSONObject) items.get("item");
+						
+						Set<String> key = items_jsonObject.keySet();
 
 						Iterator<String> iter = key.iterator();
-
+						
 						while (iter.hasNext()) {
 
 							String keyname = iter.next();
 
-							JsonParser.colWrite(walobsrvtcode, keyname, "walobsrvtcode", item_obj);
-							JsonParser.colWrite(obsrvtNm, keyname, "obsrvtNm", item_obj);
+							JsonParser.colWrite(walobsrvtcode, keyname, "walobsrvtcode", items_jsonObject);
+							JsonParser.colWrite(obsrvtNm, keyname, "obsrvtNm", items_jsonObject);
 
 						}
 
@@ -118,11 +120,41 @@ public class Walcode {
 						resultSb.append("|^");
 						resultSb.append(obsrvtNm);
 						resultSb.append(System.getProperty("line.separator"));
+						
+						
+					} else if (items.get("item") instanceof JSONArray) {
+						
+						JSONArray items_jsonArray = (JSONArray) items.get("item");
+
+						for (int r = 0; r < items_jsonArray.size(); r++) {
+
+							JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
+
+							Set<String> key = item_obj.keySet();
+
+							Iterator<String> iter = key.iterator();
+
+							while (iter.hasNext()) {
+
+								String keyname = iter.next();
+
+								JsonParser.colWrite(walobsrvtcode, keyname, "walobsrvtcode", item_obj);
+								JsonParser.colWrite(obsrvtNm, keyname, "obsrvtNm", item_obj);
+
+							}
+
+							// 한번에 문자열 합침
+							resultSb.append(args[0]);
+							resultSb.append("|^");
+							resultSb.append(walobsrvtcode);
+							resultSb.append("|^");
+							resultSb.append(obsrvtNm);
+							resultSb.append(System.getProperty("line.separator"));
 
 					}
 
-				} else if (resultCode.equals("03")) {
-					System.out.println("data not exist!!");
+					}
+
 				} else {
 					System.out.println("parsing error!!");
 				}

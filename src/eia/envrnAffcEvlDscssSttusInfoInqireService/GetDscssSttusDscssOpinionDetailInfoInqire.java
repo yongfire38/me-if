@@ -94,10 +94,13 @@ public class GetDscssSttusDscssOpinionDetailInfoInqire {
 
 				String resultCode = header.get("resultCode").toString().trim();
 				String resultMsg = header.get("resultMsg").toString().trim();
-
-				if (response.get("body") instanceof String) {
+				
+				
+				if(!(resultCode.equals("00"))){
+					System.out.println("parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
+				} else if (resultCode.equals("00") && response.get("body") instanceof String) {
 					System.out.println("data not exist!!");
-				} else if (resultCode.equals("00")) {
+				} else if (resultCode.equals("00") && !(response.get("body") instanceof String)) {
 
 					JSONObject body = (JSONObject) response.get("body");
 
@@ -192,8 +195,6 @@ public class GetDscssSttusDscssOpinionDetailInfoInqire {
 						System.out.println("parsing error!!");
 					}
 
-				} else if (resultCode.equals("03")) {
-					System.out.println("data not exist!!");
 				} else {
 					System.out.println("parsing error!!");
 				}

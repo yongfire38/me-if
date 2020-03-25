@@ -177,6 +177,7 @@ public class GetGreen {
 				JSONObject body = (JSONObject) response.get("body");
 
 				String resultCode = header.get("resultCode").toString().trim();
+				String resultMsg = header.get("resultMsg").toString().trim();
 
 				if (resultCode.equals("00")) {
 
@@ -239,136 +240,136 @@ public class GetGreen {
 						String keyname = iter.next();
 
 						if (keyname.equals("bfeGreens0gAr")) {
-							bfeGreens0gAr = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens0gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens1gAr")) {
-							bfeGreens1gAr = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens1gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens2gAr")) {
-							bfeGreens2gAr = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens2gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens3gAr")) {
-							bfeGreens3gAr = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens3gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens4gAr")) {
-							bfeGreens4gAr = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens4gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens5gAr")) {
-							bfeGreens5gAr = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens5gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens6gAr")) {
-							bfeGreens6gAr = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens6gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens7gAr")) {
-							bfeGreens7gAr = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens7gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens8gAr")) {
-							bfeGreens8gAr = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens8gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens9gAr")) {
-							bfeGreens9gAr = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens9gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens10gAr")) {
-							bfeGreens10gAr = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens10gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens0gAr")) {
-							aftGreens0gAr = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens0gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens1gAr")) {
-							aftGreens1gAr = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens1gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens2gAr")) {
-							aftGreens2gAr = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens2gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens3gAr")) {
-							aftGreens3gAr = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens3gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens4gAr")) {
-							aftGreens4gAr = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens4gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens5gAr")) {
-							aftGreens5gAr = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens5gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens6gAr")) {
-							aftGreens6gAr = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens6gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens7gAr")) {
-							aftGreens7gAr = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens7gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens8gAr")) {
-							aftGreens8gAr = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens8gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens9gAr")) {
-							aftGreens9gAr = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens9gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens10gAr")) {
-							aftGreens10gAr = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens10gAr = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens0gRt")) {
-							bfeGreens0gRt = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens0gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens1gRt")) {
-							bfeGreens1gRt = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens1gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens2gRt")) {
-							bfeGreens2gRt = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens2gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens3gRt")) {
-							bfeGreens3gRt = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens3gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens4gRt")) {
-							bfeGreens4gRt = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens4gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens5gRt")) {
-							bfeGreens5gRt = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens5gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens6gRt")) {
-							bfeGreens6gRt = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens6gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens7gRt")) {
-							bfeGreens7gRt = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens7gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens8gRt")) {
-							bfeGreens8gRt = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens8gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens9gRt")) {
-							bfeGreens9gRt = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens9gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("bfeGreens10gRt")) {
-							bfeGreens10gRt = body.get(keyname).toString().trim().replace("", " ");
+							bfeGreens10gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens0gRt")) {
-							aftGreens0gRt = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens0gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens1gRt")) {
-							aftGreens1gRt = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens1gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens2gRt")) {
-							aftGreens2gRt = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens2gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens3gRt")) {
-							aftGreens3gRt = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens3gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens4gRt")) {
-							aftGreens4gRt = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens4gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens5gRt")) {
-							aftGreens5gRt = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens5gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens6gRt")) {
-							aftGreens6gRt = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens6gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens7gRt")) {
-							aftGreens7gRt = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens7gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens8gRt")) {
-							aftGreens8gRt = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens8gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens9gRt")) {
-							aftGreens9gRt = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens9gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("aftGreens10gRt")) {
-							aftGreens10gRt = body.get(keyname).toString().trim().replace("", " ");
+							aftGreens10gRt = body.get(keyname).toString().trim();
 						}
 						if (keyname.equals("damageWdptCnt")) {
 							damageWdptCnt = body.get(keyname).toString().trim();
@@ -516,7 +517,7 @@ public class GetGreen {
 				} else if (resultCode.equals("03")) {
 					System.out.println("data not exist!! mgtNo :" + mgtNo);
 				} else {
-					System.out.println("parsing error!! mgtNo :" + mgtNo);
+					System.out.println("parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg + "::mgtNo::" + mgtNo);
 				}
 
 			} catch (Exception e) {
