@@ -61,6 +61,8 @@ public class Hourrf {
 						pw.write("|^");
 						pw.write("etime"); // 조회종료 시각
 						pw.write("|^");
+						pw.write("damcode"); // 댐 코드
+						pw.write("|^");
 						pw.write("excll"); // 우량관측소 코드
 						pw.write("|^");
 						pw.write("no"); // 순번
@@ -181,6 +183,8 @@ public class Hourrf {
 								resultSb.append("|^");
 								resultSb.append(args[4]);
 								resultSb.append("|^");
+								resultSb.append(args[5]);
+								resultSb.append("|^");
 								resultSb.append(no);
 								resultSb.append("|^");
 								resultSb.append(obsrdt);
@@ -223,6 +227,8 @@ public class Hourrf {
 									resultSb.append(args[3]);
 									resultSb.append("|^");
 									resultSb.append(args[4]);
+									resultSb.append("|^");
+									resultSb.append(args[5]);
 									resultSb.append("|^");
 									resultSb.append(no);
 									resultSb.append("|^");
