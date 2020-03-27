@@ -38,7 +38,7 @@ public class MultiPoseDam {
 				String service_key = JsonParser.getProperty("multiPoseDam_service_key");
 
 				// step 1.파일의 첫 행 작성
-				File file = new File("TIF_WRI_09.dat");
+				File file = new File(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_09.dat");
 
 				if(file.exists()){
 					
