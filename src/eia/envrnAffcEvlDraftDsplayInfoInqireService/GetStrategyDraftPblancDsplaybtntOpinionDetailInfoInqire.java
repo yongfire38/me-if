@@ -157,7 +157,6 @@ public class GetStrategyDraftPblancDsplaybtntOpinionDetailInfoInqire {
 					JSONObject obj = (JSONObject) parser.parse(json);
 					JSONObject response = (JSONObject) obj.get("response");
 
-					JSONObject body = (JSONObject) response.get("body");
 					JSONObject header = (JSONObject) response.get("header");
 
 					String resultCode = header.get("resultCode").toString().trim();
@@ -168,6 +167,8 @@ public class GetStrategyDraftPblancDsplaybtntOpinionDetailInfoInqire {
 					} else if(response.get("body") instanceof String){
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(response.get("body") instanceof String)) {
+						
+						JSONObject body = (JSONObject) response.get("body");
 
 						// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 						if (body.get("item") instanceof JSONObject) {

@@ -24,7 +24,7 @@ public class GetSelfDgnssLocplcInfoLegaldongAdstrdManageInfoInqire {
 		// 요청 파라미터는 주소,타입의 2개
 		if (args.length == 2) {
 
-			if (args[0].equals("1") || args[0].equals("2") || args[0].equals("3") || args[0].equals("4")) {
+			if (args[0].equals("1") || args[0].equals("2") || args[0].equals("3")) {
 				System.out.println("firstLine start..");
 				long start = System.currentTimeMillis(); // 시작시간
 
@@ -218,7 +218,9 @@ public class GetSelfDgnssLocplcInfoLegaldongAdstrdManageInfoInqire {
 				long end = System.currentTimeMillis();
 				System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
 
-			} else {
+			} else if(args[0].equals("4")){
+				System.out.println("data not exist!!");
+			}else {
 				System.out.println("파라미터 형식 에러!!");
 				System.exit(-1);
 			}
