@@ -426,7 +426,7 @@ public class GetSgisDrinkWaterList {
 								JsonParser.colWrite(ablDe, keyname, "ABL_DE", item);
 								JsonParser.colWrite(dayAvg, keyname, "DAY_AVG", item);
 								JsonParser.colWrite(charge, keyname, "CHARGE", item);
-								JsonParser.colWrite(insDate, keyname, "INS_DATE", item);
+								JsonParser.colWrite_waterMeasuring(insDate, keyname, "INS_DATE", item);
 								JsonParser.colWrite(delYn, keyname, "DEL_YN", item);
 								JsonParser.colWrite(office, keyname, "OFFICE", item);
 								JsonParser.colWrite(officeTel, keyname, "OFFICE_TEL", item);

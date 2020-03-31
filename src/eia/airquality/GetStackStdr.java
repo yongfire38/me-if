@@ -157,9 +157,20 @@ public class GetStackStdr {
 							}
 							if (keyname.equals("xcnts")) {
 								xcnts = stack.get(keyname).toString().trim();
+								
+								//시분초 표기일 경우 drgree 표기로 전환
+								if((xcnts.indexOf("°") > -1)){
+									xcnts = JsonParser.dmsTodecimal_latitude(xcnts);
+								}
+								
 							}
 							if (keyname.equals("ydnts")) {
 								ydnts = stack.get(keyname).toString().trim();
+								
+								//시분초 표기일 경우 drgree 표기로 전환
+								if((ydnts.indexOf("°") > -1)){
+									ydnts = JsonParser.dmsTodecimal_longitude(xcnts);
+								}
 							}
 							if (keyname.equals("stackHg")) {
 								stackHg = stack.get(keyname).toString().trim();

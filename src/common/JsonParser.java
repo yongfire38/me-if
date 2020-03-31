@@ -127,7 +127,7 @@ public class JsonParser {
 			// statement 생성
 			st = con.createStatement();
 			
-			// 테입ㄹ 이름은 파라미터로 받더라도 하드 코딩한 스키마는 변경해줘야 됨
+			// 테이블 이름은 파라미터로 받더라도 하드 코딩한 스키마는 변경해줘야 됨
 			rs = st.executeQuery(getProperty("post_colCount_query") + "'" + table_name + "'");
 		
 			if (rs.next()){
@@ -301,6 +301,111 @@ public class JsonParser {
 
 		return sb;
 	}
+	
+	//dms to decimal, latitude
+	public static String dmsTodecimal_latitude(String dms) {
+		
+		String decimalStr = "";
+		
+		//일단 공백을 전부 없앤다
+		dms = dms.replace(" ", "");
+		
+		int dmsDo = 0;
+        int dmsMinute = 0;
+        double dmsSecond = 0.0;
+        String dmsDirection = "";
+
+        
+        //형식이 제각각이다.... 방위 알파벳 있다면
+        if((dms.indexOf("N") > -1)||(dms.indexOf("E") > -1)||(dms.indexOf("S") > -1)||(dms.indexOf("W") > -1)){
+        	
+        	dmsDo = Integer.parseInt(dms.substring(0, 2));
+        	dmsMinute = Integer.parseInt(dms.substring(3, 5));
+        	//마지막 글자 전전까지가 초
+        	dmsSecond = Double.parseDouble(dms.substring(6, dms.length() - 2));
+        	//마지막 글자가 방위 알파벳
+        	dmsDirection = dms.substring(dms.length() - 1, dms.length());
+        	
+        } else {
+        	
+        	dmsDo = Integer.parseInt(dms.substring(0, 2));
+        	dmsMinute = Integer.parseInt(dms.substring(3, 5));
+        	//마지막 글자까지 초에 포함됨
+        	dmsSecond = Double.parseDouble(dms.substring(6, dms.length()));
+        	dmsDirection = "";
+	
+        }
+
+        double decimal = 0;
+        
+        decimal = Math.signum(dmsDo) * (Math.abs(dmsDo) + (dmsMinute / 60.0) + (dmsSecond / 3600.0));
+        
+        //남반구일 경우
+        if (dmsDirection.equals("S") || dmsDirection.equals("W")) {
+            decimal *= -1;
+        }
+        //소수점 넷째 자리 반올림
+        decimal = Math.round(decimal * 10000) / 10000.0;
+        
+        decimalStr = Double.toString(decimal);	
+        
+		
+		return decimalStr;
+		
+	}
+	
+	
+	//dms to decimal, longitude
+		public static String dmsTodecimal_longitude(String dms) {
+			
+			String decimalStr = "";
+			
+			//일단 공백을 전부 없앤다
+			dms = dms.replace(" ", "");
+			
+			int dmsDo = 0;
+	        int dmsMinute = 0;
+	        double dmsSecond = 0.0;
+	        String dmsDirection = "";
+
+	        
+	        //형식이 제각각이다.... 방위 알파벳 있다면
+	        if((dms.indexOf("N") > -1)||(dms.indexOf("E") > -1)||(dms.indexOf("S") > -1)||(dms.indexOf("W") > -1)){
+	        	
+	        	dmsDo = Integer.parseInt(dms.substring(0, 3));
+	        	dmsMinute = Integer.parseInt(dms.substring(4, 6));
+	        	//마지막 글자 전까지가 초
+	        	dmsSecond = Double.parseDouble(dms.substring(7, dms.length() - 2));
+	        	//마지막 글자가 방위 알파벳
+	        	dmsDirection = dms.substring(dms.length() - 1, dms.length());
+	        	
+	        } else {
+	        	
+	        	dmsDo = Integer.parseInt(dms.substring(0, 3));
+	        	dmsMinute = Integer.parseInt(dms.substring(4, 6));
+	        	//마지막 글자까지 초에 포함됨
+	        	dmsSecond = Double.parseDouble(dms.substring(7, dms.length()));
+	        	dmsDirection = "";
+		
+	        }
+	        
+	        double decimal = 0;
+	        
+	        decimal = Math.signum(dmsDo) * (Math.abs(dmsDo) + (dmsMinute / 60.0) + (dmsSecond / 3600.0));
+	        
+	        //남반구일 경우
+	        if (dmsDirection.equals("S") || dmsDirection.equals("W")) {
+	            decimal *= -1;
+	        }
+	        //소수점 넷째 자리 반올림
+	        decimal = Math.round(decimal * 10000) / 10000.0;
+	        
+	        decimalStr = Double.toString(decimal);	
+	        
+			
+			return decimalStr;
+			
+		}
 
 	// 환경영향평가 파싱 (사업코드 하나를 파라미터로 받아서 파싱)
 	public static String parseEiaJson(String service_url, String service_key, String mgtNo) {
