@@ -77,7 +77,7 @@ public class JsonParser {
 		Class.forName(getProperty("post_driver"));
 
 		Connection connection = DriverManager.getConnection(getProperty("post_url"), getProperty("post_username"),
-				getProperty("1234"));
+				getProperty("post_password"));
 
 		return connection;
 	}
