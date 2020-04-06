@@ -417,7 +417,7 @@ public class JsonParser {
 					//일단 공백을 전부 없앤다
 					dms = dms.replace(" ", "");
 					
-					String[] dms_inds = dms.split("[°|^|'|`|\"]");
+					String[] dms_inds = dms.split("[°|^|'|′|″|`|\"]");
 					
 					int dmsDo = 0;
 			        int dmsMinute = 0;

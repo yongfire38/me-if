@@ -183,7 +183,7 @@ public class GetIvstg {
 								
 								//시분초 표기일 경우 drgree 표기로 전환
 								if((ivstg_xcnts_str.indexOf("°") > -1)){
-									ivstg_xcnts_str = JsonParser.dmsTodecimal_latitude(ivstg_xcnts_str);
+									ivstg_xcnts_str = JsonParser.dmsTodecimal_split(ivstg_xcnts_str);
 								}
 								
 							} else {
@@ -195,7 +195,7 @@ public class GetIvstg {
 								
 								//시분초 표기일 경우 drgree 표기로 전환
 								if((ivstg_ydnts_str.indexOf("°") > -1)){
-									ivstg_ydnts_str = JsonParser.dmsTodecimal_longitude(ivstg_ydnts_str);
+									ivstg_ydnts_str = JsonParser.dmsTodecimal_split(ivstg_ydnts_str);
 								}
 								
 							} else {

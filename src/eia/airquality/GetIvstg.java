@@ -35,7 +35,7 @@ public class GetIvstg {
 			String service_key = JsonParser.getProperty("airquality_service_key");
 
 			// step 1.파일의 첫 행 작성
-			File file = new File("TIF_EIA_02.dat");
+			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_02.dat");
 			
 			if (file.exists()) {
 
