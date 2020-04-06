@@ -310,6 +310,8 @@ public class JsonParser {
 		//일단 공백을 전부 없앤다
 		dms = dms.replace(" ", "");
 		
+		System.out.println("dms::"+dms);
+		
 		int dmsDo = 0;
         int dmsMinute = 0;
         double dmsSecond = 0.0;
@@ -406,6 +408,68 @@ public class JsonParser {
 			return decimalStr;
 			
 		}
+		
+		//dms to decimal, split 이용(위도 경도가 제멋대로여서 기존 메서드 사용 불가능한 경우)
+				public static String dmsTodecimal_split(String dms) {
+					
+					String decimalStr = "";
+					
+					//일단 공백을 전부 없앤다
+					dms = dms.replace(" ", "");
+					
+					String[] dms_inds = dms.split("[°|^|'|`|\"]");
+					
+					int dmsDo = 0;
+			        int dmsMinute = 0;
+			        double dmsSecond = 0.0;
+			        String dmsDirection = "";
+
+			        
+			        //형식이 제각각이다.... 방위 알파벳 있다면
+			        if((dms.indexOf("N") > -1)||(dms.indexOf("E") > -1)||(dms.indexOf("S") > -1)||(dms.indexOf("W") > -1)){
+			        	
+			        	dmsDo = Integer.parseInt(dms_inds[0]);
+			        	dmsMinute = Integer.parseInt(dms_inds[1]);
+			        	
+			        	if(dms_inds.length >= 3){
+			        		dmsSecond = Double.parseDouble(dms_inds[2]);
+			        	}
+			        			
+			        	if(dms_inds.length == 4){
+			        		//마지막 글자가 방위 알파벳
+				        	dmsDirection = dms_inds[3];
+			        	}
+			        		
+			        } else {
+			        	
+			        	dmsDo = Integer.parseInt(dms_inds[0]);
+			        	dmsMinute = Integer.parseInt(dms_inds[1]);
+			        	
+			        	if(dms_inds.length >= 3){
+			        		dmsSecond = Double.parseDouble(dms_inds[2]);
+			        	}
+			        		
+			        	dmsDirection = "";
+				
+			        }
+			        
+			        double decimal = 0;
+			        
+			        decimal = Math.signum(dmsDo) * (Math.abs(dmsDo) + (dmsMinute / 60.0) + (dmsSecond / 3600.0));
+			        
+			        //남반구일 경우
+			        if (dmsDirection.equals("S") || dmsDirection.equals("W")) {
+			            decimal *= -1;
+			        }
+			        //소수점 넷째 자리 반올림
+			        decimal = Math.round(decimal * 10000) / 10000.0;
+			        
+			        decimalStr = Double.toString(decimal);	
+			        
+					
+					return decimalStr;
+					
+				}
 
 	// 환경영향평가 파싱 (사업코드 하나를 파라미터로 받아서 파싱)
 	public static String parseEiaJson(String service_url, String service_key, String mgtNo) {

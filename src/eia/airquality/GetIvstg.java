@@ -35,7 +35,7 @@ public class GetIvstg {
 			String service_key = JsonParser.getProperty("airquality_service_key");
 
 			// step 1.파일의 첫 행 작성
-			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_02.dat");
+			File file = new File("TIF_EIA_02.dat");
 			
 			if (file.exists()) {
 
@@ -222,7 +222,7 @@ public class GetIvstg {
 								
 								//시분초 표기일 경우 drgree 표기로 전환
 								if((ivstg_xcnts_str.indexOf("°") > -1)){
-									ivstg_xcnts_str = JsonParser.dmsTodecimal_latitude(ivstg_xcnts_str);
+									ivstg_xcnts_str = JsonParser.dmsTodecimal_split(ivstg_xcnts_str);
 								}
 								
 							} else {
@@ -234,7 +234,7 @@ public class GetIvstg {
 								
 								//시분초 표기일 경우 drgree 표기로 전환
 								if((ivstg_ydnts_str.indexOf("°") > -1)){
-									ivstg_ydnts_str = JsonParser.dmsTodecimal_longitude(ivstg_ydnts_str);
+									ivstg_ydnts_str = JsonParser.dmsTodecimal_split(ivstg_ydnts_str);
 								}
 								
 							} else {
