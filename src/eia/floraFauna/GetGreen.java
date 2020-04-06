@@ -240,154 +240,354 @@ public class GetGreen {
 						String keyname = iter.next();
 
 						if (keyname.equals("bfeGreens0gAr")) {
-							bfeGreens0gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens0gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens0gAr = " ";
+							}
 						}
 						if (keyname.equals("bfeGreens1gAr")) {
-							bfeGreens1gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens1gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens1gAr = " ";
+							}
 						}
 						if (keyname.equals("bfeGreens2gAr")) {
-							bfeGreens2gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens2gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens2gAr = " ";
+							}
 						}
 						if (keyname.equals("bfeGreens3gAr")) {
-							bfeGreens3gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens3gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens3gAr = " ";
+							}
 						}
 						if (keyname.equals("bfeGreens4gAr")) {
-							bfeGreens4gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens4gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens4gAr = " ";
+							}
 						}
 						if (keyname.equals("bfeGreens5gAr")) {
-							bfeGreens5gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens5gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens5gAr = " ";
+							}
 						}
 						if (keyname.equals("bfeGreens6gAr")) {
-							bfeGreens6gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens6gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens6gAr = " ";
+							}
 						}
 						if (keyname.equals("bfeGreens7gAr")) {
-							bfeGreens7gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens7gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens7gAr = " ";
+							}
 						}
 						if (keyname.equals("bfeGreens8gAr")) {
-							bfeGreens8gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens8gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens8gAr = " ";
+							}
 						}
 						if (keyname.equals("bfeGreens9gAr")) {
-							bfeGreens9gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens9gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens9gAr = " ";
+							}
 						}
 						if (keyname.equals("bfeGreens10gAr")) {
-							bfeGreens10gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens10gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens10gAr = " ";
+							}
 						}
 						if (keyname.equals("aftGreens0gAr")) {
-							aftGreens0gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens0gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens0gAr = " ";
+							}
 						}
 						if (keyname.equals("aftGreens1gAr")) {
-							aftGreens1gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens1gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens1gAr = " ";
+							}
 						}
 						if (keyname.equals("aftGreens2gAr")) {
-							aftGreens2gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens2gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens2gAr = " ";
+							}
 						}
 						if (keyname.equals("aftGreens3gAr")) {
-							aftGreens3gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens3gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens3gAr = " ";
+							}
 						}
 						if (keyname.equals("aftGreens4gAr")) {
-							aftGreens4gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens4gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens4gAr = " ";
+							}
 						}
 						if (keyname.equals("aftGreens5gAr")) {
-							aftGreens5gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens5gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens5gAr = " ";
+							}
 						}
 						if (keyname.equals("aftGreens6gAr")) {
-							aftGreens6gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens6gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens6gAr = " ";
+							}
 						}
 						if (keyname.equals("aftGreens7gAr")) {
-							aftGreens7gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens7gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens7gAr = " ";
+							}
 						}
 						if (keyname.equals("aftGreens8gAr")) {
-							aftGreens8gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens8gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens8gAr = " ";
+							}
 						}
 						if (keyname.equals("aftGreens9gAr")) {
-							aftGreens9gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens9gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens9gAr = " ";
+							}
 						}
 						if (keyname.equals("aftGreens10gAr")) {
-							aftGreens10gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens10gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens10gAr = " ";
+							}
 						}
 						if (keyname.equals("bfeGreens0gRt")) {
-							bfeGreens0gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens0gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens0gRt = " ";
+							}
 						}
 						if (keyname.equals("bfeGreens1gRt")) {
-							bfeGreens1gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens1gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens1gRt = " ";
+							}
 						}
 						if (keyname.equals("bfeGreens2gRt")) {
-							bfeGreens2gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens2gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens2gRt = " ";
+							}
 						}
 						if (keyname.equals("bfeGreens3gRt")) {
-							bfeGreens3gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens3gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens3gRt = " ";
+							}
 						}
 						if (keyname.equals("bfeGreens4gRt")) {
-							bfeGreens4gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens4gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens4gRt = " ";
+							}
 						}
 						if (keyname.equals("bfeGreens5gRt")) {
-							bfeGreens5gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens5gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens5gRt = " ";
+							}
 						}
 						if (keyname.equals("bfeGreens6gRt")) {
-							bfeGreens6gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens6gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens6gRt = " ";
+							}
 						}
 						if (keyname.equals("bfeGreens7gRt")) {
-							bfeGreens7gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens7gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens7gRt = " ";
+							}
 						}
 						if (keyname.equals("bfeGreens8gRt")) {
-							bfeGreens8gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens8gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens8gRt = " ";
+							}
 						}
 						if (keyname.equals("bfeGreens9gRt")) {
-							bfeGreens9gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens9gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens9gRt = " ";
+							}
 						}
 						if (keyname.equals("bfeGreens10gRt")) {
-							bfeGreens10gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								bfeGreens10gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								bfeGreens10gRt = " ";
+							}
 						}
 						if (keyname.equals("aftGreens0gRt")) {
-							aftGreens0gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens0gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens0gRt = " ";
+							}
 						}
 						if (keyname.equals("aftGreens1gRt")) {
-							aftGreens1gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens1gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens1gRt = " ";
+							}
 						}
 						if (keyname.equals("aftGreens2gRt")) {
-							aftGreens2gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens2gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens2gRt = " ";
+							}
 						}
 						if (keyname.equals("aftGreens3gRt")) {
-							aftGreens3gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens3gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens3gRt = " ";
+							}
 						}
 						if (keyname.equals("aftGreens4gRt")) {
-							aftGreens4gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens4gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens4gRt = " ";
+							}
 						}
 						if (keyname.equals("aftGreens5gRt")) {
-							aftGreens5gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens5gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens5gRt = " ";
+							}
 						}
 						if (keyname.equals("aftGreens6gRt")) {
-							aftGreens6gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens6gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens6gRt = " ";
+							}
 						}
 						if (keyname.equals("aftGreens7gRt")) {
-							aftGreens7gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens7gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens7gRt = " ";
+							}
 						}
 						if (keyname.equals("aftGreens8gRt")) {
-							aftGreens8gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens8gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens8gRt = " ";
+							}
 						}
 						if (keyname.equals("aftGreens9gRt")) {
-							aftGreens9gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens9gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens9gRt = " ";
+							}
 						}
 						if (keyname.equals("aftGreens10gRt")) {
-							aftGreens10gRt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								aftGreens10gRt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								aftGreens10gRt = " ";
+							}
 						}
 						if (keyname.equals("damageWdptCnt")) {
-							damageWdptCnt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								damageWdptCnt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								damageWdptCnt = " ";
+							}
 						}
 						if (keyname.equals("ruseTrnspntWdptCnt")) {
-							ruseTrnspntWdptCnt = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								ruseTrnspntWdptCnt = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								ruseTrnspntWdptCnt = " ";
+							}
 						}
 						if (keyname.equals("eclgy1gAr")) {
-							eclgy1gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								eclgy1gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								eclgy1gAr = " ";
+							}
 						}
 						if (keyname.equals("eclgy2gAr")) {
-							eclgy2gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								eclgy2gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								eclgy2gAr = " ";
+							}
 						}
 						if (keyname.equals("eclgy3gAr")) {
-							eclgy3gAr = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								eclgy3gAr = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								eclgy3gAr = " ";
+							}
 						}
 						if (keyname.equals("ivstgInfo")) {
-							ivstgInfo = body.get(keyname).toString().trim().replace(" ", "");
+							if(!(body.get(keyname).toString().equals(""))){
+								ivstgInfo = body.get(keyname).toString().trim().replace(" ", "");
+							}else{
+								ivstgInfo = " ";
+							}
 						}
 
 					}
