@@ -57,7 +57,7 @@ public class JsonParser {
 		return value;
 	}
 
-	// mysql 커넥션 
+	// mysql 커넥션
 	// 로컬 설정, 설정은 프로퍼티 파일에서 변경
 	public static Connection getConnection() throws SQLException, ClassNotFoundException {
 
@@ -68,10 +68,10 @@ public class JsonParser {
 
 		return connection;
 	}
-	
+
 	// postgreSQL 커넥션
 	// 로컬 설정, 설정은 프로퍼티 파일에서 변경
-	
+
 	public static Connection getPostGreSqlConnection() throws SQLException, ClassNotFoundException {
 
 		Class.forName(getProperty("post_driver"));
@@ -81,17 +81,16 @@ public class JsonParser {
 
 		return connection;
 	}
-	
-	
+
 	// 사업코드 값을 DB에서 읽어 와 리스트에 저장 후 리턴 (mySql)
 	// 로컬 설정, 설정은 프로퍼티 파일에서 변경
 	public static List<String> getBusinnessCodeList() throws SQLException, ClassNotFoundException {
 		List<String> list = new ArrayList<String>();
 
 		try {
-			
-			Connection con =  getConnection();
-			
+
+			Connection con = getConnection();
+
 			// statement 생성
 			Statement st = con.createStatement();
 
@@ -109,58 +108,46 @@ public class JsonParser {
 
 		return list;
 	}
-	
+
 	// 해당 테이블에 컬럼 개수 조회해서 리턴 (postgreSQL)
-	
+
 	public static int getColumnCount(String table_name) throws SQLException, ClassNotFoundException {
-		
+
 		int colCount = 0;
-		
+
 		Connection con = null;
-        Statement st = null;
-        ResultSet rs = null;
-		
+		Statement st = null;
+		ResultSet rs = null;
+
 		try {
-			
+
 			con = getPostGreSqlConnection();
-			
+
 			// statement 생성
 			st = con.createStatement();
-			
+
 			// 테이블 이름은 파라미터로 받더라도 하드 코딩한 스키마는 변경해줘야 됨
 			rs = st.executeQuery(getProperty("post_colCount_query") + "'" + table_name + "'");
-		
-			if (rs.next()){
+
+			if (rs.next()) {
 				colCount = rs.getInt(1);
 			}
-			
-			
+
 		} catch (SQLException sqlEX) {
-            System.out.println(sqlEX);
-        } finally {
-            try {
-                rs.close();
-                st.close();
-                con.close();
-            } catch (SQLException sqlEX) {
-                System.out.println(sqlEX);
-            }
-        }
-		
+			System.out.println(sqlEX);
+		} finally {
+			try {
+				rs.close();
+				st.close();
+				con.close();
+			} catch (SQLException sqlEX) {
+				System.out.println(sqlEX);
+			}
+		}
+
 		return colCount;
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	// 문자열 utf 8 인코딩
 	public static String encode_UTF8(String param) {
@@ -203,40 +190,40 @@ public class JsonParser {
 		return false;
 
 	}
-	
+
 	// 특문 제거하고 결과가 8글자 아니면 공백 처리
 	// ex) 1984.10.06 -> 19841006, 1984.10. -> " "
-	
-	public static StringBuffer colWrite_waterMeasuring(StringBuffer sb, String keyname, String chkCol, JSONObject item) {
+
+	public static StringBuffer colWrite_waterMeasuring(StringBuffer sb, String keyname, String chkCol,
+			JSONObject item) {
 
 		if (keyname.equals(chkCol)) {
 
 			if (!(JsonParser.isEmpty(item.get(keyname)))) {
 
-				
-				String content = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ").replaceAll("(\\s{2,}|\\t{2,})", " ").replace(".", "");
-				
-				//System.out.println(content);
-				
-				SimpleDateFormat dateFormatParser = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
-		        dateFormatParser.setLenient(false);
+				String content = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+						.replaceAll("(\\s{2,}|\\t{2,})", " ").replace(".", "");
 
-				try{
+				// System.out.println(content);
+
+				SimpleDateFormat dateFormatParser = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
+				dateFormatParser.setLenient(false);
+
+				try {
 					dateFormatParser.parse(content);
-					
+
 					sb.setLength(0);
 					sb.append(content);
-				} catch(Exception e){
+				} catch (Exception e) {
 					System.out.println("잘못된 날짜 형식이므로 빈 값으로 바꿉니다.");
-					
+
 					sb.setLength(0);
 					sb.append(" ");
-					
-				}
-				
-				//System.out.println(sb.toString());
 
-				
+				}
+
+				// System.out.println(sb.toString());
+
 			} else {
 				sb.setLength(0);
 				sb.append(" ");
@@ -246,9 +233,7 @@ public class JsonParser {
 
 		return sb;
 	}
-	
-	
-	
+
 	// 파싱한 데이터를 StringBuffer에 씀(null 체크, trim처리와 줄바꿈 없애는 것, 연속된 공백 치환도 같이)
 	// sns와 같은 로직이면 음수값이 없어져 버리는 이슈로 분리
 	public static StringBuffer colWrite(StringBuffer sb, String keyname, String chkCol, JSONObject item) {
@@ -257,9 +242,8 @@ public class JsonParser {
 
 			if (!(JsonParser.isEmpty(item.get(keyname)))) {
 
-				
-				String content = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ").replaceAll("(\\s{2,}|\\t{2,})", " ");
-				
+				String content = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+						.replaceAll("(\\s{2,}|\\t{2,})", " ");
 
 				sb.setLength(0);
 				sb.append(content);
@@ -282,7 +266,8 @@ public class JsonParser {
 			if (!(JsonParser.isEmpty(item.get(keyname)))) {
 
 				String content = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-						.replace("'", "").replace("&#39;", "").replace("&#34;", "").replaceAll("(\\s{2,}|\\t{2,})", " ");
+						.replace("'", "").replace("&#39;", "").replace("&#34;", "")
+						.replaceAll("(\\s{2,}|\\t{2,})", " ");
 
 				// 에러 유발자들인 emoji 제거..
 				Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
@@ -301,175 +286,168 @@ public class JsonParser {
 
 		return sb;
 	}
-	
-	//dms to decimal, latitude
+
+	// dms to decimal, latitude
 	public static String dmsTodecimal_latitude(String dms) {
-		
+
 		String decimalStr = "";
-		
-		//일단 공백을 전부 없앤다
+
+		// 일단 공백을 전부 없앤다
 		dms = dms.replace(" ", "");
-		
-		System.out.println("dms::"+dms);
-		
+
+		System.out.println("dms::" + dms);
+
 		int dmsDo = 0;
-        int dmsMinute = 0;
-        double dmsSecond = 0.0;
-        String dmsDirection = "";
+		int dmsMinute = 0;
+		double dmsSecond = 0.0;
+		String dmsDirection = "";
 
-        
-        //형식이 제각각이다.... 방위 알파벳 있다면
-        if((dms.indexOf("N") > -1)||(dms.indexOf("E") > -1)||(dms.indexOf("S") > -1)||(dms.indexOf("W") > -1)){
-        	
-        	dmsDo = Integer.parseInt(dms.substring(0, 2));
-        	dmsMinute = Integer.parseInt(dms.substring(3, 5));
-        	//마지막 글자 전전까지가 초
-        	dmsSecond = Double.parseDouble(dms.substring(6, dms.length() - 2));
-        	//마지막 글자가 방위 알파벳
-        	dmsDirection = dms.substring(dms.length() - 1, dms.length());
-        	
-        } else {
-        	
-        	dmsDo = Integer.parseInt(dms.substring(0, 2));
-        	dmsMinute = Integer.parseInt(dms.substring(3, 5));
-        	//마지막 글자까지 초에 포함됨
-        	dmsSecond = Double.parseDouble(dms.substring(6, dms.length()));
-        	dmsDirection = "";
-	
-        }
+		// 형식이 제각각이다.... 방위 알파벳 있다면
+		if ((dms.indexOf("N") > -1) || (dms.indexOf("E") > -1) || (dms.indexOf("S") > -1) || (dms.indexOf("W") > -1)) {
 
-        double decimal = 0;
-        
-        decimal = Math.signum(dmsDo) * (Math.abs(dmsDo) + (dmsMinute / 60.0) + (dmsSecond / 3600.0));
-        
-        //남반구일 경우
-        if (dmsDirection.equals("S") || dmsDirection.equals("W")) {
-            decimal *= -1;
-        }
-        //소수점 넷째 자리 반올림
-        decimal = Math.round(decimal * 10000) / 10000.0;
-        
-        decimalStr = Double.toString(decimal);	
-        
-		
-		return decimalStr;
-		
-	}
-	
-	
-	//dms to decimal, longitude
-		public static String dmsTodecimal_longitude(String dms) {
-			
-			String decimalStr = "";
-			
-			//일단 공백을 전부 없앤다
-			dms = dms.replace(" ", "");
-			
-			int dmsDo = 0;
-	        int dmsMinute = 0;
-	        double dmsSecond = 0.0;
-	        String dmsDirection = "";
+			dmsDo = Integer.parseInt(dms.substring(0, 2));
+			dmsMinute = Integer.parseInt(dms.substring(3, 5));
+			// 마지막 글자 전전까지가 초
+			dmsSecond = Double.parseDouble(dms.substring(6, dms.length() - 2));
+			// 마지막 글자가 방위 알파벳
+			dmsDirection = dms.substring(dms.length() - 1, dms.length());
 
-	        
-	        //형식이 제각각이다.... 방위 알파벳 있다면
-	        if((dms.indexOf("N") > -1)||(dms.indexOf("E") > -1)||(dms.indexOf("S") > -1)||(dms.indexOf("W") > -1)){
-	        	
-	        	dmsDo = Integer.parseInt(dms.substring(0, 3));
-	        	dmsMinute = Integer.parseInt(dms.substring(4, 6));
-	        	//마지막 글자 전까지가 초
-	        	dmsSecond = Double.parseDouble(dms.substring(7, dms.length() - 2));
-	        	//마지막 글자가 방위 알파벳
-	        	dmsDirection = dms.substring(dms.length() - 1, dms.length());
-	        	
-	        } else {
-	        	
-	        	dmsDo = Integer.parseInt(dms.substring(0, 3));
-	        	dmsMinute = Integer.parseInt(dms.substring(4, 6));
-	        	//마지막 글자까지 초에 포함됨
-	        	dmsSecond = Double.parseDouble(dms.substring(7, dms.length()));
-	        	dmsDirection = "";
-		
-	        }
-	        
-	        double decimal = 0;
-	        
-	        decimal = Math.signum(dmsDo) * (Math.abs(dmsDo) + (dmsMinute / 60.0) + (dmsSecond / 3600.0));
-	        
-	        //남반구일 경우
-	        if (dmsDirection.equals("S") || dmsDirection.equals("W")) {
-	            decimal *= -1;
-	        }
-	        //소수점 넷째 자리 반올림
-	        decimal = Math.round(decimal * 10000) / 10000.0;
-	        
-	        decimalStr = Double.toString(decimal);	
-	        
-			
-			return decimalStr;
-			
+		} else {
+
+			dmsDo = Integer.parseInt(dms.substring(0, 2));
+			dmsMinute = Integer.parseInt(dms.substring(3, 5));
+			// 마지막 글자까지 초에 포함됨
+			dmsSecond = Double.parseDouble(dms.substring(6, dms.length()));
+			dmsDirection = "";
+
 		}
-		
-		//dms to decimal, split 이용(위도 경도가 제멋대로여서 기존 메서드 사용 불가능한 경우)
-				public static String dmsTodecimal_split(String dms) {
-					
-					String decimalStr = "";
-					
-					//일단 공백을 전부 없앤다
-					dms = dms.replace(" ", "");
-					
-					String[] dms_inds = dms.split("[°|^|'|′|″|`|\"]");
-					
-					int dmsDo = 0;
-			        int dmsMinute = 0;
-			        double dmsSecond = 0.0;
-			        String dmsDirection = "";
 
-			        
-			        //형식이 제각각이다.... 방위 알파벳 있다면
-			        if((dms.indexOf("N") > -1)||(dms.indexOf("E") > -1)||(dms.indexOf("S") > -1)||(dms.indexOf("W") > -1)){
-			        	
-			        	dmsDo = Integer.parseInt(dms_inds[0]);
-			        	dmsMinute = Integer.parseInt(dms_inds[1]);
-			        	
-			        	if(dms_inds.length >= 3){
-			        		dmsSecond = Double.parseDouble(dms_inds[2]);
-			        	}
-			        			
-			        	if(dms_inds.length == 4){
-			        		//마지막 글자가 방위 알파벳
-				        	dmsDirection = dms_inds[3];
-			        	}
-			        		
-			        } else {
-			        	
-			        	dmsDo = Integer.parseInt(dms_inds[0]);
-			        	dmsMinute = Integer.parseInt(dms_inds[1]);
-			        	
-			        	if(dms_inds.length >= 3){
-			        		dmsSecond = Double.parseDouble(dms_inds[2]);
-			        	}
-			        		
-			        	dmsDirection = "";
-				
-			        }
-			        
-			        double decimal = 0;
-			        
-			        decimal = Math.signum(dmsDo) * (Math.abs(dmsDo) + (dmsMinute / 60.0) + (dmsSecond / 3600.0));
-			        
-			        //남반구일 경우
-			        if (dmsDirection.equals("S") || dmsDirection.equals("W")) {
-			            decimal *= -1;
-			        }
-			        //소수점 넷째 자리 반올림
-			        decimal = Math.round(decimal * 10000) / 10000.0;
-			        
-			        decimalStr = Double.toString(decimal);	
-			        
-					
-					return decimalStr;
-					
-				}
+		double decimal = 0;
+
+		decimal = Math.signum(dmsDo) * (Math.abs(dmsDo) + (dmsMinute / 60.0) + (dmsSecond / 3600.0));
+
+		// 남반구일 경우
+		if (dmsDirection.equals("S") || dmsDirection.equals("W")) {
+			decimal *= -1;
+		}
+		// 소수점 넷째 자리 반올림
+		decimal = Math.round(decimal * 10000) / 10000.0;
+
+		decimalStr = Double.toString(decimal);
+
+		return decimalStr;
+
+	}
+
+	// dms to decimal, longitude
+	public static String dmsTodecimal_longitude(String dms) {
+
+		String decimalStr = "";
+
+		// 일단 공백을 전부 없앤다
+		dms = dms.replace(" ", "");
+
+		int dmsDo = 0;
+		int dmsMinute = 0;
+		double dmsSecond = 0.0;
+		String dmsDirection = "";
+
+		// 형식이 제각각이다.... 방위 알파벳 있다면
+		if ((dms.indexOf("N") > -1) || (dms.indexOf("E") > -1) || (dms.indexOf("S") > -1) || (dms.indexOf("W") > -1)) {
+
+			dmsDo = Integer.parseInt(dms.substring(0, 3));
+			dmsMinute = Integer.parseInt(dms.substring(4, 6));
+			// 마지막 글자 전까지가 초
+			dmsSecond = Double.parseDouble(dms.substring(7, dms.length() - 2));
+			// 마지막 글자가 방위 알파벳
+			dmsDirection = dms.substring(dms.length() - 1, dms.length());
+
+		} else {
+
+			dmsDo = Integer.parseInt(dms.substring(0, 3));
+			dmsMinute = Integer.parseInt(dms.substring(4, 6));
+			// 마지막 글자까지 초에 포함됨
+			dmsSecond = Double.parseDouble(dms.substring(7, dms.length()));
+			dmsDirection = "";
+
+		}
+
+		double decimal = 0;
+
+		decimal = Math.signum(dmsDo) * (Math.abs(dmsDo) + (dmsMinute / 60.0) + (dmsSecond / 3600.0));
+
+		// 남반구일 경우
+		if (dmsDirection.equals("S") || dmsDirection.equals("W")) {
+			decimal *= -1;
+		}
+		// 소수점 넷째 자리 반올림
+		decimal = Math.round(decimal * 10000) / 10000.0;
+
+		decimalStr = Double.toString(decimal);
+
+		return decimalStr;
+
+	}
+
+	// dms to decimal, split 이용(위도 경도가 제멋대로여서 기존 메서드 사용 불가능한 경우)
+	public static String dmsTodecimal_split(String dms) {
+
+		String decimalStr = "";
+
+		// 일단 공백을 전부 없앤다
+		dms = dms.replace(" ", "");
+
+		String[] dms_inds = dms.split("[°|^|'|′|’|“|″|`|\"]");
+
+		int dmsDo = 0;
+		int dmsMinute = 0;
+		double dmsSecond = 0.0;
+		String dmsDirection = "";
+
+		// 형식이 제각각이다.... 방위 알파벳 있다면
+		if ((dms.indexOf("N") > -1) || (dms.indexOf("E") > -1) || (dms.indexOf("S") > -1) || (dms.indexOf("W") > -1)) {
+
+			dmsDo = Integer.parseInt(dms_inds[0]);
+			dmsMinute = Integer.parseInt(dms_inds[1]);
+
+			if (dms_inds.length >= 3) {
+				dmsSecond = Double.parseDouble(dms_inds[2]);
+			}
+
+			if (dms_inds.length == 4) {
+				// 마지막 글자가 방위 알파벳
+				dmsDirection = dms_inds[3];
+			}
+
+		} else {
+
+			dmsDo = Integer.parseInt(dms_inds[0]);
+			dmsMinute = Integer.parseInt(dms_inds[1]);
+
+			if (dms_inds.length >= 3) {
+				dmsSecond = Double.parseDouble(dms_inds[2]);
+			}
+
+			dmsDirection = "";
+
+		}
+
+		double decimal = 0;
+
+		decimal = Math.signum(dmsDo) * (Math.abs(dmsDo) + (dmsMinute / 60.0) + (dmsSecond / 3600.0));
+
+		// 남반구일 경우
+		if (dmsDirection.equals("S") || dmsDirection.equals("W")) {
+			decimal *= -1;
+		}
+		// 소수점 넷째 자리 반올림
+		decimal = Math.round(decimal * 10000) / 10000.0;
+
+		decimalStr = Double.toString(decimal);
+
+		return decimalStr;
+
+	}
 
 	// 환경영향평가 파싱 (사업코드 하나를 파라미터로 받아서 파싱)
 	public static String parseEiaJson(String service_url, String service_key, String mgtNo) {
@@ -1317,7 +1295,8 @@ public class JsonParser {
 	}
 
 	// 다음 블로그 파싱 (검색어 하나를 파라미터로 받아서 파싱)
-	public static String parseBlogJson_daum(String service_url, String daum_api_key, String query, String job_dt, String page) {
+	public static String parseBlogJson_daum(String service_url, String daum_api_key, String query, String job_dt,
+			String page) {
 
 		BufferedReader br = null;
 
@@ -1359,8 +1338,8 @@ public class JsonParser {
 	}
 
 	// 구글 블로그 파싱 (검색어 하나를 파라미터로 받아서 파싱)
-	public static String parseJson_google(String service_url, String google_api_key, String google_api_cx, String query, String job_dt,
-			String start) {
+	public static String parseJson_google(String service_url, String google_api_key, String google_api_cx, String query,
+			String job_dt, String start) {
 
 		BufferedReader br = null;
 
