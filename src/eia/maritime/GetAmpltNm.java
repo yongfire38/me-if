@@ -150,25 +150,25 @@ public class GetAmpltNm {
 									String keyname = iter.next();
 
 									if (keyname.equals("id")) {
-										id = ids_Json.get(keyname).toString().trim();
+										id = ids_Json.get(keyname).toString();
 									}
 									if (keyname.equals("mediolittoralKornm")) {
-										mediolittoralKornm = ids_Json.get(keyname).toString().trim();
+										mediolittoralKornm = ids_Json.get(keyname).toString();
 									}
 									if (keyname.equals("mediolittoralScncenm")) {
-										mediolittoralScncenm = ids_Json.get(keyname).toString().trim();
+										mediolittoralScncenm = ids_Json.get(keyname).toString();
 									}
 									if (keyname.equals("infralittoralKornm")) {
-										infralittoralKornm = ids_Json.get(keyname).toString().trim();
+										infralittoralKornm = ids_Json.get(keyname).toString();
 									}
 									if (keyname.equals("infralittoralScncenm")) {
-										infralittoralScncenm = ids_Json.get(keyname).toString().trim();
+										infralittoralScncenm = ids_Json.get(keyname).toString();
 									}
 									if (keyname.equals("seawidsKorname")) {
-										seawidsKorname = ids_Json.get(keyname).toString().trim();
+										seawidsKorname = ids_Json.get(keyname).toString();
 									}
 									if (keyname.equals("seawidsScncenm")) {
-										seawidsScncenm = ids_Json.get(keyname).toString().trim();
+										seawidsScncenm = ids_Json.get(keyname).toString();
 									}
 								}
 								// step 4. 파일에 쓰기
