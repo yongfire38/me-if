@@ -126,8 +126,6 @@ public class GetInfo {
 			String json = "";
 
 			json = JsonParser.parseEiaJson(service_url, service_key, mgtNo);
-			
-			System.out.println("json:::"+json);
 
 			// step 3.필요에 맞게 파싱
 

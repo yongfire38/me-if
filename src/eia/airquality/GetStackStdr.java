@@ -150,10 +150,10 @@ public class GetStackStdr {
 							String keyname = iter.next();
 
 							if (keyname.equals("stackNm")) {
-								stackNm = stack.get(keyname).toString().trim();
+								stackNm = stack.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
 							}
 							if (keyname.equals("adres")) {
-								adres = stack.get(keyname).toString().trim();
+								adres = stack.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
 							}
 							if (keyname.equals("xcnts")) {
 								xcnts = stack.get(keyname).toString().trim();
