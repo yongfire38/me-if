@@ -397,8 +397,10 @@ public class JsonParser {
 		
 		//남반구 좌표가 올 것 같진 않으므로 방위도 날린다 (앞에 붙었다 뒤에 붙었다 불규칙해서 판단이 어려움)
 		dms = dms.replaceAll("[a-z|A-Z]", "");
+		
+		System.out.println("dms::::"+dms);
 
-		String[] dms_inds = dms.split("[°|^|'|′|’|“|″|`|\"]");
+		String[] dms_inds = dms.split("[°|,|;|:|；|^|'|′|’|“|″|`|\"]");
 
 		int dmsDo = 0;
 		int dmsMinute = 0;
