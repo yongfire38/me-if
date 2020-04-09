@@ -295,8 +295,6 @@ public class JsonParser {
 		// 일단 공백을 전부 없앤다
 		dms = dms.replace(" ", "");
 
-		System.out.println("dms::" + dms);
-
 		int dmsDo = 0;
 		int dmsMinute = 0;
 		double dmsSecond = 0.0;
@@ -395,7 +393,10 @@ public class JsonParser {
 		String decimalStr = "";
 
 		// 일단 공백을 전부 없앤다
-		dms = dms.replace(" ", "");
+		dms = dms.replace(" ", "").replace(".","");
+		
+		//남반구 좌표가 올 것 같진 않으므로 방위도 날린다 (앞에 붙었다 뒤에 붙었다 불규칙해서 판단이 어려움)
+		dms = dms.replaceAll("[a-z|A-Z]", "");
 
 		String[] dms_inds = dms.split("[°|^|'|′|’|“|″|`|\"]");
 
