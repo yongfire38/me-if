@@ -269,7 +269,7 @@ public class Mntwal {
 
 						// step 5. 대상 서버에 sftp로 보냄
 
-						// TransSftp.transSftp(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_14.dat", "WRI");
+						//TransSftp.transSftp(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_14.dat", "WRI");
 
 						long end = System.currentTimeMillis();
 						System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");

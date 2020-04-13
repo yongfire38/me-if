@@ -292,7 +292,7 @@ public class Winfosweekwater {
 
 						// step 5. 대상 서버에 sftp로 보냄
 
-						// TransSftp.transSftp(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_13.dat", "WRS");
+						//TransSftp.transSftp(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_13.dat", "WRS");
 
 						long end = System.currentTimeMillis();
 						System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");

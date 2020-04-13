@@ -749,7 +749,7 @@ public class GetWaterMeasuringList {
 
 					// step 5. 대상 서버에 sftp로 보냄
 
-					// TransSftp.transSftp(JsonParser.getProperty("file_path") + "PRI/TIF_PRI_01.dat", "PRI");
+					//TransSftp.transSftp(JsonParser.getProperty("file_path") + "PRI/TIF_PRI_01.dat", "PRI");
 
 					long end = System.currentTimeMillis();
 					System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");

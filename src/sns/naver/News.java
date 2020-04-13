@@ -224,7 +224,7 @@ public class News {
 
 					// step 5. 대상 서버에 sftp로 보냄
 
-					// TransSftp.transSftp(JsonParser.getProperty("file_path") + "SNS/TIF_SNS_104.dat", "SNS");
+					//TransSftp.transSftp(JsonParser.getProperty("file_path") + "SNS/TIF_SNS_104.dat", "SNS");
 
 					long end = System.currentTimeMillis();
 					System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
