@@ -15,68 +15,72 @@ import org.json.simple.parser.JSONParser;
 import common.JsonParser;
 //import common.TransSftp;
 
-
 public class GetDscssSttusDscssChngIngDetailInfoInqire {
 
 	@SuppressWarnings("unchecked")
 	// 환경영향평가 협의현황 서비스 - 협의현황 상세 변경협의 진행 현황 정보를 조회
 	public static void main(String[] args) throws Exception {
 
-		// 실행시 필수 매개변수 환경영향평가 코드
-		if (args.length == 1) {
+		int retry = 0;
 
-			System.out.println("firstLine start..");
-			long start = System.currentTimeMillis(); // 시작시간
+		while (retry++ < 3) {
 
-			// step 0.open api url과 서비스 키.
-			String service_url = JsonParser.getProperty(
-					"envrnAffcEvlDscssSttusInfoInqireService_getDscssSttusDscssChngIngDetailInfoInqire_url");
-			String service_key = JsonParser.getProperty("envrnAffcEvlDraftDsplayInfoInqireService_service_key");
+			try {
 
-			// step 1.파일의 첫 행 작성
-			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_44.dat");
+				Thread.sleep(1000);
 
-			if(file.exists()){
-				
-				System.out.println("파일이 이미 존재하므로 이어쓰기..");
-				
-			} else {
-			
-				try {
+				// 실행시 필수 매개변수 환경영향평가 코드
+				if (args.length == 1) {
 
-					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-					
-					pw.write("eiaCd"); // 환경영향평가 코드
-					pw.write("|^");
-					pw.write("stateNm"); // 단계명
-					pw.write("|^");
-					pw.write("applyDt"); // 접수일
-					pw.write("|^");
-					pw.write("reviExaDt"); // 검토의뢰일
-					pw.write("|^");
-					pw.write("resApplyDt"); // 검토결과접수일
-					pw.write("|^");
-					pw.write("resReplyDt"); // 통보일
-					pw.write("|^");
-					pw.write("rtnDt"); // 반려일
-					pw.write("|^");
-					pw.write("wdwlDt"); // 취하
-					pw.println();
-					pw.flush();
-					pw.close();
+					System.out.println("firstLine start..");
+					long start = System.currentTimeMillis(); // 시작시간
 
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+					// step 0.open api url과 서비스 키.
+					String service_url = JsonParser.getProperty(
+							"envrnAffcEvlDscssSttusInfoInqireService_getDscssSttusDscssChngIngDetailInfoInqire_url");
+					String service_key = JsonParser.getProperty("envrnAffcEvlDraftDsplayInfoInqireService_service_key");
 
-			}
-			
-			String json = "";
+					// step 1.파일의 첫 행 작성
+					File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_44.dat");
 
+					if (file.exists()) {
 
-				json = JsonParser.parseEiaJson(service_url, service_key, args[0]);
+						System.out.println("파일이 이미 존재하므로 이어쓰기..");
 
-				try {
+					} else {
+
+						try {
+
+							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
+							pw.write("eiaCd"); // 환경영향평가 코드
+							pw.write("|^");
+							pw.write("stateNm"); // 단계명
+							pw.write("|^");
+							pw.write("applyDt"); // 접수일
+							pw.write("|^");
+							pw.write("reviExaDt"); // 검토의뢰일
+							pw.write("|^");
+							pw.write("resApplyDt"); // 검토결과접수일
+							pw.write("|^");
+							pw.write("resReplyDt"); // 통보일
+							pw.write("|^");
+							pw.write("rtnDt"); // 반려일
+							pw.write("|^");
+							pw.write("wdwlDt"); // 취하
+							pw.println();
+							pw.flush();
+							pw.close();
+
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+
+					}
+
+					String json = "";
+
+					json = JsonParser.parseEiaJson(service_url, service_key, args[0]);
 
 					JSONParser parser = new JSONParser();
 					JSONObject obj = (JSONObject) parser.parse(json);
@@ -88,7 +92,7 @@ public class GetDscssSttusDscssChngIngDetailInfoInqire {
 					String resultCode = header.get("resultCode").toString().trim();
 					String resultMsg = header.get("resultMsg").toString().trim();
 
-					if(!(resultCode.equals("00"))){
+					if (!(resultCode.equals("00"))) {
 						System.out.println("parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
 					} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 						System.out.println("data not exist!!");
@@ -145,7 +149,6 @@ public class GetDscssSttusDscssChngIngDetailInfoInqire {
 							try {
 								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-								
 								pw.write(args[0]); // 환경영향평가 코드
 								pw.write("|^");
 								pw.write(stateNm); // 단계명
@@ -252,24 +255,30 @@ public class GetDscssSttusDscssChngIngDetailInfoInqire {
 
 					}
 
-				} catch (Exception e) {
-					e.printStackTrace();
+					System.out.println("parsing complete!");
+
+					// step 5. 대상 서버에 sftp로 보냄
+
+					// TransSftp.transSftp(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_44.dat", "EIA");
+
+					long end = System.currentTimeMillis();
+					System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
+
+				} else {
+					System.out.println("파라미터 개수 에러!!");
+					System.exit(-1);
 				}
 
+				return; // 작업 성공시 리턴
 
-			System.out.println("parsing complete!");
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("eiaCd :" + args[0]);
+			}
 
-			// step 5. 대상 서버에 sftp로 보냄
-
-			//TransSftp.transSftp(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_44.dat", "EIA");
-
-			long end = System.currentTimeMillis();
-			System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
-
-		} else {
-			System.out.println("파라미터 개수 에러!!");
-			System.exit(-1);
 		}
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 
 	}
 

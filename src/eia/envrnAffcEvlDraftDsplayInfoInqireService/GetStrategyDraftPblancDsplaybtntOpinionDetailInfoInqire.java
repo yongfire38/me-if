@@ -15,144 +15,156 @@ import org.json.simple.parser.JSONParser;
 import common.JsonParser;
 //import common.TransSftp;
 
-
 public class GetStrategyDraftPblancDsplaybtntOpinionDetailInfoInqire {
 
 	// 환경영향평가 초안공람 정보 서비스 - 초안공람 전략영향평가 상세 정보 조회
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
-		// 실행시 필수 매개변수 사전환경성검토 코드
-		if (args.length == 1) {
 
-			System.out.println("firstLine start..");
-			long start = System.currentTimeMillis(); // 시작시간
+		int retry = 0;
 
-			// step 0.open api url과 서비스 키.
-			String service_url = JsonParser
-					.getProperty("envrnAffcEvlDraftDsplayInfoInqireService_getStrategyDraftPblancDsplaybtntOpinionDetailInfoInqire_url");
-			String service_key = JsonParser.getProperty(
-					"envrnAffcEvlDraftDsplayInfoInqireService_service_key");
+		while (retry++ < 3) {
 
-			// step 1.파일의 첫 행 작성
-			File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_38.dat");
+			try {
 
-			if(file.exists()){
-				
-				System.out.println("파일이 이미 존재하므로 이어쓰기..");
-				
-			} else {
-			
-				try {
+				Thread.sleep(1000);
 
-					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-					pw.write("perCd"); // 사전환경성검토 코드
-					pw.write("|^");
-					pw.write("bizNm"); // 사업명
-					pw.write("|^");
-					pw.write("approvOrganTeam"); // 승인기관
-					pw.write("|^");
-					pw.write("bizMoney"); // 사업비
-					pw.write("|^");
-					pw.write("bizSize"); // 사업규모
-					pw.write("|^");
-					pw.write("bizSizeDan"); // 사업규모 단위
-					pw.write("|^");
-					pw.write("benfBizmain"); // 사업시행자
-					pw.write("|^");
-					pw.write("embodEtcNm"); // 사업구분기타명칭
-					pw.write("|^");
-					pw.write("ccilJongCd"); // 협의종류
-					pw.write("|^");
-					pw.write("embodCd"); // 사업구분코드
-					pw.write("|^");
-					pw.write("embodCd2"); // 사업구분 기타 명칭
-					pw.write("|^");
-					pw.write("ccilOrganCd"); // 협의기관코드
-					pw.write("|^");
-					pw.write("ctcMemNm"); // 협의기관 담당자
-					pw.write("|^");
-					pw.write("ctcMemTeam"); // 협의기관 담당부서
-					pw.write("|^");
-					pw.write("ctcMemEmail"); // 협의기관 E-mail
-					pw.write("|^");
-					pw.write("ctcMemTel"); //협의기관 전화번호
-					pw.write("|^");
-					pw.write("ctcMemFax"); // 협의기관 Fax번호
-					pw.write("|^");
-					pw.write("bizAddrEtc"); // 소재지 주소1
-					pw.write("|^");
-					pw.write("bizAddrEtc2"); // 소재지 주소2
-					pw.write("|^");
-					pw.write("drfopPclDt"); // 초안 공고일
-					pw.write("|^");
-					pw.write("drfopTmdtStartDt"); // 초안 공람기간 시작일
-					pw.write("|^");
-					pw.write("drfopTmdtEndDt"); // 초안공람기간 종료일
-					pw.write("|^");
-					pw.write("drfopExpDttm"); // 설명회 일시
-					pw.write("|^");
-					pw.write("drfopOpnStartDt"); // 의견제출기간 시작일
-					pw.write("|^");
-					pw.write("drfopOpnEndDt"); // 의견제출기간 종료일
-					pw.write("|^");
-					pw.write("drfopSite"); // 공람장소
-					pw.write("|^");
-					pw.write("drfopExpSite"); // 설명회 장소
-					pw.write("|^");
-					pw.write("drfopTeamNm"); // 부서명
-					pw.write("|^");
-					pw.write("drfopTel"); // 전화번호
-					pw.println();
-					pw.flush();
-					pw.close();
+				// 실행시 필수 매개변수 사전환경성검토 코드
+				if (args.length == 1) {
 
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			
-			}
-			
-			String json = "";
+					System.out.println("firstLine start..");
+					long start = System.currentTimeMillis(); // 시작시간
 
-			json = JsonParser.parseEiaJson(service_url, service_key, args[0]);
-			
-			System.out.println("json::::"+json);
-			// step 2. 전체 파싱
+					// step 0.open api url과 서비스 키.
+					String service_url = JsonParser.getProperty(
+							"envrnAffcEvlDraftDsplayInfoInqireService_getStrategyDraftPblancDsplaybtntOpinionDetailInfoInqire_url");
+					String service_key = JsonParser.getProperty("envrnAffcEvlDraftDsplayInfoInqireService_service_key");
 
-			StringBuffer resultSb = new StringBuffer("");
+					// step 1.파일의 첫 행 작성
+					File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_38.dat");
 
-			StringBuffer perCd = new StringBuffer(" "); // 사전환경성검토 코드
-			StringBuffer bizNm = new StringBuffer(" "); // 사업명
-			StringBuffer approvOrganTeam = new StringBuffer(" "); // 승인기관
-			StringBuffer bizMoney = new StringBuffer(" "); // 사업비
-			StringBuffer bizSize = new StringBuffer(" "); // 사업규모
-			StringBuffer bizSizeDan = new StringBuffer(" "); // 사업규모 단위
-			StringBuffer benfBizmain = new StringBuffer(" "); // 사업시행자
-			StringBuffer embodEtcNm = new StringBuffer(" "); // 사업구분기타명칭
-			StringBuffer ccilJongCd = new StringBuffer(" "); // 협의종류
-			StringBuffer embodCd = new StringBuffer(" "); // 사업구분코드
-			StringBuffer embodCd2 = new StringBuffer(" "); // 사업구분 기타 명칭
-			StringBuffer ccilOrganCd = new StringBuffer(" "); // 협의기관코드
-			StringBuffer ctcMemNm = new StringBuffer(" "); // 협의기관 담당자									
-			StringBuffer ctcMemTeam = new StringBuffer(" "); // 협의기관 담당부서																	
-			StringBuffer ctcMemEmail = new StringBuffer(" "); // 협의기관 E-mail
-			StringBuffer ctcMemTel = new StringBuffer(" "); // 협의기관 전화번호
-			StringBuffer ctcMemFax = new StringBuffer(" "); // 협의기관 Fax번호
-			StringBuffer bizAddrEtc = new StringBuffer(" "); // 소재지 주소1
-			StringBuffer bizAddrEtc2 = new StringBuffer(" "); // 소재지 주소2
-			StringBuffer drfopPclDt = new StringBuffer(" "); // 초안 공고일
-			StringBuffer drfopTmdtStartDt = new StringBuffer(" "); // 초안 공람기간 시작일
-			StringBuffer drfopTmdtEndDt = new StringBuffer(" "); // 초안공람기간 종료일
-			StringBuffer drfopExpDttm = new StringBuffer(" "); // 설명회 일시
-			StringBuffer drfopOpnStartDt = new StringBuffer(" "); // 의견제출기간 시작일
-			StringBuffer drfopOpnEndDt = new StringBuffer(" "); // 의견제출기간 종료일
-			StringBuffer drfopSite = new StringBuffer(" "); // 공람장소
-			StringBuffer drfopExpSite = new StringBuffer(" "); // 설명회 장소
-			StringBuffer drfopTeamNm = new StringBuffer(" "); // 부서명
-			StringBuffer drfopTel = new StringBuffer(" "); // 전화번호
+					if (file.exists()) {
 
+						System.out.println("파일이 이미 존재하므로 이어쓰기..");
 
-				try {
+					} else {
+
+						try {
+
+							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+							pw.write("perCd"); // 사전환경성검토 코드
+							pw.write("|^");
+							pw.write("bizNm"); // 사업명
+							pw.write("|^");
+							pw.write("approvOrganTeam"); // 승인기관
+							pw.write("|^");
+							pw.write("bizMoney"); // 사업비
+							pw.write("|^");
+							pw.write("bizSize"); // 사업규모
+							pw.write("|^");
+							pw.write("bizSizeDan"); // 사업규모 단위
+							pw.write("|^");
+							pw.write("benfBizmain"); // 사업시행자
+							pw.write("|^");
+							pw.write("embodEtcNm"); // 사업구분기타명칭
+							pw.write("|^");
+							pw.write("ccilJongCd"); // 협의종류
+							pw.write("|^");
+							pw.write("embodCd"); // 사업구분코드
+							pw.write("|^");
+							pw.write("embodCd2"); // 사업구분 기타 명칭
+							pw.write("|^");
+							pw.write("ccilOrganCd"); // 협의기관코드
+							pw.write("|^");
+							pw.write("ctcMemNm"); // 협의기관 담당자
+							pw.write("|^");
+							pw.write("ctcMemTeam"); // 협의기관 담당부서
+							pw.write("|^");
+							pw.write("ctcMemEmail"); // 협의기관 E-mail
+							pw.write("|^");
+							pw.write("ctcMemTel"); // 협의기관 전화번호
+							pw.write("|^");
+							pw.write("ctcMemFax"); // 협의기관 Fax번호
+							pw.write("|^");
+							pw.write("bizAddrEtc"); // 소재지 주소1
+							pw.write("|^");
+							pw.write("bizAddrEtc2"); // 소재지 주소2
+							pw.write("|^");
+							pw.write("drfopPclDt"); // 초안 공고일
+							pw.write("|^");
+							pw.write("drfopTmdtStartDt"); // 초안 공람기간 시작일
+							pw.write("|^");
+							pw.write("drfopTmdtEndDt"); // 초안공람기간 종료일
+							pw.write("|^");
+							pw.write("drfopExpDttm"); // 설명회 일시
+							pw.write("|^");
+							pw.write("drfopOpnStartDt"); // 의견제출기간 시작일
+							pw.write("|^");
+							pw.write("drfopOpnEndDt"); // 의견제출기간 종료일
+							pw.write("|^");
+							pw.write("drfopSite"); // 공람장소
+							pw.write("|^");
+							pw.write("drfopExpSite"); // 설명회 장소
+							pw.write("|^");
+							pw.write("drfopTeamNm"); // 부서명
+							pw.write("|^");
+							pw.write("drfopTel"); // 전화번호
+							pw.println();
+							pw.flush();
+							pw.close();
+
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+
+					}
+
+					String json = "";
+
+					json = JsonParser.parseEiaJson(service_url, service_key, args[0]);
+
+					// step 2. 전체 파싱
+
+					StringBuffer resultSb = new StringBuffer("");
+
+					StringBuffer perCd = new StringBuffer(" "); // 사전환경성검토 코드
+					StringBuffer bizNm = new StringBuffer(" "); // 사업명
+					StringBuffer approvOrganTeam = new StringBuffer(" "); // 승인기관
+					StringBuffer bizMoney = new StringBuffer(" "); // 사업비
+					StringBuffer bizSize = new StringBuffer(" "); // 사업규모
+					StringBuffer bizSizeDan = new StringBuffer(" "); // 사업규모 단위
+					StringBuffer benfBizmain = new StringBuffer(" "); // 사업시행자
+					StringBuffer embodEtcNm = new StringBuffer(" "); // 사업구분기타명칭
+					StringBuffer ccilJongCd = new StringBuffer(" "); // 협의종류
+					StringBuffer embodCd = new StringBuffer(" "); // 사업구분코드
+					StringBuffer embodCd2 = new StringBuffer(" "); // 사업구분 기타 명칭
+					StringBuffer ccilOrganCd = new StringBuffer(" "); // 협의기관코드
+					StringBuffer ctcMemNm = new StringBuffer(" "); // 협의기관 담당자
+					StringBuffer ctcMemTeam = new StringBuffer(" "); // 협의기관
+																		// 담당부서
+					StringBuffer ctcMemEmail = new StringBuffer(" "); // 협의기관
+																		// E-mail
+					StringBuffer ctcMemTel = new StringBuffer(" "); // 협의기관 전화번호
+					StringBuffer ctcMemFax = new StringBuffer(" "); // 협의기관
+																	// Fax번호
+					StringBuffer bizAddrEtc = new StringBuffer(" "); // 소재지 주소1
+					StringBuffer bizAddrEtc2 = new StringBuffer(" "); // 소재지 주소2
+					StringBuffer drfopPclDt = new StringBuffer(" "); // 초안 공고일
+					StringBuffer drfopTmdtStartDt = new StringBuffer(" "); // 초안
+																			// 공람기간
+																			// 시작일
+					StringBuffer drfopTmdtEndDt = new StringBuffer(" "); // 초안공람기간
+																			// 종료일
+					StringBuffer drfopExpDttm = new StringBuffer(" "); // 설명회 일시
+					StringBuffer drfopOpnStartDt = new StringBuffer(" "); // 의견제출기간
+																			// 시작일
+					StringBuffer drfopOpnEndDt = new StringBuffer(" "); // 의견제출기간
+																		// 종료일
+					StringBuffer drfopSite = new StringBuffer(" "); // 공람장소
+					StringBuffer drfopExpSite = new StringBuffer(" "); // 설명회 장소
+					StringBuffer drfopTeamNm = new StringBuffer(" "); // 부서명
+					StringBuffer drfopTel = new StringBuffer(" "); // 전화번호
+
 					JSONParser parser = new JSONParser();
 					JSONObject obj = (JSONObject) parser.parse(json);
 					JSONObject response = (JSONObject) obj.get("response");
@@ -161,13 +173,13 @@ public class GetStrategyDraftPblancDsplaybtntOpinionDetailInfoInqire {
 
 					String resultCode = header.get("resultCode").toString().trim();
 					String resultMsg = header.get("resultMsg").toString().trim();
-					
-					if(!(resultCode.equals("00"))){
+
+					if (!(resultCode.equals("00"))) {
 						System.out.println("parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
-					} else if(response.get("body") instanceof String){
+					} else if (response.get("body") instanceof String) {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(response.get("body") instanceof String)) {
-						
+
 						JSONObject body = (JSONObject) response.get("body");
 
 						// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
@@ -212,7 +224,6 @@ public class GetStrategyDraftPblancDsplaybtntOpinionDetailInfoInqire {
 								JsonParser.colWrite(drfopExpSite, keyname, "drfopExpSite", items_jsonObject);
 								JsonParser.colWrite(drfopTeamNm, keyname, "drfopTeamNm", items_jsonObject);
 								JsonParser.colWrite(drfopTel, keyname, "drfopTel", items_jsonObject);
-								
 
 							}
 
@@ -393,37 +404,42 @@ public class GetStrategyDraftPblancDsplaybtntOpinionDetailInfoInqire {
 						System.out.println("parsing error!!");
 					}
 
-				} catch (Exception e) {
-					e.printStackTrace();
+					// step 4. 파일에 쓰기
+					try {
+						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
+						pw.write(resultSb.toString());
+						pw.flush();
+						pw.close();
+
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
+					System.out.println("parsing complete!");
+
+					// step 5. 대상 서버에 sftp로 보냄
+
+					// TransSftp.transSftp(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_38.dat", "EIA");
+
+					long end = System.currentTimeMillis();
+					System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
+
+				} else {
+					System.out.println("파라미터 개수 에러!!");
+					System.exit(-1);
 				}
 
-			
+				return; // 작업 성공시 리턴
 
-			// step 4. 파일에 쓰기
-			try {
-				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-				pw.write(resultSb.toString());
-				pw.flush();
-				pw.close();
-
-			} catch (IOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
+				System.out.println("perCd :" + args[0]);
 			}
 
-			System.out.println("parsing complete!");
-
-			// step 5. 대상 서버에 sftp로 보냄
-
-			//TransSftp.transSftp(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_38.dat", "EIA");
-
-			long end = System.currentTimeMillis();
-			System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
-
-		} else {
-			System.out.println("파라미터 개수 에러!!");
-			System.exit(-1);
 		}
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 
 	}
 
