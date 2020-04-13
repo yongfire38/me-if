@@ -23,11 +23,11 @@ public class GetFileInfoInqire {
 
 		int retry = 0;
 
-		while (retry++ < 3) {
+		while (retry++ < 10) {
 
 			try {
 
-				Thread.sleep(1000);
+				Thread.sleep(3000);
 
 				// 실행시 결정내용 코드와 타입(1: 결정내용 파일정보 2: 초안공람 전략환경영향평가 초안파일 3: 초안공람
 				// 환경영향평가
@@ -259,6 +259,8 @@ public class GetFileInfoInqire {
 			}
 
 		}
+		
+		System.out.println("최대 재시도 회수를 초과하였습니다.");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 

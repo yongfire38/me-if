@@ -23,11 +23,11 @@ public class GetBsnsStrtgySmallScaleDscssBsnsDetailIngInfoInqire {
 
 		int retry = 0;
 
-		while (retry++ < 3) {
+		while (retry++ < 10) {
 
 			try {
 
-				Thread.sleep(1000);
+				Thread.sleep(3000);
 
 				// 필수 요청 파라미터 사전환경성검토코드 1개
 				if (args.length == 1) {
@@ -262,6 +262,8 @@ public class GetBsnsStrtgySmallScaleDscssBsnsDetailIngInfoInqire {
 			}
 
 		}
+		
+		System.out.println("최대 재시도 회수를 초과하였습니다.");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 

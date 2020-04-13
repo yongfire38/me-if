@@ -23,11 +23,11 @@ public class De {
 
 		int retry = 0;
 
-		while (retry++ < 3) {
+		while (retry++ < 10) {
 
 			try {
 
-				Thread.sleep(1000);
+				Thread.sleep(3000);
 
 				// 댐코드 1개, 날짜를 yyyymmdd로 2개 받는다. 파라미터 유효성 체크는 파싱 때 체크
 				if (args.length == 3) {
@@ -309,6 +309,8 @@ public class De {
 			}
 
 		}
+		
+		System.out.println("최대 재시도 회수를 초과하였습니다.");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 

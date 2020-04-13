@@ -23,11 +23,11 @@ public class MultiFunctionBarrier {
 
 		int retry = 0;
 
-		while (retry++ < 3) {
+		while (retry++ < 10) {
 
 			try {
 
-				Thread.sleep(1000);
+				Thread.sleep(3000);
 
 				// 필요한 파라미터는 전일 날짜, 전년날짜, 검색날짜 (yyyyMMdd), 검색 시간(2자리)
 				if (args.length == 4) {
@@ -323,6 +323,8 @@ public class MultiFunctionBarrier {
 			}
 
 		}
+		
+		System.out.println("최대 재시도 회수를 초과하였습니다.");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 

@@ -23,11 +23,11 @@ public class GetPressFclty {
 
 		int retry = 0;
 
-		while (retry++ < 3) {
+		while (retry++ < 10) {
 
 			try {
 
-				Thread.sleep(1000);
+				Thread.sleep(3000);
 
 				// 서비스 키만 요구함, 실행시 추가 매개변수 없음
 				if (args.length == 0) {
@@ -248,6 +248,8 @@ public class GetPressFclty {
 			}
 
 		}
+		
+		System.out.println("최대 재시도 회수를 초과하였습니다.");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 

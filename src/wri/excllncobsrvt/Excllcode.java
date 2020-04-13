@@ -23,11 +23,11 @@ public class Excllcode {
 
 		int retry = 0;
 
-		while (retry++ < 3) {
+		while (retry++ < 10) {
 
 			try {
 
-				Thread.sleep(1000);
+				Thread.sleep(3000);
 
 				// 필요한 파라미터는 댐 코드
 				// 댐코드는 수문제원현황 코드조회 api에서 조회
@@ -197,6 +197,8 @@ public class Excllcode {
 			}
 
 		}
+		
+		System.out.println("최대 재시도 회수를 초과하였습니다.");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 
