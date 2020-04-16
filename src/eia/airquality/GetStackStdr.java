@@ -162,7 +162,7 @@ public class GetStackStdr {
 
 									// 시분초 표기일 경우 drgree 표기로 전환
 									if ((xcnts.indexOf("°") > -1)) {
-										xcnts = JsonParser.dmsTodecimal_latitude(xcnts);
+										xcnts = JsonParser.dmsTodecimal_split(xcnts);
 									}
 
 								}
@@ -171,7 +171,7 @@ public class GetStackStdr {
 
 									// 시분초 표기일 경우 drgree 표기로 전환
 									if ((ydnts.indexOf("°") > -1)) {
-										ydnts = JsonParser.dmsTodecimal_longitude(xcnts);
+										ydnts = JsonParser.dmsTodecimal_split(xcnts);
 									}
 								}
 								if (keyname.equals("stackHg")) {
