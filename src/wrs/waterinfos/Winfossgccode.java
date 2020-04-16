@@ -23,7 +23,7 @@ public class Winfossgccode {
 
 		int retry = 0;
 
-		while (retry++ < 10) {
+		while (retry++ < 5) {
 
 			try {
 

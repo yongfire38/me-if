@@ -23,7 +23,7 @@ public class SupplyLgldCodeList {
 
 		int retry = 0;
 
-		while (retry++ < 10) {
+		while (retry++ < 5) {
 
 			try {
 
