@@ -480,7 +480,7 @@ public class GetIvstg {
 										pw.write("|^");
 										pw.write(ivstgGb_str); // 조사구분
 										pw.write("|^");
-										pw.write(ivstg_adres_str); // 주소
+										pw.write(ivstg_adres_str.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 주소
 										pw.write("|^");
 										pw.write(ivstg_xcnts_str); // X좌표
 										pw.write("|^");

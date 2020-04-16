@@ -84,6 +84,8 @@ public class GetSlr {
 					String json = "";
 
 					json = JsonParser.parseEiaJson(service_url, service_key, mgtNo);
+					
+					System.out.println("json::::"+json);
 
 					// step 3.필요에 맞게 파싱
 
@@ -188,7 +190,7 @@ public class GetSlr {
 											slrCn = slrDph_json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("nVal")) {
-											nVal = slrDph_json.get(keyname).toString().trim();
+											nVal = slrDph_json.get(keyname).toString().trim();										
 										}
 
 									}
@@ -216,7 +218,7 @@ public class GetSlr {
 										pw.write("|^");
 										pw.write(slrCn); // 지층구성상태
 										pw.write("|^");
-										pw.write(nVal); // N치(TCR/RQD)
+										pw.write(nVal.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // N치(TCR/RQD)
 										pw.println();
 										pw.flush();
 										pw.close();

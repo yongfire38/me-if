@@ -227,7 +227,7 @@ public class GetStackStdr {
 								pw.write("|^");
 								pw.write(stackNm); // 연돌명
 								pw.write("|^");
-								pw.write(adres); // 주소
+								pw.write(adres.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 주소
 								pw.write("|^");
 								pw.write(xcnts); // X좌표
 								pw.write("|^");

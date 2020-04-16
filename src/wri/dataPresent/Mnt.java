@@ -42,14 +42,10 @@ public class Mnt {
 					// step 1.파일의 첫 행 작성
 					File file = new File(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_07.dat");
 
-					if (file.exists()) {
-
-						System.out.println("파일이 이미 존재하므로 이어쓰기..");
-
-					} else {
-
 						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+							
+							//중복 이슈 문제로 요청 파라미터 없이 전체로 돌리는 경우는 매번 파일 새로 쓰게 수정
+							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
 
 							pw.write("competDe"); // 완료일
 							pw.write("|^");
@@ -97,8 +93,6 @@ public class Mnt {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-
-					}
 
 					// step 2. 파싱
 					String json = "";

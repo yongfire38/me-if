@@ -42,15 +42,10 @@ public class Winfossgccode {
 					// step 1.파일의 첫 행 작성
 					File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_10.dat");
 
-					if (file.exists()) {
-
-						System.out.println("파일이 이미 존재하므로 이어쓰기..");
-
-					} else {
-
 						try {
 
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+							//중복 이슈 문제로 요청 파라미터 없이 전체로 돌리는 경우는 매번 파일 새로 쓰게 수정
+							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
 							pw.write("sgccd"); // 지자체코드
 							pw.write("|^");
 							pw.write("sgcnm"); // 지자체명
@@ -61,8 +56,6 @@ public class Winfossgccode {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-
-					}
 
 					// step 2. 전체 파싱
 					String json = "";
