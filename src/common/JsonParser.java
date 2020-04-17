@@ -461,37 +461,48 @@ public class JsonParser {
 		String json = "";
 
 		String urlstr = service_url + mgtNo + "&serviceKey=" + service_key;
-		
-		while (retry++ < 3) {
+
+		while (retry < 3) {
+			
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 			
 			try {
 				
 				Thread.sleep(3000);
 
-				URL url = new URL(urlstr);
-				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 				urlconnection.setRequestMethod("GET");
-				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				
+				int responseCode = urlconnection.getResponseCode();
 
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+				
 				String line;
 				
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
+				
+				urlconnection.disconnect();
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("JSON 요청 에러 : mgtNo :" + mgtNo);
-			}
+				urlconnection.disconnect();
+				retry++;
+			} 
 			
 		}
 		
 		System.out.println("재시도 회수 초과");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
-		
 		
 	}
 
@@ -505,16 +516,24 @@ public class JsonParser {
 
 		String urlstr = service_url + code + "&serviceKey=" + service_key + "&type=" + type;
 		
-		while (retry++ < 3) {
+		while (retry < 3) {
+			
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 			
 			try {
 				
 				Thread.sleep(3000);
 
-				URL url = new URL(urlstr);
-				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 				urlconnection.setRequestMethod("GET");
-				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				
+				int responseCode = urlconnection.getResponseCode();
+				
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
 
 				String line;
 				
@@ -522,12 +541,16 @@ public class JsonParser {
 					json = json + line + "\n";
 				}
 				
+				urlconnection.disconnect();
+
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("JSON 요청 에러 : code :" + code + ": type :"+ type);
-			}
+				urlconnection.disconnect();
+				retry++;
+			} 
 			
 		}
 		
@@ -547,30 +570,41 @@ public class JsonParser {
 
 		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
 		
-		while (retry++ < 3) {
+		while (retry < 3) {
+			
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 			
 			try {
 				
 				Thread.sleep(3000);
 
-				URL url = new URL(urlstr);
-				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 				urlconnection.setRequestMethod("GET");
-				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+
+				int responseCode = urlconnection.getResponseCode();
+				
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
 
 				String line;
 				
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
-
+				
+				urlconnection.disconnect();
+				
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("JSON 요청 에러 : pageNo :" + pageNo + ": code :"+ code);
-			}
-			
+				urlconnection.disconnect();
+				retry++;
+			} 
 			
 		}
 
@@ -593,30 +627,41 @@ public class JsonParser {
 		String urlstr = service_url + "&serviceKey=" + service_key + "&centerX=" + center_X + "&centerY=" + center_Y
 				+ "&numOfRows=999" + "&pageNo=" + pageNo;
 		
-		while (retry++ < 3) {
+		while (retry < 3) {
+			
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 			
 			try {
 				
 				Thread.sleep(3000);
 
-				URL url = new URL(urlstr);
-				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 				urlconnection.setRequestMethod("GET");
-				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				
+				int responseCode = urlconnection.getResponseCode();
+				
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
 
 				String line;
 				
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
+				
+				urlconnection.disconnect();
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("JSON 요청 에러 : center_X :" + center_X + ": center_Y :"+ center_Y);
-			}
-			
+				urlconnection.disconnect();
+				retry++;
+			} 
 			
 		}
 
@@ -639,29 +684,41 @@ public class JsonParser {
 		String urlstr = service_url + "&serviceKey=" + service_key + "&year=" + year + "&month=" + month + "&pageNo="
 				+ pageNo;
 		
-		while (retry++ < 3) {
+		while (retry < 3) {
+			
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 			
 			try {
 				
 				Thread.sleep(3000);
 
-				URL url = new URL(urlstr);
-				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 				urlconnection.setRequestMethod("GET");
-				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+
+				int responseCode = urlconnection.getResponseCode();
+				
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
 
 				String line;
 				
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
-
+				
+				urlconnection.disconnect();
+				
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("JSON 요청 에러 : year :" + year + ": month :"+ month);
-			}
+				urlconnection.disconnect();
+				retry++;
+			} 
 
 		}
 		
@@ -682,30 +739,41 @@ public class JsonParser {
 
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
 		
-		while (retry++ < 3) {
+		while (retry < 3) {
+			
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 			
 			try {
 				
 				Thread.sleep(3000);
 
-				URL url = new URL(urlstr);
-				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 				urlconnection.setRequestMethod("GET");
-				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				
+				int responseCode = urlconnection.getResponseCode();
+				
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
 
 				String line;
 				
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
+				
+				urlconnection.disconnect();
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("JSON 요청 에러 : pageNo :" + pageNo);
-			}
-			
+				urlconnection.disconnect();
+				retry++;
+			} 
 			
 		}
 		
@@ -728,27 +796,40 @@ public class JsonParser {
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&siteId=" + siteId
 				+ "&ptNoList=" + ptNoList + "&numOfRows=999";
 		
-		while (retry++ < 3) {
+		while (retry < 3) {
+			
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 			
 			try {
 				
 				Thread.sleep(3000);
 
-				URL url = new URL(urlstr);
-				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 				urlconnection.setRequestMethod("GET");
-				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				
+				int responseCode = urlconnection.getResponseCode();
+				
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
 
 				String line;
+				
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
+				
+				urlconnection.disconnect();
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("JSON 요청 에러 : siteId :" + siteId + ": ptNoList :"+ ptNoList);
+				urlconnection.disconnect();
+				retry++;
 			}
 				
 		}
@@ -771,44 +852,50 @@ public class JsonParser {
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
-		while (retry++ < 3) {
+		Date origin_stdt = originFormat.parse(stdt);
+		Date origin_eddt = originFormat.parse(eddt);
+
+		String parse_stdt = parseFormat.format(origin_stdt);
+		String parse_eddt = parseFormat.format(origin_eddt);
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + parse_stdt
+				+ "&eddt=" + parse_eddt + "&numOfRows=999";
+		
+		while (retry < 3) {
 			
-			try {
-
-				Date origin_stdt = originFormat.parse(stdt);
-				Date origin_eddt = originFormat.parse(eddt);
-
-				String parse_stdt = parseFormat.format(origin_stdt);
-				String parse_eddt = parseFormat.format(origin_eddt);
-
-				String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + parse_stdt
-						+ "&eddt=" + parse_eddt + "&numOfRows=999";
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+				
 				try {
 					
 					Thread.sleep(3000);
 
-					URL url = new URL(urlstr);
-					HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 					urlconnection.setRequestMethod("GET");
-					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+					
+					int responseCode = urlconnection.getResponseCode();
+					
+					if (responseCode == 200 || responseCode == 201) {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+					} else {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+					}
 
 					String line;
 					
 					while ((line = br.readLine()) != null) {
 						json = json + line + "\n";
 					}
+					
+					urlconnection.disconnect();
 
 					return json;
 
 				} catch (Exception e) {
 					e.printStackTrace();
 					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :"+ eddt);
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
+					urlconnection.disconnect();
+					retry++;
+				} 
 			
 		}
 
@@ -832,26 +919,33 @@ public class JsonParser {
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
-		while (retry++ < 3) {
+		Date origin_stdt = originFormat.parse(stdt);
+		Date origin_eddt = originFormat.parse(eddt);
+
+		String parse_stdt = parseFormat.format(origin_stdt);
+		String parse_eddt = parseFormat.format(origin_eddt);
+
+		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt="
+				+ parse_stdt + "&eddt=" + parse_eddt + "&numOfRows=999";
+		
+		while (retry < 3) {
 			
-			try {
-
-				Date origin_stdt = originFormat.parse(stdt);
-				Date origin_eddt = originFormat.parse(eddt);
-
-				String parse_stdt = parseFormat.format(origin_stdt);
-				String parse_eddt = parseFormat.format(origin_eddt);
-
-				String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt="
-						+ parse_stdt + "&eddt=" + parse_eddt + "&numOfRows=999";
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+				
 				try {
 					
 					Thread.sleep(3000);
 
-					URL url = new URL(urlstr);
-					HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 					urlconnection.setRequestMethod("GET");
-					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+					
+					int responseCode = urlconnection.getResponseCode();
+					
+					if (responseCode == 200 || responseCode == 201) {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+					} else {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+					}
 
 					String line;
 					
@@ -859,17 +953,17 @@ public class JsonParser {
 						json = json + line + "\n";
 					}
 
+					urlconnection.disconnect();
+					
 					return json;
 
 				} catch (Exception e) {
 					e.printStackTrace();
 					System.out.println("JSON 요청 에러 : code :" + code + ": stdt :"+ stdt +": eddt :"+eddt);
-				}
+					urlconnection.disconnect();
+					retry++;
+				} 
 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
 		}
 
 		System.out.println("재시도 회수 초과");
@@ -878,6 +972,7 @@ public class JsonParser {
 		
 	}
 
+	
 	// 코드 1개와 시작 날짜랑 끝 날짜를 받아서 파싱, 형식은 yyyymm
 	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
 	public static String parseWriJson_month(String service_url, String service_key, String pageNo, String code,
@@ -891,43 +986,50 @@ public class JsonParser {
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMM");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM");
 		
-		while (retry++ < 3) {
+		Date origin_stdt = originFormat.parse(stdt);
+		Date origin_eddt = originFormat.parse(eddt);
+
+		String parse_stdt = parseFormat.format(origin_stdt);
+		String parse_eddt = parseFormat.format(origin_eddt);
+
+		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt="
+				+ parse_stdt + "&eddt=" + parse_eddt + "&numOfRows=999";
+		
+		while (retry < 3) {
 			
-			try {
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-				Date origin_stdt = originFormat.parse(stdt);
-				Date origin_eddt = originFormat.parse(eddt);
-
-				String parse_stdt = parseFormat.format(origin_stdt);
-				String parse_eddt = parseFormat.format(origin_eddt);
-
-				String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt="
-						+ parse_stdt + "&eddt=" + parse_eddt + "&numOfRows=999";
 				try {
 					
 					Thread.sleep(3000);
 
-					URL url = new URL(urlstr);
-					HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 					urlconnection.setRequestMethod("GET");
-					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+					
+					int responseCode = urlconnection.getResponseCode();
+					
+					if (responseCode == 200 || responseCode == 201) {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+					} else {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+					}
 
 					String line;
 					
 					while ((line = br.readLine()) != null) {
 						json = json + line + "\n";
 					}
+					
+					urlconnection.disconnect();
 
 					return json;
 
 				} catch (Exception e) {
 					e.printStackTrace();
 					System.out.println("JSON 요청 에러 : code :" + code + ": stdt :"+ stdt +": eddt :"+eddt);
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+					urlconnection.disconnect();
+					retry++;
+				} 
 
 		}
 
@@ -950,47 +1052,53 @@ public class JsonParser {
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
-		while (retry++ < 3) {
+		Date origin_tdate = originFormat.parse(tdate);
+		Date origin_ldate = originFormat.parse(ldate);
+		Date origin_vdate = originFormat.parse(vdate);
+
+		String parse_tdate = parseFormat.format(origin_tdate);
+		String parse_ldate = parseFormat.format(origin_ldate);
+		String parse_vdate = parseFormat.format(origin_vdate);
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&tdate=" + parse_tdate
+				+ "&ldate=" + parse_ldate + "&vdate=" + parse_vdate + "&vtime=" + vtime + "&numOfRows=999";
+		
+		while (retry < 3) {
 			
-			try {
-
-				Date origin_tdate = originFormat.parse(tdate);
-				Date origin_ldate = originFormat.parse(ldate);
-				Date origin_vdate = originFormat.parse(vdate);
-
-				String parse_tdate = parseFormat.format(origin_tdate);
-				String parse_ldate = parseFormat.format(origin_ldate);
-				String parse_vdate = parseFormat.format(origin_vdate);
-
-				String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&tdate=" + parse_tdate
-						+ "&ldate=" + parse_ldate + "&vdate=" + parse_vdate + "&vtime=" + vtime + "&numOfRows=999";
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+				
 				try {
 					
 					Thread.sleep(3000);
 
-					URL url = new URL(urlstr);
-					HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 					urlconnection.setRequestMethod("GET");
-					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+					
+					int responseCode = urlconnection.getResponseCode();
+					
+					if (responseCode == 200 || responseCode == 201) {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+					} else {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+					}
 
 					String line;
 					
 					while ((line = br.readLine()) != null) {
 						json = json + line + "\n";
 					}
+					
+					urlconnection.disconnect();
 
 					return json;
 
 				} catch (Exception e) {
 					e.printStackTrace();
 					System.out.println("JSON 요청 에러 : tdate :" + tdate + ": ldate :"+ ldate +": vdate :"+vdate +": vtime :"+vtime);
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			
+					urlconnection.disconnect();
+					retry++;
+				} 
+				
 		}
 
 		System.out.println("재시도 회수 초과");
@@ -1014,46 +1122,52 @@ public class JsonParser {
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
-		while (retry++ < 3) {
+		Date origin_sdate = originFormat.parse(sdate);
+		Date origin_edate = originFormat.parse(edate);
+
+		String parse_sdate = parseFormat.format(origin_sdate);
+		String parse_edate = parseFormat.format(origin_edate);
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&sdate=" + parse_sdate
+				+ "&stime=" + stime + "&edate=" + parse_edate + "&etime=" + etime + "&excll=" + excll
+				+ "&numOfRows=999";
+		
+		while (retry < 3) {
 			
-			try {
-
-				Date origin_sdate = originFormat.parse(sdate);
-				Date origin_edate = originFormat.parse(edate);
-
-				String parse_sdate = parseFormat.format(origin_sdate);
-				String parse_edate = parseFormat.format(origin_edate);
-
-				String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&sdate=" + parse_sdate
-						+ "&stime=" + stime + "&edate=" + parse_edate + "&etime=" + etime + "&excll=" + excll
-						+ "&numOfRows=999";
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+				
 				try {
 					
 					Thread.sleep(3000);
 
-					URL url = new URL(urlstr);
-					HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 					urlconnection.setRequestMethod("GET");
-					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+					
+					int responseCode = urlconnection.getResponseCode();
+					
+					if (responseCode == 200 || responseCode == 201) {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+					} else {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+					}
 
 					String line;
 					
 					while ((line = br.readLine()) != null) {
 						json = json + line + "\n";
 					}
+					
+					urlconnection.disconnect();
 
 					return json;
 
 				} catch (Exception e) {
 					e.printStackTrace();
 					System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :"+ stime +": edate :"+edate +": etime :"+etime +": excll :"+excll);
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			
+					urlconnection.disconnect();
+					retry++;
+				} 
+	
 		}
 
 		System.out.println("재시도 회수 초과");
@@ -1076,28 +1190,35 @@ public class JsonParser {
 
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Date origin_sdate = originFormat.parse(sdate);
+		Date origin_edate = originFormat.parse(edate);
 
-		while (retry++ < 3) {
+		String parse_sdate = parseFormat.format(origin_sdate);
+		String parse_edate = parseFormat.format(origin_edate);
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&sdate=" + parse_sdate
+				+ "&stime=" + stime + "&edate=" + parse_edate + "&etime=" + etime + "&excll=" + excll + "&damcode="
+				+ damcode + "&numOfRows=999";
+
+		while (retry < 3) {
 			
-			try {
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-				Date origin_sdate = originFormat.parse(sdate);
-				Date origin_edate = originFormat.parse(edate);
-
-				String parse_sdate = parseFormat.format(origin_sdate);
-				String parse_edate = parseFormat.format(origin_edate);
-
-				String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&sdate=" + parse_sdate
-						+ "&stime=" + stime + "&edate=" + parse_edate + "&etime=" + etime + "&excll=" + excll + "&damcode="
-						+ damcode + "&numOfRows=999";
 				try {
 					
 					Thread.sleep(3000);
 
-					URL url = new URL(urlstr);
-					HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 					urlconnection.setRequestMethod("GET");
-					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+					
+					int responseCode = urlconnection.getResponseCode();
+					
+					if (responseCode == 200 || responseCode == 201) {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+					} else {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+					}
 
 					String line;
 					
@@ -1105,17 +1226,16 @@ public class JsonParser {
 						json = json + line + "\n";
 					}
 
+					urlconnection.disconnect();
+					
 					return json;
 
 				} catch (Exception e) {
 					e.printStackTrace();
 					System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :"+ stime +": edate :"+edate +": etime :"+etime +": damcode :"+damcode +": excll :"+excll);
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
+					urlconnection.disconnect();
+					retry++;
+				} 
 			
 		}
 		
@@ -1140,27 +1260,34 @@ public class JsonParser {
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
-		while (retry++ < 3) {
+		Date origin_sdate = originFormat.parse(sdate);
+		Date origin_edate = originFormat.parse(edate);
+
+		String parse_sdate = parseFormat.format(origin_sdate);
+		String parse_edate = parseFormat.format(origin_edate);
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&sdate=" + parse_sdate
+				+ "&stime=" + stime + "&edate=" + parse_edate + "&etime=" + etime + "&wal=" + wal + "&damcode="
+				+ damcode + "&numOfRows=999";
+		
+		while (retry < 3) {
 			
-			try {
-
-				Date origin_sdate = originFormat.parse(sdate);
-				Date origin_edate = originFormat.parse(edate);
-
-				String parse_sdate = parseFormat.format(origin_sdate);
-				String parse_edate = parseFormat.format(origin_edate);
-
-				String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&sdate=" + parse_sdate
-						+ "&stime=" + stime + "&edate=" + parse_edate + "&etime=" + etime + "&wal=" + wal + "&damcode="
-						+ damcode + "&numOfRows=999";
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+				
 				try {
 					
 					Thread.sleep(3000);
 
-					URL url = new URL(urlstr);
-					HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 					urlconnection.setRequestMethod("GET");
-					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+					
+					int responseCode = urlconnection.getResponseCode();
+					
+					if (responseCode == 200 || responseCode == 201) {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+					} else {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+					}
 
 					String line;
 					
@@ -1168,17 +1295,16 @@ public class JsonParser {
 						json = json + line + "\n";
 					}
 
+					urlconnection.disconnect();
+					
 					return json;
 
 				} catch (Exception e) {
 					e.printStackTrace();
 					System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :"+ stime +": edate :"+edate +": etime :"+etime +": damcode :"+damcode +": wal :"+wal);
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
+					urlconnection.disconnect();
+					retry++;
+				} 
 			
 		}
 
@@ -1200,30 +1326,42 @@ public class JsonParser {
 
 		String urlstr = service_url + "&serviceKey=" + service_key;
 		
-		while (retry++ < 3) {
+		while (retry < 3) {
+			
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 			
 			try {
 				
 				Thread.sleep(3000);
 
-				URL url = new URL(urlstr);
-				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+				
 				urlconnection.setRequestMethod("GET");
-				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				
+				int responseCode = urlconnection.getResponseCode();
+				
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
 
 				String line;
 				
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
+				
+				urlconnection.disconnect();
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("JSON 요청 에러 ");
-			}
-			
+				urlconnection.disconnect();
+				retry++;
+			} 
 			
 		}
 		
@@ -1248,26 +1386,33 @@ public class JsonParser {
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
-		while (retry++ < 3) {
+		Date origin_stDt = originFormat.parse(stDt);
+		Date origin_edDt = originFormat.parse(edDt);
+
+		String parse_stDt = parseFormat.format(origin_stDt);
+		String parse_edDt = parseFormat.format(origin_edDt);
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stDt=" + parse_stDt
+				+ "&stTm=" + stTm + "&edDt=" + parse_edDt + "&edTm=" + edTm + "&numOfRows=999";
+		
+		while (retry < 3) {
 			
-			try {
-
-				Date origin_stDt = originFormat.parse(stDt);
-				Date origin_edDt = originFormat.parse(edDt);
-
-				String parse_stDt = parseFormat.format(origin_stDt);
-				String parse_edDt = parseFormat.format(origin_edDt);
-
-				String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stDt=" + parse_stDt
-						+ "&stTm=" + stTm + "&edDt=" + parse_edDt + "&edTm=" + edTm + "&numOfRows=999";
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+				
 				try {
 					
 					Thread.sleep(3000);
 
-					URL url = new URL(urlstr);
-					HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 					urlconnection.setRequestMethod("GET");
-					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+					
+					int responseCode = urlconnection.getResponseCode();
+					
+					if (responseCode == 200 || responseCode == 201) {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+					} else {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+					}
 
 					String line;
 					
@@ -1275,18 +1420,17 @@ public class JsonParser {
 						json = json + line + "\n";
 					}
 
+					urlconnection.disconnect();
+					
 					return json;
 
 				} catch (Exception e) {
 					e.printStackTrace();
 					System.out.println("JSON 요청 에러 : stDt :" + stDt + ": stTm :"+ stTm +": edDt :"+edDt +": edTm :"+edTm);
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			
+					urlconnection.disconnect();
+					retry++;
+				} 
+				
 		}
 
 		System.out.println("재시도 회수 초과");
@@ -1307,30 +1451,41 @@ public class JsonParser {
 
 		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
 		
-		while (retry++ < 3) {
+		while (retry < 3) {
+			
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 			
 			try {
 				
 				Thread.sleep(3000);
 
-				URL url = new URL(urlstr);
-				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 				urlconnection.setRequestMethod("GET");
-				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				
+				int responseCode = urlconnection.getResponseCode();
+				
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
 
 				String line;
 				
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
+				
+				urlconnection.disconnect();
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("JSON 요청 에러 : code :" + code);
+				urlconnection.disconnect();
+				retry++;
 			}
-			
 			
 		}
 		
@@ -1352,44 +1507,50 @@ public class JsonParser {
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMM");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM");
 		
-		while (retry++ < 3) {
+		Date origin_stdt = originFormat.parse(stdt);
+		Date origin_eddt = originFormat.parse(eddt);
+
+		String parse_stdt = parseFormat.format(origin_stdt);
+		String parse_eddt = parseFormat.format(origin_eddt);
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + parse_stdt
+				+ "&eddt=" + parse_eddt + "&numOfRows=999";
+		
+		while (retry < 3) {
 			
-			try {
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-				Date origin_stdt = originFormat.parse(stdt);
-				Date origin_eddt = originFormat.parse(eddt);
-
-				String parse_stdt = parseFormat.format(origin_stdt);
-				String parse_eddt = parseFormat.format(origin_eddt);
-
-				String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + parse_stdt
-						+ "&eddt=" + parse_eddt + "&numOfRows=999";
 				try {
 					
 					Thread.sleep(3000);
 
-					URL url = new URL(urlstr);
-					HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 					urlconnection.setRequestMethod("GET");
-					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+					
+					int responseCode = urlconnection.getResponseCode();
+					
+					if (responseCode == 200 || responseCode == 201) {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+					} else {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+					}
 
 					String line;
 					
 					while ((line = br.readLine()) != null) {
 						json = json + line + "\n";
 					}
+					
+					urlconnection.disconnect();
 
 					return json;
 
 				} catch (Exception e) {
 					e.printStackTrace();
 					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :"+ eddt);
+					urlconnection.disconnect();
+					retry++;
 				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
 			
 		}
 
@@ -1413,44 +1574,50 @@ public class JsonParser {
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMM");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM");
 		
-		while (retry++ < 3) {
+		Date origin_stdt = originFormat.parse(stdt);
+		Date origin_eddt = originFormat.parse(eddt);
+
+		String parse_stdt = parseFormat.format(origin_stdt);
+		String parse_eddt = parseFormat.format(origin_eddt);
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + parse_stdt
+				+ "&eddt=" + parse_eddt + "&sgccd=" + sgccd + "&numOfRows=999";
+		
+		while (retry < 3) {
 			
-			try {
-
-				Date origin_stdt = originFormat.parse(stdt);
-				Date origin_eddt = originFormat.parse(eddt);
-
-				String parse_stdt = parseFormat.format(origin_stdt);
-				String parse_eddt = parseFormat.format(origin_eddt);
-
-				String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + parse_stdt
-						+ "&eddt=" + parse_eddt + "&sgccd=" + sgccd + "&numOfRows=999";
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+			
 				try {
 					
 					Thread.sleep(3000);
 
-					URL url = new URL(urlstr);
-					HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 					urlconnection.setRequestMethod("GET");
-					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+					
+					int responseCode = urlconnection.getResponseCode();
+					
+					if (responseCode == 200 || responseCode == 201) {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+					} else {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+					}
 
 					String line;
 					
 					while ((line = br.readLine()) != null) {
 						json = json + line + "\n";
 					}
+					
+					urlconnection.disconnect();
 
 					return json;
 
 				} catch (Exception e) {
 					e.printStackTrace();
 					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :"+ eddt +": sgccd :"+sgccd);
+					urlconnection.disconnect();
+					retry++;
 				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
 			
 		}
 
@@ -1474,16 +1641,24 @@ public class JsonParser {
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + stdt + "&damcd="
 				+ damcd + "&numOfRows=999";
 		
-		while (retry++ < 3) {
+		while (retry < 3) {
+			
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 			
 			try {
 				
 				Thread.sleep(3000);
-
-				URL url = new URL(urlstr);
-				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+	
 				urlconnection.setRequestMethod("GET");
-				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				
+				int responseCode = urlconnection.getResponseCode();
+				
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
 
 				String line;
 				
@@ -1491,13 +1666,16 @@ public class JsonParser {
 					json = json + line + "\n";
 				}
 
+				urlconnection.disconnect();
+				
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("JSON 요청 에러 : stdt :" + stdt + ": damcd :"+ damcd);
+				urlconnection.disconnect();
+				retry++;
 			}
-			
 			
 		}
 		
@@ -1522,14 +1700,15 @@ public class JsonParser {
 
 		String urlstr = service_url + query + "&start=" + start;
 		
-		while (retry++ < 3) {
+		while (retry < 3) {
+			
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 			
 			try {
 				
 				Thread.sleep(3000);
 
-				URL url = new URL(urlstr);
-				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("X-Naver-Client-Id", naver_client_id);
 				urlconnection.setRequestProperty("X-Naver-Client-Secret", naver_client_secret);
@@ -1548,11 +1727,15 @@ public class JsonParser {
 					json = json + line + "\n";
 				}
 
+				urlconnection.disconnect();
+				
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("JSON 요청 에러 : query :" + query);
+				urlconnection.disconnect();
+				retry++;
 			}
 			
 		}
@@ -1579,14 +1762,15 @@ public class JsonParser {
 
 		String urlstr = service_url + query + "&page=" + page;
 		
-		while (retry++ < 3) {
+		while (retry < 3) {
+			
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 			
 			try {
 				
 				Thread.sleep(3000);
 
-				URL url = new URL(urlstr);
-				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Authorization", "KakaoAK " + daum_api_key);
 
@@ -1603,12 +1787,16 @@ public class JsonParser {
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
+				
+				urlconnection.disconnect();
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("JSON 요청 에러 : query :" + query);
+				urlconnection.disconnect();
+				retry++;
 			}
 			
 			
@@ -1636,14 +1824,15 @@ public class JsonParser {
 
 		String urlstr = service_url + query + "&key=" + google_api_key + "&cx=" + google_api_cx + "&start=" + start;
 		
-		while (retry++ < 3) {
+		while (retry < 3) {
+			
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 			
 			try {
 				
 				Thread.sleep(3000);
 
-				URL url = new URL(urlstr);
-				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 				urlconnection.setRequestMethod("GET");
 
 				int responseCode = urlconnection.getResponseCode();
@@ -1655,15 +1844,20 @@ public class JsonParser {
 				}
 
 				String line;
+				
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
+				
+				urlconnection.disconnect();
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("JSON 요청 에러 : query :" + query);
+				urlconnection.disconnect();
+				retry++;
 			}
 			
 			
