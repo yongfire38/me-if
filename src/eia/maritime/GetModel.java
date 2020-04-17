@@ -134,7 +134,7 @@ public class GetModel {
 
 							pw.write(mgtNo); // 사업 코드
 							pw.write("|^");
-							pw.write(seawaterFlowModel); // 해수유동 적용모델
+							pw.write(seawaterFlowModel.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 해수유동 적용모델
 							pw.write("|^");
 							pw.write(bfeSusDffAr); // 부유사확산 면적(1㎎/ℓ) 저감대책 전
 							pw.write("|^");

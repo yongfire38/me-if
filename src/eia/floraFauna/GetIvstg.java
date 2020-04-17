@@ -223,10 +223,10 @@ public class GetIvstg {
 										pw.write("|^");
 										pw.write(id); // 아이디
 										pw.write("|^");
-										pw.write(scnceNm); // 식물상/포유류/조류/양서파충류/곤충류/어류/저서생물(동물)
+										pw.write(scnceNm.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 식물상/포유류/조류/양서파충류/곤충류/어류/저서생물(동물)
 															// 학명 목록
 										pw.write("|^");
-										pw.write(korNm); // 식물상/포유류/조류/양서파충류/곤충류/어류/저서생물(동물)
+										pw.write(korNm.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 식물상/포유류/조류/양서파충류/곤충류/어류/저서생물(동물)
 															// 국명 목록
 										pw.write("|^");
 										pw.write(co); // 개수

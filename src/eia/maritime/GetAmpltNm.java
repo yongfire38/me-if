@@ -197,29 +197,29 @@ public class GetAmpltNm {
 										pw.write("|^");
 										pw.write(id); // 아이디
 										pw.write("|^");
-										pw.write(mediolittoralKornm); // 조간대
+										pw.write(mediolittoralKornm.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 조간대
 																		// 저서동물
 																		// 출현종
 																		// 국문명
 										pw.write("|^");
-										pw.write(mediolittoralScncenm); // 조간대
+										pw.write(mediolittoralScncenm.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 조간대
 																		// 저서동물
 																		// 출현종
 																		// 영문명
 										pw.write("|^");
-										pw.write(infralittoralKornm); // 조하대
+										pw.write(infralittoralKornm.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 조하대
 																		// 저서동물
 																		// 우점종
 																		// 국문명
 										pw.write("|^");
-										pw.write(infralittoralScncenm); // 조하대
+										pw.write(infralittoralScncenm.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 조하대
 																		// 저서동물
 																		// 우점종
 																		// 영문명
 										pw.write("|^");
-										pw.write(seawidsKorname); // 해조류 출현종 국문명
+										pw.write(seawidsKorname.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 해조류 출현종 국문명
 										pw.write("|^");
-										pw.write(seawidsScncenm); // 해조류 출현종 영문명
+										pw.write(seawidsScncenm.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 해조류 출현종 영문명
 										pw.println();
 										pw.flush();
 										pw.close();
