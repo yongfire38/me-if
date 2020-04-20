@@ -139,59 +139,74 @@ public class CustomSearch {
 
 							json = JsonParser.parseJson_google(service_url, google_api_key, google_api_cx, args[0],
 									job_dt, Integer.toString(i));
+							
+							System.out.println("json::::"+json);
 
 							JSONParser parser = new JSONParser();
 							JSONObject obj = (JSONObject) parser.parse(json);
+							
+							JSONObject error = (JSONObject)obj.get("error");
+							
+							//일 데이터 제한 체크. JSONObject error의 null 여부로 체크
+							if(error != null){
+								
+								String status =	error.get("status").toString();
+								System.out.println("status:::::"+status);
+								System.exit(-1);
 
-							JSONArray items = (JSONArray) obj.get("items");
+							} else if(error == null){
+								
+								JSONArray items = (JSONArray) obj.get("items");
 
-							for (int r = 0; r < items.size(); r++) {
+								for (int r = 0; r < items.size(); r++) {
 
-								JSONObject item = (JSONObject) items.get(r);
+									JSONObject item = (JSONObject) items.get(r);
 
-								Set<String> key = item.keySet();
+									Set<String> key = item.keySet();
 
-								Iterator<String> iter = key.iterator();
+									Iterator<String> iter = key.iterator();
 
-								while (iter.hasNext()) {
+									while (iter.hasNext()) {
 
-									String keyname = iter.next();
+										String keyname = iter.next();
 
-									JsonParser.colWrite_sns(title, keyname, "title", item);
-									JsonParser.colWrite_sns(snippet, keyname, "snippet", item);
-									JsonParser.colWrite_sns(link, keyname, "link", item);
+										JsonParser.colWrite_sns(title, keyname, "title", item);
+										JsonParser.colWrite_sns(snippet, keyname, "snippet", item);
+										JsonParser.colWrite_sns(link, keyname, "link", item);
+
+									}
+
+									// 한번에 문자열 합침
+									resultSb.append("'");
+									resultSb.append(job_dt); // 시스템 일자 (파라미터로 준 경우는
+																// 입력값)
+									resultSb.append("'");
+									resultSb.append("|^");
+									resultSb.append("'");
+									resultSb.append(args[0]); // 검색어
+									resultSb.append("'");
+									resultSb.append("|^");
+									resultSb.append("'");
+									resultSb.append(title);
+									resultSb.append("'");
+									resultSb.append("|^");
+									resultSb.append("'");
+									resultSb.append(snippet);
+									resultSb.append("'");
+									resultSb.append("|^");
+									resultSb.append("'");
+									resultSb.append(link);
+									resultSb.append("'");
+									resultSb.append(System.getProperty("line.separator"));
 
 								}
-
-								// 한번에 문자열 합침
-								resultSb.append("'");
-								resultSb.append(job_dt); // 시스템 일자 (파라미터로 준 경우는
-															// 입력값)
-								resultSb.append("'");
-								resultSb.append("|^");
-								resultSb.append("'");
-								resultSb.append(args[0]); // 검색어
-								resultSb.append("'");
-								resultSb.append("|^");
-								resultSb.append("'");
-								resultSb.append(title);
-								resultSb.append("'");
-								resultSb.append("|^");
-								resultSb.append("'");
-								resultSb.append(snippet);
-								resultSb.append("'");
-								resultSb.append("|^");
-								resultSb.append("'");
-								resultSb.append(link);
-								resultSb.append("'");
-								resultSb.append(System.getProperty("line.separator"));
-
+								
 							}
 
 							System.out.println("진행도::::::" + i + "/" + 100);
 
 							Thread.sleep(1000);
-
+							
 						}
 
 					}
@@ -226,7 +241,7 @@ public class CustomSearch {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("mgtNo :" + args[0]);
+				System.out.println("query :" + args[0]);
 			}
 
 		}
