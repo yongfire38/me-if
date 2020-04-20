@@ -21,7 +21,7 @@ import common.JsonParser;
 
 public class Cafearticle {
 
-	// 네이버검색 - 블로그
+	// 네이버검색 - 카페
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
 
@@ -154,7 +154,9 @@ public class Cafearticle {
 						// 여기서의 i는 페이지 넘버가 아닌 조회 시작 위치값이므로 페이지 당 표시 가능 수인 100만큼
 						// 증가, 1000
 						// 초과값은 api가 지원하지 않음
-						if (i % 100 == 1 && i <= 1000) {
+						
+						//2020.04.20 : 데이터수가 너무 많다는 요청으로 200건까지만 떨어지도록 수정
+						if (i % 100 == 1 && i <= 101) {
 
 							System.out.println("페이지 검색 시작 위치는:::" + i);
 

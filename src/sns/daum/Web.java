@@ -84,8 +84,16 @@ public class Web {
 
 					int display = 50; // api에서 지원하는 최대값이므로 그냥 하드코딩
 					int totalCount = ((Long) count_meta.get("pageable_count")).intValue();
+					
+					if(totalCount > 200){
+						totalCount = 200;
+					}
 
-					pageCount = (totalCount / display) + 1;
+					pageCount = (totalCount / display);
+					
+					if(pageCount <= 0){
+						pageCount = 1;
+					}
 
 					StringBuffer resultSb = new StringBuffer("");
 
