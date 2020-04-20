@@ -23,9 +23,6 @@ public class WaterDam {
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
 
-		int retry = 0;
-
-		while (retry++ < 5) {
 
 			try {
 
@@ -350,7 +347,6 @@ public class WaterDam {
 					System.exit(-1);
 				}
 
-				return; // 작업 성공시 리턴
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -358,11 +354,7 @@ public class WaterDam {
 						"tdate :" + args[0] + ": ldate :" + args[1] + ": vdate :" + args[2] + ": vtime :" + args[3]);
 			}
 
-		}
-		
-		System.out.println("최대 재시도 회수를 초과하였습니다.");
 
-		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 
 	}
 

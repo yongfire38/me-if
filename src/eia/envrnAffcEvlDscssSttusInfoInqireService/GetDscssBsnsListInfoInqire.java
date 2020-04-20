@@ -21,10 +21,6 @@ public class GetDscssBsnsListInfoInqire {
 	@SuppressWarnings("unchecked")
 	// 환경영향평가 협의현황 서비스 - 협의사업 목록 정보를 조회
 	public static void main(String[] args) throws Exception {
-		
-		int retry = 0;
-
-		while (retry++ < 5) {
 			
 			try{
 				
@@ -231,17 +227,10 @@ public class GetDscssBsnsListInfoInqire {
 					System.exit(-1);
 				}
 				
-				return; //작업 성공시 리턴
-				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
-		}
-		
-		System.out.println("최대 재시도 회수를 초과하였습니다.");
-		
-		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 
 	}
 

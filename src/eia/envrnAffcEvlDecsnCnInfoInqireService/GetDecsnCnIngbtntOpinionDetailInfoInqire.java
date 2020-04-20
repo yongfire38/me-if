@@ -23,9 +23,6 @@ public class GetDecsnCnIngbtntOpinionDetailInfoInqire {
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
 
-		int retry = 0;
-
-		while (retry++ < 5) {
 
 			try {
 
@@ -300,18 +297,11 @@ public class GetDecsnCnIngbtntOpinionDetailInfoInqire {
 					System.exit(-1);
 				}
 
-				return; // 작업 성공시 리턴
-
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("resultCd :" + args[0]);
 			}
 
-		}
-		
-		System.out.println("최대 재시도 회수를 초과하였습니다.");
-
-		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 
 	}
 
