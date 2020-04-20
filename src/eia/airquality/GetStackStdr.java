@@ -1,7 +1,9 @@
 package eia.airquality;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,64 +42,20 @@ public class GetStackStdr {
 					String service_url = JsonParser.getProperty("airquality_getStackStdr_url");
 					String service_key = JsonParser.getProperty("airquality_service_key");
 
-					// step 1.파일의 첫 행 작성
+					// step 1.파일의 작성
 
 					File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_01.dat");
+					
+					try {
+						
+						PrintWriter pw = new PrintWriter(
+								new BufferedWriter(new FileWriter(file, true)));
 
-					if (file.exists()) {
+						pw.flush();
+						pw.close();
 
-						System.out.println("파일이 이미 존재하므로 이어쓰기..");
-
-					} else {
-
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write("mgtNo"); // 사업 코드
-							pw.write("|^");
-							pw.write("stackNm"); // 연돌명
-							pw.write("|^");
-							pw.write("adres"); // 주소
-							pw.write("|^");
-							pw.write("xcnts"); // X좌표
-							pw.write("|^");
-							pw.write("ydnts"); // Y좌표
-							pw.write("|^");
-							pw.write("stackHg"); // 연돌높이
-							pw.write("|^");
-							pw.write("stackDm"); // 연돌직경
-							pw.write("|^");
-							pw.write("stackIndm"); // 연돌내경
-							pw.write("|^");
-							pw.write("stackTp"); // 배출가스온도
-							pw.write("|^");
-							pw.write("dgsnStdrPm10Val"); // 미세먼지(10) 설계기준
-							pw.write("|^");
-							pw.write("dgsnStdrPm25Val"); // 미세먼지(2.5) 설계기준
-							pw.write("|^");
-							pw.write("dgsnStdrNo2Val"); // 이산화질소 설계기준
-							pw.write("|^");
-							pw.write("dgsnStdrSo2Val"); // 아황산가스 설계기준
-							pw.write("|^");
-							pw.write("dgsnStdrCoVal"); // 일산화탄소 설계기준
-							pw.write("|^");
-							pw.write("dscamtPm10Val"); // 미세먼지(10) 배출량
-							pw.write("|^");
-							pw.write("dscamtPm25Val"); // 미세먼지(2.5) 배출량
-							pw.write("|^");
-							pw.write("dscamtNo2Val"); // 이산화질소 배출량
-							pw.write("|^");
-							pw.write("dscamtSo20Val"); // 아황산가스 배출량
-							pw.write("|^");
-							pw.write("dscamtCoVal"); // 일산화탄소 배출량
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
 
 					String json = "";
@@ -118,6 +76,67 @@ public class GetStackStdr {
 					String resultMsg = header.get("resultMsg").toString().trim();
 
 					if (resultCode.equals("00")) {
+						
+						FileReader filereader = new FileReader(file);
+						BufferedReader bufReader = new BufferedReader(filereader);
+						
+						// 내용이 없으면 헤더를 쓴다
+						if ((bufReader.readLine()) == null) {
+
+							System.out.println("빈 파일만 존재함.");
+
+							try {
+								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
+								pw.write("mgtNo"); // 사업 코드
+								pw.write("|^");
+								pw.write("stackNm"); // 연돌명
+								pw.write("|^");
+								pw.write("adres"); // 주소
+								pw.write("|^");
+								pw.write("xcnts"); // X좌표
+								pw.write("|^");
+								pw.write("ydnts"); // Y좌표
+								pw.write("|^");
+								pw.write("stackHg"); // 연돌높이
+								pw.write("|^");
+								pw.write("stackDm"); // 연돌직경
+								pw.write("|^");
+								pw.write("stackIndm"); // 연돌내경
+								pw.write("|^");
+								pw.write("stackTp"); // 배출가스온도
+								pw.write("|^");
+								pw.write("dgsnStdrPm10Val"); // 미세먼지(10) 설계기준
+								pw.write("|^");
+								pw.write("dgsnStdrPm25Val"); // 미세먼지(2.5) 설계기준
+								pw.write("|^");
+								pw.write("dgsnStdrNo2Val"); // 이산화질소 설계기준
+								pw.write("|^");
+								pw.write("dgsnStdrSo2Val"); // 아황산가스 설계기준
+								pw.write("|^");
+								pw.write("dgsnStdrCoVal"); // 일산화탄소 설계기준
+								pw.write("|^");
+								pw.write("dscamtPm10Val"); // 미세먼지(10) 배출량
+								pw.write("|^");
+								pw.write("dscamtPm25Val"); // 미세먼지(2.5) 배출량
+								pw.write("|^");
+								pw.write("dscamtNo2Val"); // 이산화질소 배출량
+								pw.write("|^");
+								pw.write("dscamtSo20Val"); // 아황산가스 배출량
+								pw.write("|^");
+								pw.write("dscamtCoVal"); // 일산화탄소 배출량
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						} else {
+							System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
+						}
+
+						bufReader.close();
 
 						JSONArray stacks = (JSONArray) body.get("stacks");
 

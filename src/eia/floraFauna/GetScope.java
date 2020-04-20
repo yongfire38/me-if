@@ -1,7 +1,9 @@
 package eia.floraFauna;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,47 +42,19 @@ public class GetScope {
 					String service_url = JsonParser.getProperty("florafauna_getScope_url");
 					String service_key = JsonParser.getProperty("florafauna_service_key");
 
-					// step 1.파일의 첫 행 작성
+					// step 1.파일의 작성
 					File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_30.dat");
+					
+					try {
+						
+						PrintWriter pw = new PrintWriter(
+								new BufferedWriter(new FileWriter(file, true)));
 
-					if (file.exists()) {
+						pw.flush();
+						pw.close();
 
-						System.out.println("파일이 이미 존재하므로 이어쓰기..");
-
-					} else {
-
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write("mgtNo"); // 사업 코드
-							pw.write("|^");
-							pw.write("ivstgOdr"); // 조사차수
-							pw.write("|^");
-							pw.write("ivstgBgnde"); // 조사시작일
-							pw.write("|^");
-							pw.write("ivstgEndde"); // 조사종료일
-							pw.write("|^");
-							pw.write("plntIvstgYn"); // 식물상조사유무
-							pw.write("|^");
-							pw.write("animalIvstgYn"); // 포유류조사유무
-							pw.write("|^");
-							pw.write("birdsIvstgYn"); // 조류조사유무
-							pw.write("|^");
-							pw.write("herptileIvstgYn"); // 양서파충류조사유무
-							pw.write("|^");
-							pw.write("insectIvstgYn"); // 곤충류조사유무
-							pw.write("|^");
-							pw.write("fishesIvstgYn"); // 어류조사유무
-							pw.write("|^");
-							pw.write("benthosIvstgYn"); // 저서생물(동물)유무
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
 
 					String json = "";
@@ -101,6 +75,51 @@ public class GetScope {
 					String resultMsg = header.get("resultMsg").toString().trim();
 
 					if (resultCode.equals("00")) {
+						
+						FileReader filereader = new FileReader(file);
+						BufferedReader bufReader = new BufferedReader(filereader);
+						
+						// 내용이 없으면 헤더를 쓴다
+						if ((bufReader.readLine()) == null) {
+
+							System.out.println("빈 파일만 존재함.");
+
+							try {
+								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
+								pw.write("mgtNo"); // 사업 코드
+								pw.write("|^");
+								pw.write("ivstgOdr"); // 조사차수
+								pw.write("|^");
+								pw.write("ivstgBgnde"); // 조사시작일
+								pw.write("|^");
+								pw.write("ivstgEndde"); // 조사종료일
+								pw.write("|^");
+								pw.write("plntIvstgYn"); // 식물상조사유무
+								pw.write("|^");
+								pw.write("animalIvstgYn"); // 포유류조사유무
+								pw.write("|^");
+								pw.write("birdsIvstgYn"); // 조류조사유무
+								pw.write("|^");
+								pw.write("herptileIvstgYn"); // 양서파충류조사유무
+								pw.write("|^");
+								pw.write("insectIvstgYn"); // 곤충류조사유무
+								pw.write("|^");
+								pw.write("fishesIvstgYn"); // 어류조사유무
+								pw.write("|^");
+								pw.write("benthosIvstgYn"); // 저서생물(동물)유무
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						} else {
+							System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
+						}
+
+						bufReader.close();
 
 						JSONArray ivstgs = (JSONArray) body.get("ivstgs");
 

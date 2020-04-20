@@ -1,7 +1,9 @@
 package sns.daum;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -50,19 +52,64 @@ public class Blog {
 					String service_url = JsonParser.getProperty("daum_blog_url");
 					String daum_api_key = JsonParser.getProperty("daum_api_key");
 
-					// step 1.파일의 첫 행 작성
+					// step 1.파일의 작성
 
 					File file = new File(JsonParser.getProperty("file_path") + "SNS/TIF_SNS_201.dat");
 
-					if (file.exists()) {
+					try {
+						
+						PrintWriter pw = new PrintWriter(
+								new BufferedWriter(new FileWriter(file, true)));
 
-						System.out.println("파일이 이미 존재하므로 이어쓰기..");
+						pw.flush();
+						pw.close();
 
-					} else {
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
+					// step 2. 전체 페이지 파악을 위한 샘플 파싱
+
+					String json = "";
+
+					json = JsonParser.parseBlogJson_daum(service_url, daum_api_key, args[0], job_dt, "1");
+
+					// System.out.println("json::::::" + json);
+
+					int pageCount = 0;
+
+					JSONParser count_parser = new JSONParser();
+					JSONObject count_obj = (JSONObject) count_parser.parse(json);
+					JSONObject count_meta = (JSONObject) count_obj.get("meta");
+
+					int display = 50; // api에서 지원하는 최대값이므로 그냥 하드코딩
+					int totalCount = ((Long) count_meta.get("pageable_count")).intValue();
+
+					pageCount = (totalCount / display) + 1;
+
+					// System.out.println("totalCount::::"+totalCount);
+					// System.out.println("pageCount::::"+pageCount);
+
+					StringBuffer resultSb = new StringBuffer("");
+
+					StringBuffer title = new StringBuffer(" "); // 블로그 제목
+					StringBuffer contents = new StringBuffer(" "); // 블로그 글 요약
+					StringBuffer url = new StringBuffer(" "); // 블로그 글 url
+					StringBuffer blogname = new StringBuffer(" "); // 블로그 이름
+					StringBuffer thumbnail = new StringBuffer(" "); // 대표썸네일
+					StringBuffer datetime = new StringBuffer(" "); // 블로그 작성일시
+					
+					FileReader filereader = new FileReader(file);
+					BufferedReader bufReader = new BufferedReader(filereader);
+					
+					// 내용이 없으면 헤더를 쓴다
+					if ((bufReader.readLine()) == null) {
+
+						System.out.println("빈 파일만 존재함.");
 
 						try {
-
 							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
 							pw.write("'");
 							pw.write("job_dt"); // 시스템 일자 (파라미터로 준 경우는 입력값)
 							pw.write("'");
@@ -101,39 +148,11 @@ public class Blog {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-
+					} else {
+						System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
 					}
 
-					// step 2. 전체 페이지 파악을 위한 샘플 파싱
-
-					String json = "";
-
-					json = JsonParser.parseBlogJson_daum(service_url, daum_api_key, args[0], job_dt, "1");
-
-					// System.out.println("json::::::" + json);
-
-					int pageCount = 0;
-
-					JSONParser count_parser = new JSONParser();
-					JSONObject count_obj = (JSONObject) count_parser.parse(json);
-					JSONObject count_meta = (JSONObject) count_obj.get("meta");
-
-					int display = 50; // api에서 지원하는 최대값이므로 그냥 하드코딩
-					int totalCount = ((Long) count_meta.get("pageable_count")).intValue();
-
-					pageCount = (totalCount / display) + 1;
-
-					// System.out.println("totalCount::::"+totalCount);
-					// System.out.println("pageCount::::"+pageCount);
-
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer title = new StringBuffer(" "); // 블로그 제목
-					StringBuffer contents = new StringBuffer(" "); // 블로그 글 요약
-					StringBuffer url = new StringBuffer(" "); // 블로그 글 url
-					StringBuffer blogname = new StringBuffer(" "); // 블로그 이름
-					StringBuffer thumbnail = new StringBuffer(" "); // 대표썸네일
-					StringBuffer datetime = new StringBuffer(" "); // 블로그 작성일시
+					bufReader.close();
 
 					// step 3. 페이지 숫자만큼 반복하면서 파싱
 

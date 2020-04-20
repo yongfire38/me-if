@@ -1,7 +1,9 @@
 package eia.maritime;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,39 +41,19 @@ public class GetModel {
 					String service_url = JsonParser.getProperty("maritime_getModel_url");
 					String service_key = JsonParser.getProperty("maritime_service_key");
 
-					// step 1.파일의 첫 행 작성
+					// step 1.파일의 작성
 					File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_13.dat");
 
-					if (file.exists()) {
+					try {
+						
+						PrintWriter pw = new PrintWriter(
+								new BufferedWriter(new FileWriter(file, true)));
 
-						System.out.println("파일이 이미 존재하므로 이어쓰기..");
+						pw.flush();
+						pw.close();
 
-					} else {
-
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write("mgtNo"); // 사업 코드
-							pw.write("|^");
-							pw.write("seawaterFlowModel"); // 해수유동 적용모델
-							pw.write("|^");
-							pw.write("bfeSusDffAr"); // 부유사확산 면적(1㎎/ℓ) 저감대책 전
-							pw.write("|^");
-							pw.write("aftSusDffAr"); // 부유사확산 면적(1㎎/ℓ) 저감대책 후
-							pw.write("|^");
-							pw.write("bfeSusDffLt"); // 부유사확산 거리(1㎎/ℓ) 저감대책 전
-							pw.write("|^");
-							pw.write("aftSusDffLt"); // 부유사확산 거리(1㎎/ℓ) 저감대책 후
-							pw.write("|^");
-							pw.write("rm"); // 비고
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
 
 					String json = "";
@@ -92,6 +74,43 @@ public class GetModel {
 					String resultMsg = header.get("resultMsg").toString().trim();
 
 					if (resultCode.equals("00")) {
+						
+						FileReader filereader = new FileReader(file);
+						BufferedReader bufReader = new BufferedReader(filereader);
+						
+						// 내용이 없으면 헤더를 쓴다
+						if ((bufReader.readLine()) == null) {
+
+							System.out.println("빈 파일만 존재함.");
+
+							try {
+								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
+								pw.write("mgtNo"); // 사업 코드
+								pw.write("|^");
+								pw.write("seawaterFlowModel"); // 해수유동 적용모델
+								pw.write("|^");
+								pw.write("bfeSusDffAr"); // 부유사확산 면적(1㎎/ℓ) 저감대책 전
+								pw.write("|^");
+								pw.write("aftSusDffAr"); // 부유사확산 면적(1㎎/ℓ) 저감대책 후
+								pw.write("|^");
+								pw.write("bfeSusDffLt"); // 부유사확산 거리(1㎎/ℓ) 저감대책 전
+								pw.write("|^");
+								pw.write("aftSusDffLt"); // 부유사확산 거리(1㎎/ℓ) 저감대책 후
+								pw.write("|^");
+								pw.write("rm"); // 비고
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						} else {
+							System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
+						}
+
+						bufReader.close();
 
 						Set<String> key = body.keySet();
 

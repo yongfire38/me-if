@@ -1,7 +1,9 @@
 package wrs.dailwater;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,49 +44,19 @@ public class Dmntindstry {
 						String service_url = JsonParser.getProperty("dailwater_Dmntindstry_url");
 						String service_key = JsonParser.getProperty("dailwater_service_key");
 
-						// step 1.파일의 첫 행 작성
+						// step 1.파일의 작성
 						File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_23.dat");
 
-						if (file.exists()) {
+						try {
+							
+							PrintWriter pw = new PrintWriter(
+									new BufferedWriter(new FileWriter(file, true)));
 
-							System.out.println("파일이 이미 존재하므로 이어쓰기..");
+							pw.flush();
+							pw.close();
 
-						} else {
-
-							try {
-								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-								pw.write("fcode"); // 정수장코드
-								pw.write("|^");
-								pw.write("stdt"); // 조회시작월
-								pw.write("|^");
-								pw.write("eddt"); // 조회종료월
-								pw.write("|^");
-								pw.write("mesurede"); // 측정시간
-								pw.write("|^");
-								pw.write("item1"); // 부유물질(mg/L)
-								pw.write("|^");
-								pw.write("item2"); // 용존산소(mg/L)
-								pw.write("|^");
-								pw.write("item3"); // 총인(mg/L)
-								pw.write("|^");
-								pw.write("item4"); // 총질소(mg/L)
-								pw.write("|^");
-								pw.write("item5"); // 클로로필-a(mg/㎥)
-								pw.write("|^");
-								pw.write("item6"); // 총대장균군(/100mL)
-								pw.write("|^");
-								pw.write("numOfRows"); // 줄수
-								pw.write("|^");
-								pw.write("pageNo"); // 페이지번호
-								pw.println();
-								pw.flush();
-								pw.close();
-
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-
+						} catch (IOException e) {
+							e.printStackTrace();
 						}
 
 						// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
@@ -152,6 +124,53 @@ public class Dmntindstry {
 							} else if (body.get("items") instanceof String) {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
+								
+								FileReader filereader = new FileReader(file);
+								BufferedReader bufReader = new BufferedReader(filereader);
+								
+								// 내용이 없으면 헤더를 쓴다
+								if ((bufReader.readLine()) == null) {
+
+									System.out.println("빈 파일만 존재함.");
+
+									try {
+										PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
+										pw.write("fcode"); // 정수장코드
+										pw.write("|^");
+										pw.write("stdt"); // 조회시작월
+										pw.write("|^");
+										pw.write("eddt"); // 조회종료월
+										pw.write("|^");
+										pw.write("mesurede"); // 측정시간
+										pw.write("|^");
+										pw.write("item1"); // 부유물질(mg/L)
+										pw.write("|^");
+										pw.write("item2"); // 용존산소(mg/L)
+										pw.write("|^");
+										pw.write("item3"); // 총인(mg/L)
+										pw.write("|^");
+										pw.write("item4"); // 총질소(mg/L)
+										pw.write("|^");
+										pw.write("item5"); // 클로로필-a(mg/㎥)
+										pw.write("|^");
+										pw.write("item6"); // 총대장균군(/100mL)
+										pw.write("|^");
+										pw.write("numOfRows"); // 줄수
+										pw.write("|^");
+										pw.write("pageNo"); // 페이지번호
+										pw.println();
+										pw.flush();
+										pw.close();
+
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
+								} else {
+									System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
+								}
+
+								bufReader.close();
 
 								JSONObject items = (JSONObject) body.get("items");
 

@@ -1,7 +1,9 @@
 package eia.foulsmell;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,81 +41,19 @@ public class GetPredict {
 					String service_url = JsonParser.getProperty("foulsmell_getPredict_url");
 					String service_key = JsonParser.getProperty("foulsmell_service_key");
 
-					// step 1.파일의 첫 행 작성
+					// step 1.파일의 작성
 					File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_06.dat");
 
-					if (file.exists()) {
+					try {
+						
+						PrintWriter pw = new PrintWriter(
+								new BufferedWriter(new FileWriter(file, true)));
 
-						System.out.println("파일이 이미 존재하므로 이어쓰기..");
+						pw.flush();
+						pw.close();
 
-					} else {
-
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write("mgtNo"); // 사업 코드
-							pw.write("|^");
-							pw.write("umenoCmpndBsmlVal"); // 운영시 복합악취 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoNh3Val"); // 운영시 암모니아 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoCh4sVal"); // 운영시 메틸메르캅탄 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoH2sVal"); // 운영시 황화수소 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoCh3sch3Val"); // 운영시 다이메틸설파이드 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoCh3ssch3Val"); // 운영시 다이메틸다이설파이드
-															// 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoCh33nVal"); // 운영시 트라이메틸아민 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoC2h4oVal"); // 운영시 아세트알데하이드 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoC8h8Val"); // 운영시 스타이렌(스티렌) 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoC3h6oVal"); // 운영시 프로피온알데하이드 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoCh3ch22choVal"); // 운영시 뷰틸알데하이드
-															// 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoCh3ch23choVal"); // 운영시 n-발레르알데하이드
-															// 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoCh32chch2choVal"); // 운영시 i-발레르알데하이드
-																// 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoC7h8Val"); // 운영시 톨루엔 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoC8h10Val"); // 운영시 자일렌 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoC4h8oVal"); // 운영시 메틸에틸케톤 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoC6h12oVal"); // 운영시 메틸아이소뷰틸케톤 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoC6h12o2Val"); // 운영시 뷰틸아세테이트 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoC2h5coohVal"); // 운영시 프로피온산 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoCh3ch22choohVal"); // 운영시 n-뷰틸산
-																// 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoCh3ch23coohVal"); // 운영시 n-발레르산
-																// 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoCh32chch2coohVal"); // 운영시 i-발레르산
-																// 배출(발생)량
-							pw.write("|^");
-							pw.write("umenoCh32chch2ohVal"); // 운영시 i-뷰틸알코올
-																// 배출(발생)량
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
 
 					String json = "";
@@ -134,6 +74,85 @@ public class GetPredict {
 					String resultMsg = header.get("resultMsg").toString().trim();
 
 					if (resultCode.equals("00")) {
+						
+						FileReader filereader = new FileReader(file);
+						BufferedReader bufReader = new BufferedReader(filereader);
+						
+						// 내용이 없으면 헤더를 쓴다
+						if ((bufReader.readLine()) == null) {
+
+							System.out.println("빈 파일만 존재함.");
+
+							try {
+								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
+								pw.write("mgtNo"); // 사업 코드
+								pw.write("|^");
+								pw.write("umenoCmpndBsmlVal"); // 운영시 복합악취 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoNh3Val"); // 운영시 암모니아 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoCh4sVal"); // 운영시 메틸메르캅탄 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoH2sVal"); // 운영시 황화수소 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoCh3sch3Val"); // 운영시 다이메틸설파이드 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoCh3ssch3Val"); // 운영시 다이메틸다이설파이드
+																// 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoCh33nVal"); // 운영시 트라이메틸아민 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoC2h4oVal"); // 운영시 아세트알데하이드 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoC8h8Val"); // 운영시 스타이렌(스티렌) 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoC3h6oVal"); // 운영시 프로피온알데하이드 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoCh3ch22choVal"); // 운영시 뷰틸알데하이드
+																// 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoCh3ch23choVal"); // 운영시 n-발레르알데하이드
+																// 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoCh32chch2choVal"); // 운영시 i-발레르알데하이드
+																	// 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoC7h8Val"); // 운영시 톨루엔 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoC8h10Val"); // 운영시 자일렌 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoC4h8oVal"); // 운영시 메틸에틸케톤 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoC6h12oVal"); // 운영시 메틸아이소뷰틸케톤 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoC6h12o2Val"); // 운영시 뷰틸아세테이트 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoC2h5coohVal"); // 운영시 프로피온산 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoCh3ch22choohVal"); // 운영시 n-뷰틸산
+																	// 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoCh3ch23coohVal"); // 운영시 n-발레르산
+																	// 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoCh32chch2coohVal"); // 운영시 i-발레르산
+																	// 배출(발생)량
+								pw.write("|^");
+								pw.write("umenoCh32chch2ohVal"); // 운영시 i-뷰틸알코올
+																	// 배출(발생)량
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						} else {
+							System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
+						}
+
+						bufReader.close();
 
 						Set<String> key = body.keySet();
 

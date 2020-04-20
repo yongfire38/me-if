@@ -1,7 +1,9 @@
 package pri.waterquality;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,170 +42,19 @@ public class GetWaterMeasuringListMavg {
 							.getProperty("PRI_WaterQualityService_getWaterMeasuringListMavg_url");
 					String service_key = JsonParser.getProperty("PRI_WaterQualityService_key");
 
-					// step 1.파일의 첫 행 작성
+					// step 1.파일의 작성
 					File file = new File(JsonParser.getProperty("file_path") + "PRI/TIF_PRI_05.dat");
 
-					if (file.exists()) {
+					try {
+						
+						PrintWriter pw = new PrintWriter(
+								new BufferedWriter(new FileWriter(file, true)));
 
-						System.out.println("파일이 이미 존재하므로 이어쓰기..");
+						pw.flush();
+						pw.close();
 
-					} else {
-
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write("ptNoList"); // 검색조건 기관
-							pw.write("|^");
-							pw.write("resultCode"); // 결과코드
-							pw.write("|^");
-							pw.write("resultMsg"); // 결과메시지
-							pw.write("|^");
-							pw.write("rowno"); // 행번호
-							pw.write("|^");
-							pw.write("ptNo"); // 조사지점코드
-							pw.write("|^");
-							pw.write("ptNm"); // 조사지점명
-							pw.write("|^");
-							pw.write("wmyr"); // 측정년도
-							pw.write("|^");
-							pw.write("wmod"); // 측정월
-							pw.write("|^");
-							pw.write("itemAmnt"); // 측정값(유량) (단위 : ㎥/sec)
-							pw.write("|^");
-							pw.write("itemTemp"); // 측정값(수온) (단위 : ℃)
-							pw.write("|^");
-							pw.write("itemPh"); // 측정값(수소이온농도(pH))
-							pw.write("|^");
-							pw.write("itemDoc"); // 측정값(용존산소(DO)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemBod"); // 측정값(생물화학적산소요구량(BOD)) (단위 :
-													// ㎎/L)
-							pw.write("|^");
-							pw.write("itemCod"); // 측정값(화학적산소요구량(COD)) (단위 :
-													// ㎎/L)
-							pw.write("|^");
-							pw.write("itemSs"); // 측정값(부유물질(SS)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemTcoli"); // 측정값(총대장균군)(단위 :
-													// 총대장균군수/100㎖)
-							pw.write("|^");
-							pw.write("itemTn"); // 측정값(총질소(T-N)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemTp"); // 측정값(총인(T-P)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemCd"); // 측정값(카드뮴(Cd)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemCn"); // 측정값(시안(CN)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemPb"); // 측정값(납(Pb)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemCr6"); // 측정값(6가크롬(Cr6+)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemAs"); // 측정값(비소(As)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemHg"); // 측정값(수은(Hg)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemCu"); // 측정값(구리(Cu)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemAbs"); // 측정값(음이온계면활성제(ABS)) (단위 :
-													// ㎎/L)
-							pw.write("|^");
-							pw.write("itemPcb"); // 측정값(폴리클로리네이티드비페닐(PCB)) (단위 :
-													// ㎎/L)
-							pw.write("|^");
-							pw.write("itemOp"); // 측정값(유기인) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemMn"); // 측정값(용해성 망간(Mn)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemTrans"); // 측정값(투명도) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemCloa"); // 측정값(클로로필-a(Chlorophyll-a))
-													// (단위 :
-													// ㎎/L)
-							pw.write("|^");
-							pw.write("itemCl"); // 측정값(염소이온(Cl-)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemZn"); // 측정값(아연(Zn)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemCr"); // 측정값(크롬(Cr)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemFe"); // 측정값(용해성 철(Fe)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemPhenol"); // 측정값(페놀류(phenols)) (단위 :
-													// ㎎/L)
-							pw.write("|^");
-							pw.write("itemNhex"); // 측정값(노말헥산추출물질) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemEc"); // 측정값(전기전도도(EC)) (단위 : µS/㎝)
-							pw.write("|^");
-							pw.write("itemTce"); // 측정값(트리클로로에틸렌(TCE)) (단위 :
-													// ㎎/L)
-							pw.write("|^");
-							pw.write("itemPce"); // 측정값(테트라클로로에틸렌(PCE)) (단위 :
-													// ㎎/L)
-							pw.write("|^");
-							pw.write("itemNo3n"); // 측정값(질산성질소(NO3-N)) (단위 :
-													// ㎎/L)
-							pw.write("|^");
-							pw.write("itemNh3n"); // 측정값(암모니아성 질소(NH3-N)) (단위 :
-													// ㎎/L)
-							pw.write("|^");
-							pw.write("itemEcoli"); // 측정값(분원성대장균군) (단위 :
-													// 분원성대장균군수/100㎖)
-							pw.write("|^");
-							pw.write("itemPop"); // 측정값(인산염 인(PO4-P)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemDtn"); // 측정값(용존총질소(DTN)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemDtp"); // 측정값(용존총인(DTP)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemFl"); // 측정값(불소(F)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemCol"); // 측정값(색도) (단위 : 도)
-							pw.write("|^");
-							pw.write("itemCcl4"); // 측정값(사염화탄소) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemDceth"); // 측정값(1,2-다이클로로에탄) (단위 :
-													// ㎎/L)
-							pw.write("|^");
-							pw.write("itemDcm"); // 측정값(다이클로로메탄) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemBenzene"); // 측정값(벤젠) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemChcl3"); // 측정값(클로로포름) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemToc"); // 측정값(총유기탄소(TOC)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemDehp"); // 측정값(다이에틸헥실프탈레이트(DEHP)) (단위
-													// : ㎎/L)
-							pw.write("|^");
-							pw.write("itemAntimon"); // 측정값(안티몬(Sb)) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemDiox"); // 측정값(1,4-다이옥세인) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemHcho"); // 측정값(포름알데히드) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemHcb"); // 측정값(헥사클로로벤젠) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemNi"); // 측정값(니켈) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemBa"); // 측정값(바륨) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("itemSe"); // 측정값(셀레늄) (단위 : ㎎/L)
-							pw.write("|^");
-							pw.write("numOfRows"); // 한 페이지 결과 수
-							pw.write("|^");
-							pw.write("pageNo"); // 페이지 번호
-							pw.write("|^");
-							pw.write("totalCount"); // 전체 결과 수
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
 
 					// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
@@ -441,6 +292,174 @@ public class GetWaterMeasuringListMavg {
 							System.out.println("parsing error!!::resultCode::" + resultCode_col.toString()
 									+ "::resultMsg::" + resultMsg_col.toString());
 						} else if (resultCode_col.toString().equals("00")) {
+							
+							FileReader filereader = new FileReader(file);
+							BufferedReader bufReader = new BufferedReader(filereader);
+							
+							// 내용이 없으면 헤더를 쓴다
+							if ((bufReader.readLine()) == null) {
+
+								System.out.println("빈 파일만 존재함.");
+
+								try {
+									PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
+									pw.write("ptNoList"); // 검색조건 기관
+									pw.write("|^");
+									pw.write("resultCode"); // 결과코드
+									pw.write("|^");
+									pw.write("resultMsg"); // 결과메시지
+									pw.write("|^");
+									pw.write("rowno"); // 행번호
+									pw.write("|^");
+									pw.write("ptNo"); // 조사지점코드
+									pw.write("|^");
+									pw.write("ptNm"); // 조사지점명
+									pw.write("|^");
+									pw.write("wmyr"); // 측정년도
+									pw.write("|^");
+									pw.write("wmod"); // 측정월
+									pw.write("|^");
+									pw.write("itemAmnt"); // 측정값(유량) (단위 : ㎥/sec)
+									pw.write("|^");
+									pw.write("itemTemp"); // 측정값(수온) (단위 : ℃)
+									pw.write("|^");
+									pw.write("itemPh"); // 측정값(수소이온농도(pH))
+									pw.write("|^");
+									pw.write("itemDoc"); // 측정값(용존산소(DO)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemBod"); // 측정값(생물화학적산소요구량(BOD)) (단위 :
+															// ㎎/L)
+									pw.write("|^");
+									pw.write("itemCod"); // 측정값(화학적산소요구량(COD)) (단위 :
+															// ㎎/L)
+									pw.write("|^");
+									pw.write("itemSs"); // 측정값(부유물질(SS)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemTcoli"); // 측정값(총대장균군)(단위 :
+															// 총대장균군수/100㎖)
+									pw.write("|^");
+									pw.write("itemTn"); // 측정값(총질소(T-N)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemTp"); // 측정값(총인(T-P)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemCd"); // 측정값(카드뮴(Cd)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemCn"); // 측정값(시안(CN)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemPb"); // 측정값(납(Pb)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemCr6"); // 측정값(6가크롬(Cr6+)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemAs"); // 측정값(비소(As)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemHg"); // 측정값(수은(Hg)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemCu"); // 측정값(구리(Cu)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemAbs"); // 측정값(음이온계면활성제(ABS)) (단위 :
+															// ㎎/L)
+									pw.write("|^");
+									pw.write("itemPcb"); // 측정값(폴리클로리네이티드비페닐(PCB)) (단위 :
+															// ㎎/L)
+									pw.write("|^");
+									pw.write("itemOp"); // 측정값(유기인) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemMn"); // 측정값(용해성 망간(Mn)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemTrans"); // 측정값(투명도) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemCloa"); // 측정값(클로로필-a(Chlorophyll-a))
+															// (단위 :
+															// ㎎/L)
+									pw.write("|^");
+									pw.write("itemCl"); // 측정값(염소이온(Cl-)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemZn"); // 측정값(아연(Zn)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemCr"); // 측정값(크롬(Cr)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemFe"); // 측정값(용해성 철(Fe)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemPhenol"); // 측정값(페놀류(phenols)) (단위 :
+															// ㎎/L)
+									pw.write("|^");
+									pw.write("itemNhex"); // 측정값(노말헥산추출물질) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemEc"); // 측정값(전기전도도(EC)) (단위 : µS/㎝)
+									pw.write("|^");
+									pw.write("itemTce"); // 측정값(트리클로로에틸렌(TCE)) (단위 :
+															// ㎎/L)
+									pw.write("|^");
+									pw.write("itemPce"); // 측정값(테트라클로로에틸렌(PCE)) (단위 :
+															// ㎎/L)
+									pw.write("|^");
+									pw.write("itemNo3n"); // 측정값(질산성질소(NO3-N)) (단위 :
+															// ㎎/L)
+									pw.write("|^");
+									pw.write("itemNh3n"); // 측정값(암모니아성 질소(NH3-N)) (단위 :
+															// ㎎/L)
+									pw.write("|^");
+									pw.write("itemEcoli"); // 측정값(분원성대장균군) (단위 :
+															// 분원성대장균군수/100㎖)
+									pw.write("|^");
+									pw.write("itemPop"); // 측정값(인산염 인(PO4-P)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemDtn"); // 측정값(용존총질소(DTN)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemDtp"); // 측정값(용존총인(DTP)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemFl"); // 측정값(불소(F)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemCol"); // 측정값(색도) (단위 : 도)
+									pw.write("|^");
+									pw.write("itemCcl4"); // 측정값(사염화탄소) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemDceth"); // 측정값(1,2-다이클로로에탄) (단위 :
+															// ㎎/L)
+									pw.write("|^");
+									pw.write("itemDcm"); // 측정값(다이클로로메탄) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemBenzene"); // 측정값(벤젠) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemChcl3"); // 측정값(클로로포름) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemToc"); // 측정값(총유기탄소(TOC)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemDehp"); // 측정값(다이에틸헥실프탈레이트(DEHP)) (단위
+															// : ㎎/L)
+									pw.write("|^");
+									pw.write("itemAntimon"); // 측정값(안티몬(Sb)) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemDiox"); // 측정값(1,4-다이옥세인) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemHcho"); // 측정값(포름알데히드) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemHcb"); // 측정값(헥사클로로벤젠) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemNi"); // 측정값(니켈) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemBa"); // 측정값(바륨) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("itemSe"); // 측정값(셀레늄) (단위 : ㎎/L)
+									pw.write("|^");
+									pw.write("numOfRows"); // 한 페이지 결과 수
+									pw.write("|^");
+									pw.write("pageNo"); // 페이지 번호
+									pw.write("|^");
+									pw.write("totalCount"); // 전체 결과 수
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+							} else {
+								System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
+							}
+
+							bufReader.close();
 
 							JSONArray items = (JSONArray) getWaterMeasuringListMavgList.get("item");
 

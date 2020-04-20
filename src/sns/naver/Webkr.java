@@ -1,7 +1,9 @@
 package sns.naver;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -51,46 +53,20 @@ public class Webkr {
 					String naver_client_id = JsonParser.getProperty("naver_client_id");
 					String naver_client_secret = JsonParser.getProperty("naver_client_secret");
 
-					// step 1.파일의 첫 행 작성
+					// step 1.파일의 작성
 
 					File file = new File(JsonParser.getProperty("file_path") + "SNS/TIF_SNS_103.dat");
 
-					if (file.exists()) {
+					try {
+						
+						PrintWriter pw = new PrintWriter(
+								new BufferedWriter(new FileWriter(file, true)));
 
-						System.out.println("파일이 이미 존재하므로 이어쓰기..");
+						pw.flush();
+						pw.close();
 
-					} else {
-
-						try {
-
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-							pw.write("'");
-							pw.write("job_dt"); // 시스템 일자 (파라미터로 준 경우는 입력값)
-							pw.write("'");
-							pw.write("|^");
-							pw.write("'");
-							pw.write("query"); // 검색어
-							pw.write("'");
-							pw.write("|^");
-							pw.write("'");
-							pw.write("title"); // 웹문서 제목
-							pw.write("'");
-							pw.write("|^");
-							pw.write("'");
-							pw.write("link"); // 웹문서 링크
-							pw.write("'");
-							pw.write("|^");
-							pw.write("'");
-							pw.write("description"); // 웹문서 내용
-							pw.write("'");
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
 
 					String json = "";
@@ -117,6 +93,49 @@ public class Webkr {
 					StringBuffer title = new StringBuffer(" "); // 웹문서 제목
 					StringBuffer link = new StringBuffer(" "); // 웹문서 링크
 					StringBuffer description = new StringBuffer(" "); // 웹문서 내용
+					
+					FileReader filereader = new FileReader(file);
+					BufferedReader bufReader = new BufferedReader(filereader);
+					
+					// 내용이 없으면 헤더를 쓴다
+					if ((bufReader.readLine()) == null) {
+
+						System.out.println("빈 파일만 존재함.");
+
+						try {
+							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
+							pw.write("'");
+							pw.write("job_dt"); // 시스템 일자 (파라미터로 준 경우는 입력값)
+							pw.write("'");
+							pw.write("|^");
+							pw.write("'");
+							pw.write("query"); // 검색어
+							pw.write("'");
+							pw.write("|^");
+							pw.write("'");
+							pw.write("title"); // 웹문서 제목
+							pw.write("'");
+							pw.write("|^");
+							pw.write("'");
+							pw.write("link"); // 웹문서 링크
+							pw.write("'");
+							pw.write("|^");
+							pw.write("'");
+							pw.write("description"); // 웹문서 내용
+							pw.write("'");
+							pw.println();
+							pw.flush();
+							pw.close();
+
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					} else {
+						System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
+					}
+
+					bufReader.close();
 
 					// step 3. 페이지 숫자만큼 반복하면서 파싱
 

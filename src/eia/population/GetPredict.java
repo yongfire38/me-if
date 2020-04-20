@@ -1,7 +1,9 @@
 package eia.population;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,35 +41,19 @@ public class GetPredict {
 					String service_url = JsonParser.getProperty("population_getPredict_url");
 					String service_key = JsonParser.getProperty("population_service_key");
 
-					// step 1.파일의 첫 행 작성
+					// step 1.파일의 작성
 					File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_35.dat");
 
-					if (file.exists()) {
+					try {
+						
+						PrintWriter pw = new PrintWriter(
+								new BufferedWriter(new FileWriter(file, true)));
 
-						System.out.println("파일이 이미 존재하므로 이어쓰기..");
+						pw.flush();
+						pw.close();
 
-					} else {
-
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write("mgtNo"); // 사업 코드
-							pw.write("|^");
-							pw.write("aftFtePopltn"); // 사업 후 상근인구
-							pw.write("|^");
-							pw.write("aftUsePopltn"); // 사업 후 이용인구
-							pw.write("|^");
-							pw.write("aftHousePopltn"); // 사업 후 주택계획인구
-							pw.write("|^");
-							pw.write("nearbyAreaDevlopSttus"); // 인근지역 개발 현황(건수)
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
 
 					String json = "";
@@ -88,6 +74,39 @@ public class GetPredict {
 					String resultMsg = header.get("resultMsg").toString().trim();
 
 					if (resultCode.equals("00")) {
+						
+						FileReader filereader = new FileReader(file);
+						BufferedReader bufReader = new BufferedReader(filereader);
+						
+						// 내용이 없으면 헤더를 쓴다
+						if ((bufReader.readLine()) == null) {
+
+							System.out.println("빈 파일만 존재함.");
+
+							try {
+								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
+								pw.write("mgtNo"); // 사업 코드
+								pw.write("|^");
+								pw.write("aftFtePopltn"); // 사업 후 상근인구
+								pw.write("|^");
+								pw.write("aftUsePopltn"); // 사업 후 이용인구
+								pw.write("|^");
+								pw.write("aftHousePopltn"); // 사업 후 주택계획인구
+								pw.write("|^");
+								pw.write("nearbyAreaDevlopSttus"); // 인근지역 개발 현황(건수)
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						} else {
+							System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
+						}
+
+						bufReader.close();
 
 						Set<String> key = body.keySet();
 

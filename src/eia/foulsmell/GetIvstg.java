@@ -1,7 +1,9 @@
 package eia.foulsmell;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,89 +42,19 @@ public class GetIvstg {
 					String service_url = JsonParser.getProperty("foulsmell_getIvstg_url");
 					String service_key = JsonParser.getProperty("foulsmell_service_key");
 
-					// step 1.파일의 첫 행 작성
+					// step 1.파일의 작성
 					File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_05.dat");
+					
+					try {
+						
+						PrintWriter pw = new PrintWriter(
+								new BufferedWriter(new FileWriter(file, true)));
 
-					if (file.exists()) {
+						pw.flush();
+						pw.close();
 
-						System.out.println("파일이 이미 존재하므로 이어쓰기..");
-
-					} else {
-
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write("mgtNo"); // 사업 코드
-							pw.write("|^");
-							pw.write("ivstgSpotNm"); // 조사지점명
-							pw.write("|^");
-							pw.write("ivstgGb"); // 조사구분
-							pw.write("|^");
-							pw.write("adres"); // 주소
-							pw.write("|^");
-							pw.write("xcnts"); // X좌표
-							pw.write("|^");
-							pw.write("ydnts"); // Y좌표
-							pw.write("|^");
-							pw.write("ivstgOdr"); // 조사차수
-							pw.write("|^");
-							pw.write("ivstgBgnde"); // 조사시작일
-							pw.write("|^");
-							pw.write("ivstgEndde"); // 조사종료일
-							pw.write("|^");
-							pw.write("cmpndBsmlVal"); // 복합악취
-							pw.write("|^");
-							pw.write("nh3Val"); // 암모니아
-							pw.write("|^");
-							pw.write("ch4sVal"); // 메틸메르캅탄
-							pw.write("|^");
-							pw.write("h2sVal"); // 황화수소
-							pw.write("|^");
-							pw.write("ch3sch3Val"); // 다이메틸설파이드
-							pw.write("|^");
-							pw.write("ch3ssch3Val"); // 다이메틸다이설파이드
-							pw.write("|^");
-							pw.write("ch33nVal"); // 트라이메틸아민
-							pw.write("|^");
-							pw.write("c2h4oVal"); // 아세트알데하이드
-							pw.write("|^");
-							pw.write("c8h8Val"); // 스타이렌
-							pw.write("|^");
-							pw.write("c3h6oVal"); // 프로피온알데하이드
-							pw.write("|^");
-							pw.write("ch3ch22choVal"); // 뷰틸알데하이드
-							pw.write("|^");
-							pw.write("ch3ch23choVal"); // n-발레르알데하이드
-							pw.write("|^");
-							pw.write("ch32chch2choVal"); // i-발레르알데하이드
-							pw.write("|^");
-							pw.write("c7h8Val"); // 톨루엔
-							pw.write("|^");
-							pw.write("c8h10Val"); // 자일렌
-							pw.write("|^");
-							pw.write("c4h8oVal"); // 메틸에틸케톤
-							pw.write("|^");
-							pw.write("c6h12oVal"); // 메틸아이소뷰틸케톤
-							pw.write("|^");
-							pw.write("c6h12o2Val"); // 뷰틸아세테이트
-							pw.write("|^");
-							pw.write("c2h5coohVal"); // 프로피온산
-							pw.write("|^");
-							pw.write("ch3ch22choohVal"); // n-뷰틸산
-							pw.write("|^");
-							pw.write("ch3ch23coohVal"); // n-발레르산
-							pw.write("|^");
-							pw.write("ch32chch2coohVal"); // i-발레르산
-							pw.write("|^");
-							pw.write("ch32chch2ohVal"); // i-뷰틸알코올
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
 
 					String json = "";
@@ -143,6 +75,93 @@ public class GetIvstg {
 					String resultMsg = header.get("resultMsg").toString().trim();
 
 					if (resultCode.equals("00")) {
+						
+						FileReader filereader = new FileReader(file);
+						BufferedReader bufReader = new BufferedReader(filereader);
+						
+						// 내용이 없으면 헤더를 쓴다
+						if ((bufReader.readLine()) == null) {
+
+							System.out.println("빈 파일만 존재함.");
+
+							try {
+								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
+								pw.write("mgtNo"); // 사업 코드
+								pw.write("|^");
+								pw.write("ivstgSpotNm"); // 조사지점명
+								pw.write("|^");
+								pw.write("ivstgGb"); // 조사구분
+								pw.write("|^");
+								pw.write("adres"); // 주소
+								pw.write("|^");
+								pw.write("xcnts"); // X좌표
+								pw.write("|^");
+								pw.write("ydnts"); // Y좌표
+								pw.write("|^");
+								pw.write("ivstgOdr"); // 조사차수
+								pw.write("|^");
+								pw.write("ivstgBgnde"); // 조사시작일
+								pw.write("|^");
+								pw.write("ivstgEndde"); // 조사종료일
+								pw.write("|^");
+								pw.write("cmpndBsmlVal"); // 복합악취
+								pw.write("|^");
+								pw.write("nh3Val"); // 암모니아
+								pw.write("|^");
+								pw.write("ch4sVal"); // 메틸메르캅탄
+								pw.write("|^");
+								pw.write("h2sVal"); // 황화수소
+								pw.write("|^");
+								pw.write("ch3sch3Val"); // 다이메틸설파이드
+								pw.write("|^");
+								pw.write("ch3ssch3Val"); // 다이메틸다이설파이드
+								pw.write("|^");
+								pw.write("ch33nVal"); // 트라이메틸아민
+								pw.write("|^");
+								pw.write("c2h4oVal"); // 아세트알데하이드
+								pw.write("|^");
+								pw.write("c8h8Val"); // 스타이렌
+								pw.write("|^");
+								pw.write("c3h6oVal"); // 프로피온알데하이드
+								pw.write("|^");
+								pw.write("ch3ch22choVal"); // 뷰틸알데하이드
+								pw.write("|^");
+								pw.write("ch3ch23choVal"); // n-발레르알데하이드
+								pw.write("|^");
+								pw.write("ch32chch2choVal"); // i-발레르알데하이드
+								pw.write("|^");
+								pw.write("c7h8Val"); // 톨루엔
+								pw.write("|^");
+								pw.write("c8h10Val"); // 자일렌
+								pw.write("|^");
+								pw.write("c4h8oVal"); // 메틸에틸케톤
+								pw.write("|^");
+								pw.write("c6h12oVal"); // 메틸아이소뷰틸케톤
+								pw.write("|^");
+								pw.write("c6h12o2Val"); // 뷰틸아세테이트
+								pw.write("|^");
+								pw.write("c2h5coohVal"); // 프로피온산
+								pw.write("|^");
+								pw.write("ch3ch22choohVal"); // n-뷰틸산
+								pw.write("|^");
+								pw.write("ch3ch23coohVal"); // n-발레르산
+								pw.write("|^");
+								pw.write("ch32chch2coohVal"); // i-발레르산
+								pw.write("|^");
+								pw.write("ch32chch2ohVal"); // i-뷰틸알코올
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						} else {
+							System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
+						}
+
+						bufReader.close();
 
 						JSONArray ivstgGbs = (JSONArray) body.get("ivstgGbs");
 

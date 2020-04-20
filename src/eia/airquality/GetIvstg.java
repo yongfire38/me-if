@@ -1,7 +1,9 @@
 package eia.airquality;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -41,134 +43,19 @@ public class GetIvstg {
 					String service_url = JsonParser.getProperty("airquality_getIvstg_url");
 					String service_key = JsonParser.getProperty("airquality_service_key");
 
-					// step 1.파일의 첫 행 작성
+					// step 1.파일의 작성
 					File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_02.dat");
+					
+					try {
+						
+						PrintWriter pw = new PrintWriter(
+								new BufferedWriter(new FileWriter(file, true)));
 
-					if (file.exists()) {
+						pw.flush();
+						pw.close();
 
-						System.out.println("파일이 이미 존재하므로 이어쓰기..");
-
-					} else {
-
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-							pw.write("mgtNo"); // 사업 코드
-							pw.write("|^");
-							pw.write("ivstgSpotNm"); // 조사지점명
-							pw.write("|^");
-							pw.write("ivstgGb"); // 조사구분
-							pw.write("|^");
-							pw.write("adres"); // 주소
-							pw.write("|^");
-							pw.write("xcnts"); // X좌표
-							pw.write("|^");
-							pw.write("ydnts"); // Y좌표
-							pw.write("|^");
-							pw.write("ivstgOdr"); // 조사차수
-							pw.write("|^");
-							pw.write("ivstgBgnde"); // 조사시작일
-							pw.write("|^");
-							pw.write("ivstgEndde"); // 조사종료일
-							pw.write("|^");
-							pw.write("pm10Val"); // 미세먼지(10)
-							pw.write("|^");
-							pw.write("pm25Val"); // 미세먼지(2.5)
-							pw.write("|^");
-							pw.write("no2Val"); // 이산화질소
-							pw.write("|^");
-							pw.write("so2Val"); // 아황산가스
-							pw.write("|^");
-							pw.write("coVal"); // 일산화탄소
-							pw.write("|^");
-							pw.write("o3Val"); // 오존
-							pw.write("|^");
-							pw.write("pbVal"); // 납
-							pw.write("|^");
-							pw.write("bzVal"); // 벤젠
-							pw.write("|^");
-							pw.write("hclVal"); // 염화수소(HCL)
-							pw.write("|^");
-							pw.write("hgVal"); // 수은(Hg)
-							pw.write("|^");
-							pw.write("niVal"); // 니켈(Ni)
-							pw.write("|^");
-							pw.write("cr6Val"); // 6가크롬(Cr6+)
-							pw.write("|^");
-							pw.write("cdVal"); // 카드뮴(Cd)
-							pw.write("|^");
-							pw.write("asVal"); // 비소(As)
-							pw.write("|^");
-							pw.write("hchoVal"); // 포름알데히드
-							pw.write("|^");
-							pw.write("vcVal"); // 염화비닐
-							pw.write("|^");
-							pw.write("dioxinVal"); // 다이옥신
-							pw.write("|^");
-							pw.write("beVal"); // 베릴륨(Be)
-							pw.write("|^");
-							pw.write("ebVal"); // 에틸벤젠
-							pw.write("|^");
-							pw.write("c6h14Val"); // n-헥산
-							pw.write("|^");
-							pw.write("c6h12Val"); // 시클로헥산
-							pw.write("|^");
-							pw.write("deVal"); // 1,-2디클로로에탄
-							pw.write("|^");
-							pw.write("cfVal"); // 클로로포름
-							pw.write("|^");
-							pw.write("tceVal"); // 트리클로로에틸렌
-							pw.write("|^");
-							pw.write("ctVal"); // 사염화탄소
-							pw.write("|^");
-							pw.write("hcnVal"); // 시안화수소
-							pw.write("|^");
-							pw.write("gmenoPm1024hr"); // 공사시 PM-10_24시간평균
-							pw.write("|^");
-							pw.write("gmenoPm10Year"); // 공사시 PM-10_연평균
-							pw.write("|^");
-							pw.write("gmenoPm2524hr"); // 공사시 PM-2.5_24시간평균
-							pw.write("|^");
-							pw.write("gmenoPm25Year"); // 공사시 PM-2.5_연평균
-							pw.write("|^");
-							pw.write("gmenoNo21hr"); // 공사시 NO2_1시간평균
-							pw.write("|^");
-							pw.write("gmenoNo224hr"); // 공사시 NO2_24시간평균
-							pw.write("|^");
-							pw.write("gmenoNo2Year"); // 공사시 NO2_연평균
-							pw.write("|^");
-							pw.write("umenoPm1024hr"); // 운영시 PM-10_24시간평균
-							pw.write("|^");
-							pw.write("umenoPm10Year"); // 운영시 PM-10_연평균
-							pw.write("|^");
-							pw.write("umenoPm2524hr"); // 운영시 PM-2.5_24시간평균
-							pw.write("|^");
-							pw.write("umenoPm25Year"); // 운영시 PM-2.5_연평균
-							pw.write("|^");
-							pw.write("umenoSo21hr"); // 운영시 SO2_1시간평균
-							pw.write("|^");
-							pw.write("umenoSo224hr"); // 운영시 SO2_24시간평균
-							pw.write("|^");
-							pw.write("umenoSo2Year"); // 운영시 SO2_연평균
-							pw.write("|^");
-							pw.write("umenoNo21hr"); // 운영시 NO2_1시간평균
-							pw.write("|^");
-							pw.write("umenoNo224hr"); // 운영시 NO2_24시간평균
-							pw.write("|^");
-							pw.write("umenoNo2Year"); // 운영시 NO2_연평균
-							pw.write("|^");
-							pw.write("umenoCo1hr"); // 운영시 CO_1시간평균
-							pw.write("|^");
-							pw.write("umenoCo8hr"); // 운영시 CO_8시간평균
-							pw.write("|^");
-							pw.write("envrnGrad"); // 환경기준등급
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
 
 					String json = "";
@@ -189,6 +76,139 @@ public class GetIvstg {
 					String resultMsg = header.get("resultMsg").toString().trim();
 
 					if (resultCode.equals("00")) {
+						
+						FileReader filereader = new FileReader(file);
+						BufferedReader bufReader = new BufferedReader(filereader);
+						
+						// 내용이 없으면 헤더를 쓴다
+						if ((bufReader.readLine()) == null) {
+
+							System.out.println("빈 파일만 존재함.");
+
+							try {
+								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
+								pw.write("mgtNo"); // 사업 코드
+								pw.write("|^");
+								pw.write("ivstgSpotNm"); // 조사지점명
+								pw.write("|^");
+								pw.write("ivstgGb"); // 조사구분
+								pw.write("|^");
+								pw.write("adres"); // 주소
+								pw.write("|^");
+								pw.write("xcnts"); // X좌표
+								pw.write("|^");
+								pw.write("ydnts"); // Y좌표
+								pw.write("|^");
+								pw.write("ivstgOdr"); // 조사차수
+								pw.write("|^");
+								pw.write("ivstgBgnde"); // 조사시작일
+								pw.write("|^");
+								pw.write("ivstgEndde"); // 조사종료일
+								pw.write("|^");
+								pw.write("pm10Val"); // 미세먼지(10)
+								pw.write("|^");
+								pw.write("pm25Val"); // 미세먼지(2.5)
+								pw.write("|^");
+								pw.write("no2Val"); // 이산화질소
+								pw.write("|^");
+								pw.write("so2Val"); // 아황산가스
+								pw.write("|^");
+								pw.write("coVal"); // 일산화탄소
+								pw.write("|^");
+								pw.write("o3Val"); // 오존
+								pw.write("|^");
+								pw.write("pbVal"); // 납
+								pw.write("|^");
+								pw.write("bzVal"); // 벤젠
+								pw.write("|^");
+								pw.write("hclVal"); // 염화수소(HCL)
+								pw.write("|^");
+								pw.write("hgVal"); // 수은(Hg)
+								pw.write("|^");
+								pw.write("niVal"); // 니켈(Ni)
+								pw.write("|^");
+								pw.write("cr6Val"); // 6가크롬(Cr6+)
+								pw.write("|^");
+								pw.write("cdVal"); // 카드뮴(Cd)
+								pw.write("|^");
+								pw.write("asVal"); // 비소(As)
+								pw.write("|^");
+								pw.write("hchoVal"); // 포름알데히드
+								pw.write("|^");
+								pw.write("vcVal"); // 염화비닐
+								pw.write("|^");
+								pw.write("dioxinVal"); // 다이옥신
+								pw.write("|^");
+								pw.write("beVal"); // 베릴륨(Be)
+								pw.write("|^");
+								pw.write("ebVal"); // 에틸벤젠
+								pw.write("|^");
+								pw.write("c6h14Val"); // n-헥산
+								pw.write("|^");
+								pw.write("c6h12Val"); // 시클로헥산
+								pw.write("|^");
+								pw.write("deVal"); // 1,-2디클로로에탄
+								pw.write("|^");
+								pw.write("cfVal"); // 클로로포름
+								pw.write("|^");
+								pw.write("tceVal"); // 트리클로로에틸렌
+								pw.write("|^");
+								pw.write("ctVal"); // 사염화탄소
+								pw.write("|^");
+								pw.write("hcnVal"); // 시안화수소
+								pw.write("|^");
+								pw.write("gmenoPm1024hr"); // 공사시 PM-10_24시간평균
+								pw.write("|^");
+								pw.write("gmenoPm10Year"); // 공사시 PM-10_연평균
+								pw.write("|^");
+								pw.write("gmenoPm2524hr"); // 공사시 PM-2.5_24시간평균
+								pw.write("|^");
+								pw.write("gmenoPm25Year"); // 공사시 PM-2.5_연평균
+								pw.write("|^");
+								pw.write("gmenoNo21hr"); // 공사시 NO2_1시간평균
+								pw.write("|^");
+								pw.write("gmenoNo224hr"); // 공사시 NO2_24시간평균
+								pw.write("|^");
+								pw.write("gmenoNo2Year"); // 공사시 NO2_연평균
+								pw.write("|^");
+								pw.write("umenoPm1024hr"); // 운영시 PM-10_24시간평균
+								pw.write("|^");
+								pw.write("umenoPm10Year"); // 운영시 PM-10_연평균
+								pw.write("|^");
+								pw.write("umenoPm2524hr"); // 운영시 PM-2.5_24시간평균
+								pw.write("|^");
+								pw.write("umenoPm25Year"); // 운영시 PM-2.5_연평균
+								pw.write("|^");
+								pw.write("umenoSo21hr"); // 운영시 SO2_1시간평균
+								pw.write("|^");
+								pw.write("umenoSo224hr"); // 운영시 SO2_24시간평균
+								pw.write("|^");
+								pw.write("umenoSo2Year"); // 운영시 SO2_연평균
+								pw.write("|^");
+								pw.write("umenoNo21hr"); // 운영시 NO2_1시간평균
+								pw.write("|^");
+								pw.write("umenoNo224hr"); // 운영시 NO2_24시간평균
+								pw.write("|^");
+								pw.write("umenoNo2Year"); // 운영시 NO2_연평균
+								pw.write("|^");
+								pw.write("umenoCo1hr"); // 운영시 CO_1시간평균
+								pw.write("|^");
+								pw.write("umenoCo8hr"); // 운영시 CO_8시간평균
+								pw.write("|^");
+								pw.write("envrnGrad"); // 환경기준등급
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						} else {
+							System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
+						}
+
+						bufReader.close();
 
 						JSONArray ivstgGbs = (JSONArray) body.get("ivstgGbs");
 

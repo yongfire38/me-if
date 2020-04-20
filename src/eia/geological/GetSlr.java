@@ -1,7 +1,9 @@
 package eia.geological;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,52 +42,25 @@ public class GetSlr {
 					String service_url = JsonParser.getProperty("geological_getSlr_url");
 					String service_key = JsonParser.getProperty("geological_service_key");
 
-					// step 1.파일의 첫 행 작성
+					// step 1.파일의 작성
 					File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_28.dat");
 
-					if (file.exists()) {
+					try {
+						
+						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-						System.out.println("파일이 이미 존재하므로 이어쓰기..");
+						pw.flush();
+						pw.close();
 
-					} else {
-
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write("mgtNo"); // 사업 코드
-							pw.write("|^");
-							pw.write("ivstgSpotNm"); // 조사지점명
-							pw.write("|^");
-							pw.write("dllLc"); // 시추공위치
-							pw.write("|^");
-							pw.write("xcnts"); // X좌표
-							pw.write("|^");
-							pw.write("ydnts"); // Y좌표
-							pw.write("|^");
-							pw.write("slrNm"); // 지층명
-							pw.write("|^");
-							pw.write("slrDph"); // 지층심도
-							pw.write("|^");
-							pw.write("slrThick"); // 지층두께
-							pw.write("|^");
-							pw.write("slrCn"); // 지층구성상태
-							pw.write("|^");
-							pw.write("nVal"); // N치(TCR/RQD)
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
 
 					String json = "";
 
 					json = JsonParser.parseEiaJson(service_url, service_key, mgtNo);
-					
-					System.out.println("json::::"+json);
+
+					// System.out.println("json::::"+json);
 
 					// step 3.필요에 맞게 파싱
 
@@ -101,6 +76,49 @@ public class GetSlr {
 					String resultMsg = header.get("resultMsg").toString().trim();
 
 					if (resultCode.equals("00")) {
+
+						FileReader filereader = new FileReader(file);
+						BufferedReader bufReader = new BufferedReader(filereader);
+
+						// 내용이 없으면 헤더를 쓴다
+						if ((bufReader.readLine()) == null) {
+
+							System.out.println("빈 파일만 존재함.");
+
+							try {
+								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
+								pw.write("mgtNo"); // 사업 코드
+								pw.write("|^");
+								pw.write("ivstgSpotNm"); // 조사지점명
+								pw.write("|^");
+								pw.write("dllLc"); // 시추공위치
+								pw.write("|^");
+								pw.write("xcnts"); // X좌표
+								pw.write("|^");
+								pw.write("ydnts"); // Y좌표
+								pw.write("|^");
+								pw.write("slrNm"); // 지층명
+								pw.write("|^");
+								pw.write("slrDph"); // 지층심도
+								pw.write("|^");
+								pw.write("slrThick"); // 지층두께
+								pw.write("|^");
+								pw.write("slrCn"); // 지층구성상태
+								pw.write("|^");
+								pw.write("nVal"); // N치(TCR/RQD)
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						} else {
+							System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
+						}
+
+						bufReader.close();
 
 						JSONArray ivstgs = (JSONArray) body.get("ivstgs");
 
@@ -190,7 +208,7 @@ public class GetSlr {
 											slrCn = slrDph_json.get(keyname).toString().trim();
 										}
 										if (keyname.equals("nVal")) {
-											nVal = slrDph_json.get(keyname).toString().trim();										
+											nVal = slrDph_json.get(keyname).toString().trim();
 										}
 
 									}
@@ -237,7 +255,7 @@ public class GetSlr {
 
 						// step 5. 대상 서버에 sftp로 보냄
 
-						//TransSftp.transSftp(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_28.dat", "EIA");
+						// TransSftp.transSftp(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_28.dat", "EIA");
 
 						long end = System.currentTimeMillis();
 						System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
@@ -262,7 +280,7 @@ public class GetSlr {
 			}
 
 		}
-		
+
 		System.out.println("최대 재시도 회수를 초과하였습니다.");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생

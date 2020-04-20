@@ -1,7 +1,9 @@
 package eia.ecoCycle;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,58 +41,19 @@ public class GetInfo {
 					String service_url = JsonParser.getProperty("ecoCycle_getInfo_url");
 					String service_key = JsonParser.getProperty("ecoCycle_service_key");
 
-					// step 1.파일의 첫 행 작성
+					// step 1.파일의 작성
 					File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_33.dat");
+					
+					try {
+						
+						PrintWriter pw = new PrintWriter(
+								new BufferedWriter(new FileWriter(file, true)));
 
-					if (file.exists()) {
+						pw.flush();
+						pw.close();
 
-						System.out.println("파일이 이미 존재하므로 이어쓰기..");
-
-					} else {
-
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write("mgtNo"); // 사업 코드
-							pw.write("|^");
-							pw.write("gmemodomwsteOcty"); // 공사시 생활폐기물 발생량
-							pw.write("|^");
-							pw.write("umemoDomwsteOcty"); // 운영시 생활폐기물 발생량
-							pw.write("|^");
-							pw.write("domwsteOcty"); // 생활폐기물 발생량
-							pw.write("|^");
-							pw.write("cnstrcwsteBryng"); // 건설폐기물 처리현황_매립
-							pw.write("|^");
-							pw.write("cnstrcwsteIncnr"); // 건설폐기물 처리현황_소각
-							pw.write("|^");
-							pw.write("cnstrcwsteRuse"); // 건설폐기물 처리현황_재활용
-							pw.write("|^");
-							pw.write("indswsteBryng"); // 사업장배출시설계 폐기물의 처리 현황_매립
-							pw.write("|^");
-							pw.write("indswsteIncnr"); // 사업장배출시설계 폐기물의 처리 현황_소각
-							pw.write("|^");
-							pw.write("indswsteRuse"); // 사업장배출시설계 폐기물의 처리 현황_재활용
-							pw.write("|^");
-							pw.write("indswsteSarea"); // 사업장배출시설계 폐기물의 처리
-														// 현황_해역배출
-							pw.write("|^");
-							pw.write("appnwsteBryng"); // 사업장 지정 폐기물의 처리 현황_매립
-							pw.write("|^");
-							pw.write("appnwsteIncnr"); // 사업장 지정 폐기물의 처리 현황_소각
-							pw.write("|^");
-							pw.write("appnwsteRuse"); // 사업장 지정 폐기물의 처리 현황_재활용
-							pw.write("|^");
-							pw.write("appnwsteEtc"); // 사업장 지정 폐기물의 처리 현황_기타
-							pw.write("|^");
-							pw.write("sggemdNm"); // 시군구읍면동명칭
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
 
 					String json = "";
@@ -111,6 +74,62 @@ public class GetInfo {
 					String resultMsg = header.get("resultMsg").toString().trim();
 
 					if (resultCode.equals("00")) {
+						
+						FileReader filereader = new FileReader(file);
+						BufferedReader bufReader = new BufferedReader(filereader);
+						
+						// 내용이 없으면 헤더를 쓴다
+						if ((bufReader.readLine()) == null) {
+
+							System.out.println("빈 파일만 존재함.");
+
+							try {
+								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
+								pw.write("mgtNo"); // 사업 코드
+								pw.write("|^");
+								pw.write("gmemodomwsteOcty"); // 공사시 생활폐기물 발생량
+								pw.write("|^");
+								pw.write("umemoDomwsteOcty"); // 운영시 생활폐기물 발생량
+								pw.write("|^");
+								pw.write("domwsteOcty"); // 생활폐기물 발생량
+								pw.write("|^");
+								pw.write("cnstrcwsteBryng"); // 건설폐기물 처리현황_매립
+								pw.write("|^");
+								pw.write("cnstrcwsteIncnr"); // 건설폐기물 처리현황_소각
+								pw.write("|^");
+								pw.write("cnstrcwsteRuse"); // 건설폐기물 처리현황_재활용
+								pw.write("|^");
+								pw.write("indswsteBryng"); // 사업장배출시설계 폐기물의 처리 현황_매립
+								pw.write("|^");
+								pw.write("indswsteIncnr"); // 사업장배출시설계 폐기물의 처리 현황_소각
+								pw.write("|^");
+								pw.write("indswsteRuse"); // 사업장배출시설계 폐기물의 처리 현황_재활용
+								pw.write("|^");
+								pw.write("indswsteSarea"); // 사업장배출시설계 폐기물의 처리
+															// 현황_해역배출
+								pw.write("|^");
+								pw.write("appnwsteBryng"); // 사업장 지정 폐기물의 처리 현황_매립
+								pw.write("|^");
+								pw.write("appnwsteIncnr"); // 사업장 지정 폐기물의 처리 현황_소각
+								pw.write("|^");
+								pw.write("appnwsteRuse"); // 사업장 지정 폐기물의 처리 현황_재활용
+								pw.write("|^");
+								pw.write("appnwsteEtc"); // 사업장 지정 폐기물의 처리 현황_기타
+								pw.write("|^");
+								pw.write("sggemdNm"); // 시군구읍면동명칭
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						} else {
+							System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
+						}
+
+						bufReader.close();
 
 						Set<String> key = body.keySet();
 
@@ -231,6 +250,7 @@ public class GetInfo {
 						// step 5. 대상 서버에 sftp로 보냄
 
 						//TransSftp.transSftp(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_33.dat", "EIA");
+						
 						long end = System.currentTimeMillis();
 						System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
 

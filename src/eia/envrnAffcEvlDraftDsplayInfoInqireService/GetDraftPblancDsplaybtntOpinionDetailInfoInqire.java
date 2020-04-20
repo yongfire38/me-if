@@ -1,7 +1,9 @@
 package eia.envrnAffcEvlDraftDsplayInfoInqireService;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,61 +42,19 @@ public class GetDraftPblancDsplaybtntOpinionDetailInfoInqire {
 							"envrnAffcEvlDraftDsplayInfoInqireService_getDraftPblancDsplaybtntOpinionDetailInfoInqire_url");
 					String service_key = JsonParser.getProperty("envrnAffcEvlDraftDsplayInfoInqireService_service_key");
 
-					// step 1.파일의 첫 행 작성
+					// step 1.파일의 작성
 					File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_40.dat");
 
-					if (file.exists()) {
+					try {
+						
+						PrintWriter pw = new PrintWriter(
+								new BufferedWriter(new FileWriter(file, true)));
 
-						System.out.println("파일이 이미 존재하므로 이어쓰기..");
+						pw.flush();
+						pw.close();
 
-					} else {
-
-						try {
-
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-							pw.write("resultCode"); // 결과코드
-							pw.write("|^");
-							pw.write("resultMsg"); // 결과메세지
-							pw.write("|^");
-							pw.write("eiaCd"); // 환경영향평가코드
-							pw.write("|^");
-							pw.write("eiaSeq"); // 환경영향평가고유번호
-							pw.write("|^");
-							pw.write("bizNm"); // 사업명
-							pw.write("|^");
-							pw.write("bizGubunNm"); // 사업구분
-							pw.write("|^");
-							pw.write("bizmainNm"); // 사업자명
-							pw.write("|^");
-							pw.write("approvOrganNm"); // 승인기관명
-							pw.write("|^");
-							pw.write("drfopDt"); // 초안공고일
-							pw.write("|^");
-							pw.write("drfopStartDt"); // 초안공람기간 시작일
-							pw.write("|^");
-							pw.write("drfopEndDt"); // 초안공람기간 종료일
-							pw.write("|^");
-							pw.write("drfopSiteTxt"); // 공람장소
-							pw.write("|^");
-							pw.write("drfopExpSiteTxt"); // 설명회장소
-							pw.write("|^");
-							pw.write("drfopExpDttmTxt"); // 설명회일시
-							pw.write("|^");
-							pw.write("drfopSuggStartDt"); // 초안공람 의견제출 시작일
-							pw.write("|^");
-							pw.write("drfopSuggEndDt"); // 초안공람 의견제출 종료일
-							pw.write("|^");
-							pw.write("drfopTelTxt"); // 연락처
-							pw.write("|^");
-							pw.write("eiaAddrTxt"); // 사업지 주소
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
 
 					String json = "";
@@ -144,6 +104,65 @@ public class GetDraftPblancDsplaybtntOpinionDetailInfoInqire {
 					} else if (response.get("body") instanceof String) {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(response.get("body") instanceof String)) {
+						
+						FileReader filereader = new FileReader(file);
+						BufferedReader bufReader = new BufferedReader(filereader);
+						
+						// 내용이 없으면 헤더를 쓴다
+						if ((bufReader.readLine()) == null) {
+
+							System.out.println("빈 파일만 존재함.");
+
+							try {
+								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
+								pw.write("resultCode"); // 결과코드
+								pw.write("|^");
+								pw.write("resultMsg"); // 결과메세지
+								pw.write("|^");
+								pw.write("eiaCd"); // 환경영향평가코드
+								pw.write("|^");
+								pw.write("eiaSeq"); // 환경영향평가고유번호
+								pw.write("|^");
+								pw.write("bizNm"); // 사업명
+								pw.write("|^");
+								pw.write("bizGubunNm"); // 사업구분
+								pw.write("|^");
+								pw.write("bizmainNm"); // 사업자명
+								pw.write("|^");
+								pw.write("approvOrganNm"); // 승인기관명
+								pw.write("|^");
+								pw.write("drfopDt"); // 초안공고일
+								pw.write("|^");
+								pw.write("drfopStartDt"); // 초안공람기간 시작일
+								pw.write("|^");
+								pw.write("drfopEndDt"); // 초안공람기간 종료일
+								pw.write("|^");
+								pw.write("drfopSiteTxt"); // 공람장소
+								pw.write("|^");
+								pw.write("drfopExpSiteTxt"); // 설명회장소
+								pw.write("|^");
+								pw.write("drfopExpDttmTxt"); // 설명회일시
+								pw.write("|^");
+								pw.write("drfopSuggStartDt"); // 초안공람 의견제출 시작일
+								pw.write("|^");
+								pw.write("drfopSuggEndDt"); // 초안공람 의견제출 종료일
+								pw.write("|^");
+								pw.write("drfopTelTxt"); // 연락처
+								pw.write("|^");
+								pw.write("eiaAddrTxt"); // 사업지 주소
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						} else {
+							System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
+						}
+
+						bufReader.close();
 
 						JSONObject body = (JSONObject) response.get("body");
 

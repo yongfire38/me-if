@@ -1,7 +1,9 @@
 package eia.floraFauna;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,49 +42,19 @@ public class GetIvstg {
 					String service_url = JsonParser.getProperty("florafauna_getIvstg_url");
 					String service_key = JsonParser.getProperty("florafauna_service_key");
 
-					// step 1.파일의 첫 행 작성
+					// step 1.파일의 작성
 					File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_32.dat");
+					
+					try {
+						
+						PrintWriter pw = new PrintWriter(
+								new BufferedWriter(new FileWriter(file, true)));
 
-					if (file.exists()) {
+						pw.flush();
+						pw.close();
 
-						System.out.println("파일이 이미 존재하므로 이어쓰기..");
-
-					} else {
-
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write("mgtNo"); // 사업 코드
-							pw.write("|^");
-							pw.write("ivstgSpotNm"); // 조사지점명
-							pw.write("|^");
-							pw.write("ivstgCl"); // 조사분류
-							pw.write("|^");
-							pw.write("adres"); // 주소
-							pw.write("|^");
-							pw.write("xcnts"); // X좌표
-							pw.write("|^");
-							pw.write("ydnts"); // Y좌표
-							pw.write("|^");
-							pw.write("ivstgOdr"); // 조사차수
-							pw.write("|^");
-							pw.write("id"); // 아이디
-							pw.write("|^");
-							pw.write("scnceNm"); // 식물상/포유류/조류/양서파충류/곤충류/어류/저서생물(동물)
-													// 학명 목록
-							pw.write("|^");
-							pw.write("korNm"); // 식물상/포유류/조류/양서파충류/곤충류/어류/저서생물(동물)
-												// 국명 목록
-							pw.write("|^");
-							pw.write("co"); // 개수
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
 
 					String json = "";
@@ -103,6 +75,53 @@ public class GetIvstg {
 					String resultMsg = header.get("resultMsg").toString().trim();
 
 					if (resultCode.equals("00")) {
+						
+						FileReader filereader = new FileReader(file);
+						BufferedReader bufReader = new BufferedReader(filereader);
+						
+						// 내용이 없으면 헤더를 쓴다
+						if ((bufReader.readLine()) == null) {
+
+							System.out.println("빈 파일만 존재함.");
+
+							try {
+								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
+								pw.write("mgtNo"); // 사업 코드
+								pw.write("|^");
+								pw.write("ivstgSpotNm"); // 조사지점명
+								pw.write("|^");
+								pw.write("ivstgCl"); // 조사분류
+								pw.write("|^");
+								pw.write("adres"); // 주소
+								pw.write("|^");
+								pw.write("xcnts"); // X좌표
+								pw.write("|^");
+								pw.write("ydnts"); // Y좌표
+								pw.write("|^");
+								pw.write("ivstgOdr"); // 조사차수
+								pw.write("|^");
+								pw.write("id"); // 아이디
+								pw.write("|^");
+								pw.write("scnceNm"); // 식물상/포유류/조류/양서파충류/곤충류/어류/저서생물(동물)
+														// 학명 목록
+								pw.write("|^");
+								pw.write("korNm"); // 식물상/포유류/조류/양서파충류/곤충류/어류/저서생물(동물)
+													// 국명 목록
+								pw.write("|^");
+								pw.write("co"); // 개수
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						} else {
+							System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
+						}
+
+						bufReader.close();
 
 						JSONArray ivstgs = (JSONArray) body.get("ivstgs");
 

@@ -1,7 +1,9 @@
 package sns.naver;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -51,19 +53,61 @@ public class News {
 					String naver_client_id = JsonParser.getProperty("naver_client_id");
 					String naver_client_secret = JsonParser.getProperty("naver_client_secret");
 
-					// step 1.파일의 첫 행 작성
+					// step 1.파일의 작성
 
 					File file = new File(JsonParser.getProperty("file_path") + "SNS/TIF_SNS_104.dat");
 
-					if (file.exists()) {
+					try {
+						
+						PrintWriter pw = new PrintWriter(
+								new BufferedWriter(new FileWriter(file, true)));
 
-						System.out.println("파일이 이미 존재하므로 이어쓰기..");
+						pw.flush();
+						pw.close();
 
-					} else {
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
+					String json = "";
+
+					// step 2. 전체 페이지 파악을 위한 샘플 파싱
+					json = JsonParser.parseBlogJson_naver(service_url, naver_client_id, naver_client_secret, args[0],
+							job_dt, "1");
+
+					int pageCount = 0;
+
+					// 테스트 출력
+					// System.out.println(json);
+
+					JSONParser count_parser = new JSONParser();
+					JSONObject count_obj = (JSONObject) count_parser.parse(json);
+
+					int display = ((Long) count_obj.get("display")).intValue();
+					int totalCount = ((Long) count_obj.get("total")).intValue();
+
+					pageCount = (totalCount / display) + 1;
+
+					StringBuffer resultSb = new StringBuffer("");
+
+					StringBuffer title = new StringBuffer(" "); // 뉴스 제목
+					StringBuffer originallink = new StringBuffer(" "); // 뉴스원본
+																		// 링크
+					StringBuffer link = new StringBuffer(" "); // 네이버 뉴스 링크
+					StringBuffer description = new StringBuffer(" "); // 뉴스 내용
+					StringBuffer pubDate = new StringBuffer(" "); // 제공일시
+					
+					FileReader filereader = new FileReader(file);
+					BufferedReader bufReader = new BufferedReader(filereader);
+					
+					// 내용이 없으면 헤더를 쓴다
+					if ((bufReader.readLine()) == null) {
+
+						System.out.println("빈 파일만 존재함.");
 
 						try {
-
 							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
 							pw.write("'");
 							pw.write("job_dt"); // 시스템 일자 (파라미터로 준 경우는 입력값)
 							pw.write("'");
@@ -98,36 +142,11 @@ public class News {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-
+					} else {
+						System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
 					}
 
-					String json = "";
-
-					// step 2. 전체 페이지 파악을 위한 샘플 파싱
-					json = JsonParser.parseBlogJson_naver(service_url, naver_client_id, naver_client_secret, args[0],
-							job_dt, "1");
-
-					int pageCount = 0;
-
-					// 테스트 출력
-					// System.out.println(json);
-
-					JSONParser count_parser = new JSONParser();
-					JSONObject count_obj = (JSONObject) count_parser.parse(json);
-
-					int display = ((Long) count_obj.get("display")).intValue();
-					int totalCount = ((Long) count_obj.get("total")).intValue();
-
-					pageCount = (totalCount / display) + 1;
-
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer title = new StringBuffer(" "); // 뉴스 제목
-					StringBuffer originallink = new StringBuffer(" "); // 뉴스원본
-																		// 링크
-					StringBuffer link = new StringBuffer(" "); // 네이버 뉴스 링크
-					StringBuffer description = new StringBuffer(" "); // 뉴스 내용
-					StringBuffer pubDate = new StringBuffer(" "); // 제공일시
+					bufReader.close();
 
 					// step 3. 페이지 숫자만큼 반복하면서 파싱
 

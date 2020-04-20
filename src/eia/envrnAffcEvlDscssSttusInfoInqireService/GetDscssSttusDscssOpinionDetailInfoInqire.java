@@ -1,7 +1,9 @@
 package eia.envrnAffcEvlDscssSttusInfoInqireService;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,39 +42,19 @@ public class GetDscssSttusDscssOpinionDetailInfoInqire {
 							"envrnAffcEvlDscssSttusInfoInqireService_getDscssSttusDscssOpinionDetailInfoInqire_url");
 					String service_key = JsonParser.getProperty("envrnAffcEvlDraftDsplayInfoInqireService_service_key");
 
-					// step 1.파일의 첫 행 작성
+					// step 1.파일의 작성
 					File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_42.dat");
 
-					if (file.exists()) {
+					try {
+						
+						PrintWriter pw = new PrintWriter(
+								new BufferedWriter(new FileWriter(file, true)));
 
-						System.out.println("파일이 이미 존재하므로 이어쓰기..");
+						pw.flush();
+						pw.close();
 
-					} else {
-
-						try {
-
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-							pw.write("eiaCd"); // 환경영향평가코드
-							pw.write("|^");
-							pw.write("eiaSeq"); // 환경영향평가고유번호
-							pw.write("|^");
-							pw.write("bizNm"); // 사업명
-							pw.write("|^");
-							pw.write("bizGubunNm"); // 사업구분
-							pw.write("|^");
-							pw.write("ccilOrganNm"); // 협의기관
-							pw.write("|^");
-							pw.write("ccilMemNm"); // 담당자
-							pw.write("|^");
-							pw.write("ccilMemEmail"); // 연락처
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
 
 					String json = "";
@@ -105,6 +87,43 @@ public class GetDscssSttusDscssOpinionDetailInfoInqire {
 					} else if (resultCode.equals("00") && response.get("body") instanceof String) {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(response.get("body") instanceof String)) {
+						
+						FileReader filereader = new FileReader(file);
+						BufferedReader bufReader = new BufferedReader(filereader);
+						
+						// 내용이 없으면 헤더를 쓴다
+						if ((bufReader.readLine()) == null) {
+
+							System.out.println("빈 파일만 존재함.");
+
+							try {
+								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
+								pw.write("eiaCd"); // 환경영향평가코드
+								pw.write("|^");
+								pw.write("eiaSeq"); // 환경영향평가고유번호
+								pw.write("|^");
+								pw.write("bizNm"); // 사업명
+								pw.write("|^");
+								pw.write("bizGubunNm"); // 사업구분
+								pw.write("|^");
+								pw.write("ccilOrganNm"); // 협의기관
+								pw.write("|^");
+								pw.write("ccilMemNm"); // 담당자
+								pw.write("|^");
+								pw.write("ccilMemEmail"); // 연락처
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						} else {
+							System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
+						}
+
+						bufReader.close();
 
 						JSONObject body = (JSONObject) response.get("body");
 

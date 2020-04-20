@@ -1,7 +1,9 @@
 package sns.google;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -51,19 +53,46 @@ public class CustomSearch {
 					String google_api_key = JsonParser.getProperty("google_api_key");
 					String google_api_cx = JsonParser.getProperty("google_api_cx");
 
-					// step 1.파일의 첫 행 작성
+					// step 1.파일의 작성
 
 					File file = new File(JsonParser.getProperty("file_path") + "SNS/TIF_SNS_301.dat");
 
-					if (file.exists()) {
+					try {
+						
+						PrintWriter pw = new PrintWriter(
+								new BufferedWriter(new FileWriter(file, true)));
 
-						System.out.println("파일이 이미 존재하므로 이어쓰기..");
+						pw.flush();
+						pw.close();
 
-					} else {
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
+					String json = "";
+
+					json = JsonParser.parseJson_google(service_url, google_api_key, google_api_cx, args[0], job_dt,
+							"1");
+
+					// System.out.println("json::::" + json);
+
+					StringBuffer resultSb = new StringBuffer("");
+
+					StringBuffer title = new StringBuffer(" "); // 문서 제목
+					StringBuffer snippet = new StringBuffer(" "); // 문서 내용
+					StringBuffer link = new StringBuffer(" "); // 링크
+					
+					FileReader filereader = new FileReader(file);
+					BufferedReader bufReader = new BufferedReader(filereader);
+					
+					// 내용이 없으면 헤더를 쓴다
+					if ((bufReader.readLine()) == null) {
+
+						System.out.println("빈 파일만 존재함.");
 
 						try {
-
 							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
 							pw.write("'");
 							pw.write("job_dt"); // 시스템 일자 (파라미터로 준 경우는 입력값)
 							pw.write("'");
@@ -90,21 +119,11 @@ public class CustomSearch {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-
+					} else {
+						System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
 					}
 
-					String json = "";
-
-					json = JsonParser.parseJson_google(service_url, google_api_key, google_api_cx, args[0], job_dt,
-							"1");
-
-					// System.out.println("json::::" + json);
-
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer title = new StringBuffer(" "); // 문서 제목
-					StringBuffer snippet = new StringBuffer(" "); // 문서 내용
-					StringBuffer link = new StringBuffer(" "); // 링크
+					bufReader.close();
 
 					// step 3. 페이지 숫자만큼 반복하면서 파싱
 					// 구글의 검색 api는 한 페이지 당 건수는 10, 검색 최대값은 100건으로 고정되어 있음

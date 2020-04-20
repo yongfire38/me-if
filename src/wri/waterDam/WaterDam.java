@@ -1,7 +1,9 @@
 package wri.waterDam;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,75 +44,19 @@ public class WaterDam {
 						String service_url = JsonParser.getProperty("waterDam_url");
 						String service_key = JsonParser.getProperty("waterDam_service_key");
 
-						// step 1.파일의 첫 행 작성
+						// step 1.파일의 작성
 						File file = new File(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_10.dat");
 
-						if (file.exists()) {
+						try {
+							
+							PrintWriter pw = new PrintWriter(
+									new BufferedWriter(new FileWriter(file, true)));
 
-							System.out.println("파일이 이미 존재하므로 이어쓰기..");
+							pw.flush();
+							pw.close();
 
-						} else {
-
-							try {
-
-								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-								pw.write("tdate"); // 전일 날짜
-								pw.write("|^");
-								pw.write("ldate"); // 현재년도 마지막 날짜
-								pw.write("|^");
-								pw.write("vdate"); // 조회날짜
-								pw.write("|^");
-								pw.write("vtime"); // 조회시간
-								pw.write("|^");
-								pw.write("suge"); // 수계
-								pw.write("|^");
-								pw.write("damnm"); // 댐이름
-								pw.write("|^");
-								pw.write("zerosevenhourprcptqy"); // 강우량(금일)
-								pw.write("|^");
-								pw.write("prcptqy"); // 강우량(전일)
-								pw.write("|^");
-								pw.write("nowthsyracmtlrf"); // 전일누계(금년)
-								pw.write("|^");
-								pw.write("thsyracmtlrf"); // 전일누계(전년)
-								pw.write("|^");
-								pw.write("nyearavrgacmtlrf"); // 전일누계(예년)
-								pw.write("|^");
-								pw.write("inflowqy"); // 전일유입량
-								pw.write("|^");
-								pw.write("total"); // 전일 방류량(전체)
-								pw.write("|^");
-								pw.write("sangwater"); // 전일 방류량(생공용수)
-								pw.write("|^");
-								pw.write("river"); // 전일 방류량(하천,관개)
-								pw.write("|^");
-								pw.write("spilldcwtrqy"); // 전일 방류량(여수로)
-								pw.write("|^");
-								pw.write("lvlhindstryuswtrplan"); // 영수공급계획
-								pw.write("|^");
-								pw.write("nowlowlevel"); // 저수위(현재)
-								pw.write("|^");
-								pw.write("lastlowlevel"); // 저수위(전년)
-								pw.write("|^");
-								pw.write("nyearlowlevel"); // 저수위(예년)
-								pw.write("|^");
-								pw.write("nowrsvwtqy"); // 현저수량
-								pw.write("|^");
-								pw.write("nowrsvwtqy2"); // 저수율(현재)
-								pw.write("|^");
-								pw.write("lastrsvwtqy"); // 저수율(전년)
-								pw.write("|^");
-								pw.write("nyearrsvwtqy"); // 저수율(예년)
-								pw.write("|^");
-								pw.write("totrf"); // 총저수량
-								pw.println();
-								pw.flush();
-								pw.close();
-
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-
+						} catch (IOException e) {
+							e.printStackTrace();
 						}
 
 						// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
@@ -193,6 +139,79 @@ public class WaterDam {
 							} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
+								
+								FileReader filereader = new FileReader(file);
+								BufferedReader bufReader = new BufferedReader(filereader);
+								
+								// 내용이 없으면 헤더를 쓴다
+								if ((bufReader.readLine()) == null) {
+
+									System.out.println("빈 파일만 존재함.");
+
+									try {
+										PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
+										pw.write("tdate"); // 전일 날짜
+										pw.write("|^");
+										pw.write("ldate"); // 현재년도 마지막 날짜
+										pw.write("|^");
+										pw.write("vdate"); // 조회날짜
+										pw.write("|^");
+										pw.write("vtime"); // 조회시간
+										pw.write("|^");
+										pw.write("suge"); // 수계
+										pw.write("|^");
+										pw.write("damnm"); // 댐이름
+										pw.write("|^");
+										pw.write("zerosevenhourprcptqy"); // 강우량(금일)
+										pw.write("|^");
+										pw.write("prcptqy"); // 강우량(전일)
+										pw.write("|^");
+										pw.write("nowthsyracmtlrf"); // 전일누계(금년)
+										pw.write("|^");
+										pw.write("thsyracmtlrf"); // 전일누계(전년)
+										pw.write("|^");
+										pw.write("nyearavrgacmtlrf"); // 전일누계(예년)
+										pw.write("|^");
+										pw.write("inflowqy"); // 전일유입량
+										pw.write("|^");
+										pw.write("total"); // 전일 방류량(전체)
+										pw.write("|^");
+										pw.write("sangwater"); // 전일 방류량(생공용수)
+										pw.write("|^");
+										pw.write("river"); // 전일 방류량(하천,관개)
+										pw.write("|^");
+										pw.write("spilldcwtrqy"); // 전일 방류량(여수로)
+										pw.write("|^");
+										pw.write("lvlhindstryuswtrplan"); // 영수공급계획
+										pw.write("|^");
+										pw.write("nowlowlevel"); // 저수위(현재)
+										pw.write("|^");
+										pw.write("lastlowlevel"); // 저수위(전년)
+										pw.write("|^");
+										pw.write("nyearlowlevel"); // 저수위(예년)
+										pw.write("|^");
+										pw.write("nowrsvwtqy"); // 현저수량
+										pw.write("|^");
+										pw.write("nowrsvwtqy2"); // 저수율(현재)
+										pw.write("|^");
+										pw.write("lastrsvwtqy"); // 저수율(전년)
+										pw.write("|^");
+										pw.write("nyearrsvwtqy"); // 저수율(예년)
+										pw.write("|^");
+										pw.write("totrf"); // 총저수량
+										pw.println();
+										pw.flush();
+										pw.close();
+
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
+								} else {
+									System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
+								}
+
+								bufReader.close();
 
 								JSONObject items = (JSONObject) body.get("items");
 
