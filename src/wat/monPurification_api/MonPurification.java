@@ -23,7 +23,7 @@ public class MonPurification {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 필요한 파라미터는 년(4자리)과 월(2자리)의 2개
 				if (args.length == 2) {

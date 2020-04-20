@@ -23,7 +23,7 @@ public class Winfosmonthwater {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 요청 파라미터는 조회 시작일과 조회 종료일의 2개
 				if (args.length == 2) {

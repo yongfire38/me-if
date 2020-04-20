@@ -23,7 +23,7 @@ public class GetBeffatEnvrnExmntBeffatBsnsPlaceInfoInqire {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 요청 파라미터는 반경의 1개
 				if (args.length == 1) {

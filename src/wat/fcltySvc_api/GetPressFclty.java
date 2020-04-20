@@ -23,7 +23,7 @@ public class GetPressFclty {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 서비스 키만 요구함, 실행시 추가 매개변수 없음
 				if (args.length == 0) {

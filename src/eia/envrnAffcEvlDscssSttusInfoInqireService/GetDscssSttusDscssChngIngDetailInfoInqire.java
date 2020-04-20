@@ -23,8 +23,6 @@ public class GetDscssSttusDscssChngIngDetailInfoInqire {
 
 			try {
 
-				Thread.sleep(3000);
-
 				// 실행시 필수 매개변수 환경영향평가 코드
 				if (args.length == 1) {
 

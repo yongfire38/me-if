@@ -23,7 +23,7 @@ public class GetStrategyDraftPblancDsplayListInfoInqire {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 서비스 키만 요구함, 실행시 필수 매개변수 없음
 				if (args.length == 0) {

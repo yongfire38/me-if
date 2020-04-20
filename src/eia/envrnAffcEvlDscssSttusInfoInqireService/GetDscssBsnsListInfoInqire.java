@@ -24,7 +24,7 @@ public class GetDscssBsnsListInfoInqire {
 			
 			try{
 				
-				Thread.sleep(3000);
+				
 				
 				// 실행시 필요 매개 변수는 페이지 번호 외에는 없음
 				if (args.length == 0) {

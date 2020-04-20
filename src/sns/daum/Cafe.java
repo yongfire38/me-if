@@ -26,7 +26,7 @@ public class Cafe {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				if (args.length == 1 || args.length == 2) {
 

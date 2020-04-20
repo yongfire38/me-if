@@ -24,7 +24,7 @@ public class Winfossgccode {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 요청 파라미터 없음
 				if (args.length == 0) {

@@ -23,7 +23,7 @@ public class FcltyList {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 필요한 파라미터는 검색 코드 (1:취수장, 2:정수장, 3:가압장, 4:배수지)
 

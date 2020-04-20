@@ -23,7 +23,7 @@ public class GetBsnsStrtgySmallScaleDscssListInfoInqire {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 필수 요청 파라미터 없음
 				if (args.length == 0) {

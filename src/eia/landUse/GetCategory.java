@@ -23,7 +23,7 @@ public class GetCategory {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 필수 파라미터로 사업 코드를 넣으면 그 사업 코드에 대한 데이터를 파싱해서 출력한다. 사업코드는 1개만 넣을 수 있다.
 				if (args.length == 1) {

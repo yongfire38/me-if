@@ -23,7 +23,7 @@ public class GetSelfDgnssLocplcInfoLegaldongAdstrdManageInfoInqire {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 요청 파라미터는 주소,타입의 2개
 				if (args.length == 2) {

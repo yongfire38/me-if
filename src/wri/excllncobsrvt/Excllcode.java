@@ -23,7 +23,7 @@ public class Excllcode {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 필요한 파라미터는 댐 코드
 				// 댐코드는 수문제원현황 코드조회 api에서 조회

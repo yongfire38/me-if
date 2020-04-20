@@ -23,7 +23,7 @@ public class Winfosmonthqtrwater {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 요청 파라미터는 조회 시작일과 조회 종료일, 지자체코드의 3개
 				if (args.length == 3) {

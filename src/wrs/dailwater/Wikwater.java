@@ -24,7 +24,7 @@ public class Wikwater {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 요청 파라미터는 조회시작일(yyyyMM), 조회종료일(yyyyMM), 정수장 코드의 3개
 				// 정수장 코드는 정수장 코드 조회 api에서 조회 가능

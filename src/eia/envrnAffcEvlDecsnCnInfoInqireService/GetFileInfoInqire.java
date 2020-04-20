@@ -23,7 +23,7 @@ public class GetFileInfoInqire {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 실행시 결정내용 코드와 타입(1: 결정내용 파일정보 2: 초안공람 전략환경영향평가 초안파일 3: 초안공람
 				// 환경영향평가

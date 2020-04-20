@@ -24,7 +24,7 @@ public class MultiFunctionBarrier {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 필요한 파라미터는 전일 날짜, 전년날짜, 검색날짜 (yyyyMMdd), 검색 시간(2자리)
 				if (args.length == 4) {

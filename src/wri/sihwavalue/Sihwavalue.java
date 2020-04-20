@@ -24,7 +24,7 @@ public class Sihwavalue {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 날짜를 yyyymmdd로 2개 받는다, 파라미터 유효성 체크는 파싱 때 체크
 				if (args.length == 2) {

@@ -23,7 +23,7 @@ public class GetBsnsPlaceLnMyeonInfoInqire {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 요청 파라미터 x,y 좌표의 2개
 				if (args.length == 2) {

@@ -24,7 +24,7 @@ public class GetRealTimeWaterQualityList {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 측정소 코드를 받음
 				if (args.length == 1) {

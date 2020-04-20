@@ -23,7 +23,7 @@ public class GetBsnsStrtgySmallScaleDscssBsnsDetailIngInfoInqire {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 필수 요청 파라미터 사전환경성검토코드 1개
 				if (args.length == 1) {

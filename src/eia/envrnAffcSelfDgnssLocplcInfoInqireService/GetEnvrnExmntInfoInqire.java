@@ -24,7 +24,7 @@ public class GetEnvrnExmntInfoInqire {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 필수 파라미터는 지분의 1개
 				if (args.length == 1) {

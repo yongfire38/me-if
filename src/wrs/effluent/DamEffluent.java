@@ -23,7 +23,7 @@ public class DamEffluent {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 요청 파라미터는 조회 시작 년도(yyyy), 댐코드의 2개
 				if (args.length == 2) {

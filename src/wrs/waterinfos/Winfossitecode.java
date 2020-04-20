@@ -24,7 +24,7 @@ public class Winfossitecode {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 요청 파라미터 없음
 

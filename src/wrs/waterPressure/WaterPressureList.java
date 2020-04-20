@@ -24,7 +24,7 @@ public class WaterPressureList {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 필요한 파라미터는 조회시작일 (yyyyMMdd), 조회시작시각 2자리, 조회 종료일 (yyyyMMdd),
 				// 조회종료 시각

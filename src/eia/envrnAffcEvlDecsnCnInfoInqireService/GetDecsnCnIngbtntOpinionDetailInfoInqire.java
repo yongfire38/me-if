@@ -24,7 +24,7 @@ public class GetDecsnCnIngbtntOpinionDetailInfoInqire {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 실행시 필수 결정내용 코드
 				if (args.length == 1) {

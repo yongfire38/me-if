@@ -24,7 +24,7 @@ public class GetRadioActiveMaterList {
 
 			try {
 
-				Thread.sleep(3000);
+				
 
 				// 서비스 키만 요구함, 실행시 필수 매개변수 없음(전체 데이터 수가 많지 않으므로..)
 				if (args.length == 0) {
