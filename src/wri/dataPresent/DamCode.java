@@ -38,20 +38,7 @@ public class DamCode {
 					// step 1.파일의 첫 행 작성
 					File file = new File(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_08.dat");
 
-						try {
-							//중복 이슈 문제로 요청 파라미터 없이 전체로 돌리는 경우는 매번 파일 새로 쓰게 수정
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-
-							pw.write("damcode"); // 댐코드
-							pw.write("|^");
-							pw.write("damnm"); // 댐이름
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+						
 
 					// step 2. 파싱
 					String json = "";

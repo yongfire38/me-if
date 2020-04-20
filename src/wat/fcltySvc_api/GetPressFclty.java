@@ -39,40 +39,7 @@ public class GetPressFclty {
 					File file = new File(JsonParser.getProperty("file_path") + "WAT/TIF_WAT_03.dat");
 
 
-						try {
-							//중복 이슈 문제로 요청 파라미터 없이 전체로 돌리는 경우는 매번 파일 새로 쓰게 수정
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-
-							pw.write("numOfRows"); // 한 페이지 결과 수
-							pw.write("|^");
-							pw.write("pageNo"); // 페이지 수
-							pw.write("|^");
-							pw.write("totalCount"); // 데이터 총 개수
-							pw.write("|^");
-							pw.write("RNUM"); // 순번
-							pw.write("|^");
-							pw.write("WBIZ_NAM"); // 수도사업자
-							pw.write("|^");
-							pw.write("FCLT_NAM"); // 가압장명
-							pw.write("|^");
-							pw.write("DTL_ADR"); // 시설주소
-							pw.write("|^");
-							pw.write("PHONE_NUM"); // 전화번호
-							pw.write("|^");
-							pw.write("DSGNF_VOL"); // 설계용량(㎥/일)
-							pw.write("|^");
-							pw.write("COMPL_DAT"); // 준공일
-							pw.write("|^");
-							pw.write("MNTRG_CTRL_YN"); // 감시제어유무
-							pw.write("|^");
-							pw.write("EMGNC_DVLP_TY_NM"); // 비상발전유형
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+						
 
 					// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
 					String json = "";

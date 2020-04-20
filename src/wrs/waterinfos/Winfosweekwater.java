@@ -1,9 +1,7 @@
 package wrs.waterinfos;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -122,52 +120,7 @@ public class Winfosweekwater {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 								
-								FileReader filereader = new FileReader(file);
-								BufferedReader bufReader = new BufferedReader(filereader);
 								
-								// 내용이 없으면 헤더를 쓴다
-								if ((bufReader.readLine()) == null) {
-
-									System.out.println("빈 파일만 존재함.");
-
-									try {
-										PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-										pw.write("stdt"); // 조회시작일
-										pw.write("|^");
-										pw.write("eddt"); // 조회종료일
-										pw.write("|^");
-										pw.write("sgcnm"); // 지자체명
-										pw.write("|^");
-										pw.write("sitenm"); // 정수장명
-										pw.write("|^");
-										pw.write("cltdt"); // 측정일자
-										pw.write("|^");
-										pw.write("data1"); // 일반세균
-										pw.write("|^");
-										pw.write("data2"); // 총대장균군
-										pw.write("|^");
-										pw.write("data3"); // 대장균/분원성대장균
-										pw.write("|^");
-										pw.write("data4"); // 암모니아성질소
-										pw.write("|^");
-										pw.write("data5"); // 질산성질소
-										pw.write("|^");
-										pw.write("data6"); // 과망간산칼륨소비량
-										pw.write("|^");
-										pw.write("data7"); // 증발잔류물
-										pw.println();
-										pw.flush();
-										pw.close();
-
-									} catch (IOException e) {
-										e.printStackTrace();
-									}
-								} else {
-									System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
-								}
-
-								bufReader.close();
 
 								JSONObject items = (JSONObject) body.get("items");
 

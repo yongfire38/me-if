@@ -39,57 +39,7 @@ public class Mnt {
 					// step 1.파일의 첫 행 작성
 					File file = new File(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_07.dat");
 
-						try {
-							
-							//중복 이슈 문제로 요청 파라미터 없이 전체로 돌리는 경우는 매번 파일 새로 쓰게 수정
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-
-							pw.write("competDe"); // 완료일
-							pw.write("|^");
-							pw.write("damFom"); // 형식
-							pw.write("|^");
-							pw.write("damdgr"); // 하천
-							pw.write("|^");
-							pw.write("damnm"); // 댐이름
-							pw.write("|^");
-							pw.write("dgrar"); // 유역면적
-							pw.write("|^");
-							pw.write("floodadjstCpcty"); // 홍수조절용량
-							pw.write("|^");
-							pw.write("floodseLmttWal"); // 상시만수위
-							pw.write("|^");
-							pw.write("fyerUswtrsuplyplanqy"); // 연간용수공급량
-							pw.write("|^");
-							pw.write("hg"); // 높이(m)
-							pw.write("|^");
-							pw.write("lowlevel"); // 저수위
-							pw.write("|^");
-							pw.write("lt"); // 길이(m)
-							pw.write("|^");
-							pw.write("nrmltAl"); // 정상표고
-							pw.write("|^");
-							pw.write("ordtmFwal"); // 홍수기제한수위
-							pw.write("|^");
-							pw.write("planFwal"); // 계획홍수위
-							pw.write("|^");
-							pw.write("rsvwtAr"); // 저수면적
-							pw.write("|^");
-							pw.write("strwrkDe"); // 사업기간
-							pw.write("|^");
-							pw.write("totRsvwtcpcty"); // 총저수용량
-							pw.write("|^");
-							pw.write("validRsvwtcpcty"); // 유효저수용량
-							pw.write("|^");
-							pw.write("vl"); // 체적
-							pw.write("|^");
-							pw.write("wollyupvlAl"); // 월류정표고
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+						
 
 					// step 2. 파싱
 					String json = "";

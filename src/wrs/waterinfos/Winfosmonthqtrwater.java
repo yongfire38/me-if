@@ -1,9 +1,7 @@
 package wrs.waterinfos;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -121,52 +119,7 @@ public class Winfosmonthqtrwater {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 								
-								FileReader filereader = new FileReader(file);
-								BufferedReader bufReader = new BufferedReader(filereader);
 								
-								// 내용이 없으면 헤더를 쓴다
-								if ((bufReader.readLine()) == null) {
-
-									System.out.println("빈 파일만 존재함.");
-
-									try {
-										PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-										pw.write("stdt"); // 조회시작월
-										pw.write("|^");
-										pw.write("eddt"); // 조회종료월
-										pw.write("|^");
-										pw.write("sgccd"); // 지자체코드
-										pw.write("|^");
-										pw.write("sgcnm"); // 지자체명
-										pw.write("|^");
-										pw.write("sitenm"); // 지점명
-										pw.write("|^");
-										pw.write("cltdt"); // 측정일자
-										pw.write("|^");
-										pw.write("data1"); // 수소이온농도(pH)
-										pw.write("|^");
-										pw.write("data2"); // BOD(호소수:COD)
-										pw.write("|^");
-										pw.write("data3"); // 부유물질(SS)
-										pw.write("|^");
-										pw.write("data4"); // 용존산소량(DO)
-										pw.write("|^");
-										pw.write("data5"); // 총대장균군(원수)
-										pw.write("|^");
-										pw.write("data6"); // 분원성대장균군수(원수-CFU)
-										pw.println();
-										pw.flush();
-										pw.close();
-
-									} catch (IOException e) {
-										e.printStackTrace();
-									}
-								} else {
-									System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
-								}
-
-								bufReader.close();
 
 								JSONObject items = (JSONObject) body.get("items");
 

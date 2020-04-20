@@ -39,30 +39,7 @@ public class SupplyLgldCodeList {
 					// step 1.파일의 첫 행 작성
 					File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_09.dat");
 
-						try {
-
-							//중복 이슈 문제로 요청 파라미터 없이 전체로 돌리는 경우는 매번 파일 새로 쓰게 수정
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-							pw.write("addrName"); // 법정동명
-							pw.write("|^");
-							pw.write("fcltyMngNm"); // 시설관리명
-							pw.write("|^");
-							pw.write("fcltyMngNo"); // 시설관리번호
-							pw.write("|^");
-							pw.write("lgldCode"); // 법정동코드
-							pw.write("|^");
-							pw.write("lgldFullAddr"); // 법정동 상세 주소
-							pw.write("|^");
-							pw.write("sujCode"); // 사업장코드
-							pw.write("|^");
-							pw.write("upprLgldCode"); // 상위법정동코드
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+						
 
 
 					// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱

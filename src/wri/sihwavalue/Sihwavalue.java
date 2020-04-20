@@ -1,9 +1,7 @@
 package wri.sihwavalue;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -115,40 +113,7 @@ public class Sihwavalue {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 								
-								FileReader filereader = new FileReader(file);
-								BufferedReader bufReader = new BufferedReader(filereader);
 								
-								// 내용이 없으면 헤더를 쓴다
-								if ((bufReader.readLine()) == null) {
-
-									System.out.println("빈 파일만 존재함.");
-
-									try {
-										PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-										pw.write("stdt"); // 조회시작일자
-										pw.write("|^");
-										pw.write("eddt"); // 조회종료일자
-										pw.write("|^");
-										pw.write("bidno"); // 번호
-										pw.write("|^");
-										pw.write("obsdt"); // 일자
-										pw.write("|^");
-										pw.write("lakeRwl"); // 호소위(EL.m)
-										pw.write("|^");
-										pw.write("seaRwl"); // 해수위(EL.m)
-										pw.println();
-										pw.flush();
-										pw.close();
-
-									} catch (IOException e) {
-										e.printStackTrace();
-									}
-								} else {
-									System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
-								}
-
-								bufReader.close();
 
 								JSONObject items = (JSONObject) body.get("items");
 

@@ -1,9 +1,7 @@
 package eia.envrnAffcEvlDscssSttusInfoInqireService;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -73,44 +71,7 @@ public class GetDscssSttusDscssChngIngDetailInfoInqire {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 						
-						FileReader filereader = new FileReader(file);
-						BufferedReader bufReader = new BufferedReader(filereader);
 						
-						// 내용이 없으면 헤더를 쓴다
-						if ((bufReader.readLine()) == null) {
-
-							System.out.println("빈 파일만 존재함.");
-
-							try {
-								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-								pw.write("eiaCd"); // 환경영향평가 코드
-								pw.write("|^");
-								pw.write("stateNm"); // 단계명
-								pw.write("|^");
-								pw.write("applyDt"); // 접수일
-								pw.write("|^");
-								pw.write("reviExaDt"); // 검토의뢰일
-								pw.write("|^");
-								pw.write("resApplyDt"); // 검토결과접수일
-								pw.write("|^");
-								pw.write("resReplyDt"); // 통보일
-								pw.write("|^");
-								pw.write("rtnDt"); // 반려일
-								pw.write("|^");
-								pw.write("wdwlDt"); // 취하
-								pw.println();
-								pw.flush();
-								pw.close();
-
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-						} else {
-							System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
-						}
-
-						bufReader.close();
 
 						JSONObject items = (JSONObject) body.get("items");
 

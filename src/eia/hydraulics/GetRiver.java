@@ -1,9 +1,7 @@
 package eia.hydraulics;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -72,54 +70,7 @@ public class GetRiver {
 
 					if (resultCode.equals("00")) {
 						
-						FileReader filereader = new FileReader(file);
-						BufferedReader bufReader = new BufferedReader(filereader);
 						
-						// 내용이 없으면 헤더를 쓴다
-						if ((bufReader.readLine()) == null) {
-
-							System.out.println("빈 파일만 존재함.");
-
-							try {
-								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-								pw.write("mgtNo"); // 사업 코드
-								pw.write("|^");
-								pw.write("id"); // 아이디
-								pw.write("|^");
-								pw.write("dtlclfc"); // 사업세분류
-								pw.write("|^");
-								pw.write("lc"); // 사업위치
-								pw.write("|^");
-								pw.write("totalEt"); // 총연장
-								pw.write("|^");
-								pw.write("dstrcNm"); // 지구구분
-								pw.write("|^");
-								pw.write("gubun1"); // 사업구분1 (사업내용구분)
-								pw.write("|^");
-								pw.write("gubun2"); // 사업구분2 (사업내용구분)
-								pw.write("|^");
-								pw.write("gubun3"); // 사업구분3 (사업내용구분)
-								pw.write("|^");
-								pw.write("co"); // 개수
-								pw.write("|^");
-								pw.write("et"); // 연장
-								pw.write("|^");
-								pw.write("ar"); // 면적
-								pw.write("|^");
-								pw.write("vl"); // 부피
-								pw.println();
-								pw.flush();
-								pw.close();
-
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-						} else {
-							System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
-						}
-
-						bufReader.close();
 
 						JSONArray ids = (JSONArray) body.get("ids");
 

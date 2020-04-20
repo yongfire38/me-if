@@ -1,9 +1,7 @@
 package eia.soil;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -72,94 +70,7 @@ public class GetInfo {
 
 					if (resultCode.equals("00")) {
 						
-						FileReader filereader = new FileReader(file);
-						BufferedReader bufReader = new BufferedReader(filereader);
 						
-						// 내용이 없으면 헤더를 쓴다
-						if ((bufReader.readLine()) == null) {
-
-							System.out.println("빈 파일만 존재함.");
-
-							try {
-								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-								pw.write("mgtNo"); // 사업 코드
-								pw.write("|^");
-								pw.write("ivstgSpotNm"); // 조사지점명
-								pw.write("|^");
-								pw.write("ivstgGb"); // 조사구분
-								pw.write("|^");
-								pw.write("adres"); // 주소
-								pw.write("|^");
-								pw.write("xcnts"); // X좌표
-								pw.write("|^");
-								pw.write("ydnts"); // Y좌표
-								pw.write("|^");
-								pw.write("ivstgOdr"); // 조사차수
-								pw.write("|^");
-								pw.write("ivstgBgnde"); // 조사시작일
-								pw.write("|^");
-								pw.write("ivstgEndde"); // 조사종료일
-								pw.write("|^");
-								pw.write("sdNm"); // 토층구분(예 : 표토, 중토, 심토 등)
-								pw.write("|^");
-								pw.write("slrDph"); // 토층별 심도
-								pw.write("|^");
-								pw.write("spoil"); // 준설토
-								pw.write("|^");
-								pw.write("cmdVal"); // 카드뮴
-								pw.write("|^");
-								pw.write("cuVal"); // 구리
-								pw.write("|^");
-								pw.write("asVal"); // 비소
-								pw.write("|^");
-								pw.write("hgVal"); // 수은
-								pw.write("|^");
-								pw.write("pbVal"); // 납
-								pw.write("|^");
-								pw.write("cr6Val"); // 6가크롬(Cr6+)
-								pw.write("|^");
-								pw.write("znVal"); // 아연
-								pw.write("|^");
-								pw.write("niVal"); // 니켈
-								pw.write("|^");
-								pw.write("fVal"); // 불소
-								pw.write("|^");
-								pw.write("ugnhVal"); // 유기인화합물
-								pw.write("|^");
-								pw.write("pcbVal"); // 폴리클로리네이티드비페닐
-								pw.write("|^");
-								pw.write("cnVal"); // 시안
-								pw.write("|^");
-								pw.write("pnVal"); // 페놀
-								pw.write("|^");
-								pw.write("bzVal"); // 벤젠
-								pw.write("|^");
-								pw.write("tuVal"); // 톨루엔
-								pw.write("|^");
-								pw.write("ebVal"); // 에틸벤젠
-								pw.write("|^");
-								pw.write("xyVal"); // 크실렌
-								pw.write("|^");
-								pw.write("tphVal"); // 석유계총탄화수소
-								pw.write("|^");
-								pw.write("tceVal"); // 트리클로로에틸렌
-								pw.write("|^");
-								pw.write("pceVal"); // 테트라클로로에틸렌
-								pw.write("|^");
-								pw.write("bpVal"); // 벤조(a)피렌
-								pw.println();
-								pw.flush();
-								pw.close();
-
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-						} else {
-							System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
-						}
-
-						bufReader.close();
 
 						JSONArray ivstgGbs = (JSONArray) body.get("ivstgGbs");
 

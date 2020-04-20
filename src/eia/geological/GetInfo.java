@@ -1,9 +1,7 @@
 package eia.geological;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -71,52 +69,7 @@ public class GetInfo {
 
 					if (resultCode.equals("00")) {
 						
-						FileReader filereader = new FileReader(file);
-						BufferedReader bufReader = new BufferedReader(filereader);
 						
-						// 내용이 없으면 헤더를 쓴다
-						if ((bufReader.readLine()) == null) {
-
-							System.out.println("빈 파일만 존재함.");
-
-							try {
-								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-								pw.write("mgtNo"); // 사업 코드
-								pw.write("|^");
-								pw.write("coeQy"); // 절토량(땅깎기)
-								pw.write("|^");
-								pw.write("bkQy"); // 성토량(흙쌇기)
-								pw.write("|^");
-								pw.write("mcoeHg"); // 최대깎기고
-								pw.write("|^");
-								pw.write("unlmYn"); // 최대깎기고 무한사면 유무
-								pw.write("|^");
-								pw.write("mbkHg"); // 최대쌓기고
-								pw.write("|^");
-								pw.write("mcoeShg"); // 최대절토사면고
-								pw.write("|^");
-								pw.write("mbkShg"); // 최대성토사면고
-								pw.write("|^");
-								pw.write("tpgrphChangeInex"); // 지형변화지수
-								pw.write("|^");
-								pw.write("frtltySoilOcty"); // 비옥토 발생량
-								pw.write("|^");
-								pw.write("ridgeAnals"); // 능선분할분석
-								pw.write("|^");
-								pw.write("mbrewalHg"); // 최대옹벽 높이
-								pw.println();
-								pw.flush();
-								pw.close();
-
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-						} else {
-							System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
-						}
-
-						bufReader.close();
 
 						Set<String> key = body.keySet();
 

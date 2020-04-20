@@ -39,41 +39,7 @@ public class GetRadioActiveMaterList {
 					// step 1.파일의 첫 행 작성
 					File file = new File(JsonParser.getProperty("file_path") + "PRI/TIF_PRI_04.dat");
 
-						try {
-							
-							//중복 이슈 문제로 요청 파라미터 없이 전체로 돌리는 경우는 매번 파일 새로 쓰게 수정
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-
-							pw.write("resultCode"); // 결과코드
-							pw.write("|^");
-							pw.write("resultMsg"); // 결과메시지
-							pw.write("|^");
-							pw.write("rn"); // 행번호
-							pw.write("|^");
-							pw.write("ptNo"); // 조사지점코드
-							pw.write("|^");
-							pw.write("ptNm"); // 조사지점명
-							pw.write("|^");
-							pw.write("wmcymd"); // 채취일
-							pw.write("|^");
-							pw.write("act1"); // 측정값 Cs-134(세슘)
-							pw.write("|^");
-							pw.write("act2"); // 측정값 Cs-137(세슘)
-							pw.write("|^");
-							pw.write("act3"); // 측정값 I-131(요드)
-							pw.write("|^");
-							pw.write("numOfRows"); // 한 페이지 결과 수
-							pw.write("|^");
-							pw.write("pageNo"); // 페이지 번호
-							pw.write("|^");
-							pw.write("totalCount"); // 전체 결과 수
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+						
 
 					// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
 					String json = "";

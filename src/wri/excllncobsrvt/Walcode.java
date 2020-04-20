@@ -1,9 +1,7 @@
 package wri.excllncobsrvt;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -82,34 +80,7 @@ public class Walcode {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 						
-						FileReader filereader = new FileReader(file);
-						BufferedReader bufReader = new BufferedReader(filereader);
 						
-						// 내용이 없으면 헤더를 쓴다
-						if ((bufReader.readLine()) == null) {
-
-							System.out.println("빈 파일만 존재함.");
-
-							try {
-								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-								pw.write("damcode"); // 댐코드
-								pw.write("|^");
-								pw.write("walobsrvtcode"); // 수위 관측소코드
-								pw.write("|^");
-								pw.write("obsrvtNm"); // 관측소이름
-								pw.println();
-								pw.flush();
-								pw.close();
-
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-						} else {
-							System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
-						}
-
-						bufReader.close();
 
 						JSONObject items = (JSONObject) body.get("items");
 

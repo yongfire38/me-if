@@ -1,9 +1,7 @@
 package eia.waterquality;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -71,104 +69,7 @@ public class GetInfo {
 
 					if (resultCode.equals("00")) {
 						
-						FileReader filereader = new FileReader(file);
-						BufferedReader bufReader = new BufferedReader(filereader);
 						
-						// 내용이 없으면 헤더를 쓴다
-						if ((bufReader.readLine()) == null) {
-
-							System.out.println("빈 파일만 존재함.");
-
-							try {
-								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-								pw.write("mgtNo"); // 사업 코드
-								pw.write("|^");
-								pw.write("bfeBodPlulod"); // 사업시행전 BOD 배출부하량
-								pw.write("|^");
-								pw.write("bfeTpPlulod"); // 사업시행전 T-P 배출부하량
-								pw.write("|^");
-								pw.write("aftBodPlulod"); // 사업시행후 BOD 배출부하량
-								pw.write("|^");
-								pw.write("aftTpPlulod"); // 사업시행후 T-P 배출부하량
-								pw.write("|^");
-								pw.write("wtrReuseYn"); // 물재이용여부
-								pw.write("|^");
-								pw.write("ptfctCntcYn"); // 공공처리시설 연계 처리 여부
-								pw.write("|^");
-								pw.write("itfctBodDnsty"); // 개별처리시설의 오염원 배출농도(BOD)
-								pw.write("|^");
-								pw.write("itfctBodQy"); // 개별처리시설의 오염원 배출량(BOD)
-								pw.write("|^");
-								pw.write("itfctCodDnsty"); // 개별처리시설의 오염원 배출농도(COD)
-								pw.write("|^");
-								pw.write("itfctCodQy"); // 개별처리시설의 오염원 배출량(COD)
-								pw.write("|^");
-								pw.write("itfctSsDnsty"); // 개별처리시설의 오염원 배출농도(SS)
-								pw.write("|^");
-								pw.write("itfctSsQy"); // 개별처리시설의 오염원 배출량(SS)
-								pw.write("|^");
-								pw.write("itfctTnDnsty"); // 개별처리시설의 오염원 배출농도(T-N)
-								pw.write("|^");
-								pw.write("itfctTnQy"); // 개별처리시설의 오염원 배출량(T-N)
-								pw.write("|^");
-								pw.write("itfctTpDnsty"); // 개별처리시설의 오염원 배출농도(T-P)
-								pw.write("|^");
-								pw.write("itfctTpQy"); // 개별처리시설의 오염원 배출량(T-P)
-								pw.write("|^");
-								pw.write("jrjYn"); // 저류지 유무
-								pw.write("|^");
-								pw.write("jjrjYn"); // 지하저류조 유무
-								pw.write("|^");
-								pw.write("igsjYn"); // 인공습지 유무
-								pw.write("|^");
-								pw.write("ygpjYn"); // 유공포장(투수성포장) 유무
-								pw.write("|^");
-								pw.write("ctjrjYn"); // 침투저류지 유무
-								pw.write("|^");
-								pw.write("ctdrYn"); // 침투도랑 유무
-								pw.write("|^");
-								pw.write("ssygdYn"); // 식생여과대 유무
-								pw.write("|^");
-								pw.write("sssrYn"); // 식생수로 유무
-								pw.write("|^");
-								pw.write("sscrjYn"); // 식생체류지 유무
-								pw.write("|^");
-								pw.write("smjbhbYn"); // 식물재배화분 유무
-								pw.write("|^");
-								pw.write("nmygsjYn"); // 나무여과상자 유무
-								pw.write("|^");
-								pw.write("yghssYn"); // 여과형시설 유무
-								pw.write("|^");
-								pw.write("yrhssYn"); // 와류형시설 유무
-								pw.write("|^");
-								pw.write("scrhssYn"); // 스크린형 시설 유무
-								pw.write("|^");
-								pw.write("ajcjcrhssYn"); // 응집 침전 처리형 시설 유무
-								pw.write("|^");
-								pw.write("ugrwtrQy"); // 지하수함양량
-								pw.write("|^");
-								pw.write("ugrwtrDevlopqy"); // 지하수개발가능량
-								pw.write("|^");
-								pw.write("ugrwtrWpqy"); // 지하수 적정채수량(양수량)
-								pw.write("|^");
-								pw.write("ugrwtrAffcra"); // 영향반경
-								pw.write("|^");
-								pw.write("ugrwtrAnalsYn"); // 지하수모델링유무
-								pw.write("|^");
-								pw.write("ugrwtrRm"); // 지하수 비고
-								pw.println();
-								pw.flush();
-								pw.close();
-
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-						} else {
-							System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
-						}
-
-						bufReader.close();
 
 						Set<String> key = body.keySet();
 

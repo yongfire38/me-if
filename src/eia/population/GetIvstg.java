@@ -1,9 +1,7 @@
 package eia.population;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -72,47 +70,7 @@ public class GetIvstg {
 
 					if (resultCode.equals("00")) {
 						
-						FileReader filereader = new FileReader(file);
-						BufferedReader bufReader = new BufferedReader(filereader);
 						
-						// 내용이 없으면 헤더를 쓴다
-						if ((bufReader.readLine()) == null) {
-
-							System.out.println("빈 파일만 존재함.");
-
-							try {
-								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-								pw.write("mgtNo"); // 사업 코드
-								pw.write("|^");
-								pw.write("sggemdNm"); // 시군구읍면동 명칭
-								pw.write("|^");
-								pw.write("popltnYr"); // 년도
-								pw.write("|^");
-								pw.write("totPopltnMale"); // 인구수_남자
-								pw.write("|^");
-								pw.write("totPopltnFemale"); // 인구수_여자
-								pw.write("|^");
-								pw.write("totPopltn"); // 인구수_합계
-								pw.write("|^");
-								pw.write("totHshldCo"); // 총 가구수
-								pw.write("|^");
-								pw.write("totHouseCo"); // 총 주택수
-								pw.write("|^");
-								pw.write("houseSupplyRate"); // 주택보급율
-								pw.write("|^");
-								pw.println();
-								pw.flush();
-								pw.close();
-
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-						} else {
-							System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
-						}
-
-						bufReader.close();
 
 						JSONArray sggemds = (JSONArray) body.get("sggemds");
 

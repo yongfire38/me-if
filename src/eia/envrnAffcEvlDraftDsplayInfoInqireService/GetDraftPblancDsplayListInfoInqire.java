@@ -39,38 +39,7 @@ public class GetDraftPblancDsplayListInfoInqire {
 					// step 1.파일의 첫 행 작성
 					File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_39.dat");
 
-						try {
-
-							//중복 이슈 문제로 요청 파라미터 없이 전체로 돌리는 경우는 매번 파일 새로 쓰게 수정
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-							pw.write("resultCode"); // 결과코드
-							pw.write("|^");
-							pw.write("resultMsg"); // 결과메세지
-							pw.write("|^");
-							pw.write("numOfRows"); // 한 페이지 결과 수
-							pw.write("|^");
-							pw.write("pageNo"); // 페이지 번호
-							pw.write("|^");
-							pw.write("totalCount"); // 전체 결과 수
-							pw.write("|^");
-							pw.write("rnum"); // 정렬순서
-							pw.write("|^");
-							pw.write("eiaCd"); // 환경영향평가코드
-							pw.write("|^");
-							pw.write("eiaSeq"); // 환경영향평가고유번호
-							pw.write("|^");
-							pw.write("bizNm"); // 사업명
-							pw.write("|^");
-							pw.write("bizGubunNm"); // 사업구분
-							pw.write("|^");
-							pw.write("drfopTmdt"); // 초안공람 기간
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+						
 
 					// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
 					String json = "";

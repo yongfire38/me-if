@@ -40,30 +40,6 @@ public class GetComCodeInfoInqire {
 					// step 1.파일의 첫 행 작성
 					File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_48.dat");
 
-						try {
-
-							//중복 이슈 문제로 요청 파라미터 없이 전체로 돌리는 경우는 매번 파일 새로 쓰게 수정
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-							pw.write("resultCode"); // 결과코드
-							pw.write("|^");
-							pw.write("resultMsg"); // 결과메시지
-							pw.write("|^");
-							pw.write("comCd"); // 공통코드
-							pw.write("|^");
-							pw.write("jongCd"); // 코드종류
-							pw.write("|^");
-							pw.write("cdNm"); // 코드명
-							pw.write("|^");
-							pw.write("gubunFl"); // 구분상태
-							pw.write("|^");
-							pw.write("sortSeq"); // 소팅 일련번호
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
 
 					String json = "";
 

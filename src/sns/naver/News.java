@@ -1,9 +1,7 @@
 package sns.naver;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -93,56 +91,7 @@ public class News {
 					StringBuffer description = new StringBuffer(" "); // 뉴스 내용
 					StringBuffer pubDate = new StringBuffer(" "); // 제공일시
 					
-					FileReader filereader = new FileReader(file);
-					BufferedReader bufReader = new BufferedReader(filereader);
 					
-					// 내용이 없으면 헤더를 쓴다
-					if ((bufReader.readLine()) == null) {
-
-						System.out.println("빈 파일만 존재함.");
-
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write("'");
-							pw.write("job_dt"); // 시스템 일자 (파라미터로 준 경우는 입력값)
-							pw.write("'");
-							pw.write("|^");
-							pw.write("'");
-							pw.write("query"); // 검색어
-							pw.write("'");
-							pw.write("|^");
-							pw.write("'");
-							pw.write("title"); // 뉴스 제목
-							pw.write("'");
-							pw.write("|^");
-							pw.write("'");
-							pw.write("originallink"); // 뉴스원본 링크
-							pw.write("'");
-							pw.write("|^");
-							pw.write("'");
-							pw.write("link"); // 네이버 뉴스 링크
-							pw.write("'");
-							pw.write("|^");
-							pw.write("'");
-							pw.write("description"); // 뉴스 내용
-							pw.write("'");
-							pw.write("|^");
-							pw.write("'");
-							pw.write("pubDate"); // 제공일시
-							pw.write("'");
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					} else {
-						System.out.println("내용이 있는 파일이 이미 존재하므로 이어쓰기..");
-					}
-
-					bufReader.close();
 
 					// step 3. 페이지 숫자만큼 반복하면서 파싱
 
