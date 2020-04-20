@@ -462,7 +462,7 @@ public class JsonParser {
 
 		String urlstr = service_url + mgtNo + "&serviceKey=" + service_key;
 
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -516,7 +516,7 @@ public class JsonParser {
 
 		String urlstr = service_url + code + "&serviceKey=" + service_key + "&type=" + type;
 		
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -570,7 +570,7 @@ public class JsonParser {
 
 		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
 		
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -627,7 +627,7 @@ public class JsonParser {
 		String urlstr = service_url + "&serviceKey=" + service_key + "&centerX=" + center_X + "&centerY=" + center_Y
 				+ "&numOfRows=999" + "&pageNo=" + pageNo;
 		
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -684,7 +684,7 @@ public class JsonParser {
 		String urlstr = service_url + "&serviceKey=" + service_key + "&year=" + year + "&month=" + month + "&pageNo="
 				+ pageNo;
 		
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -739,7 +739,7 @@ public class JsonParser {
 
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
 		
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -796,7 +796,7 @@ public class JsonParser {
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&siteId=" + siteId
 				+ "&ptNoList=" + ptNoList + "&numOfRows=999";
 		
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -861,7 +861,7 @@ public class JsonParser {
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + parse_stdt
 				+ "&eddt=" + parse_eddt + "&numOfRows=999";
 		
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -928,7 +928,7 @@ public class JsonParser {
 		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt="
 				+ parse_stdt + "&eddt=" + parse_eddt + "&numOfRows=999";
 		
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -995,7 +995,7 @@ public class JsonParser {
 		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt="
 				+ parse_stdt + "&eddt=" + parse_eddt + "&numOfRows=999";
 		
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1063,7 +1063,7 @@ public class JsonParser {
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&tdate=" + parse_tdate
 				+ "&ldate=" + parse_ldate + "&vdate=" + parse_vdate + "&vtime=" + vtime + "&numOfRows=999";
 		
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1132,7 +1132,7 @@ public class JsonParser {
 				+ "&stime=" + stime + "&edate=" + parse_edate + "&etime=" + etime + "&excll=" + excll
 				+ "&numOfRows=999";
 		
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1201,7 +1201,7 @@ public class JsonParser {
 				+ "&stime=" + stime + "&edate=" + parse_edate + "&etime=" + etime + "&excll=" + excll + "&damcode="
 				+ damcode + "&numOfRows=999";
 
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1270,7 +1270,7 @@ public class JsonParser {
 				+ "&stime=" + stime + "&edate=" + parse_edate + "&etime=" + etime + "&wal=" + wal + "&damcode="
 				+ damcode + "&numOfRows=999";
 		
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1326,7 +1326,7 @@ public class JsonParser {
 
 		String urlstr = service_url + "&serviceKey=" + service_key;
 		
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1395,7 +1395,7 @@ public class JsonParser {
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stDt=" + parse_stDt
 				+ "&stTm=" + stTm + "&edDt=" + parse_edDt + "&edTm=" + edTm + "&numOfRows=999";
 		
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1451,7 +1451,7 @@ public class JsonParser {
 
 		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
 		
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1516,7 +1516,7 @@ public class JsonParser {
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + parse_stdt
 				+ "&eddt=" + parse_eddt + "&numOfRows=999";
 		
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1583,7 +1583,7 @@ public class JsonParser {
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + parse_stdt
 				+ "&eddt=" + parse_eddt + "&sgccd=" + sgccd + "&numOfRows=999";
 		
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1641,7 +1641,7 @@ public class JsonParser {
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + stdt + "&damcd="
 				+ damcd + "&numOfRows=999";
 		
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1700,7 +1700,7 @@ public class JsonParser {
 
 		String urlstr = service_url + query + "&start=" + start;
 		
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1762,7 +1762,7 @@ public class JsonParser {
 
 		String urlstr = service_url + query + "&page=" + page;
 		
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1824,7 +1824,7 @@ public class JsonParser {
 
 		String urlstr = service_url + query + "&key=" + google_api_key + "&cx=" + google_api_cx + "&start=" + start;
 		
-		while (retry < 3) {
+		while (retry < 5) {
 			
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
