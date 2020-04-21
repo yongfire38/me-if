@@ -50,7 +50,7 @@ public class CustomSearch {
 
 					// step 1.파일의 작성
 
-					File file = new File(JsonParser.getProperty("file_path") + "SNS/TIF_SNS_301.dat");
+					File file = new File("TIF_SNS_301.dat");
 
 					try {
 						
@@ -94,7 +94,7 @@ public class CustomSearch {
 							json = JsonParser.parseJson_google(service_url, google_api_key, google_api_cx, args[0],
 									job_dt, Integer.toString(i));
 							
-							System.out.println("json::::"+json);
+							//System.out.println("json::::"+json);
 
 							JSONParser parser = new JSONParser();
 							JSONObject obj = (JSONObject) parser.parse(json);
@@ -106,7 +106,7 @@ public class CustomSearch {
 								
 								String status =	error.get("status").toString();
 								System.out.println("status:::::"+status);
-								System.exit(-1);
+								//System.exit(-1);
 
 							} else if(error == null){
 								
