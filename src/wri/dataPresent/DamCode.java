@@ -87,7 +87,7 @@ public class DamCode {
 							}
 
 							try {
-								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
 
 								pw.write(damcode); // 댐코드
 								pw.write("|^");

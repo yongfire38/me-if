@@ -185,7 +185,7 @@ public class GetRadioActiveMaterList {
 					// step 4. 파일에 쓰기
 					try {
 
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
 
 						pw.write(resultSb.toString());
 						pw.flush();

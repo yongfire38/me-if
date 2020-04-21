@@ -174,7 +174,7 @@ public class GetPressFclty {
 
 					// 누적된 결과물을 파일로 한방에 쏘기
 					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
 
 						pw.write(resultSb.toString());
 						pw.flush();

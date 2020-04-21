@@ -274,6 +274,11 @@ public class JsonParser {
 				Matcher emoticonsMatcher = emoticons.matcher(content);
 				content = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
 						.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
+				
+				//내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
+				if(content.isEmpty()) {
+					content = " ";
+				}
 
 				sb.setLength(0);
 				sb.append(content);

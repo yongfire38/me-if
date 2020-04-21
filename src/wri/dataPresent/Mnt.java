@@ -161,7 +161,7 @@ public class Mnt {
 
 							try {
 
-								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
 
 								pw.write(competDe); // 완료일
 								pw.write("|^");
