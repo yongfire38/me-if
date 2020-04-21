@@ -15,7 +15,7 @@ public class DBConnection {
 	public static String getProperty(String keyName) {
 		
 		String value = "";
-		String resource = "properties/apiConfig.properties";
+		String resource = "conf/apiConfig.properties";
 		
 		try {
 			Properties props = new Properties();

@@ -477,6 +477,7 @@ public class JsonParser {
 				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
 				
 				int responseCode = urlconnection.getResponseCode();
 
@@ -531,6 +532,7 @@ public class JsonParser {
 				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
 				
 				int responseCode = urlconnection.getResponseCode();
 				
@@ -585,6 +587,7 @@ public class JsonParser {
 				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
 
 				int responseCode = urlconnection.getResponseCode();
 				
@@ -642,6 +645,7 @@ public class JsonParser {
 				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
 				
 				int responseCode = urlconnection.getResponseCode();
 				
@@ -699,6 +703,7 @@ public class JsonParser {
 				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
 
 				int responseCode = urlconnection.getResponseCode();
 				
@@ -754,6 +759,7 @@ public class JsonParser {
 				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
 				
 				int responseCode = urlconnection.getResponseCode();
 				
@@ -811,6 +817,7 @@ public class JsonParser {
 				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
 				
 				int responseCode = urlconnection.getResponseCode();
 				
@@ -876,6 +883,7 @@ public class JsonParser {
 					Thread.sleep(3000);
 
 					urlconnection.setRequestMethod("GET");
+					urlconnection.setRequestProperty("Accept", "application/json");
 					
 					int responseCode = urlconnection.getResponseCode();
 					
@@ -943,6 +951,7 @@ public class JsonParser {
 					Thread.sleep(3000);
 
 					urlconnection.setRequestMethod("GET");
+					urlconnection.setRequestProperty("Accept", "application/json");
 					
 					int responseCode = urlconnection.getResponseCode();
 					
@@ -1010,6 +1019,7 @@ public class JsonParser {
 					Thread.sleep(3000);
 
 					urlconnection.setRequestMethod("GET");
+					urlconnection.setRequestProperty("Accept", "application/json");
 					
 					int responseCode = urlconnection.getResponseCode();
 					
@@ -1078,6 +1088,7 @@ public class JsonParser {
 					Thread.sleep(3000);
 
 					urlconnection.setRequestMethod("GET");
+					urlconnection.setRequestProperty("Accept", "application/json");
 					
 					int responseCode = urlconnection.getResponseCode();
 					
@@ -1147,6 +1158,7 @@ public class JsonParser {
 					Thread.sleep(3000);
 
 					urlconnection.setRequestMethod("GET");
+					urlconnection.setRequestProperty("Accept", "application/json");
 					
 					int responseCode = urlconnection.getResponseCode();
 					
@@ -1216,6 +1228,7 @@ public class JsonParser {
 					Thread.sleep(3000);
 
 					urlconnection.setRequestMethod("GET");
+					urlconnection.setRequestProperty("Accept", "application/json");
 					
 					int responseCode = urlconnection.getResponseCode();
 					
@@ -1285,6 +1298,7 @@ public class JsonParser {
 					Thread.sleep(3000);
 
 					urlconnection.setRequestMethod("GET");
+					urlconnection.setRequestProperty("Accept", "application/json");
 					
 					int responseCode = urlconnection.getResponseCode();
 					
@@ -1342,6 +1356,7 @@ public class JsonParser {
 
 				
 				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
 				
 				int responseCode = urlconnection.getResponseCode();
 				
@@ -1410,6 +1425,7 @@ public class JsonParser {
 					Thread.sleep(3000);
 
 					urlconnection.setRequestMethod("GET");
+					urlconnection.setRequestProperty("Accept", "application/json");
 					
 					int responseCode = urlconnection.getResponseCode();
 					
@@ -1466,6 +1482,7 @@ public class JsonParser {
 				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
 				
 				int responseCode = urlconnection.getResponseCode();
 				
@@ -1531,6 +1548,7 @@ public class JsonParser {
 					Thread.sleep(3000);
 
 					urlconnection.setRequestMethod("GET");
+					urlconnection.setRequestProperty("Accept", "application/json");
 					
 					int responseCode = urlconnection.getResponseCode();
 					
@@ -1598,6 +1616,7 @@ public class JsonParser {
 					Thread.sleep(3000);
 
 					urlconnection.setRequestMethod("GET");
+					urlconnection.setRequestProperty("Accept", "application/json");
 					
 					int responseCode = urlconnection.getResponseCode();
 					
@@ -1656,6 +1675,7 @@ public class JsonParser {
 				Thread.sleep(3000);
 	
 				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
 				
 				int responseCode = urlconnection.getResponseCode();
 				
