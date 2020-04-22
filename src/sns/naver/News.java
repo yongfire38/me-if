@@ -79,6 +79,11 @@ public class News {
 
 					int display = ((Long) count_obj.get("display")).intValue();
 					int totalCount = ((Long) count_obj.get("total")).intValue();
+					
+					//2020.04.22 display값이 0인 경우 발견. 예외처리.
+					if(display == 0){
+						display = 100;
+					}
 
 					pageCount = (totalCount / display) + 1;
 

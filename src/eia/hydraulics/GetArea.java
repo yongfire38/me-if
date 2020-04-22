@@ -54,6 +54,12 @@ public class GetArea {
 					String json = "";
 
 					json = JsonParser.parseEiaJson(service_url, service_key, mgtNo);
+					
+					//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
+					//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
+					if(json.indexOf("</") > -1){
+						json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";
+					}
 
 					// step 3.필요에 맞게 파싱
 
@@ -150,7 +156,7 @@ public class GetArea {
 								pw.write("|^");
 								pw.write(id); // 아이디
 								pw.write("|^");
-								pw.write(dgrNm); // 소유역
+								pw.write(dgrNm.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 소유역
 								pw.write("|^");
 								pw.write(ar); // 면적
 								pw.write("|^");

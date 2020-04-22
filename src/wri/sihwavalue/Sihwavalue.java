@@ -96,6 +96,10 @@ public class Sihwavalue {
 							json = JsonParser.parseWriJson(service_url, service_key, String.valueOf(i), args[0],
 									args[1]);
 
+							if(json.indexOf("</") > -1){
+								json ="{\"response\":{\"header\":{\"resultCode\":\"03\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
+							}
+							
 							JSONParser parser = new JSONParser();
 							JSONObject obj = (JSONObject) parser.parse(json);
 							JSONObject response = (JSONObject) obj.get("response");

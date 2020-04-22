@@ -169,6 +169,12 @@ public class MonPurification {
 
 							json = JsonParser.parseWatJson(service_url, service_key, args[0], args[1],
 									String.valueOf(i));
+							
+							//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
+							//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
+							if(json.indexOf("</") > -1){
+								json ="{\"OPERATION\":\"MonPurification\",\"response\":{\"body\":{\"itemsInfo\":{\"totalCount\":0,\"pageNo\":\"1\",\"numberOfRows\":100},\"items\":[],\"measurementItems\":null},\"header\":{\"resultMsg\":\"NODATA_ERROR\",\"resultCode\":\"03\"}}}";
+							}
 
 							JSONParser parser = new JSONParser();
 							JSONObject obj = (JSONObject) parser.parse(json);
