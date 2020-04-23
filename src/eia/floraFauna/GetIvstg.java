@@ -193,7 +193,7 @@ public class GetIvstg {
 										pw.write("|^");
 										pw.write(ivstg_ydnts_str); // Y좌표
 										pw.write("|^");
-										pw.write(ivstgOdr_str); // 조사차수
+										pw.write(ivstgOdr_str.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 조사차수
 										pw.write("|^");
 										pw.write(id); // 아이디
 										pw.write("|^");

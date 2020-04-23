@@ -178,7 +178,7 @@ public class GetInfo {
 
 										pw.write(mgtNo); // 사업 코드
 										pw.write("|^");
-										pw.write(ivstg_ivstgSpotNm_str); // 조사지점명
+										pw.write(ivstg_ivstgSpotNm_str.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 조사지점명
 										pw.write("|^");
 										pw.write(ivstgGb_str); // 조사구분
 										pw.write("|^");

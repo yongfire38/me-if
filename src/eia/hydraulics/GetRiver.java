@@ -155,7 +155,7 @@ public class GetRiver {
 								pw.write("|^");
 								pw.write(dtlclfc); // 사업세분류
 								pw.write("|^");
-								pw.write(lc); // 사업위치
+								pw.write(lc.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 사업위치
 								pw.write("|^");
 								pw.write(totalEt); // 총연장
 								pw.write("|^");
