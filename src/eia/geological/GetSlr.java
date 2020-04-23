@@ -181,7 +181,7 @@ public class GetSlr {
 										pw.write("|^");
 										pw.write(ivstg_ivstgSpotNm_str); // 조사지점명
 										pw.write("|^");
-										pw.write(ivstg_dllLc_str); // 시추공위치
+										pw.write(ivstg_dllLc_str.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 시추공위치
 										pw.write("|^");
 										pw.write(ivstg_xcnts_str); // X좌표
 										pw.write("|^");
@@ -193,7 +193,7 @@ public class GetSlr {
 										pw.write("|^");
 										pw.write(slrThick); // 지층두께
 										pw.write("|^");
-										pw.write(slrCn); // 지층구성상태
+										pw.write(slrCn.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 지층구성상태
 										pw.write("|^");
 										pw.write(nVal.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // N치(TCR/RQD)
 										pw.println();

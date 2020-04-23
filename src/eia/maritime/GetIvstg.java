@@ -143,20 +143,20 @@ public class GetIvstg {
 									String ivstgOdr_str = " "; // 조사차수
 									String ivstgBgnde_str = " "; // 조사시작일
 									String ivstgEndde_str = " "; // 조사종료일
-
-									if (ivstg.get("ivstgOdr") != null) {
+									
+									if (odr.get("ivstgOdr") != null) {
 										ivstgOdr_str = odr.get("ivstgOdr").toString().trim();
 									} else {
 										ivstgOdr_str = " ";
 									}
 
-									if (ivstg.get("ivstgBgnde") != null) {
+									if (odr.get("ivstgBgnde") != null) {
 										ivstgBgnde_str = odr.get("ivstgBgnde").toString().trim();
 									} else {
 										ivstgBgnde_str = " ";
 									}
 
-									if (ivstg.get("ivstgEndde") != null) {
+									if (odr.get("ivstgEndde") != null) {
 										ivstgEndde_str = odr.get("ivstgEndde").toString().trim();
 									} else {
 										ivstgEndde_str = " ";

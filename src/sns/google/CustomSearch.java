@@ -50,7 +50,7 @@ public class CustomSearch {
 
 					// step 1.파일의 작성
 
-					File file = new File("TIF_SNS_301.dat");
+					File file = new File(JsonParser.getProperty("file_path") + "SNS/TIF_SNS_301.dat");
 
 					try {
 						
@@ -111,50 +111,57 @@ public class CustomSearch {
 							} else if(error == null){
 								
 								JSONArray items = (JSONArray) obj.get("items");
+								
+								if(items == null){
+									
+									System.out.println("status:::::NO_DATA_ERROR");
+									//System.exit(-1);
 
-								for (int r = 0; r < items.size(); r++) {
+								} else {
+									for (int r = 0; r < items.size(); r++) {
 
-									JSONObject item = (JSONObject) items.get(r);
+										JSONObject item = (JSONObject) items.get(r);
 
-									Set<String> key = item.keySet();
+										Set<String> key = item.keySet();
 
-									Iterator<String> iter = key.iterator();
+										Iterator<String> iter = key.iterator();
 
-									while (iter.hasNext()) {
+										while (iter.hasNext()) {
 
-										String keyname = iter.next();
+											String keyname = iter.next();
 
-										JsonParser.colWrite_sns(title, keyname, "title", item);
-										JsonParser.colWrite_sns(snippet, keyname, "snippet", item);
-										JsonParser.colWrite_sns(link, keyname, "link", item);
+											JsonParser.colWrite_sns(title, keyname, "title", item);
+											JsonParser.colWrite_sns(snippet, keyname, "snippet", item);
+											JsonParser.colWrite_sns(link, keyname, "link", item);
+
+										}
+
+										// 한번에 문자열 합침
+										resultSb.append("'");
+										resultSb.append(job_dt); // 시스템 일자 (파라미터로 준 경우는
+																	// 입력값)
+										resultSb.append("'");
+										resultSb.append("|^");
+										resultSb.append("'");
+										resultSb.append(args[0]); // 검색어
+										resultSb.append("'");
+										resultSb.append("|^");
+										resultSb.append("'");
+										resultSb.append(title);
+										resultSb.append("'");
+										resultSb.append("|^");
+										resultSb.append("'");
+										resultSb.append(snippet);
+										resultSb.append("'");
+										resultSb.append("|^");
+										resultSb.append("'");
+										resultSb.append(link);
+										resultSb.append("'");
+										resultSb.append(System.getProperty("line.separator"));
 
 									}
-
-									// 한번에 문자열 합침
-									resultSb.append("'");
-									resultSb.append(job_dt); // 시스템 일자 (파라미터로 준 경우는
-																// 입력값)
-									resultSb.append("'");
-									resultSb.append("|^");
-									resultSb.append("'");
-									resultSb.append(args[0]); // 검색어
-									resultSb.append("'");
-									resultSb.append("|^");
-									resultSb.append("'");
-									resultSb.append(title);
-									resultSb.append("'");
-									resultSb.append("|^");
-									resultSb.append("'");
-									resultSb.append(snippet);
-									resultSb.append("'");
-									resultSb.append("|^");
-									resultSb.append("'");
-									resultSb.append(link);
-									resultSb.append("'");
-									resultSb.append(System.getProperty("line.separator"));
-
 								}
-								
+	
 							}
 
 							System.out.println("진행도::::::" + i + "/" + 100);
