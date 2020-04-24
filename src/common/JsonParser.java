@@ -1894,5 +1894,61 @@ public class JsonParser {
 
 		
 	}
+	
+	// 상수도 정보 시스템 파싱 (페이지 번호를 받아서 파싱)
+		// 요청 형식이 동일한 경우 다른 시스템에서도 사용 가능 - 페이지 번호 외에는 요청 파라미터가 없는 경우
+		public static String parseSpcJson(String service_url, String service_key, String pageIndex) throws Exception {
+			
+			int retry = 0;
+
+			BufferedReader br = null;
+			String json = "";
+
+			String urlstr = service_url + pageIndex + "&accessKey=" + service_key + "&userId=bigdata";
+			
+			while (retry < 5) {
+				
+				URL url = new URL(urlstr);
+				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+				
+				try {
+					
+					Thread.sleep(3000);
+
+					urlconnection.setRequestMethod("GET");
+					urlconnection.setRequestProperty("Accept", "application/json");
+					
+					int responseCode = urlconnection.getResponseCode();
+					
+					if (responseCode == 200 || responseCode == 201) {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+					} else {
+						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+					}
+
+					String line;
+					
+					while ((line = br.readLine()) != null) {
+						json = json + line + "\n";
+					}
+					
+					urlconnection.disconnect();
+
+					return json;
+
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("JSON 요청 에러 : pageIndex :" + pageIndex);
+					urlconnection.disconnect();
+					retry++;
+				} 
+				
+			}
+			
+			System.out.println("재시도 회수 초과");
+
+			throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+		}
 
 }
