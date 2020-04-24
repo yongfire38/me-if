@@ -13,6 +13,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import common.JsonParser;
+//import common.TransSftp;
 
 public class Taxons {
 
@@ -49,8 +50,6 @@ public class Taxons {
 
 				String json = "";
 
-				StringBuffer resultSb = new StringBuffer("");
-
 				// step 2. 파라미터로 던진 페이지의 파싱
 				json = JsonParser.parseSpcJson(spc_taxons_url, spc_api_key, String.valueOf(args[0]));
 
@@ -62,7 +61,7 @@ public class Taxons {
 				String resultCode = obj.get("resultCode").toString().trim();
 
 				if (!(resultCode.equals("0"))) {
-					System.out.println("1페이지 째 서버 비정상 응답..");
+					System.out.println(args[0]+"페이지 째 서버 비정상 응답..");
 				} else {
 
 					JSONArray items = (JSONArray) obj.get("item");
@@ -187,58 +186,66 @@ public class Taxons {
 
 						}
 
-						// 한번에 문자열 합침
-						resultSb.append(KSTN);
-						resultSb.append("|^");
-						resultSb.append(COMM_GROUP_NM);
-						resultSb.append("|^");
-						resultSb.append(TAXON_NM);
-						resultSb.append("|^");
-						resultSb.append(TAXON_FULL_NM);
-						resultSb.append("|^");
-						resultSb.append(TAXON_KNM);
-						resultSb.append("|^");
-						resultSb.append(IDENTIERS);
-						resultSb.append("|^");
-						resultSb.append(EXTINCT);
-						resultSb.append("|^");
-						resultSb.append(R200_KNM);
-						resultSb.append("|^");
-						resultSb.append(R200_NM);
-						resultSb.append("|^");
-						resultSb.append(R300_KNM);
-						resultSb.append("|^");
-						resultSb.append(R300_NM);
-						resultSb.append("|^");
-						resultSb.append(R400_KNM);
-						resultSb.append("|^");
-						resultSb.append(R400_NM);
-						resultSb.append("|^");
-						resultSb.append(R500_KNM);
-						resultSb.append("|^");
-						resultSb.append(R500_NM);
-						resultSb.append("|^");
-						resultSb.append(R600_KNM);
-						resultSb.append("|^");
-						resultSb.append(R600_NM);
-						resultSb.append("|^");
-						resultSb.append(R610_KNM);
-						resultSb.append("|^");
-						resultSb.append(R610_NM);
-						resultSb.append("|^");
-						resultSb.append(R700_KNM);
-						resultSb.append("|^");
-						resultSb.append(R700_NM);
-						resultSb.append("|^");
-						resultSb.append(R710_KNM);
-						resultSb.append("|^");
-						resultSb.append(R710_NM);
-						resultSb.append("|^");
-						resultSb.append(ORIGINAL_IDENTIERS);
-						resultSb.append("|^");
-						resultSb.append(IDENTIERS_YEAR);
+						// step 4. 파일에 쓰기
+						try {
+							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-						resultSb.append(System.getProperty("line.separator"));
+							pw.write(KSTN); // KSTN
+							pw.write("|^");
+							pw.write(COMM_GROUP_NM); // 관리분류군
+							pw.write("|^");
+							pw.write(TAXON_NM); // 분류군명
+							pw.write("|^");
+							pw.write(TAXON_FULL_NM); // 학명
+							pw.write("|^");
+							pw.write(TAXON_KNM); // 국명
+							pw.write("|^");
+							pw.write(IDENTIERS); // 명명자
+							pw.write("|^");
+							pw.write(EXTINCT); // 멸종위기종
+							pw.write("|^");
+							pw.write(R200_KNM); // phylum 국명
+							pw.write("|^");
+							pw.write(R200_NM); // phylum
+							pw.write("|^");
+							pw.write(R300_KNM); // class 국명
+							pw.write("|^");
+							pw.write(R300_NM); // class
+							pw.write("|^");
+							pw.write(R400_KNM); // order 국명
+							pw.write("|^");
+							pw.write(R400_NM); // order
+							pw.write("|^");
+							pw.write(R500_KNM); // family 국명
+							pw.write("|^");
+							pw.write(R500_NM); // family
+							pw.write("|^");
+							pw.write(R600_KNM); // genus 국명
+							pw.write("|^");
+							pw.write(R600_NM); // genus
+							pw.write("|^");
+							pw.write(R610_KNM); // subgenus 국명
+							pw.write("|^");
+							pw.write(R610_NM); // subgenus
+							pw.write("|^");
+							pw.write(R700_KNM); // species 국명
+							pw.write("|^");
+							pw.write(R700_NM); // species
+							pw.write("|^");
+							pw.write(R710_KNM); // subspecies 국명
+							pw.write("|^");
+							pw.write(R710_NM); // subspecies
+							pw.write("|^");
+							pw.write(ORIGINAL_IDENTIERS); // 최초명명자
+							pw.write("|^");
+							pw.write(IDENTIERS_YEAR); // 최초명명년도
+							pw.println();
+							pw.flush();
+							pw.close();
+
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 
 						System.out.println("진행도::::::" + i + "/" + items.size());
 
@@ -248,24 +255,11 @@ public class Taxons {
 
 				}
 
-				// step 4. 파일에 쓰기
-				try {
-
-					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-					pw.write(resultSb.toString());
-					pw.flush();
-					pw.close();
-
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
 				System.out.println("parsing complete!");
 
 				// step 5. 대상 서버에 sftp로 보냄
 
-				// TransSftp.transSftp(JsonParser.getProperty("file_path") + "SPC/TIF_SPC_01.dat", "SPC");
+				//TransSftp.transSftp(JsonParser.getProperty("file_path") + "SPC/TIF_SPC_01.dat", "SPC");
 
 				long end = System.currentTimeMillis();
 				System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
