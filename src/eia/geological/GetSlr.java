@@ -179,7 +179,7 @@ public class GetSlr {
 
 										pw.write(mgtNo); // 사업 코드
 										pw.write("|^");
-										pw.write(ivstg_ivstgSpotNm_str); // 조사지점명
+										pw.write(ivstg_ivstgSpotNm_str.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 조사지점명
 										pw.write("|^");
 										pw.write(ivstg_dllLc_str.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 시추공위치
 										pw.write("|^");
@@ -187,11 +187,11 @@ public class GetSlr {
 										pw.write("|^");
 										pw.write(ivstg_ydnts_str); // Y좌표
 										pw.write("|^");
-										pw.write(slrNm_str); // 지층명
+										pw.write(slrNm_str.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 지층명
 										pw.write("|^");
-										pw.write(slrDph); // 지층심도
+										pw.write(slrDph.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 지층심도
 										pw.write("|^");
-										pw.write(slrThick); // 지층두께
+										pw.write(slrThick.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 지층두께
 										pw.write("|^");
 										pw.write(slrCn.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 지층구성상태
 										pw.write("|^");
