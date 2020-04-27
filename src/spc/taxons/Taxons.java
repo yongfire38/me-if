@@ -35,7 +35,7 @@ public class Taxons {
 
 				// step 1.파일의 작성
 
-				File file = new File(JsonParser.getProperty("file_path") + "SNS/TIF_SPC_01.dat");
+				File file = new File(JsonParser.getProperty("file_path") + "SPC/TIF_SPC_01.dat");
 
 				try {
 
@@ -79,7 +79,7 @@ public class Taxons {
 
 							Iterator<String> iter = key.iterator();
 
-							String KSTN = " "; // KSTN
+							String KTSN = " "; // KTSN
 							String COMM_GROUP_NM = " "; // 관리분류군
 							String TAXON_NM = " "; // 분류군명
 							String TAXON_FULL_NM = " "; // 학명
@@ -108,8 +108,8 @@ public class Taxons {
 							while (iter.hasNext()) {
 								String keyname = iter.next();
 
-								if (keyname.equals("KSTN")) {
-									KSTN = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								if (keyname.equals("KTSN")) {
+									KTSN = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
 								}
 								if (keyname.equals("COMM_GROUP_NM")) {
 									COMM_GROUP_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
@@ -194,7 +194,7 @@ public class Taxons {
 							try {
 								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-								pw.write(KSTN); // KSTN
+								pw.write(KTSN); // KTSN
 								pw.write("|^");
 								pw.write(COMM_GROUP_NM); // 관리분류군
 								pw.write("|^");
