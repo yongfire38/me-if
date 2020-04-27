@@ -65,192 +65,197 @@ public class Taxons {
 				} else {
 
 					JSONArray items = (JSONArray) obj.get("item");
+					
+					if(items.size() == 0){
+						System.out.println("data not exist!! pageIndex :" + args[0]);
+					} else {
+						
+						// 마지막 페이지만 제외하면 1000번
+						for (int i = 0; i < items.size(); i++) {
 
-					// 마지막 페이지만 제외하면 1000번
-					for (int i = 0; i < items.size(); i++) {
+							JSONObject item = (JSONObject) items.get(i);
 
-						JSONObject item = (JSONObject) items.get(i);
+							Set<String> key = item.keySet();
 
-						Set<String> key = item.keySet();
+							Iterator<String> iter = key.iterator();
 
-						Iterator<String> iter = key.iterator();
+							String KSTN = " "; // KSTN
+							String COMM_GROUP_NM = " "; // 관리분류군
+							String TAXON_NM = " "; // 분류군명
+							String TAXON_FULL_NM = " "; // 학명
+							String TAXON_KNM = " "; // 국명
+							String IDENTIERS = " "; // 명명자
+							String EXTINCT = " "; // 멸종위기종
+							String R200_KNM = " "; // phylum 국명
+							String R200_NM = " "; // phylum
+							String R300_KNM = " "; // class 국명
+							String R300_NM = " "; // class
+							String R400_KNM = " "; // order 국명
+							String R400_NM = " "; // order
+							String R500_KNM = " "; // family 국명
+							String R500_NM = " "; // family
+							String R600_KNM = " "; // genus 국명
+							String R600_NM = " "; // genus
+							String R610_KNM = " "; // subgenus 국명
+							String R610_NM = " "; // subgenus
+							String R700_KNM = " "; // species 국명
+							String R700_NM = " "; // species
+							String R710_KNM = " "; // subspecies 국명
+							String R710_NM = " "; // subspecies
+							String ORIGINAL_IDENTIERS = " "; // 최초명명자
+							String IDENTIERS_YEAR = " "; // 최초명명년도
 
-						String KSTN = " "; // KSTN
-						String COMM_GROUP_NM = " "; // 관리분류군
-						String TAXON_NM = " "; // 분류군명
-						String TAXON_FULL_NM = " "; // 학명
-						String TAXON_KNM = " "; // 국명
-						String IDENTIERS = " "; // 명명자
-						String EXTINCT = " "; // 멸종위기종
-						String R200_KNM = " "; // phylum 국명
-						String R200_NM = " "; // phylum
-						String R300_KNM = " "; // class 국명
-						String R300_NM = " "; // class
-						String R400_KNM = " "; // order 국명
-						String R400_NM = " "; // order
-						String R500_KNM = " "; // family 국명
-						String R500_NM = " "; // family
-						String R600_KNM = " "; // genus 국명
-						String R600_NM = " "; // genus
-						String R610_KNM = " "; // subgenus 국명
-						String R610_NM = " "; // subgenus
-						String R700_KNM = " "; // species 국명
-						String R700_NM = " "; // species
-						String R710_KNM = " "; // subspecies 국명
-						String R710_NM = " "; // subspecies
-						String ORIGINAL_IDENTIERS = " "; // 최초명명자
-						String IDENTIERS_YEAR = " "; // 최초명명년도
+							while (iter.hasNext()) {
+								String keyname = iter.next();
 
-						while (iter.hasNext()) {
-							String keyname = iter.next();
+								if (keyname.equals("KSTN")) {
+									KSTN = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								}
+								if (keyname.equals("COMM_GROUP_NM")) {
+									COMM_GROUP_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+											.trim();
+								}
+								if (keyname.equals("TAXON_NM")) {
+									TAXON_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								}
+								if (keyname.equals("TAXON_FULL_NM")) {
+									TAXON_FULL_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+											.trim();
+								}
+								if (keyname.equals("TAXON_KNM")) {
+									TAXON_KNM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								}
+								if (keyname.equals("IDENTIERS")) {
+									IDENTIERS = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								}
+								if (keyname.equals("EXTINCT")) {
+									EXTINCT = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								}
+								if (keyname.equals("R200_KNM")) {
+									R200_KNM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								}
+								if (keyname.equals("R200_NM")) {
+									R200_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								}
+								if (keyname.equals("R300_KNM")) {
+									R300_KNM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								}
+								if (keyname.equals("R300_NM")) {
+									R300_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								}
+								if (keyname.equals("R400_KNM")) {
+									R400_KNM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								}
+								if (keyname.equals("R400_NM")) {
+									R400_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								}
+								if (keyname.equals("R500_KNM")) {
+									R500_KNM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								}
+								if (keyname.equals("R500_NM")) {
+									R500_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								}
+								if (keyname.equals("R600_KNM")) {
+									R600_KNM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								}
+								if (keyname.equals("R600_NM")) {
+									R600_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								}
+								if (keyname.equals("R610_KNM")) {
+									R610_KNM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								}
+								if (keyname.equals("R610_NM")) {
+									R610_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								}
+								if (keyname.equals("R700_KNM")) {
+									R700_KNM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								}
+								if (keyname.equals("R700_NM")) {
+									R700_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								}
+								if (keyname.equals("R710_KNM")) {
+									R710_KNM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								}
+								if (keyname.equals("R710_NM")) {
+									R710_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+								}
+								if (keyname.equals("ORIGINAL_IDENTIERS")) {
+									ORIGINAL_IDENTIERS = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+											.trim();
+								}
+								if (keyname.equals("IDENTIERS_YEAR")) {
+									IDENTIERS_YEAR = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+											.trim();
+								}
 
-							if (keyname.equals("KSTN")) {
-								KSTN = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
 							}
-							if (keyname.equals("COMM_GROUP_NM")) {
-								COMM_GROUP_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-										.trim();
+
+							// step 4. 파일에 쓰기
+							try {
+								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
+								pw.write(KSTN); // KSTN
+								pw.write("|^");
+								pw.write(COMM_GROUP_NM); // 관리분류군
+								pw.write("|^");
+								pw.write(TAXON_NM); // 분류군명
+								pw.write("|^");
+								pw.write(TAXON_FULL_NM); // 학명
+								pw.write("|^");
+								pw.write(TAXON_KNM); // 국명
+								pw.write("|^");
+								pw.write(IDENTIERS); // 명명자
+								pw.write("|^");
+								pw.write(EXTINCT); // 멸종위기종
+								pw.write("|^");
+								pw.write(R200_KNM); // phylum 국명
+								pw.write("|^");
+								pw.write(R200_NM); // phylum
+								pw.write("|^");
+								pw.write(R300_KNM); // class 국명
+								pw.write("|^");
+								pw.write(R300_NM); // class
+								pw.write("|^");
+								pw.write(R400_KNM); // order 국명
+								pw.write("|^");
+								pw.write(R400_NM); // order
+								pw.write("|^");
+								pw.write(R500_KNM); // family 국명
+								pw.write("|^");
+								pw.write(R500_NM); // family
+								pw.write("|^");
+								pw.write(R600_KNM); // genus 국명
+								pw.write("|^");
+								pw.write(R600_NM); // genus
+								pw.write("|^");
+								pw.write(R610_KNM); // subgenus 국명
+								pw.write("|^");
+								pw.write(R610_NM); // subgenus
+								pw.write("|^");
+								pw.write(R700_KNM); // species 국명
+								pw.write("|^");
+								pw.write(R700_NM); // species
+								pw.write("|^");
+								pw.write(R710_KNM); // subspecies 국명
+								pw.write("|^");
+								pw.write(R710_NM); // subspecies
+								pw.write("|^");
+								pw.write(ORIGINAL_IDENTIERS); // 최초명명자
+								pw.write("|^");
+								pw.write(IDENTIERS_YEAR); // 최초명명년도
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
 							}
-							if (keyname.equals("TAXON_NM")) {
-								TAXON_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
-							}
-							if (keyname.equals("TAXON_FULL_NM")) {
-								TAXON_FULL_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-										.trim();
-							}
-							if (keyname.equals("TAXON_KNM")) {
-								TAXON_KNM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
-							}
-							if (keyname.equals("IDENTIERS")) {
-								IDENTIERS = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
-							}
-							if (keyname.equals("EXTINCT")) {
-								EXTINCT = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
-							}
-							if (keyname.equals("R200_KNM")) {
-								R200_KNM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
-							}
-							if (keyname.equals("R200_NM")) {
-								R200_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
-							}
-							if (keyname.equals("R300_KNM")) {
-								R300_KNM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
-							}
-							if (keyname.equals("R300_NM")) {
-								R300_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
-							}
-							if (keyname.equals("R400_KNM")) {
-								R400_KNM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
-							}
-							if (keyname.equals("R400_NM")) {
-								R400_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
-							}
-							if (keyname.equals("R500_KNM")) {
-								R500_KNM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
-							}
-							if (keyname.equals("R500_NM")) {
-								R500_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
-							}
-							if (keyname.equals("R600_KNM")) {
-								R600_KNM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
-							}
-							if (keyname.equals("R600_NM")) {
-								R600_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
-							}
-							if (keyname.equals("R610_KNM")) {
-								R610_KNM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
-							}
-							if (keyname.equals("R610_NM")) {
-								R610_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
-							}
-							if (keyname.equals("R700_KNM")) {
-								R700_KNM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
-							}
-							if (keyname.equals("R700_NM")) {
-								R700_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
-							}
-							if (keyname.equals("R710_KNM")) {
-								R710_KNM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
-							}
-							if (keyname.equals("R710_NM")) {
-								R710_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
-							}
-							if (keyname.equals("ORIGINAL_IDENTIERS")) {
-								ORIGINAL_IDENTIERS = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-										.trim();
-							}
-							if (keyname.equals("IDENTIERS_YEAR")) {
-								IDENTIERS_YEAR = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-										.trim();
-							}
+
+							System.out.println("진행도::::::" + i + "/" + items.size());
+
+							Thread.sleep(1000);
 
 						}
-
-						// step 4. 파일에 쓰기
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write(KSTN); // KSTN
-							pw.write("|^");
-							pw.write(COMM_GROUP_NM); // 관리분류군
-							pw.write("|^");
-							pw.write(TAXON_NM); // 분류군명
-							pw.write("|^");
-							pw.write(TAXON_FULL_NM); // 학명
-							pw.write("|^");
-							pw.write(TAXON_KNM); // 국명
-							pw.write("|^");
-							pw.write(IDENTIERS); // 명명자
-							pw.write("|^");
-							pw.write(EXTINCT); // 멸종위기종
-							pw.write("|^");
-							pw.write(R200_KNM); // phylum 국명
-							pw.write("|^");
-							pw.write(R200_NM); // phylum
-							pw.write("|^");
-							pw.write(R300_KNM); // class 국명
-							pw.write("|^");
-							pw.write(R300_NM); // class
-							pw.write("|^");
-							pw.write(R400_KNM); // order 국명
-							pw.write("|^");
-							pw.write(R400_NM); // order
-							pw.write("|^");
-							pw.write(R500_KNM); // family 국명
-							pw.write("|^");
-							pw.write(R500_NM); // family
-							pw.write("|^");
-							pw.write(R600_KNM); // genus 국명
-							pw.write("|^");
-							pw.write(R600_NM); // genus
-							pw.write("|^");
-							pw.write(R610_KNM); // subgenus 국명
-							pw.write("|^");
-							pw.write(R610_NM); // subgenus
-							pw.write("|^");
-							pw.write(R700_KNM); // species 국명
-							pw.write("|^");
-							pw.write(R700_NM); // species
-							pw.write("|^");
-							pw.write(R710_KNM); // subspecies 국명
-							pw.write("|^");
-							pw.write(R710_NM); // subspecies
-							pw.write("|^");
-							pw.write(ORIGINAL_IDENTIERS); // 최초명명자
-							pw.write("|^");
-							pw.write(IDENTIERS_YEAR); // 최초명명년도
-							pw.println();
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
-						System.out.println("진행도::::::" + i + "/" + items.size());
-
-						Thread.sleep(1000);
-
 					}
 
 				}
