@@ -478,7 +478,7 @@ public class GetIvstg {
 					} else if (resultCode.equals("03")) {
 						System.out.println("data not exist!! mgtNo :" + mgtNo);
 					} else {
-						System.out.println("parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg
+						System.out.println("parsing error!!:::resultCode::" + resultCode + "::resultMsg::" + resultMsg
 								+ "::mgtNo::" + mgtNo);
 					}
 
