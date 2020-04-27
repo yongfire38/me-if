@@ -253,7 +253,7 @@ public class Taxons {
 
 							System.out.println("진행도::::::" + i + "/" + items.size());
 
-							Thread.sleep(1000);
+							//Thread.sleep(1000);
 
 						}
 					}
