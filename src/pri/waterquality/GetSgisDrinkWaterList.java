@@ -203,19 +203,20 @@ public class GetSgisDrinkWaterList {
 						resultMsg_col.setLength(0);
 						resultMsg_col.append(header.get("message").toString().trim()); // 결과
 																						// 메시지
-						numOfRows.setLength(0);
-						numOfRows.append(getSgisDrinkWaterList.get("numOfRows").toString().trim());
-
-						pageNo_str.setLength(0);
-						pageNo_str.append(String.valueOf(i).trim());
-
-						totalCount.setLength(0);
-						totalCount.append(getSgisDrinkWaterList.get("totalCount").toString().trim());
-
+						
 						if (!(resultCode_col.toString().equals("00"))) {
 							System.out.println("parsing error!!::resultCode::" + resultCode_col.toString()
 									+ "::resultMsg::" + resultMsg_col.toString());
 						} else if (resultCode_col.toString().equals("00")) {
+							
+							numOfRows.setLength(0);
+							numOfRows.append(getSgisDrinkWaterList.get("numOfRows").toString().trim());
+
+							pageNo_str.setLength(0);
+							pageNo_str.append(String.valueOf(i).trim());
+
+							totalCount.setLength(0);
+							totalCount.append(getSgisDrinkWaterList.get("totalCount").toString().trim());
 
 							JSONArray items = (JSONArray) getSgisDrinkWaterList.get("item");
 

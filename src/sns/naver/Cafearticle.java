@@ -64,142 +64,153 @@ public class Cafearticle {
 						e.printStackTrace();
 					}
 
+					int pageCount = 0;
+					
 					String json = "";
 
 					// step 2. 전체 페이지 파악을 위한 샘플 파싱
 					json = JsonParser.parseBlogJson_naver(service_url, naver_client_id, naver_client_secret, args[0],
 							job_dt, "1");
-
-					int pageCount = 0;
-
+					
 					// 테스트 출력
 					// System.out.println(json);
 
-					JSONParser count_parser = new JSONParser();
-					JSONObject count_obj = (JSONObject) count_parser.parse(json);
-
-					int display = ((Long) count_obj.get("display")).intValue();
-					int totalCount = ((Long) count_obj.get("total")).intValue();
-					
-					//2020.04.22 display값이 0인 경우 발견. 예외처리.
-					if(display == 0){
-						display = 100;
-					}
-
-					pageCount = (totalCount / display) + 1;
-
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer title = new StringBuffer(" "); // 카페 제목
-					StringBuffer link = new StringBuffer(" "); // 카페 링크
-					StringBuffer description = new StringBuffer(" "); // 카페 내용
-					StringBuffer cafename = new StringBuffer(" "); // 카페 이름
-					StringBuffer cafeurl = new StringBuffer(" "); // 카페 url
-					
-					
-
-					// step 3. 페이지 숫자만큼 반복하면서 파싱
-
-					for (int i = 1; i <= pageCount; i++) {
-
-						// 여기서의 i는 페이지 넘버가 아닌 조회 시작 위치값이므로 페이지 당 표시 가능 수인 100만큼
-						// 증가, 1000
-						// 초과값은 api가 지원하지 않음
+					if(json.substring(0, 1).equals("<")) {
+						//정상 json 응답이 아님
+						System.out.println("indexing parsing error!!::query::" +args[0]);
 						
-						//2020.04.20 : 데이터수가 너무 많다는 요청으로 200건까지만 떨어지도록 수정
-						if (i % 100 == 1 && i <= 101) {
+					} else {
+						
+						JSONParser count_parser = new JSONParser();
+						JSONObject count_obj = (JSONObject) count_parser.parse(json);
 
-							System.out.println("페이지 검색 시작 위치는:::" + i);
+						int display = ((Long) count_obj.get("display")).intValue();
+						int totalCount = ((Long) count_obj.get("total")).intValue();
+						
+						//2020.04.22 display값이 0인 경우 발견. 예외처리.
+						if(display == 0){
+							display = 100;
+						}
 
-							json = JsonParser.parseBlogJson_naver(service_url, naver_client_id, naver_client_secret,
-									args[0], job_dt, Integer.toString(i));
+						pageCount = (totalCount / display) + 1;
 
-							JSONParser parser = new JSONParser();
-							JSONObject obj = (JSONObject) parser.parse(json);
+						StringBuffer resultSb = new StringBuffer("");
 
-							JSONArray items = (JSONArray) obj.get("items");
+						StringBuffer title = new StringBuffer(" "); // 카페 제목
+						StringBuffer link = new StringBuffer(" "); // 카페 링크
+						StringBuffer description = new StringBuffer(" "); // 카페 내용
+						StringBuffer cafename = new StringBuffer(" "); // 카페 이름
+						StringBuffer cafeurl = new StringBuffer(" "); // 카페 url
+						
+						// step 3. 페이지 숫자만큼 반복하면서 파싱
 
-							for (int r = 0; r < items.size(); r++) {
+						for (int i = 1; i <= pageCount; i++) {
 
-								JSONObject item = (JSONObject) items.get(r);
+							// 여기서의 i는 페이지 넘버가 아닌 조회 시작 위치값이므로 페이지 당 표시 가능 수인 100만큼
+							// 증가, 1000
+							// 초과값은 api가 지원하지 않음
+							
+							//2020.04.20 : 데이터수가 너무 많다는 요청으로 200건까지만 떨어지도록 수정
+							if (i % 100 == 1 && i <= 101) {
 
-								Set<String> key = item.keySet();
+								System.out.println("페이지 검색 시작 위치는:::" + i);
 
-								Iterator<String> iter = key.iterator();
+								json = JsonParser.parseBlogJson_naver(service_url, naver_client_id, naver_client_secret,
+										args[0], job_dt, Integer.toString(i));
+								
+								if(json.substring(0, 1).equals("<")) {
+									//정상 json이 아닌 xml 형식의 리턴
+									json = "{\"start\": 1,\"display\": 100,\"total\": 1,\"items\": []}";
+								}
 
-								while (iter.hasNext()) {
+								JSONParser parser = new JSONParser();
+								JSONObject obj = (JSONObject) parser.parse(json);
 
-									String keyname = iter.next();
+								JSONArray items = (JSONArray) obj.get("items");
 
-									JsonParser.colWrite_sns(title, keyname, "title", item);
-									JsonParser.colWrite_sns(link, keyname, "link", item);
-									JsonParser.colWrite_sns(description, keyname, "description", item);
-									JsonParser.colWrite_sns(cafename, keyname, "cafename", item);
-									JsonParser.colWrite_sns(cafeurl, keyname, "cafeurl", item);
+								for (int r = 0; r < items.size(); r++) {
+
+									JSONObject item = (JSONObject) items.get(r);
+
+									Set<String> key = item.keySet();
+
+									Iterator<String> iter = key.iterator();
+
+									while (iter.hasNext()) {
+
+										String keyname = iter.next();
+
+										JsonParser.colWrite_sns(title, keyname, "title", item);
+										JsonParser.colWrite_sns(link, keyname, "link", item);
+										JsonParser.colWrite_sns(description, keyname, "description", item);
+										JsonParser.colWrite_sns(cafename, keyname, "cafename", item);
+										JsonParser.colWrite_sns(cafeurl, keyname, "cafeurl", item);
+
+									}
+
+									// 한번에 문자열 합침
+									resultSb.append("'");
+									resultSb.append(job_dt); // 시스템 일자 (파라미터로 준 경우는
+																// 입력값)
+									resultSb.append("'");
+									resultSb.append("|^");
+									resultSb.append("'");
+									resultSb.append(args[0]); // 검색어
+									resultSb.append("'");
+									resultSb.append("|^");
+									resultSb.append("'");
+									resultSb.append(title);
+									resultSb.append("'");
+									resultSb.append("|^");
+									resultSb.append("'");
+									resultSb.append(link);
+									resultSb.append("'");
+									resultSb.append("|^");
+									resultSb.append("'");
+									resultSb.append(description);
+									resultSb.append("'");
+									resultSb.append("|^");
+									resultSb.append("'");
+									resultSb.append(cafename);
+									resultSb.append("'");
+									resultSb.append("|^");
+									resultSb.append("'");
+									resultSb.append(cafeurl);
+									resultSb.append("'");
+									resultSb.append(System.getProperty("line.separator"));
 
 								}
 
-								// 한번에 문자열 합침
-								resultSb.append("'");
-								resultSb.append(job_dt); // 시스템 일자 (파라미터로 준 경우는
-															// 입력값)
-								resultSb.append("'");
-								resultSb.append("|^");
-								resultSb.append("'");
-								resultSb.append(args[0]); // 검색어
-								resultSb.append("'");
-								resultSb.append("|^");
-								resultSb.append("'");
-								resultSb.append(title);
-								resultSb.append("'");
-								resultSb.append("|^");
-								resultSb.append("'");
-								resultSb.append(link);
-								resultSb.append("'");
-								resultSb.append("|^");
-								resultSb.append("'");
-								resultSb.append(description);
-								resultSb.append("'");
-								resultSb.append("|^");
-								resultSb.append("'");
-								resultSb.append(cafename);
-								resultSb.append("'");
-								resultSb.append("|^");
-								resultSb.append("'");
-								resultSb.append(cafeurl);
-								resultSb.append("'");
-								resultSb.append(System.getProperty("line.separator"));
+								System.out.println("진행도::::::" + i + "/" + pageCount);
 
+								Thread.sleep(1000);
 							}
 
-							System.out.println("진행도::::::" + i + "/" + pageCount);
+						}
+						
+						// step 4. 파일에 쓰기
+						try {
+							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-							Thread.sleep(1000);
+							pw.write(resultSb.toString());
+							pw.flush();
+							pw.close();
+
+						} catch (IOException e) {
+							e.printStackTrace();
 						}
 
+						System.out.println("parsing complete!");
+
+						// step 5. 대상 서버에 sftp로 보냄
+
+						//TransSftp.transSftp(JsonParser.getProperty("file_path") + "SNS/TIF_SNS_102.dat", "SNS");
+
+						long end = System.currentTimeMillis();
+						System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");	
+						
 					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-
-					System.out.println("parsing complete!");
-
-					// step 5. 대상 서버에 sftp로 보냄
-
-					//TransSftp.transSftp(JsonParser.getProperty("file_path") + "SNS/TIF_SNS_102.dat", "SNS");
-
-					long end = System.currentTimeMillis();
-					System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
-
+					
 				} else {
 					System.out.println("파라미터 개수 에러!!");
 					System.exit(-1);
@@ -210,8 +221,6 @@ public class Cafearticle {
 				e.printStackTrace();
 				System.out.println("mgtNo :" + args[0]);
 			}
-
-
 
 	}
 
