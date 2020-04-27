@@ -195,148 +195,148 @@ public class GetIvstg {
 										String keyname = iter.next();
 
 										if (keyname.equals("ivstgOdr")) {
-											ivstgOdr = odr.get(keyname).toString().trim();
+											ivstgOdr = odr.get(keyname).toString();
 										}
 										if (keyname.equals("ivstgBgnde")) {
-											ivstgBgnde = odr.get(keyname).toString().trim();
+											ivstgBgnde = odr.get(keyname).toString();
 										}
 										if (keyname.equals("ivstgEndde")) {
-											ivstgEndde = odr.get(keyname).toString().trim();
+											ivstgEndde = odr.get(keyname).toString();
 										}
 										if (keyname.equals("waterTp")) {
-											waterTp = odr.get(keyname).toString().trim();
+											waterTp = odr.get(keyname).toString();
 										}
 										if (keyname.equals("phVal")) {
-											phVal = odr.get(keyname).toString().trim();
+											phVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("doVal")) {
-											doVal = odr.get(keyname).toString().trim();
+											doVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("ssVal")) {
-											ssVal = odr.get(keyname).toString().trim();
+											ssVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("codVal")) {
-											codVal = odr.get(keyname).toString().trim();
+											codVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("ftcVal")) {
-											ftcVal = odr.get(keyname).toString().trim();
+											ftcVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("fcVal")) {
-											fcVal = odr.get(keyname).toString().trim();
+											fcVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("tnVal")) {
-											tnVal = odr.get(keyname).toString().trim();
+											tnVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("tpVal")) {
-											tpVal = odr.get(keyname).toString().trim();
+											tpVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("bodVal")) {
-											bodVal = odr.get(keyname).toString().trim();
+											bodVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("tocVal")) {
-											tocVal = odr.get(keyname).toString().trim();
+											tocVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("cpaVal")) {
-											cpaVal = odr.get(keyname).toString().trim();
+											cpaVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("fluxVal")) {
-											fluxVal = odr.get(keyname).toString().trim();
+											fluxVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("ugnVal")) {
-											ugnVal = odr.get(keyname).toString().trim();
+											ugnVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("absVal")) {
-											absVal = odr.get(keyname).toString().trim();
+											absVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("cdmVal")) {
-											cdmVal = odr.get(keyname).toString().trim();
+											cdmVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("pbVal")) {
-											pbVal = odr.get(keyname).toString().trim();
+											pbVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("pcbVal")) {
-											pcbVal = odr.get(keyname).toString().trim();
+											pcbVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("cnVal")) {
-											cnVal = odr.get(keyname).toString().trim();
+											cnVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("hgVal")) {
-											hgVal = odr.get(keyname).toString().trim();
+											hgVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("cr6Val")) {
-											cr6Val = odr.get(keyname).toString().trim();
+											cr6Val = odr.get(keyname).toString();
 										}
 										if (keyname.equals("asVal")) {
-											asVal = odr.get(keyname).toString().trim();
+											asVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("ctVal")) {
-											ctVal = odr.get(keyname).toString().trim();
+											ctVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("deVal")) {
-											deVal = odr.get(keyname).toString().trim();
+											deVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("teVal")) {
-											teVal = odr.get(keyname).toString().trim();
+											teVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("dmVal")) {
-											dmVal = odr.get(keyname).toString().trim();
+											dmVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("bzVal")) {
-											bzVal = odr.get(keyname).toString().trim();
+											bzVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("cfVal")) {
-											cfVal = odr.get(keyname).toString().trim();
+											cfVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("dehfVal")) {
-											dehfVal = odr.get(keyname).toString().trim();
+											dehfVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("amVal")) {
-											amVal = odr.get(keyname).toString().trim();
+											amVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("dxVal")) {
-											dxVal = odr.get(keyname).toString().trim();
+											dxVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("faVal")) {
-											faVal = odr.get(keyname).toString().trim();
+											faVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("hbVal")) {
-											hbVal = odr.get(keyname).toString().trim();
+											hbVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("kmno4Cnsmpqy")) {
-											kmno4Cnsmpqy = odr.get(keyname).toString().trim();
+											kmno4Cnsmpqy = odr.get(keyname).toString();
 										}
 										if (keyname.equals("tssVal")) {
-											tssVal = odr.get(keyname).toString().trim();
+											tssVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("no3Val")) {
-											no3Val = odr.get(keyname).toString().trim();
+											no3Val = odr.get(keyname).toString();
 										}
 										if (keyname.equals("nhVal")) {
-											nhVal = odr.get(keyname).toString().trim();
+											nhVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("soVal")) {
-											soVal = odr.get(keyname).toString().trim();
+											soVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("fVal")) {
-											fVal = odr.get(keyname).toString().trim();
+											fVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("feVal")) {
-											feVal = odr.get(keyname).toString().trim();
+											feVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("znVal")) {
-											znVal = odr.get(keyname).toString().trim();
+											znVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("pnVal")) {
-											pnVal = odr.get(keyname).toString().trim();
+											pnVal = odr.get(keyname).toString();
 										}
 										if (keyname.equals("envrnGrad")) {
-											envrnGrad = odr.get(keyname).toString().trim();
+											envrnGrad = odr.get(keyname).toString();
 										}
 										if (keyname.equals("ugrwtrPrpos")) {
-											ugrwtrPrpos = odr.get(keyname).toString().trim();
+											ugrwtrPrpos = odr.get(keyname).toString();
 										}
 										if (keyname.equals("ugrwtrDkps")) {
-											ugrwtrDkps = odr.get(keyname).toString().trim();
+											ugrwtrDkps = odr.get(keyname).toString();
 										}
 									}
 
