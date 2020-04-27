@@ -85,7 +85,7 @@ public class GetIvstg {
 
 							JSONObject ivstgGb_Json = (JSONObject) ivstgGbs.get(i);
 
-							String ivstgGb_str = ivstgGb_Json.get("ivstgGb").toString().trim(); // 조사구분
+							String ivstgGb_str = ivstgGb_Json.get("ivstgGb").toString(); // 조사구분
 
 							JSONArray ivstgs = (JSONArray) ivstgGb_Json.get("ivstgs");
 
@@ -99,19 +99,19 @@ public class GetIvstg {
 								String ivstg_ydnts_str = " "; // Y좌표
 
 								if (ivstg.get("adres") != null) {
-									ivstg_adres_str = ivstg.get("adres").toString().trim();
+									ivstg_adres_str = ivstg.get("adres").toString();
 								} else {
 									ivstg_adres_str = " ";
 								}
 
 								if (ivstg.get("ivstgSpotNm") != null) {
-									ivstg_ivstgSpotNm_str = ivstg.get("ivstgSpotNm").toString().trim();
+									ivstg_ivstgSpotNm_str = ivstg.get("ivstgSpotNm").toString();
 								} else {
 									ivstg_ivstgSpotNm_str = " ";
 								}
 
 								if (ivstg.get("xcnts") != null) {
-									ivstg_xcnts_str = ivstg.get("xcnts").toString().trim();
+									ivstg_xcnts_str = ivstg.get("xcnts").toString();
 
 									// 시분초 표기일 경우 drgree 표기로 전환
 									if ((ivstg_xcnts_str.indexOf("°") > -1)) {
@@ -122,7 +122,7 @@ public class GetIvstg {
 								}
 
 								if (ivstg.get("ydnts") != null) {
-									ivstg_ydnts_str = ivstg.get("ydnts").toString().trim();
+									ivstg_ydnts_str = ivstg.get("ydnts").toString();
 
 									// 시분초 표기일 경우 drgree 표기로 전환
 									if ((ivstg_ydnts_str.indexOf("°") > -1)) {
