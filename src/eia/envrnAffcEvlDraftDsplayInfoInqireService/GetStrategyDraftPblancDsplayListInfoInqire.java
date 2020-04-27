@@ -116,15 +116,15 @@ public class GetStrategyDraftPblancDsplayListInfoInqire {
 						String resultCode = header.get("resultCode").toString().trim();
 						String resultMsg = header.get("resultMsg").toString().trim();
 
-						String numOfRows_str = body.get("numOfRows").toString();
-						String totalCount_str = body.get("totalCount").toString();
-
 						if (!(resultCode.equals("00"))) {
 							System.out.println(
 									"parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
 						} else if (body.get("items") instanceof String) {
 							System.out.println("data not exist!!");
 						} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
+							
+							String numOfRows_str = body.get("numOfRows").toString();
+							String totalCount_str = body.get("totalCount").toString();
 
 							// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 							if (body.get("item") instanceof JSONObject) {

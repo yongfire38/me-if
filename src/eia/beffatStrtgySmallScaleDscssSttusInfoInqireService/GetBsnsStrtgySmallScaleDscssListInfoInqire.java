@@ -105,15 +105,15 @@ public class GetBsnsStrtgySmallScaleDscssListInfoInqire {
 						String resultCode = header.get("resultCode").toString().trim();
 						String resultMsg = header.get("resultMsg").toString().trim();
 
-						String numOfRows_str = body.get("numOfRows").toString().trim();
-						String totalCount_str = body.get("totalCount").toString().trim();
-
 						if (!(resultCode.equals("00"))) {
 							System.out.println(
 									"parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
 						} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 							System.out.println("data not exist!!");
 						} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
+							
+							String numOfRows_str = body.get("numOfRows").toString().trim();
+							String totalCount_str = body.get("totalCount").toString().trim();
 
 							JSONObject items = (JSONObject) body.get("items");
 

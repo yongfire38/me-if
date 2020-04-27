@@ -173,8 +173,6 @@ public class Dmntwater {
 							JSONObject body = (JSONObject) response.get("body");
 							JSONObject header = (JSONObject) response.get("header");
 
-							String numOfRows_str = body.get("numOfRows").toString();
-
 							String resultCode = header.get("resultCode").toString().trim();
 							String resultMsg = header.get("resultMsg").toString().trim();
 
@@ -185,7 +183,7 @@ public class Dmntwater {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 								
-								
+								String numOfRows_str = body.get("numOfRows").toString();
 
 								JSONObject items = (JSONObject) body.get("items");
 
