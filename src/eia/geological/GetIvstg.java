@@ -154,22 +154,22 @@ public class GetIvstg {
 										String keyname = iter.next();
 
 										if (keyname.equals("ivstgOdr")) {
-											ivstgOdr = odr.get(keyname).toString().trim();
+											ivstgOdr = odr.get(keyname).toString();
 										}
 										if (keyname.equals("ivstgBgnde")) {
-											ivstgBgnde = odr.get(keyname).toString().trim();
+											ivstgBgnde = odr.get(keyname).toString();
 										}
 										if (keyname.equals("ivstgEndde")) {
-											ivstgEndde = odr.get(keyname).toString().trim();
+											ivstgEndde = odr.get(keyname).toString();
 										}
 										if (keyname.equals("ugrwal12hr")) {
-											ugrwal12hr = odr.get(keyname).toString().trim();
+											ugrwal12hr = odr.get(keyname).toString();
 										}
 										if (keyname.equals("ugrwal24hr")) {
-											ugrwal24hr = odr.get(keyname).toString().trim();
+											ugrwal24hr = odr.get(keyname).toString();
 										}
 										if (keyname.equals("exprResult")) {
-											exprResult = odr.get(keyname).toString().trim();
+											exprResult = odr.get(keyname).toString();
 										}
 
 									}
