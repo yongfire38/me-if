@@ -45,7 +45,7 @@ public class Taxons {
 					pw.close();
 
 				} catch (IOException e) {
-					e.printStackTrace();
+
 				}
 
 				String json = "";
@@ -61,15 +61,15 @@ public class Taxons {
 				String resultCode = obj.get("resultCode").toString().trim();
 
 				if (!(resultCode.equals("0"))) {
-					System.out.println(args[0]+"페이지 째 서버 비정상 응답..");
+					System.out.println(args[0] + "페이지 째 서버 비정상 응답..");
 				} else {
 
 					JSONArray items = (JSONArray) obj.get("item");
-					
-					if(items.size() == 0){
+
+					if (items.size() == 0) {
 						System.out.println("data not exist!! pageIndex :" + args[0]);
 					} else {
-						
+
 						// 마지막 페이지만 제외하면 1000번
 						for (int i = 0; i < items.size(); i++) {
 
@@ -123,10 +123,12 @@ public class Taxons {
 											.trim();
 								}
 								if (keyname.equals("TAXON_KNM")) {
-									TAXON_KNM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+									TAXON_KNM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+											.trim();
 								}
 								if (keyname.equals("IDENTIERS")) {
-									IDENTIERS = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
+									IDENTIERS = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+											.trim();
 								}
 								if (keyname.equals("EXTINCT")) {
 									EXTINCT = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
@@ -180,8 +182,8 @@ public class Taxons {
 									R710_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
 								}
 								if (keyname.equals("ORIGINAL_IDENTIERS")) {
-									ORIGINAL_IDENTIERS = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-											.trim();
+									ORIGINAL_IDENTIERS = item.get(keyname).toString()
+											.replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
 								}
 								if (keyname.equals("IDENTIERS_YEAR")) {
 									IDENTIERS_YEAR = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
@@ -253,7 +255,7 @@ public class Taxons {
 
 							System.out.println("진행도::::::" + i + "/" + items.size());
 
-							//Thread.sleep(1000);
+							// Thread.sleep(1000);
 
 						}
 					}
@@ -264,7 +266,7 @@ public class Taxons {
 
 				// step 5. 대상 서버에 sftp로 보냄
 
-				//TransSftp.transSftp(JsonParser.getProperty("file_path") + "SPC/TIF_SPC_01.dat", "SPC");
+				// TransSftp.transSftp(JsonParser.getProperty("file_path") + "SPC/TIF_SPC_01.dat", "SPC");
 
 				long end = System.currentTimeMillis();
 				System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
