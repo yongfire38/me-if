@@ -173,7 +173,7 @@ public class Cafe {
 
 						System.out.println("진행도::::::" + i + "/" + pageCount);
 
-						Thread.sleep(1000);
+						//Thread.sleep(1000);
 					}
 
 					// step 4. 파일에 쓰기

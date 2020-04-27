@@ -166,7 +166,7 @@ public class CustomSearch {
 
 							System.out.println("진행도::::::" + i + "/" + 100);
 
-							Thread.sleep(1000);
+							//Thread.sleep(1000);
 							
 						}
 
