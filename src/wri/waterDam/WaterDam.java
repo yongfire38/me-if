@@ -251,7 +251,7 @@ public class WaterDam {
 
 							System.out.println("진행도::::::" + i + "/" + pageCount);
 
-							Thread.sleep(1000);
+							//Thread.sleep(1000);
 
 						}
 

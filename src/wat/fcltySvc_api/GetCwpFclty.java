@@ -197,7 +197,7 @@ public class GetCwpFclty {
 							System.out.println("parsing error!!");
 						}
 
-						Thread.sleep(1000);
+						//Thread.sleep(1000);
 
 					}
 

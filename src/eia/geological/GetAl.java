@@ -114,11 +114,11 @@ public class GetAl {
 
 								pw.write(mgtNo); // 사업 코드
 								pw.write("|^");
-								pw.write(alGrad); // 사업지구 표고구분
+								pw.write(alGrad.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 사업지구 표고구분
 								pw.write("|^");
-								pw.write(alAreaRate); // 표고별 면적비율
+								pw.write(alAreaRate.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 표고별 면적비율
 								pw.write("|^");
-								pw.write(alArea); // 표고별 면적
+								pw.write(alArea.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 표고별 면적
 								pw.println();
 								pw.flush();
 								pw.close();

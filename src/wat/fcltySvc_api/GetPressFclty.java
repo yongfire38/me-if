@@ -189,7 +189,7 @@ public class GetPressFclty {
 							System.out.println("parsing error!!");
 						}
 
-						Thread.sleep(1000);
+						//Thread.sleep(1000);
 
 						// System.out.println("진행도::::"+String.valueOf(i));
 					}

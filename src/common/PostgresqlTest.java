@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class PostgresqlLocalTest {
+public class PostgresqlTest {
 
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
@@ -14,16 +14,16 @@ public class PostgresqlLocalTest {
 		PreparedStatement pstat = null;
 		ResultSet rs = null;
 
-		String url = "jdbc:postgresql://localhost/IF_DB";
-		String user = "postgres";
-		String password = "1234";
+		String url = JsonParser.getProperty("post_hfg_url");
+		String user = JsonParser.getProperty("post_hfg_username");
+		String password = JsonParser.getProperty("post_hfg_password");
 
 		try {
 
 			Class.forName("org.postgresql.Driver");
 			conn = DriverManager.getConnection(url, user, password);
 			//그냥 Statement 쓰면 커서 뒤쪽으로 이동이 안 된다...
-			pstat = conn.prepareStatement("select * from  public.\"TIF_WMS_V_WMS_SITEINFO_WPCS\"",  ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			pstat = conn.prepareStatement("select * from \"HIAA02\"",  ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			rs = pstat.executeQuery();
 			//rs = st.executeQuery(JsonParser.getProperty("post_colCount_query") + "'" + args[0] + "'");
 

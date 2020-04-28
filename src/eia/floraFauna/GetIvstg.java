@@ -90,19 +90,19 @@ public class GetIvstg {
 							String ivstg_ydnts_str = " "; // Y좌표
 
 							if (ivstg.get("ivstgSpotNm") != null) {
-								ivstg_ivstgSpotNm_str = ivstg.get("ivstgSpotNm").toString().trim();
+								ivstg_ivstgSpotNm_str = ivstg.get("ivstgSpotNm").toString();
 							} else {
 								ivstg_ivstgSpotNm_str = " ";
 							}
 
 							if (ivstg.get("adres") != null) {
-								ivstg_adres_str = ivstg.get("adres").toString().trim();
+								ivstg_adres_str = ivstg.get("adres").toString();
 							} else {
 								ivstg_adres_str = " ";
 							}
 
 							if (ivstg.get("xcnts") != null) {
-								ivstg_xcnts_str = ivstg.get("xcnts").toString().trim();
+								ivstg_xcnts_str = ivstg.get("xcnts").toString();
 
 								// 시분초 표기일 경우 drgree 표기로 전환
 								if ((ivstg_xcnts_str.indexOf("°") > -1)) {
@@ -114,7 +114,7 @@ public class GetIvstg {
 							}
 
 							if (ivstg.get("ydnts") != null) {
-								ivstg_ydnts_str = ivstg.get("ydnts").toString().trim();
+								ivstg_ydnts_str = ivstg.get("ydnts").toString();
 
 								// 시분초 표기일 경우 drgree 표기로 전환
 								if ((ivstg_ydnts_str.indexOf("°") > -1)) {
@@ -133,7 +133,7 @@ public class GetIvstg {
 								String ivstgOdr_str = " "; // 조사차수
 
 								if (odr.get("ivstgOdr") != null) {
-									ivstgOdr_str = odr.get("ivstgOdr").toString().trim();
+									ivstgOdr_str = odr.get("ivstgOdr").toString();
 								} else {
 									ivstgOdr_str = " ";
 								}
@@ -160,19 +160,19 @@ public class GetIvstg {
 										String keyname = iter.next();
 
 										if (keyname.equals("id")) {
-											id = id_json.get(keyname).toString().trim();
+											id = id_json.get(keyname).toString();
 										}
 										if (keyname.equals("ivgtgCl")) {
-											ivstgCl = id_json.get(keyname).toString().trim();
+											ivstgCl = id_json.get(keyname).toString();
 										}
 										if (keyname.equals("scnceNm")) {
-											scnceNm = id_json.get(keyname).toString().trim();
+											scnceNm = id_json.get(keyname).toString();
 										}
 										if (keyname.equals("korNm")) {
-											korNm = id_json.get(keyname).toString().trim();
+											korNm = id_json.get(keyname).toString();
 										}
 										if (keyname.equals("co")) {
-											co = id_json.get(keyname).toString().trim();
+											co = id_json.get(keyname).toString();
 										}
 									}
 
