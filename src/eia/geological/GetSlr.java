@@ -91,19 +91,19 @@ public class GetSlr {
 							String ivstg_ydnts_str = " "; // Y좌표
 
 							if (ivstg.get("ivstgSpotNm") != null) {
-								ivstg_ivstgSpotNm_str = ivstg.get("ivstgSpotNm").toString().trim();
+								ivstg_ivstgSpotNm_str = ivstg.get("ivstgSpotNm").toString();
 							} else {
 								ivstg_ivstgSpotNm_str = " ";
 							}
 
 							if (ivstg.get("dllLc") != null) {
-								ivstg_dllLc_str = ivstg.get("dllLc").toString().trim();
+								ivstg_dllLc_str = ivstg.get("dllLc").toString();
 							} else {
 								ivstg_dllLc_str = " ";
 							}
 
 							if (ivstg.get("xcnts") != null) {
-								ivstg_xcnts_str = ivstg.get("xcnts").toString().trim();
+								ivstg_xcnts_str = ivstg.get("xcnts").toString();
 
 								// 시분초 표기일 경우 drgree 표기로 전환
 								if ((ivstg_xcnts_str.indexOf("°") > -1)) {
@@ -114,7 +114,7 @@ public class GetSlr {
 							}
 
 							if (ivstg.get("ydnts") != null) {
-								ivstg_ydnts_str = ivstg.get("ydnts").toString().trim();
+								ivstg_ydnts_str = ivstg.get("ydnts").toString();
 
 								// 시분초 표기일 경우 drgree 표기로 전환
 								if ((ivstg_ydnts_str.indexOf("°") > -1)) {
@@ -133,7 +133,7 @@ public class GetSlr {
 								String slrNm_str = " "; // 지층명
 
 								if (slr.get("slrNm") != null) {
-									slrNm_str = slr.get("slrNm").toString().trim();
+									slrNm_str = slr.get("slrNm").toString();
 								} else {
 									slrNm_str = " ";
 								}
@@ -158,16 +158,16 @@ public class GetSlr {
 										String keyname = iter.next();
 
 										if (keyname.equals("slrDph")) {
-											slrDph = slrDph_json.get(keyname).toString().trim();
+											slrDph = slrDph_json.get(keyname).toString();
 										}
 										if (keyname.equals("slrThick")) {
-											slrThick = slrDph_json.get(keyname).toString().trim();
+											slrThick = slrDph_json.get(keyname).toString();
 										}
 										if (keyname.equals("slrCn")) {
-											slrCn = slrDph_json.get(keyname).toString().trim();
+											slrCn = slrDph_json.get(keyname).toString();
 										}
 										if (keyname.equals("nVal")) {
-											nVal = slrDph_json.get(keyname).toString().trim();
+											nVal = slrDph_json.get(keyname).toString();
 										}
 
 									}

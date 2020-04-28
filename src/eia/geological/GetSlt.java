@@ -114,11 +114,11 @@ public class GetSlt {
 
 								pw.write(mgtNo); // 사업 코드
 								pw.write("|^");
-								pw.write(sltGrad); // 사업지구 경사 구분
+								pw.write(sltGrad.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 사업지구 경사 구분
 								pw.write("|^");
-								pw.write(sltArea); // 경사별 면적
+								pw.write(sltArea.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 경사별 면적
 								pw.write("|^");
-								pw.write(sltAreaRate); // 경사별 면적비율
+								pw.write(sltAreaRate.replaceAll("(\r\n|\r|\n|\n\r)", " ")); // 경사별 면적비율
 								pw.println();
 								pw.flush();
 								pw.close();
