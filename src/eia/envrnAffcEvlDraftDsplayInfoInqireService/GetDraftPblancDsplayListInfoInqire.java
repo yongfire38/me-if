@@ -235,7 +235,7 @@ public class GetDraftPblancDsplayListInfoInqire {
 
 						System.out.println("진행도::::::" + i + "/" + pageCount);
 
-						Thread.sleep(3000);
+						//Thread.sleep(3000);
 
 					}
 

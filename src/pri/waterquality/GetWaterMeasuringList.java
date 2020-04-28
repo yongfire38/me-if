@@ -563,7 +563,7 @@ public class GetWaterMeasuringList {
 
 						System.out.println("진행도::::::" + i + "/" + pageCount);
 
-						Thread.sleep(2500);
+						//Thread.sleep(2500);
 					}
 
 					// step 4. 파일에 쓰기
