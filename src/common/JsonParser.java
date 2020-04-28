@@ -190,6 +190,16 @@ public class JsonParser {
 		return false;
 
 	}
+	
+	// 특정문자열이 숫자인지 체크
+		public static boolean isNumeric(String s) {
+			try {
+				Double.parseDouble(s);
+				return true;
+			} catch (NumberFormatException e) {
+				return false;
+			}
+		}
 
 	// 특문 제거하고 결과가 8글자 아니면 공백 처리
 	// ex) 1984.10.06 -> 19841006, 1984.10. -> " "
@@ -274,9 +284,9 @@ public class JsonParser {
 				Matcher emoticonsMatcher = emoticons.matcher(content);
 				content = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
 						.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
-				
-				//내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
-				if(content.isEmpty()) {
+
+				// 내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
+				if (content.isEmpty()) {
 					content = " ";
 				}
 
@@ -398,14 +408,19 @@ public class JsonParser {
 		String decimalStr = "";
 
 		// 일단 공백을 전부 없앤다
-		dms = dms.replace(" ", "").replace(".","").replace("⑴","");
+		dms = dms.replace(" ", "").replace(".","").replace("⑴","").replace("?","");
 		
 		//남반구 좌표가 올 것 같진 않으므로 방위도 날린다 (앞에 붙었다 뒤에 붙었다 불규칙해서 판단이 어려움)
 		dms = dms.replaceAll("[a-z|A-Z]", "");
 		
+		//첫 글자가 숫자가 아닌 경우가 있었다...
+		if(!(isNumeric(dms.substring(0, 1)))){
+			dms = dms.substring(1);
+		}
+		
 		System.out.println("dms::::"+dms);
 
-		String[] dms_inds = dms.split("[°|,|;|:|；|^|'|′|’|“|″|‘|”|`|\"]");
+		String[] dms_inds = dms.split("[°|,|;|:|；|^|'|′|’|“|″|‘|”|`|?|\"]");
 
 		int dmsDo = 0;
 		int dmsMinute = 0;
@@ -458,27 +473,27 @@ public class JsonParser {
 	}
 
 	// 환경영향평가 파싱 (사업코드 하나를 파라미터로 받아서 파싱)
-	public static String parseEiaJson (String service_url, String service_key, String mgtNo) throws Exception{
-		
+	public static String parseEiaJson(String service_url, String service_key, String mgtNo) throws Exception {
+
 		int retry = 0;
-		
+
 		BufferedReader br = null;
 		String json = "";
 
 		String urlstr = service_url + mgtNo + "&serviceKey=" + service_key;
 
 		while (retry < 5) {
-			
+
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-			
+
 			try {
-				
+
 				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
-				
+
 				int responseCode = urlconnection.getResponseCode();
 
 				if (responseCode == 200 || responseCode == 201) {
@@ -486,13 +501,13 @@ public class JsonParser {
 				} else {
 					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
 				}
-				
+
 				String line;
-				
+
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
-				
+
 				urlconnection.disconnect();
 
 				return json;
@@ -502,40 +517,41 @@ public class JsonParser {
 				System.out.println("JSON 요청 에러 : mgtNo :" + mgtNo);
 				urlconnection.disconnect();
 				retry++;
-			} 
-			
+			}
+
 		}
-		
+
 		System.out.println("재시도 회수 초과");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
-		
+
 	}
 
 	// 환경영향평가 파싱 (타입 구분자와 코드 하나를 파라미터로 받아서 파싱)
-	public static String parseEiaJson(String service_url, String service_key, String code, String type) throws Exception {
-		
+	public static String parseEiaJson(String service_url, String service_key, String code, String type)
+			throws Exception {
+
 		int retry = 0;
-		
+
 		BufferedReader br = null;
 		String json = "";
 
 		String urlstr = service_url + code + "&serviceKey=" + service_key + "&type=" + type;
-		
+
 		while (retry < 5) {
-			
+
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-			
+
 			try {
-				
+
 				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
-				
+
 				int responseCode = urlconnection.getResponseCode();
-				
+
 				if (responseCode == 200 || responseCode == 201) {
 					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
 				} else {
@@ -543,54 +559,55 @@ public class JsonParser {
 				}
 
 				String line;
-				
+
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
-				
+
 				urlconnection.disconnect();
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : code :" + code + ": type :"+ type);
+				System.out.println("JSON 요청 에러 : code :" + code + ": type :" + type);
 				urlconnection.disconnect();
 				retry++;
-			} 
-			
+			}
+
 		}
-		
+
 		System.out.println("재시도 회수 초과");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
-		
+
 	}
 
 	// 환경영향평가 파싱 (반경 수치와 페이지 번호를 받아서 파싱)
-	public static String parseEiaJson_distance(String service_url, String service_key, String pageNo, String code) throws Exception {
-		
+	public static String parseEiaJson_distance(String service_url, String service_key, String pageNo, String code)
+			throws Exception {
+
 		int retry = 0;
-		
+
 		BufferedReader br = null;
 		String json = "";
 
 		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
-		
+
 		while (retry < 5) {
-			
+
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-			
+
 			try {
-				
+
 				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
 
 				int responseCode = urlconnection.getResponseCode();
-				
+
 				if (responseCode == 200 || responseCode == 201) {
 					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
 				} else {
@@ -598,22 +615,22 @@ public class JsonParser {
 				}
 
 				String line;
-				
+
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
-				
+
 				urlconnection.disconnect();
-				
+
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : pageNo :" + pageNo + ": code :"+ code);
+				System.out.println("JSON 요청 에러 : pageNo :" + pageNo + ": code :" + code);
 				urlconnection.disconnect();
 				retry++;
-			} 
-			
+			}
+
 		}
 
 		System.out.println("재시도 회수 초과");
@@ -626,7 +643,7 @@ public class JsonParser {
 	// 환경영향평가 정보 서비스
 	public static String parseEiaJson(String service_url, String service_key, String pageNo, String center_X,
 			String center_Y) throws Exception {
-		
+
 		int retry = 0;
 
 		BufferedReader br = null;
@@ -634,21 +651,21 @@ public class JsonParser {
 
 		String urlstr = service_url + "&serviceKey=" + service_key + "&centerX=" + center_X + "&centerY=" + center_Y
 				+ "&numOfRows=999" + "&pageNo=" + pageNo;
-		
+
 		while (retry < 5) {
-			
+
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-			
+
 			try {
-				
+
 				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
-				
+
 				int responseCode = urlconnection.getResponseCode();
-				
+
 				if (responseCode == 200 || responseCode == 201) {
 					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
 				} else {
@@ -656,35 +673,34 @@ public class JsonParser {
 				}
 
 				String line;
-				
+
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
-				
+
 				urlconnection.disconnect();
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : center_X :" + center_X + ": center_Y :"+ center_Y);
+				System.out.println("JSON 요청 에러 : center_X :" + center_X + ": center_Y :" + center_Y);
 				urlconnection.disconnect();
 				retry++;
-			} 
-			
+			}
+
 		}
 
 		System.out.println("재시도 회수 초과");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 
-		
 	}
 
 	// 상수도 정보 시스템 파싱 (년과 월, 페이지 번호를 받아서 파싱)
-	public static String parseWatJson(String service_url, String service_key, String year, String month,
-			String pageNo) throws Exception {
-		
+	public static String parseWatJson(String service_url, String service_key, String year, String month, String pageNo)
+			throws Exception {
+
 		int retry = 0;
 
 		BufferedReader br = null;
@@ -692,21 +708,21 @@ public class JsonParser {
 
 		String urlstr = service_url + "&serviceKey=" + service_key + "&year=" + year + "&month=" + month + "&pageNo="
 				+ pageNo;
-		
+
 		while (retry < 5) {
-			
+
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-			
+
 			try {
-				
+
 				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
 
 				int responseCode = urlconnection.getResponseCode();
-				
+
 				if (responseCode == 200 || responseCode == 201) {
 					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
 				} else {
@@ -714,55 +730,55 @@ public class JsonParser {
 				}
 
 				String line;
-				
+
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
-				
+
 				urlconnection.disconnect();
-				
+
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : year :" + year + ": month :"+ month);
+				System.out.println("JSON 요청 에러 : year :" + year + ": month :" + month);
 				urlconnection.disconnect();
 				retry++;
-			} 
+			}
 
 		}
-		
+
 		System.out.println("재시도 회수 초과");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
-		
+
 	}
 
 	// 상수도 정보 시스템 파싱 (페이지 번호를 받아서 파싱)
 	// 요청 형식이 동일한 경우 다른 시스템에서도 사용 가능 - 페이지 번호 외에는 요청 파라미터가 없는 경우
 	public static String parseWatJson(String service_url, String service_key, String pageNo) throws Exception {
-		
+
 		int retry = 0;
 
 		BufferedReader br = null;
 		String json = "";
 
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
-		
+
 		while (retry < 5) {
-			
+
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-			
+
 			try {
-				
+
 				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
-				
+
 				int responseCode = urlconnection.getResponseCode();
-				
+
 				if (responseCode == 200 || responseCode == 201) {
 					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
 				} else {
@@ -770,11 +786,11 @@ public class JsonParser {
 				}
 
 				String line;
-				
+
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
-				
+
 				urlconnection.disconnect();
 
 				return json;
@@ -784,10 +800,10 @@ public class JsonParser {
 				System.out.println("JSON 요청 에러 : pageNo :" + pageNo);
 				urlconnection.disconnect();
 				retry++;
-			} 
-			
+			}
+
 		}
-		
+
 		System.out.println("재시도 회수 초과");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
@@ -798,7 +814,7 @@ public class JsonParser {
 	// 수질자동측정망 운영결과 DB
 	public static String parsePriJson(String service_url, String service_key, String pageNo, String siteId,
 			String ptNoList) throws Exception {
-		
+
 		int retry = 0;
 
 		BufferedReader br = null;
@@ -806,21 +822,21 @@ public class JsonParser {
 
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&siteId=" + siteId
 				+ "&ptNoList=" + ptNoList + "&numOfRows=999";
-		
+
 		while (retry < 5) {
-			
+
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-			
+
 			try {
-				
+
 				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
-				
+
 				int responseCode = urlconnection.getResponseCode();
-				
+
 				if (responseCode == 200 || responseCode == 201) {
 					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
 				} else {
@@ -828,24 +844,24 @@ public class JsonParser {
 				}
 
 				String line;
-				
+
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
-				
+
 				urlconnection.disconnect();
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : siteId :" + siteId + ": ptNoList :"+ ptNoList);
+				System.out.println("JSON 요청 에러 : siteId :" + siteId + ": ptNoList :" + ptNoList);
 				urlconnection.disconnect();
 				retry++;
 			}
-				
+
 		}
-		
+
 		System.out.println("재시도 회수 초과");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
@@ -854,16 +870,17 @@ public class JsonParser {
 
 	// 시작 날짜랑 끝 날짜를 받아서 파싱, 형식은 yyyymmdd
 	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
-	public static String parseWriJson(String service_url, String service_key, String pageNo, String stdt, String eddt) throws Exception {
+	public static String parseWriJson(String service_url, String service_key, String pageNo, String stdt, String eddt)
+			throws Exception {
 
 		int retry = 0;
-		
+
 		BufferedReader br = null;
 		String json = "";
 
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
-		
+
 		Date origin_stdt = originFormat.parse(stdt);
 		Date origin_eddt = originFormat.parse(eddt);
 
@@ -872,51 +889,50 @@ public class JsonParser {
 
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + parse_stdt
 				+ "&eddt=" + parse_eddt + "&numOfRows=999";
-		
+
 		while (retry < 5) {
-			
+
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-				
-				try {
-					
-					Thread.sleep(3000);
 
-					urlconnection.setRequestMethod("GET");
-					urlconnection.setRequestProperty("Accept", "application/json");
-					
-					int responseCode = urlconnection.getResponseCode();
-					
-					if (responseCode == 200 || responseCode == 201) {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
-					} else {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
-					}
+			try {
 
-					String line;
-					
-					while ((line = br.readLine()) != null) {
-						json = json + line + "\n";
-					}
-					
-					urlconnection.disconnect();
+				Thread.sleep(3000);
 
-					return json;
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
 
-				} catch (Exception e) {
-					e.printStackTrace();
-					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :"+ eddt);
-					urlconnection.disconnect();
-					retry++;
-				} 
-			
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				return json;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt);
+				urlconnection.disconnect();
+				retry++;
+			}
+
 		}
 
 		System.out.println("재시도 회수 초과");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 
-		
 	}
 
 	// 코드 1개와 시작 날짜랑 끝 날짜를 받아서 파싱, 형식은 yyyymmdd
@@ -925,73 +941,72 @@ public class JsonParser {
 			String eddt) throws Exception {
 
 		int retry = 0;
-		
+
 		BufferedReader br = null;
 		String json = "";
 
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
-		
+
 		Date origin_stdt = originFormat.parse(stdt);
 		Date origin_eddt = originFormat.parse(eddt);
 
 		String parse_stdt = parseFormat.format(origin_stdt);
 		String parse_eddt = parseFormat.format(origin_eddt);
 
-		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt="
-				+ parse_stdt + "&eddt=" + parse_eddt + "&numOfRows=999";
-		
+		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + parse_stdt
+				+ "&eddt=" + parse_eddt + "&numOfRows=999";
+
 		while (retry < 5) {
-			
+
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-				
-				try {
-					
-					Thread.sleep(3000);
 
-					urlconnection.setRequestMethod("GET");
-					urlconnection.setRequestProperty("Accept", "application/json");
-					
-					int responseCode = urlconnection.getResponseCode();
-					
-					if (responseCode == 200 || responseCode == 201) {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
-					} else {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
-					}
+			try {
 
-					String line;
-					
-					while ((line = br.readLine()) != null) {
-						json = json + line + "\n";
-					}
+				Thread.sleep(3000);
 
-					urlconnection.disconnect();
-					
-					return json;
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
 
-				} catch (Exception e) {
-					e.printStackTrace();
-					System.out.println("JSON 요청 에러 : code :" + code + ": stdt :"+ stdt +": eddt :"+eddt);
-					urlconnection.disconnect();
-					retry++;
-				} 
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				return json;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("JSON 요청 에러 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+				urlconnection.disconnect();
+				retry++;
+			}
 
 		}
 
 		System.out.println("재시도 회수 초과");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
-		
+
 	}
 
-	
 	// 코드 1개와 시작 날짜랑 끝 날짜를 받아서 파싱, 형식은 yyyymm
 	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
 	public static String parseWriJson_month(String service_url, String service_key, String pageNo, String code,
 			String stdt, String eddt) throws Exception {
-		
+
 		int retry = 0;
 
 		BufferedReader br = null;
@@ -999,52 +1014,52 @@ public class JsonParser {
 
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMM");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM");
-		
+
 		Date origin_stdt = originFormat.parse(stdt);
 		Date origin_eddt = originFormat.parse(eddt);
 
 		String parse_stdt = parseFormat.format(origin_stdt);
 		String parse_eddt = parseFormat.format(origin_eddt);
 
-		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt="
-				+ parse_stdt + "&eddt=" + parse_eddt + "&numOfRows=999";
-		
+		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + parse_stdt
+				+ "&eddt=" + parse_eddt + "&numOfRows=999";
+
 		while (retry < 5) {
-			
+
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-				try {
-					
-					Thread.sleep(3000);
+			try {
 
-					urlconnection.setRequestMethod("GET");
-					urlconnection.setRequestProperty("Accept", "application/json");
-					
-					int responseCode = urlconnection.getResponseCode();
-					
-					if (responseCode == 200 || responseCode == 201) {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
-					} else {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
-					}
+				Thread.sleep(3000);
 
-					String line;
-					
-					while ((line = br.readLine()) != null) {
-						json = json + line + "\n";
-					}
-					
-					urlconnection.disconnect();
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
 
-					return json;
+				int responseCode = urlconnection.getResponseCode();
 
-				} catch (Exception e) {
-					e.printStackTrace();
-					System.out.println("JSON 요청 에러 : code :" + code + ": stdt :"+ stdt +": eddt :"+eddt);
-					urlconnection.disconnect();
-					retry++;
-				} 
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				return json;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("JSON 요청 에러 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+				urlconnection.disconnect();
+				retry++;
+			}
 
 		}
 
@@ -1058,7 +1073,7 @@ public class JsonParser {
 	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
 	public static String parseWriJson(String service_url, String service_key, String pageNo, String tdate, String ldate,
 			String vdate, String vtime) throws Exception {
-		
+
 		int retry = 0;
 
 		BufferedReader br = null;
@@ -1066,7 +1081,7 @@ public class JsonParser {
 
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
-		
+
 		Date origin_tdate = originFormat.parse(tdate);
 		Date origin_ldate = originFormat.parse(ldate);
 		Date origin_vdate = originFormat.parse(vdate);
@@ -1077,51 +1092,51 @@ public class JsonParser {
 
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&tdate=" + parse_tdate
 				+ "&ldate=" + parse_ldate + "&vdate=" + parse_vdate + "&vtime=" + vtime + "&numOfRows=999";
-		
+
 		while (retry < 5) {
-			
+
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-				
-				try {
-					
-					Thread.sleep(3000);
 
-					urlconnection.setRequestMethod("GET");
-					urlconnection.setRequestProperty("Accept", "application/json");
-					
-					int responseCode = urlconnection.getResponseCode();
-					
-					if (responseCode == 200 || responseCode == 201) {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
-					} else {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
-					}
+			try {
 
-					String line;
-					
-					while ((line = br.readLine()) != null) {
-						json = json + line + "\n";
-					}
-					
-					urlconnection.disconnect();
+				Thread.sleep(3000);
 
-					return json;
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
 
-				} catch (Exception e) {
-					e.printStackTrace();
-					System.out.println("JSON 요청 에러 : tdate :" + tdate + ": ldate :"+ ldate +": vdate :"+vdate +": vtime :"+vtime);
-					urlconnection.disconnect();
-					retry++;
-				} 
-				
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				return json;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("JSON 요청 에러 : tdate :" + tdate + ": ldate :" + ldate + ": vdate :" + vdate
+						+ ": vtime :" + vtime);
+				urlconnection.disconnect();
+				retry++;
+			}
+
 		}
 
 		System.out.println("재시도 회수 초과");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 
-		
 	}
 
 	// 조회시작일 (yyyyMMdd), 조회시작시각 2자리, 조회 종료일 (yyyyMMdd), 조회종료 시각 2자리, 우량관측소 코드를
@@ -1129,7 +1144,7 @@ public class JsonParser {
 	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
 	public static String parseWriJson(String service_url, String service_key, String pageNo, String sdate, String stime,
 			String edate, String etime, String excll) throws Exception {
-		
+
 		int retry = 0;
 
 		BufferedReader br = null;
@@ -1137,7 +1152,7 @@ public class JsonParser {
 
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
-		
+
 		Date origin_sdate = originFormat.parse(sdate);
 		Date origin_edate = originFormat.parse(edate);
 
@@ -1147,51 +1162,51 @@ public class JsonParser {
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&sdate=" + parse_sdate
 				+ "&stime=" + stime + "&edate=" + parse_edate + "&etime=" + etime + "&excll=" + excll
 				+ "&numOfRows=999";
-		
+
 		while (retry < 5) {
-			
+
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-				
-				try {
-					
-					Thread.sleep(3000);
 
-					urlconnection.setRequestMethod("GET");
-					urlconnection.setRequestProperty("Accept", "application/json");
-					
-					int responseCode = urlconnection.getResponseCode();
-					
-					if (responseCode == 200 || responseCode == 201) {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
-					} else {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
-					}
+			try {
 
-					String line;
-					
-					while ((line = br.readLine()) != null) {
-						json = json + line + "\n";
-					}
-					
-					urlconnection.disconnect();
+				Thread.sleep(3000);
 
-					return json;
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
 
-				} catch (Exception e) {
-					e.printStackTrace();
-					System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :"+ stime +": edate :"+edate +": etime :"+etime +": excll :"+excll);
-					urlconnection.disconnect();
-					retry++;
-				} 
-	
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				return json;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+						+ ": etime :" + etime + ": excll :" + excll);
+				urlconnection.disconnect();
+				retry++;
+			}
+
 		}
 
 		System.out.println("재시도 회수 초과");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 
-		
 	}
 
 	// 조회시작일 (yyyyMMdd), 조회시작시각 2자리, 조회 종료일 (yyyyMMdd), 조회종료 시각 2자리, 댐코드, 우량관측소
@@ -1199,7 +1214,7 @@ public class JsonParser {
 	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
 	public static String parseWriJson_excll(String service_url, String service_key, String pageNo, String sdate,
 			String stime, String edate, String etime, String damcode, String excll) throws Exception {
-		
+
 		int retry = 0;
 
 		BufferedReader br = null;
@@ -1207,7 +1222,7 @@ public class JsonParser {
 
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
-		
+
 		Date origin_sdate = originFormat.parse(sdate);
 		Date origin_edate = originFormat.parse(edate);
 
@@ -1219,49 +1234,49 @@ public class JsonParser {
 				+ damcode + "&numOfRows=999";
 
 		while (retry < 5) {
-			
+
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-				try {
-					
-					Thread.sleep(3000);
+			try {
 
-					urlconnection.setRequestMethod("GET");
-					urlconnection.setRequestProperty("Accept", "application/json");
-					
-					int responseCode = urlconnection.getResponseCode();
-					
-					if (responseCode == 200 || responseCode == 201) {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
-					} else {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
-					}
+				Thread.sleep(3000);
 
-					String line;
-					
-					while ((line = br.readLine()) != null) {
-						json = json + line + "\n";
-					}
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
 
-					urlconnection.disconnect();
-					
-					return json;
+				int responseCode = urlconnection.getResponseCode();
 
-				} catch (Exception e) {
-					e.printStackTrace();
-					System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :"+ stime +": edate :"+edate +": etime :"+etime +": damcode :"+damcode +": excll :"+excll);
-					urlconnection.disconnect();
-					retry++;
-				} 
-			
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				return json;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+						+ ": etime :" + etime + ": damcode :" + damcode + ": excll :" + excll);
+				urlconnection.disconnect();
+				retry++;
+			}
+
 		}
-		
+
 		System.out.println("재시도 회수 초과");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 
-		
 	}
 
 	// 조회시작일 (yyyyMMdd), 조회시작시각 2자리, 조회 종료일 (yyyyMMdd), 조회종료 시각 2자리, 댐코드, 수위관측소
@@ -1269,7 +1284,7 @@ public class JsonParser {
 	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
 	public static String parseWriJson_wal(String service_url, String service_key, String pageNo, String sdate,
 			String stime, String edate, String etime, String damcode, String wal) throws Exception {
-		
+
 		int retry = 0;
 
 		BufferedReader br = null;
@@ -1277,7 +1292,7 @@ public class JsonParser {
 
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
-		
+
 		Date origin_sdate = originFormat.parse(sdate);
 		Date origin_edate = originFormat.parse(edate);
 
@@ -1287,79 +1302,21 @@ public class JsonParser {
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&sdate=" + parse_sdate
 				+ "&stime=" + stime + "&edate=" + parse_edate + "&etime=" + etime + "&wal=" + wal + "&damcode="
 				+ damcode + "&numOfRows=999";
-		
+
 		while (retry < 5) {
-			
+
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-				
-				try {
-					
-					Thread.sleep(3000);
 
-					urlconnection.setRequestMethod("GET");
-					urlconnection.setRequestProperty("Accept", "application/json");
-					
-					int responseCode = urlconnection.getResponseCode();
-					
-					if (responseCode == 200 || responseCode == 201) {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
-					} else {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
-					}
-
-					String line;
-					
-					while ((line = br.readLine()) != null) {
-						json = json + line + "\n";
-					}
-
-					urlconnection.disconnect();
-					
-					return json;
-
-				} catch (Exception e) {
-					e.printStackTrace();
-					System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :"+ stime +": edate :"+edate +": etime :"+etime +": damcode :"+damcode +": wal :"+wal);
-					urlconnection.disconnect();
-					retry++;
-				} 
-			
-		}
-
-		System.out.println("재시도 회수 초과");
-
-		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
-
-		
-	}
-
-	// url과 서비스 키 이외 추가 파라미터 없이 파싱
-	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
-	public static String parseWriJson(String service_url, String service_key) throws Exception {
-		
-		int retry = 0;
-
-		BufferedReader br = null;
-		String json = "";
-
-		String urlstr = service_url + "&serviceKey=" + service_key;
-		
-		while (retry < 5) {
-			
-			URL url = new URL(urlstr);
-			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-			
 			try {
-				
+
 				Thread.sleep(3000);
 
-				
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
-				
+
 				int responseCode = urlconnection.getResponseCode();
-				
+
 				if (responseCode == 200 || responseCode == 201) {
 					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
 				} else {
@@ -1367,11 +1324,68 @@ public class JsonParser {
 				}
 
 				String line;
-				
+
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
-				
+
+				urlconnection.disconnect();
+
+				return json;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+						+ ": etime :" + etime + ": damcode :" + damcode + ": wal :" + wal);
+				urlconnection.disconnect();
+				retry++;
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// url과 서비스 키 이외 추가 파라미터 없이 파싱
+	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
+	public static String parseWriJson(String service_url, String service_key) throws Exception {
+
+		int retry = 0;
+
+		BufferedReader br = null;
+		String json = "";
+
+		String urlstr = service_url + "&serviceKey=" + service_key;
+
+		while (retry < 5) {
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			try {
+
+				Thread.sleep(3000);
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
 				urlconnection.disconnect();
 
 				return json;
@@ -1381,15 +1395,14 @@ public class JsonParser {
 				System.out.println("JSON 요청 에러 ");
 				urlconnection.disconnect();
 				retry++;
-			} 
-			
+			}
+
 		}
-		
+
 		System.out.println("재시도 회수 초과");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 
-		
 	}
 
 	// 조회시작일 (yyyyMMdd), 조회시작시각 2자리, 조회 종료일 (yyyyMMdd), 조회종료 시각 2자리
@@ -1397,7 +1410,7 @@ public class JsonParser {
 	// 수도통합(WIS)-운영통합시스템(댐보발전통합)
 	public static String parseWrsJson(String service_url, String service_key, String pageNo, String stDt, String stTm,
 			String edDt, String edTm) throws Exception {
-		
+
 		int retry = 0;
 
 		BufferedReader br = null;
@@ -1405,7 +1418,7 @@ public class JsonParser {
 
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
-		
+
 		Date origin_stDt = originFormat.parse(stDt);
 		Date origin_edDt = originFormat.parse(edDt);
 
@@ -1414,78 +1427,21 @@ public class JsonParser {
 
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stDt=" + parse_stDt
 				+ "&stTm=" + stTm + "&edDt=" + parse_edDt + "&edTm=" + edTm + "&numOfRows=999";
-		
+
 		while (retry < 5) {
-			
+
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-				
-				try {
-					
-					Thread.sleep(3000);
 
-					urlconnection.setRequestMethod("GET");
-					urlconnection.setRequestProperty("Accept", "application/json");
-					
-					int responseCode = urlconnection.getResponseCode();
-					
-					if (responseCode == 200 || responseCode == 201) {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
-					} else {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
-					}
-
-					String line;
-					
-					while ((line = br.readLine()) != null) {
-						json = json + line + "\n";
-					}
-
-					urlconnection.disconnect();
-					
-					return json;
-
-				} catch (Exception e) {
-					e.printStackTrace();
-					System.out.println("JSON 요청 에러 : stDt :" + stDt + ": stTm :"+ stTm +": edDt :"+edDt +": edTm :"+edTm);
-					urlconnection.disconnect();
-					retry++;
-				} 
-				
-		}
-
-		System.out.println("재시도 회수 초과");
-
-		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
-
-		
-	}
-
-	// 구분코드 와 페이지 번호를 받아서 파싱
-	// 수도통합(WIS)-운영통합시스템(댐보발전통합)
-	public static String parseWrsJson(String service_url, String service_key, String pageNo, String code) throws Exception {
-
-		int retry = 0;
-		
-		BufferedReader br = null;
-		String json = "";
-
-		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
-		
-		while (retry < 5) {
-			
-			URL url = new URL(urlstr);
-			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-			
 			try {
-				
+
 				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
-				
+
 				int responseCode = urlconnection.getResponseCode();
-				
+
 				if (responseCode == 200 || responseCode == 201) {
 					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
 				} else {
@@ -1493,11 +1449,69 @@ public class JsonParser {
 				}
 
 				String line;
-				
+
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
-				
+
+				urlconnection.disconnect();
+
+				return json;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println(
+						"JSON 요청 에러 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt + ": edTm :" + edTm);
+				urlconnection.disconnect();
+				retry++;
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 구분코드 와 페이지 번호를 받아서 파싱
+	// 수도통합(WIS)-운영통합시스템(댐보발전통합)
+	public static String parseWrsJson(String service_url, String service_key, String pageNo, String code)
+			throws Exception {
+
+		int retry = 0;
+
+		BufferedReader br = null;
+		String json = "";
+
+		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
+
+		while (retry < 5) {
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			try {
+
+				Thread.sleep(3000);
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
 				urlconnection.disconnect();
 
 				return json;
@@ -1508,27 +1522,28 @@ public class JsonParser {
 				urlconnection.disconnect();
 				retry++;
 			}
-			
+
 		}
-		
+
 		System.out.println("재시도 회수 초과");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
-		
+
 	}
 
 	// 시작 날짜랑 끝 날짜를 받아서 파싱, 형식은 yyyymm
 	// 수자원통합(WIS)-운영통합시스템(댐보발전통합)
-	public static String parseWrsJson(String service_url, String service_key, String pageNo, String stdt, String eddt) throws Exception {
+	public static String parseWrsJson(String service_url, String service_key, String pageNo, String stdt, String eddt)
+			throws Exception {
 
 		int retry = 0;
-		
+
 		BufferedReader br = null;
 		String json = "";
 
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMM");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM");
-		
+
 		Date origin_stdt = originFormat.parse(stdt);
 		Date origin_eddt = originFormat.parse(eddt);
 
@@ -1537,58 +1552,57 @@ public class JsonParser {
 
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + parse_stdt
 				+ "&eddt=" + parse_eddt + "&numOfRows=999";
-		
+
 		while (retry < 5) {
-			
+
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-				try {
-					
-					Thread.sleep(3000);
+			try {
 
-					urlconnection.setRequestMethod("GET");
-					urlconnection.setRequestProperty("Accept", "application/json");
-					
-					int responseCode = urlconnection.getResponseCode();
-					
-					if (responseCode == 200 || responseCode == 201) {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
-					} else {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
-					}
+				Thread.sleep(3000);
 
-					String line;
-					
-					while ((line = br.readLine()) != null) {
-						json = json + line + "\n";
-					}
-					
-					urlconnection.disconnect();
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
 
-					return json;
+				int responseCode = urlconnection.getResponseCode();
 
-				} catch (Exception e) {
-					e.printStackTrace();
-					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :"+ eddt);
-					urlconnection.disconnect();
-					retry++;
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
 				}
-			
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				return json;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt);
+				urlconnection.disconnect();
+				retry++;
+			}
+
 		}
 
 		System.out.println("재시도 회수 초과");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 
-		
 	}
 
 	// 시작 날짜랑 끝 날짜, 지자체코드를 받아서 파싱, 날짜형식은 yyyymm
 	// 수자원통합(WIS)-운영통합시스템(댐보발전통합)
 	public static String parseWrsJson(String service_url, String service_key, String pageNo, String stdt, String eddt,
 			String sgccd) throws Exception {
-		
+
 		int retry = 0;
 
 		BufferedReader br = null;
@@ -1596,7 +1610,7 @@ public class JsonParser {
 
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMM");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM");
-		
+
 		Date origin_stdt = originFormat.parse(stdt);
 		Date origin_eddt = originFormat.parse(eddt);
 
@@ -1605,80 +1619,21 @@ public class JsonParser {
 
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + parse_stdt
 				+ "&eddt=" + parse_eddt + "&sgccd=" + sgccd + "&numOfRows=999";
-		
+
 		while (retry < 5) {
-			
+
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-			
-				try {
-					
-					Thread.sleep(3000);
 
-					urlconnection.setRequestMethod("GET");
-					urlconnection.setRequestProperty("Accept", "application/json");
-					
-					int responseCode = urlconnection.getResponseCode();
-					
-					if (responseCode == 200 || responseCode == 201) {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
-					} else {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
-					}
-
-					String line;
-					
-					while ((line = br.readLine()) != null) {
-						json = json + line + "\n";
-					}
-					
-					urlconnection.disconnect();
-
-					return json;
-
-				} catch (Exception e) {
-					e.printStackTrace();
-					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :"+ eddt +": sgccd :"+sgccd);
-					urlconnection.disconnect();
-					retry++;
-				}
-			
-		}
-
-		System.out.println("재시도 회수 초과");
-
-		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
-
-		
-	}
-
-	// 시작년도(yyyy)와 댐 코드를 받아서 파싱
-	// 수도통합(WIS)-운영통합시스템(댐보발전통합)
-	public static String parseWrsJson_eff(String service_url, String service_key, String pageNo, String stdt,
-			String damcd) throws Exception {
-		
-		int retry = 0;
-
-		BufferedReader br = null;
-		String json = "";
-
-		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + stdt + "&damcd="
-				+ damcd + "&numOfRows=999";
-		
-		while (retry < 5) {
-			
-			URL url = new URL(urlstr);
-			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-			
 			try {
-				
+
 				Thread.sleep(3000);
-	
+
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
-				
+
 				int responseCode = urlconnection.getResponseCode();
-				
+
 				if (responseCode == 200 || responseCode == 201) {
 					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
 				} else {
@@ -1686,34 +1641,92 @@ public class JsonParser {
 				}
 
 				String line;
-				
+
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
 
 				urlconnection.disconnect();
-				
+
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : stdt :" + stdt + ": damcd :"+ damcd);
+				System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt + ": sgccd :" + sgccd);
 				urlconnection.disconnect();
 				retry++;
 			}
-			
+
 		}
-		
+
 		System.out.println("재시도 회수 초과");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
-		
+
+	}
+
+	// 시작년도(yyyy)와 댐 코드를 받아서 파싱
+	// 수도통합(WIS)-운영통합시스템(댐보발전통합)
+	public static String parseWrsJson_eff(String service_url, String service_key, String pageNo, String stdt,
+			String damcd) throws Exception {
+
+		int retry = 0;
+
+		BufferedReader br = null;
+		String json = "";
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + stdt + "&damcd="
+				+ damcd + "&numOfRows=999";
+
+		while (retry < 5) {
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			try {
+
+				Thread.sleep(3000);
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				return json;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("JSON 요청 에러 : stdt :" + stdt + ": damcd :" + damcd);
+				urlconnection.disconnect();
+				retry++;
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
 	}
 
 	// 네이버 블로그 파싱 (검색어 하나를 파라미터로 받아서 파싱)
 	public static String parseBlogJson_naver(String service_url, String naver_client_id, String naver_client_secret,
 			String query, String job_dt, String start) throws Exception {
-		
+
 		int retry = 0;
 
 		BufferedReader br = null;
@@ -1724,14 +1737,14 @@ public class JsonParser {
 		String json = "";
 
 		String urlstr = service_url + query + "&start=" + start;
-		
+
 		while (retry < 5) {
-			
+
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-			
+
 			try {
-				
+
 				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
@@ -1747,13 +1760,13 @@ public class JsonParser {
 				}
 
 				String line;
-				
+
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
 
 				urlconnection.disconnect();
-				
+
 				return json;
 
 			} catch (Exception e) {
@@ -1762,20 +1775,19 @@ public class JsonParser {
 				urlconnection.disconnect();
 				retry++;
 			}
-			
+
 		}
 
 		System.out.println("재시도 회수 초과");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 
-		
 	}
 
 	// 다음 블로그 파싱 (검색어 하나를 파라미터로 받아서 파싱)
 	public static String parseBlogJson_daum(String service_url, String daum_api_key, String query, String job_dt,
 			String page) throws Exception {
-		
+
 		int retry = 0;
 
 		BufferedReader br = null;
@@ -1786,14 +1798,14 @@ public class JsonParser {
 		String json = "";
 
 		String urlstr = service_url + query + "&page=" + page;
-		
+
 		while (retry < 5) {
-			
+
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-			
+
 			try {
-				
+
 				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
@@ -1808,11 +1820,11 @@ public class JsonParser {
 				}
 
 				String line;
-				
+
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
-				
+
 				urlconnection.disconnect();
 
 				return json;
@@ -1823,21 +1835,19 @@ public class JsonParser {
 				urlconnection.disconnect();
 				retry++;
 			}
-			
-			
+
 		}
 
 		System.out.println("재시도 회수 초과");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 
-		
 	}
 
 	// 구글 블로그 파싱 (검색어 하나를 파라미터로 받아서 파싱)
 	public static String parseJson_google(String service_url, String google_api_key, String google_api_cx, String query,
 			String job_dt, String start) throws Exception {
-		
+
 		int retry = 0;
 
 		BufferedReader br = null;
@@ -1848,14 +1858,14 @@ public class JsonParser {
 		String json = "";
 
 		String urlstr = service_url + query + "&key=" + google_api_key + "&cx=" + google_api_cx + "&start=" + start;
-		
+
 		while (retry < 5) {
-			
+
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-			
+
 			try {
-				
+
 				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
@@ -1869,11 +1879,11 @@ public class JsonParser {
 				}
 
 				String line;
-				
+
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
-				
+
 				urlconnection.disconnect();
 
 				return json;
@@ -1884,71 +1894,69 @@ public class JsonParser {
 				urlconnection.disconnect();
 				retry++;
 			}
-			
-			
+
 		}
 
 		System.out.println("재시도 회수 초과");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 
-		
 	}
-	
+
 	// 상수도 정보 시스템 파싱 (페이지 번호를 받아서 파싱)
-		// 요청 형식이 동일한 경우 다른 시스템에서도 사용 가능 - 페이지 번호 외에는 요청 파라미터가 없는 경우
-		public static String parseSpcJson(String service_url, String service_key, String pageIndex) throws Exception {
-			
-			int retry = 0;
+	// 요청 형식이 동일한 경우 다른 시스템에서도 사용 가능 - 페이지 번호 외에는 요청 파라미터가 없는 경우
+	public static String parseSpcJson(String service_url, String service_key, String pageIndex) throws Exception {
 
-			BufferedReader br = null;
-			String json = "";
+		int retry = 0;
 
-			String urlstr = service_url + pageIndex + "&accessKey=" + service_key + "&userId=bigdata";
-			
-			while (retry < 5) {
-				
-				URL url = new URL(urlstr);
-				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-				
-				try {
-					
-					Thread.sleep(3000);
+		BufferedReader br = null;
+		String json = "";
 
-					urlconnection.setRequestMethod("GET");
-					urlconnection.setRequestProperty("Accept", "application/json");
-					
-					int responseCode = urlconnection.getResponseCode();
-					
-					if (responseCode == 200 || responseCode == 201) {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
-					} else {
-						br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
-					}
+		String urlstr = service_url + pageIndex + "&accessKey=" + service_key + "&userId=bigdata";
 
-					String line;
-					
-					while ((line = br.readLine()) != null) {
-						json = json + line + "\n";
-					}
-					
-					urlconnection.disconnect();
+		while (retry < 5) {
 
-					return json;
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-				} catch (Exception e) {
-					e.printStackTrace();
-					System.out.println("JSON 요청 에러 : pageIndex :" + pageIndex);
-					urlconnection.disconnect();
-					retry++;
-				} 
-				
+			try {
+
+				Thread.sleep(3000);
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				return json;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("JSON 요청 에러 : pageIndex :" + pageIndex);
+				urlconnection.disconnect();
+				retry++;
 			}
-			
-			System.out.println("재시도 회수 초과");
-
-			throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 
 		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
 
 }
