@@ -50,7 +50,7 @@ public class Blog {
 
 					// step 1.파일의 작성
 
-					File file = new File("TIF_SNS_101.dat");
+					File file = new File(JsonParser.getProperty("file_path") + "SNS/TIF_SNS_101.dat");
 
 					try {
 						
@@ -122,6 +122,9 @@ public class Blog {
 									//정상 json이 아닌 xml 형식의 리턴
 									json = "{\"start\": 1,\"display\": 100,\"total\": 1,\"items\": []}";
 								}
+								
+								// 테스트 출력
+								//System.out.println(json);
 
 								JSONParser parser = new JSONParser();
 								JSONObject obj = (JSONObject) parser.parse(json);
