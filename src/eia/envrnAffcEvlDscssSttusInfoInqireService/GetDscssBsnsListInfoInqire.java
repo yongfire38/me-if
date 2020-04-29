@@ -104,8 +104,7 @@ public class GetDscssBsnsListInfoInqire {
 
 							JSONObject body = (JSONObject) response.get("body");
 							JSONObject header = (JSONObject) response.get("header");
-							JSONObject items = (JSONObject) body.get("items");
-
+							
 							String resultCode = header.get("resultCode").toString().trim();
 							String resultMsg = header.get("resultMsg").toString().trim();
 
@@ -117,6 +116,8 @@ public class GetDscssBsnsListInfoInqire {
 								
 								String numOfRows_str = body.get("numOfRows").toString();
 								String totalCount_str = body.get("totalCount").toString();
+								
+								JSONObject items = (JSONObject) body.get("items");
 
 								JSONArray items_jsonArray = (JSONArray) items.get("item");
 
