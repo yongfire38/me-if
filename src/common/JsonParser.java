@@ -190,16 +190,16 @@ public class JsonParser {
 		return false;
 
 	}
-	
+
 	// 특정문자열이 숫자인지 체크
-		public static boolean isNumeric(String s) {
-			try {
-				Double.parseDouble(s);
-				return true;
-			} catch (NumberFormatException e) {
-				return false;
-			}
+	public static boolean isNumeric(String s) {
+		try {
+			Double.parseDouble(s);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
 		}
+	}
 
 	// 특문 제거하고 결과가 8글자 아니면 공백 처리
 	// ex) 1984.10.06 -> 19841006, 1984.10. -> " "
@@ -408,19 +408,21 @@ public class JsonParser {
 		String decimalStr = "";
 
 		// 일단 공백을 전부 없앤다
-		dms = dms.replace(" ", "").replace(".","").replace("⑴","").replace("?","").replace("*","");
-		
-		//남반구 좌표가 올 것 같진 않으므로 방위도 날린다 (앞에 붙었다 뒤에 붙었다 불규칙해서 판단이 어려움)
-		dms = dms.replaceAll("[a-z|A-Z]", "");
-		
-		//첫 글자가 숫자가 아닌 경우가 있었다...
-		if(!(isNumeric(dms.substring(0, 1)))){
+		dms = dms.replace(" ", "").replace(".", "").replace("⑴", "").replace("?", "").replace("*", "");
+
+		// 남반구 좌표가 올 것 같진 않으므로 방위도 날린다 (앞에 붙었다 뒤에 붙었다 불규칙해서 판단이 어려움)
+		// 한글도 들어가 있으니 한글도 날린다
+		dms = dms.replaceAll("[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|a-z|A-Z]", "");
+
+		// 첫 글자가 숫자가 아닌 경우가 있었다...
+		if (!(isNumeric(dms.substring(0, 1)))) {
 			dms = dms.substring(1);
 		}
-		
-		System.out.println("dms::::"+dms);
 
-		String[] dms_inds = dms.split("[°|,|;|:|；|^|´|'|′|’|“|″|˝|‘|”|/|`|?|(|)|{|}|[|]|<|>|&|#|$|%|!|-|_|~|`|=|+|@|\"]");
+		System.out.println("dms::::" + dms);
+
+		String[] dms_inds = dms
+				.split("[°|,|;|:|；|^|´|'|′|’|“|″|˝|‘|”|/|`|?|(|)|{|}|[|]|<|>|&|#|$|%|!|-|_|~|`|=|+|@|\"]");
 
 		int dmsDo = 0;
 		int dmsMinute = 0;
@@ -856,6 +858,80 @@ public class JsonParser {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("JSON 요청 에러 : siteId :" + siteId + ": ptNoList :" + ptNoList);
+				urlconnection.disconnect();
+				retry++;
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 수질 DB 정보 시스템 파싱 (페이지 번호와 측정소 코드, 측정년도, 측정월을 받아서 파싱)
+	// 페이지 번호만 필수값 (값이 없으면 메서드를 부르는 쪽에서 공백값으로 치환)
+	public static String parsePriJson_Mavg(String service_url, String service_key, String pageNo, String ... params) throws Exception {
+
+		String ptNoList = "";
+		String wmyrList = "";
+		String wmodList = "";
+		
+		if(params.length == 1){
+			ptNoList = params[0];
+		} else if(params.length == 2){
+			ptNoList = params[0];
+			wmyrList = params[1];
+		}
+		else if(params.length == 3){
+			ptNoList = params[0];
+			wmyrList = params[1];
+			wmodList = params[2];
+		}
+		
+		int retry = 0;
+
+		BufferedReader br = null;
+		String json = "";
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&ptNoList=" + ptNoList
+				+ "&wmyrList=" + wmyrList + "&wmodList=" + wmodList + "&numOfRows=999";
+
+		while (retry < 5) {
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			try {
+
+				Thread.sleep(3000);
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				return json;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println(
+						"JSON 요청 에러 : ptNoList :" + ptNoList + ": wmyrList :" + wmyrList + ": wmodList :" + wmodList);
 				urlconnection.disconnect();
 				retry++;
 			}

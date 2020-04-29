@@ -82,120 +82,129 @@ public class Webkr {
 						
 						JSONParser count_parser = new JSONParser();
 						JSONObject count_obj = (JSONObject) count_parser.parse(json);
-
-						int display = ((Long) count_obj.get("display")).intValue();
-						int totalCount = ((Long) count_obj.get("total")).intValue();
 						
-						//2020.04.22 display값이 0인 경우 발견. 예외처리.
-						if(display == 0){
-							display = 100;
-						}
-
-						pageCount = (totalCount / display) + 1;
-
-						StringBuffer resultSb = new StringBuffer("");
-
-						StringBuffer title = new StringBuffer(" "); // 웹문서 제목
-						StringBuffer link = new StringBuffer(" "); // 웹문서 링크
-						StringBuffer description = new StringBuffer(" "); // 웹문서 내용
+						String error = (String) count_obj.get("errorMessage");
 						
-						// step 3. 페이지 숫자만큼 반복하면서 파싱
-
-						for (int i = 1; i <= pageCount; i++) {
-
-							// 여기서의 i는 페이지 넘버가 아닌 조회 시작 위치값이므로 페이지 당 표시 가능 수인 30만큼
-							// 증가, 1000
-							// 초과값은 api가 지원하지 않음
+						// 일 데이터 제한 체크. JSONObject error의 null 여부로 체크
+						if (error != null) {
+							System.out.println("errorMessage:::::" + error);
+						} else if (error == null) {
 							
-							//2020.04.20 : 데이터수가 너무 많다는 요청으로 200건까지만 떨어지도록 수정
-							//181~210까지가 조회될 것
-							if (i % 30 == 1 && i <= 181) {
+							int display = ((Long) count_obj.get("display")).intValue();
+							int totalCount = ((Long) count_obj.get("total")).intValue();
+							
+							//2020.04.22 display값이 0인 경우 발견. 예외처리.
+							if(display == 0){
+								display = 100;
+							}
 
-								System.out.println("페이지 검색 시작 위치는:::" + i);
+							pageCount = (totalCount / display) + 1;
 
-								json = JsonParser.parseBlogJson_naver(service_url, naver_client_id, naver_client_secret,
-										args[0], job_dt, Integer.toString(i));
+							StringBuffer resultSb = new StringBuffer("");
+
+							StringBuffer title = new StringBuffer(" "); // 웹문서 제목
+							StringBuffer link = new StringBuffer(" "); // 웹문서 링크
+							StringBuffer description = new StringBuffer(" "); // 웹문서 내용
+							
+							// step 3. 페이지 숫자만큼 반복하면서 파싱
+
+							for (int i = 1; i <= pageCount; i++) {
+
+								// 여기서의 i는 페이지 넘버가 아닌 조회 시작 위치값이므로 페이지 당 표시 가능 수인 30만큼
+								// 증가, 1000
+								// 초과값은 api가 지원하지 않음
 								
-								if(json.substring(0, 1).equals("<")) {
-									//정상 json이 아닌 xml 형식의 리턴
-									json = "{\"start\": 1,\"display\": 100,\"total\": 1,\"items\": []}";
-								}
+								//2020.04.20 : 데이터수가 너무 많다는 요청으로 200건까지만 떨어지도록 수정
+								//181~210까지가 조회될 것
+								if (i % 30 == 1 && i <= 181) {
 
-								JSONParser parser = new JSONParser();
-								JSONObject obj = (JSONObject) parser.parse(json);
+									System.out.println("페이지 검색 시작 위치는:::" + i);
 
-								JSONArray items = (JSONArray) obj.get("items");
+									json = JsonParser.parseBlogJson_naver(service_url, naver_client_id, naver_client_secret,
+											args[0], job_dt, Integer.toString(i));
+									
+									if(json.substring(0, 1).equals("<")) {
+										//정상 json이 아닌 xml 형식의 리턴
+										json = "{\"start\": 1,\"display\": 100,\"total\": 1,\"items\": []}";
+									}
 
-								for (int r = 0; r < items.size(); r++) {
+									JSONParser parser = new JSONParser();
+									JSONObject obj = (JSONObject) parser.parse(json);
 
-									JSONObject item = (JSONObject) items.get(r);
+									JSONArray items = (JSONArray) obj.get("items");
 
-									Set<String> key = item.keySet();
+									for (int r = 0; r < items.size(); r++) {
 
-									Iterator<String> iter = key.iterator();
+										JSONObject item = (JSONObject) items.get(r);
 
-									while (iter.hasNext()) {
+										Set<String> key = item.keySet();
 
-										String keyname = iter.next();
+										Iterator<String> iter = key.iterator();
 
-										JsonParser.colWrite_sns(title, keyname, "title", item);
-										JsonParser.colWrite_sns(link, keyname, "link", item);
-										JsonParser.colWrite_sns(description, keyname, "description", item);
+										while (iter.hasNext()) {
+
+											String keyname = iter.next();
+
+											JsonParser.colWrite_sns(title, keyname, "title", item);
+											JsonParser.colWrite_sns(link, keyname, "link", item);
+											JsonParser.colWrite_sns(description, keyname, "description", item);
+
+										}
+
+										// 한번에 문자열 합침
+										resultSb.append("'");
+										resultSb.append(job_dt); // 시스템 일자 (파라미터로 준 경우는
+																	// 입력값)
+										resultSb.append("'");
+										resultSb.append("|^");
+										resultSb.append("'");
+										resultSb.append(args[0]); // 검색어
+										resultSb.append("'");
+										resultSb.append("|^");
+										resultSb.append("'");
+										resultSb.append(title);
+										resultSb.append("'");
+										resultSb.append("|^");
+										resultSb.append("'");
+										resultSb.append(link);
+										resultSb.append("'");
+										resultSb.append("|^");
+										resultSb.append("'");
+										resultSb.append(description);
+										resultSb.append("'");
+										resultSb.append(System.getProperty("line.separator"));
 
 									}
 
-									// 한번에 문자열 합침
-									resultSb.append("'");
-									resultSb.append(job_dt); // 시스템 일자 (파라미터로 준 경우는
-																// 입력값)
-									resultSb.append("'");
-									resultSb.append("|^");
-									resultSb.append("'");
-									resultSb.append(args[0]); // 검색어
-									resultSb.append("'");
-									resultSb.append("|^");
-									resultSb.append("'");
-									resultSb.append(title);
-									resultSb.append("'");
-									resultSb.append("|^");
-									resultSb.append("'");
-									resultSb.append(link);
-									resultSb.append("'");
-									resultSb.append("|^");
-									resultSb.append("'");
-									resultSb.append(description);
-									resultSb.append("'");
-									resultSb.append(System.getProperty("line.separator"));
+									System.out.println("진행도::::::" + i + "/" + pageCount);
 
+									//Thread.sleep(1000);
 								}
 
-								System.out.println("진행도::::::" + i + "/" + pageCount);
+							}
+							
+							// step 4. 파일에 쓰기
+							try {
+								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-								//Thread.sleep(1000);
+								pw.write(resultSb.toString());
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
 							}
 
+							System.out.println("parsing complete!");
+
+							// step 5. 대상 서버에 sftp로 보냄
+
+							//TransSftp.transSftp(JsonParser.getProperty("file_path") + "SNS/TIF_SNS_103.dat", "SNS");
+
+							long end = System.currentTimeMillis();
+							System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
+					
 						}
-						
-						// step 4. 파일에 쓰기
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write(resultSb.toString());
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
-						System.out.println("parsing complete!");
-
-						// step 5. 대상 서버에 sftp로 보냄
-
-						//TransSftp.transSftp(JsonParser.getProperty("file_path") + "SNS/TIF_SNS_103.dat", "SNS");
-
-						long end = System.currentTimeMillis();
-						System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
 						
 					}
 
