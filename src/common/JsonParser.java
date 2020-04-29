@@ -420,7 +420,7 @@ public class JsonParser {
 		
 		System.out.println("dms::::"+dms);
 
-		String[] dms_inds = dms.split("[°|,|;|:|；|^|´|'|′|’|“|″|˝|‘|”|/|`|?|(|)|{|}|[|]|<|>|&|#|$|%|!|@|\"]");
+		String[] dms_inds = dms.split("[°|,|;|:|；|^|´|'|′|’|“|″|˝|‘|”|/|`|?|(|)|{|}|[|]|<|>|&|#|$|%|!|-|_|~|`|=|+|@|\"]");
 
 		int dmsDo = 0;
 		int dmsMinute = 0;
