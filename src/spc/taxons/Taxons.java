@@ -45,7 +45,7 @@ public class Taxons {
 					pw.close();
 
 				} catch (IOException e) {
-
+					e.printStackTrace();
 				}
 
 				String json = "";
