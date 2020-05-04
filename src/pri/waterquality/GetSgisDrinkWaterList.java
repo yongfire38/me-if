@@ -25,8 +25,9 @@ public class GetSgisDrinkWaterList {
 
 				
 
-				// 서비스 키만 요구함, 실행시 필수 매개변수 없음
-				if (args.length == 0) {
+				// '연도'를 매개변수로 받음 (필수는 아님)
+				// 전체 대상으로 돌리면 커넥션 에러 가능성이 큼... 연도를 필수로 하면 문제는 없지만 가변적으로 받도록 처리(되도록 연도는 받도록)
+				if (args.length <= 1) {
 
 					System.out.println("firstLine start..");
 					long start = System.currentTimeMillis(); // 시작시간
@@ -56,7 +57,7 @@ public class GetSgisDrinkWaterList {
 					int pageNo = 0;
 					int pageCount = 0;
 
-					json = JsonParser.parseWatJson(service_url, service_key, String.valueOf(pageNo));
+					json = JsonParser.parsePriJson_drinkWater(service_url, service_key, String.valueOf(pageNo), args);
 					
 					//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 					//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
@@ -182,7 +183,7 @@ public class GetSgisDrinkWaterList {
 
 					for (int i = 1; i <= pageCount; i++) {
 
-						json = JsonParser.parseWatJson(service_url, service_key, String.valueOf(i));
+						json = JsonParser.parsePriJson_drinkWater(service_url, service_key, String.valueOf(i), args);
 						
 						//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 						//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...

@@ -872,24 +872,24 @@ public class JsonParser {
 
 	// 수질 DB 정보 시스템 파싱 (페이지 번호와 측정소 코드, 측정년도, 측정월을 받아서 파싱)
 	// 페이지 번호만 필수값 (값이 없으면 메서드를 부르는 쪽에서 공백값으로 치환)
-	public static String parsePriJson_Mavg(String service_url, String service_key, String pageNo, String ... params) throws Exception {
+	public static String parsePriJson_waterMeasuring(String service_url, String service_key, String pageNo,
+			String... params) throws Exception {
 
 		String ptNoList = "";
 		String wmyrList = "";
 		String wmodList = "";
-		
-		if(params.length == 1){
+
+		if (params.length == 1) {
 			ptNoList = params[0];
-		} else if(params.length == 2){
+		} else if (params.length == 2) {
 			ptNoList = params[0];
 			wmyrList = params[1];
-		}
-		else if(params.length == 3){
+		} else if (params.length == 3) {
 			ptNoList = params[0];
 			wmyrList = params[1];
 			wmodList = params[2];
 		}
-		
+
 		int retry = 0;
 
 		BufferedReader br = null;
@@ -932,6 +932,132 @@ public class JsonParser {
 				e.printStackTrace();
 				System.out.println(
 						"JSON 요청 에러 : ptNoList :" + ptNoList + ": wmyrList :" + wmyrList + ": wmodList :" + wmodList);
+				urlconnection.disconnect();
+				retry++;
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 수질 DB 정보 시스템 - 토양지하수 먹는물 공동시설 운영결과 파싱 (년도를 받아서 파싱, 필수값은 아님)
+	// 페이지 번호만 필수값 (값이 없으면 메서드를 부르는 쪽에서 공백값으로 치환)
+	public static String parsePriJson_drinkWater(String service_url, String service_key, String pageNo,
+			String... params) throws Exception {
+
+		String yyyy = "";
+
+		if (params.length == 1) {
+			yyyy = params[0];
+		}
+
+		int retry = 0;
+
+		BufferedReader br = null;
+		String json = "";
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&yyyy=" + yyyy
+				+ "&numOfRows=999";
+
+		while (retry < 5) {
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			try {
+
+				Thread.sleep(3000);
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				return json;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("JSON 요청 에러 : yyyy :" + yyyy);
+				urlconnection.disconnect();
+				retry++;
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 수질 DB 정보 시스템 - 수질자동측정망 운영결과 DB 파싱 (년도를 받아서 파싱, 필수값은 아님)
+	// 페이지 번호만 필수값 (값이 없으면 메서드를 부르는 쪽에서 공백값으로 치환)
+	public static String parsePriJson_realTimeWater(String service_url, String service_key, String pageNo, String startDate, String endDate) throws Exception {
+
+		int retry = 0;
+
+		BufferedReader br = null;
+		String json = "";
+		
+		//api문서상의 요청 형식은 yyyyMMddHHmmss 
+		//결과값은 날짜까지밖에 안 나오므로 통일 시켜 줌.. 어차피 검색 범위는 하루 단위
+		startDate = startDate + "000000";
+		endDate = endDate + "999999";
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&startDate=" + startDate + "&endDate=" + endDate 
+				+ "&numOfRows=999";
+
+		while (retry < 5) {
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			try {
+
+				Thread.sleep(3000);
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				return json;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("JSON 요청 에러 : startDate :" + startDate + ": endDate :" + endDate);
 				urlconnection.disconnect();
 				retry++;
 			}

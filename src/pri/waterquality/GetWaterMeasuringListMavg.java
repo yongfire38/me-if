@@ -26,9 +26,9 @@ public class GetWaterMeasuringListMavg {
 
 				
 
-				// '측정소 코드', '측정년도', '측정월'을 파라미터로 받음 (셋 다 필수는 아님)
+				// '측정소 코드', '측정년도', '측정월'을 파라미터로 받음 (년도와 월은 필수는 아님)
 				// 자바 단 에러 때문에 측정소 코드는 필수로 받도록 함
-				if (args.length > 0 && args.length <= 3 ) {
+				if (args.length > 0 && args.length <= 3) {
 
 					System.out.println("firstLine start..");
 					long start = System.currentTimeMillis(); // 시작시간
@@ -60,7 +60,7 @@ public class GetWaterMeasuringListMavg {
 					int pageCount = 0;
 
 					// 물환경 수질측정망 운영결과 DB API에서는 siteId는 필요 없음
-					json = JsonParser.parsePriJson_Mavg(service_url, service_key, String.valueOf(pageNo), args);
+					json = JsonParser.parsePriJson_waterMeasuring(service_url, service_key, String.valueOf(pageNo), args);
 					
 					//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 					//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
@@ -266,7 +266,7 @@ public class GetWaterMeasuringListMavg {
 					for (int i = 1; i <= pageCount; i++) {
 
 						// 입력된 파라미터가  null 이라면 공백으로 들어가서 실행되어야 함
-						json = JsonParser.parsePriJson_Mavg(service_url, service_key, String.valueOf(i), args);
+						json = JsonParser.parsePriJson_waterMeasuring(service_url, service_key, String.valueOf(i), args);
 						
 						//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 						//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
