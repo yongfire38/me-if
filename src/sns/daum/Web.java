@@ -133,6 +133,10 @@ public class Web {
 
 							// 한번에 문자열 합침
 							resultSb.append("'");
+							resultSb.append((r + ((i-1) * 50)) +1); // 행 번호
+							resultSb.append("'");
+							resultSb.append("|^");
+							resultSb.append("'");
 							resultSb.append(job_dt); // 시스템 일자 (파라미터로 준 경우는 입력값)
 							resultSb.append("'");
 							resultSb.append("|^");
