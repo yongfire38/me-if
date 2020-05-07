@@ -80,7 +80,7 @@ public class Taxons {
 							Iterator<String> iter = key.iterator();
 
 							String KTSN = " "; // KTSN
-							String COMM_GROUP_NM = " "; // 관리분류군
+							String COMMONGROUP_NM = " "; // 관리분류군
 							String TAXON_NM = " "; // 분류군명
 							String TAXON_FULL_NM = " "; // 학명
 							String TAXON_KNM = " "; // 국명
@@ -111,8 +111,8 @@ public class Taxons {
 								if (keyname.equals("KTSN")) {
 									KTSN = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
 								}
-								if (keyname.equals("COMM_GROUP_NM")) {
-									COMM_GROUP_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+								if (keyname.equals("COMMONGROUP_NM")) {
+									COMMONGROUP_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
 											.trim();
 								}
 								if (keyname.equals("TAXON_NM")) {
@@ -198,7 +198,7 @@ public class Taxons {
 
 								pw.write(KTSN); // KTSN
 								pw.write("|^");
-								pw.write(COMM_GROUP_NM); // 관리분류군
+								pw.write(COMMONGROUP_NM); // 관리분류군
 								pw.write("|^");
 								pw.write(TAXON_NM); // 분류군명
 								pw.write("|^");
@@ -335,7 +335,7 @@ public class Taxons {
 							Iterator<String> iter = key.iterator();
 
 							String KTSN = " "; // KTSN
-							String COMM_GROUP_NM = " "; // 관리분류군
+							String COMMONGROUP_NM = " "; // 관리분류군
 							String TAXON_NM = " "; // 분류군명
 							String TAXON_FULL_NM = " "; // 학명
 							String TAXON_KNM = " "; // 국명
@@ -366,8 +366,8 @@ public class Taxons {
 								if (keyname.equals("KTSN")) {
 									KTSN = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
 								}
-								if (keyname.equals("COMM_GROUP_NM")) {
-									COMM_GROUP_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+								if (keyname.equals("COMMONGROUP_NM")) {
+									COMMONGROUP_NM = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
 											.trim();
 								}
 								if (keyname.equals("TAXON_NM")) {
@@ -453,7 +453,7 @@ public class Taxons {
 
 								pw.write(KTSN); // KTSN
 								pw.write("|^");
-								pw.write(COMM_GROUP_NM); // 관리분류군
+								pw.write(COMMONGROUP_NM); // 관리분류군
 								pw.write("|^");
 								pw.write(TAXON_NM); // 분류군명
 								pw.write("|^");
@@ -548,7 +548,7 @@ public class Taxons {
 								Iterator<String> iter = key.iterator();
 
 								String KTSN = " "; // KTSN
-								String COMM_GROUP_NM = " "; // 관리분류군
+								String COMMONGROUP_NM = " "; // 관리분류군
 								String TAXON_NM = " "; // 분류군명
 								String TAXON_FULL_NM = " "; // 학명
 								String TAXON_KNM = " "; // 국명
@@ -579,8 +579,8 @@ public class Taxons {
 									if (keyname.equals("KTSN")) {
 										KTSN = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
 									}
-									if (keyname.equals("COMM_GROUP_NM")) {
-										COMM_GROUP_NM = item.get(keyname).toString()
+									if (keyname.equals("COMMONGROUP_NM")) {
+										COMMONGROUP_NM = item.get(keyname).toString()
 												.replaceAll("(\r\n|\r|\n|\n\r)", " ").trim();
 									}
 									if (keyname.equals("TAXON_NM")) {
@@ -684,7 +684,7 @@ public class Taxons {
 
 									pw.write(KTSN); // KTSN
 									pw.write("|^");
-									pw.write(COMM_GROUP_NM); // 관리분류군
+									pw.write(COMMONGROUP_NM); // 관리분류군
 									pw.write("|^");
 									pw.write(TAXON_NM); // 분류군명
 									pw.write("|^");
