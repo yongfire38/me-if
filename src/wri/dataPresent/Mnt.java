@@ -21,35 +21,33 @@ public class Mnt {
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
 
+		try {
 
-			try {
+			// 서비스 키만 요구함, 실행시 필수 매개변수 없음
+			if (args.length == 0) {
 
-				
+				System.out.println("firstLine start..");
+				long start = System.currentTimeMillis(); // 시작시간
 
-				// 서비스 키만 요구함, 실행시 필수 매개변수 없음
-				if (args.length == 0) {
+				// step 0.open api url과 서비스 키.
+				String service_url = JsonParser.getProperty("dataPresent_mnt_url");
+				String service_key = JsonParser.getProperty("dataPresent_service_key");
 
-					System.out.println("firstLine start..");
-					long start = System.currentTimeMillis(); // 시작시간
+				// step 1.파일의 첫 행 작성
+				File file = new File(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_07.dat");
 
-					// step 0.open api url과 서비스 키.
-					String service_url = JsonParser.getProperty("dataPresent_mnt_url");
-					String service_key = JsonParser.getProperty("dataPresent_service_key");
-
-					// step 1.파일의 첫 행 작성
-					File file = new File(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_07.dat");
-
-						
+				if (!(file.exists())) {
 
 					// step 2. 파싱
 					String json = "";
 
 					json = JsonParser.parseWriJson(service_url, service_key);
-					
-					//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
-					//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
-					if(json.indexOf("</") > -1){
-						json ="{\"response\":{\"header\":{\"resultCode\":\"03\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":{\"item\":[]}}}}";
+
+					// 서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록
+					// 처리
+					// 원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
+					if (json.indexOf("</") > -1) {
+						json = "{\"response\":{\"header\":{\"resultCode\":\"03\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":{\"item\":[]}}}}";
 					}
 
 					JSONParser parser = new JSONParser();
@@ -167,7 +165,7 @@ public class Mnt {
 
 							try {
 
-								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
+								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
 								pw.write(competDe); // 완료일
 								pw.write("|^");
@@ -222,24 +220,28 @@ public class Mnt {
 						System.out.println("parsing error!!");
 					}
 
-					System.out.println("parsing complete!");
-
-					// step 5. 대상 서버에 sftp로 보냄
-
-					//TransSftp.transSftp(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_07.dat", "WRI");
-
-					long end = System.currentTimeMillis();
-					System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
-
 				} else {
-					System.out.println("파라미터 개수 에러!!");
-					System.exit(-1);
+
+					System.out.println("파일이 이미 존재하는 전체 파싱입니다.");
 				}
 
-			} catch (Exception e) {
-				e.printStackTrace();
+				System.out.println("parsing complete!");
+
+				// step 5. 대상 서버에 sftp로 보냄
+
+				// TransSftp.transSftp(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_07.dat", "WRI");
+
+				long end = System.currentTimeMillis();
+				System.out.println("실행 시간 : " + (end - start) / 1000.0 + "초");
+
+			} else {
+				System.out.println("파라미터 개수 에러!!");
+				System.exit(-1);
 			}
 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
