@@ -64,6 +64,8 @@ public class MonPurification {
 						json = JsonParser.parseWatJson(service_url, service_key, args[0], args[1],
 								String.valueOf(pageNo));
 						
+						System.out.println(json);
+						
 						//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 						//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
 						if(json.indexOf("</") > -1){
@@ -74,9 +76,6 @@ public class MonPurification {
 						JSONObject count_obj = (JSONObject) count_parser.parse(json);
 						JSONObject count_response = (JSONObject) count_obj.get("response");
 
-						JSONObject count_body = (JSONObject) count_response.get("body");
-						JSONObject count_itemsInfo = (JSONObject) count_body.get("itemsInfo");
-
 						JSONObject count_header = (JSONObject) count_response.get("header");
 						String count_resultCode = count_header.get("resultCode").toString().trim();
 						String count_resultMsg = count_header.get("resultMsg").toString().trim();
@@ -85,6 +84,9 @@ public class MonPurification {
 							System.out.println("parsing error!!::resultCode::" + count_resultCode + "::resultMsg::"
 									+ count_resultMsg);
 						} else {
+							
+							JSONObject count_body = (JSONObject) count_response.get("body");
+							JSONObject count_itemsInfo = (JSONObject) count_body.get("itemsInfo");
 
 							// json 값에서 가져온 전체 데이터 캐수와 한 페이지 당 개수
 							int totalCount = ((Long) count_itemsInfo.get("totalCount")).intValue();

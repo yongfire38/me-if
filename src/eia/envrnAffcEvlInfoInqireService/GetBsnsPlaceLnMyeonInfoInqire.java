@@ -26,7 +26,7 @@ public class GetBsnsPlaceLnMyeonInfoInqire {
 				
 
 				// 요청 파라미터 x,y 좌표의 2개
-				// 마지막에 사업자 코드를 넣는다(실행시 집어넣는 아규먼트, 테이블에서 조회해 온다. api의 파라미터와는 무관함)
+				// 마지막에 사업자 코드를 넣는다(실행시 집어넣는 아규먼트, 테이블에서 조회해 온다. api의 파라미터와는 무관)
 				if (args.length == 3) {
 
 					System.out.println("firstLine start..");
@@ -174,7 +174,7 @@ public class GetBsnsPlaceLnMyeonInfoInqire {
 								resultSb.append("|^");
 								resultSb.append(distance);
 								resultSb.append("|^");
-								resultSb.append(distance);
+								resultSb.append(args[2]);
 								resultSb.append(System.getProperty("line.separator"));
 
 							} else if (items.get("item") instanceof JSONArray) {
@@ -222,6 +222,8 @@ public class GetBsnsPlaceLnMyeonInfoInqire {
 									resultSb.append(centerx);
 									resultSb.append("|^");
 									resultSb.append(centery);
+									resultSb.append("|^");
+									resultSb.append(distance);
 									resultSb.append("|^");
 									resultSb.append(args[2]);
 									resultSb.append(System.getProperty("line.separator"));
