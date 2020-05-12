@@ -601,7 +601,7 @@ public class GetRealTimeWaterQualityList {
 
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-						pw.write(resultSb.toString());
+						pw.println(resultSb.toString());
 						pw.flush();
 						pw.close();
 

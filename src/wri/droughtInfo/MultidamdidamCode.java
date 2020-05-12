@@ -162,7 +162,7 @@ public class MultidamdidamCode {
 					try {
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
 
-						pw.write(resultSb.toString());
+						pw.println(resultSb.toString());
 						pw.flush();
 						pw.close();
 
