@@ -39,18 +39,6 @@ public class GetDscssSttusDscssOpinionDetailInfoInqire {
 					// step 1.파일의 작성
 					File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_42.dat");
 
-					try {
-						
-						PrintWriter pw = new PrintWriter(
-								new BufferedWriter(new FileWriter(file, true)));
-
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-
 					String json = "";
 
 					json = JsonParser.parseEiaJson(service_url, service_key, args[0]);
@@ -191,7 +179,7 @@ public class GetDscssSttusDscssOpinionDetailInfoInqire {
 					try {
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-						pw.println(resultSb.toString());
+						pw.write(resultSb.toString());
 						pw.flush();
 						pw.close();
 

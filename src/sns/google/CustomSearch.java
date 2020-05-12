@@ -52,18 +52,6 @@ public class CustomSearch {
 
 					File file = new File(JsonParser.getProperty("file_path") + "SNS/TIF_SNS_301.dat");
 
-					try {
-						
-						PrintWriter pw = new PrintWriter(
-								new BufferedWriter(new FileWriter(file, true)));
-
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-
 					String json = "";
 
 					json = JsonParser.parseJson_google(service_url, google_api_key, google_api_cx, args[0], job_dt,
@@ -176,7 +164,7 @@ public class CustomSearch {
 					try {
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-						pw.println(resultSb.toString());
+						pw.write(resultSb.toString());
 						pw.flush();
 						pw.close();
 

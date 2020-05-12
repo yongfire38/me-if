@@ -50,18 +50,6 @@ public class Blog {
 
 					File file = new File(JsonParser.getProperty("file_path") + "SNS/TIF_SNS_201.dat");
 
-					try {
-						
-						PrintWriter pw = new PrintWriter(
-								new BufferedWriter(new FileWriter(file, true)));
-
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-
 					// step 2. 전체 페이지 파악을 위한 샘플 파싱
 
 					String json = "";
@@ -183,7 +171,7 @@ public class Blog {
 					try {
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-						pw.println(resultSb.toString());
+						pw.write(resultSb.toString());
 						pw.flush();
 						pw.close();
 

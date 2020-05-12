@@ -50,18 +50,6 @@ public class Webkr {
 					// step 1.파일의 작성
 
 					File file = new File(JsonParser.getProperty("file_path") + "SNS/TIF_SNS_103.dat");
-
-					try {
-						
-						PrintWriter pw = new PrintWriter(
-								new BufferedWriter(new FileWriter(file, true)));
-
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
 					
 					int pageCount = 0;
 
@@ -187,7 +175,7 @@ public class Webkr {
 							try {
 								PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-								pw.println(resultSb.toString());
+								pw.write(resultSb.toString());
 								pw.flush();
 								pw.close();
 

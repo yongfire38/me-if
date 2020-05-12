@@ -37,19 +37,7 @@ public class SupplyLgldCodeList {
 					String service_key = JsonParser.getProperty("waterQuality_service_key");
 
 					// step 1.파일의 작성
-					File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_09.dat");
-
-					try {
-						
-						PrintWriter pw = new PrintWriter(
-								new BufferedWriter(new FileWriter(file, true)));
-
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
-					}	
+					File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_09.dat");	
 
 					// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
 					String json = "";
@@ -226,7 +214,7 @@ public class SupplyLgldCodeList {
 					try {
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
 
-						pw.println(resultSb.toString());
+						pw.write(resultSb.toString());
 						pw.flush();
 						pw.close();
 

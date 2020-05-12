@@ -49,17 +49,6 @@ public class Blog {
 
 				File file = new File(JsonParser.getProperty("file_path") + "SNS/TIF_SNS_101.dat");
 
-				try {
-
-					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-					pw.flush();
-					pw.close();
-
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
 				int pageCount = 0;
 
 				String json = "";
@@ -209,7 +198,7 @@ public class Blog {
 						try {
 							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-							pw.println(resultSb.toString());
+							pw.write(resultSb.toString());
 							pw.flush();
 							pw.close();
 

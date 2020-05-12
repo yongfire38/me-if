@@ -40,8 +40,6 @@ public class Winfossitecode {
 					// step 1.파일의 첫 행 작성
 					File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_11.dat");
 
-						
-
 					// step 2. 전체 파싱
 					String json = "";
 
@@ -144,7 +142,7 @@ public class Winfossitecode {
 					try {
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
 
-						pw.println(resultSb.toString());
+						pw.write(resultSb.toString());
 						pw.flush();
 						pw.close();
 

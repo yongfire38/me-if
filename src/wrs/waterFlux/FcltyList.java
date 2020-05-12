@@ -39,18 +39,6 @@ public class FcltyList {
 					// step 1.파일의 작성
 					File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_02.dat");
 
-					try {
-						
-						PrintWriter pw = new PrintWriter(
-								new BufferedWriter(new FileWriter(file, true)));
-
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-
 					// step 2. 전체 파싱
 					String json = "";
 
@@ -155,7 +143,7 @@ public class FcltyList {
 					try {
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-						pw.println(resultSb.toString());
+						pw.write(resultSb.toString());
 						pw.flush();
 						pw.close();
 

@@ -40,7 +40,6 @@ public class GetComCodeInfoInqire {
 					// step 1.파일의 첫 행 작성
 					File file = new File(JsonParser.getProperty("file_path") + "EIA/TIF_EIA_48.dat");
 
-
 					String json = "";
 
 					json = JsonParser.parseWriJson(service_url, service_key);
@@ -170,7 +169,7 @@ public class GetComCodeInfoInqire {
 					try {
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
 
-						pw.println(resultSb.toString());
+						pw.write(resultSb.toString());
 						pw.flush();
 						pw.close();
 

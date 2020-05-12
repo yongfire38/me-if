@@ -229,7 +229,7 @@ public class GetBsnsStrtgySmallScaleDscssListInfoInqire {
 					try {
 						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
 
-						pw.println(resultSb.toString());
+						pw.write(resultSb.toString());
 						pw.flush();
 						pw.close();
 
