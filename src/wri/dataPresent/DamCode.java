@@ -36,8 +36,6 @@ public class DamCode {
 				// step 1.파일의 첫 행 작성
 				File file = new File(JsonParser.getProperty("file_path") +"WRI/TIF_WRI_08.dat");
 
-				if (!(file.exists())) {
-
 					// step 2. 파싱
 					String json = "";
 
@@ -110,11 +108,6 @@ public class DamCode {
 					} else {
 						System.out.println("parsing error!!");
 					}
-
-				} else {
-
-					System.out.println("파일이 이미 존재하는 전체 파싱입니다.");
-				}
 
 				System.out.println("parsing complete!");
 
