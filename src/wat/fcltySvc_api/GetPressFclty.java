@@ -83,18 +83,6 @@ public class GetPressFclty {
 
 					// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer RNUM = new StringBuffer(" ");
-					StringBuffer WBIZ_NAM = new StringBuffer(" ");
-					StringBuffer FCLT_NAM = new StringBuffer(" ");
-					StringBuffer DTL_ADR = new StringBuffer(" ");
-					StringBuffer PHONE_NUM = new StringBuffer(" ");
-					StringBuffer DSGNF_VOL = new StringBuffer(" ");
-					StringBuffer COMPL_DAT = new StringBuffer(" ");
-					StringBuffer MNTRG_CTRL_YN = new StringBuffer(" ");
-					StringBuffer EMGNC_DVLP_TY_NM = new StringBuffer(" ");
-
 					for (int i = 1; i <= pageCount; ++i) {
 
 						json = JsonParser.parseWatJson(service_url, service_key, String.valueOf(i));
@@ -119,6 +107,16 @@ public class GetPressFclty {
 							System.out.println(
 									"parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
 						} else if (resultCode.equals("00")) {
+							
+							String RNUM = " ";
+							String WBIZ_NAM = " ";
+							String FCLT_NAM = " ";
+							String DTL_ADR = " ";
+							String PHONE_NUM = " ";
+							String DSGNF_VOL = " ";
+							String COMPL_DAT = " ";
+							String MNTRG_CTRL_YN = " ";
+							String EMGNC_DVLP_TY_NM = " ";
 
 							JSONArray items = (JSONArray) body.get("items");
 
@@ -133,44 +131,117 @@ public class GetPressFclty {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									JsonParser.colWrite(RNUM, keyname, "RNUM", item);
-									JsonParser.colWrite(WBIZ_NAM, keyname, "WBIZ_NAM", item);
-									JsonParser.colWrite(FCLT_NAM, keyname, "FCLT_NAM", item);
-									JsonParser.colWrite(DTL_ADR, keyname, "DTL_ADR", item);
-									JsonParser.colWrite(PHONE_NUM, keyname, "PHONE_NUM", item);
-									JsonParser.colWrite(DSGNF_VOL, keyname, "DSGNF_VOL", item);
-									JsonParser.colWrite(COMPL_DAT, keyname, "COMPL_DAT", item);
-									JsonParser.colWrite(MNTRG_CTRL_YN, keyname, "MNTRG_CTRL_YN", item);
-									JsonParser.colWrite(EMGNC_DVLP_TY_NM, keyname, "EMGNC_DVLP_TY_NM", item);
+									
+									if(keyname.equals("RNUM")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											RNUM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											RNUM = " ";
+										}
+									}
+									if(keyname.equals("WBIZ_NAM")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											WBIZ_NAM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											WBIZ_NAM = " ";
+										}
+									}
+									if(keyname.equals("FCLT_NAM")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											FCLT_NAM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											FCLT_NAM = " ";
+										}
+									}
+									if(keyname.equals("DTL_ADR")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											DTL_ADR = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											DTL_ADR = " ";
+										}
+									}
+									if(keyname.equals("PHONE_NUM")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											PHONE_NUM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											PHONE_NUM = " ";
+										}
+									}
+									if(keyname.equals("DSGNF_VOL")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											DSGNF_VOL = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											DSGNF_VOL = " ";
+										}
+									}
+									if(keyname.equals("COMPL_DAT")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											COMPL_DAT = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											COMPL_DAT = " ";
+										}
+									}
+									if(keyname.equals("MNTRG_CTRL_YN")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											MNTRG_CTRL_YN = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											MNTRG_CTRL_YN = " ";
+										}
+									}
+									if(keyname.equals("EMGNC_DVLP_TY_NM")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											EMGNC_DVLP_TY_NM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											EMGNC_DVLP_TY_NM = " ";
+										}
+									}
 
 								}
 
-								// 한방에 한 줄
-								resultSb.append(numberOfRows_str);
-								resultSb.append("|^");
-								resultSb.append(String.valueOf(i));
-								resultSb.append("|^");
-								resultSb.append(totalCount_str);
-								resultSb.append("|^");
-								resultSb.append(RNUM);
-								resultSb.append("|^");
-								resultSb.append(WBIZ_NAM);
-								resultSb.append("|^");
-								resultSb.append(FCLT_NAM);
-								resultSb.append("|^");
-								resultSb.append(DTL_ADR);
-								resultSb.append("|^");
-								resultSb.append(PHONE_NUM);
-								resultSb.append("|^");
-								resultSb.append(DSGNF_VOL);
-								resultSb.append("|^");
-								resultSb.append(COMPL_DAT);
-								resultSb.append("|^");
-								resultSb.append(MNTRG_CTRL_YN);
-								resultSb.append("|^");
-								resultSb.append(EMGNC_DVLP_TY_NM);
-								resultSb.append(System.getProperty("line.separator"));
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
+
+									pw.write(numberOfRows_str);
+									pw.write("|^");
+									pw.write(String.valueOf(i));
+									pw.write("|^");
+									pw.write(totalCount_str);
+									pw.write("|^");
+									pw.write(RNUM);
+									pw.write("|^");
+									pw.write(WBIZ_NAM);
+									pw.write("|^");
+									pw.write(FCLT_NAM);
+									pw.write("|^");
+									pw.write(DTL_ADR);
+									pw.write("|^");
+									pw.write(PHONE_NUM);
+									pw.write("|^");
+									pw.write(DSGNF_VOL);
+									pw.write("|^");
+									pw.write(COMPL_DAT);
+									pw.write("|^");
+									pw.write(MNTRG_CTRL_YN);
+									pw.write("|^");
+									pw.write(EMGNC_DVLP_TY_NM);
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 							}
 
 						} else {
@@ -179,19 +250,7 @@ public class GetPressFclty {
 
 						//Thread.sleep(1000);
 
-						// System.out.println("진행도::::"+String.valueOf(i));
-					}
-
-					// 누적된 결과물을 파일로 한방에 쏘기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
+						 System.out.println("진행도::::"+String.valueOf(i) + "/" + pageCount);
 					}
 
 					System.out.println("parsing complete!");

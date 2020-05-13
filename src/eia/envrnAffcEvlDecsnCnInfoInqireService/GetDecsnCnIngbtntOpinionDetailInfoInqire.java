@@ -52,21 +52,6 @@ public class GetDecsnCnIngbtntOpinionDetailInfoInqire {
 
 					// step 2. 전체 파싱
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer resultCd = new StringBuffer(" "); // 결정내용코드
-					StringBuffer bizNm = new StringBuffer(" "); // 사업명
-					StringBuffer approvOrganTeam = new StringBuffer(" "); // 승인기관
-					StringBuffer openPclDt = new StringBuffer(" "); // 공고일
-					StringBuffer openTmdtStartDt = new StringBuffer(" "); // 공람기간시작일
-					StringBuffer openTmdtEndDt = new StringBuffer(" "); // 공람기간종료일
-					StringBuffer openOpnEndDt = new StringBuffer(" "); // 의견종료일
-					StringBuffer openOpnStartDt = new StringBuffer(" "); // 의견시작일
-					StringBuffer openOpnEtc = new StringBuffer(" "); // 결정내용
-					StringBuffer openTeamNm = new StringBuffer(" "); // 부서명
-					StringBuffer bizManTxt = new StringBuffer(" "); // 사업자
-					StringBuffer discOrganNm = new StringBuffer(" "); // 협의기관
-
 					JSONParser parser = new JSONParser();
 					JSONObject obj = (JSONObject) parser.parse(json);
 					JSONObject response = (JSONObject) obj.get("response");
@@ -81,6 +66,19 @@ public class GetDecsnCnIngbtntOpinionDetailInfoInqire {
 					} else if (resultCode.equals("00") && response.get("body") instanceof String) {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(response.get("body") instanceof String)) {
+						
+						String resultCd = " "; // 결정내용코드
+						String bizNm = " "; // 사업명
+						String approvOrganTeam = " "; // 승인기관
+						String openPclDt = " "; // 공고일
+						String openTmdtStartDt = " "; // 공람기간시작일
+						String openTmdtEndDt = " "; // 공람기간종료일
+						String openOpnEndDt = " "; // 의견종료일
+						String openOpnStartDt = " "; // 의견시작일
+						String openOpnEtc = " "; // 결정내용
+						String openTeamNm = " "; // 부서명
+						String bizManTxt = " "; // 사업자
+						String discOrganNm = " "; // 협의기관
 						
 
 						JSONObject body = (JSONObject) response.get("body");
@@ -98,50 +96,144 @@ public class GetDecsnCnIngbtntOpinionDetailInfoInqire {
 
 								String keyname = iter.next();
 
-								JsonParser.colWrite(resultCd, keyname, "resultCd", items_jsonObject);
-								JsonParser.colWrite(bizNm, keyname, "bizNm", items_jsonObject);
-								JsonParser.colWrite(approvOrganTeam, keyname, "approvOrganTeam", items_jsonObject);
-								JsonParser.colWrite(openPclDt, keyname, "openPclDt", items_jsonObject);
-								JsonParser.colWrite(openTmdtStartDt, keyname, "openTmdtStartDt", items_jsonObject);
-								JsonParser.colWrite(openTmdtEndDt, keyname, "openTmdtEndDt", items_jsonObject);
-								JsonParser.colWrite(openOpnEndDt, keyname, "openOpnEndDt", items_jsonObject);
-								JsonParser.colWrite(openOpnStartDt, keyname, "openOpnStartDt", items_jsonObject);
-								JsonParser.colWrite(openOpnEtc, keyname, "openOpnEtc", items_jsonObject);
-								JsonParser.colWrite(openTeamNm, keyname, "openTeamNm", items_jsonObject);
-								JsonParser.colWrite(bizManTxt, keyname, "bizManTxt", items_jsonObject);
-								JsonParser.colWrite(discOrganNm, keyname, "discOrganNm", items_jsonObject);
+								if(keyname.equals("resultCd")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										resultCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										resultCd = " ";
+									}
+								}
+								if(keyname.equals("bizNm")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										bizNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										bizNm = " ";
+									}
+								}
+								if(keyname.equals("approvOrganTeam")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										approvOrganTeam = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										approvOrganTeam = " ";
+									}
+								}
+								if(keyname.equals("openPclDt")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										openPclDt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										openPclDt = " ";
+									}
+								}
+								if(keyname.equals("openTmdtStartDt")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										openTmdtStartDt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										openTmdtStartDt = " ";
+									}
+								}
+								if(keyname.equals("openTmdtEndDt")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										openTmdtEndDt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										openTmdtEndDt = " ";
+									}
+								}
+								if(keyname.equals("openOpnEndDt")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										openOpnEndDt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										openOpnEndDt = " ";
+									}
+								}
+								if(keyname.equals("openOpnStartDt")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										openOpnStartDt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										openOpnStartDt = " ";
+									}
+								}
+								if(keyname.equals("openOpnEtc")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										openOpnEtc = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										openOpnEtc = " ";
+									}
+								}
+								if(keyname.equals("openTeamNm")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										openTeamNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										openTeamNm = " ";
+									}
+								}
+								if(keyname.equals("bizManTxt")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										bizManTxt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										bizManTxt = " ";
+									}
+								}
+								if(keyname.equals("discOrganNm")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										discOrganNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										discOrganNm = " ";
+									}
+								}
 
 							}
 
-							// 한번에 문자열 합침
-							resultSb.append(resultCode);
-							resultSb.append("|^");
-							resultSb.append(resultMsg);
-							resultSb.append("|^");
-							resultSb.append(resultCd);
-							resultSb.append("|^");
-							resultSb.append(bizNm);
-							resultSb.append("|^");
-							resultSb.append(approvOrganTeam);
-							resultSb.append("|^");
-							resultSb.append(openPclDt);
-							resultSb.append("|^");
-							resultSb.append(openTmdtStartDt);
-							resultSb.append("|^");
-							resultSb.append(openTmdtEndDt);
-							resultSb.append("|^");
-							resultSb.append(openOpnEndDt);
-							resultSb.append("|^");
-							resultSb.append(openOpnStartDt);
-							resultSb.append("|^");
-							resultSb.append(openOpnEtc);
-							resultSb.append("|^");
-							resultSb.append(openTeamNm);
-							resultSb.append("|^");
-							resultSb.append(bizManTxt);
-							resultSb.append("|^");
-							resultSb.append(discOrganNm);
-							resultSb.append(System.getProperty("line.separator"));
+							// step 4. 파일에 쓰기
+							try {
+								PrintWriter pw = new PrintWriter(
+										new BufferedWriter(new FileWriter(file, true)));
+
+								pw.write(resultCode); 
+								pw.write("|^");
+								pw.write(resultMsg); 
+								pw.write("|^");
+								pw.write(resultCd); 
+								pw.write("|^");
+								pw.write(bizNm); 
+								pw.write("|^");
+								pw.write(approvOrganTeam); 
+								pw.write("|^");
+								pw.write(openPclDt); 
+								pw.write("|^");
+								pw.write(openTmdtStartDt); 
+								pw.write("|^");
+								pw.write(openTmdtEndDt); 
+								pw.write("|^");
+								pw.write(openOpnEndDt); 
+								pw.write("|^");
+								pw.write(openOpnStartDt); 
+								pw.write("|^");
+								pw.write(openOpnEtc); 
+								pw.write("|^");
+								pw.write(openTeamNm); 
+								pw.write("|^");
+								pw.write(bizManTxt); 
+								pw.write("|^");
+								pw.write(discOrganNm);
+								pw.println();
+								pw.flush();
+								pw.close();
+								
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 
 						} else if (body.get("item") instanceof JSONArray) {
 
@@ -159,50 +251,144 @@ public class GetDecsnCnIngbtntOpinionDetailInfoInqire {
 
 									String keyname = iter.next();
 
-									JsonParser.colWrite(resultCd, keyname, "resultCd", item_obj);
-									JsonParser.colWrite(bizNm, keyname, "bizNm", item_obj);
-									JsonParser.colWrite(approvOrganTeam, keyname, "approvOrganTeam", item_obj);
-									JsonParser.colWrite(openPclDt, keyname, "openPclDt", item_obj);
-									JsonParser.colWrite(openTmdtStartDt, keyname, "openTmdtStartDt", item_obj);
-									JsonParser.colWrite(openTmdtEndDt, keyname, "openTmdtEndDt", item_obj);
-									JsonParser.colWrite(openOpnEndDt, keyname, "openOpnEndDt", item_obj);
-									JsonParser.colWrite(openOpnStartDt, keyname, "openOpnStartDt", item_obj);
-									JsonParser.colWrite(openOpnEtc, keyname, "openOpnEtc", item_obj);
-									JsonParser.colWrite(openTeamNm, keyname, "openTeamNm", item_obj);
-									JsonParser.colWrite(bizManTxt, keyname, "bizManTxt", item_obj);
-									JsonParser.colWrite(discOrganNm, keyname, "discOrganNm", item_obj);
+									if(keyname.equals("resultCd")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											resultCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											resultCd = " ";
+										}
+									}
+									if(keyname.equals("bizNm")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											bizNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											bizNm = " ";
+										}
+									}
+									if(keyname.equals("approvOrganTeam")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											approvOrganTeam = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											approvOrganTeam = " ";
+										}
+									}
+									if(keyname.equals("openPclDt")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											openPclDt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											openPclDt = " ";
+										}
+									}
+									if(keyname.equals("openTmdtStartDt")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											openTmdtStartDt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											openTmdtStartDt = " ";
+										}
+									}
+									if(keyname.equals("openTmdtEndDt")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											openTmdtEndDt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											openTmdtEndDt = " ";
+										}
+									}
+									if(keyname.equals("openOpnEndDt")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											openOpnEndDt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											openOpnEndDt = " ";
+										}
+									}
+									if(keyname.equals("openOpnStartDt")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											openOpnStartDt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											openOpnStartDt = " ";
+										}
+									}
+									if(keyname.equals("openOpnEtc")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											openOpnEtc = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											openOpnEtc = " ";
+										}
+									}
+									if(keyname.equals("openTeamNm")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											openTeamNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											openTeamNm = " ";
+										}
+									}
+									if(keyname.equals("bizManTxt")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											bizManTxt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											bizManTxt = " ";
+										}
+									}
+									if(keyname.equals("discOrganNm")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											discOrganNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											discOrganNm = " ";
+										}
+									}
 
 								}
 
-								// 한번에 문자열 합침
-								resultSb.append(resultCode);
-								resultSb.append("|^");
-								resultSb.append(resultMsg);
-								resultSb.append("|^");
-								resultSb.append(resultCd);
-								resultSb.append("|^");
-								resultSb.append(bizNm);
-								resultSb.append("|^");
-								resultSb.append(approvOrganTeam);
-								resultSb.append("|^");
-								resultSb.append(openPclDt);
-								resultSb.append("|^");
-								resultSb.append(openTmdtStartDt);
-								resultSb.append("|^");
-								resultSb.append(openTmdtEndDt);
-								resultSb.append("|^");
-								resultSb.append(openOpnEndDt);
-								resultSb.append("|^");
-								resultSb.append(openOpnStartDt);
-								resultSb.append("|^");
-								resultSb.append(openOpnEtc);
-								resultSb.append("|^");
-								resultSb.append(openTeamNm);
-								resultSb.append("|^");
-								resultSb.append(bizManTxt);
-								resultSb.append("|^");
-								resultSb.append(discOrganNm);
-								resultSb.append(System.getProperty("line.separator"));
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
+
+									pw.write(resultCode); 
+									pw.write("|^");
+									pw.write(resultMsg); 
+									pw.write("|^");
+									pw.write(resultCd); 
+									pw.write("|^");
+									pw.write(bizNm); 
+									pw.write("|^");
+									pw.write(approvOrganTeam); 
+									pw.write("|^");
+									pw.write(openPclDt); 
+									pw.write("|^");
+									pw.write(openTmdtStartDt); 
+									pw.write("|^");
+									pw.write(openTmdtEndDt); 
+									pw.write("|^");
+									pw.write(openOpnEndDt); 
+									pw.write("|^");
+									pw.write(openOpnStartDt); 
+									pw.write("|^");
+									pw.write(openOpnEtc); 
+									pw.write("|^");
+									pw.write(openTeamNm); 
+									pw.write("|^");
+									pw.write(bizManTxt); 
+									pw.write("|^");
+									pw.write(discOrganNm);
+									pw.println();
+									pw.flush();
+									pw.close();
+									
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 							}
 
 						} else {
@@ -211,18 +397,6 @@ public class GetDecsnCnIngbtntOpinionDetailInfoInqire {
 
 					} else {
 						System.out.println("parsing error!!");
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

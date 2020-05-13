@@ -75,15 +75,6 @@ public class GetStrategyDraftPblancDsplayListInfoInqire {
 
 					// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer rnum = new StringBuffer(" "); // 정렬순서
-					StringBuffer perCd = new StringBuffer(" "); // 사전환경성 검토 코드
-					StringBuffer bizSeq = new StringBuffer(" "); // 사업고유 번호
-					StringBuffer bizNm = new StringBuffer(" "); // 사업명
-					StringBuffer ccilOrganCd = new StringBuffer(" "); // 협의기관
-					StringBuffer drfopTmdt = new StringBuffer(" "); // 초안공람 기간
-
 					for (int i = 1; i <= pageCount; i++) {
 
 						json = JsonParser.parseWatJson(service_url, service_key, String.valueOf(i));
@@ -111,6 +102,13 @@ public class GetStrategyDraftPblancDsplayListInfoInqire {
 							System.out.println("data not exist!!");
 						} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 							
+							String rnum = " "; // 정렬순서
+							String perCd = " "; // 사전환경성 검토 코드
+							String bizSeq = " "; // 사업고유 번호
+							String bizNm = " "; // 사업명
+							String ccilOrganCd = " "; // 협의기관
+							String drfopTmdt = " "; // 초안공람 기간
+							
 							String numOfRows_str = body.get("numOfRows").toString();
 							String totalCount_str = body.get("totalCount").toString();
 
@@ -126,39 +124,92 @@ public class GetStrategyDraftPblancDsplayListInfoInqire {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									JsonParser.colWrite(rnum, keyname, "rnum", items_jsonObject);
-									JsonParser.colWrite(perCd, keyname, "perCd", items_jsonObject);
-									JsonParser.colWrite(bizSeq, keyname, "bizSeq", items_jsonObject);
-									JsonParser.colWrite(bizNm, keyname, "bizNm", items_jsonObject);
-									JsonParser.colWrite(ccilOrganCd, keyname, "ccilOrganCd", items_jsonObject);
-									JsonParser.colWrite(drfopTmdt, keyname, "drfopTmdt", items_jsonObject);
+									
+									if(keyname.equals("rnum")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											rnum = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											rnum = " ";
+										}
+									}
+									if(keyname.equals("perCd")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											perCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											perCd = " ";
+										}
+									}
+									if(keyname.equals("bizSeq")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											bizSeq = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											bizSeq = " ";
+										}
+									}
+									if(keyname.equals("bizNm")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											bizNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											bizNm = " ";
+										}
+									}
+									if(keyname.equals("ccilOrganCd")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											ccilOrganCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											ccilOrganCd = " ";
+										}
+									}
+									if(keyname.equals("drfopTmdt")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											drfopTmdt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											drfopTmdt = " ";
+										}
+									}
 
 								}
+								
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
 
-								// 한번에 문자열 합침
-								resultSb.append(resultCode);
-								resultSb.append("|^");
-								resultSb.append(resultMsg);
-								resultSb.append("|^");
-								resultSb.append(numOfRows_str);
-								resultSb.append("|^");
-								resultSb.append(Integer.toString(i));
-								resultSb.append("|^");
-								resultSb.append(totalCount_str);
-								resultSb.append("|^");
-								resultSb.append(rnum);
-								resultSb.append("|^");
-								resultSb.append(perCd);
-								resultSb.append("|^");
-								resultSb.append(bizSeq);
-								resultSb.append("|^");
-								resultSb.append(bizNm);
-								resultSb.append("|^");
-								resultSb.append(ccilOrganCd);
-								resultSb.append("|^");
-								resultSb.append(drfopTmdt);
-								resultSb.append(System.getProperty("line.separator"));
+									pw.write(resultCode); 
+									pw.write("|^");
+									pw.write(resultMsg); 
+									pw.write("|^");
+									pw.write(numOfRows_str); 
+									pw.write("|^");
+									pw.write(Integer.toString(i)); 
+									pw.write("|^");
+									pw.write(totalCount_str); 
+									pw.write("|^");
+									pw.write(rnum); 
+									pw.write("|^");
+									pw.write(perCd); 
+									pw.write("|^");
+									pw.write(bizSeq); 
+									pw.write("|^");
+									pw.write(bizNm); 
+									pw.write("|^");
+									pw.write(ccilOrganCd); 
+									pw.write("|^");
+									pw.write(drfopTmdt); 
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}			
+
 
 							} else if (body.get("item") instanceof JSONArray) {
 
@@ -176,38 +227,90 @@ public class GetStrategyDraftPblancDsplayListInfoInqire {
 
 										String keyname = iter.next();
 
-										JsonParser.colWrite(rnum, keyname, "rnum", item_obj);
-										JsonParser.colWrite(perCd, keyname, "perCd", item_obj);
-										JsonParser.colWrite(bizSeq, keyname, "bizSeq", item_obj);
-										JsonParser.colWrite(bizNm, keyname, "bizNm", item_obj);
-										JsonParser.colWrite(ccilOrganCd, keyname, "ccilOrganCd", item_obj);
-										JsonParser.colWrite(drfopTmdt, keyname, "drfopTmdt", item_obj);
+										if(keyname.equals("rnum")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												rnum = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												rnum = " ";
+											}
+										}
+										if(keyname.equals("perCd")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												perCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												perCd = " ";
+											}
+										}
+										if(keyname.equals("bizSeq")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												bizSeq = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												bizSeq = " ";
+											}
+										}
+										if(keyname.equals("bizNm")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												bizNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												bizNm = " ";
+											}
+										}
+										if(keyname.equals("ccilOrganCd")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												ccilOrganCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												ccilOrganCd = " ";
+											}
+										}
+										if(keyname.equals("drfopTmdt")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												drfopTmdt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												drfopTmdt = " ";
+											}
+										}
 
 									}
 
-									// 한번에 문자열 합침
-									resultSb.append(resultCode);
-									resultSb.append("|^");
-									resultSb.append(resultMsg);
-									resultSb.append("|^");
-									resultSb.append(numOfRows_str);
-									resultSb.append("|^");
-									resultSb.append(Integer.toString(i));
-									resultSb.append("|^");
-									resultSb.append(totalCount_str);
-									resultSb.append("|^");
-									resultSb.append(rnum);
-									resultSb.append("|^");
-									resultSb.append(perCd);
-									resultSb.append("|^");
-									resultSb.append(bizSeq);
-									resultSb.append("|^");
-									resultSb.append(bizNm);
-									resultSb.append("|^");
-									resultSb.append(ccilOrganCd);
-									resultSb.append("|^");
-									resultSb.append(drfopTmdt);
-									resultSb.append(System.getProperty("line.separator"));
+									// step 4. 파일에 쓰기
+									try {
+										PrintWriter pw = new PrintWriter(
+												new BufferedWriter(new FileWriter(file, true)));
+
+										pw.write(resultCode); 
+										pw.write("|^");
+										pw.write(resultMsg); 
+										pw.write("|^");
+										pw.write(numOfRows_str); 
+										pw.write("|^");
+										pw.write(Integer.toString(i)); 
+										pw.write("|^");
+										pw.write(totalCount_str); 
+										pw.write("|^");
+										pw.write(rnum); 
+										pw.write("|^");
+										pw.write(perCd); 
+										pw.write("|^");
+										pw.write(bizSeq); 
+										pw.write("|^");
+										pw.write(bizNm); 
+										pw.write("|^");
+										pw.write(ccilOrganCd); 
+										pw.write("|^");
+										pw.write(drfopTmdt); 
+										pw.println();
+										pw.flush();
+										pw.close();
+
+									} catch (IOException e) {
+										e.printStackTrace();
+									}			
 
 								}
 
@@ -225,18 +328,6 @@ public class GetStrategyDraftPblancDsplayListInfoInqire {
 
 						//Thread.sleep(1000);
 
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

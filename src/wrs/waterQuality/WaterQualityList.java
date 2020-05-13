@@ -82,21 +82,6 @@ public class WaterQualityList {
 
 						// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-						StringBuffer resultSb = new StringBuffer("");
-
-						StringBuffer no = new StringBuffer(" "); // 번호
-						StringBuffer occrrncDt = new StringBuffer(" "); // 발생일시
-						StringBuffer fcltyMngNm = new StringBuffer(" "); // 시설관리명
-						StringBuffer fcltyMngNo = new StringBuffer(" "); // 시설관리번호
-						StringBuffer fcltyAddr = new StringBuffer(" "); // 시설주소
-						StringBuffer liIndDivName = new StringBuffer(" "); // 용수구분명
-						StringBuffer clVal = new StringBuffer(" "); // 잔류염소
-						StringBuffer phVal = new StringBuffer(" "); // pH
-						StringBuffer tbVal = new StringBuffer(" "); // 탁도
-						StringBuffer phUnit = new StringBuffer(" "); // pH단위
-						StringBuffer tbUnit = new StringBuffer(" "); // 탁도단위
-						StringBuffer clUnit = new StringBuffer(" "); // 잔류단위
-
 						for (int i = 1; i <= pageCount; i++) {
 
 							json = JsonParser.parseWrsJson(service_url, service_key, String.valueOf(i), args[0],
@@ -125,7 +110,18 @@ public class WaterQualityList {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 								
-								
+								String no = " "; // 번호
+								String occrrncDt = " "; // 발생일시
+								String fcltyMngNm = " "; // 시설관리명
+								String fcltyMngNo = " "; // 시설관리번호
+								String fcltyAddr = " "; // 시설주소
+								String liIndDivName = " "; // 용수구분명
+								String clVal = " "; // 잔류염소
+								String phVal = " "; // pH
+								String tbVal = " "; // 탁도
+								String phUnit = " "; // pH단위
+								String tbUnit = " "; // 탁도단위
+								String clUnit = " "; // 잔류단위
 
 								JSONObject items = (JSONObject) body.get("items");
 
@@ -141,55 +137,149 @@ public class WaterQualityList {
 									while (iter.hasNext()) {
 
 										String keyname = iter.next();
-
-										JsonParser.colWrite(no, keyname, "no", items_jsonObject);
-										JsonParser.colWrite(occrrncDt, keyname, "occrrncDt", items_jsonObject);
-										JsonParser.colWrite(fcltyMngNm, keyname, "fcltyMngNm", items_jsonObject);
-										JsonParser.colWrite(fcltyMngNo, keyname, "fcltyMngNo", items_jsonObject);
-										JsonParser.colWrite(fcltyAddr, keyname, "fcltyAddr", items_jsonObject);
-										JsonParser.colWrite(liIndDivName, keyname, "liIndDivName", items_jsonObject);
-										JsonParser.colWrite(clVal, keyname, "clVal", items_jsonObject);
-										JsonParser.colWrite(phVal, keyname, "phVal", items_jsonObject);
-										JsonParser.colWrite(tbVal, keyname, "tbVal", items_jsonObject);
-										JsonParser.colWrite(phUnit, keyname, "phUnit", items_jsonObject);
-										JsonParser.colWrite(tbUnit, keyname, "tbUnit", items_jsonObject);
-										JsonParser.colWrite(clUnit, keyname, "clUnit", items_jsonObject);
+										
+										if(keyname.equals("no")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												no = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												no = " ";
+											}
+										}
+										if(keyname.equals("occrrncDt")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												occrrncDt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												occrrncDt = " ";
+											}
+										}
+										if(keyname.equals("fcltyMngNm")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												fcltyMngNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												fcltyMngNm = " ";
+											}
+										}
+										if(keyname.equals("fcltyMngNo")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												fcltyMngNo = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												fcltyMngNo = " ";
+											}
+										}
+										if(keyname.equals("fcltyAddr")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												fcltyAddr = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												fcltyAddr = " ";
+											}
+										}
+										if(keyname.equals("liIndDivName")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												liIndDivName = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												liIndDivName = " ";
+											}
+										}
+										if(keyname.equals("clVal")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												clVal = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												clVal = " ";
+											}
+										}
+										if(keyname.equals("phVal")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												phVal = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												phVal = " ";
+											}
+										}
+										if(keyname.equals("tbVal")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												tbVal = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												tbVal = " ";
+											}
+										}
+										if(keyname.equals("phUnit")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												phUnit = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												phUnit = " ";
+											}
+										}
+										if(keyname.equals("tbUnit")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												tbUnit = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												tbUnit = " ";
+											}
+										}
+										if(keyname.equals("clUnit")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												clUnit = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												clUnit = " ";
+											}
+										}
 
 									}
+									
+									// step 4. 파일에 쓰기
+									try {
+										PrintWriter pw = new PrintWriter(
+												new BufferedWriter(new FileWriter(file, true)));
 
-									// 한번에 문자열 합침
-									resultSb.append(args[0]);
-									resultSb.append("|^");
-									resultSb.append(args[1]);
-									resultSb.append("|^");
-									resultSb.append(args[2]);
-									resultSb.append("|^");
-									resultSb.append(args[3]);
-									resultSb.append("|^");
-									resultSb.append(no);
-									resultSb.append("|^");
-									resultSb.append(occrrncDt);
-									resultSb.append("|^");
-									resultSb.append(fcltyMngNm);
-									resultSb.append("|^");
-									resultSb.append(fcltyMngNo);
-									resultSb.append("|^");
-									resultSb.append(fcltyAddr);
-									resultSb.append("|^");
-									resultSb.append(liIndDivName);
-									resultSb.append("|^");
-									resultSb.append(clVal);
-									resultSb.append("|^");
-									resultSb.append(phVal);
-									resultSb.append("|^");
-									resultSb.append(tbVal);
-									resultSb.append("|^");
-									resultSb.append(phUnit);
-									resultSb.append("|^");
-									resultSb.append(tbUnit);
-									resultSb.append("|^");
-									resultSb.append(clUnit);
-									resultSb.append(System.getProperty("line.separator"));
+										pw.write(args[0]);
+										pw.write("|^");
+										pw.write(args[1]);
+										pw.write("|^");
+										pw.write(args[2]);
+										pw.write("|^");
+										pw.write(args[3]);
+										pw.write("|^");
+										pw.write(no);
+										pw.write("|^");
+										pw.write(occrrncDt);
+										pw.write("|^");
+										pw.write(fcltyMngNm);
+										pw.write("|^");
+										pw.write(fcltyMngNo);
+										pw.write("|^");
+										pw.write(fcltyAddr);
+										pw.write("|^");
+										pw.write(liIndDivName);
+										pw.write("|^");
+										pw.write(clVal);
+										pw.write("|^");
+										pw.write(phVal);
+										pw.write("|^");
+										pw.write(tbVal);
+										pw.write("|^");
+										pw.write(phUnit);
+										pw.write("|^");
+										pw.write(tbUnit);
+										pw.write("|^");
+										pw.write(clUnit);
+										pw.println();
+										pw.flush();
+										pw.close();
+
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
 
 								} else if (items.get("item") instanceof JSONArray) {
 
@@ -207,54 +297,148 @@ public class WaterQualityList {
 
 											String keyname = iter.next();
 
-											JsonParser.colWrite(no, keyname, "no", item_obj);
-											JsonParser.colWrite(occrrncDt, keyname, "occrrncDt", item_obj);
-											JsonParser.colWrite(fcltyMngNm, keyname, "fcltyMngNm", item_obj);
-											JsonParser.colWrite(fcltyMngNo, keyname, "fcltyMngNo", item_obj);
-											JsonParser.colWrite(fcltyAddr, keyname, "fcltyAddr", item_obj);
-											JsonParser.colWrite(liIndDivName, keyname, "liIndDivName", item_obj);
-											JsonParser.colWrite(clVal, keyname, "clVal", item_obj);
-											JsonParser.colWrite(phVal, keyname, "phVal", item_obj);
-											JsonParser.colWrite(tbVal, keyname, "tbVal", item_obj);
-											JsonParser.colWrite(phUnit, keyname, "phUnit", item_obj);
-											JsonParser.colWrite(tbUnit, keyname, "tbUnit", item_obj);
-											JsonParser.colWrite(clUnit, keyname, "clUnit", item_obj);
+											if(keyname.equals("no")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													no = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													no = " ";
+												}
+											}
+											if(keyname.equals("occrrncDt")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													occrrncDt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													occrrncDt = " ";
+												}
+											}
+											if(keyname.equals("fcltyMngNm")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													fcltyMngNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													fcltyMngNm = " ";
+												}
+											}
+											if(keyname.equals("fcltyMngNo")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													fcltyMngNo = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													fcltyMngNo = " ";
+												}
+											}
+											if(keyname.equals("fcltyAddr")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													fcltyAddr = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													fcltyAddr = " ";
+												}
+											}
+											if(keyname.equals("liIndDivName")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													liIndDivName = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													liIndDivName = " ";
+												}
+											}
+											if(keyname.equals("clVal")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													clVal = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													clVal = " ";
+												}
+											}
+											if(keyname.equals("phVal")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													phVal = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													phVal = " ";
+												}
+											}
+											if(keyname.equals("tbVal")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													tbVal = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													tbVal = " ";
+												}
+											}
+											if(keyname.equals("phUnit")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													phUnit = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													phUnit = " ";
+												}
+											}
+											if(keyname.equals("tbUnit")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													tbUnit = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													tbUnit = " ";
+												}
+											}
+											if(keyname.equals("clUnit")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													clUnit = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													clUnit = " ";
+												}
+											}
 
 										}
 
-										// 한번에 문자열 합침
-										resultSb.append(args[0]);
-										resultSb.append("|^");
-										resultSb.append(args[1]);
-										resultSb.append("|^");
-										resultSb.append(args[2]);
-										resultSb.append("|^");
-										resultSb.append(args[3]);
-										resultSb.append("|^");
-										resultSb.append(no);
-										resultSb.append("|^");
-										resultSb.append(occrrncDt);
-										resultSb.append("|^");
-										resultSb.append(fcltyMngNm);
-										resultSb.append("|^");
-										resultSb.append(fcltyMngNo);
-										resultSb.append("|^");
-										resultSb.append(fcltyAddr);
-										resultSb.append("|^");
-										resultSb.append(liIndDivName);
-										resultSb.append("|^");
-										resultSb.append(clVal);
-										resultSb.append("|^");
-										resultSb.append(phVal);
-										resultSb.append("|^");
-										resultSb.append(tbVal);
-										resultSb.append("|^");
-										resultSb.append(phUnit);
-										resultSb.append("|^");
-										resultSb.append(tbUnit);
-										resultSb.append("|^");
-										resultSb.append(clUnit);
-										resultSb.append(System.getProperty("line.separator"));
+										// step 4. 파일에 쓰기
+										try {
+											PrintWriter pw = new PrintWriter(
+													new BufferedWriter(new FileWriter(file, true)));
+
+											pw.write(args[0]);
+											pw.write("|^");
+											pw.write(args[1]);
+											pw.write("|^");
+											pw.write(args[2]);
+											pw.write("|^");
+											pw.write(args[3]);
+											pw.write("|^");
+											pw.write(no);
+											pw.write("|^");
+											pw.write(occrrncDt);
+											pw.write("|^");
+											pw.write(fcltyMngNm);
+											pw.write("|^");
+											pw.write(fcltyMngNo);
+											pw.write("|^");
+											pw.write(fcltyAddr);
+											pw.write("|^");
+											pw.write(liIndDivName);
+											pw.write("|^");
+											pw.write(clVal);
+											pw.write("|^");
+											pw.write(phVal);
+											pw.write("|^");
+											pw.write(tbVal);
+											pw.write("|^");
+											pw.write(phUnit);
+											pw.write("|^");
+											pw.write(tbUnit);
+											pw.write("|^");
+											pw.write(clUnit);
+											pw.println();
+											pw.flush();
+											pw.close();
+
+										} catch (IOException e) {
+											e.printStackTrace();
+										}
 
 									}
 
@@ -270,18 +454,6 @@ public class WaterQualityList {
 
 							//Thread.sleep(1000);
 
-						}
-
-						// step 4. 파일에 쓰기
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write(resultSb.toString());
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
 						}
 
 						System.out.println("parsing complete!");

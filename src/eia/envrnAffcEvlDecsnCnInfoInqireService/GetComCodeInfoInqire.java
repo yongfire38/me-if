@@ -52,14 +52,6 @@ public class GetComCodeInfoInqire {
 
 					// step 2. 전체 파싱
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer comCd = new StringBuffer(" "); // 공통코드
-					StringBuffer jongCd = new StringBuffer(" "); // 코드종류
-					StringBuffer cdNm = new StringBuffer(" "); // 코드명
-					StringBuffer gubunFl = new StringBuffer(" "); // 구분상태
-					StringBuffer sortSeq = new StringBuffer(" "); // 소팅 일련번호
-
 					JSONParser parser = new JSONParser();
 					JSONObject obj = (JSONObject) parser.parse(json);
 					JSONObject response = (JSONObject) obj.get("response");
@@ -77,6 +69,12 @@ public class GetComCodeInfoInqire {
 					} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 
 						JSONObject items = (JSONObject) body.get("items");
+						
+						String comCd = " "; // 공통코드
+						String jongCd = " "; // 코드종류
+						String cdNm = " "; // 코드명
+						String gubunFl = " "; // 구분상태
+						String sortSeq = " "; // 소팅 일련번호
 
 						// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 						if (items.get("item") instanceof JSONObject) {
@@ -91,29 +89,77 @@ public class GetComCodeInfoInqire {
 
 								String keyname = iter.next();
 
-								JsonParser.colWrite(comCd, keyname, "comCd", items_jsonObject);
-								JsonParser.colWrite(jongCd, keyname, "jongCd", items_jsonObject);
-								JsonParser.colWrite(cdNm, keyname, "cdNm", items_jsonObject);
-								JsonParser.colWrite(gubunFl, keyname, "gubunFl", items_jsonObject);
-								JsonParser.colWrite(sortSeq, keyname, "sortSeq", items_jsonObject);
+								if(keyname.equals("comCd")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										comCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										comCd = " ";
+									}
+								}
+								if(keyname.equals("jongCd")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										jongCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										jongCd = " ";
+									}
+								}
+								if(keyname.equals("cdNm")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										cdNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										cdNm = " ";
+									}
+								}
+								if(keyname.equals("gubunFl")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										gubunFl = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										gubunFl = " ";
+									}
+								}
+								if(keyname.equals("sortSeq")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										sortSeq = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										sortSeq = " ";
+									}
+								}
+								
 
 							}
+							
+							// step 4. 파일에 쓰기
+							try {
+								PrintWriter pw = new PrintWriter(
+										new BufferedWriter(new FileWriter(file, true)));
 
-							// 한번에 문자열 합침
-							resultSb.append(resultCode);
-							resultSb.append("|^");
-							resultSb.append(resultMsg);
-							resultSb.append("|^");
-							resultSb.append(comCd);
-							resultSb.append("|^");
-							resultSb.append(jongCd);
-							resultSb.append("|^");
-							resultSb.append(cdNm);
-							resultSb.append("|^");
-							resultSb.append(gubunFl);
-							resultSb.append("|^");
-							resultSb.append(sortSeq);
-							resultSb.append(System.getProperty("line.separator"));
+								pw.write(resultCode); 
+								pw.write("|^");
+								pw.write(resultMsg); 
+								pw.write("|^");
+								pw.write(comCd); 
+								pw.write("|^");
+								pw.write(jongCd); 
+								pw.write("|^");
+								pw.write(cdNm); 
+								pw.write("|^");
+								pw.write(gubunFl); 
+								pw.write("|^");
+								pw.write(sortSeq); 
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}			
+
+							
 
 						} else if (items.get("item") instanceof JSONArray) {
 
@@ -131,29 +177,74 @@ public class GetComCodeInfoInqire {
 
 									String keyname = iter.next();
 
-									JsonParser.colWrite(comCd, keyname, "comCd", item_obj);
-									JsonParser.colWrite(jongCd, keyname, "jongCd", item_obj);
-									JsonParser.colWrite(cdNm, keyname, "cdNm", item_obj);
-									JsonParser.colWrite(gubunFl, keyname, "gubunFl", item_obj);
-									JsonParser.colWrite(sortSeq, keyname, "sortSeq", item_obj);
+									if(keyname.equals("comCd")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											comCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											comCd = " ";
+										}
+									}
+									if(keyname.equals("jongCd")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											jongCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											jongCd = " ";
+										}
+									}
+									if(keyname.equals("cdNm")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											cdNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											cdNm = " ";
+										}
+									}
+									if(keyname.equals("gubunFl")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											gubunFl = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											gubunFl = " ";
+										}
+									}
+									if(keyname.equals("sortSeq")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											sortSeq = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											sortSeq = " ";
+										}
+									}
 
 								}
 
-								// 한번에 문자열 합침
-								resultSb.append(resultCode);
-								resultSb.append("|^");
-								resultSb.append(resultMsg);
-								resultSb.append("|^");
-								resultSb.append(comCd);
-								resultSb.append("|^");
-								resultSb.append(jongCd);
-								resultSb.append("|^");
-								resultSb.append(cdNm);
-								resultSb.append("|^");
-								resultSb.append(gubunFl);
-								resultSb.append("|^");
-								resultSb.append(sortSeq);
-								resultSb.append(System.getProperty("line.separator"));
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
+
+									pw.write(resultCode); 
+									pw.write("|^");
+									pw.write(resultMsg); 
+									pw.write("|^");
+									pw.write(comCd); 
+									pw.write("|^");
+									pw.write(jongCd); 
+									pw.write("|^");
+									pw.write(cdNm); 
+									pw.write("|^");
+									pw.write(gubunFl); 
+									pw.write("|^");
+									pw.write(sortSeq); 
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}	
 
 							}
 
@@ -163,18 +254,6 @@ public class GetComCodeInfoInqire {
 
 					} else {
 						System.out.println("parsing error!!");
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

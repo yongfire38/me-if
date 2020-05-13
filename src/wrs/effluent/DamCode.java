@@ -77,12 +77,6 @@ public class DamCode {
 
 					// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer damcd = new StringBuffer(" "); // 댐코드
-					StringBuffer damnm = new StringBuffer(" "); // 댐명칭
-					StringBuffer seqno = new StringBuffer(" "); // 순번
-
 					for (int i = 1; i <= pageCount; i++) {
 
 						json = JsonParser.parseWatJson(service_url, service_key, String.valueOf(i));
@@ -109,6 +103,10 @@ public class DamCode {
 						} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 							System.out.println("data not exist!!");
 						} else if (resultCode.equals("00")) {
+							
+							String damcd = " "; // 댐코드
+							String damnm = " "; // 댐명칭
+							String seqno = " "; // 순번
 
 							JSONObject items = (JSONObject) body.get("items");
 
@@ -124,24 +122,55 @@ public class DamCode {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									JsonParser.colWrite(damcd, keyname, "damcd", items_jsonObject);
-									JsonParser.colWrite(damnm, keyname, "damnm", items_jsonObject);
-									JsonParser.colWrite(seqno, keyname, "seqno", items_jsonObject);
+									
+									if(keyname.equals("damcd")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											damcd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											damcd = " ";
+										}
+									}
+									if(keyname.equals("damnm")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											damnm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											damnm = " ";
+										}
+									}
+									if(keyname.equals("seqno")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											seqno = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											seqno = " ";
+										}
+									}
 
 								}
+								
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
 
-								// 한번에 문자열 합침
-								resultSb.append(resultCode);
-								resultSb.append("|^");
-								resultSb.append(resultMsg);
-								resultSb.append("|^");
-								resultSb.append(damcd);
-								resultSb.append("|^");
-								resultSb.append(damnm);
-								resultSb.append("|^");
-								resultSb.append(seqno);
-								resultSb.append(System.getProperty("line.separator"));
+									pw.write(resultCode);
+									pw.write("|^");
+									pw.write(resultMsg);
+									pw.write("|^");
+									pw.write(damcd);
+									pw.write("|^");
+									pw.write(damnm);
+									pw.write("|^");
+									pw.write(seqno);
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 
 							} else if (items.get("item") instanceof JSONArray) {
 
@@ -159,23 +188,54 @@ public class DamCode {
 
 										String keyname = iter.next();
 
-										JsonParser.colWrite(damcd, keyname, "damcd", item_obj);
-										JsonParser.colWrite(damnm, keyname, "damnm", item_obj);
-										JsonParser.colWrite(seqno, keyname, "seqno", item_obj);
+										if(keyname.equals("damcd")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												damcd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												damcd = " ";
+											}
+										}
+										if(keyname.equals("damnm")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												damnm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												damnm = " ";
+											}
+										}
+										if(keyname.equals("seqno")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												seqno = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												seqno = " ";
+											}
+										}
 
 									}
 
-									// 한번에 문자열 합침
-									resultSb.append(resultCode);
-									resultSb.append("|^");
-									resultSb.append(resultMsg);
-									resultSb.append("|^");
-									resultSb.append(damcd);
-									resultSb.append("|^");
-									resultSb.append(damnm);
-									resultSb.append("|^");
-									resultSb.append(seqno);
-									resultSb.append(System.getProperty("line.separator"));
+									// step 4. 파일에 쓰기
+									try {
+										PrintWriter pw = new PrintWriter(
+												new BufferedWriter(new FileWriter(file, true)));
+
+										pw.write(resultCode);
+										pw.write("|^");
+										pw.write(resultMsg);
+										pw.write("|^");
+										pw.write(damcd);
+										pw.write("|^");
+										pw.write(damnm);
+										pw.write("|^");
+										pw.write(seqno);
+										pw.println();
+										pw.flush();
+										pw.close();
+
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
 
 								}
 
@@ -191,18 +251,6 @@ public class DamCode {
 
 						//Thread.sleep(1000);
 
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

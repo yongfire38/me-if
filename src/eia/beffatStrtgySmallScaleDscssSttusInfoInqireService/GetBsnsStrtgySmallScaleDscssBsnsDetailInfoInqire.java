@@ -52,18 +52,6 @@ public class GetBsnsStrtgySmallScaleDscssBsnsDetailInfoInqire {
 
 					// step 2. 전체 파싱
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer perCd = new StringBuffer(" "); // 사전환경성검토코드
-					StringBuffer bizNm = new StringBuffer(" "); // 사업명
-					StringBuffer ccilOrganCd = new StringBuffer(" "); // 협의기관
-					StringBuffer ctcMemNm = new StringBuffer(" "); // 담당자
-					StringBuffer ctcMemTeam = new StringBuffer(" "); // 담당부서
-					StringBuffer ctcMemEmail = new StringBuffer(" "); // E-mail
-					StringBuffer ctcMemTel = new StringBuffer(" "); // 전화번호
-					StringBuffer ctcMemFax = new StringBuffer(" "); // Fax 번호
-					StringBuffer ccilResFl = new StringBuffer(" "); // 협의결과
-
 					JSONParser parser = new JSONParser();
 					JSONObject obj = (JSONObject) parser.parse(json);
 					JSONObject response = (JSONObject) obj.get("response");
@@ -80,7 +68,16 @@ public class GetBsnsStrtgySmallScaleDscssBsnsDetailInfoInqire {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 						
-
+						String perCd = " "; // 사전환경성검토코드
+						String bizNm = " "; // 사업명
+						String ccilOrganCd = " "; // 협의기관
+						String ctcMemNm = " "; // 담당자
+						String ctcMemTeam = " "; // 담당부서
+						String ctcMemEmail = " "; // E-mail
+						String ctcMemTel = " "; // 전화번호
+						String ctcMemFax = " "; // Fax 번호
+						String ccilResFl = " "; // 협의결과
+						
 						JSONObject items = (JSONObject) body.get("items");
 
 						// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
@@ -95,42 +92,108 @@ public class GetBsnsStrtgySmallScaleDscssBsnsDetailInfoInqire {
 							while (iter.hasNext()) {
 
 								String keyname = iter.next();
+								
+								if(keyname.equals("perCd")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										perCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										perCd = " ";
+									}
+								}
+								if(keyname.equals("bizNm")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										bizNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										bizNm = " ";
+									}
+								}
+								if(keyname.equals("ctcMemNm")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										ctcMemNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										ctcMemNm = " ";
+									}
+								}
+								if(keyname.equals("ctcMemTeam")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										ctcMemTeam = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										ctcMemTeam = " ";
+									}
+								}
+								if(keyname.equals("ctcMemEmail")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										ctcMemEmail = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										ctcMemEmail = " ";
+									}
+								}
+								if(keyname.equals("ctcMemTel")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										ctcMemTel = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										ctcMemTel = " ";
+									}
+								}
+								if(keyname.equals("ctcMemFax")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										ctcMemFax = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										ctcMemFax = " ";
+									}
+								}
+								if(keyname.equals("ccilResFl")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										ccilResFl = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										ccilResFl = " ";
+									}
+								}
 
-								JsonParser.colWrite(perCd, keyname, "perCd", items_jsonObject);
-								JsonParser.colWrite(bizNm, keyname, "bizNm", items_jsonObject);
-								JsonParser.colWrite(ccilOrganCd, keyname, "ccilOrganCd", items_jsonObject);
-								JsonParser.colWrite(ctcMemNm, keyname, "ctcMemNm", items_jsonObject);
-								JsonParser.colWrite(ctcMemTeam, keyname, "ctcMemTeam", items_jsonObject);
-								JsonParser.colWrite(ctcMemEmail, keyname, "ctcMemEmail", items_jsonObject);
-								JsonParser.colWrite(ctcMemTel, keyname, "ctcMemTel", items_jsonObject);
-								JsonParser.colWrite(ctcMemFax, keyname, "ctcMemFax", items_jsonObject);
-								JsonParser.colWrite(ccilResFl, keyname, "ccilResFl", items_jsonObject);
 
 							}
 
-							// 한번에 문자열 합침
-							resultSb.append(resultCode);
-							resultSb.append("|^");
-							resultSb.append(resultMsg);
-							resultSb.append("|^");
-							resultSb.append(perCd);
-							resultSb.append("|^");
-							resultSb.append(bizNm);
-							resultSb.append("|^");
-							resultSb.append(ccilOrganCd);
-							resultSb.append("|^");
-							resultSb.append(ctcMemNm);
-							resultSb.append("|^");
-							resultSb.append(ctcMemTeam);
-							resultSb.append("|^");
-							resultSb.append(ctcMemEmail);
-							resultSb.append("|^");
-							resultSb.append(ctcMemTel);
-							resultSb.append("|^");
-							resultSb.append(ctcMemFax);
-							resultSb.append("|^");
-							resultSb.append(ccilResFl);
-							resultSb.append(System.getProperty("line.separator"));
+							// step 4. 파일에 쓰기
+							try {
+								PrintWriter pw = new PrintWriter(
+										new BufferedWriter(new FileWriter(file, true)));
+
+								pw.write(resultCode); 
+								pw.write("|^");
+								pw.write(resultMsg); 
+								pw.write("|^");
+								pw.write(perCd); 
+								pw.write("|^");
+								pw.write(bizNm); 
+								pw.write("|^");
+								pw.write(ccilOrganCd); 
+								pw.write("|^");
+								pw.write(ctcMemNm); 
+								pw.write("|^");
+								pw.write(ctcMemTeam); 
+								pw.write("|^");
+								pw.write(ctcMemEmail); 
+								pw.write("|^");
+								pw.write(ctcMemTel); 
+								pw.write("|^");
+								pw.write(ctcMemFax); 
+								pw.write("|^");
+								pw.write(ccilResFl);  
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 
 						} else if (items.get("item") instanceof JSONArray) {
 
@@ -148,41 +211,106 @@ public class GetBsnsStrtgySmallScaleDscssBsnsDetailInfoInqire {
 
 									String keyname = iter.next();
 
-									JsonParser.colWrite(perCd, keyname, "perCd", item_obj);
-									JsonParser.colWrite(bizNm, keyname, "bizNm", item_obj);
-									JsonParser.colWrite(ccilOrganCd, keyname, "ccilOrganCd", item_obj);
-									JsonParser.colWrite(ctcMemNm, keyname, "ctcMemNm", item_obj);
-									JsonParser.colWrite(ctcMemTeam, keyname, "ctcMemTeam", item_obj);
-									JsonParser.colWrite(ctcMemEmail, keyname, "ctcMemEmail", item_obj);
-									JsonParser.colWrite(ctcMemTel, keyname, "ctcMemTel", item_obj);
-									JsonParser.colWrite(ctcMemFax, keyname, "ctcMemFax", item_obj);
-									JsonParser.colWrite(ccilResFl, keyname, "ccilResFl", item_obj);
+									if(keyname.equals("perCd")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											perCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											perCd = " ";
+										}
+									}
+									if(keyname.equals("bizNm")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											bizNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											bizNm = " ";
+										}
+									}
+									if(keyname.equals("ctcMemNm")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											ctcMemNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											ctcMemNm = " ";
+										}
+									}
+									if(keyname.equals("ctcMemTeam")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											ctcMemTeam = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											ctcMemTeam = " ";
+										}
+									}
+									if(keyname.equals("ctcMemEmail")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											ctcMemEmail = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											ctcMemEmail = " ";
+										}
+									}
+									if(keyname.equals("ctcMemTel")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											ctcMemTel = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											ctcMemTel = " ";
+										}
+									}
+									if(keyname.equals("ctcMemFax")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											ctcMemFax = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											ctcMemFax = " ";
+										}
+									}
+									if(keyname.equals("ccilResFl")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											ccilResFl = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											ccilResFl = " ";
+										}
+									}
 
 								}
 
-								// 한번에 문자열 합침
-								resultSb.append(resultCode);
-								resultSb.append("|^");
-								resultSb.append(resultMsg);
-								resultSb.append("|^");
-								resultSb.append(perCd);
-								resultSb.append("|^");
-								resultSb.append(bizNm);
-								resultSb.append("|^");
-								resultSb.append(ccilOrganCd);
-								resultSb.append("|^");
-								resultSb.append(ctcMemNm);
-								resultSb.append("|^");
-								resultSb.append(ctcMemTeam);
-								resultSb.append("|^");
-								resultSb.append(ctcMemEmail);
-								resultSb.append("|^");
-								resultSb.append(ctcMemTel);
-								resultSb.append("|^");
-								resultSb.append(ctcMemFax);
-								resultSb.append("|^");
-								resultSb.append(ccilResFl);
-								resultSb.append(System.getProperty("line.separator"));
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
+
+									pw.write(resultCode); 
+									pw.write("|^");
+									pw.write(resultMsg); 
+									pw.write("|^");
+									pw.write(perCd); 
+									pw.write("|^");
+									pw.write(bizNm); 
+									pw.write("|^");
+									pw.write(ccilOrganCd); 
+									pw.write("|^");
+									pw.write(ctcMemNm); 
+									pw.write("|^");
+									pw.write(ctcMemTeam); 
+									pw.write("|^");
+									pw.write(ctcMemEmail); 
+									pw.write("|^");
+									pw.write(ctcMemTel); 
+									pw.write("|^");
+									pw.write(ctcMemFax); 
+									pw.write("|^");
+									pw.write(ccilResFl);  
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 
 							}
 
@@ -190,18 +318,6 @@ public class GetBsnsStrtgySmallScaleDscssBsnsDetailInfoInqire {
 							System.out.println("parsing error!!");
 						}
 
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

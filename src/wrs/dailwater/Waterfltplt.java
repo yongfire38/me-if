@@ -76,10 +76,8 @@ public class Waterfltplt {
 
 					// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer fltplt = new StringBuffer(" "); // 정수장코드
-					StringBuffer fltpltnm = new StringBuffer(" "); // 정수장명
+					String fltplt = " "; // 정수장코드
+					String fltpltnm = " "; // 정수장명
 
 					for (int i = 1; i <= pageCount; i++) {
 
@@ -124,20 +122,45 @@ public class Waterfltplt {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
+									
+									if(keyname.equals("fltplt")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											fltplt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											fltplt = " ";
+										}
+									}
+									if(keyname.equals("fltpltnm")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											fltpltnm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											fltpltnm = " ";
+										}
+									}
 
-									JsonParser.colWrite(fltplt, keyname, "fltplt", items_jsonObject);
-									JsonParser.colWrite(fltpltnm, keyname, "fltpltnm", items_jsonObject);
 								}
+								
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
 
-								// 한번에 문자열 합침
-								resultSb.append(fltplt);
-								resultSb.append("|^");
-								resultSb.append(fltpltnm);
-								resultSb.append("|^");
-								resultSb.append(numOfRows_str);
-								resultSb.append("|^");
-								resultSb.append(String.valueOf(i));
-								resultSb.append(System.getProperty("line.separator"));
+									pw.write(fltplt);
+									pw.write("|^");
+									pw.write(fltpltnm);
+									pw.write("|^");
+									pw.write(numOfRows_str);
+									pw.write("|^");
+									pw.write(String.valueOf(i));
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 
 							} else if (items.get("item") instanceof JSONArray) {
 
@@ -155,19 +178,43 @@ public class Waterfltplt {
 
 										String keyname = iter.next();
 
-										JsonParser.colWrite(fltplt, keyname, "fltplt", item_obj);
-										JsonParser.colWrite(fltpltnm, keyname, "fltpltnm", item_obj);
+										if(keyname.equals("fltplt")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												fltplt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												fltplt = " ";
+											}
+										}
+										if(keyname.equals("fltpltnm")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												fltpltnm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												fltpltnm = " ";
+											}
+										}
 									}
 
-									// 한번에 문자열 합침
-									resultSb.append(fltplt);
-									resultSb.append("|^");
-									resultSb.append(fltpltnm);
-									resultSb.append("|^");
-									resultSb.append(numOfRows_str);
-									resultSb.append("|^");
-									resultSb.append(String.valueOf(i));
-									resultSb.append(System.getProperty("line.separator"));
+									// step 4. 파일에 쓰기
+									try {
+										PrintWriter pw = new PrintWriter(
+												new BufferedWriter(new FileWriter(file, true)));
+
+										pw.write(fltplt);
+										pw.write("|^");
+										pw.write(fltpltnm);
+										pw.write("|^");
+										pw.write(numOfRows_str);
+										pw.write("|^");
+										pw.write(String.valueOf(i));
+										pw.println();
+										pw.flush();
+										pw.close();
+
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
 
 								}
 
@@ -181,18 +228,6 @@ public class Waterfltplt {
 
 						//Thread.sleep(1000);
 
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

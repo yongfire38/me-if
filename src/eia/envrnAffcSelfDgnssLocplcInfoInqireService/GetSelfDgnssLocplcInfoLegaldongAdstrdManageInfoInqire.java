@@ -53,13 +53,6 @@ public class GetSelfDgnssLocplcInfoLegaldongAdstrdManageInfoInqire {
 
 						// step 2. 전체 파싱
 
-						StringBuffer resultSb = new StringBuffer("");
-
-						StringBuffer sido = new StringBuffer(" "); // 시도
-						StringBuffer sgg = new StringBuffer(" "); // 시/군/구
-						StringBuffer emd = new StringBuffer(" "); // 읍/면/동
-						StringBuffer ri = new StringBuffer(" "); // 리
-
 						JSONParser parser = new JSONParser();
 						JSONObject obj = (JSONObject) parser.parse(json);
 						JSONObject response = (JSONObject) obj.get("response");
@@ -77,7 +70,11 @@ public class GetSelfDgnssLocplcInfoLegaldongAdstrdManageInfoInqire {
 							System.out.println("data not exist!!");
 						} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 							
-							
+
+							String sido = " "; // 시도
+							String sgg = " "; // 시/군/구
+							String emd = " "; // 읍/면/동
+							String ri = " ";  // 리
 
 							JSONObject items = (JSONObject) body.get("items");
 
@@ -93,31 +90,69 @@ public class GetSelfDgnssLocplcInfoLegaldongAdstrdManageInfoInqire {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									JsonParser.colWrite(sido, keyname, "sido", items_jsonObject);
-									JsonParser.colWrite(sgg, keyname, "sgg", items_jsonObject);
-									JsonParser.colWrite(emd, keyname, "emd", items_jsonObject);
-									JsonParser.colWrite(ri, keyname, "ri", items_jsonObject);
+									
+									if(keyname.equals("sido")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											sido = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											sido = " ";
+										}
+									}
+									if(keyname.equals("sgg")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											sgg = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											sgg = " ";
+										}
+									}
+									if(keyname.equals("emd")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											emd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											emd = " ";
+										}
+									}
+									if(keyname.equals("ri")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											ri = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											ri = " ";
+										}
+									}
 
 								}
+								
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
 
-								// 한번에 문자열 합침
-								resultSb.append(args[0]);
-								resultSb.append("|^");
-								resultSb.append(args[1]);
-								resultSb.append("|^");
-								resultSb.append(resultCode);
-								resultSb.append("|^");
-								resultSb.append(resultMsg);
-								resultSb.append("|^");
-								resultSb.append(sido);
-								resultSb.append("|^");
-								resultSb.append(sgg);
-								resultSb.append("|^");
-								resultSb.append(emd);
-								resultSb.append("|^");
-								resultSb.append(ri);
-								resultSb.append(System.getProperty("line.separator"));
+									pw.write(args[0]); 
+									pw.write("|^");
+									pw.write(args[1]); 
+									pw.write("|^");
+									pw.write(resultCode); 
+									pw.write("|^");
+									pw.write(resultMsg); 
+									pw.write("|^");
+									pw.write(sido); 
+									pw.write("|^");
+									pw.write(sgg); 
+									pw.write("|^");
+									pw.write(emd); 
+									pw.write("|^");
+									pw.write(ri);  
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}			
 
 							} else if (items.get("item") instanceof JSONArray) {
 
@@ -135,30 +170,68 @@ public class GetSelfDgnssLocplcInfoLegaldongAdstrdManageInfoInqire {
 
 										String keyname = iter.next();
 
-										JsonParser.colWrite(sido, keyname, "sido", item_obj);
-										JsonParser.colWrite(sgg, keyname, "sgg", item_obj);
-										JsonParser.colWrite(emd, keyname, "emd", item_obj);
-										JsonParser.colWrite(ri, keyname, "ri", item_obj);
+										if(keyname.equals("sido")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												sido = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												sido = " ";
+											}
+										}
+										if(keyname.equals("sgg")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												sgg = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												sgg = " ";
+											}
+										}
+										if(keyname.equals("emd")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												emd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												emd = " ";
+											}
+										}
+										if(keyname.equals("ri")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												ri = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												ri = " ";
+											}
+										}
 
 									}
 
-									// 한번에 문자열 합침
-									resultSb.append(args[0]);
-									resultSb.append("|^");
-									resultSb.append(args[1]);
-									resultSb.append("|^");
-									resultSb.append(resultCode);
-									resultSb.append("|^");
-									resultSb.append(resultMsg);
-									resultSb.append("|^");
-									resultSb.append(sido);
-									resultSb.append("|^");
-									resultSb.append(sgg);
-									resultSb.append("|^");
-									resultSb.append(emd);
-									resultSb.append("|^");
-									resultSb.append(ri);
-									resultSb.append(System.getProperty("line.separator"));
+									// step 4. 파일에 쓰기
+									try {
+										PrintWriter pw = new PrintWriter(
+												new BufferedWriter(new FileWriter(file, true)));
+
+										pw.write(args[0]); 
+										pw.write("|^");
+										pw.write(args[1]); 
+										pw.write("|^");
+										pw.write(resultCode); 
+										pw.write("|^");
+										pw.write(resultMsg); 
+										pw.write("|^");
+										pw.write(sido); 
+										pw.write("|^");
+										pw.write(sgg); 
+										pw.write("|^");
+										pw.write(emd); 
+										pw.write("|^");
+										pw.write(ri);  
+										pw.println();
+										pw.flush();
+										pw.close();
+
+									} catch (IOException e) {
+										e.printStackTrace();
+									}	
 								}
 
 							} else {
@@ -167,18 +240,6 @@ public class GetSelfDgnssLocplcInfoLegaldongAdstrdManageInfoInqire {
 
 						} else {
 							System.out.println("parsing error!!");
-						}
-
-						// step 4. 파일에 쓰기
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write(resultSb.toString());
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
 						}
 
 						System.out.println("parsing complete!");

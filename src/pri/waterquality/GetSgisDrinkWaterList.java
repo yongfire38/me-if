@@ -74,100 +74,7 @@ public class GetSgisDrinkWaterList {
 
 					// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer resultCode_col = new StringBuffer(" "); // 결과코드
-					StringBuffer resultMsg_col = new StringBuffer(" "); // 결과메시지
-					StringBuffer rowno = new StringBuffer(" "); // 순번
-					StringBuffer legacyCodeNo = new StringBuffer(" "); // 지점번호
-					StringBuffer spotNm = new StringBuffer(" "); // 지점명
-					StringBuffer spotStdCode = new StringBuffer(" "); // 지점표준코드
-					StringBuffer infoCreatlnsttNm = new StringBuffer(" "); // 정보생성기관명칭
-					StringBuffer doNm = new StringBuffer(" "); // 시도
-					StringBuffer ctyNm = new StringBuffer(" "); // 시군구
-					StringBuffer adres = new StringBuffer(" "); // 주소
-					StringBuffer admcode = new StringBuffer(" "); // 법정동코드
-					StringBuffer ablAt = new StringBuffer(" "); // 폐지여부
-					StringBuffer ablDe = new StringBuffer(" "); // 폐지일자
-					StringBuffer dayAvg = new StringBuffer(" "); // 1일평균이용자수
-					StringBuffer charge = new StringBuffer(" "); // 담당자
-					StringBuffer insDate = new StringBuffer(" "); // 설치일자
-					StringBuffer delYn = new StringBuffer(" "); // 삭제여부(추정)
-					StringBuffer office = new StringBuffer(" "); // 담당자명
-					StringBuffer officeTel = new StringBuffer(" "); // 담당자연락처
-					StringBuffer buildingNo = new StringBuffer(" "); // 건물번호
-					StringBuffer locJibun = new StringBuffer(" "); // 소재지_지번
-					StringBuffer commt = new StringBuffer(" "); // 비고
-					StringBuffer yyyy = new StringBuffer(" "); // 년
-					StringBuffer period = new StringBuffer(" "); // 분기
-					StringBuffer samp_date = new StringBuffer(" "); // 채수일자
-					StringBuffer inspCheck = new StringBuffer(" "); // 검사여부
-					StringBuffer unlnspDesc = new StringBuffer(" "); // 미검사사유
-					StringBuffer insp_date = new StringBuffer(" "); // 검사일자
-					StringBuffer acceptYn = new StringBuffer(" "); // 적합여부
-					StringBuffer suit = new StringBuffer(" "); // 적합
-					StringBuffer unsuit = new StringBuffer(" "); // 부적합
-					StringBuffer itemGenbaclow = new StringBuffer(" "); // 일반세균저온
-					StringBuffer itemGenbacmid = new StringBuffer(" "); // 일반세균중온
-					StringBuffer itemTotbac = new StringBuffer(" "); // 총대장균군
-					StringBuffer itemBac = new StringBuffer(" "); // 대장균
-					StringBuffer itemFestr = new StringBuffer(" "); // 분원성대장균군
-					StringBuffer itemBranfungus = new StringBuffer(" "); // 분원성연쇄상구균
-					StringBuffer itemGrgungus = new StringBuffer(" "); // 녹농균
-					StringBuffer itemSalmol = new StringBuffer(" "); // 살모넬라
-					StringBuffer itemSegel = new StringBuffer(" "); // 쉬겔라
-					StringBuffer itemSulfungus = new StringBuffer(" "); // 아황산환원혐기성포자형성균
-					StringBuffer itemYersinia = new StringBuffer(" "); // 여시니아균
-					StringBuffer itemPb = new StringBuffer(" "); // 납
-					StringBuffer itemF = new StringBuffer(" "); // 불소
-					StringBuffer itemGas = new StringBuffer(" "); // 비소
-					StringBuffer itemSe = new StringBuffer(" "); // 셀레늄
-					StringBuffer itemHg = new StringBuffer(" "); // 수은
-					StringBuffer itemCn = new StringBuffer(" "); // 시안
-					StringBuffer itemCr6 = new StringBuffer(" "); // 크롬
-					StringBuffer itemNo3am = new StringBuffer(" "); // 암모니아성질소
-					StringBuffer itemNo3n = new StringBuffer(" "); // 질산성질소
-					StringBuffer itemCd = new StringBuffer(" "); // 카드뮴
-					StringBuffer itemBoron = new StringBuffer(" "); // 보론
-					StringBuffer itemBro3 = new StringBuffer(" "); // 브론산염
-					StringBuffer itemUran = new StringBuffer(" "); // 우라늄
-					StringBuffer itemPhenol = new StringBuffer(" "); // 페놀
-					StringBuffer itemDiazn = new StringBuffer(" "); // 다이아지논
-					StringBuffer itemParat = new StringBuffer(" "); // 파라티온
-					StringBuffer itemPenitro = new StringBuffer(" "); // 페니트로티온
-					StringBuffer itemCarbaryl = new StringBuffer(" "); // 카바릴
-					StringBuffer itemTcet = new StringBuffer(" "); // 1.1.1-트리클로로에탄
-					StringBuffer itemTece = new StringBuffer(" "); // 테트라클로로에틸렌
-					StringBuffer itemTce = new StringBuffer(" "); // 트리클로로에틸렌
-					StringBuffer itemDcm = new StringBuffer(" "); // 디클로로메탄
-					StringBuffer itemBenzene = new StringBuffer(" "); // 벤젠
-					StringBuffer itemToluene = new StringBuffer(" "); // 톨루엔
-					StringBuffer itemEtilben = new StringBuffer(" "); // 에틸벤젠
-					StringBuffer itemXylene = new StringBuffer(" "); // 자일렌
-					StringBuffer itemDce = new StringBuffer(" "); // 1.1디클로로에틸렌
-					StringBuffer itemCcl4 = new StringBuffer(" "); // 사염화탄소
-					StringBuffer itemDbcp = new StringBuffer(" "); // 1,2-디브로모-3-클로로프로판
-					StringBuffer itemC4h8o2 = new StringBuffer(" "); // 1.4-다이옥산
-					StringBuffer itemGradient = new StringBuffer(" "); // 경도
-					StringBuffer itemKmn = new StringBuffer(" "); // 과망간산칼륨소비량
-					StringBuffer itemSmell = new StringBuffer(" "); // 냄새
-					StringBuffer itemColor = new StringBuffer(" "); // 색도
-					StringBuffer itemCu = new StringBuffer(" "); // 동
-					StringBuffer itemAbs = new StringBuffer(" "); // 세제(음이온계면활성제)
-					StringBuffer itemPh = new StringBuffer(" "); // 수소이온농도
-					StringBuffer itemZn = new StringBuffer(" "); // 아연
-					StringBuffer itemCl = new StringBuffer(" "); // 염소이온
-					StringBuffer itemFe = new StringBuffer(" "); // 철
-					StringBuffer itemMn = new StringBuffer(" "); // 망간
-					StringBuffer itemMuddy = new StringBuffer(" "); // 탁도
-					StringBuffer itemSo42 = new StringBuffer(" "); // 황산이온
-					StringBuffer itemAl = new StringBuffer(" "); // 알루미늄
-					StringBuffer inspRst = new StringBuffer(" "); // 부적합항목
-					StringBuffer failDesc = new StringBuffer(" "); // 부적합시 조치사항
-					StringBuffer numOfRows = new StringBuffer(" "); // 한 페이지 결과
-																	// 수
-					StringBuffer pageNo_str = new StringBuffer(" "); // 페이지 번호
-					StringBuffer totalCount = new StringBuffer(" "); // 전체 결과 수
+					
 
 					for (int i = 1; i <= pageCount; i++) {
 
@@ -185,12 +92,13 @@ public class GetSgisDrinkWaterList {
 						JSONObject getSgisDrinkWaterList = (JSONObject) obj.get("getSgisDrinkWaterList");
 
 						JSONObject header = (JSONObject) getSgisDrinkWaterList.get("header");
+						
+						String resultCode_col = " "; // 결과코드
+						String resultMsg_col = " "; // 결과메시지
 
-						resultCode_col.setLength(0);
-						resultCode_col.append(header.get("code").toString().trim()); // 결과
+						resultCode_col = header.get("code").toString().trim(); // 결과
 																						// 코드
-						resultMsg_col.setLength(0);
-						resultMsg_col.append(header.get("message").toString().trim()); // 결과
+						resultMsg_col = header.get("message").toString().trim(); // 결과
 																						// 메시지
 						
 						if (!(resultCode_col.toString().equals("00"))) {
@@ -198,14 +106,95 @@ public class GetSgisDrinkWaterList {
 									+ "::resultMsg::" + resultMsg_col.toString());
 						} else if (resultCode_col.toString().equals("00")) {
 							
-							numOfRows.setLength(0);
-							numOfRows.append(getSgisDrinkWaterList.get("numOfRows").toString().trim());
-
-							pageNo_str.setLength(0);
-							pageNo_str.append(String.valueOf(i).trim());
-
-							totalCount.setLength(0);
-							totalCount.append(getSgisDrinkWaterList.get("totalCount").toString().trim());
+							String rowno =  " "; // 순번
+							String legacyCodeNo =  " "; // 지점번호
+							String spotNm =  " "; // 지점명
+							String spotStdCode =  " "; // 지점표준코드
+							String infoCreatlnsttNm =  " "; // 정보생성기관명칭
+							String doNm =  " "; // 시도
+							String ctyNm =  " "; // 시군구
+							String adres =  " "; // 주소
+							String admcode =  " "; // 법정동코드
+							String ablAt =  " "; // 폐지여부
+							String ablDe =  " "; // 폐지일자
+							String dayAvg =  " "; // 1일평균이용자수
+							String charge =  " "; // 담당자
+							String insDate =  " "; // 설치일자
+							String delYn =  " "; // 삭제여부(추정)
+							String office =  " "; // 담당자명
+							String officeTel =  " "; // 담당자연락처
+							String buildingNo =  " "; // 건물번호
+							String locJibun =  " "; // 소재지_지번
+							String commt =  " "; // 비고
+							String yyyy =  " "; // 년
+							String period =  " "; // 분기
+							String samp_date =  " "; // 채수일자
+							String inspCheck =  " "; // 검사여부
+							String unlnspDesc =  " "; // 미검사사유
+							String insp_date =  " "; // 검사일자
+							String acceptYn =  " "; // 적합여부
+							String suit =  " "; // 적합
+							String unsuit =  " "; // 부적합
+							String itemGenbaclow =  " "; // 일반세균저온
+							String itemGenbacmid =  " "; // 일반세균중온
+							String itemTotbac =  " "; // 총대장균군
+							String itemBac =  " "; // 대장균
+							String itemFestr =  " "; // 분원성대장균군
+							String itemBranfungus =  " "; // 분원성연쇄상구균
+							String itemGrgungus =  " "; // 녹농균
+							String itemSalmol =  " "; // 살모넬라
+							String itemSegel =  " "; // 쉬겔라
+							String itemSulfungus =  " "; // 아황산환원혐기성포자형성균
+							String itemYersinia =  " "; // 여시니아균
+							String itemPb =  " "; // 납
+							String itemF =  " "; // 불소
+							String itemGas =  " "; // 비소
+							String itemSe =  " "; // 셀레늄
+							String itemHg =  " "; // 수은
+							String itemCn =  " "; // 시안
+							String itemCr6 =  " "; // 크롬
+							String itemNo3am =  " "; // 암모니아성질소
+							String itemNo3n =  " "; // 질산성질소
+							String itemCd =  " "; // 카드뮴
+							String itemBoron =  " "; // 보론
+							String itemBro3 =  " "; // 브론산염
+							String itemUran =  " "; // 우라늄
+							String itemPhenol =  " "; // 페놀
+							String itemDiazn =  " "; // 다이아지논
+							String itemParat =  " "; // 파라티온
+							String itemPenitro = " "; // 페니트로티온
+							String itemCarbaryl =  " "; // 카바릴
+							String itemTcet =  " "; // 1.1.1-트리클로로에탄
+							String itemTece =  " "; // 테트라클로로에틸렌
+							String itemTce =  " "; // 트리클로로에틸렌
+							String itemDcm =  " "; // 디클로로메탄
+							String itemBenzene =  " "; // 벤젠
+							String itemToluene =  " "; // 톨루엔
+							String itemEtilben =  " "; // 에틸벤젠
+							String itemXylene =  " "; // 자일렌
+							String itemDce =  " "; // 1.1디클로로에틸렌
+							String itemCcl4 =  " "; // 사염화탄소
+							String itemDbcp =  " "; // 1,2-디브로모-3-클로로프로판
+							String itemC4h8o2 =  " "; // 1.4-다이옥산
+							String itemGradient =  " "; // 경도
+							String itemKmn =  " "; // 과망간산칼륨소비량
+							String itemSmell =  " "; // 냄새
+							String itemColor =  " "; // 색도
+							String itemCu =  " "; // 동
+							String itemAbs =  " "; // 세제(음이온계면활성제)
+							String itemPh =  " "; // 수소이온농도
+							String itemZn =  " "; // 아연
+							String itemCl =  " "; // 염소이온
+							String itemFe =  " "; // 철
+							String itemMn =  " "; // 망간
+							String itemMuddy =  " "; // 탁도
+							String itemSo42 =  " "; // 황산이온
+							String itemAl =  " "; // 알루미늄
+							String inspRst =  " "; // 부적합항목
+							String failDesc =  " "; // 부적합시 조치사항
+							String numOfRows =  " "; // 한 페이지 결과 수
+							String pageNo_str =  " "; // 페이지 번호
+							String totalCount =  " "; // 전체 결과 수
 
 							JSONArray items = (JSONArray) getSgisDrinkWaterList.get("item");
 
@@ -220,282 +209,907 @@ public class GetSgisDrinkWaterList {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									JsonParser.colWrite(rowno, keyname, "ROWNO", item);
-									JsonParser.colWrite(legacyCodeNo, keyname, "LEGACY_CODE_NO", item);
-									JsonParser.colWrite(spotNm, keyname, "SPOT_NM", item);
-									JsonParser.colWrite(spotStdCode, keyname, "SPOT_STD_CODE", item);
-									JsonParser.colWrite(infoCreatlnsttNm, keyname, "INFO_CREAT_INSTT_NM", item);
-									JsonParser.colWrite(doNm, keyname, "DO_NM", item);
-									JsonParser.colWrite(ctyNm, keyname, "CTY_NM", item);
-									JsonParser.colWrite(adres, keyname, "ADRES", item);
-									JsonParser.colWrite(admcode, keyname, "ADMCODE", item);
-									JsonParser.colWrite(ablAt, keyname, "ABL_AT", item);
-									JsonParser.colWrite(ablDe, keyname, "ABL_DE", item);
-									JsonParser.colWrite(dayAvg, keyname, "DAY_AVG", item);
-									JsonParser.colWrite(charge, keyname, "CHARGE", item);
-									JsonParser.colWrite_waterMeasuring(insDate, keyname, "INS_DATE", item);
-									JsonParser.colWrite(delYn, keyname, "DEL_YN", item);
-									JsonParser.colWrite(office, keyname, "OFFICE", item);
-									JsonParser.colWrite(officeTel, keyname, "OFFICE_TEL", item);
-									JsonParser.colWrite(buildingNo, keyname, "BUILDING_NO", item);
-									JsonParser.colWrite(locJibun, keyname, "LOC_JIBUN", item);
-									JsonParser.colWrite(commt, keyname, "COMMT", item);
-									JsonParser.colWrite(yyyy, keyname, "YYYY", item);
-									JsonParser.colWrite(period, keyname, "PERIOD", item);
-									JsonParser.colWrite(samp_date, keyname, "SAMP_DATE", item);
-									JsonParser.colWrite(inspCheck, keyname, "INSP_CHECK", item);
-									JsonParser.colWrite(unlnspDesc, keyname, "UN_INSP_DESC", item);
-									JsonParser.colWrite(insp_date, keyname, "INSP_DATE", item);
-									JsonParser.colWrite(acceptYn, keyname, "ACCEPT_YN", item);
-									JsonParser.colWrite(suit, keyname, "SUIT", item);
-									JsonParser.colWrite(unsuit, keyname, "UNSUIT", item);
-									JsonParser.colWrite(itemGenbaclow, keyname, "ITEM_GENBACLOW", item);
-									JsonParser.colWrite(itemGenbacmid, keyname, "ITEM_GENBACMID", item);
-									JsonParser.colWrite(itemTotbac, keyname, "ITEM_TOTBAC", item);
-									JsonParser.colWrite(itemBac, keyname, "ITEM_BAC", item);
-									JsonParser.colWrite(itemFestr, keyname, "ITEM_FESTR", item);
-									JsonParser.colWrite(itemBranfungus, keyname, "ITEM_BRANFUNGUS", item);
-									JsonParser.colWrite(itemGrgungus, keyname, "ITEM_GRGUNGUS", item);
-									JsonParser.colWrite(itemSalmol, keyname, "ITEM_SALMOL", item);
-									JsonParser.colWrite(itemSegel, keyname, "ITEM_SEGEL", item);
-									JsonParser.colWrite(itemSulfungus, keyname, "ITEM_SULFUNGUS", item);
-									JsonParser.colWrite(itemYersinia, keyname, "ITEM_YERSINIA", item);
-									JsonParser.colWrite(itemPb, keyname, "ITEM_PB", item);
-									JsonParser.colWrite(itemF, keyname, "ITEM_F", item);
-									JsonParser.colWrite(itemGas, keyname, "ITEM_GAS", item);
-									JsonParser.colWrite(itemSe, keyname, "ITEM_SE", item);
-									JsonParser.colWrite(itemHg, keyname, "ITEM_HG", item);
-									JsonParser.colWrite(itemCn, keyname, "ITEM_CN", item);
-									JsonParser.colWrite(itemCr6, keyname, "ITEM_CR6", item);
-									JsonParser.colWrite(itemNo3am, keyname, "ITEM_NO3AM", item);
-									JsonParser.colWrite(itemNo3n, keyname, "ITEM_NO3N", item);
-									JsonParser.colWrite(itemCd, keyname, "ITEM_CD", item);
-									JsonParser.colWrite(itemBoron, keyname, "ITEM_BORON", item);
-									JsonParser.colWrite(itemBro3, keyname, "ITEM_BRO3", item);
-									JsonParser.colWrite(itemUran, keyname, "ITEM_URAN", item);
-									JsonParser.colWrite(itemPhenol, keyname, "ITEM_PHENOL", item);
-									JsonParser.colWrite(itemDiazn, keyname, "ITEM_DIAZN", item);
-									JsonParser.colWrite(itemParat, keyname, "ITEM_PARAT", item);
-									JsonParser.colWrite(itemPenitro, keyname, "ITEM_PENITRO", item);
-									JsonParser.colWrite(itemCarbaryl, keyname, "ITEM_CARBARYL", item);
-									JsonParser.colWrite(itemTcet, keyname, "ITEM_TCET", item);
-									JsonParser.colWrite(itemTece, keyname, "ITEM_TECE", item);
-									JsonParser.colWrite(itemTce, keyname, "ITEM_TCE", item);
-									JsonParser.colWrite(itemDcm, keyname, "ITEM_DCM", item);
-									JsonParser.colWrite(itemBenzene, keyname, "ITEM_BENZENE", item);
-									JsonParser.colWrite(itemToluene, keyname, "ITEM_TOLUENE", item);
-									JsonParser.colWrite(itemEtilben, keyname, "ITEM_ETILBEN", item);
-									JsonParser.colWrite(itemXylene, keyname, "ITEM_XYLENE", item);
-									JsonParser.colWrite(itemDce, keyname, "ITEM_DCE", item);
-									JsonParser.colWrite(itemCcl4, keyname, "ITEM_CCL4", item);
-									JsonParser.colWrite(itemDbcp, keyname, "ITEM_DBCP", item);
-									JsonParser.colWrite(itemC4h8o2, keyname, "ITEM_C4H8O2", item);
-									JsonParser.colWrite(itemGradient, keyname, "ITEM_GRADIENT", item);
-									JsonParser.colWrite(itemKmn, keyname, "ITEM_KMN", item);
-									JsonParser.colWrite(itemSmell, keyname, "ITEM_SMELL", item);
-									JsonParser.colWrite(itemColor, keyname, "ITEM_COLOR", item);
-									JsonParser.colWrite(itemCu, keyname, "ITEM_CU", item);
-									JsonParser.colWrite(itemAbs, keyname, "ITEM_ABS", item);
-									JsonParser.colWrite(itemPh, keyname, "ITEM_PH", item);
-									JsonParser.colWrite(itemZn, keyname, "ITEM_ZN", item);
-									JsonParser.colWrite(itemCl, keyname, "ITEM_CL", item);
-									JsonParser.colWrite(itemFe, keyname, "ITEM_FE", item);
-									JsonParser.colWrite(itemMn, keyname, "ITEM_MN", item);
-									JsonParser.colWrite(itemMuddy, keyname, "ITEM_MUDDY", item);
-									JsonParser.colWrite(itemSo42, keyname, "ITEM_SO42", item);
-									JsonParser.colWrite(itemAl, keyname, "ITEM_AL", item);
-									JsonParser.colWrite(inspRst, keyname, "INSP_RST", item);
-									JsonParser.colWrite(failDesc, keyname, "FAIL_DESC", item);
-									JsonParser.colWrite(numOfRows, keyname, "numOfRows", item);
-									JsonParser.colWrite(pageNo_str, keyname, "pageNo", item);
-									JsonParser.colWrite(totalCount, keyname, "totalCount", item);
-
+									
+									if(keyname.equals("ROWNO")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											rowno = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											rowno = " ";
+										}
+									}
+									if(keyname.equals("LEGACY_CODE_NO")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											legacyCodeNo = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											legacyCodeNo = " ";
+										}
+									}
+									if(keyname.equals("SPOT_NM")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											spotNm = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											spotNm = " ";
+										}
+									}
+									if(keyname.equals("SPOT_STD_CODE")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											spotStdCode = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											spotStdCode = " ";
+										}
+									}
+									if(keyname.equals("INFO_CREAT_INSTT_NM")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											infoCreatlnsttNm = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											infoCreatlnsttNm = " ";
+										}
+									}
+									if(keyname.equals("DO_NM")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											doNm = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											doNm = " ";
+										}
+									}
+									if(keyname.equals("CTY_NM")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											ctyNm = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											ctyNm = " ";
+										}
+									}
+									if(keyname.equals("ADRES")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											adres = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											adres = " ";
+										}
+									}
+									if(keyname.equals("ADMCODE")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											admcode = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											admcode = " ";
+										}
+									}
+									if(keyname.equals("ABL_AT")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											ablAt = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											ablAt = " ";
+										}
+									}
+									if(keyname.equals("ABL_DE")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											ablDe = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											ablDe = " ";
+										}
+									}
+									if(keyname.equals("DAY_AVG")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											dayAvg = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											dayAvg = " ";
+										}
+									}
+									if(keyname.equals("CHARGE")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											charge = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											charge = " ";
+										}
+									}
+									if(keyname.equals("INS_DATE")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											insDate = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											insDate = " ";
+										}
+									}
+									if(keyname.equals("OFFICE")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											office = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											office = " ";
+										}
+									}
+									if(keyname.equals("OFFICE_TEL")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											officeTel = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											officeTel = " ";
+										}
+									}
+									if(keyname.equals("BUILDING_NO")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											buildingNo = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											buildingNo = " ";
+										}
+									}
+									if(keyname.equals("LOC_JIBUN")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											locJibun = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											locJibun = " ";
+										}
+									}
+									if(keyname.equals("COMMT")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											commt = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											commt = " ";
+										}
+									}
+									if(keyname.equals("YYYY")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											yyyy = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											yyyy = " ";
+										}
+									}
+									if(keyname.equals("PERIOD")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											period = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											period = " ";
+										}
+									}
+									if(keyname.equals("SAMP_DATE")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											samp_date = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											samp_date = " ";
+										}
+									}
+									if(keyname.equals("INSP_CHECK")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											inspCheck = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											inspCheck = " ";
+										}
+									}
+									if(keyname.equals("UN_INSP_DESC")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											unlnspDesc = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											unlnspDesc = " ";
+										}
+									}
+									if(keyname.equals("INSP_DATE")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											insp_date = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											insp_date = " ";
+										}
+									}
+									if(keyname.equals("ACCEPT_YN")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											acceptYn = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											acceptYn = " ";
+										}
+									}
+									if(keyname.equals("SUIT")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											suit = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											suit = " ";
+										}
+									}
+									if(keyname.equals("UNSUIT")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											unsuit = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											unsuit = " ";
+										}
+									}
+									if(keyname.equals("ITEM_GENBACLOW")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemGenbaclow = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemGenbaclow = " ";
+										}
+									}
+									if(keyname.equals("ITEM_GENBACMID")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemGenbacmid = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemGenbacmid = " ";
+										}
+									}
+									if(keyname.equals("ITEM_TOTBAC")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemTotbac = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemTotbac = " ";
+										}
+									}
+									if(keyname.equals("ITEM_BAC")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemBac = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemBac = " ";
+										}
+									}
+									if(keyname.equals("ITEM_FESTR")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemFestr = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemFestr = " ";
+										}
+									}
+									if(keyname.equals("ITEM_BRANFUNGUS")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemBranfungus = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemBranfungus = " ";
+										}
+									}
+									if(keyname.equals("ITEM_GRGUNGUS")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemGrgungus = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemGrgungus = " ";
+										}
+									}
+									if(keyname.equals("ITEM_SALMOL")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemSalmol = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemSalmol = " ";
+										}
+									}
+									if(keyname.equals("ITEM_SEGEL")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemSegel = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemSegel = " ";
+										}
+									}
+									if(keyname.equals("ITEM_SULFUNGUS")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemSulfungus = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemSulfungus = " ";
+										}
+									}
+									if(keyname.equals("ITEM_YERSINIA")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemYersinia = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemYersinia = " ";
+										}
+									}
+									if(keyname.equals("ITEM_PB")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemPb = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemPb = " ";
+										}
+									}
+									if(keyname.equals("ITEM_F")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemF = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemF = " ";
+										}
+									}
+									if(keyname.equals("ITEM_GAS")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemGas = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemGas = " ";
+										}
+									}
+									if(keyname.equals("ITEM_SE")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemSe = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemSe = " ";
+										}
+									}
+									if(keyname.equals("ITEM_HG")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemHg = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemHg = " ";
+										}
+									}
+									if(keyname.equals("ITEM_CN")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemCn = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemCn = " ";
+										}
+									}
+									if(keyname.equals("ITEM_CR6")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemCr6 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemCr6 = " ";
+										}
+									}
+									if(keyname.equals("ITEM_NO3AM")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemNo3am = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemNo3am = " ";
+										}
+									}
+									if(keyname.equals("ITEM_NO3N")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemNo3n = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemNo3n = " ";
+										}
+									}
+									if(keyname.equals("ITEM_CD")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemCd = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemCd = " ";
+										}
+									}
+									if(keyname.equals("ITEM_BORON")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemBoron = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemBoron = " ";
+										}
+									}
+									if(keyname.equals("ITEM_BRO3")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemBro3 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemBro3 = " ";
+										}
+									}
+									if(keyname.equals("ITEM_URAN")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemUran = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemUran = " ";
+										}
+									}
+									if(keyname.equals("ITEM_PHENOL")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemPhenol = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemPhenol = " ";
+										}
+									}
+									if(keyname.equals("ITEM_DIAZN")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemDiazn = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemDiazn = " ";
+										}
+									}
+									if(keyname.equals("ITEM_PARAT")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemParat = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemParat = " ";
+										}
+									}
+									if(keyname.equals("ITEM_PENITRO")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemPenitro = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemPenitro = " ";
+										}
+									}
+									if(keyname.equals("ITEM_CARBARYL")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemCarbaryl = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemCarbaryl = " ";
+										}
+									}
+									if(keyname.equals("ITEM_TCET")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemTcet = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemTcet = " ";
+										}
+									}
+									if(keyname.equals("ITEM_TECE")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemTece = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemTece = " ";
+										}
+									}
+									if(keyname.equals("ITEM_TCE")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemTce = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemTce = " ";
+										}
+									}
+									if(keyname.equals("ITEM_DCM")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemDcm = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemDcm = " ";
+										}
+									}
+									if(keyname.equals("ITEM_BENZENE")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemBenzene = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemBenzene = " ";
+										}
+									}
+									if(keyname.equals("ITEM_TOLUENE")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemToluene = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemToluene = " ";
+										}
+									}
+									if(keyname.equals("ITEM_ETILBEN")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemEtilben = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemEtilben = " ";
+										}
+									}
+									if(keyname.equals("ITEM_XYLENE")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemXylene = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemXylene = " ";
+										}
+									}
+									if(keyname.equals("ITEM_DCE")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemDce = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemDce = " ";
+										}
+									}
+									if(keyname.equals("ITEM_CCL4")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemCcl4 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemCcl4 = " ";
+										}
+									}
+									if(keyname.equals("ITEM_DBCP")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemDbcp = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemDbcp = " ";
+										}
+									}
+									if(keyname.equals("ITEM_C4H8O2")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemC4h8o2 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemC4h8o2 = " ";
+										}
+									}
+									if(keyname.equals("ITEM_GRADIENT")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemGradient = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemGradient = " ";
+										}
+									}
+									if(keyname.equals("ITEM_KMN")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemKmn = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemKmn = " ";
+										}
+									}
+									if(keyname.equals("ITEM_SMELL")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemSmell = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemSmell = " ";
+										}
+									}
+									if(keyname.equals("ITEM_COLOR")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemColor = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemColor = " ";
+										}
+									}
+									if(keyname.equals("ITEM_CU")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemCu = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemCu = " ";
+										}
+									}
+									if(keyname.equals("ITEM_ABS")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemAbs = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemAbs = " ";
+										}
+									}
+									if(keyname.equals("ITEM_PH")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemPh = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemPh = " ";
+										}
+									}
+									if(keyname.equals("ITEM_ZN")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemZn = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemZn = " ";
+										}
+									}
+									if(keyname.equals("ITEM_CL")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemCl = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemCl = " ";
+										}
+									}
+									if(keyname.equals("ITEM_FE")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemFe = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemFe = " ";
+										}
+									}
+									if(keyname.equals("ITEM_MN")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemMn = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemMn = " ";
+										}
+									}
+									if(keyname.equals("ITEM_MUDDY")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemMuddy = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemMuddy = " ";
+										}
+									}
+									if(keyname.equals("ITEM_SO42")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemSo42 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemSo42 = " ";
+										}
+									}
+									if(keyname.equals("ITEM_AL")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											itemAl = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											itemAl = " ";
+										}
+									}
+									if(keyname.equals("INSP_RST")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											inspRst = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											inspRst = " ";
+										}
+									}
+									if(keyname.equals("FAIL_DESC")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											failDesc = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											failDesc = " ";
+										}
+									}
+									if(keyname.equals("numOfRows")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											numOfRows = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											numOfRows = " ";
+										}
+									}
+									if(keyname.equals("pageNo")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											pageNo_str = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											pageNo_str = " ";
+										}
+									}
+									if(keyname.equals("totalCount")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											totalCount = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											totalCount = " ";
+										}
+									}
+									
 								}
 
-								// 한번에 문자열 합침
-								resultSb.append(resultCode_col);
-								resultSb.append("|^");
-								resultSb.append(resultMsg_col);
-								resultSb.append("|^");
-								resultSb.append(rowno);
-								resultSb.append("|^");
-								resultSb.append(legacyCodeNo);
-								resultSb.append("|^");
-								resultSb.append(spotNm);
-								resultSb.append("|^");
-								resultSb.append(spotStdCode);
-								resultSb.append("|^");
-								resultSb.append(infoCreatlnsttNm);
-								resultSb.append("|^");
-								resultSb.append(doNm);
-								resultSb.append("|^");
-								resultSb.append(ctyNm);
-								resultSb.append("|^");
-								resultSb.append(adres);
-								resultSb.append("|^");
-								resultSb.append(admcode);
-								resultSb.append("|^");
-								resultSb.append(ablAt);
-								resultSb.append("|^");
-								resultSb.append(ablDe);
-								resultSb.append("|^");
-								resultSb.append(dayAvg);
-								resultSb.append("|^");
-								resultSb.append(charge);
-								resultSb.append("|^");
-								resultSb.append(insDate);
-								resultSb.append("|^");
-								resultSb.append(delYn);
-								resultSb.append("|^");
-								resultSb.append(office);
-								resultSb.append("|^");
-								resultSb.append(officeTel);
-								resultSb.append("|^");
-								resultSb.append(buildingNo);
-								resultSb.append("|^");
-								resultSb.append(locJibun);
-								resultSb.append("|^");
-								resultSb.append(commt);
-								resultSb.append("|^");
-								resultSb.append(yyyy);
-								resultSb.append("|^");
-								resultSb.append(period);
-								resultSb.append("|^");
-								resultSb.append(samp_date);
-								resultSb.append("|^");
-								resultSb.append(inspCheck);
-								resultSb.append("|^");
-								resultSb.append(unlnspDesc);
-								resultSb.append("|^");
-								resultSb.append(insp_date);
-								resultSb.append("|^");
-								resultSb.append(acceptYn);
-								resultSb.append("|^");
-								resultSb.append(suit);
-								resultSb.append("|^");
-								resultSb.append(unsuit);
-								resultSb.append("|^");
-								resultSb.append(itemGenbaclow);
-								resultSb.append("|^");
-								resultSb.append(itemGenbacmid);
-								resultSb.append("|^");
-								resultSb.append(itemTotbac);
-								resultSb.append("|^");
-								resultSb.append(itemBac);
-								resultSb.append("|^");
-								resultSb.append(itemFestr);
-								resultSb.append("|^");
-								resultSb.append(itemBranfungus);
-								resultSb.append("|^");
-								resultSb.append(itemGrgungus);
-								resultSb.append("|^");
-								resultSb.append(itemSalmol);
-								resultSb.append("|^");
-								resultSb.append(itemSegel);
-								resultSb.append("|^");
-								resultSb.append(itemSulfungus);
-								resultSb.append("|^");
-								resultSb.append(itemYersinia);
-								resultSb.append("|^");
-								resultSb.append(itemPb);
-								resultSb.append("|^");
-								resultSb.append(itemF);
-								resultSb.append("|^");
-								resultSb.append(itemGas);
-								resultSb.append("|^");
-								resultSb.append(itemSe);
-								resultSb.append("|^");
-								resultSb.append(itemHg);
-								resultSb.append("|^");
-								resultSb.append(itemCn);
-								resultSb.append("|^");
-								resultSb.append(itemCr6);
-								resultSb.append("|^");
-								resultSb.append(itemNo3am);
-								resultSb.append("|^");
-								resultSb.append(itemNo3n);
-								resultSb.append("|^");
-								resultSb.append(itemCd);
-								resultSb.append("|^");
-								resultSb.append(itemBoron);
-								resultSb.append("|^");
-								resultSb.append(itemBro3);
-								resultSb.append("|^");
-								resultSb.append(itemUran);
-								resultSb.append("|^");
-								resultSb.append(itemPhenol);
-								resultSb.append("|^");
-								resultSb.append(itemDiazn);
-								resultSb.append("|^");
-								resultSb.append(itemParat);
-								resultSb.append("|^");
-								resultSb.append(itemPenitro);
-								resultSb.append("|^");
-								resultSb.append(itemCarbaryl);
-								resultSb.append("|^");
-								resultSb.append(itemTcet);
-								resultSb.append("|^");
-								resultSb.append(itemTece);
-								resultSb.append("|^");
-								resultSb.append(itemTce);
-								resultSb.append("|^");
-								resultSb.append(itemDcm);
-								resultSb.append("|^");
-								resultSb.append(itemBenzene);
-								resultSb.append("|^");
-								resultSb.append(itemToluene);
-								resultSb.append("|^");
-								resultSb.append(itemEtilben);
-								resultSb.append("|^");
-								resultSb.append(itemXylene);
-								resultSb.append("|^");
-								resultSb.append(itemDce);
-								resultSb.append("|^");
-								resultSb.append(itemCcl4);
-								resultSb.append("|^");
-								resultSb.append(itemDbcp);
-								resultSb.append("|^");
-								resultSb.append(itemC4h8o2);
-								resultSb.append("|^");
-								resultSb.append(itemGradient);
-								resultSb.append("|^");
-								resultSb.append(itemKmn);
-								resultSb.append("|^");
-								resultSb.append(itemSmell);
-								resultSb.append("|^");
-								resultSb.append(itemColor);
-								resultSb.append("|^");
-								resultSb.append(itemCu);
-								resultSb.append("|^");
-								resultSb.append(itemAbs);
-								resultSb.append("|^");
-								resultSb.append(itemPh);
-								resultSb.append("|^");
-								resultSb.append(itemZn);
-								resultSb.append("|^");
-								resultSb.append(itemCl);
-								resultSb.append("|^");
-								resultSb.append(itemFe);
-								resultSb.append("|^");
-								resultSb.append(itemMn);
-								resultSb.append("|^");
-								resultSb.append(itemMuddy);
-								resultSb.append("|^");
-								resultSb.append(itemSo42);
-								resultSb.append("|^");
-								resultSb.append(itemAl);
-								resultSb.append("|^");
-								resultSb.append(inspRst);
-								resultSb.append("|^");
-								resultSb.append(failDesc);
-								resultSb.append("|^");
-								resultSb.append(numOfRows);
-								resultSb.append("|^");
-								resultSb.append(pageNo_str);
-								resultSb.append("|^");
-								resultSb.append(totalCount);
-								resultSb.append(System.getProperty("line.separator"));
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
+
+									pw.write(resultCode_col);
+									pw.write("|^");
+									pw.write(resultMsg_col);
+									pw.write("|^");
+									pw.write(rowno);
+									pw.write("|^");
+									pw.write(legacyCodeNo);
+									pw.write("|^");
+									pw.write(spotNm);
+									pw.write("|^");
+									pw.write(spotStdCode);
+									pw.write("|^");
+									pw.write(infoCreatlnsttNm);
+									pw.write("|^");
+									pw.write(doNm);
+									pw.write("|^");
+									pw.write(ctyNm);
+									pw.write("|^");
+									pw.write(adres);
+									pw.write("|^");
+									pw.write(admcode);
+									pw.write("|^");
+									pw.write(ablAt);
+									pw.write("|^");
+									pw.write(ablDe);
+									pw.write("|^");
+									pw.write(dayAvg);
+									pw.write("|^");
+									pw.write(charge);
+									pw.write("|^");
+									pw.write(insDate);
+									pw.write("|^");
+									pw.write(delYn);
+									pw.write("|^");
+									pw.write(office);
+									pw.write("|^");
+									pw.write(officeTel);
+									pw.write("|^");
+									pw.write(buildingNo);
+									pw.write("|^");
+									pw.write(locJibun);
+									pw.write("|^");
+									pw.write(commt);
+									pw.write("|^");
+									pw.write(yyyy);
+									pw.write("|^");
+									pw.write(period);
+									pw.write("|^");
+									pw.write(samp_date);
+									pw.write("|^");
+									pw.write(inspCheck);
+									pw.write("|^");
+									pw.write(unlnspDesc);
+									pw.write("|^");
+									pw.write(insp_date);
+									pw.write("|^");
+									pw.write(acceptYn);
+									pw.write("|^");
+									pw.write(suit);
+									pw.write("|^");
+									pw.write(unsuit);
+									pw.write("|^");
+									pw.write(itemGenbaclow);
+									pw.write("|^");
+									pw.write(itemGenbacmid);
+									pw.write("|^");
+									pw.write(itemTotbac);
+									pw.write("|^");
+									pw.write(itemBac);
+									pw.write("|^");
+									pw.write(itemFestr);
+									pw.write("|^");
+									pw.write(itemBranfungus);
+									pw.write("|^");
+									pw.write(itemGrgungus);
+									pw.write("|^");
+									pw.write(itemSalmol);
+									pw.write("|^");
+									pw.write(itemSegel);
+									pw.write("|^");
+									pw.write(itemSulfungus);
+									pw.write("|^");
+									pw.write(itemYersinia);
+									pw.write("|^");
+									pw.write(itemPb);
+									pw.write("|^");
+									pw.write(itemF);
+									pw.write("|^");
+									pw.write(itemGas);
+									pw.write("|^");
+									pw.write(itemSe);
+									pw.write("|^");
+									pw.write(itemHg);
+									pw.write("|^");
+									pw.write(itemCn);
+									pw.write("|^");
+									pw.write(itemCr6);
+									pw.write("|^");
+									pw.write(itemNo3am);
+									pw.write("|^");
+									pw.write(itemNo3n);
+									pw.write("|^");
+									pw.write(itemCd);
+									pw.write("|^");
+									pw.write(itemBoron);
+									pw.write("|^");
+									pw.write(itemBro3);
+									pw.write("|^");
+									pw.write(itemUran);
+									pw.write("|^");
+									pw.write(itemPhenol);
+									pw.write("|^");
+									pw.write(itemDiazn);
+									pw.write("|^");
+									pw.write(itemParat);
+									pw.write("|^");
+									pw.write(itemPenitro);
+									pw.write("|^");
+									pw.write(itemCarbaryl);
+									pw.write("|^");
+									pw.write(itemTcet);
+									pw.write("|^");
+									pw.write(itemTece);
+									pw.write("|^");
+									pw.write(itemTce);
+									pw.write("|^");
+									pw.write(itemDcm);
+									pw.write("|^");
+									pw.write(itemBenzene);
+									pw.write("|^");
+									pw.write(itemToluene);
+									pw.write("|^");
+									pw.write(itemEtilben);
+									pw.write("|^");
+									pw.write(itemXylene);
+									pw.write("|^");
+									pw.write(itemDce);
+									pw.write("|^");
+									pw.write(itemCcl4);
+									pw.write("|^");
+									pw.write(itemDbcp);
+									pw.write("|^");
+									pw.write(itemC4h8o2);
+									pw.write("|^");
+									pw.write(itemGradient);
+									pw.write("|^");
+									pw.write(itemKmn);
+									pw.write("|^");
+									pw.write(itemSmell);
+									pw.write("|^");
+									pw.write(itemColor);
+									pw.write("|^");
+									pw.write(itemCu);
+									pw.write("|^");
+									pw.write(itemAbs);
+									pw.write("|^");
+									pw.write(itemPh);
+									pw.write("|^");
+									pw.write(itemZn);
+									pw.write("|^");
+									pw.write(itemCl);
+									pw.write("|^");
+									pw.write(itemFe);
+									pw.write("|^");
+									pw.write(itemMn);
+									pw.write("|^");
+									pw.write(itemMuddy);
+									pw.write("|^");
+									pw.write(itemSo42);
+									pw.write("|^");
+									pw.write(itemAl);
+									pw.write("|^");
+									pw.write(inspRst);
+									pw.write("|^");
+									pw.write(failDesc);
+									pw.write("|^");
+									pw.write(numOfRows);
+									pw.write("|^");
+									pw.write(pageNo_str);
+									pw.write("|^");
+									pw.write(totalCount); 
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}	
 
 							}
 
@@ -507,19 +1121,6 @@ public class GetSgisDrinkWaterList {
 
 						//Thread.sleep(4500);
 
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

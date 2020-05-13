@@ -266,7 +266,7 @@ public class JsonParser {
 
 		return sb;
 	}
-
+	
 	// 파싱한 데이터를 StringBuffer에 씀(null 체크, trim처리와 줄바꿈 없애는 것, utf8 인코딩 처리도 같이)
 	// sns 쪽 데이터에서 문제되는 emoji와 홑따옴표도 제거함
 	public static StringBuffer colWrite_sns(StringBuffer sb, String keyname, String chkCol, JSONObject item) {

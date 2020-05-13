@@ -76,16 +76,6 @@ public class SupplyLgldCodeList {
 
 					// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer addrName = new StringBuffer(" ");
-					StringBuffer fcltyMngNm = new StringBuffer(" ");
-					StringBuffer fcltyMngNo = new StringBuffer(" ");
-					StringBuffer lgldCode = new StringBuffer(" ");
-					StringBuffer lgldFullAddr = new StringBuffer(" ");
-					StringBuffer sujCode = new StringBuffer(" ");
-					StringBuffer upprLgldCode = new StringBuffer(" ");
-
 					for (int i = 1; i <= pageCount; i++) {
 
 						json = JsonParser.parseWatJson(service_url, service_key, String.valueOf(i));
@@ -112,6 +102,14 @@ public class SupplyLgldCodeList {
 						} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 							System.out.println("data not exist!!");
 						} else if (resultCode.equals("00")) {
+							
+							String addrName = " ";
+							String fcltyMngNm = " ";
+							String fcltyMngNo = " ";
+							String lgldCode = " ";
+							String lgldFullAddr = " ";
+							String sujCode = " ";
+							String upprLgldCode = " ";
 
 							JSONObject items = (JSONObject) body.get("items");
 
@@ -127,32 +125,91 @@ public class SupplyLgldCodeList {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									JsonParser.colWrite(addrName, keyname, "addrName", items_jsonObject);
-									JsonParser.colWrite(fcltyMngNm, keyname, "fcltyMngNm", items_jsonObject);
-									JsonParser.colWrite(fcltyMngNo, keyname, "fcltyMngNo", items_jsonObject);
-									JsonParser.colWrite(lgldCode, keyname, "lgldCode", items_jsonObject);
-									JsonParser.colWrite(lgldFullAddr, keyname, "lgldFullAddr", items_jsonObject);
-									JsonParser.colWrite(sujCode, keyname, "sujCode", items_jsonObject);
-									JsonParser.colWrite(upprLgldCode, keyname, "upprLgldCode", items_jsonObject);
+									
+									if(keyname.equals("addrName")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											addrName = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											addrName = " ";
+										}
+									}
+									if(keyname.equals("fcltyMngNm")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											fcltyMngNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											fcltyMngNm = " ";
+										}
+									}
+									if(keyname.equals("fcltyMngNo")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											fcltyMngNo = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											fcltyMngNo = " ";
+										}
+									}
+									if(keyname.equals("lgldCode")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											lgldCode = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											lgldCode = " ";
+										}
+									}
+									if(keyname.equals("lgldFullAddr")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											lgldFullAddr = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											lgldFullAddr = " ";
+										}
+									}
+									if(keyname.equals("sujCode")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											sujCode = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											sujCode = " ";
+										}
+									}
+									if(keyname.equals("upprLgldCode")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											upprLgldCode = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											upprLgldCode = " ";
+										}
+									}
 
 								}
+								
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
 
-								// 한번에 문자열 합침
-								resultSb.append(addrName);
-								resultSb.append("|^");
-								resultSb.append(fcltyMngNm);
-								resultSb.append("|^");
-								resultSb.append(fcltyMngNo);
-								resultSb.append("|^");
-								resultSb.append(lgldCode);
-								resultSb.append("|^");
-								resultSb.append(lgldFullAddr);
-								resultSb.append("|^");
-								resultSb.append(sujCode);
-								resultSb.append("|^");
-								resultSb.append(upprLgldCode);
-								resultSb.append(System.getProperty("line.separator"));
+									pw.write(addrName);
+									pw.write("|^");
+									pw.write(fcltyMngNm);
+									pw.write("|^");
+									pw.write(fcltyMngNo);
+									pw.write("|^");
+									pw.write(lgldCode);
+									pw.write("|^");
+									pw.write(lgldFullAddr);
+									pw.write("|^");
+									pw.write(sujCode);
+									pw.write("|^");
+									pw.write(upprLgldCode);
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 
 							} else if (items.get("item") instanceof JSONArray) {
 
@@ -170,31 +227,90 @@ public class SupplyLgldCodeList {
 
 										String keyname = iter.next();
 
-										JsonParser.colWrite(addrName, keyname, "addrName", item_obj);
-										JsonParser.colWrite(fcltyMngNm, keyname, "fcltyMngNm", item_obj);
-										JsonParser.colWrite(fcltyMngNo, keyname, "fcltyMngNo", item_obj);
-										JsonParser.colWrite(lgldCode, keyname, "lgldCode", item_obj);
-										JsonParser.colWrite(lgldFullAddr, keyname, "lgldFullAddr", item_obj);
-										JsonParser.colWrite(sujCode, keyname, "sujCode", item_obj);
-										JsonParser.colWrite(upprLgldCode, keyname, "upprLgldCode", item_obj);
+										if(keyname.equals("addrName")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												addrName = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												addrName = " ";
+											}
+										}
+										if(keyname.equals("fcltyMngNm")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												fcltyMngNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												fcltyMngNm = " ";
+											}
+										}
+										if(keyname.equals("fcltyMngNo")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												fcltyMngNo = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												fcltyMngNo = " ";
+											}
+										}
+										if(keyname.equals("lgldCode")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												lgldCode = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												lgldCode = " ";
+											}
+										}
+										if(keyname.equals("lgldFullAddr")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												lgldFullAddr = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												lgldFullAddr = " ";
+											}
+										}
+										if(keyname.equals("sujCode")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												sujCode = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												sujCode = " ";
+											}
+										}
+										if(keyname.equals("upprLgldCode")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												upprLgldCode = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												upprLgldCode = " ";
+											}
+										}
 
 									}
 
-									// 한번에 문자열 합침
-									resultSb.append(addrName);
-									resultSb.append("|^");
-									resultSb.append(fcltyMngNm);
-									resultSb.append("|^");
-									resultSb.append(fcltyMngNo);
-									resultSb.append("|^");
-									resultSb.append(lgldCode);
-									resultSb.append("|^");
-									resultSb.append(lgldFullAddr);
-									resultSb.append("|^");
-									resultSb.append(sujCode);
-									resultSb.append("|^");
-									resultSb.append(upprLgldCode);
-									resultSb.append(System.getProperty("line.separator"));
+									// step 4. 파일에 쓰기
+									try {
+										PrintWriter pw = new PrintWriter(
+												new BufferedWriter(new FileWriter(file, true)));
+
+										pw.write(addrName);
+										pw.write("|^");
+										pw.write(fcltyMngNm);
+										pw.write("|^");
+										pw.write(fcltyMngNo);
+										pw.write("|^");
+										pw.write(lgldCode);
+										pw.write("|^");
+										pw.write(lgldFullAddr);
+										pw.write("|^");
+										pw.write(sujCode);
+										pw.write("|^");
+										pw.write(upprLgldCode);
+										pw.println();
+										pw.flush();
+										pw.close();
+
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
 
 								}
 
@@ -208,18 +324,6 @@ public class SupplyLgldCodeList {
 
 						//Thread.sleep(1000);
 
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

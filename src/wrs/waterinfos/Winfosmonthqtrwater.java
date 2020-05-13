@@ -79,18 +79,6 @@ public class Winfosmonthqtrwater {
 
 						// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-						StringBuffer resultSb = new StringBuffer("");
-
-						StringBuffer sgcnm = new StringBuffer(" "); // 지자체명
-						StringBuffer sitenm = new StringBuffer(" "); // 지점명
-						StringBuffer cltdt = new StringBuffer(" "); // 측정일자
-						StringBuffer data1 = new StringBuffer(" "); // 수소이온농도(pH)
-						StringBuffer data2 = new StringBuffer(" "); // BOD(호소수:COD)
-						StringBuffer data3 = new StringBuffer(" "); // 부유물질(SS)
-						StringBuffer data4 = new StringBuffer(" "); // 용존산소량(DO)
-						StringBuffer data5 = new StringBuffer(" "); // 총대장균군(원수)
-						StringBuffer data6 = new StringBuffer(" "); // 분원성대장균군수(원수-CFU)
-
 						for (int i = 1; i <= pageCount; i++) {
 
 							json = JsonParser.parseWrsJson(service_url, service_key, String.valueOf(i), args[0],
@@ -119,7 +107,15 @@ public class Winfosmonthqtrwater {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 								
-								
+								String sgcnm = " "; // 지자체명
+								String sitenm = " "; // 지점명
+								String cltdt = " "; // 측정일자
+								String data1 = " "; // 수소이온농도(pH)
+								String data2 = " "; // BOD(호소수:COD)
+								String data3 = " "; // 부유물질(SS)
+								String data4 = " "; // 용존산소량(DO)
+								String data5 = " "; // 총대장균군(원수)
+								String data6 = " "; // 분원성대장균군수(원수-CFU)
 
 								JSONObject items = (JSONObject) body.get("items");
 
@@ -135,44 +131,117 @@ public class Winfosmonthqtrwater {
 									while (iter.hasNext()) {
 
 										String keyname = iter.next();
-
-										JsonParser.colWrite(sgcnm, keyname, "sgcnm", items_jsonObject);
-										JsonParser.colWrite(sitenm, keyname, "sitenm", items_jsonObject);
-										JsonParser.colWrite(cltdt, keyname, "cltdt", items_jsonObject);
-										JsonParser.colWrite(data1, keyname, "data1", items_jsonObject);
-										JsonParser.colWrite(data2, keyname, "data2", items_jsonObject);
-										JsonParser.colWrite(data3, keyname, "data3", items_jsonObject);
-										JsonParser.colWrite(data4, keyname, "data4", items_jsonObject);
-										JsonParser.colWrite(data5, keyname, "data5", items_jsonObject);
-										JsonParser.colWrite(data6, keyname, "data6", items_jsonObject);
+										
+										if(keyname.equals("sgcnm")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												sgcnm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												sgcnm = " ";
+											}
+										}
+										if(keyname.equals("sitenm")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												sitenm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												sitenm = " ";
+											}
+										}
+										if(keyname.equals("cltdt")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												cltdt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												cltdt = " ";
+											}
+										}
+										if(keyname.equals("data1")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												data1 = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												data1 = " ";
+											}
+										}
+										if(keyname.equals("data2")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												data2 = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												data2 = " ";
+											}
+										}
+										if(keyname.equals("data3")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												data3 = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												data3 = " ";
+											}
+										}
+										if(keyname.equals("data4")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												data4 = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												data4 = " ";
+											}
+										}
+										if(keyname.equals("data5")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												data5 = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												data5 = " ";
+											}
+										}
+										if(keyname.equals("data6")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												data6 = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												data6 = " ";
+											}
+										}
 
 									}
+									
+									// step 4. 파일에 쓰기
+									try {
+										PrintWriter pw = new PrintWriter(
+												new BufferedWriter(new FileWriter(file, true)));
 
-									// 한번에 문자열 합침
-									resultSb.append(args[0]);
-									resultSb.append("|^");
-									resultSb.append(args[1]);
-									resultSb.append("|^");
-									resultSb.append(args[2]);
-									resultSb.append("|^");
-									resultSb.append(sgcnm);
-									resultSb.append("|^");
-									resultSb.append(sitenm);
-									resultSb.append("|^");
-									resultSb.append(cltdt);
-									resultSb.append("|^");
-									resultSb.append(data1);
-									resultSb.append("|^");
-									resultSb.append(data2);
-									resultSb.append("|^");
-									resultSb.append(data3);
-									resultSb.append("|^");
-									resultSb.append(data4);
-									resultSb.append("|^");
-									resultSb.append(data5);
-									resultSb.append("|^");
-									resultSb.append(data6);
-									resultSb.append(System.getProperty("line.separator"));
+										pw.write(args[0]);
+										pw.write("|^");
+										pw.write(args[1]);
+										pw.write("|^");
+										pw.write(args[2]);
+										pw.write("|^");
+										pw.write(sgcnm);
+										pw.write("|^");
+										pw.write(sitenm);
+										pw.write("|^");
+										pw.write(cltdt);
+										pw.write("|^");
+										pw.write(data1);
+										pw.write("|^");
+										pw.write(data2);
+										pw.write("|^");
+										pw.write(data3);
+										pw.write("|^");
+										pw.write(data4);
+										pw.write("|^");
+										pw.write(data5);
+										pw.write("|^");
+										pw.write(data6);
+										pw.println();
+										pw.flush();
+										pw.close();
+
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
 
 								} else if (items.get("item") instanceof JSONArray) {
 
@@ -190,43 +259,116 @@ public class Winfosmonthqtrwater {
 
 											String keyname = iter.next();
 
-											JsonParser.colWrite(sgcnm, keyname, "sgcnm", item_obj);
-											JsonParser.colWrite(sitenm, keyname, "sitenm", item_obj);
-											JsonParser.colWrite(cltdt, keyname, "cltdt", item_obj);
-											JsonParser.colWrite(data1, keyname, "data1", item_obj);
-											JsonParser.colWrite(data2, keyname, "data2", item_obj);
-											JsonParser.colWrite(data3, keyname, "data3", item_obj);
-											JsonParser.colWrite(data4, keyname, "data4", item_obj);
-											JsonParser.colWrite(data5, keyname, "data5", item_obj);
-											JsonParser.colWrite(data6, keyname, "data6", item_obj);
+											if(keyname.equals("sgcnm")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													sgcnm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													sgcnm = " ";
+												}
+											}
+											if(keyname.equals("sitenm")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													sitenm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													sitenm = " ";
+												}
+											}
+											if(keyname.equals("cltdt")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													cltdt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													cltdt = " ";
+												}
+											}
+											if(keyname.equals("data1")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													data1 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													data1 = " ";
+												}
+											}
+											if(keyname.equals("data2")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													data2 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													data2 = " ";
+												}
+											}
+											if(keyname.equals("data3")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													data3 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													data3 = " ";
+												}
+											}
+											if(keyname.equals("data4")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													data4 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													data4 = " ";
+												}
+											}
+											if(keyname.equals("data5")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													data5 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													data5 = " ";
+												}
+											}
+											if(keyname.equals("data6")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													data6 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													data6 = " ";
+												}
+											}
 
 										}
 
-										// 한번에 문자열 합침
-										resultSb.append(args[0]);
-										resultSb.append("|^");
-										resultSb.append(args[1]);
-										resultSb.append("|^");
-										resultSb.append(args[2]);
-										resultSb.append("|^");
-										resultSb.append(sgcnm);
-										resultSb.append("|^");
-										resultSb.append(sitenm);
-										resultSb.append("|^");
-										resultSb.append(cltdt);
-										resultSb.append("|^");
-										resultSb.append(data1);
-										resultSb.append("|^");
-										resultSb.append(data2);
-										resultSb.append("|^");
-										resultSb.append(data3);
-										resultSb.append("|^");
-										resultSb.append(data4);
-										resultSb.append("|^");
-										resultSb.append(data5);
-										resultSb.append("|^");
-										resultSb.append(data6);
-										resultSb.append(System.getProperty("line.separator"));
+										// step 4. 파일에 쓰기
+										try {
+											PrintWriter pw = new PrintWriter(
+													new BufferedWriter(new FileWriter(file, true)));
+
+											pw.write(args[0]);
+											pw.write("|^");
+											pw.write(args[1]);
+											pw.write("|^");
+											pw.write(args[2]);
+											pw.write("|^");
+											pw.write(sgcnm);
+											pw.write("|^");
+											pw.write(sitenm);
+											pw.write("|^");
+											pw.write(cltdt);
+											pw.write("|^");
+											pw.write(data1);
+											pw.write("|^");
+											pw.write(data2);
+											pw.write("|^");
+											pw.write(data3);
+											pw.write("|^");
+											pw.write(data4);
+											pw.write("|^");
+											pw.write(data5);
+											pw.write("|^");
+											pw.write(data6);
+											pw.println();
+											pw.flush();
+											pw.close();
+
+										} catch (IOException e) {
+											e.printStackTrace();
+										}
 
 									}
 
@@ -242,18 +384,6 @@ public class Winfosmonthqtrwater {
 
 							//Thread.sleep(1000);
 
-						}
-
-						// step 4. 파일에 쓰기
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write(resultSb.toString());
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
 						}
 
 						System.out.println("parsing complete!");

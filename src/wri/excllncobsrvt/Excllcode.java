@@ -42,12 +42,6 @@ public class Excllcode {
 					// step 2. 전체 파싱
 					String json = "";
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer excllncobsrvtcode = new StringBuffer(" "); // 우량
-																			// 관측소코드
-					StringBuffer obsrvtNm = new StringBuffer(" "); // 관측소이름
-
 					// 파라미터 1개만 받으므로 환경영향평가 쪽 메서드 이용
 					json = JsonParser.parseEiaJson(service_url, service_key, args[0]);
 					
@@ -73,8 +67,9 @@ public class Excllcode {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 						
+						String excllncobsrvtcode = " "; // 우량관측소코드
+						String obsrvtNm = " "; // 관측소이름
 						
-
 						JSONObject items = (JSONObject) body.get("items");
 
 						// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
@@ -89,19 +84,43 @@ public class Excllcode {
 							while (iter.hasNext()) {
 
 								String keyname = iter.next();
-
-								JsonParser.colWrite(excllncobsrvtcode, keyname, "excllncobsrvtcode", items_jsonObject);
-								JsonParser.colWrite(obsrvtNm, keyname, "obsrvtNm", items_jsonObject);
+								
+								if(keyname.equals("excllncobsrvtcode")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										excllncobsrvtcode = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										excllncobsrvtcode = " ";
+									}
+								}
+								if(keyname.equals("obsrvtNm")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										obsrvtNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										obsrvtNm = " ";
+									}
+								}
 
 							}
+							
+							// step 4. 파일에 쓰기
+							try {
+								PrintWriter pw = new PrintWriter(
+										new BufferedWriter(new FileWriter(file, true)));
 
-							// 한번에 문자열 합침
-							resultSb.append(args[0]);
-							resultSb.append("|^");
-							resultSb.append(excllncobsrvtcode);
-							resultSb.append("|^");
-							resultSb.append(obsrvtNm);
-							resultSb.append(System.getProperty("line.separator"));
+								pw.write(args[0]);
+								pw.write("|^");
+								pw.write(excllncobsrvtcode);
+								pw.write("|^");
+								pw.write(obsrvtNm);
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 
 						} else if (items.get("item") instanceof JSONArray) {
 
@@ -119,18 +138,42 @@ public class Excllcode {
 
 									String keyname = iter.next();
 
-									JsonParser.colWrite(excllncobsrvtcode, keyname, "excllncobsrvtcode", item_obj);
-									JsonParser.colWrite(obsrvtNm, keyname, "obsrvtNm", item_obj);
+									if(keyname.equals("excllncobsrvtcode")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											excllncobsrvtcode = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											excllncobsrvtcode = " ";
+										}
+									}
+									if(keyname.equals("obsrvtNm")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											obsrvtNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											obsrvtNm = " ";
+										}
+									}
 
 								}
 
-								// 한번에 문자열 합침
-								resultSb.append(args[0]);
-								resultSb.append("|^");
-								resultSb.append(excllncobsrvtcode);
-								resultSb.append("|^");
-								resultSb.append(obsrvtNm);
-								resultSb.append(System.getProperty("line.separator"));
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
+
+									pw.write(args[0]);
+									pw.write("|^");
+									pw.write(excllncobsrvtcode);
+									pw.write("|^");
+									pw.write(obsrvtNm);
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 
 							}
 
@@ -140,18 +183,6 @@ public class Excllcode {
 						System.out.println("data not exist!!");
 					} else {
 						System.out.println("parsing error!!");
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

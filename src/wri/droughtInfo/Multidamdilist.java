@@ -76,21 +76,6 @@ public class Multidamdilist {
 
 					// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer seqno = new StringBuffer(" "); // 순번
-					StringBuffer damcdcrd = new StringBuffer(" "); // 댐코드
-					StringBuffer damnm = new StringBuffer(" "); // 댐명칭
-					StringBuffer obsymd = new StringBuffer(" "); // 측정일자
-					StringBuffer rsqtysum = new StringBuffer(" "); // 저수량합계(백만m3)
-					StringBuffer stagenow = new StringBuffer(" "); // 현재저수지가뭄단계명
-					StringBuffer limobsymd = new StringBuffer(" "); // 용수공급가능일
-					StringBuffer stage_1 = new StringBuffer(" "); // 관심단계저수량
-					StringBuffer stage_2 = new StringBuffer(" "); // 주의단계저수량
-					StringBuffer stage_3 = new StringBuffer(" "); // 경계단계저수량
-					StringBuffer stage_4 = new StringBuffer(" "); // 심각단계저수량
-					StringBuffer stage_0 = new StringBuffer(" "); // 정상공급환원단계저수량
-
 					for (int i = 1; i <= pageCount; ++i) {
 
 						json = JsonParser.parseWatJson(service_url, service_key, String.valueOf(i));
@@ -116,6 +101,19 @@ public class Multidamdilist {
 							System.out.println(
 									"parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
 						} else if (resultCode.equals("00")) {
+							
+							String seqno = " "; // 순번
+							String damcdcrd = " "; // 댐코드
+							String damnm = " "; // 댐명칭
+							String obsymd = " "; // 측정일자
+							String rsqtysum = " "; // 저수량합계(백만m3)
+							String stagenow = " "; // 현재저수지가뭄단계명
+							String limobsymd = " "; // 용수공급가능일
+							String stage_1 = " "; // 관심단계저수량
+							String stage_2 = " "; // 주의단계저수량
+							String stage_3 = " "; // 경계단계저수량
+							String stage_4 = " "; // 심각단계저수량
+							String stage_0 = " "; // 정상공급환원단계저수량
 
 							JSONArray items_jsonArray = (JSONArray) items.get("item");
 
@@ -130,47 +128,142 @@ public class Multidamdilist {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									JsonParser.colWrite(seqno, keyname, "seqno", item_obj);
-									JsonParser.colWrite(damcdcrd, keyname, "damcdcrd", item_obj);
-									JsonParser.colWrite(damnm, keyname, "damnm", item_obj);
-									JsonParser.colWrite(obsymd, keyname, "obsymd", item_obj);
-									JsonParser.colWrite(rsqtysum, keyname, "rsqtysum", item_obj);
-									JsonParser.colWrite(stagenow, keyname, "stagenow", item_obj);
-									JsonParser.colWrite(limobsymd, keyname, "limobsymd", item_obj);
-									JsonParser.colWrite(stage_1, keyname, "stage_1", item_obj);
-									JsonParser.colWrite(stage_2, keyname, "stage_2", item_obj);
-									JsonParser.colWrite(stage_3, keyname, "stage_3", item_obj);
-									JsonParser.colWrite(stage_4, keyname, "stage_4", item_obj);
-									JsonParser.colWrite(stage_0, keyname, "stage_0", item_obj);
+									
+									
+									if(keyname.equals("seqno")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											seqno = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											seqno = " ";
+										}
+									}
+									if(keyname.equals("damcdcrd")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											damcdcrd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											damcdcrd = " ";
+										}
+									}
+									if(keyname.equals("damnm")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											damnm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											damnm = " ";
+										}
+									}
+									if(keyname.equals("obsymd")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											obsymd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											obsymd = " ";
+										}
+									}
+									if(keyname.equals("rsqtysum")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											rsqtysum = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											rsqtysum = " ";
+										}
+									}
+									if(keyname.equals("stagenow")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											stagenow = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											stagenow = " ";
+										}
+									}
+									if(keyname.equals("limobsymd")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											limobsymd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											limobsymd = " ";
+										}
+									}
+									if(keyname.equals("stage_1")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											stage_1 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											stage_1 = " ";
+										}
+									}
+									if(keyname.equals("stage_2")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											stage_2 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											stage_2 = " ";
+										}
+									}
+									if(keyname.equals("stage_3")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											stage_3 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											stage_3 = " ";
+										}
+									}
+									if(keyname.equals("stage_4")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											stage_4 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											stage_4 = " ";
+										}
+									}	
+									if(keyname.equals("stage_0")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											stage_0 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											stage_0 = " ";
+										}
+									}
 
 								}
+								
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
 
-								// 한번에 문자열 합침
-								resultSb.append(seqno);
-								resultSb.append("|^");
-								resultSb.append(damcdcrd);
-								resultSb.append("|^");
-								resultSb.append(damnm);
-								resultSb.append("|^");
-								resultSb.append(obsymd);
-								resultSb.append("|^");
-								resultSb.append(rsqtysum);
-								resultSb.append("|^");
-								resultSb.append(stagenow);
-								resultSb.append("|^");
-								resultSb.append(limobsymd);
-								resultSb.append("|^");
-								resultSb.append(stage_1);
-								resultSb.append("|^");
-								resultSb.append(stage_2);
-								resultSb.append("|^");
-								resultSb.append(stage_3);
-								resultSb.append("|^");
-								resultSb.append(stage_4);
-								resultSb.append("|^");
-								resultSb.append(stage_0);
-								resultSb.append(System.getProperty("line.separator"));
+									pw.write(seqno);
+									pw.write("|^");
+									pw.write(damcdcrd);
+									pw.write("|^");
+									pw.write(damnm);
+									pw.write("|^");
+									pw.write(obsymd);
+									pw.write("|^");
+									pw.write(rsqtysum);
+									pw.write("|^");
+									pw.write(stagenow);
+									pw.write("|^");
+									pw.write(limobsymd);
+									pw.write("|^");
+									pw.write(stage_1);
+									pw.write("|^");
+									pw.write(stage_2);
+									pw.write("|^");
+									pw.write(stage_3);
+									pw.write("|^");
+									pw.write(stage_4);
+									pw.write("|^");
+									pw.write(stage_0);
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 
 							}
 
@@ -182,18 +275,6 @@ public class Multidamdilist {
 
 						//Thread.sleep(1000);
 
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

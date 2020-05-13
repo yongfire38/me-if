@@ -75,22 +75,6 @@ public class GetRadioActiveMaterList {
 
 					// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer resultCode_col = new StringBuffer(" "); // 결과코드
-					StringBuffer resultMsg_col = new StringBuffer(" "); // 결과메시지
-					StringBuffer rn = new StringBuffer(" "); // 행번호
-					StringBuffer ptNo = new StringBuffer(" "); // 조사지점코드
-					StringBuffer ptNm = new StringBuffer(" "); // 조사지점명
-					StringBuffer wmcymd = new StringBuffer(" "); // 채취일
-					StringBuffer act1 = new StringBuffer(" "); // 측정값 Cs-134(세슘)
-					StringBuffer act2 = new StringBuffer(" "); // 측정값 Cs-137(세슘)
-					StringBuffer act3 = new StringBuffer(" "); // 측정값 I-131(요드)
-					StringBuffer numOfRows = new StringBuffer(" "); // 한 페이지 결과
-																	// 수
-					StringBuffer pageNo_str = new StringBuffer(" "); // 페이지 번호
-					StringBuffer totalCount = new StringBuffer(" "); // 전체 결과 수
-
 					for (int i = 1; i <= pageCount; i++) {
 
 						json = JsonParser.parseWatJson(service_url, service_key, String.valueOf(i));
@@ -107,27 +91,30 @@ public class GetRadioActiveMaterList {
 						JSONObject getRadioActiveMaterList = (JSONObject) obj.get("getRadioActiveMaterList");
 
 						JSONObject header = (JSONObject) getRadioActiveMaterList.get("header");
+						
+						String resultCode_col = " "; // 결과코드
+						String resultMsg_col = " "; // 결과메시지
 
-						resultCode_col.setLength(0);
-						resultCode_col.append(header.get("code").toString().trim()); // 결과
+						resultCode_col = header.get("code").toString().trim(); // 결과
 																						// 코드
-						resultMsg_col.setLength(0);
-						resultMsg_col.append(header.get("message").toString().trim()); // 결과
+						resultMsg_col = header.get("message").toString().trim(); // 결과
 																						// 메시지
 
 						if (!(resultCode_col.toString().equals("00"))) {
 							System.out.println("parsing error!!::resultCode::" + resultCode_col.toString()
 									+ "::resultMsg::" + resultMsg_col.toString());
 						} else if (resultCode_col.toString().equals("00")) {
-							
-							numOfRows.setLength(0);
-							numOfRows.append(getRadioActiveMaterList.get("numOfRows").toString().trim());
 
-							pageNo_str.setLength(0);
-							pageNo_str.append(String.valueOf(i).trim());
-
-							totalCount.setLength(0);
-							totalCount.append(getRadioActiveMaterList.get("totalCount").toString().trim());
+							String rn = " "; // 행번호
+							String ptNo = " "; // 조사지점코드
+							String ptNm = " "; // 조사지점명
+							String wmcymd = " "; // 채취일
+							String act1 = " "; // 측정값 Cs-134(세슘)
+							String act2 = " "; // 측정값 Cs-137(세슘)
+							String act3 = " "; // 측정값 I-131(요드)
+							String numOfRows = " "; // 한 페이지 결과 수
+							String pageNo_str = " "; // 페이지 번호
+							String totalCount = " "; // 전체 결과 수
 
 							JSONArray items = (JSONArray) getRadioActiveMaterList.get("item");
 
@@ -142,45 +129,126 @@ public class GetRadioActiveMaterList {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									JsonParser.colWrite(rn, keyname, "RN", item);
-									JsonParser.colWrite(ptNo, keyname, "PT_NO", item);
-									JsonParser.colWrite(ptNm, keyname, "PT_NM", item);
-									JsonParser.colWrite(wmcymd, keyname, "WMCYMD", item);
-									JsonParser.colWrite(act1, keyname, "ACT1", item);
-									JsonParser.colWrite(act2, keyname, "ACT2", item);
-									JsonParser.colWrite(act3, keyname, "ACT3", item);
-									JsonParser.colWrite(numOfRows, keyname, "numOfRows", item);
-									JsonParser.colWrite(pageNo_str, keyname, "pageNo", item);
-									JsonParser.colWrite(totalCount, keyname, "totalCount", item);
+									
+									if(keyname.equals("RN")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											rn = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											rn = " ";
+										}
+									}
+									if(keyname.equals("PT_NO")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											ptNo = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											ptNo = " ";
+										}
+									}
+									if(keyname.equals("PT_NM")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											ptNm = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											ptNm = " ";
+										}
+									}
+									if(keyname.equals("WMCYMD")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											wmcymd = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											wmcymd = " ";
+										}
+									}
+									if(keyname.equals("ACT1")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											act1 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											act1 = " ";
+										}
+									}
+									if(keyname.equals("ACT2")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											act2 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											act2 = " ";
+										}
+									}
+									if(keyname.equals("ACT3")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											act3 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											act3 = " ";
+										}
+									}
+									if(keyname.equals("numOfRows")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											numOfRows = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											numOfRows = " ";
+										}
+									}
+									if(keyname.equals("pageNo")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											pageNo_str = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											pageNo_str = " ";
+										}
+									}
+									if(keyname.equals("totalCount")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											totalCount = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											totalCount = " ";
+										}
+									}
 
 								}
+								
+								
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
 
-								// 한번에 문자열 합침
-								resultSb.append(resultCode_col);
-								resultSb.append("|^");
-								resultSb.append(resultMsg_col);
-								resultSb.append("|^");
-								resultSb.append(rn);
-								resultSb.append("|^");
-								resultSb.append(ptNo);
-								resultSb.append("|^");
-								resultSb.append(ptNm);
-								resultSb.append("|^");
-								resultSb.append(wmcymd);
-								resultSb.append("|^");
-								resultSb.append(act1);
-								resultSb.append("|^");
-								resultSb.append(act2);
-								resultSb.append("|^");
-								resultSb.append(act3);
-								resultSb.append("|^");
-								resultSb.append(numOfRows);
-								resultSb.append("|^");
-								resultSb.append(pageNo_str);
-								resultSb.append("|^");
-								resultSb.append(totalCount);
-								resultSb.append(System.getProperty("line.separator"));
+									pw.write(resultCode_col); 
+									pw.write("|^");
+									pw.write(resultMsg_col); 
+									pw.write("|^");
+									pw.write(rn); 
+									pw.write("|^");
+									pw.write(ptNo); 
+									pw.write("|^");
+									pw.write(ptNm); 
+									pw.write("|^");
+									pw.write(wmcymd); 
+									pw.write("|^");
+									pw.write(act1); 
+									pw.write("|^");
+									pw.write(act2); 
+									pw.write("|^");
+									pw.write(act3); 
+									pw.write("|^");
+									pw.write(numOfRows); 
+									pw.write("|^");
+									pw.write(pageNo_str); 
+									pw.write("|^");
+									pw.write(totalCount); 
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}			
 
 							}
 
@@ -191,19 +259,6 @@ public class GetRadioActiveMaterList {
 						System.out.println("진행도::::::" + i + "/" + pageCount);
 
 						//Thread.sleep(2500);
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

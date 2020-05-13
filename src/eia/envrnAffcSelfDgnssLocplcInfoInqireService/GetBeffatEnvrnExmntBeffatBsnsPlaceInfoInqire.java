@@ -76,15 +76,6 @@ public class GetBeffatEnvrnExmntBeffatBsnsPlaceInfoInqire {
 
 					// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer rnum = new StringBuffer(" "); // 소팅넘버링
-					StringBuffer num = new StringBuffer(" "); // 번호
-					StringBuffer name = new StringBuffer(" "); // 사업명
-					StringBuffer centerx = new StringBuffer(" "); // 좌표 X
-					StringBuffer centery = new StringBuffer(" "); // 좌표 Y
-					StringBuffer distance = new StringBuffer(" "); // 반경
-
 					for (int i = 1; i <= pageCount; i++) {
 
 						json = JsonParser.parseEiaJson_distance(service_url, service_key, String.valueOf(i), args[0]);
@@ -112,6 +103,13 @@ public class GetBeffatEnvrnExmntBeffatBsnsPlaceInfoInqire {
 							System.out.println("data not exist!!");
 						} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 							
+							String rnum = " "; // 소팅넘버링
+							String num = " "; // 번호
+							String name = " "; // 사업명
+							String centerx = " "; // 좌표 X
+							String centery = " "; // 좌표 Y
+							String distance = " "; // 반경
+							
 							String numOfRows_str = body.get("numOfRows").toString().trim();
 							String totalCount_str = body.get("totalCount").toString().trim();
 
@@ -129,39 +127,91 @@ public class GetBeffatEnvrnExmntBeffatBsnsPlaceInfoInqire {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									JsonParser.colWrite(rnum, keyname, "rnum", items_jsonObject);
-									JsonParser.colWrite(num, keyname, "num", items_jsonObject);
-									JsonParser.colWrite(name, keyname, "name", items_jsonObject);
-									JsonParser.colWrite(centerx, keyname, "centerx", items_jsonObject);
-									JsonParser.colWrite(centery, keyname, "centery", items_jsonObject);
-									JsonParser.colWrite(distance, keyname, "distance", items_jsonObject);
+									
+									if(keyname.equals("rnum")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											rnum = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											rnum = " ";
+										}
+									}
+									if(keyname.equals("num")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											num = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											num = " ";
+										}
+									}
+									if(keyname.equals("name")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											name = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											name = " ";
+										}
+									}
+									if(keyname.equals("centerx")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											centerx = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											centerx = " ";
+										}
+									}
+									if(keyname.equals("centery")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											centery = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											centery = " ";
+										}
+									}
+									if(keyname.equals("distance")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											distance = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											distance = " ";
+										}
+									}
 
 								}
+								
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
 
-								// 한번에 문자열 합침
-								resultSb.append(resultCode);
-								resultSb.append("|^");
-								resultSb.append(resultMsg);
-								resultSb.append("|^");
-								resultSb.append(numOfRows_str);
-								resultSb.append("|^");
-								resultSb.append(Integer.toString(i));
-								resultSb.append("|^");
-								resultSb.append(totalCount_str);
-								resultSb.append("|^");
-								resultSb.append(rnum);
-								resultSb.append("|^");
-								resultSb.append(num);
-								resultSb.append("|^");
-								resultSb.append(name);
-								resultSb.append("|^");
-								resultSb.append(centerx);
-								resultSb.append("|^");
-								resultSb.append(centery);
-								resultSb.append("|^");
-								resultSb.append(distance);
-								resultSb.append(System.getProperty("line.separator"));
+									pw.write(resultCode); 
+									pw.write("|^");
+									pw.write(resultMsg); 
+									pw.write("|^");
+									pw.write(numOfRows_str); 
+									pw.write("|^");
+									pw.write(Integer.toString(i)); 
+									pw.write("|^");
+									pw.write(totalCount_str); 
+									pw.write("|^");
+									pw.write(rnum); 
+									pw.write("|^");
+									pw.write(num); 
+									pw.write("|^");
+									pw.write(name); 
+									pw.write("|^");
+									pw.write(centerx); 
+									pw.write("|^");
+									pw.write(centery); 
+									pw.write("|^");
+									pw.write(distance); 
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}			
 
 							} else if (items.get("item") instanceof JSONArray) {
 
@@ -179,38 +229,90 @@ public class GetBeffatEnvrnExmntBeffatBsnsPlaceInfoInqire {
 
 										String keyname = iter.next();
 
-										JsonParser.colWrite(rnum, keyname, "rnum", item_obj);
-										JsonParser.colWrite(num, keyname, "num", item_obj);
-										JsonParser.colWrite(name, keyname, "name", item_obj);
-										JsonParser.colWrite(centerx, keyname, "centerx", item_obj);
-										JsonParser.colWrite(centery, keyname, "centery", item_obj);
-										JsonParser.colWrite(distance, keyname, "distance", item_obj);
+										if(keyname.equals("rnum")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												rnum = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												rnum = " ";
+											}
+										}
+										if(keyname.equals("num")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												num = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												num = " ";
+											}
+										}
+										if(keyname.equals("name")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												name = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												name = " ";
+											}
+										}
+										if(keyname.equals("centerx")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												centerx = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												centerx = " ";
+											}
+										}
+										if(keyname.equals("centery")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												centery = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												centery = " ";
+											}
+										}
+										if(keyname.equals("distance")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												distance = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												distance = " ";
+											}
+										}
 
 									}
 
-									// 한번에 문자열 합침
-									resultSb.append(resultCode);
-									resultSb.append("|^");
-									resultSb.append(resultMsg);
-									resultSb.append("|^");
-									resultSb.append(numOfRows_str);
-									resultSb.append("|^");
-									resultSb.append(Integer.toString(i));
-									resultSb.append("|^");
-									resultSb.append(totalCount_str);
-									resultSb.append("|^");
-									resultSb.append(rnum);
-									resultSb.append("|^");
-									resultSb.append(num);
-									resultSb.append("|^");
-									resultSb.append(name);
-									resultSb.append("|^");
-									resultSb.append(centerx);
-									resultSb.append("|^");
-									resultSb.append(centery);
-									resultSb.append("|^");
-									resultSb.append(distance);
-									resultSb.append(System.getProperty("line.separator"));
+									// step 4. 파일에 쓰기
+									try {
+										PrintWriter pw = new PrintWriter(
+												new BufferedWriter(new FileWriter(file, true)));
+
+										pw.write(resultCode); 
+										pw.write("|^");
+										pw.write(resultMsg); 
+										pw.write("|^");
+										pw.write(numOfRows_str); 
+										pw.write("|^");
+										pw.write(Integer.toString(i)); 
+										pw.write("|^");
+										pw.write(totalCount_str); 
+										pw.write("|^");
+										pw.write(rnum); 
+										pw.write("|^");
+										pw.write(num); 
+										pw.write("|^");
+										pw.write(name); 
+										pw.write("|^");
+										pw.write(centerx); 
+										pw.write("|^");
+										pw.write(centery); 
+										pw.write("|^");
+										pw.write(distance); 
+										pw.println();
+										pw.flush();
+										pw.close();
+
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
 
 								}
 
@@ -223,18 +325,6 @@ public class GetBeffatEnvrnExmntBeffatBsnsPlaceInfoInqire {
 
 						//Thread.sleep(1000);
 
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

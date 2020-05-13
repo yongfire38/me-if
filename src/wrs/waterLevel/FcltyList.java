@@ -75,11 +75,6 @@ public class FcltyList {
 
 					// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer fcltyMngNm = new StringBuffer(" "); // 시설관리명
-					StringBuffer sujCode = new StringBuffer(" "); // 사업장코드
-
 					for (int i = 1; i <= pageCount; i++) {
 
 						json = JsonParser.parseWrsJson(service_url, service_key, String.valueOf(i), args[0]);
@@ -107,7 +102,8 @@ public class FcltyList {
 							System.out.println("data not exist!!");
 						} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 							
-							
+							String fcltyMngNm = " "; // 시설관리명
+							String sujCode = " "; // 사업장코드
 
 							JSONObject items = (JSONObject) body.get("items");
 
@@ -123,19 +119,43 @@ public class FcltyList {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									JsonParser.colWrite(fcltyMngNm, keyname, "fcltyMngNm", items_jsonObject);
-									JsonParser.colWrite(sujCode, keyname, "sujCode", items_jsonObject);
+									
+									if(keyname.equals("fcltyMngNm")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											fcltyMngNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											fcltyMngNm = " ";
+										}
+									}
+									if(keyname.equals("sujCode")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											sujCode = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											sujCode = " ";
+										}
+									}
 
 								}
+								
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
 
-								// 한번에 문자열 합침
-								resultSb.append(args[0]);
-								resultSb.append("|^");
-								resultSb.append(fcltyMngNm);
-								resultSb.append("|^");
-								resultSb.append(sujCode);
-								resultSb.append(System.getProperty("line.separator"));
+									pw.write(args[0]);
+									pw.write("|^");
+									pw.write(fcltyMngNm);
+									pw.write("|^");
+									pw.write(sujCode);
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 
 							} else if (items.get("item") instanceof JSONArray) {
 
@@ -153,18 +173,42 @@ public class FcltyList {
 
 										String keyname = iter.next();
 
-										JsonParser.colWrite(fcltyMngNm, keyname, "fcltyMngNm", item_obj);
-										JsonParser.colWrite(sujCode, keyname, "sujCode", item_obj);
+										if(keyname.equals("fcltyMngNm")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												fcltyMngNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												fcltyMngNm = " ";
+											}
+										}
+										if(keyname.equals("sujCode")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												sujCode = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												sujCode = " ";
+											}
+										}
 
 									}
 
-									// 한번에 문자열 합침
-									resultSb.append(args[0]);
-									resultSb.append("|^");
-									resultSb.append(fcltyMngNm);
-									resultSb.append("|^");
-									resultSb.append(sujCode);
-									resultSb.append(System.getProperty("line.separator"));
+									// step 4. 파일에 쓰기
+									try {
+										PrintWriter pw = new PrintWriter(
+												new BufferedWriter(new FileWriter(file, true)));
+
+										pw.write(args[0]);
+										pw.write("|^");
+										pw.write(fcltyMngNm);
+										pw.write("|^");
+										pw.write(sujCode);
+										pw.println();
+										pw.flush();
+										pw.close();
+
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
 
 								}
 
@@ -178,18 +222,6 @@ public class FcltyList {
 
 						//Thread.sleep(1000);
 
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

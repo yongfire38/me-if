@@ -43,12 +43,6 @@ public class Walcode {
 					// step 2. 전체 파싱
 					String json = "";
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer walobsrvtcode = new StringBuffer(" "); // 수위
-																		// 관측소코드
-					StringBuffer obsrvtNm = new StringBuffer(" "); // 관측소이름
-
 					// 파라미터 1개만 받으므로 환경영향평가 쪽 메서드 이용
 					json = JsonParser.parseEiaJson(service_url, service_key, args[0]);
 					
@@ -74,7 +68,8 @@ public class Walcode {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 						
-						
+						String walobsrvtcode = " "; // 수위 관측소코드
+						String obsrvtNm = " ";  // 관측소이름
 
 						JSONObject items = (JSONObject) body.get("items");
 
@@ -90,19 +85,43 @@ public class Walcode {
 							while (iter.hasNext()) {
 
 								String keyname = iter.next();
-
-								JsonParser.colWrite(walobsrvtcode, keyname, "walobsrvtcode", items_jsonObject);
-								JsonParser.colWrite(obsrvtNm, keyname, "obsrvtNm", items_jsonObject);
+								
+								if(keyname.equals("walobsrvtcode")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										walobsrvtcode = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										walobsrvtcode = " ";
+									}
+								}
+								if(keyname.equals("obsrvtNm")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										obsrvtNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										obsrvtNm = " ";
+									}
+								}
 
 							}
+							
+							// step 4. 파일에 쓰기
+							try {
+								PrintWriter pw = new PrintWriter(
+										new BufferedWriter(new FileWriter(file, true)));
 
-							// 한번에 문자열 합침
-							resultSb.append(args[0]);
-							resultSb.append("|^");
-							resultSb.append(walobsrvtcode);
-							resultSb.append("|^");
-							resultSb.append(obsrvtNm);
-							resultSb.append(System.getProperty("line.separator"));
+								pw.write(args[0]);
+								pw.write("|^");
+								pw.write(walobsrvtcode);
+								pw.write("|^");
+								pw.write(obsrvtNm);
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 
 						} else if (items.get("item") instanceof JSONArray) {
 
@@ -120,18 +139,42 @@ public class Walcode {
 
 									String keyname = iter.next();
 
-									JsonParser.colWrite(walobsrvtcode, keyname, "walobsrvtcode", item_obj);
-									JsonParser.colWrite(obsrvtNm, keyname, "obsrvtNm", item_obj);
+									if(keyname.equals("walobsrvtcode")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											walobsrvtcode = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											walobsrvtcode = " ";
+										}
+									}
+									if(keyname.equals("obsrvtNm")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											obsrvtNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											obsrvtNm = " ";
+										}
+									}
 
 								}
 
-								// 한번에 문자열 합침
-								resultSb.append(args[0]);
-								resultSb.append("|^");
-								resultSb.append(walobsrvtcode);
-								resultSb.append("|^");
-								resultSb.append(obsrvtNm);
-								resultSb.append(System.getProperty("line.separator"));
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
+
+									pw.write(args[0]);
+									pw.write("|^");
+									pw.write(walobsrvtcode);
+									pw.write("|^");
+									pw.write(obsrvtNm);
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 
 							}
 
@@ -139,18 +182,6 @@ public class Walcode {
 
 					} else {
 						System.out.println("parsing error!!");
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

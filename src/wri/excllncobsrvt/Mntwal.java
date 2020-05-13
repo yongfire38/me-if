@@ -83,13 +83,6 @@ public class Mntwal {
 
 						// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-						StringBuffer resultSb = new StringBuffer("");
-
-						StringBuffer no = new StringBuffer(" "); // 순번
-						StringBuffer obsrdtmnt = new StringBuffer(" "); // 시간
-						StringBuffer flux = new StringBuffer(" "); // 수위
-						StringBuffer wal = new StringBuffer(" "); // 우량
-
 						for (int i = 1; i <= pageCount; i++) {
 
 							json = JsonParser.parseWriJson_wal(service_url, service_key, String.valueOf(i), args[0],
@@ -118,7 +111,10 @@ public class Mntwal {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 								
-								
+								String no = " "; // 순번
+								String obsrdtmnt = " "; // 시간
+								String flux = " "; // 수위
+								String wal = " "; // 우량
 
 								JSONObject items = (JSONObject) body.get("items");
 
@@ -134,35 +130,73 @@ public class Mntwal {
 									while (iter.hasNext()) {
 
 										String keyname = iter.next();
-
-										JsonParser.colWrite(no, keyname, "no", items_jsonObject);
-										JsonParser.colWrite(obsrdtmnt, keyname, "obsrdtmnt", items_jsonObject);
-										JsonParser.colWrite(flux, keyname, "flux", items_jsonObject);
-										JsonParser.colWrite(wal, keyname, "wal", items_jsonObject);
+										
+										if(keyname.equals("no")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												no = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												no = " ";
+											}
+										}
+										if(keyname.equals("obsrdtmnt")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												obsrdtmnt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												obsrdtmnt = " ";
+											}
+										}
+										if(keyname.equals("flux")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												flux = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												flux = " ";
+											}
+										}
+										if(keyname.equals("wal")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												wal = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												wal = " ";
+											}
+										}
 
 									}
+									
+									// step 4. 파일에 쓰기
+									try {
+										PrintWriter pw = new PrintWriter(
+												new BufferedWriter(new FileWriter(file, true)));
 
-									// 한번에 문자열 합침
-									resultSb.append(args[0]);
-									resultSb.append("|^");
-									resultSb.append(args[1]);
-									resultSb.append("|^");
-									resultSb.append(args[2]);
-									resultSb.append("|^");
-									resultSb.append(args[3]);
-									resultSb.append("|^");
-									resultSb.append(args[4]);
-									resultSb.append("|^");
-									resultSb.append(args[5]);
-									resultSb.append("|^");
-									resultSb.append(no);
-									resultSb.append("|^");
-									resultSb.append(obsrdtmnt);
-									resultSb.append("|^");
-									resultSb.append(flux);
-									resultSb.append("|^");
-									resultSb.append(wal);
-									resultSb.append(System.getProperty("line.separator"));
+										pw.write(args[0]);
+										pw.write("|^");
+										pw.write(args[1]);
+										pw.write("|^");
+										pw.write(args[2]);
+										pw.write("|^");
+										pw.write(args[3]);
+										pw.write("|^");
+										pw.write(args[4]);
+										pw.write("|^");
+										pw.write(args[5]);
+										pw.write("|^");
+										pw.write(no);
+										pw.write("|^");
+										pw.write(obsrdtmnt);
+										pw.write("|^");
+										pw.write(flux);
+										pw.write("|^");
+										pw.write(wal);
+										pw.println();
+										pw.flush();
+										pw.close();
+
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
 
 								} else if (items.get("item") instanceof JSONArray) {
 
@@ -180,34 +214,72 @@ public class Mntwal {
 
 											String keyname = iter.next();
 
-											JsonParser.colWrite(no, keyname, "no", item_obj);
-											JsonParser.colWrite(obsrdtmnt, keyname, "obsrdtmnt", item_obj);
-											JsonParser.colWrite(flux, keyname, "flux", item_obj);
-											JsonParser.colWrite(wal, keyname, "wal", item_obj);
+											if(keyname.equals("no")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													no = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													no = " ";
+												}
+											}
+											if(keyname.equals("obsrdtmnt")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													obsrdtmnt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													obsrdtmnt = " ";
+												}
+											}
+											if(keyname.equals("flux")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													flux = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													flux = " ";
+												}
+											}
+											if(keyname.equals("wal")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													wal = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													wal = " ";
+												}
+											}
 
 										}
 
-										// 한번에 문자열 합침
-										resultSb.append(args[0]);
-										resultSb.append("|^");
-										resultSb.append(args[1]);
-										resultSb.append("|^");
-										resultSb.append(args[2]);
-										resultSb.append("|^");
-										resultSb.append(args[3]);
-										resultSb.append("|^");
-										resultSb.append(args[4]);
-										resultSb.append("|^");
-										resultSb.append(args[5]);
-										resultSb.append("|^");
-										resultSb.append(no);
-										resultSb.append("|^");
-										resultSb.append(obsrdtmnt);
-										resultSb.append("|^");
-										resultSb.append(flux);
-										resultSb.append("|^");
-										resultSb.append(wal);
-										resultSb.append(System.getProperty("line.separator"));
+										// step 4. 파일에 쓰기
+										try {
+											PrintWriter pw = new PrintWriter(
+													new BufferedWriter(new FileWriter(file, true)));
+
+											pw.write(args[0]);
+											pw.write("|^");
+											pw.write(args[1]);
+											pw.write("|^");
+											pw.write(args[2]);
+											pw.write("|^");
+											pw.write(args[3]);
+											pw.write("|^");
+											pw.write(args[4]);
+											pw.write("|^");
+											pw.write(args[5]);
+											pw.write("|^");
+											pw.write(no);
+											pw.write("|^");
+											pw.write(obsrdtmnt);
+											pw.write("|^");
+											pw.write(flux);
+											pw.write("|^");
+											pw.write(wal);
+											pw.println();
+											pw.flush();
+											pw.close();
+
+										} catch (IOException e) {
+											e.printStackTrace();
+										}
 
 									}
 
@@ -223,18 +295,6 @@ public class Mntwal {
 
 							//Thread.sleep(1000);
 
-						}
-
-						// step 4. 파일에 쓰기
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write(resultSb.toString());
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
 						}
 
 						System.out.println("parsing complete!");

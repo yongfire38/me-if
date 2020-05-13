@@ -74,12 +74,6 @@ public class MultidamdidamCode {
 
 					// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer damcdcrd = new StringBuffer(" "); // 댐코드
-					StringBuffer damnm = new StringBuffer(" "); // 댐명칭
-					StringBuffer seqno = new StringBuffer(" "); // 순번
-
 					for (int i = 1; i <= pageCount; ++i) {
 
 						json = JsonParser.parseWatJson(service_url, service_key, String.valueOf(i));
@@ -105,6 +99,10 @@ public class MultidamdidamCode {
 							System.out.println(
 									"parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
 						} else if (resultCode.equals("00")) {
+							
+							String damcdcrd = " "; // 댐코드
+							String damnm = " ";  // 댐명칭
+							String seqno = " ";  // 순번
 
 							JSONArray items_jsonArray = (JSONArray) items.get("item");
 
@@ -119,20 +117,51 @@ public class MultidamdidamCode {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									JsonParser.colWrite(damcdcrd, keyname, "damcode", item_obj);
-									JsonParser.colWrite(damnm, keyname, "damnm", item_obj);
-									JsonParser.colWrite(seqno, keyname, "seqno", item_obj);
+									
+									if(keyname.equals("damcode")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											damcdcrd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											damcdcrd = " ";
+										}
+									}
+									if(keyname.equals("damnm")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											damnm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											damnm = " ";
+										}
+									}
+									if(keyname.equals("seqno")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											seqno = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											seqno = " ";
+										}
+									}
 
 								}
+								
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
 
-								// 한번에 문자열 합침
-								resultSb.append(damcdcrd);
-								resultSb.append("|^");
-								resultSb.append(damnm);
-								resultSb.append("|^");
-								resultSb.append(seqno);
-								resultSb.append(System.getProperty("line.separator"));
+									pw.write(damcdcrd);
+									pw.write("|^");
+									pw.write(damnm);
+									pw.write("|^");
+									pw.write(seqno);
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 
 							}
 
@@ -144,18 +173,6 @@ public class MultidamdidamCode {
 
 						//Thread.sleep(1000);
 
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

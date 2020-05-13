@@ -78,13 +78,6 @@ public class Sihwavalue {
 
 						// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-						StringBuffer resultSb = new StringBuffer("");
-
-						StringBuffer bidno = new StringBuffer(" "); // 번호
-						StringBuffer obsdt = new StringBuffer(" "); // 일자
-						StringBuffer lakeRwl = new StringBuffer(" "); // 호소위(EL.m)
-						StringBuffer seaRwl = new StringBuffer(" "); // 해수위(EL.m)
-
 						for (int i = 1; i <= pageCount; ++i) {
 
 							json = JsonParser.parseWriJson(service_url, service_key, String.valueOf(i), args[0],
@@ -113,7 +106,11 @@ public class Sihwavalue {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 								
-								
+								String bidno = " "; // 번호
+								String obsdt = " "; // 일자
+								String lakeRwl = " "; // 호소위(EL.m)
+								String seaRwl = " "; // 해수위(EL.m)
+
 
 								JSONObject items = (JSONObject) body.get("items");
 
@@ -129,27 +126,67 @@ public class Sihwavalue {
 									while (iter.hasNext()) {
 
 										String keyname = iter.next();
-
-										JsonParser.colWrite(bidno, keyname, "bidno", items_jsonObject);
-										JsonParser.colWrite(obsdt, keyname, "obsdt", items_jsonObject);
-										JsonParser.colWrite(lakeRwl, keyname, "lakeRwl", items_jsonObject);
-										JsonParser.colWrite(seaRwl, keyname, "seaRwl", items_jsonObject);
+										
+										if(keyname.equals("bidno")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												bidno = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												bidno = " ";
+											}
+										}
+										if(keyname.equals("obsdt")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												obsdt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												obsdt = " ";
+											}
+										}
+										if(keyname.equals("lakeRwl")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												lakeRwl = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												lakeRwl = " ";
+											}
+										}
+										if(keyname.equals("seaRwl")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												seaRwl = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												seaRwl = " ";
+											}
+										}
 
 									}
+									
+									// step 4. 파일에 쓰기
+									try {
+										PrintWriter pw = new PrintWriter(
+												new BufferedWriter(new FileWriter(file, true)));
 
-									// 한번에 문자열 합침
-									resultSb.append(args[0]);
-									resultSb.append("|^");
-									resultSb.append(args[1]);
-									resultSb.append("|^");
-									resultSb.append(bidno);
-									resultSb.append("|^");
-									resultSb.append(obsdt);
-									resultSb.append("|^");
-									resultSb.append(lakeRwl);
-									resultSb.append("|^");
-									resultSb.append(seaRwl);
-									resultSb.append(System.getProperty("line.separator"));
+										pw.write(args[0]);
+										pw.write("|^");
+										pw.write(args[1]);
+										pw.write("|^");
+										pw.write(bidno);
+										pw.write("|^");
+										pw.write(obsdt);
+										pw.write("|^");
+										pw.write(lakeRwl);
+										pw.write("|^");
+										pw.write(seaRwl);
+										pw.println();
+										pw.flush();
+										pw.close();
+
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
+
+									
 
 								} else if (items.get("item") instanceof JSONArray) {
 
@@ -167,26 +204,64 @@ public class Sihwavalue {
 
 											String keyname = iter.next();
 
-											JsonParser.colWrite(bidno, keyname, "bidno", item_obj);
-											JsonParser.colWrite(obsdt, keyname, "obsdt", item_obj);
-											JsonParser.colWrite(lakeRwl, keyname, "lakeRwl", item_obj);
-											JsonParser.colWrite(seaRwl, keyname, "seaRwl", item_obj);
+											if(keyname.equals("bidno")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													bidno = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													bidno = " ";
+												}
+											}
+											if(keyname.equals("obsdt")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													obsdt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													obsdt = " ";
+												}
+											}
+											if(keyname.equals("lakeRwl")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													lakeRwl = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													lakeRwl = " ";
+												}
+											}
+											if(keyname.equals("seaRwl")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													seaRwl = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													seaRwl = " ";
+												}
+											}
 
 										}
 
-										// 한번에 문자열 합침
-										resultSb.append(args[0]);
-										resultSb.append("|^");
-										resultSb.append(args[1]);
-										resultSb.append("|^");
-										resultSb.append(bidno);
-										resultSb.append("|^");
-										resultSb.append(obsdt);
-										resultSb.append("|^");
-										resultSb.append(lakeRwl);
-										resultSb.append("|^");
-										resultSb.append(seaRwl);
-										resultSb.append(System.getProperty("line.separator"));
+										// step 4. 파일에 쓰기
+										try {
+											PrintWriter pw = new PrintWriter(
+													new BufferedWriter(new FileWriter(file, true)));
+
+											pw.write(args[0]);
+											pw.write("|^");
+											pw.write(args[1]);
+											pw.write("|^");
+											pw.write(bidno);
+											pw.write("|^");
+											pw.write(obsdt);
+											pw.write("|^");
+											pw.write(lakeRwl);
+											pw.write("|^");
+											pw.write(seaRwl);
+											pw.println();
+											pw.flush();
+											pw.close();
+
+										} catch (IOException e) {
+											e.printStackTrace();
+										}
 
 									}
 
@@ -202,18 +277,6 @@ public class Sihwavalue {
 
 							//Thread.sleep(1000);
 
-						}
-
-						// step 4. 파일에 쓰기
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write(resultSb.toString());
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
 						}
 
 						System.out.println("parsing complete!");

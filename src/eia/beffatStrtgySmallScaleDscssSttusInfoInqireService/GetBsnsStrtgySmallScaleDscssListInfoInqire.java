@@ -76,15 +76,6 @@ public class GetBsnsStrtgySmallScaleDscssListInfoInqire {
 
 					// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer rnum = new StringBuffer(" "); // 정렬순서
-					StringBuffer perCd = new StringBuffer(" "); // 사전환경성검토코드
-					StringBuffer bizSeq = new StringBuffer(" "); // 사업 고유 번호
-					StringBuffer bizNm = new StringBuffer(" "); // 사업명
-					StringBuffer applyDt = new StringBuffer(" "); // 사업명
-					StringBuffer ccilStepCd = new StringBuffer(" "); // 협의진행현황
-
 					for (int i = 1; i <= pageCount; i++) {
 
 						json = JsonParser.parseWatJson(service_url, service_key, String.valueOf(i));
@@ -116,6 +107,13 @@ public class GetBsnsStrtgySmallScaleDscssListInfoInqire {
 							String totalCount_str = body.get("totalCount").toString().trim();
 
 							JSONObject items = (JSONObject) body.get("items");
+							
+							String rnum = " "; // 정렬순서
+							String perCd = " "; // 사전환경성검토코드
+							String bizSeq = " "; // 사업 고유 번호
+							String bizNm = " "; // 사업명
+							String applyDt = " "; // 사업명
+							String ccilStepCd = " "; // 협의진행현황
 
 							// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 							if (items.get("item") instanceof JSONObject) {
@@ -130,38 +128,90 @@ public class GetBsnsStrtgySmallScaleDscssListInfoInqire {
 
 									String keyname = iter.next();
 
-									JsonParser.colWrite(rnum, keyname, "rnum", items_jsonObject);
-									JsonParser.colWrite(perCd, keyname, "perCd", items_jsonObject);
-									JsonParser.colWrite(bizSeq, keyname, "bizSeq", items_jsonObject);
-									JsonParser.colWrite(bizNm, keyname, "bizNm", items_jsonObject);
-									JsonParser.colWrite(applyDt, keyname, "applyDt", items_jsonObject);
-									JsonParser.colWrite(ccilStepCd, keyname, "ccilStepCd", items_jsonObject);
+									if(keyname.equals("rnum")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											rnum = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											rnum = " ";
+										}
+									}
+									if(keyname.equals("perCd")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											perCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											perCd = " ";
+										}
+									}
+									if(keyname.equals("bizSeq")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											bizSeq = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											bizSeq = " ";
+										}
+									}
+									if(keyname.equals("bizNm")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											bizNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											bizNm = " ";
+										}
+									}
+									if(keyname.equals("applyDt")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											applyDt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											applyDt = " ";
+										}
+									}
+									if(keyname.equals("ccilStepCd")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											ccilStepCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											ccilStepCd = " ";
+										}
+									}
 
 								}
 
-								// 한번에 문자열 합침
-								resultSb.append(resultCode);
-								resultSb.append("|^");
-								resultSb.append(resultMsg);
-								resultSb.append("|^");
-								resultSb.append(numOfRows_str);
-								resultSb.append("|^");
-								resultSb.append(Integer.toString(i));
-								resultSb.append("|^");
-								resultSb.append(totalCount_str);
-								resultSb.append("|^");
-								resultSb.append(rnum);
-								resultSb.append("|^");
-								resultSb.append(perCd);
-								resultSb.append("|^");
-								resultSb.append(bizSeq);
-								resultSb.append("|^");
-								resultSb.append(bizNm);
-								resultSb.append("|^");
-								resultSb.append(applyDt);
-								resultSb.append("|^");
-								resultSb.append(ccilStepCd);
-								resultSb.append(System.getProperty("line.separator"));
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
+
+									pw.write(resultCode); 
+									pw.write("|^");
+									pw.write(resultMsg); 
+									pw.write("|^");
+									pw.write(numOfRows_str); 
+									pw.write("|^");
+									pw.write(Integer.toString(i)); 
+									pw.write("|^");
+									pw.write(totalCount_str); 
+									pw.write("|^");
+									pw.write(rnum); 
+									pw.write("|^");
+									pw.write(perCd); 
+									pw.write("|^");
+									pw.write(bizSeq); 
+									pw.write("|^");
+									pw.write(bizNm); 
+									pw.write("|^");
+									pw.write(applyDt); 
+									pw.write("|^");
+									pw.write(ccilStepCd); 
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}		
 
 							} else if (items.get("item") instanceof JSONArray) {
 
@@ -179,38 +229,90 @@ public class GetBsnsStrtgySmallScaleDscssListInfoInqire {
 
 										String keyname = iter.next();
 
-										JsonParser.colWrite(rnum, keyname, "rnum", item_obj);
-										JsonParser.colWrite(perCd, keyname, "perCd", item_obj);
-										JsonParser.colWrite(bizSeq, keyname, "bizSeq", item_obj);
-										JsonParser.colWrite(bizNm, keyname, "bizNm", item_obj);
-										JsonParser.colWrite(applyDt, keyname, "applyDt", item_obj);
-										JsonParser.colWrite(ccilStepCd, keyname, "ccilStepCd", item_obj);
+										if(keyname.equals("rnum")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												rnum = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												rnum = " ";
+											}
+										}
+										if(keyname.equals("perCd")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												perCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												perCd = " ";
+											}
+										}
+										if(keyname.equals("bizSeq")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												bizSeq = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												bizSeq = " ";
+											}
+										}
+										if(keyname.equals("bizNm")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												bizNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												bizNm = " ";
+											}
+										}
+										if(keyname.equals("applyDt")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												applyDt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												applyDt = " ";
+											}
+										}
+										if(keyname.equals("ccilStepCd")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												ccilStepCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												ccilStepCd = " ";
+											}
+										}
 
 									}
 
-									// 한번에 문자열 합침
-									resultSb.append(resultCode);
-									resultSb.append("|^");
-									resultSb.append(resultMsg);
-									resultSb.append("|^");
-									resultSb.append(numOfRows_str);
-									resultSb.append("|^");
-									resultSb.append(Integer.toString(i));
-									resultSb.append("|^");
-									resultSb.append(totalCount_str);
-									resultSb.append("|^");
-									resultSb.append(rnum);
-									resultSb.append("|^");
-									resultSb.append(perCd);
-									resultSb.append("|^");
-									resultSb.append(bizSeq);
-									resultSb.append("|^");
-									resultSb.append(bizNm);
-									resultSb.append("|^");
-									resultSb.append(applyDt);
-									resultSb.append("|^");
-									resultSb.append(ccilStepCd);
-									resultSb.append(System.getProperty("line.separator"));
+									// step 4. 파일에 쓰기
+									try {
+										PrintWriter pw = new PrintWriter(
+												new BufferedWriter(new FileWriter(file, true)));
+
+										pw.write(resultCode); 
+										pw.write("|^");
+										pw.write(resultMsg); 
+										pw.write("|^");
+										pw.write(numOfRows_str); 
+										pw.write("|^");
+										pw.write(Integer.toString(i)); 
+										pw.write("|^");
+										pw.write(totalCount_str); 
+										pw.write("|^");
+										pw.write(rnum); 
+										pw.write("|^");
+										pw.write(perCd); 
+										pw.write("|^");
+										pw.write(bizSeq); 
+										pw.write("|^");
+										pw.write(bizNm); 
+										pw.write("|^");
+										pw.write(applyDt); 
+										pw.write("|^");
+										pw.write(ccilStepCd); 
+										pw.println();
+										pw.flush();
+										pw.close();
+
+									} catch (IOException e) {
+										e.printStackTrace();
+									}	
 								}
 
 							} else {
@@ -223,18 +325,6 @@ public class GetBsnsStrtgySmallScaleDscssListInfoInqire {
 
 						//Thread.sleep(1000);
 
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

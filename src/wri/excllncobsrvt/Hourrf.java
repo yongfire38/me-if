@@ -84,13 +84,6 @@ public class Hourrf {
 
 						// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-						StringBuffer resultSb = new StringBuffer("");
-
-						StringBuffer no = new StringBuffer(" "); // 순번
-						StringBuffer obsrdt = new StringBuffer(" "); // 시간
-						StringBuffer hourrf = new StringBuffer(" "); // 시강우량
-						StringBuffer acmtlrf = new StringBuffer(" "); // 누적우량
-
 						for (int i = 1; i <= pageCount; i++) {
 
 							json = JsonParser.parseWriJson_excll(service_url, service_key, String.valueOf(i), args[0],
@@ -119,7 +112,10 @@ public class Hourrf {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 								
-								
+								String no = " "; // 순번
+								String obsrdt = " "; // 시간
+								String hourrf = " "; // 시강우량
+								String acmtlrf = " "; // 누적우량
 
 								JSONObject items = (JSONObject) body.get("items");
 
@@ -135,35 +131,73 @@ public class Hourrf {
 									while (iter.hasNext()) {
 
 										String keyname = iter.next();
-
-										JsonParser.colWrite(no, keyname, "no", items_jsonObject);
-										JsonParser.colWrite(obsrdt, keyname, "obsrdt", items_jsonObject);
-										JsonParser.colWrite(hourrf, keyname, "hourrf", items_jsonObject);
-										JsonParser.colWrite(acmtlrf, keyname, "acmtlrf", items_jsonObject);
+										
+										if(keyname.equals("no")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												no = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												no = " ";
+											}
+										}
+										if(keyname.equals("obsrdt")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												obsrdt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												obsrdt = " ";
+											}
+										}
+										if(keyname.equals("hourrf")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												hourrf = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												hourrf = " ";
+											}
+										}
+										if(keyname.equals("acmtlrf")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												acmtlrf = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												acmtlrf = " ";
+											}
+										}
 
 									}
+									
+									// step 4. 파일에 쓰기
+									try {
+										PrintWriter pw = new PrintWriter(
+												new BufferedWriter(new FileWriter(file, true)));
 
-									// 한번에 문자열 합침
-									resultSb.append(args[0]);
-									resultSb.append("|^");
-									resultSb.append(args[1]);
-									resultSb.append("|^");
-									resultSb.append(args[2]);
-									resultSb.append("|^");
-									resultSb.append(args[3]);
-									resultSb.append("|^");
-									resultSb.append(args[4]);
-									resultSb.append("|^");
-									resultSb.append(args[5]);
-									resultSb.append("|^");
-									resultSb.append(no);
-									resultSb.append("|^");
-									resultSb.append(obsrdt);
-									resultSb.append("|^");
-									resultSb.append(hourrf);
-									resultSb.append("|^");
-									resultSb.append(acmtlrf);
-									resultSb.append(System.getProperty("line.separator"));
+										pw.write(args[0]);
+										pw.write("|^");
+										pw.write(args[1]);
+										pw.write("|^");
+										pw.write(args[2]);
+										pw.write("|^");
+										pw.write(args[3]);
+										pw.write("|^");
+										pw.write(args[4]);
+										pw.write("|^");
+										pw.write(args[5]);
+										pw.write("|^");
+										pw.write(no);
+										pw.write("|^");
+										pw.write(obsrdt);
+										pw.write("|^");
+										pw.write(hourrf);
+										pw.write("|^");
+										pw.write(acmtlrf);
+										pw.println();
+										pw.flush();
+										pw.close();
+
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
 
 								} else if (items.get("item") instanceof JSONArray) {
 
@@ -181,34 +215,72 @@ public class Hourrf {
 
 											String keyname = iter.next();
 
-											JsonParser.colWrite(no, keyname, "no", item_obj);
-											JsonParser.colWrite(obsrdt, keyname, "obsrdt", item_obj);
-											JsonParser.colWrite(hourrf, keyname, "hourrf", item_obj);
-											JsonParser.colWrite(acmtlrf, keyname, "acmtlrf", item_obj);
+											if(keyname.equals("no")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													no = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													no = " ";
+												}
+											}
+											if(keyname.equals("obsrdt")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													obsrdt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													obsrdt = " ";
+												}
+											}
+											if(keyname.equals("hourrf")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													hourrf = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													hourrf = " ";
+												}
+											}
+											if(keyname.equals("acmtlrf")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													acmtlrf = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													acmtlrf = " ";
+												}
+											}
 
 										}
 
-										// 한번에 문자열 합침
-										resultSb.append(args[0]);
-										resultSb.append("|^");
-										resultSb.append(args[1]);
-										resultSb.append("|^");
-										resultSb.append(args[2]);
-										resultSb.append("|^");
-										resultSb.append(args[3]);
-										resultSb.append("|^");
-										resultSb.append(args[4]);
-										resultSb.append("|^");
-										resultSb.append(args[5]);
-										resultSb.append("|^");
-										resultSb.append(no);
-										resultSb.append("|^");
-										resultSb.append(obsrdt);
-										resultSb.append("|^");
-										resultSb.append(hourrf);
-										resultSb.append("|^");
-										resultSb.append(acmtlrf);
-										resultSb.append(System.getProperty("line.separator"));
+										// step 4. 파일에 쓰기
+										try {
+											PrintWriter pw = new PrintWriter(
+													new BufferedWriter(new FileWriter(file, true)));
+
+											pw.write(args[0]);
+											pw.write("|^");
+											pw.write(args[1]);
+											pw.write("|^");
+											pw.write(args[2]);
+											pw.write("|^");
+											pw.write(args[3]);
+											pw.write("|^");
+											pw.write(args[4]);
+											pw.write("|^");
+											pw.write(args[5]);
+											pw.write("|^");
+											pw.write(no);
+											pw.write("|^");
+											pw.write(obsrdt);
+											pw.write("|^");
+											pw.write(hourrf);
+											pw.write("|^");
+											pw.write(acmtlrf);
+											pw.println();
+											pw.flush();
+											pw.close();
+
+										} catch (IOException e) {
+											e.printStackTrace();
+										}
 
 									}
 
@@ -224,18 +296,6 @@ public class Hourrf {
 
 							//Thread.sleep(1000);
 
-						}
-
-						// step 4. 파일에 쓰기
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write(resultSb.toString());
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
 						}
 
 						System.out.println("parsing complete!");

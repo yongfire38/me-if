@@ -53,13 +53,6 @@ public class GetEnvrnExmntInfoInqire {
 
 					// step 2. 전체 파싱
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer pnu = new StringBuffer(" "); // PNU
-					StringBuffer jibun = new StringBuffer(" "); // 지분
-					StringBuffer centerx = new StringBuffer(" "); // 좌표 X
-					StringBuffer centery = new StringBuffer(" "); // 좌표 Y
-
 					JSONParser parser = new JSONParser();
 					JSONObject obj = (JSONObject) parser.parse(json);
 					JSONObject response = (JSONObject) obj.get("response");
@@ -76,7 +69,10 @@ public class GetEnvrnExmntInfoInqire {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 						
-						
+						String pnu = " "; // PNU
+						String jibun = " "; // 지분
+						String centerx = " "; // 좌표 X
+						String centery = " "; // 좌표 Y
 
 						JSONObject items = (JSONObject) body.get("items");
 
@@ -92,29 +88,67 @@ public class GetEnvrnExmntInfoInqire {
 							while (iter.hasNext()) {
 
 								String keyname = iter.next();
-
-								JsonParser.colWrite(pnu, keyname, "pnu", items_jsonObject);
-								JsonParser.colWrite(jibun, keyname, "jibun", items_jsonObject);
-								JsonParser.colWrite(centerx, keyname, "centerx", items_jsonObject);
-								JsonParser.colWrite(centery, keyname, "centery", items_jsonObject);
+								
+								if(keyname.equals("pnu")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										pnu = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										pnu = " ";
+									}
+								}
+								if(keyname.equals("jibun")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										jibun = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										jibun = " ";
+									}
+								}
+								if(keyname.equals("centerx")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										centerx = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										centerx = " ";
+									}
+								}
+								if(keyname.equals("centery")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										centery = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										centery = " ";
+									}
+								}
 
 							}
+							
+							// step 4. 파일에 쓰기
+							try {
+								PrintWriter pw = new PrintWriter(
+										new BufferedWriter(new FileWriter(file, true)));
 
-							// 한번에 문자열 합침
-							resultSb.append(args[0]);
-							resultSb.append("|^");
-							resultSb.append(resultCode);
-							resultSb.append("|^");
-							resultSb.append(resultMsg);
-							resultSb.append("|^");
-							resultSb.append(pnu);
-							resultSb.append("|^");
-							resultSb.append(jibun);
-							resultSb.append("|^");
-							resultSb.append(centerx);
-							resultSb.append("|^");
-							resultSb.append(centery);
-							resultSb.append(System.getProperty("line.separator"));
+								pw.write(args[0]); 
+								pw.write("|^");
+								pw.write(resultCode); 
+								pw.write("|^");
+								pw.write(resultMsg); 
+								pw.write("|^");
+								pw.write(pnu); 
+								pw.write("|^");
+								pw.write(jibun); 
+								pw.write("|^");
+								pw.write(centerx); 
+								pw.write("|^");
+								pw.write(centery); 
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}			
 
 						} else if (items.get("item") instanceof JSONArray) {
 
@@ -132,46 +166,72 @@ public class GetEnvrnExmntInfoInqire {
 
 									String keyname = iter.next();
 
-									JsonParser.colWrite(pnu, keyname, "pnu", item_obj);
-									JsonParser.colWrite(jibun, keyname, "jibun", item_obj);
-									JsonParser.colWrite(centerx, keyname, "centerx", item_obj);
-									JsonParser.colWrite(centery, keyname, "centery", item_obj);
+									if(keyname.equals("pnu")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											pnu = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											pnu = " ";
+										}
+									}
+									if(keyname.equals("jibun")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											jibun = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											jibun = " ";
+										}
+									}
+									if(keyname.equals("centerx")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											centerx = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											centerx = " ";
+										}
+									}
+									if(keyname.equals("centery")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											centery = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											centery = " ";
+										}
+									}
 
 								}
 
-								// 한번에 문자열 합침
-								resultSb.append(args[0]);
-								resultSb.append("|^");
-								resultSb.append(resultCode);
-								resultSb.append("|^");
-								resultSb.append(resultMsg);
-								resultSb.append("|^");
-								resultSb.append(pnu);
-								resultSb.append("|^");
-								resultSb.append(jibun);
-								resultSb.append("|^");
-								resultSb.append(centerx);
-								resultSb.append("|^");
-								resultSb.append(centery);
-								resultSb.append(System.getProperty("line.separator"));
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
+
+									pw.write(args[0]); 
+									pw.write("|^");
+									pw.write(resultCode); 
+									pw.write("|^");
+									pw.write(resultMsg); 
+									pw.write("|^");
+									pw.write(pnu); 
+									pw.write("|^");
+									pw.write(jibun); 
+									pw.write("|^");
+									pw.write(centerx); 
+									pw.write("|^");
+									pw.write(centery); 
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}			
 							}
 
 						} else {
 							System.out.println("parsing error!!");
 						}
 
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

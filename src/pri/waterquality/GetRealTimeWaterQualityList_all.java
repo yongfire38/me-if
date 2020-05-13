@@ -79,119 +79,6 @@ public class GetRealTimeWaterQualityList_all {
 
 					// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer resultCode_col = new StringBuffer(" "); // 결과코드
-					StringBuffer resultMsg_col = new StringBuffer(" "); // 결과메시지
-					StringBuffer rowno = new StringBuffer(" "); // 순번
-					StringBuffer siteId = new StringBuffer(" "); // 조사지점번호
-					StringBuffer siteName = new StringBuffer(" "); // 조사지점명
-					StringBuffer msrDate = new StringBuffer(" "); // 조사시간
-					StringBuffer m01 = new StringBuffer(" "); // 통신상태
-					StringBuffer m02 = new StringBuffer(" "); // 수온1
-					StringBuffer m03 = new StringBuffer(" "); // 수소이온농도
-					StringBuffer m04 = new StringBuffer(" "); // 전기전도도1
-					StringBuffer m05 = new StringBuffer(" "); // 용존산소1
-					StringBuffer m06 = new StringBuffer(" "); // 총유기탄소1
-					StringBuffer m07 = new StringBuffer(" "); // 임펄스
-					StringBuffer m08 = new StringBuffer(" "); // 수조pH
-					StringBuffer m09 = new StringBuffer(" "); // 수온
-					StringBuffer m10 = new StringBuffer(" "); // 수조 산소량
-					StringBuffer m11 = new StringBuffer(" "); // 활동여부
-					StringBuffer m12 = new StringBuffer(" "); // 염화메틸렌
-					StringBuffer m13 = new StringBuffer(" "); // 1.1.1-트리클로로에테인
-					StringBuffer m14 = new StringBuffer(" "); // 벤젠
-					StringBuffer m15 = new StringBuffer(" "); // 사염화탄소
-					StringBuffer m16 = new StringBuffer(" "); // 트리클로로에틸렌
-					StringBuffer m17 = new StringBuffer(" "); // 톨루엔
-					StringBuffer m18 = new StringBuffer(" "); // 테트라클로로에틸렌
-					StringBuffer m19 = new StringBuffer(" "); // 에틸벤젠
-					StringBuffer m20 = new StringBuffer(" "); // m,p-자일렌
-					StringBuffer m21 = new StringBuffer(" "); // o-자일렌
-					StringBuffer m22 = new StringBuffer(" "); // [ECD]염화메틸렌
-					StringBuffer m23 = new StringBuffer(" "); // [ECD]1.1.1-트리클로로에테인
-					StringBuffer m24 = new StringBuffer(" "); // [ECD]사염화탄소
-					StringBuffer m25 = new StringBuffer(" "); // [ECD]트리클로로에틸렌
-					StringBuffer m26 = new StringBuffer(" "); // [ECD}테트라클로로에틸렌
-					StringBuffer m27 = new StringBuffer(" "); // 총질소
-					StringBuffer m28 = new StringBuffer(" "); // 총인
-					StringBuffer m29 = new StringBuffer(" "); // 클로로필-a
-					StringBuffer m30 = new StringBuffer(" "); // 투과도
-					StringBuffer m31 = new StringBuffer(" "); // 임펄스(우)
-					StringBuffer m32 = new StringBuffer(" "); // 임펄스(좌)
-					StringBuffer m33 = new StringBuffer(" "); // 수조수온(우)
-					StringBuffer m34 = new StringBuffer(" "); // 수조수온(좌)
-					StringBuffer m35 = new StringBuffer(" "); // 인산염인
-					StringBuffer m36 = new StringBuffer(" "); // 암모니아성질소
-					StringBuffer m37 = new StringBuffer(" "); // 질산성질소
-					StringBuffer m38 = new StringBuffer(" "); // 수온2
-					StringBuffer m39 = new StringBuffer(" "); // 수소이온농도2
-					StringBuffer m40 = new StringBuffer(" "); // 전기전도도2
-					StringBuffer m41 = new StringBuffer(" "); // 용존산소2
-					StringBuffer m42 = new StringBuffer(" "); // 실내온도
-					StringBuffer m43 = new StringBuffer(" "); // UPS전압
-					StringBuffer m44 = new StringBuffer(" "); // 출입문 상태
-					StringBuffer m45 = new StringBuffer(" "); // 유속
-					StringBuffer m46 = new StringBuffer(" "); // 유압
-					StringBuffer m47 = new StringBuffer(" "); // 채수펌프(우)
-					StringBuffer m48 = new StringBuffer(" "); // 채수펌프(좌)
-					StringBuffer m49 = new StringBuffer(" "); // 여과장치
-					StringBuffer m50 = new StringBuffer(" "); // 항온항습기
-					StringBuffer m51 = new StringBuffer(" "); // 자탐기
-					StringBuffer m52 = new StringBuffer(" "); // 실내습도
-					StringBuffer m53 = new StringBuffer(" "); // 전원상태
-					StringBuffer m54 = new StringBuffer(" "); // 일반채수기
-					StringBuffer m55 = new StringBuffer(" "); // VOCs 채수기
-					StringBuffer m56 = new StringBuffer(" "); // 자일렌
-					StringBuffer m57 = new StringBuffer(" "); // 독성지수(좌)
-					StringBuffer m58 = new StringBuffer(" "); // 유영속도(좌)
-					StringBuffer m59 = new StringBuffer(" "); // 개체수(좌)
-					StringBuffer m60 = new StringBuffer(" "); // 유영속도 분포지수(좌)
-					StringBuffer m61 = new StringBuffer(" "); // 프렉탈 차수(좌)
-					StringBuffer m62 = new StringBuffer(" "); // 시료온도(좌)
-					StringBuffer m63 = new StringBuffer(" "); // 독성지수(우)
-					StringBuffer m64 = new StringBuffer(" "); // 유영속도(우)
-					StringBuffer m65 = new StringBuffer(" "); // 개체수(우)
-					StringBuffer m66 = new StringBuffer(" "); // 유영속도 분포지수(우)
-					StringBuffer m67 = new StringBuffer(" "); // 프렉탈 차수(우)
-					StringBuffer m68 = new StringBuffer(" "); // 시료온도(우)
-					StringBuffer m69 = new StringBuffer(" "); // 수온3
-					StringBuffer m70 = new StringBuffer(" "); // 수소이온농도3
-					StringBuffer m71 = new StringBuffer(" "); // 전기전도도3
-					StringBuffer m72 = new StringBuffer(" "); // 용존산소3
-					StringBuffer m73 = new StringBuffer(" "); // 탁도3
-					StringBuffer m74 = new StringBuffer(" "); // 카드뮴
-					StringBuffer m75 = new StringBuffer(" "); // 납
-					StringBuffer m76 = new StringBuffer(" "); // 구리
-					StringBuffer m77 = new StringBuffer(" "); // 아연
-					StringBuffer m78 = new StringBuffer(" "); // 페놀
-					StringBuffer m79 = new StringBuffer(" "); // 탁도1
-					StringBuffer m80 = new StringBuffer(" "); // 탁도2
-					StringBuffer m81 = new StringBuffer(" "); // 총유기탄소
-					StringBuffer m82 = new StringBuffer(" "); // 수소가스노출
-					StringBuffer m83 = new StringBuffer(" "); // 펌프수명
-					StringBuffer m84 = new StringBuffer(" "); // 미생물 독성지수
-					StringBuffer m85 = new StringBuffer(" "); // 전극(A)
-					StringBuffer m86 = new StringBuffer(" "); // 전극(B)
-					StringBuffer m87 = new StringBuffer(" "); // 조류 독성지수
-					StringBuffer m88 = new StringBuffer(" "); // 조류 형광량(시료)
-					StringBuffer m89 = new StringBuffer(" "); // 조류 최대형광량(시료)
-					StringBuffer m90 = new StringBuffer(" "); // 조류 형광량(바탕시료)
-					StringBuffer m91 = new StringBuffer(" "); // 조류 최대형광량(바탕시료)
-					StringBuffer m92 = new StringBuffer(" "); // 조류 형광산출량(시료)
-					StringBuffer m93 = new StringBuffer(" "); // 조류 형광산출량(바탕시료)
-					StringBuffer m94 = new StringBuffer(" "); // 채수펌프 원격제어
-					StringBuffer m95 = new StringBuffer(" "); // 강우량
-					StringBuffer m96 = new StringBuffer(" "); // 저류수조수위
-					StringBuffer m97 = new StringBuffer(" "); // 여과수조수위
-					StringBuffer m98 = new StringBuffer(" "); // 필터유입압력
-					StringBuffer m99 = new StringBuffer(" "); // 유량
-					StringBuffer m100 = new StringBuffer(" "); // 페놀2
-					StringBuffer numOfRows = new StringBuffer(" "); // 한 페이지 결과
-																	// 수
-					StringBuffer pageNo_str = new StringBuffer(" "); // 페이지 번호
-					StringBuffer totalCount = new StringBuffer(" "); // 전체 결과 수
-
 					for (int i = 1; i <= pageCount; i++) {
 
 						json = JsonParser.parseWatJson(service_url, service_key, String.valueOf(i));
@@ -208,12 +95,13 @@ public class GetRealTimeWaterQualityList_all {
 						JSONObject getRealTimeWaterQualityList = (JSONObject) obj.get("getRealTimeWaterQualityList");
 
 						JSONObject header = (JSONObject) getRealTimeWaterQualityList.get("header");
+						
+						String resultCode_col = " "; // 결과코드
+						String resultMsg_col = " "; // 결과메시지
 
-						resultCode_col.setLength(0);
-						resultCode_col.append(header.get("code").toString().trim()); // 결과
+						resultCode_col = header.get("code").toString().trim(); // 결과
 																						// 코드
-						resultMsg_col.setLength(0);
-						resultMsg_col.append(header.get("message").toString().trim()); // 결과
+						resultMsg_col = header.get("message").toString().trim(); // 결과
 																						// 메시지
 
 						if (!(resultCode_col.toString().equals("00"))) {
@@ -221,14 +109,114 @@ public class GetRealTimeWaterQualityList_all {
 									+ "::resultMsg::" + resultMsg_col.toString());
 						} else if (resultCode_col.toString().equals("00")) {
 							
-							numOfRows.setLength(0);
-							numOfRows.append(getRealTimeWaterQualityList.get("numOfRows").toString().trim());
-
-							pageNo_str.setLength(0);
-							pageNo_str.append(String.valueOf(i).trim());
-
-							totalCount.setLength(0);
-							totalCount.append(getRealTimeWaterQualityList.get("totalCount").toString().trim());
+							String rowno = " "; // 순번
+							String siteId = " "; // 조사지점번호
+							String siteName = " "; // 조사지점명
+							String msrDate = " "; // 조사시간
+							String m01 = " "; // 통신상태
+							String m02 = " "; // 수온1
+							String m03 = " "; // 수소이온농도
+							String m04 = " "; // 전기전도도1
+							String m05 = " "; // 용존산소1
+							String m06 = " "; // 총유기탄소1
+							String m07 = " "; // 임펄스
+							String m08 = " "; // 수조pH
+							String m09 = " "; // 수온
+							String m10 = " "; // 수조 산소량
+							String m11 = " "; // 활동여부
+							String m12 = " "; // 염화메틸렌
+							String m13 = " "; // 1.1.1-트리클로로에테인
+							String m14 = " "; // 벤젠
+							String m15 = " "; // 사염화탄소
+							String m16 = " "; // 트리클로로에틸렌
+							String m17 = " "; // 톨루엔
+							String m18 = " "; // 테트라클로로에틸렌
+							String m19 = " "; // 에틸벤젠
+							String m20 = " "; // m,p-자일렌
+							String m21 = " "; // o-자일렌
+							String m22 = " "; // [ECD]염화메틸렌
+							String m23 = " "; // [ECD]1.1.1-트리클로로에테인
+							String m24 = " "; // [ECD]사염화탄소
+							String m25 = " "; // [ECD]트리클로로에틸렌
+							String m26 = " "; // [ECD}테트라클로로에틸렌
+							String m27 = " "; // 총질소
+							String m28 = " "; // 총인
+							String m29 = " "; // 클로로필-a
+							String m30 = " "; // 투과도
+							String m31 = " "; // 임펄스(우)
+							String m32 = " "; // 임펄스(좌)
+							String m33 = " "; // 수조수온(우)
+							String m34 = " "; // 수조수온(좌)
+							String m35 = " "; // 인산염인
+							String m36 = " "; // 암모니아성질소
+							String m37 = " "; // 질산성질소
+							String m38 = " "; // 수온2
+							String m39 = " "; // 수소이온농도2
+							String m40 = " "; // 전기전도도2
+							String m41 = " "; // 용존산소2
+							String m42 = " "; // 실내온도
+							String m43 = " "; // UPS전압
+							String m44 = " "; // 출입문 상태
+							String m45 = " "; // 유속
+							String m46 = " "; // 유압
+							String m47 = " "; // 채수펌프(우)
+							String m48 = " "; // 채수펌프(좌)
+							String m49 = " "; // 여과장치
+							String m50 = " "; // 항온항습기
+							String m51 = " "; // 자탐기
+							String m52 = " "; // 실내습도
+							String m53 = " "; // 전원상태
+							String m54 = " "; // 일반채수기
+							String m55 = " "; // VOCs 채수기
+							String m56 = " "; // 자일렌
+							String m57 = " "; // 독성지수(좌)
+							String m58 = " "; // 유영속도(좌)
+							String m59 = " "; // 개체수(좌)
+							String m60 = " "; // 유영속도 분포지수(좌)
+							String m61 = " "; // 프렉탈 차수(좌)
+							String m62 = " "; // 시료온도(좌)
+							String m63 = " "; // 독성지수(우)
+							String m64 = " "; // 유영속도(우)
+							String m65 = " "; // 개체수(우)
+							String m66 = " "; // 유영속도 분포지수(우)
+							String m67 = " "; // 프렉탈 차수(우)
+							String m68 = " "; // 시료온도(우)
+							String m69 = " "; // 수온3
+							String m70 = " "; // 수소이온농도3
+							String m71 = " "; // 전기전도도3
+							String m72 = " "; // 용존산소3
+							String m73 = " "; // 탁도3
+							String m74 = " "; // 카드뮴
+							String m75 = " "; // 납
+							String m76 = " "; // 구리
+							String m77 = " "; // 아연
+							String m78 = " "; // 페놀
+							String m79 = " "; // 탁도1
+							String m80 = " "; // 탁도2
+							String m81 = " "; // 총유기탄소
+							String m82 = " "; // 수소가스노출
+							String m83 = " "; // 펌프수명
+							String m84 = " "; // 미생물 독성지수
+							String m85 = " "; // 전극(A)
+							String m86 = " "; // 전극(B)
+							String m87 = " "; // 조류 독성지수
+							String m88 = " "; // 조류 형광량(시료)
+							String m89 = " "; // 조류 최대형광량(시료)
+							String m90 = " "; // 조류 형광량(바탕시료)
+							String m91 = " "; // 조류 최대형광량(바탕시료)
+							String m92 = " "; // 조류 형광산출량(시료)
+							String m93 = " "; // 조류 형광산출량(바탕시료)
+							String m94 = " "; // 채수펌프 원격제어
+							String m95 = " "; // 강우량
+							String m96 = " "; // 저류수조수위
+							String m97 = " "; // 여과수조수위
+							String m98 = " "; // 필터유입압력
+							String m99 = " "; // 유량
+							String m100 = " "; // 페놀2
+							String numOfRows = " "; // 한 페이지 결과
+																			// 수
+							String pageNo_str = " "; // 페이지 번호
+							String totalCount = " "; // 전체 결과 수
 
 							JSONArray items = (JSONArray) getRealTimeWaterQualityList.get("item");
 
@@ -244,335 +232,1096 @@ public class GetRealTimeWaterQualityList_all {
 
 									String keyname = iter.next();
 
-									JsonParser.colWrite(rowno, keyname, "ROWNO", item);
-									JsonParser.colWrite(siteId, keyname, "SITE_ID", item);
-									JsonParser.colWrite(siteName, keyname, "SITE_NAME", item);
-									JsonParser.colWrite(msrDate, keyname, "MSR_DATE", item);
-									JsonParser.colWrite(m01, keyname, "M01", item);
-									JsonParser.colWrite(m02, keyname, "M02", item);
-									JsonParser.colWrite(m03, keyname, "M03", item);
-									JsonParser.colWrite(m04, keyname, "M04", item);
-									JsonParser.colWrite(m05, keyname, "M05", item);
-									JsonParser.colWrite(m06, keyname, "M06", item);
-									JsonParser.colWrite(m07, keyname, "M07", item);
-									JsonParser.colWrite(m08, keyname, "M08", item);
-									JsonParser.colWrite(m09, keyname, "M09", item);
-									JsonParser.colWrite(m10, keyname, "M10", item);
-									JsonParser.colWrite(m11, keyname, "M11", item);
-									JsonParser.colWrite(m12, keyname, "M12", item);
-									JsonParser.colWrite(m13, keyname, "M13", item);
-									JsonParser.colWrite(m14, keyname, "M14", item);
-									JsonParser.colWrite(m15, keyname, "M15", item);
-									JsonParser.colWrite(m16, keyname, "M16", item);
-									JsonParser.colWrite(m17, keyname, "M17", item);
-									JsonParser.colWrite(m18, keyname, "M18", item);
-									JsonParser.colWrite(m19, keyname, "M19", item);
-									JsonParser.colWrite(m20, keyname, "M20", item);
-									JsonParser.colWrite(m21, keyname, "M21", item);
-									JsonParser.colWrite(m22, keyname, "M22", item);
-									JsonParser.colWrite(m23, keyname, "M23", item);
-									JsonParser.colWrite(m24, keyname, "M24", item);
-									JsonParser.colWrite(m25, keyname, "M25", item);
-									JsonParser.colWrite(m26, keyname, "M26", item);
-									JsonParser.colWrite(m27, keyname, "M27", item);
-									JsonParser.colWrite(m28, keyname, "M28", item);
-									JsonParser.colWrite(m29, keyname, "M29", item);
-									JsonParser.colWrite(m30, keyname, "M30", item);
-									JsonParser.colWrite(m31, keyname, "M31", item);
-									JsonParser.colWrite(m32, keyname, "M32", item);
-									JsonParser.colWrite(m33, keyname, "M33", item);
-									JsonParser.colWrite(m34, keyname, "M34", item);
-									JsonParser.colWrite(m35, keyname, "M35", item);
-									JsonParser.colWrite(m36, keyname, "M36", item);
-									JsonParser.colWrite(m37, keyname, "M37", item);
-									JsonParser.colWrite(m38, keyname, "M38", item);
-									JsonParser.colWrite(m39, keyname, "M39", item);
-									JsonParser.colWrite(m40, keyname, "M40", item);
-									JsonParser.colWrite(m41, keyname, "M41", item);
-									JsonParser.colWrite(m42, keyname, "M42", item);
-									JsonParser.colWrite(m43, keyname, "M43", item);
-									JsonParser.colWrite(m44, keyname, "M44", item);
-									JsonParser.colWrite(m45, keyname, "M45", item);
-									JsonParser.colWrite(m46, keyname, "M46", item);
-									JsonParser.colWrite(m47, keyname, "M47", item);
-									JsonParser.colWrite(m48, keyname, "M48", item);
-									JsonParser.colWrite(m49, keyname, "M49", item);
-									JsonParser.colWrite(m50, keyname, "M50", item);
-									JsonParser.colWrite(m51, keyname, "M51", item);
-									JsonParser.colWrite(m52, keyname, "M52", item);
-									JsonParser.colWrite(m53, keyname, "M53", item);
-									JsonParser.colWrite(m54, keyname, "M54", item);
-									JsonParser.colWrite(m55, keyname, "M55", item);
-									JsonParser.colWrite(m56, keyname, "M56", item);
-									JsonParser.colWrite(m57, keyname, "M57", item);
-									JsonParser.colWrite(m58, keyname, "M58", item);
-									JsonParser.colWrite(m59, keyname, "M59", item);
-									JsonParser.colWrite(m60, keyname, "M60", item);
-									JsonParser.colWrite(m61, keyname, "M61", item);
-									JsonParser.colWrite(m62, keyname, "M62", item);
-									JsonParser.colWrite(m63, keyname, "M63", item);
-									JsonParser.colWrite(m64, keyname, "M64", item);
-									JsonParser.colWrite(m65, keyname, "M65", item);
-									JsonParser.colWrite(m66, keyname, "M66", item);
-									JsonParser.colWrite(m67, keyname, "M67", item);
-									JsonParser.colWrite(m68, keyname, "M68", item);
-									JsonParser.colWrite(m69, keyname, "M69", item);
-									JsonParser.colWrite(m70, keyname, "M70", item);
-									JsonParser.colWrite(m71, keyname, "M71", item);
-									JsonParser.colWrite(m72, keyname, "M72", item);
-									JsonParser.colWrite(m73, keyname, "M73", item);
-									JsonParser.colWrite(m74, keyname, "M74", item);
-									JsonParser.colWrite(m75, keyname, "M75", item);
-									JsonParser.colWrite(m76, keyname, "M76", item);
-									JsonParser.colWrite(m77, keyname, "M77", item);
-									JsonParser.colWrite(m78, keyname, "M78", item);
-									JsonParser.colWrite(m79, keyname, "M79", item);
-									JsonParser.colWrite(m80, keyname, "M80", item);
-									JsonParser.colWrite(m81, keyname, "M81", item);
-									JsonParser.colWrite(m82, keyname, "M82", item);
-									JsonParser.colWrite(m83, keyname, "M83", item);
-									JsonParser.colWrite(m84, keyname, "M84", item);
-									JsonParser.colWrite(m85, keyname, "M85", item);
-									JsonParser.colWrite(m86, keyname, "M86", item);
-									JsonParser.colWrite(m87, keyname, "M87", item);
-									JsonParser.colWrite(m88, keyname, "M88", item);
-									JsonParser.colWrite(m89, keyname, "M89", item);
-									JsonParser.colWrite(m90, keyname, "M90", item);
-									JsonParser.colWrite(m91, keyname, "M91", item);
-									JsonParser.colWrite(m92, keyname, "M92", item);
-									JsonParser.colWrite(m93, keyname, "M93", item);
-									JsonParser.colWrite(m94, keyname, "M94", item);
-									JsonParser.colWrite(m95, keyname, "M95", item);
-									JsonParser.colWrite(m96, keyname, "M96", item);
-									JsonParser.colWrite(m97, keyname, "M97", item);
-									JsonParser.colWrite(m98, keyname, "M98", item);
-									JsonParser.colWrite(m99, keyname, "M99", item);
-									JsonParser.colWrite(m100, keyname, "M100", item);
-									JsonParser.colWrite(numOfRows, keyname, "numOfRows", item);
-									JsonParser.colWrite(pageNo_str, keyname, "pageNo", item);
-									JsonParser.colWrite(totalCount, keyname, "totalCount", item);
+									if(keyname.equals("ROWNO")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											rowno = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											rowno = " ";
+										}
+									}
+									if(keyname.equals("SITE_ID")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											siteId = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											siteId = " ";
+										}
+									}
+									if(keyname.equals("SITE_NAME")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											siteName = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											siteName = " ";
+										}
+									}
+									if(keyname.equals("MSR_DATE")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											msrDate = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											msrDate = " ";
+										}
+									}
+									if(keyname.equals("M01")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m01 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m01 = " ";
+										}
+									}
+									if(keyname.equals("M02")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m02 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m02 = " ";
+										}
+									}
+									if(keyname.equals("M03")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m03 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m03 = " ";
+										}
+									}
+									if(keyname.equals("M04")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m04 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m04 = " ";
+										}
+									}
+									if(keyname.equals("M05")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m05 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m05 = " ";
+										}
+									}
+									if(keyname.equals("M06")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m06 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m06 = " ";
+										}
+									}
+									if(keyname.equals("M07")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m07 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m07 = " ";
+										}
+									}
+									if(keyname.equals("M08")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m08 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m08 = " ";
+										}
+									}
+									if(keyname.equals("M09")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m09 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m09 = " ";
+										}
+									}
+									if(keyname.equals("M10")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m10 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m10 = " ";
+										}
+									}
+									if(keyname.equals("M11")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m11 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m11 = " ";
+										}
+									}
+									if(keyname.equals("M12")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m12 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m12 = " ";
+										}
+									}
+									if(keyname.equals("M13")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m13 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m13 = " ";
+										}
+									}
+									if(keyname.equals("M14")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m14 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m14 = " ";
+										}
+									}
+									if(keyname.equals("M15")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m15 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m15 = " ";
+										}
+									}
+									if(keyname.equals("M16")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m16 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m16 = " ";
+										}
+									}
+									if(keyname.equals("M17")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m17 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m17 = " ";
+										}
+									}
+									if(keyname.equals("M18")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m18 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m18 = " ";
+										}
+									}
+									if(keyname.equals("M19")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m19 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m19 = " ";
+										}
+									}
+									if(keyname.equals("M20")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m20 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m20 = " ";
+										}
+									}
+									if(keyname.equals("M21")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m21 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m21 = " ";
+										}
+									}
+									if(keyname.equals("M22")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m22 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m22 = " ";
+										}
+									}
+									if(keyname.equals("M23")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m23 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m23 = " ";
+										}
+									}
+									if(keyname.equals("M24")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m24 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m24 = " ";
+										}
+									}
+									if(keyname.equals("M25")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m25 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m25 = " ";
+										}
+									}
+									if(keyname.equals("M26")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m26 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m26 = " ";
+										}
+									}
+									if(keyname.equals("M27")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m27 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m27 = " ";
+										}
+									}
+									if(keyname.equals("M28")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m28 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m28 = " ";
+										}
+									}
+									if(keyname.equals("M29")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m29 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m29 = " ";
+										}
+									}
+									if(keyname.equals("M30")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m30 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m30 = " ";
+										}
+									}
+									if(keyname.equals("M31")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m31 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m31 = " ";
+										}
+									}
+									if(keyname.equals("M32")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m32 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m32 = " ";
+										}
+									}
+									if(keyname.equals("M33")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m33 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m33 = " ";
+										}
+									}
+									if(keyname.equals("M34")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m34 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m34 = " ";
+										}
+									}
+									if(keyname.equals("M35")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m35 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m35 = " ";
+										}
+									}
+									if(keyname.equals("M36")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m36 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m36 = " ";
+										}
+									}
+									if(keyname.equals("M37")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m37 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m37 = " ";
+										}
+									}
+									if(keyname.equals("M38")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m38 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m38 = " ";
+										}
+									}
+									if(keyname.equals("M39")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m39 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m39 = " ";
+										}
+									}
+									if(keyname.equals("M40")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m40 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m40 = " ";
+										}
+									}
+									if(keyname.equals("M41")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m41 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m41 = " ";
+										}
+									}
+									if(keyname.equals("M42")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m42 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m42 = " ";
+										}
+									}
+									if(keyname.equals("M43")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m43 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m43 = " ";
+										}
+									}
+									if(keyname.equals("M44")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m44 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m44 = " ";
+										}
+									}
+									if(keyname.equals("M45")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m45 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m45 = " ";
+										}
+									}
+									if(keyname.equals("M46")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m46 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m46 = " ";
+										}
+									}
+									if(keyname.equals("M47")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m47 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m47 = " ";
+										}
+									}
+									if(keyname.equals("M48")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m48 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m48 = " ";
+										}
+									}
+									if(keyname.equals("M49")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m49 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m49 = " ";
+										}
+									}
+									if(keyname.equals("M50")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m50 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m50 = " ";
+										}
+									}
+									if(keyname.equals("M51")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m51 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m51 = " ";
+										}
+									}
+									if(keyname.equals("M52")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m52 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m52 = " ";
+										}
+									}
+									if(keyname.equals("M53")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m53 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m53 = " ";
+										}
+									}
+									if(keyname.equals("M54")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m54 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m54 = " ";
+										}
+									}
+									if(keyname.equals("M55")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m55 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m55 = " ";
+										}
+									}
+									if(keyname.equals("M56")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m56 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m56 = " ";
+										}
+									}
+									if(keyname.equals("M57")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m57 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m57 = " ";
+										}
+									}
+									if(keyname.equals("M58")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m58 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m58 = " ";
+										}
+									}
+									if(keyname.equals("M59")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m59 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m59 = " ";
+										}
+									}
+									if(keyname.equals("M60")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m60 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m60 = " ";
+										}
+									}
+									if(keyname.equals("M61")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m61 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m61 = " ";
+										}
+									}
+									if(keyname.equals("M62")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m62 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m62 = " ";
+										}
+									}
+									if(keyname.equals("M63")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m63 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m63 = " ";
+										}
+									}
+									if(keyname.equals("M64")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m64 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m64 = " ";
+										}
+									}
+									if(keyname.equals("M65")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m65 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m65 = " ";
+										}
+									}
+									if(keyname.equals("M66")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m66 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m66 = " ";
+										}
+									}
+									if(keyname.equals("M67")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m67 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m67 = " ";
+										}
+									}
+									if(keyname.equals("M68")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m68 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m68 = " ";
+										}
+									}
+									if(keyname.equals("M69")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m69 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m69 = " ";
+										}
+									}
+									if(keyname.equals("M70")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m70 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m70 = " ";
+										}
+									}
+									if(keyname.equals("M71")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m71 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m71 = " ";
+										}
+									}
+									if(keyname.equals("M72")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m72 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m72 = " ";
+										}
+									}
+									if(keyname.equals("M73")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m73 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m73 = " ";
+										}
+									}
+									if(keyname.equals("M74")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m74 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m74 = " ";
+										}
+									}
+									if(keyname.equals("M75")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m75 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m75 = " ";
+										}
+									}
+									if(keyname.equals("M76")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m76 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m76 = " ";
+										}
+									}
+									if(keyname.equals("M77")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m77 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m77 = " ";
+										}
+									}
+									if(keyname.equals("M78")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m78 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m78 = " ";
+										}
+									}
+									if(keyname.equals("M79")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m79 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m79 = " ";
+										}
+									}
+									if(keyname.equals("M80")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m80 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m80 = " ";
+										}
+									}
+									if(keyname.equals("M81")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m81 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m81 = " ";
+										}
+									}
+									if(keyname.equals("M82")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m82 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m82 = " ";
+										}
+									}
+									if(keyname.equals("M83")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m83 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m83 = " ";
+										}
+									}
+									if(keyname.equals("M84")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m84 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m84 = " ";
+										}
+									}
+									if(keyname.equals("M85")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m85 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m85 = " ";
+										}
+									}
+									if(keyname.equals("M86")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m86 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m86 = " ";
+										}
+									}
+									if(keyname.equals("M87")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m87 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m87 = " ";
+										}
+									}
+									if(keyname.equals("M88")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m88 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m88 = " ";
+										}
+									}
+									if(keyname.equals("M89")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m89 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m89 = " ";
+										}
+									}
+									if(keyname.equals("M90")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m90 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m90 = " ";
+										}
+									}
+									if(keyname.equals("M91")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m91 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m91 = " ";
+										}
+									}
+									if(keyname.equals("M92")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m92 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m92 = " ";
+										}
+									}
+									if(keyname.equals("M93")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m93 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m93 = " ";
+										}
+									}
+									if(keyname.equals("M94")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m94 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m94 = " ";
+										}
+									}
+									if(keyname.equals("M95")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m95 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m95 = " ";
+										}
+									}
+									if(keyname.equals("M96")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m96 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m96 = " ";
+										}
+									}
+									if(keyname.equals("M97")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m97 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m97 = " ";
+										}
+									}
+									if(keyname.equals("M98")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m98 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m98 = " ";
+										}
+									}
+									if(keyname.equals("M99")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m99 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m99 = " ";
+										}
+									}
+									if(keyname.equals("M100")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											m100 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											m100 = " ";
+										}
+									}
+									if(keyname.equals("numOfRows")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											numOfRows = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											numOfRows = " ";
+										}
+									}
+									if(keyname.equals("pageNo")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											pageNo_str = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											pageNo_str = " ";
+										}
+									}
+									if(keyname.equals("totalCount")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											totalCount = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											totalCount = " ";
+										}
+									}
 
 								}
+								
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
 
-								// 한번에 문자열 합침
-								resultSb.append(resultCode_col);
-								resultSb.append("|^");
-								resultSb.append(resultMsg_col);
-								resultSb.append("|^");
-								resultSb.append(rowno);
-								resultSb.append("|^");
-								resultSb.append(siteId);
-								resultSb.append("|^");
-								resultSb.append(siteName);
-								resultSb.append("|^");
-								resultSb.append(msrDate);
-								resultSb.append("|^");
-								resultSb.append(m01);
-								resultSb.append("|^");
-								resultSb.append(m02);
-								resultSb.append("|^");
-								resultSb.append(m03);
-								resultSb.append("|^");
-								resultSb.append(m04);
-								resultSb.append("|^");
-								resultSb.append(m05);
-								resultSb.append("|^");
-								resultSb.append(m06);
-								resultSb.append("|^");
-								resultSb.append(m07);
-								resultSb.append("|^");
-								resultSb.append(m08);
-								resultSb.append("|^");
-								resultSb.append(m09);
-								resultSb.append("|^");
-								resultSb.append(m10);
-								resultSb.append("|^");
-								resultSb.append(m11);
-								resultSb.append("|^");
-								resultSb.append(m12);
-								resultSb.append("|^");
-								resultSb.append(m13);
-								resultSb.append("|^");
-								resultSb.append(m14);
-								resultSb.append("|^");
-								resultSb.append(m15);
-								resultSb.append("|^");
-								resultSb.append(m16);
-								resultSb.append("|^");
-								resultSb.append(m17);
-								resultSb.append("|^");
-								resultSb.append(m18);
-								resultSb.append("|^");
-								resultSb.append(m19);
-								resultSb.append("|^");
-								resultSb.append(m20);
-								resultSb.append("|^");
-								resultSb.append(m21);
-								resultSb.append("|^");
-								resultSb.append(m22);
-								resultSb.append("|^");
-								resultSb.append(m23);
-								resultSb.append("|^");
-								resultSb.append(m24);
-								resultSb.append("|^");
-								resultSb.append(m25);
-								resultSb.append("|^");
-								resultSb.append(m26);
-								resultSb.append("|^");
-								resultSb.append(m27);
-								resultSb.append("|^");
-								resultSb.append(m28);
-								resultSb.append("|^");
-								resultSb.append(m29);
-								resultSb.append("|^");
-								resultSb.append(m30);
-								resultSb.append("|^");
-								resultSb.append(m31);
-								resultSb.append("|^");
-								resultSb.append(m32);
-								resultSb.append("|^");
-								resultSb.append(m33);
-								resultSb.append("|^");
-								resultSb.append(m34);
-								resultSb.append("|^");
-								resultSb.append(m35);
-								resultSb.append("|^");
-								resultSb.append(m36);
-								resultSb.append("|^");
-								resultSb.append(m37);
-								resultSb.append("|^");
-								resultSb.append(m38);
-								resultSb.append("|^");
-								resultSb.append(m39);
-								resultSb.append("|^");
-								resultSb.append(m40);
-								resultSb.append("|^");
-								resultSb.append(m41);
-								resultSb.append("|^");
-								resultSb.append(m42);
-								resultSb.append("|^");
-								resultSb.append(m43);
-								resultSb.append("|^");
-								resultSb.append(m44);
-								resultSb.append("|^");
-								resultSb.append(m45);
-								resultSb.append("|^");
-								resultSb.append(m46);
-								resultSb.append("|^");
-								resultSb.append(m47);
-								resultSb.append("|^");
-								resultSb.append(m48);
-								resultSb.append("|^");
-								resultSb.append(m49);
-								resultSb.append("|^");
-								resultSb.append(m50);
-								resultSb.append("|^");
-								resultSb.append(m51);
-								resultSb.append("|^");
-								resultSb.append(m52);
-								resultSb.append("|^");
-								resultSb.append(m53);
-								resultSb.append("|^");
-								resultSb.append(m54);
-								resultSb.append("|^");
-								resultSb.append(m55);
-								resultSb.append("|^");
-								resultSb.append(m56);
-								resultSb.append("|^");
-								resultSb.append(m57);
-								resultSb.append("|^");
-								resultSb.append(m58);
-								resultSb.append("|^");
-								resultSb.append(m59);
-								resultSb.append("|^");
-								resultSb.append(m60);
-								resultSb.append("|^");
-								resultSb.append(m61);
-								resultSb.append("|^");
-								resultSb.append(m62);
-								resultSb.append("|^");
-								resultSb.append(m63);
-								resultSb.append("|^");
-								resultSb.append(m64);
-								resultSb.append("|^");
-								resultSb.append(m65);
-								resultSb.append("|^");
-								resultSb.append(m66);
-								resultSb.append("|^");
-								resultSb.append(m67);
-								resultSb.append("|^");
-								resultSb.append(m68);
-								resultSb.append("|^");
-								resultSb.append(m69);
-								resultSb.append("|^");
-								resultSb.append(m70);
-								resultSb.append("|^");
-								resultSb.append(m71);
-								resultSb.append("|^");
-								resultSb.append(m72);
-								resultSb.append("|^");
-								resultSb.append(m73);
-								resultSb.append("|^");
-								resultSb.append(m74);
-								resultSb.append("|^");
-								resultSb.append(m75);
-								resultSb.append("|^");
-								resultSb.append(m76);
-								resultSb.append("|^");
-								resultSb.append(m77);
-								resultSb.append("|^");
-								resultSb.append(m78);
-								resultSb.append("|^");
-								resultSb.append(m79);
-								resultSb.append("|^");
-								resultSb.append(m80);
-								resultSb.append("|^");
-								resultSb.append(m81);
-								resultSb.append("|^");
-								resultSb.append(m82);
-								resultSb.append("|^");
-								resultSb.append(m83);
-								resultSb.append("|^");
-								resultSb.append(m84);
-								resultSb.append("|^");
-								resultSb.append(m85);
-								resultSb.append("|^");
-								resultSb.append(m86);
-								resultSb.append("|^");
-								resultSb.append(m87);
-								resultSb.append("|^");
-								resultSb.append(m88);
-								resultSb.append("|^");
-								resultSb.append(m89);
-								resultSb.append("|^");
-								resultSb.append(m90);
-								resultSb.append("|^");
-								resultSb.append(m91);
-								resultSb.append("|^");
-								resultSb.append(m92);
-								resultSb.append("|^");
-								resultSb.append(m93);
-								resultSb.append("|^");
-								resultSb.append(m94);
-								resultSb.append("|^");
-								resultSb.append(m95);
-								resultSb.append("|^");
-								resultSb.append(m96);
-								resultSb.append("|^");
-								resultSb.append(m97);
-								resultSb.append("|^");
-								resultSb.append(m98);
-								resultSb.append("|^");
-								resultSb.append(m99);
-								resultSb.append("|^");
-								resultSb.append(m100);
-								resultSb.append("|^");
-								resultSb.append(numOfRows);
-								resultSb.append("|^");
-								resultSb.append(pageNo_str);
-								resultSb.append("|^");
-								resultSb.append(totalCount);
-								resultSb.append(System.getProperty("line.separator"));
+									pw.write(resultCode_col);
+									pw.write("|^");
+									pw.write(resultMsg_col);
+									pw.write("|^");
+									pw.write(rowno);
+									pw.write("|^");
+									pw.write(siteId);
+									pw.write("|^");
+									pw.write(siteName);
+									pw.write("|^");
+									pw.write(msrDate);
+									pw.write("|^");
+									pw.write(m01);
+									pw.write("|^");
+									pw.write(m02);
+									pw.write("|^");
+									pw.write(m03);
+									pw.write("|^");
+									pw.write(m04);
+									pw.write("|^");
+									pw.write(m05);
+									pw.write("|^");
+									pw.write(m06);
+									pw.write("|^");
+									pw.write(m07);
+									pw.write("|^");
+									pw.write(m08);
+									pw.write("|^");
+									pw.write(m09);
+									pw.write("|^");
+									pw.write(m10);
+									pw.write("|^");
+									pw.write(m11);
+									pw.write("|^");
+									pw.write(m12);
+									pw.write("|^");
+									pw.write(m13);
+									pw.write("|^");
+									pw.write(m14);
+									pw.write("|^");
+									pw.write(m15);
+									pw.write("|^");
+									pw.write(m16);
+									pw.write("|^");
+									pw.write(m17);
+									pw.write("|^");
+									pw.write(m18);
+									pw.write("|^");
+									pw.write(m19);
+									pw.write("|^");
+									pw.write(m20);
+									pw.write("|^");
+									pw.write(m21);
+									pw.write("|^");
+									pw.write(m22);
+									pw.write("|^");
+									pw.write(m23);
+									pw.write("|^");
+									pw.write(m24);
+									pw.write("|^");
+									pw.write(m25);
+									pw.write("|^");
+									pw.write(m26);
+									pw.write("|^");
+									pw.write(m27);
+									pw.write("|^");
+									pw.write(m28);
+									pw.write("|^");
+									pw.write(m29);
+									pw.write("|^");
+									pw.write(m30);
+									pw.write("|^");
+									pw.write(m31);
+									pw.write("|^");
+									pw.write(m32);
+									pw.write("|^");
+									pw.write(m33);
+									pw.write("|^");
+									pw.write(m34);
+									pw.write("|^");
+									pw.write(m35);
+									pw.write("|^");
+									pw.write(m36);
+									pw.write("|^");
+									pw.write(m37);
+									pw.write("|^");
+									pw.write(m38);
+									pw.write("|^");
+									pw.write(m39);
+									pw.write("|^");
+									pw.write(m40);
+									pw.write("|^");
+									pw.write(m41);
+									pw.write("|^");
+									pw.write(m42);
+									pw.write("|^");
+									pw.write(m43);
+									pw.write("|^");
+									pw.write(m44);
+									pw.write("|^");
+									pw.write(m45);
+									pw.write("|^");
+									pw.write(m46);
+									pw.write("|^");
+									pw.write(m47);
+									pw.write("|^");
+									pw.write(m48);
+									pw.write("|^");
+									pw.write(m49);
+									pw.write("|^");
+									pw.write(m50);
+									pw.write("|^");
+									pw.write(m51);
+									pw.write("|^");
+									pw.write(m52);
+									pw.write("|^");
+									pw.write(m53);
+									pw.write("|^");
+									pw.write(m54);
+									pw.write("|^");
+									pw.write(m55);
+									pw.write("|^");
+									pw.write(m56);
+									pw.write("|^");
+									pw.write(m57);
+									pw.write("|^");
+									pw.write(m58);
+									pw.write("|^");
+									pw.write(m59);
+									pw.write("|^");
+									pw.write(m60);
+									pw.write("|^");
+									pw.write(m61);
+									pw.write("|^");
+									pw.write(m62);
+									pw.write("|^");
+									pw.write(m63);
+									pw.write("|^");
+									pw.write(m64);
+									pw.write("|^");
+									pw.write(m65);
+									pw.write("|^");
+									pw.write(m66);
+									pw.write("|^");
+									pw.write(m67);
+									pw.write("|^");
+									pw.write(m68);
+									pw.write("|^");
+									pw.write(m69);
+									pw.write("|^");
+									pw.write(m70);
+									pw.write("|^");
+									pw.write(m71);
+									pw.write("|^");
+									pw.write(m72);
+									pw.write("|^");
+									pw.write(m73);
+									pw.write("|^");
+									pw.write(m74);
+									pw.write("|^");
+									pw.write(m75);
+									pw.write("|^");
+									pw.write(m76);
+									pw.write("|^");
+									pw.write(m77);
+									pw.write("|^");
+									pw.write(m78);
+									pw.write("|^");
+									pw.write(m79);
+									pw.write("|^");
+									pw.write(m80);
+									pw.write("|^");
+									pw.write(m81);
+									pw.write("|^");
+									pw.write(m82);
+									pw.write("|^");
+									pw.write(m83);
+									pw.write("|^");
+									pw.write(m84);
+									pw.write("|^");
+									pw.write(m85);
+									pw.write("|^");
+									pw.write(m86);
+									pw.write("|^");
+									pw.write(m87);
+									pw.write("|^");
+									pw.write(m88);
+									pw.write("|^");
+									pw.write(m89);
+									pw.write("|^");
+									pw.write(m90);
+									pw.write("|^");
+									pw.write(m91);
+									pw.write("|^");
+									pw.write(m92);
+									pw.write("|^");
+									pw.write(m93);
+									pw.write("|^");
+									pw.write(m94);
+									pw.write("|^");
+									pw.write(m95);
+									pw.write("|^");
+									pw.write(m96);
+									pw.write("|^");
+									pw.write(m97);
+									pw.write("|^");
+									pw.write(m98);
+									pw.write("|^");
+									pw.write(m99);
+									pw.write("|^");
+									pw.write(m100);
+									pw.write("|^");
+									pw.write(numOfRows);
+									pw.write("|^");
+									pw.write(pageNo_str);
+									pw.write("|^");
+									pw.write(totalCount);
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+
+								
 							}
 
 						} else {
@@ -583,19 +1332,6 @@ public class GetRealTimeWaterQualityList_all {
 
 						//Thread.sleep(2500);
 
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

@@ -43,11 +43,6 @@ public class Winfossitecode {
 					// step 2. 전체 파싱
 					String json = "";
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer sitecd = new StringBuffer(" "); // 정수장코드
-					StringBuffer sitenm = new StringBuffer(" "); // 정수장명
-
 					// 추가 파라미터가 없으므로 기존 메서드 이용
 					json = JsonParser.parseWriJson(service_url, service_key);
 					
@@ -72,6 +67,9 @@ public class Winfossitecode {
 					} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
+						
+						String sitecd = " "; // 정수장코드
+						String sitenm = " "; // 정수장명
 
 						JSONObject items = (JSONObject) body.get("items");
 
@@ -87,17 +85,41 @@ public class Winfossitecode {
 							while (iter.hasNext()) {
 
 								String keyname = iter.next();
-
-								JsonParser.colWrite(sitecd, keyname, "sitecd", items_jsonObject);
-								JsonParser.colWrite(sitenm, keyname, "sitenm", items_jsonObject);
+								
+								if(keyname.equals("sitecd")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										sitecd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										sitecd = " ";
+									}
+								}
+								if(keyname.equals("sitenm")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										sitenm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										sitenm = " ";
+									}
+								}
 
 							}
+							
+							// step 4. 파일에 쓰기
+							try {
+								PrintWriter pw = new PrintWriter(
+										new BufferedWriter(new FileWriter(file, true)));
 
-							// 한번에 문자열 합침
-							resultSb.append(sitecd);
-							resultSb.append("|^");
-							resultSb.append(sitenm);
-							resultSb.append(System.getProperty("line.separator"));
+								pw.write(sitecd);
+								pw.write("|^");
+								pw.write(sitenm);
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 
 						} else if (items.get("item") instanceof JSONArray) {
 
@@ -115,16 +137,40 @@ public class Winfossitecode {
 
 									String keyname = iter.next();
 
-									JsonParser.colWrite(sitecd, keyname, "sitecd", item_obj);
-									JsonParser.colWrite(sitenm, keyname, "sitenm", item_obj);
+									if(keyname.equals("sitecd")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											sitecd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											sitecd = " ";
+										}
+									}
+									if(keyname.equals("sitenm")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											sitenm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											sitenm = " ";
+										}
+									}
 
 								}
 
-								// 한번에 문자열 합침
-								resultSb.append(sitecd);
-								resultSb.append("|^");
-								resultSb.append(sitenm);
-								resultSb.append(System.getProperty("line.separator"));
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
+
+									pw.write(sitecd);
+									pw.write("|^");
+									pw.write(sitenm);
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 
 							}
 
@@ -136,18 +182,6 @@ public class Winfossitecode {
 						System.out.println("data not exist!!");
 					} else {
 						System.out.println("parsing error!!");
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

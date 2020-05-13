@@ -42,11 +42,6 @@ public class Winfossgccode {
 					// step 2. 전체 파싱
 					String json = "";
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer sgccd = new StringBuffer(" "); // 지자체코드
-					StringBuffer sgcnm = new StringBuffer(" "); // 지자체명
-
 					// 추가 파라미터가 없으므로 기존 메서드 이용
 					json = JsonParser.parseWriJson(service_url, service_key);
 					
@@ -71,6 +66,9 @@ public class Winfossgccode {
 					} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
+						
+						String sgccd = " "; // 지자체코드
+						String sgcnm = " "; // 지자체명
 
 						JSONObject items = (JSONObject) body.get("items");
 
@@ -86,17 +84,41 @@ public class Winfossgccode {
 							while (iter.hasNext()) {
 
 								String keyname = iter.next();
-
-								JsonParser.colWrite(sgccd, keyname, "sgccd", items_jsonObject);
-								JsonParser.colWrite(sgcnm, keyname, "sgcnm", items_jsonObject);
+								
+								if(keyname.equals("sgccd")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										sgccd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										sgccd = " ";
+									}
+								}
+								if(keyname.equals("sgcnm")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										sgcnm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										sgcnm = " ";
+									}
+								}
 
 							}
+							
+							// step 4. 파일에 쓰기
+							try {
+								PrintWriter pw = new PrintWriter(
+										new BufferedWriter(new FileWriter(file, true)));
 
-							// 한번에 문자열 합침
-							resultSb.append(sgccd);
-							resultSb.append("|^");
-							resultSb.append(sgcnm);
-							resultSb.append(System.getProperty("line.separator"));
+								pw.write(sgccd);
+								pw.write("|^");
+								pw.write(sgcnm);
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 
 						} else if (items.get("item") instanceof JSONArray) {
 
@@ -114,16 +136,40 @@ public class Winfossgccode {
 
 									String keyname = iter.next();
 
-									JsonParser.colWrite(sgccd, keyname, "sgccd", item_obj);
-									JsonParser.colWrite(sgcnm, keyname, "sgcnm", item_obj);
+									if(keyname.equals("sgccd")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											sgccd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											sgccd = " ";
+										}
+									}
+									if(keyname.equals("sgcnm")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											sgcnm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											sgcnm = " ";
+										}
+									}
 
 								}
 
-								// 한번에 문자열 합침
-								resultSb.append(sgccd);
-								resultSb.append("|^");
-								resultSb.append(sgcnm);
-								resultSb.append(System.getProperty("line.separator"));
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
+
+									pw.write(sgccd);
+									pw.write("|^");
+									pw.write(sgcnm);
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 
 							}
 
@@ -135,18 +181,6 @@ public class Winfossgccode {
 						System.out.println("data not exist!!");
 					} else {
 						System.out.println("parsing error!!");
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

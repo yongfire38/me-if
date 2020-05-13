@@ -55,16 +55,6 @@ public class GetFileInfoInqire {
 
 						// step 2. 전체 파싱
 
-						StringBuffer resultSb = new StringBuffer("");
-
-						StringBuffer fileSeq = new StringBuffer(" "); // 파일고유번호
-						StringBuffer fileVNm = new StringBuffer(" "); // 표출파일명
-						StringBuffer fileNm = new StringBuffer(" "); // 파일명
-						StringBuffer fileSize = new StringBuffer(" "); // 파일사이즈
-						StringBuffer fileExt = new StringBuffer(" "); // 파일 확장자
-						StringBuffer fileUrl = new StringBuffer(" "); // 파일 다운로드
-																		// 경로
-
 						JSONParser parser = new JSONParser();
 						JSONObject obj = (JSONObject) parser.parse(json);
 						JSONObject response = (JSONObject) obj.get("response");
@@ -82,7 +72,12 @@ public class GetFileInfoInqire {
 							System.out.println("data not exist!!");
 						} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 							
-							
+							String fileSeq = " "; // 파일고유번호
+							String fileVNm = " "; // 표출파일명
+							String fileNm = " "; // 파일명
+							String fileSize = " "; // 파일사이즈
+							String fileExt = " "; // 파일 확장자
+							String fileUrl = " "; // 파일 다운로드 경로
 
 							JSONObject items = (JSONObject) body.get("items");
 
@@ -98,37 +93,89 @@ public class GetFileInfoInqire {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									JsonParser.colWrite(fileSeq, keyname, "fileSeq", items_jsonObject);
-									JsonParser.colWrite(fileVNm, keyname, "fileVNm", items_jsonObject);
-									JsonParser.colWrite(fileNm, keyname, "fileNm", items_jsonObject);
-									JsonParser.colWrite(fileSize, keyname, "fileSize", items_jsonObject);
-									JsonParser.colWrite(fileExt, keyname, "fileExt", items_jsonObject);
-									JsonParser.colWrite(fileUrl, keyname, "fileUrl", items_jsonObject);
+									
+									if(keyname.equals("fileSeq")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											fileSeq = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											fileSeq = " ";
+										}
+									}
+									if(keyname.equals("fileVNm")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											fileVNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											fileVNm = " ";
+										}
+									}
+									if(keyname.equals("fileNm")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											fileNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											fileNm = " ";
+										}
+									}
+									if(keyname.equals("fileSize")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											fileSize = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											fileSize = " ";
+										}
+									}
+									if(keyname.equals("fileExt")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											fileExt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											fileExt = " ";
+										}
+									}
+									if(keyname.equals("fileUrl")) {
+										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+											fileUrl = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											fileUrl = " ";
+										}
+									}
 
 								}
 
-								// 한번에 문자열 합침
-								resultSb.append(args[0]);
-								resultSb.append("|^");
-								resultSb.append(args[1]);
-								resultSb.append("|^");
-								resultSb.append(resultCode);
-								resultSb.append("|^");
-								resultSb.append(resultMsg);
-								resultSb.append("|^");
-								resultSb.append(fileSeq);
-								resultSb.append("|^");
-								resultSb.append(fileVNm);
-								resultSb.append("|^");
-								resultSb.append(fileNm);
-								resultSb.append("|^");
-								resultSb.append(fileSize);
-								resultSb.append("|^");
-								resultSb.append(fileExt);
-								resultSb.append("|^");
-								resultSb.append(fileUrl);
-								resultSb.append(System.getProperty("line.separator"));
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
+
+									pw.write(args[0]); 
+									pw.write("|^");
+									pw.write(args[1]); 
+									pw.write("|^");
+									pw.write(resultCode); 
+									pw.write("|^");
+									pw.write(resultMsg); 
+									pw.write("|^");
+									pw.write(fileSeq); 
+									pw.write("|^");
+									pw.write(fileVNm); 
+									pw.write("|^");
+									pw.write(fileNm); 
+									pw.write("|^");
+									pw.write(fileSize); 
+									pw.write("|^");
+									pw.write(fileExt); 
+									pw.write("|^");
+									pw.write(fileUrl);  
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}			
 
 							} else if (items.get("item") instanceof JSONArray) {
 
@@ -146,36 +193,88 @@ public class GetFileInfoInqire {
 
 										String keyname = iter.next();
 
-										JsonParser.colWrite(fileSeq, keyname, "fileSeq", item_obj);
-										JsonParser.colWrite(fileVNm, keyname, "fileVNm", item_obj);
-										JsonParser.colWrite(fileNm, keyname, "fileNm", item_obj);
-										JsonParser.colWrite(fileSize, keyname, "fileSize", item_obj);
-										JsonParser.colWrite(fileExt, keyname, "fileExt", item_obj);
-										JsonParser.colWrite(fileUrl, keyname, "fileUrl", item_obj);
+										if(keyname.equals("fileSeq")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												fileSeq = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												fileSeq = " ";
+											}
+										}
+										if(keyname.equals("fileVNm")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												fileVNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												fileVNm = " ";
+											}
+										}
+										if(keyname.equals("fileNm")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												fileNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												fileNm = " ";
+											}
+										}
+										if(keyname.equals("fileSize")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												fileSize = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												fileSize = " ";
+											}
+										}
+										if(keyname.equals("fileExt")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												fileExt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												fileExt = " ";
+											}
+										}
+										if(keyname.equals("fileUrl")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												fileUrl = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												fileUrl = " ";
+											}
+										}
 
 									}
 
-									// 한번에 문자열 합침
-									resultSb.append(args[0]);
-									resultSb.append("|^");
-									resultSb.append(args[1]);
-									resultSb.append("|^");
-									resultSb.append(resultCode);
-									resultSb.append("|^");
-									resultSb.append(resultMsg);
-									resultSb.append("|^");
-									resultSb.append(fileSeq);
-									resultSb.append("|^");
-									resultSb.append(fileVNm);
-									resultSb.append("|^");
-									resultSb.append(fileNm);
-									resultSb.append("|^");
-									resultSb.append(fileSize);
-									resultSb.append("|^");
-									resultSb.append(fileExt);
-									resultSb.append("|^");
-									resultSb.append(fileUrl);
-									resultSb.append(System.getProperty("line.separator"));
+									// step 4. 파일에 쓰기
+									try {
+										PrintWriter pw = new PrintWriter(
+												new BufferedWriter(new FileWriter(file, true)));
+
+										pw.write(args[0]); 
+										pw.write("|^");
+										pw.write(args[1]); 
+										pw.write("|^");
+										pw.write(resultCode); 
+										pw.write("|^");
+										pw.write(resultMsg); 
+										pw.write("|^");
+										pw.write(fileSeq); 
+										pw.write("|^");
+										pw.write(fileVNm); 
+										pw.write("|^");
+										pw.write(fileNm); 
+										pw.write("|^");
+										pw.write(fileSize); 
+										pw.write("|^");
+										pw.write(fileExt); 
+										pw.write("|^");
+										pw.write(fileUrl);  
+										pw.println();
+										pw.flush();
+										pw.close();
+
+									} catch (IOException e) {
+										e.printStackTrace();
+									}		
 
 								}
 
@@ -183,18 +282,6 @@ public class GetFileInfoInqire {
 								System.out.println("parsing error!!");
 							}
 
-						}
-
-						// step 4. 파일에 쓰기
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write(resultSb.toString());
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
 						}
 
 						System.out.println("parsing complete!");

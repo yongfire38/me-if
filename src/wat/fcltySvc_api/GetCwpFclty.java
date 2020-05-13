@@ -82,20 +82,6 @@ public class GetCwpFclty {
 
 					// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer RNUM = new StringBuffer(" "); // 순번
-					StringBuffer WILO_NAM = new StringBuffer(" "); // 수도구분
-					StringBuffer WBIZ_NAM = new StringBuffer(" "); // 수도사업자
-					StringBuffer FCLT_NAM = new StringBuffer(" "); // 정수장명
-					StringBuffer DTL_ADR = new StringBuffer(" "); // 정수장주소
-					StringBuffer TOT_VOL = new StringBuffer(" "); // 시설용량(㎥/일)
-					StringBuffer WSRC_NAM = new StringBuffer(" "); // 수원
-					StringBuffer PHONE_NUM = new StringBuffer(" "); // 전화번호
-					StringBuffer CWMETH_NAM = new StringBuffer(" "); // 정수방식
-					StringBuffer COMPL_DAT = new StringBuffer(" "); // 준공일
-					StringBuffer DINF_VOL = new StringBuffer(" "); // 소독제
-
 					for (int i = 1; i <= pageCount; ++i) {
 
 						json = JsonParser.parseWatJson(service_url, service_key, String.valueOf(i));
@@ -120,6 +106,18 @@ public class GetCwpFclty {
 							System.out.println(
 									"parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
 						} else if (resultCode.equals("00")) {
+							
+							String RNUM = " "; // 순번
+							String WILO_NAM = " "; // 수도구분
+							String WBIZ_NAM = " "; // 수도사업자
+							String FCLT_NAM = " "; // 정수장명
+							String DTL_ADR = " "; // 정수장주소
+							String TOT_VOL = " "; // 시설용량(㎥/일)
+							String WSRC_NAM = " "; // 수원
+							String PHONE_NUM = " "; // 전화번호
+							String CWMETH_NAM = " "; // 정수방식
+							String COMPL_DAT = " "; // 준공일
+							String DINF_VOL = " "; // 소독제
 
 							JSONArray items = (JSONArray) body.get("items");
 
@@ -134,50 +132,137 @@ public class GetCwpFclty {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									JsonParser.colWrite(RNUM, keyname, "RNUM", item);
-									JsonParser.colWrite(WILO_NAM, keyname, "WILO_NAM", item);
-									JsonParser.colWrite(WBIZ_NAM, keyname, "WBIZ_NAM", item);
-									JsonParser.colWrite(FCLT_NAM, keyname, "FCLT_NAM", item);
-									JsonParser.colWrite(DTL_ADR, keyname, "DTL_ADR", item);
-									JsonParser.colWrite(TOT_VOL, keyname, "TOT_VOL", item);
-									JsonParser.colWrite(WSRC_NAM, keyname, "WSRC_NAM", item);
-									JsonParser.colWrite(PHONE_NUM, keyname, "PHONE_NUM", item);
-									JsonParser.colWrite(CWMETH_NAM, keyname, "CWMETH_NAM", item);
-									JsonParser.colWrite(COMPL_DAT, keyname, "COMPL_DAT", item);
-									JsonParser.colWrite(DINF_VOL, keyname, "DINF_VOL", item);
+									
+									if(keyname.equals("RNUM")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											RNUM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											RNUM = " ";
+										}
+									}
+									if(keyname.equals("WILO_NAM")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											WILO_NAM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											WILO_NAM = " ";
+										}
+									}
+									if(keyname.equals("WBIZ_NAM")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											WBIZ_NAM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											WBIZ_NAM = " ";
+										}
+									}
+									if(keyname.equals("FCLT_NAM")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											FCLT_NAM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											FCLT_NAM = " ";
+										}
+									}
+									if(keyname.equals("DTL_ADR")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											DTL_ADR = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											DTL_ADR = " ";
+										}
+									}
+									if(keyname.equals("TOT_VOL")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											TOT_VOL = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											TOT_VOL = " ";
+										}
+									}
+									if(keyname.equals("WSRC_NAM")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											WSRC_NAM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											WSRC_NAM = " ";
+										}
+									}
+									if(keyname.equals("PHONE_NUM")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											PHONE_NUM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											PHONE_NUM = " ";
+										}
+									}
+									if(keyname.equals("CWMETH_NAM")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											CWMETH_NAM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											CWMETH_NAM = " ";
+										}
+									}
+									if(keyname.equals("COMPL_DAT")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											COMPL_DAT = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											COMPL_DAT = " ";
+										}
+									}
+									if(keyname.equals("DINF_VOL")) {
+										if(!(JsonParser.isEmpty(item.get(keyname)))){
+											DINF_VOL = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											DINF_VOL = " ";
+										}
+									}
 
 								}
 
-								// 한번에 문자열 합침
-								resultSb.append(numberOfRows_str);
-								resultSb.append("|^");
-								resultSb.append(String.valueOf(i));
-								resultSb.append("|^");
-								resultSb.append(totalCount_str);
-								resultSb.append("|^");
-								resultSb.append(RNUM);
-								resultSb.append("|^");
-								resultSb.append(WILO_NAM);
-								resultSb.append("|^");
-								resultSb.append(WBIZ_NAM);
-								resultSb.append("|^");
-								resultSb.append(FCLT_NAM);
-								resultSb.append("|^");
-								resultSb.append(DTL_ADR);
-								resultSb.append("|^");
-								resultSb.append(TOT_VOL);
-								resultSb.append("|^");
-								resultSb.append(WSRC_NAM);
-								resultSb.append("|^");
-								resultSb.append(PHONE_NUM);
-								resultSb.append("|^");
-								resultSb.append(CWMETH_NAM);
-								resultSb.append("|^");
-								resultSb.append(COMPL_DAT);
-								resultSb.append("|^");
-								resultSb.append(DINF_VOL);
-								resultSb.append(System.getProperty("line.separator"));
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
+
+									pw.write(numberOfRows_str);
+									pw.write("|^");
+									pw.write(String.valueOf(i));
+									pw.write("|^");
+									pw.write(totalCount_str);
+									pw.write("|^");
+									pw.write(RNUM);
+									pw.write("|^");
+									pw.write(WILO_NAM);
+									pw.write("|^");
+									pw.write(WBIZ_NAM);
+									pw.write("|^");
+									pw.write(FCLT_NAM);
+									pw.write("|^");
+									pw.write(DTL_ADR);
+									pw.write("|^");
+									pw.write(TOT_VOL);
+									pw.write("|^");
+									pw.write(WSRC_NAM);
+									pw.write("|^");
+									pw.write(PHONE_NUM);
+									pw.write("|^");
+									pw.write(CWMETH_NAM);
+									pw.write("|^");
+									pw.write(COMPL_DAT);
+									pw.write("|^");
+									pw.write(DINF_VOL);
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 
 							}
 
@@ -187,19 +272,6 @@ public class GetCwpFclty {
 
 						//Thread.sleep(1000);
 
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

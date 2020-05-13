@@ -79,16 +79,6 @@ public class Mnt {
 
 						// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-						StringBuffer resultSb = new StringBuffer("");
-
-						StringBuffer obsrdtmnt = new StringBuffer(" "); // 일시
-						StringBuffer lowlevel = new StringBuffer(" "); // 댐수위
-						StringBuffer rf = new StringBuffer(" "); // 강우량
-						StringBuffer inflowqy = new StringBuffer(" "); // 유입량
-						StringBuffer totdcwtrqy = new StringBuffer(" "); // 총방류량
-						StringBuffer rsvwtqy = new StringBuffer(" "); // 저수량
-						StringBuffer rsvwtrt = new StringBuffer(" "); // 저수율
-
 						for (int i = 1; i <= pageCount; ++i) {
 
 							json = JsonParser.parseWriJson(service_url, service_key, String.valueOf(i), args[0],
@@ -117,7 +107,13 @@ public class Mnt {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 								
-								
+								String obsrdtmnt = " "; // 일시
+								String lowlevel = " "; // 댐수위
+								String rf = " "; // 강우량
+								String inflowqy = " "; // 유입량
+								String totdcwtrqy = " "; // 총방류량
+								String rsvwtqy = " "; // 저수량
+								String rsvwtrt = " "; // 저수율
 
 								JSONObject items = (JSONObject) body.get("items");
 
@@ -133,42 +129,101 @@ public class Mnt {
 									while (iter.hasNext()) {
 
 										String keyname = iter.next();
-
-										JsonParser.colWrite(obsrdtmnt, keyname, "obsrdtmnt", items_jsonObject);
-										JsonParser.colWrite(lowlevel, keyname, "lowlevel", items_jsonObject);
-										JsonParser.colWrite(rf, keyname, "rf", items_jsonObject);
-										JsonParser.colWrite(inflowqy, keyname, "inflowqy", items_jsonObject);
-										JsonParser.colWrite(totdcwtrqy, keyname, "totdcwtrqy", items_jsonObject);
-										JsonParser.colWrite(rsvwtqy, keyname, "rsvwtqy", items_jsonObject);
-										JsonParser.colWrite(rsvwtrt, keyname, "rsvwtrt", items_jsonObject);
+										
+										if(keyname.equals("obsrdtmnt")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												obsrdtmnt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												obsrdtmnt = " ";
+											}
+										}
+										if(keyname.equals("lowlevel")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												lowlevel = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												lowlevel = " ";
+											}
+										}
+										if(keyname.equals("rf")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												rf = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												rf = " ";
+											}
+										}
+										if(keyname.equals("inflowqy")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												inflowqy = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												inflowqy = " ";
+											}
+										}
+										if(keyname.equals("totdcwtrqy")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												totdcwtrqy = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												totdcwtrqy = " ";
+											}
+										}
+										if(keyname.equals("rsvwtqy")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												rsvwtqy = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												rsvwtqy = " ";
+											}
+										}
+										if(keyname.equals("rsvwtrt")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												rsvwtrt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												rsvwtrt = " ";
+											}
+										}
 
 									}
+									
+									// step 4. 파일에 쓰기
+									try {
+										PrintWriter pw = new PrintWriter(
+												new BufferedWriter(new FileWriter(file, true)));
 
-									// 한번에 문자열 합침
-									resultSb.append(args[0]);
-									resultSb.append("|^");
-									resultSb.append(args[1]);
-									resultSb.append("|^");
-									resultSb.append(args[2]);
-									resultSb.append("|^");
-									resultSb.append(obsrdtmnt);
-									resultSb.append("|^");
-									resultSb.append(lowlevel);
-									resultSb.append("|^");
-									resultSb.append(rf);
-									resultSb.append("|^");
-									resultSb.append(inflowqy);
-									resultSb.append("|^");
-									resultSb.append(totdcwtrqy);
-									resultSb.append("|^");
-									resultSb.append(rsvwtqy);
-									resultSb.append("|^");
-									resultSb.append(rsvwtrt);
-									resultSb.append("|^");
-									resultSb.append(numberOfRows_str);
-									resultSb.append("|^");
-									resultSb.append(String.valueOf(i));
-									resultSb.append(System.getProperty("line.separator"));
+										pw.write(args[0]);
+										pw.write("|^");
+										pw.write(args[1]);
+										pw.write("|^");
+										pw.write(args[2]);
+										pw.write("|^");
+										pw.write(obsrdtmnt);
+										pw.write("|^");
+										pw.write(lowlevel);
+										pw.write("|^");
+										pw.write(rf);
+										pw.write("|^");
+										pw.write(inflowqy);
+										pw.write("|^");
+										pw.write(totdcwtrqy);
+										pw.write("|^");
+										pw.write(rsvwtqy);
+										pw.write("|^");
+										pw.write(rsvwtrt);
+										pw.write("|^");
+										pw.write(numberOfRows_str);
+										pw.write("|^");
+										pw.write(String.valueOf(i));
+										pw.println();
+										pw.flush();
+										pw.close();
+
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
 
 								} else if (items.get("item") instanceof JSONArray) {
 
@@ -186,41 +241,100 @@ public class Mnt {
 
 											String keyname = iter.next();
 
-											JsonParser.colWrite(obsrdtmnt, keyname, "obsrdtmnt", item_obj);
-											JsonParser.colWrite(lowlevel, keyname, "lowlevel", item_obj);
-											JsonParser.colWrite(rf, keyname, "rf", item_obj);
-											JsonParser.colWrite(inflowqy, keyname, "inflowqy", item_obj);
-											JsonParser.colWrite(totdcwtrqy, keyname, "totdcwtrqy", item_obj);
-											JsonParser.colWrite(rsvwtqy, keyname, "rsvwtqy", item_obj);
-											JsonParser.colWrite(rsvwtrt, keyname, "rsvwtrt", item_obj);
+											if(keyname.equals("obsrdtmnt")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													obsrdtmnt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													obsrdtmnt = " ";
+												}
+											}
+											if(keyname.equals("lowlevel")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													lowlevel = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													lowlevel = " ";
+												}
+											}
+											if(keyname.equals("rf")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													rf = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													rf = " ";
+												}
+											}
+											if(keyname.equals("inflowqy")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													inflowqy = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													inflowqy = " ";
+												}
+											}
+											if(keyname.equals("totdcwtrqy")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													totdcwtrqy = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													totdcwtrqy = " ";
+												}
+											}
+											if(keyname.equals("rsvwtqy")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													rsvwtqy = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													rsvwtqy = " ";
+												}
+											}
+											if(keyname.equals("rsvwtrt")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													rsvwtrt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													rsvwtrt = " ";
+												}
+											}
 
 										}
 
-										// 한번에 문자열 합침
-										resultSb.append(args[0]);
-										resultSb.append("|^");
-										resultSb.append(args[1]);
-										resultSb.append("|^");
-										resultSb.append(args[2]);
-										resultSb.append("|^");
-										resultSb.append(obsrdtmnt);
-										resultSb.append("|^");
-										resultSb.append(lowlevel);
-										resultSb.append("|^");
-										resultSb.append(rf);
-										resultSb.append("|^");
-										resultSb.append(inflowqy);
-										resultSb.append("|^");
-										resultSb.append(totdcwtrqy);
-										resultSb.append("|^");
-										resultSb.append(rsvwtqy);
-										resultSb.append("|^");
-										resultSb.append(rsvwtrt);
-										resultSb.append("|^");
-										resultSb.append(numberOfRows_str);
-										resultSb.append("|^");
-										resultSb.append(String.valueOf(i));
-										resultSb.append(System.getProperty("line.separator"));
+										// step 4. 파일에 쓰기
+										try {
+											PrintWriter pw = new PrintWriter(
+													new BufferedWriter(new FileWriter(file, true)));
+
+											pw.write(args[0]);
+											pw.write("|^");
+											pw.write(args[1]);
+											pw.write("|^");
+											pw.write(args[2]);
+											pw.write("|^");
+											pw.write(obsrdtmnt);
+											pw.write("|^");
+											pw.write(lowlevel);
+											pw.write("|^");
+											pw.write(rf);
+											pw.write("|^");
+											pw.write(inflowqy);
+											pw.write("|^");
+											pw.write(totdcwtrqy);
+											pw.write("|^");
+											pw.write(rsvwtqy);
+											pw.write("|^");
+											pw.write(rsvwtrt);
+											pw.write("|^");
+											pw.write(numberOfRows_str);
+											pw.write("|^");
+											pw.write(String.valueOf(i));
+											pw.println();
+											pw.flush();
+											pw.close();
+
+										} catch (IOException e) {
+											e.printStackTrace();
+										}
 
 									}
 
@@ -236,18 +350,6 @@ public class Mnt {
 
 							//Thread.sleep(1000);
 
-						}
-
-						// step 4. 파일에 쓰기
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write(resultSb.toString());
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
 						}
 
 						System.out.println("parsing complete!");

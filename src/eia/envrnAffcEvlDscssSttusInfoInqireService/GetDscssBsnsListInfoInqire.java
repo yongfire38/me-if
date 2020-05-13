@@ -76,16 +76,6 @@ public class GetDscssBsnsListInfoInqire {
 
 					// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer rnum = new StringBuffer(" "); // 정렬순서
-					StringBuffer eiaCd = new StringBuffer(" "); // 환경영향평가코드
-					StringBuffer eiaSeq = new StringBuffer(" "); // 환경영향평가고유번호
-					StringBuffer bizNm = new StringBuffer(" "); // 사업명
-					StringBuffer ccilOrganNm = new StringBuffer(" "); // 협의기관
-					StringBuffer firstCtgCd = new StringBuffer(" "); // 현재단계
-					StringBuffer stepChangeDt = new StringBuffer(" "); // 단계변경일
-
 					for (int i = 1; i <= pageCount; i++) {
 
 						json = JsonParser.parseWatJson(service_url, service_key, String.valueOf(i));
@@ -112,6 +102,15 @@ public class GetDscssBsnsListInfoInqire {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 								
+
+								String rnum = " "; // 정렬순서
+								String eiaCd = " "; // 환경영향평가코드
+								String eiaSeq = " "; // 환경영향평가고유번호
+								String bizNm = " "; // 사업명
+								String ccilOrganNm = " "; // 협의기관
+								String firstCtgCd = " "; // 현재단계
+								String stepChangeDt = " "; // 단계변경일
+								
 								String numOfRows_str = body.get("numOfRows").toString();
 								String totalCount_str = body.get("totalCount").toString();
 								
@@ -130,42 +129,103 @@ public class GetDscssBsnsListInfoInqire {
 									while (iter.hasNext()) {
 
 										String keyname = iter.next();
-
-										JsonParser.colWrite(rnum, keyname, "rnum", item_obj);
-										JsonParser.colWrite(eiaCd, keyname, "eiaCd", item_obj);
-										JsonParser.colWrite(eiaSeq, keyname, "eiaSeq", item_obj);
-										JsonParser.colWrite(bizNm, keyname, "bizNm", item_obj);
-										JsonParser.colWrite(ccilOrganNm, keyname, "ccilOrganNm", item_obj);
-										JsonParser.colWrite(firstCtgCd, keyname, "firstCtgCd", item_obj);
-										JsonParser.colWrite(stepChangeDt, keyname, "stepChangeDt", item_obj);
+										
+										if(keyname.equals("rnum")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												rnum = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												rnum = " ";
+											}
+										}
+										if(keyname.equals("eiaCd")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												eiaCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												eiaCd = " ";
+											}
+										}
+										if(keyname.equals("eiaSeq")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												eiaSeq = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												eiaSeq = " ";
+											}
+										}
+										if(keyname.equals("bizNm")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												bizNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												bizNm = " ";
+											}
+										}
+										if(keyname.equals("ccilOrganNm")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												ccilOrganNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												ccilOrganNm = " ";
+											}
+										}
+										if(keyname.equals("firstCtgCd")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												firstCtgCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												firstCtgCd = " ";
+											}
+										}
+										if(keyname.equals("stepChangeDt")) {
+											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+												stepChangeDt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												stepChangeDt = " ";
+											}
+										}
 
 									}
+									
+									// step 4. 파일에 쓰기
+									try {
+										PrintWriter pw = new PrintWriter(
+												new BufferedWriter(new FileWriter(file, true)));
 
-									// 한번에 문자열 합침
-									resultSb.append(resultCode);
-									resultSb.append("|^");
-									resultSb.append(resultMsg);
-									resultSb.append("|^");
-									resultSb.append(numOfRows_str);
-									resultSb.append("|^");
-									resultSb.append(Integer.toString(i));
-									resultSb.append("|^");
-									resultSb.append(totalCount_str);
-									resultSb.append("|^");
-									resultSb.append(rnum);
-									resultSb.append("|^");
-									resultSb.append(eiaCd);
-									resultSb.append("|^");
-									resultSb.append(eiaSeq);
-									resultSb.append("|^");
-									resultSb.append(bizNm);
-									resultSb.append("|^");
-									resultSb.append(ccilOrganNm);
-									resultSb.append("|^");
-									resultSb.append(firstCtgCd);
-									resultSb.append("|^");
-									resultSb.append(stepChangeDt);
-									resultSb.append(System.getProperty("line.separator"));
+										pw.write(resultCode); 
+										pw.write("|^");
+										pw.write(resultMsg); 
+										pw.write("|^");
+										pw.write(numOfRows_str); 
+										pw.write("|^");
+										pw.write(Integer.toString(i)); 
+										pw.write("|^");
+										pw.write(totalCount_str); 
+										pw.write("|^");
+										pw.write(rnum); 
+										pw.write("|^");
+										pw.write(eiaCd); 
+										pw.write("|^");
+										pw.write(eiaSeq); 
+										pw.write("|^");
+										pw.write(bizNm); 
+										pw.write("|^");
+										pw.write(ccilOrganNm); 
+										pw.write("|^");
+										pw.write(firstCtgCd); 
+										pw.write("|^");
+										pw.write(stepChangeDt); 
+										pw.println();
+										pw.flush();
+										pw.close();
+
+									} catch (IOException e) {
+										e.printStackTrace();
+									}			
+
+								
 
 								}
 
@@ -177,18 +237,6 @@ public class GetDscssBsnsListInfoInqire {
 
 						//Thread.sleep(1000);
 
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

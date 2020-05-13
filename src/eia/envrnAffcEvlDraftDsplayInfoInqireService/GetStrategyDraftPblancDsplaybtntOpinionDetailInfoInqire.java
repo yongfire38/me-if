@@ -51,46 +51,6 @@ public class GetStrategyDraftPblancDsplaybtntOpinionDetailInfoInqire {
 
 					// step 2. 전체 파싱
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer perCd = new StringBuffer(" "); // 사전환경성검토 코드
-					StringBuffer bizNm = new StringBuffer(" "); // 사업명
-					StringBuffer approvOrganTeam = new StringBuffer(" "); // 승인기관
-					StringBuffer bizMoney = new StringBuffer(" "); // 사업비
-					StringBuffer bizSize = new StringBuffer(" "); // 사업규모
-					StringBuffer bizSizeDan = new StringBuffer(" "); // 사업규모 단위
-					StringBuffer benfBizmain = new StringBuffer(" "); // 사업시행자
-					StringBuffer embodEtcNm = new StringBuffer(" "); // 사업구분기타명칭
-					StringBuffer ccilJongCd = new StringBuffer(" "); // 협의종류
-					StringBuffer embodCd = new StringBuffer(" "); // 사업구분코드
-					StringBuffer embodCd2 = new StringBuffer(" "); // 사업구분 기타 명칭
-					StringBuffer ccilOrganCd = new StringBuffer(" "); // 협의기관코드
-					StringBuffer ctcMemNm = new StringBuffer(" "); // 협의기관 담당자
-					StringBuffer ctcMemTeam = new StringBuffer(" "); // 협의기관
-																		// 담당부서
-					StringBuffer ctcMemEmail = new StringBuffer(" "); // 협의기관
-																		// E-mail
-					StringBuffer ctcMemTel = new StringBuffer(" "); // 협의기관 전화번호
-					StringBuffer ctcMemFax = new StringBuffer(" "); // 협의기관
-																	// Fax번호
-					StringBuffer bizAddrEtc = new StringBuffer(" "); // 소재지 주소1
-					StringBuffer bizAddrEtc2 = new StringBuffer(" "); // 소재지 주소2
-					StringBuffer drfopPclDt = new StringBuffer(" "); // 초안 공고일
-					StringBuffer drfopTmdtStartDt = new StringBuffer(" "); // 초안
-																			// 공람기간
-																			// 시작일
-					StringBuffer drfopTmdtEndDt = new StringBuffer(" "); // 초안공람기간
-																			// 종료일
-					StringBuffer drfopExpDttm = new StringBuffer(" "); // 설명회 일시
-					StringBuffer drfopOpnStartDt = new StringBuffer(" "); // 의견제출기간
-																			// 시작일
-					StringBuffer drfopOpnEndDt = new StringBuffer(" "); // 의견제출기간
-																		// 종료일
-					StringBuffer drfopSite = new StringBuffer(" "); // 공람장소
-					StringBuffer drfopExpSite = new StringBuffer(" "); // 설명회 장소
-					StringBuffer drfopTeamNm = new StringBuffer(" "); // 부서명
-					StringBuffer drfopTel = new StringBuffer(" "); // 전화번호
-
 					JSONParser parser = new JSONParser();
 					JSONObject obj = (JSONObject) parser.parse(json);
 					JSONObject response = (JSONObject) obj.get("response");
@@ -106,7 +66,43 @@ public class GetStrategyDraftPblancDsplaybtntOpinionDetailInfoInqire {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(response.get("body") instanceof String)) {
 						
-						
+						String perCd = " "; // 사전환경성검토 코드
+						String bizNm = " "; // 사업명
+						String approvOrganTeam = " "; // 승인기관
+						String bizMoney = " "; // 사업비
+						String bizSize = " "; // 사업규모
+						String bizSizeDan = " "; // 사업규모 단위
+						String benfBizmain = " "; // 사업시행자
+						String embodEtcNm = " "; // 사업구분기타명칭
+						String ccilJongCd = " "; // 협의종류
+						String embodCd = " "; // 사업구분코드
+						String embodCd2 = " "; // 사업구분 기타 명칭
+						String ccilOrganCd = " "; // 협의기관코드
+						String ctcMemNm = " "; // 협의기관 담당자
+						String ctcMemTeam = " "; // 협의기관
+																			// 담당부서
+						String ctcMemEmail = " "; // 협의기관
+																			// E-mail
+						String ctcMemTel = " "; // 협의기관 전화번호
+						String ctcMemFax = " "; // 협의기관
+																		// Fax번호
+						String bizAddrEtc = " "; // 소재지 주소1
+						String bizAddrEtc2 = " "; // 소재지 주소2
+						String drfopPclDt = " "; // 초안 공고일
+						String drfopTmdtStartDt = " "; // 초안
+																				// 공람기간
+																				// 시작일
+						String drfopTmdtEndDt = " "; // 초안공람기간
+																				// 종료일
+						String drfopExpDttm = " "; // 설명회 일시
+						String drfopOpnStartDt = " "; // 의견제출기간
+																				// 시작일
+						String drfopOpnEndDt = " "; // 의견제출기간
+																			// 종료일
+						String drfopSite = " "; // 공람장소
+						String drfopExpSite = " "; // 설명회 장소
+						String drfopTeamNm = " "; // 부서명
+						String drfopTel = " "; // 전화번호
 
 						JSONObject body = (JSONObject) response.get("body");
 
@@ -122,98 +118,311 @@ public class GetStrategyDraftPblancDsplaybtntOpinionDetailInfoInqire {
 							while (iter.hasNext()) {
 
 								String keyname = iter.next();
-
-								JsonParser.colWrite(perCd, keyname, "perCd", items_jsonObject);
-								JsonParser.colWrite(bizNm, keyname, "bizNm", items_jsonObject);
-								JsonParser.colWrite(approvOrganTeam, keyname, "approvOrganTeam", items_jsonObject);
-								JsonParser.colWrite(bizMoney, keyname, "bizMoney", items_jsonObject);
-								JsonParser.colWrite(bizSize, keyname, "bizSize", items_jsonObject);
-								JsonParser.colWrite(bizSizeDan, keyname, "bizSizeDan", items_jsonObject);
-								JsonParser.colWrite(benfBizmain, keyname, "benfBizmain", items_jsonObject);
-								JsonParser.colWrite(embodEtcNm, keyname, "embodEtcNm", items_jsonObject);
-								JsonParser.colWrite(ccilJongCd, keyname, "ccilJongCd", items_jsonObject);
-								JsonParser.colWrite(embodCd, keyname, "embodCd", items_jsonObject);
-								JsonParser.colWrite(embodCd2, keyname, "embodCd2", items_jsonObject);
-								JsonParser.colWrite(ccilOrganCd, keyname, "ccilOrganCd", items_jsonObject);
-								JsonParser.colWrite(ctcMemNm, keyname, "ctcMemNm", items_jsonObject);
-								JsonParser.colWrite(ctcMemTeam, keyname, "ctcMemTeam", items_jsonObject);
-								JsonParser.colWrite(ctcMemEmail, keyname, "ctcMemEmail", items_jsonObject);
-								JsonParser.colWrite(ctcMemTel, keyname, "ctcMemTel", items_jsonObject);
-								JsonParser.colWrite(ctcMemFax, keyname, "ctcMemFax", items_jsonObject);
-								JsonParser.colWrite(bizAddrEtc, keyname, "bizAddrEtc", items_jsonObject);
-								JsonParser.colWrite(bizAddrEtc2, keyname, "bizAddrEtc2", items_jsonObject);
-								JsonParser.colWrite(drfopPclDt, keyname, "drfopPclDt", items_jsonObject);
-								JsonParser.colWrite(drfopTmdtStartDt, keyname, "drfopTmdtStartDt", items_jsonObject);
-								JsonParser.colWrite(drfopTmdtEndDt, keyname, "drfopTmdtEndDt", items_jsonObject);
-								JsonParser.colWrite(drfopExpDttm, keyname, "drfopExpDttm", items_jsonObject);
-								JsonParser.colWrite(drfopOpnStartDt, keyname, "drfopOpnStartDt", items_jsonObject);
-								JsonParser.colWrite(drfopOpnEndDt, keyname, "drfopOpnEndDt", items_jsonObject);
-								JsonParser.colWrite(drfopSite, keyname, "drfopSite", items_jsonObject);
-								JsonParser.colWrite(drfopExpSite, keyname, "drfopExpSite", items_jsonObject);
-								JsonParser.colWrite(drfopTeamNm, keyname, "drfopTeamNm", items_jsonObject);
-								JsonParser.colWrite(drfopTel, keyname, "drfopTel", items_jsonObject);
+								
+								if(keyname.equals("perCd")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										perCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										perCd = " ";
+									}
+								}
+								if(keyname.equals("bizNm")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										bizNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										bizNm = " ";
+									}
+								}
+								if(keyname.equals("approvOrganTeam")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										approvOrganTeam = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										approvOrganTeam = " ";
+									}
+								}
+								if(keyname.equals("bizMoney")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										bizMoney = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										bizMoney = " ";
+									}
+								}
+								if(keyname.equals("bizSize")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										bizSize = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										bizSize = " ";
+									}
+								}
+								if(keyname.equals("bizSizeDan")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										bizSizeDan = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										bizSizeDan = " ";
+									}
+								}
+								if(keyname.equals("benfBizmain")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										benfBizmain = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										benfBizmain = " ";
+									}
+								}
+								if(keyname.equals("embodEtcNm")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										embodEtcNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										embodEtcNm = " ";
+									}
+								}
+								if(keyname.equals("ccilJongCd")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										ccilJongCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										ccilJongCd = " ";
+									}
+								}
+								if(keyname.equals("embodCd")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										embodCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										embodCd = " ";
+									}
+								}
+								if(keyname.equals("embodCd2")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										embodCd2 = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										embodCd2 = " ";
+									}
+								}
+								if(keyname.equals("ccilOrganCd")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										ccilOrganCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										ccilOrganCd = " ";
+									}
+								}
+								if(keyname.equals("ctcMemNm")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										ctcMemNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										ctcMemNm = " ";
+									}
+								}
+								if(keyname.equals("ctcMemTeam")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										ctcMemTeam = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										ctcMemTeam = " ";
+									}
+								}
+								if(keyname.equals("ctcMemEmail")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										ctcMemEmail = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										ctcMemEmail = " ";
+									}
+								}
+								if(keyname.equals("ctcMemTel")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										ctcMemTel = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										ctcMemTel = " ";
+									}
+								}
+								if(keyname.equals("ctcMemFax")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										ctcMemFax = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										ctcMemFax = " ";
+									}
+								}
+								if(keyname.equals("bizAddrEtc")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										bizAddrEtc = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										bizAddrEtc = " ";
+									}
+								}
+								if(keyname.equals("bizAddrEtc2")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										bizAddrEtc2 = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										bizAddrEtc2 = " ";
+									}
+								}
+								if(keyname.equals("drfopPclDt")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										drfopPclDt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										drfopPclDt = " ";
+									}
+								}
+								if(keyname.equals("drfopTmdtStartDt")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										drfopTmdtStartDt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										drfopTmdtStartDt = " ";
+									}
+								}
+								if(keyname.equals("drfopTmdtEndDt")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										drfopTmdtEndDt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										drfopTmdtEndDt = " ";
+									}
+								}
+								if(keyname.equals("drfopExpDttm")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										drfopExpDttm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										drfopExpDttm = " ";
+									}
+								}
+								if(keyname.equals("drfopOpnStartDt")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										drfopOpnStartDt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										drfopOpnStartDt = " ";
+									}
+								}
+								if(keyname.equals("drfopOpnEndDt")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										drfopOpnEndDt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										drfopOpnEndDt = " ";
+									}
+								}
+								if(keyname.equals("drfopSite")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										drfopSite = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										drfopSite = " ";
+									}
+								}
+								if(keyname.equals("drfopExpSite")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										drfopExpSite = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										drfopExpSite = " ";
+									}
+								}
+								if(keyname.equals("drfopTeamNm")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										drfopTeamNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										drfopTeamNm = " ";
+									}
+								}
+								if(keyname.equals("drfopTel")) {
+									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+										drfopTel = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										drfopTel = " ";
+									}
+								}	
 
 							}
 
-							// 한번에 문자열 합침
-							resultSb.append(perCd);
-							resultSb.append("|^");
-							resultSb.append(bizNm);
-							resultSb.append("|^");
-							resultSb.append(approvOrganTeam);
-							resultSb.append("|^");
-							resultSb.append(bizMoney);
-							resultSb.append("|^");
-							resultSb.append(bizSize);
-							resultSb.append("|^");
-							resultSb.append(bizSizeDan);
-							resultSb.append("|^");
-							resultSb.append(benfBizmain);
-							resultSb.append("|^");
-							resultSb.append(embodEtcNm);
-							resultSb.append("|^");
-							resultSb.append(ccilJongCd);
-							resultSb.append("|^");
-							resultSb.append(embodCd);
-							resultSb.append("|^");
-							resultSb.append(embodCd2);
-							resultSb.append("|^");
-							resultSb.append(ccilOrganCd);
-							resultSb.append("|^");
-							resultSb.append(ctcMemNm);
-							resultSb.append("|^");
-							resultSb.append(ctcMemTeam);
-							resultSb.append("|^");
-							resultSb.append(ctcMemEmail);
-							resultSb.append("|^");
-							resultSb.append(ctcMemTel);
-							resultSb.append("|^");
-							resultSb.append(ctcMemFax);
-							resultSb.append("|^");
-							resultSb.append(bizAddrEtc);
-							resultSb.append("|^");
-							resultSb.append(bizAddrEtc2);
-							resultSb.append("|^");
-							resultSb.append(drfopPclDt);
-							resultSb.append("|^");
-							resultSb.append(drfopTmdtStartDt);
-							resultSb.append("|^");
-							resultSb.append(drfopTmdtEndDt);
-							resultSb.append("|^");
-							resultSb.append(drfopExpDttm);
-							resultSb.append("|^");
-							resultSb.append(drfopOpnStartDt);
-							resultSb.append("|^");
-							resultSb.append(drfopOpnEndDt);
-							resultSb.append("|^");
-							resultSb.append(drfopSite);
-							resultSb.append("|^");
-							resultSb.append(drfopExpSite);
-							resultSb.append("|^");
-							resultSb.append(drfopTeamNm);
-							resultSb.append("|^");
-							resultSb.append(drfopTel);
-							resultSb.append(System.getProperty("line.separator"));
+							// step 4. 파일에 쓰기
+							try {
+								PrintWriter pw = new PrintWriter(
+										new BufferedWriter(new FileWriter(file, true)));
+
+								pw.write(perCd); 
+								pw.write("|^");
+								pw.write(bizNm); 
+								pw.write("|^");
+								pw.write(approvOrganTeam); 
+								pw.write("|^");
+								pw.write(bizMoney); 
+								pw.write("|^");
+								pw.write(bizSize); 
+								pw.write("|^");
+								pw.write(bizSizeDan); 
+								pw.write("|^");
+								pw.write(benfBizmain); 
+								pw.write("|^");
+								pw.write(embodEtcNm); 
+								pw.write("|^");
+								pw.write(ccilJongCd); 
+								pw.write("|^");
+								pw.write(embodCd); 
+								pw.write("|^");
+								pw.write(embodCd2); 
+								pw.write("|^");
+								pw.write(ccilOrganCd);
+								pw.write("|^");
+								pw.write(ctcMemNm); 
+								pw.write("|^");
+								pw.write(ctcMemTeam); 
+								pw.write("|^");
+								pw.write(ctcMemEmail); 
+								pw.write("|^");
+								pw.write(ctcMemTel); 
+								pw.write("|^");
+								pw.write(ctcMemFax); 
+								pw.write("|^");
+								pw.write(bizAddrEtc); 
+								pw.write("|^");
+								pw.write(bizAddrEtc2); 
+								pw.write("|^");
+								pw.write(drfopPclDt); 
+								pw.write("|^");
+								pw.write(drfopTmdtStartDt); 
+								pw.write("|^");
+								pw.write(drfopTmdtEndDt); 
+								pw.write("|^");
+								pw.write(drfopExpDttm); 
+								pw.write("|^");
+								pw.write(drfopOpnStartDt); 
+								pw.write("|^");
+								pw.write(drfopOpnEndDt); 
+								pw.write("|^");
+								pw.write(drfopSite); 
+								pw.write("|^");
+								pw.write(drfopExpSite); 
+								pw.write("|^");
+								pw.write(drfopTeamNm); 
+								pw.write("|^");
+								pw.write(drfopTel); 
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}			
 
 						} else if (body.get("item") instanceof JSONArray) {
 
@@ -231,97 +440,309 @@ public class GetStrategyDraftPblancDsplaybtntOpinionDetailInfoInqire {
 
 									String keyname = iter.next();
 
-									JsonParser.colWrite(perCd, keyname, "perCd", item_obj);
-									JsonParser.colWrite(bizNm, keyname, "bizNm", item_obj);
-									JsonParser.colWrite(approvOrganTeam, keyname, "approvOrganTeam", item_obj);
-									JsonParser.colWrite(bizMoney, keyname, "bizMoney", item_obj);
-									JsonParser.colWrite(bizSize, keyname, "bizSize", item_obj);
-									JsonParser.colWrite(bizSizeDan, keyname, "bizSizeDan", item_obj);
-									JsonParser.colWrite(benfBizmain, keyname, "benfBizmain", item_obj);
-									JsonParser.colWrite(embodEtcNm, keyname, "embodEtcNm", item_obj);
-									JsonParser.colWrite(ccilJongCd, keyname, "ccilJongCd", item_obj);
-									JsonParser.colWrite(embodCd, keyname, "embodCd", item_obj);
-									JsonParser.colWrite(embodCd2, keyname, "embodCd2", item_obj);
-									JsonParser.colWrite(ccilOrganCd, keyname, "ccilOrganCd", item_obj);
-									JsonParser.colWrite(ctcMemNm, keyname, "ctcMemNm", item_obj);
-									JsonParser.colWrite(ctcMemTeam, keyname, "ctcMemTeam", item_obj);
-									JsonParser.colWrite(ctcMemEmail, keyname, "ctcMemEmail", item_obj);
-									JsonParser.colWrite(ctcMemTel, keyname, "ctcMemTel", item_obj);
-									JsonParser.colWrite(ctcMemFax, keyname, "ctcMemFax", item_obj);
-									JsonParser.colWrite(bizAddrEtc, keyname, "bizAddrEtc", item_obj);
-									JsonParser.colWrite(bizAddrEtc2, keyname, "bizAddrEtc2", item_obj);
-									JsonParser.colWrite(drfopPclDt, keyname, "drfopPclDt", item_obj);
-									JsonParser.colWrite(drfopTmdtStartDt, keyname, "drfopTmdtStartDt", item_obj);
-									JsonParser.colWrite(drfopTmdtEndDt, keyname, "drfopTmdtEndDt", item_obj);
-									JsonParser.colWrite(drfopExpDttm, keyname, "drfopExpDttm", item_obj);
-									JsonParser.colWrite(drfopOpnStartDt, keyname, "drfopOpnStartDt", item_obj);
-									JsonParser.colWrite(drfopOpnEndDt, keyname, "drfopOpnEndDt", item_obj);
-									JsonParser.colWrite(drfopSite, keyname, "drfopSite", item_obj);
-									JsonParser.colWrite(drfopExpSite, keyname, "drfopExpSite", item_obj);
-									JsonParser.colWrite(drfopTeamNm, keyname, "drfopTeamNm", item_obj);
-									JsonParser.colWrite(drfopTel, keyname, "drfopTel", item_obj);
-
+									if(keyname.equals("perCd")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											perCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											perCd = " ";
+										}
+									}
+									if(keyname.equals("bizNm")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											bizNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											bizNm = " ";
+										}
+									}
+									if(keyname.equals("approvOrganTeam")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											approvOrganTeam = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											approvOrganTeam = " ";
+										}
+									}
+									if(keyname.equals("bizMoney")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											bizMoney = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											bizMoney = " ";
+										}
+									}
+									if(keyname.equals("bizSize")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											bizSize = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											bizSize = " ";
+										}
+									}
+									if(keyname.equals("bizSizeDan")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											bizSizeDan = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											bizSizeDan = " ";
+										}
+									}
+									if(keyname.equals("benfBizmain")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											benfBizmain = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											benfBizmain = " ";
+										}
+									}
+									if(keyname.equals("embodEtcNm")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											embodEtcNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											embodEtcNm = " ";
+										}
+									}
+									if(keyname.equals("ccilJongCd")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											ccilJongCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											ccilJongCd = " ";
+										}
+									}
+									if(keyname.equals("embodCd")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											embodCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											embodCd = " ";
+										}
+									}
+									if(keyname.equals("embodCd2")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											embodCd2 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											embodCd2 = " ";
+										}
+									}
+									if(keyname.equals("ccilOrganCd")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											ccilOrganCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											ccilOrganCd = " ";
+										}
+									}
+									if(keyname.equals("ctcMemNm")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											ctcMemNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											ctcMemNm = " ";
+										}
+									}
+									if(keyname.equals("ctcMemTeam")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											ctcMemTeam = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											ctcMemTeam = " ";
+										}
+									}
+									if(keyname.equals("ctcMemEmail")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											ctcMemEmail = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											ctcMemEmail = " ";
+										}
+									}
+									if(keyname.equals("ctcMemTel")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											ctcMemTel = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											ctcMemTel = " ";
+										}
+									}
+									if(keyname.equals("ctcMemFax")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											ctcMemFax = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											ctcMemFax = " ";
+										}
+									}
+									if(keyname.equals("bizAddrEtc")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											bizAddrEtc = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											bizAddrEtc = " ";
+										}
+									}
+									if(keyname.equals("bizAddrEtc2")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											bizAddrEtc2 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											bizAddrEtc2 = " ";
+										}
+									}
+									if(keyname.equals("drfopPclDt")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											drfopPclDt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											drfopPclDt = " ";
+										}
+									}
+									if(keyname.equals("drfopTmdtStartDt")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											drfopTmdtStartDt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											drfopTmdtStartDt = " ";
+										}
+									}
+									if(keyname.equals("drfopTmdtEndDt")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											drfopTmdtEndDt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											drfopTmdtEndDt = " ";
+										}
+									}
+									if(keyname.equals("drfopExpDttm")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											drfopExpDttm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											drfopExpDttm = " ";
+										}
+									}
+									if(keyname.equals("drfopOpnStartDt")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											drfopOpnStartDt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											drfopOpnStartDt = " ";
+										}
+									}
+									if(keyname.equals("drfopOpnEndDt")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											drfopOpnEndDt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											drfopOpnEndDt = " ";
+										}
+									}
+									if(keyname.equals("drfopSite")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											drfopSite = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											drfopSite = " ";
+										}
+									}
+									if(keyname.equals("drfopExpSite")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											drfopExpSite = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											drfopExpSite = " ";
+										}
+									}
+									if(keyname.equals("drfopTeamNm")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											drfopTeamNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											drfopTeamNm = " ";
+										}
+									}
+									if(keyname.equals("drfopTel")) {
+										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+											drfopTel = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+													.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										}else{
+											drfopTel = " ";
+										}
+									}
 								}
 
-								// 한번에 문자열 합침
-								resultSb.append(perCd);
-								resultSb.append("|^");
-								resultSb.append(bizNm);
-								resultSb.append("|^");
-								resultSb.append(approvOrganTeam);
-								resultSb.append("|^");
-								resultSb.append(bizMoney);
-								resultSb.append("|^");
-								resultSb.append(bizSize);
-								resultSb.append("|^");
-								resultSb.append(bizSizeDan);
-								resultSb.append("|^");
-								resultSb.append(benfBizmain);
-								resultSb.append("|^");
-								resultSb.append(embodEtcNm);
-								resultSb.append("|^");
-								resultSb.append(ccilJongCd);
-								resultSb.append("|^");
-								resultSb.append(embodCd);
-								resultSb.append("|^");
-								resultSb.append(embodCd2);
-								resultSb.append("|^");
-								resultSb.append(ccilOrganCd);
-								resultSb.append("|^");
-								resultSb.append(ctcMemNm);
-								resultSb.append("|^");
-								resultSb.append(ctcMemTeam);
-								resultSb.append("|^");
-								resultSb.append(ctcMemEmail);
-								resultSb.append("|^");
-								resultSb.append(ctcMemTel);
-								resultSb.append("|^");
-								resultSb.append(ctcMemFax);
-								resultSb.append("|^");
-								resultSb.append(bizAddrEtc);
-								resultSb.append("|^");
-								resultSb.append(bizAddrEtc2);
-								resultSb.append("|^");
-								resultSb.append(drfopPclDt);
-								resultSb.append("|^");
-								resultSb.append(drfopTmdtStartDt);
-								resultSb.append("|^");
-								resultSb.append(drfopTmdtEndDt);
-								resultSb.append("|^");
-								resultSb.append(drfopExpDttm);
-								resultSb.append("|^");
-								resultSb.append(drfopOpnStartDt);
-								resultSb.append("|^");
-								resultSb.append(drfopOpnEndDt);
-								resultSb.append("|^");
-								resultSb.append(drfopSite);
-								resultSb.append("|^");
-								resultSb.append(drfopExpSite);
-								resultSb.append("|^");
-								resultSb.append(drfopTeamNm);
-								resultSb.append("|^");
-								resultSb.append(drfopTel);
-								resultSb.append(System.getProperty("line.separator"));
+								// step 4. 파일에 쓰기
+								try {
+									PrintWriter pw = new PrintWriter(
+											new BufferedWriter(new FileWriter(file, true)));
+
+									pw.write(perCd); 
+									pw.write("|^");
+									pw.write(bizNm); 
+									pw.write("|^");
+									pw.write(approvOrganTeam); 
+									pw.write("|^");
+									pw.write(bizMoney); 
+									pw.write("|^");
+									pw.write(bizSize); 
+									pw.write("|^");
+									pw.write(bizSizeDan); 
+									pw.write("|^");
+									pw.write(benfBizmain); 
+									pw.write("|^");
+									pw.write(embodEtcNm); 
+									pw.write("|^");
+									pw.write(ccilJongCd); 
+									pw.write("|^");
+									pw.write(embodCd); 
+									pw.write("|^");
+									pw.write(embodCd2); 
+									pw.write("|^");
+									pw.write(ccilOrganCd);
+									pw.write("|^");
+									pw.write(ctcMemNm); 
+									pw.write("|^");
+									pw.write(ctcMemTeam); 
+									pw.write("|^");
+									pw.write(ctcMemEmail); 
+									pw.write("|^");
+									pw.write(ctcMemTel); 
+									pw.write("|^");
+									pw.write(ctcMemFax); 
+									pw.write("|^");
+									pw.write(bizAddrEtc); 
+									pw.write("|^");
+									pw.write(bizAddrEtc2); 
+									pw.write("|^");
+									pw.write(drfopPclDt); 
+									pw.write("|^");
+									pw.write(drfopTmdtStartDt); 
+									pw.write("|^");
+									pw.write(drfopTmdtEndDt); 
+									pw.write("|^");
+									pw.write(drfopExpDttm); 
+									pw.write("|^");
+									pw.write(drfopOpnStartDt); 
+									pw.write("|^");
+									pw.write(drfopOpnEndDt); 
+									pw.write("|^");
+									pw.write(drfopSite); 
+									pw.write("|^");
+									pw.write(drfopExpSite); 
+									pw.write("|^");
+									pw.write(drfopTeamNm); 
+									pw.write("|^");
+									pw.write(drfopTel); 
+									pw.println();
+									pw.flush();
+									pw.close();
+
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 							}
 
 						} else {
@@ -330,18 +751,6 @@ public class GetStrategyDraftPblancDsplaybtntOpinionDetailInfoInqire {
 
 					} else {
 						System.out.println("parsing error!!");
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

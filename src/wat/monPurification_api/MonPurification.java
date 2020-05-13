@@ -89,78 +89,6 @@ public class MonPurification {
 
 						// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-						StringBuffer resultSb = new StringBuffer("");
-
-						StringBuffer RNUM = new StringBuffer(" "); // 순번
-						StringBuffer FIM_FCLT_NAM = new StringBuffer(" "); // 정수장명
-						StringBuffer FIM_REGN_CTY = new StringBuffer(" "); // 관리기관명
-						StringBuffer BRTC_NM = new StringBuffer(" "); // 시도명
-						StringBuffer SIGNGU_NM = new StringBuffer(" "); // 시군구명
-						StringBuffer TELNO = new StringBuffer(" "); // 관리기관전화번호
-						StringBuffer WCI_COLL_DAT = new StringBuffer(" "); // 채수일자
-						StringBuffer WCI_INORG_NAM = new StringBuffer(" "); // 검사기관명
-						StringBuffer TCC = new StringBuffer(" "); // 일반세균
-						StringBuffer TC = new StringBuffer(" "); // 총대장균군
-						StringBuffer EFC = new StringBuffer(" "); // 대장균/분원성대장균군
-						StringBuffer PB = new StringBuffer(" "); // 납
-						StringBuffer FL = new StringBuffer(" "); // 불소
-						StringBuffer AS = new StringBuffer(" "); // 비소
-						StringBuffer SE = new StringBuffer(" "); // 셀레늄
-						StringBuffer HG = new StringBuffer(" "); // 수은
-						StringBuffer CN = new StringBuffer(" "); // 시안
-						StringBuffer CR = new StringBuffer(" "); // 크롬
-						StringBuffer NHN = new StringBuffer(" "); // 암모니아성질소
-						StringBuffer NON = new StringBuffer(" "); // 질산성질소
-						StringBuffer CD = new StringBuffer(" "); // 카드뮴
-						StringBuffer BOR = new StringBuffer(" "); // 붕소
-						StringBuffer BRO = new StringBuffer(" "); // 브롬산염
-						StringBuffer D_URNM = new StringBuffer(" "); // 우라늄
-						StringBuffer PHEN = new StringBuffer(" "); // 페놀
-						StringBuffer DIA = new StringBuffer(" "); // 다이아지논
-						StringBuffer PARA = new StringBuffer(" "); // 파라티온
-						StringBuffer PENI = new StringBuffer(" "); // 페니트로티온
-						StringBuffer CBR = new StringBuffer(" "); // 카바릴
-						StringBuffer TCE = new StringBuffer(" "); // 1_1_1-트리클로로에탄
-						StringBuffer TTCE = new StringBuffer(" "); // 테트라클로로에틸렌
-						StringBuffer TCF = new StringBuffer(" "); // 트리클로로에틸렌
-						StringBuffer CC = new StringBuffer(" "); // 사염화탄소
-						StringBuffer DDE = new StringBuffer(" "); // 1_1-디클로로에틸렌
-						StringBuffer DCM = new StringBuffer(" "); // 디클로로메탄
-						StringBuffer BZ = new StringBuffer(" "); // 벤젠
-						StringBuffer TOL = new StringBuffer(" "); // 톨루엔
-						StringBuffer EB = new StringBuffer(" "); // 에틸벤젠
-						StringBuffer XYL = new StringBuffer(" "); // 크실렌
-						StringBuffer DBCP = new StringBuffer(" "); // 1_2-디브로모-3-클로로프로판
-						StringBuffer DIOX = new StringBuffer(" "); // 1_4-다이옥산
-						StringBuffer RC = new StringBuffer(" "); // 잔류염소
-						StringBuffer THMS = new StringBuffer(" "); // 총트리할로메탄
-						StringBuffer CF = new StringBuffer(" "); // 클로로포름
-						StringBuffer BDCM = new StringBuffer(" "); // 브로모디클로로메탄
-						StringBuffer DBCM = new StringBuffer(" "); // 디브로모클로로메탄
-						StringBuffer CH = new StringBuffer(" "); // 클로랄하이드레이트
-						StringBuffer DIT = new StringBuffer(" "); // 디브로모아세토니트릴
-						StringBuffer TRT = new StringBuffer(" "); // 디클로로아세토니트릴
-						StringBuffer TRL = new StringBuffer(" "); // 트리클로로아세토니트릴
-						StringBuffer HAS = new StringBuffer(" "); // 할로아세틱에시드
-						StringBuffer FOAH = new StringBuffer(" "); // 포름알데히드
-						StringBuffer HR = new StringBuffer(" "); // 경도
-						StringBuffer KMN = new StringBuffer(" "); // 과망간산칼륨소비량
-						StringBuffer ODOR = new StringBuffer(" "); // 냄새
-						StringBuffer TW = new StringBuffer(" "); // 맛
-						StringBuffer CU = new StringBuffer(" "); // 동
-						StringBuffer CW = new StringBuffer(" "); // 색도
-						StringBuffer DTG = new StringBuffer(" "); // 세제
-						StringBuffer PH = new StringBuffer(" "); // 수소이온농도
-						StringBuffer ZN = new StringBuffer(" "); // 아연
-						StringBuffer CL = new StringBuffer(" "); // 염소이온
-						StringBuffer RE = new StringBuffer(" "); // 증발잔류물
-						StringBuffer FE = new StringBuffer(" "); // 철
-						StringBuffer MN = new StringBuffer(" "); // 망간
-						StringBuffer TU = new StringBuffer(" "); // 탁도
-						StringBuffer SO = new StringBuffer(" "); // 황산이온
-						StringBuffer AL = new StringBuffer(" "); // 알루미늄
-						StringBuffer WCI_UPDATE_DAT = new StringBuffer(" "); // 데이터기준일자
-
 						for (int i = 1; i <= pageCount; ++i) {
 
 							json = JsonParser.parseWatJson(service_url, service_key, args[0], args[1],
@@ -187,7 +115,75 @@ public class MonPurification {
 										"parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
 							} else if (resultCode.equals("00")) {
 								
-								
+								String RNUM = " "; // 순번
+								String FIM_FCLT_NAM = " "; // 정수장명
+								String FIM_REGN_CTY = " "; // 관리기관명
+								String BRTC_NM = " "; // 시도명
+								String SIGNGU_NM = " "; // 시군구명
+								String TELNO = " "; // 관리기관전화번호
+								String WCI_COLL_DAT = " "; // 채수일자
+								String WCI_INORG_NAM = " "; // 검사기관명
+								String TCC = " "; // 일반세균
+								String TC = " "; // 총대장균군
+								String EFC = " "; // 대장균/분원성대장균군
+								String PB = " "; // 납
+								String FL = " "; // 불소
+								String AS = " "; // 비소
+								String SE = " "; // 셀레늄
+								String HG = " "; // 수은
+								String CN = " "; // 시안
+								String CR = " "; // 크롬
+								String NHN = " "; // 암모니아성질소
+								String NON = " "; // 질산성질소
+								String CD = " "; // 카드뮴
+								String BOR = " "; // 붕소
+								String BRO = " "; // 브롬산염
+								String D_URNM = " "; // 우라늄
+								String PHEN = " "; // 페놀
+								String DIA = " "; // 다이아지논
+								String PARA = " "; // 파라티온
+								String PENI = " "; // 페니트로티온
+								String CBR = " "; // 카바릴
+								String TCE = " "; // 1_1_1-트리클로로에탄
+								String TTCE = " "; // 테트라클로로에틸렌
+								String TCF = " "; // 트리클로로에틸렌
+								String CC = " "; // 사염화탄소
+								String DDE = " "; // 1_1-디클로로에틸렌
+								String DCM = " "; // 디클로로메탄
+								String BZ = " "; // 벤젠
+								String TOL = " "; // 톨루엔
+								String EB = " "; // 에틸벤젠
+								String XYL = " "; // 크실렌
+								String DBCP = " "; // 1_2-디브로모-3-클로로프로판
+								String DIOX = " "; // 1_4-다이옥산
+								String RC = " "; // 잔류염소
+								String THMS = " "; // 총트리할로메탄
+								String CF = " "; // 클로로포름
+								String BDCM = " "; // 브로모디클로로메탄
+								String DBCM = " "; // 디브로모클로로메탄
+								String CH = " "; // 클로랄하이드레이트
+								String DIT = " "; // 디브로모아세토니트릴
+								String TRT = " "; // 디클로로아세토니트릴
+								String TRL = " "; // 트리클로로아세토니트릴
+								String HAS = " "; // 할로아세틱에시드
+								String FOAH = " "; // 포름알데히드
+								String HR = " "; // 경도
+								String KMN = " "; // 과망간산칼륨소비량
+								String ODOR = " "; // 냄새
+								String TW = " "; // 맛
+								String CU = " "; // 동
+								String CW = " "; // 색도
+								String DTG = " "; // 세제
+								String PH = " "; // 수소이온농도
+								String ZN = " "; // 아연
+								String CL = " "; // 염소이온
+								String RE = " "; // 증발잔류물
+								String FE = " "; // 철
+								String MN = " "; // 망간
+								String TU = " "; // 탁도
+								String SO = " "; // 황산이온
+								String AL = " "; // 알루미늄
+								String WCI_UPDATE_DAT = " "; // 데이터기준일자
 
 								JSONArray items = (JSONArray) body.get("items");
 
@@ -201,228 +197,714 @@ public class MonPurification {
 
 									while (iter.hasNext()) {
 										String keyname = iter.next();
-
-										JsonParser.colWrite(RNUM, keyname, "RNUM", item);
-										JsonParser.colWrite(FIM_FCLT_NAM, keyname, "FIM_FCLT_NAM", item);
-										JsonParser.colWrite(FIM_REGN_CTY, keyname, "FIM_REGN_CTY", item);
-										JsonParser.colWrite(BRTC_NM, keyname, "BRTC_NM", item);
-										JsonParser.colWrite(SIGNGU_NM, keyname, "SIGNGU_NM", item);
-										JsonParser.colWrite(TELNO, keyname, "TELNO", item);
-										JsonParser.colWrite(WCI_COLL_DAT, keyname, "WCI_COLL_DAT", item);
-										JsonParser.colWrite(WCI_INORG_NAM, keyname, "WCI_INORG_NAM", item);
-										JsonParser.colWrite(TCC, keyname, "TCC", item);
-										JsonParser.colWrite(TC, keyname, "TC", item);
-										JsonParser.colWrite(EFC, keyname, "EFC", item);
-										JsonParser.colWrite(PB, keyname, "PB", item);
-										JsonParser.colWrite(FL, keyname, "FL", item);
-										JsonParser.colWrite(AS, keyname, "AS", item);
-										JsonParser.colWrite(SE, keyname, "SE", item);
-										JsonParser.colWrite(HG, keyname, "HG", item);
-										JsonParser.colWrite(CN, keyname, "CN", item);
-										JsonParser.colWrite(CR, keyname, "CR", item);
-										JsonParser.colWrite(NHN, keyname, "NHN", item);
-										JsonParser.colWrite(NON, keyname, "NON", item);
-										JsonParser.colWrite(CD, keyname, "CD", item);
-										JsonParser.colWrite(BOR, keyname, "BOR", item);
-										JsonParser.colWrite(BRO, keyname, "BRO", item);
-										JsonParser.colWrite(D_URNM, keyname, "D-URNM", item);
-										JsonParser.colWrite(PHEN, keyname, "PHEN", item);
-										JsonParser.colWrite(DIA, keyname, "DIA", item);
-										JsonParser.colWrite(PARA, keyname, "PARA", item);
-										JsonParser.colWrite(PENI, keyname, "PENI", item);
-										JsonParser.colWrite(CBR, keyname, "CBR", item);
-										JsonParser.colWrite(TCE, keyname, "TCE", item);
-										JsonParser.colWrite(TTCE, keyname, "TTCE", item);
-										JsonParser.colWrite(TCF, keyname, "TCF", item);
-										JsonParser.colWrite(CC, keyname, "CC", item);
-										JsonParser.colWrite(DDE, keyname, "DDE", item);
-										JsonParser.colWrite(DCM, keyname, "DCM", item);
-										JsonParser.colWrite(BZ, keyname, "BZ", item);
-										JsonParser.colWrite(TOL, keyname, "TOL", item);
-										JsonParser.colWrite(EB, keyname, "EB", item);
-										JsonParser.colWrite(XYL, keyname, "XYL", item);
-										JsonParser.colWrite(DIOX, keyname, "DIOX", item);
-										JsonParser.colWrite(RC, keyname, "RC", item);
-										JsonParser.colWrite(THMS, keyname, "THMS", item);
-										JsonParser.colWrite(CF, keyname, "CF", item);
-										JsonParser.colWrite(BDCM, keyname, "BDCM", item);
-										JsonParser.colWrite(DBCM, keyname, "DBCM", item);
-										JsonParser.colWrite(CH, keyname, "CH", item);
-										JsonParser.colWrite(DIT, keyname, "DIT", item);
-										JsonParser.colWrite(TRT, keyname, "TRT", item);
-										JsonParser.colWrite(TRL, keyname, "TRL", item);
-										JsonParser.colWrite(HAS, keyname, "HAS", item);
-										JsonParser.colWrite(FOAH, keyname, "FOAH", item);
-										JsonParser.colWrite(HR, keyname, "HR", item);
-										JsonParser.colWrite(KMN, keyname, "KMN", item);
-										JsonParser.colWrite(ODOR, keyname, "ODOR", item);
-										JsonParser.colWrite(TW, keyname, "TW", item);
-										JsonParser.colWrite(CU, keyname, "CU", item);
-										JsonParser.colWrite(CW, keyname, "CW", item);
-										JsonParser.colWrite(DTG, keyname, "DTG", item);
-										JsonParser.colWrite(PH, keyname, "PH", item);
-										JsonParser.colWrite(ZN, keyname, "ZN", item);
-										JsonParser.colWrite(CL, keyname, "CL", item);
-										JsonParser.colWrite(RE, keyname, "RE", item);
-										JsonParser.colWrite(FE, keyname, "FE", item);
-										JsonParser.colWrite(MN, keyname, "MN", item);
-										JsonParser.colWrite(TU, keyname, "TU", item);
-										JsonParser.colWrite(SO, keyname, "SO", item);
-										JsonParser.colWrite(AL, keyname, "AL", item);
-										JsonParser.colWrite(WCI_UPDATE_DAT, keyname, "WCI_UPDATE_DAT", item);
+										
+										if(keyname.equals("RNUM")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												RNUM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												RNUM = " ";
+											}
+										}
+										if(keyname.equals("FIM_FCLT_NAM")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												FIM_FCLT_NAM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												FIM_FCLT_NAM = " ";
+											}
+										}
+										if(keyname.equals("FIM_REGN_CTY")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												FIM_REGN_CTY = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												FIM_REGN_CTY = " ";
+											}
+										}
+										if(keyname.equals("BRTC_NM")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												BRTC_NM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												BRTC_NM = " ";
+											}
+										}
+										if(keyname.equals("SIGNGU_NM")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												SIGNGU_NM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												SIGNGU_NM = " ";
+											}
+										}
+										if(keyname.equals("TELNO")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												TELNO = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												TELNO = " ";
+											}
+										}
+										if(keyname.equals("WCI_COLL_DAT")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												WCI_COLL_DAT = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												WCI_COLL_DAT = " ";
+											}
+										}
+										if(keyname.equals("WCI_INORG_NAM")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												WCI_INORG_NAM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												WCI_INORG_NAM = " ";
+											}
+										}
+										if(keyname.equals("TCC")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												TCC = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												TCC = " ";
+											}
+										}
+										if(keyname.equals("TC")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												TC = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												TC = " ";
+											}
+										}
+										if(keyname.equals("EFC")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												EFC = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												EFC = " ";
+											}
+										}
+										if(keyname.equals("PB")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												PB = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												PB = " ";
+											}
+										}
+										if(keyname.equals("FL")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												FL = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												FL = " ";
+											}
+										}
+										if(keyname.equals("AS")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												AS = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												AS = " ";
+											}
+										}
+										if(keyname.equals("SE")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												SE = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												SE = " ";
+											}
+										}
+										if(keyname.equals("HG")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												HG = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												HG = " ";
+											}
+										}
+										if(keyname.equals("CN")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												CN = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												CN = " ";
+											}
+										}
+										if(keyname.equals("CR")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												CR = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												CR = " ";
+											}
+										}
+										if(keyname.equals("NHN")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												NHN = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												NHN = " ";
+											}
+										}
+										if(keyname.equals("NON")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												NON = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												NON = " ";
+											}
+										}
+										if(keyname.equals("CD")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												CD = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												CD = " ";
+											}
+										}
+										if(keyname.equals("BOR")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												BOR = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												BOR = " ";
+											}
+										}
+										if(keyname.equals("BRO")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												BRO = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												BRO = " ";
+											}
+										}
+										if(keyname.equals("D-URNM")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												D_URNM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												D_URNM = " ";
+											}
+										}
+										if(keyname.equals("PHEN")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												PHEN = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												PHEN = " ";
+											}
+										}
+										if(keyname.equals("DIA")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												DIA = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												DIA = " ";
+											}
+										}
+										if(keyname.equals("PARA")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												PARA = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												PARA = " ";
+											}
+										}
+										if(keyname.equals("PENI")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												PENI = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												PENI = " ";
+											}
+										}
+										if(keyname.equals("CBR")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												CBR = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												CBR = " ";
+											}
+										}
+										if(keyname.equals("TCE")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												TCE = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												TCE = " ";
+											}
+										}
+										if(keyname.equals("TTCE")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												TTCE = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												TTCE = " ";
+											}
+										}
+										if(keyname.equals("TCF")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												TCF = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												TCF = " ";
+											}
+										}
+										if(keyname.equals("CC")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												CC = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												CC = " ";
+											}
+										}
+										if(keyname.equals("DDE")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												DDE = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												DDE = " ";
+											}
+										}
+										if(keyname.equals("DCM")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												DCM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												DCM = " ";
+											}
+										}
+										if(keyname.equals("BZ")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												BZ = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												BZ = " ";
+											}
+										}
+										if(keyname.equals("TOL")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												TOL = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												TOL = " ";
+											}
+										}
+										if(keyname.equals("EB")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												EB = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												EB = " ";
+											}
+										}
+										if(keyname.equals("XYL")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												XYL = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												XYL = " ";
+											}
+										}
+										if(keyname.equals("DIOX")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												DIOX = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												DIOX = " ";
+											}
+										}
+										if(keyname.equals("RC")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												RC = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												RC = " ";
+											}
+										}
+										if(keyname.equals("THMS")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												THMS = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												THMS = " ";
+											}
+										}
+										if(keyname.equals("CF")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												CF = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												CF = " ";
+											}
+										}
+										if(keyname.equals("BDCM")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												BDCM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												BDCM = " ";
+											}
+										}
+										if(keyname.equals("DBCM")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												DBCM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												DBCM = " ";
+											}
+										}
+										if(keyname.equals("CH")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												CH = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												CH = " ";
+											}
+										}
+										if(keyname.equals("DIT")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												DIT = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												DIT = " ";
+											}
+										}
+										if(keyname.equals("TRT")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												TRT = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												TRT = " ";
+											}
+										}
+										if(keyname.equals("TRL")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												TRL = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												TRL = " ";
+											}
+										}
+										if(keyname.equals("HAS")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												HAS = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												HAS = " ";
+											}
+										}
+										if(keyname.equals("FOAH")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												FOAH = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												FOAH = " ";
+											}
+										}
+										if(keyname.equals("HR")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												HR = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												HR = " ";
+											}
+										}
+										if(keyname.equals("KMN")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												KMN = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												KMN = " ";
+											}
+										}
+										if(keyname.equals("ODOR")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												ODOR = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												ODOR = " ";
+											}
+										}
+										if(keyname.equals("TW")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												TW = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												TW = " ";
+											}
+										}
+										if(keyname.equals("CU")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												CU = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												CU = " ";
+											}
+										}
+										if(keyname.equals("CW")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												CW = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												CW = " ";
+											}
+										}
+										if(keyname.equals("DTG")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												DTG = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												DTG = " ";
+											}
+										}
+										if(keyname.equals("PH")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												PH = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												PH = " ";
+											}
+										}
+										if(keyname.equals("ZN")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												ZN = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												ZN = " ";
+											}
+										}
+										if(keyname.equals("CL")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												CL = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												CL = " ";
+											}
+										}
+										if(keyname.equals("RE")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												RE = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												RE = " ";
+											}
+										}
+										if(keyname.equals("FE")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												FE = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												FE = " ";
+											}
+										}
+										if(keyname.equals("MN")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												MN = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												MN = " ";
+											}
+										}
+										if(keyname.equals("TU")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												TU = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												TU = " ";
+											}
+										}
+										if(keyname.equals("SO")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												SO = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												SO = " ";
+											}
+										}
+										if(keyname.equals("AL")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												AL = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												AL = " ";
+											}
+										}
+										if(keyname.equals("WCI_UPDATE_DAT")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												WCI_UPDATE_DAT = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												WCI_UPDATE_DAT = " ";
+											}
+										}
 
 									}
 
-									// 한번에 문자열 합침
-									resultSb.append(args[0]);
-									resultSb.append("|^");
-									resultSb.append(args[1]);
-									resultSb.append("|^");
-									resultSb.append(numberOfRows_str);
-									resultSb.append("|^");
-									resultSb.append(String.valueOf(i));
-									resultSb.append("|^");
-									resultSb.append(totalCount_str);
-									resultSb.append("|^");
-									resultSb.append(RNUM);
-									resultSb.append("|^");
-									resultSb.append(FIM_FCLT_NAM);
-									resultSb.append("|^");
-									resultSb.append(FIM_REGN_CTY);
-									resultSb.append("|^");
-									resultSb.append(BRTC_NM);
-									resultSb.append("|^");
-									resultSb.append(SIGNGU_NM);
-									resultSb.append("|^");
-									resultSb.append(TELNO);
-									resultSb.append("|^");
-									resultSb.append(WCI_COLL_DAT);
-									resultSb.append("|^");
-									resultSb.append(WCI_INORG_NAM);
-									resultSb.append("|^");
-									resultSb.append(TCC);
-									resultSb.append("|^");
-									resultSb.append(TC);
-									resultSb.append("|^");
-									resultSb.append(EFC);
-									resultSb.append("|^");
-									resultSb.append(PB);
-									resultSb.append("|^");
-									resultSb.append(FL);
-									resultSb.append("|^");
-									resultSb.append(AS);
-									resultSb.append("|^");
-									resultSb.append(SE);
-									resultSb.append("|^");
-									resultSb.append(HG);
-									resultSb.append("|^");
-									resultSb.append(CN);
-									resultSb.append("|^");
-									resultSb.append(CR);
-									resultSb.append("|^");
-									resultSb.append(NHN);
-									resultSb.append("|^");
-									resultSb.append(NON);
-									resultSb.append("|^");
-									resultSb.append(CD);
-									resultSb.append("|^");
-									resultSb.append(BOR);
-									resultSb.append("|^");
-									resultSb.append(BRO);
-									resultSb.append("|^");
-									resultSb.append(D_URNM);
-									resultSb.append("|^");
-									resultSb.append(PHEN);
-									resultSb.append("|^");
-									resultSb.append(DIA);
-									resultSb.append("|^");
-									resultSb.append(PARA);
-									resultSb.append("|^");
-									resultSb.append(PENI);
-									resultSb.append("|^");
-									resultSb.append(CBR);
-									resultSb.append("|^");
-									resultSb.append(TCE);
-									resultSb.append("|^");
-									resultSb.append(TTCE);
-									resultSb.append("|^");
-									resultSb.append(TCF);
-									resultSb.append("|^");
-									resultSb.append(CC);
-									resultSb.append("|^");
-									resultSb.append(DDE);
-									resultSb.append("|^");
-									resultSb.append(DCM);
-									resultSb.append("|^");
-									resultSb.append(BZ);
-									resultSb.append("|^");
-									resultSb.append(TOL);
-									resultSb.append("|^");
-									resultSb.append(EB);
-									resultSb.append("|^");
-									resultSb.append(XYL);
-									resultSb.append("|^");
-									resultSb.append(DBCP);
-									resultSb.append("|^");
-									resultSb.append(DIOX);
-									resultSb.append("|^");
-									resultSb.append(RC);
-									resultSb.append("|^");
-									resultSb.append(THMS);
-									resultSb.append("|^");
-									resultSb.append(CF);
-									resultSb.append("|^");
-									resultSb.append(BDCM);
-									resultSb.append("|^");
-									resultSb.append(DBCM);
-									resultSb.append("|^");
-									resultSb.append(CH);
-									resultSb.append("|^");
-									resultSb.append(DIT);
-									resultSb.append("|^");
-									resultSb.append(TRT);
-									resultSb.append("|^");
-									resultSb.append(TRL);
-									resultSb.append("|^");
-									resultSb.append(HAS);
-									resultSb.append("|^");
-									resultSb.append(FOAH);
-									resultSb.append("|^");
-									resultSb.append(HR);
-									resultSb.append("|^");
-									resultSb.append(KMN);
-									resultSb.append("|^");
-									resultSb.append(ODOR);
-									resultSb.append("|^");
-									resultSb.append(TW);
-									resultSb.append("|^");
-									resultSb.append(CU);
-									resultSb.append("|^");
-									resultSb.append(CW);
-									resultSb.append("|^");
-									resultSb.append(DTG);
-									resultSb.append("|^");
-									resultSb.append(PH);
-									resultSb.append("|^");
-									resultSb.append(ZN);
-									resultSb.append("|^");
-									resultSb.append(CL);
-									resultSb.append("|^");
-									resultSb.append(RE);
-									resultSb.append("|^");
-									resultSb.append(FE);
-									resultSb.append("|^");
-									resultSb.append(MN);
-									resultSb.append("|^");
-									resultSb.append(TU);
-									resultSb.append("|^");
-									resultSb.append(SO);
-									resultSb.append("|^");
-									resultSb.append(AL);
-									resultSb.append("|^");
-									resultSb.append(WCI_UPDATE_DAT);
-									resultSb.append(System.getProperty("line.separator"));
+									// step 4. 파일에 쓰기
+									try {
+										PrintWriter pw = new PrintWriter(
+												new BufferedWriter(new FileWriter(file, true)));
 
+										pw.write(args[0]);
+										pw.write("|^");
+										pw.write(args[1]);
+										pw.write("|^");
+										pw.write(numberOfRows_str);
+										pw.write("|^");
+										pw.write(String.valueOf(i));
+										pw.write("|^");
+										pw.write(totalCount_str);
+										pw.write("|^");
+										pw.write(RNUM);
+										pw.write("|^");
+										pw.write(FIM_FCLT_NAM);
+										pw.write("|^");
+										pw.write(FIM_REGN_CTY);
+										pw.write("|^");
+										pw.write(BRTC_NM);
+										pw.write("|^");
+										pw.write(SIGNGU_NM);
+										pw.write("|^");
+										pw.write(TELNO);
+										pw.write("|^");
+										pw.write(WCI_COLL_DAT);
+										pw.write("|^");
+										pw.write(WCI_INORG_NAM);
+										pw.write("|^");
+										pw.write(TCC);
+										pw.write("|^");
+										pw.write(TC);
+										pw.write("|^");
+										pw.write(EFC);
+										pw.write("|^");
+										pw.write(PB);
+										pw.write("|^");
+										pw.write(FL);
+										pw.write("|^");
+										pw.write(AS);
+										pw.write("|^");
+										pw.write(SE);
+										pw.write("|^");
+										pw.write(HG);
+										pw.write("|^");
+										pw.write(CN);
+										pw.write("|^");
+										pw.write(CR);
+										pw.write("|^");
+										pw.write(NHN);
+										pw.write("|^");
+										pw.write(NON);
+										pw.write("|^");
+										pw.write(CD);
+										pw.write("|^");
+										pw.write(BOR);
+										pw.write("|^");
+										pw.write(BRO);
+										pw.write("|^");
+										pw.write(D_URNM);
+										pw.write("|^");
+										pw.write(PHEN);
+										pw.write("|^");
+										pw.write(DIA);
+										pw.write("|^");
+										pw.write(PARA);
+										pw.write("|^");
+										pw.write(PENI);
+										pw.write("|^");
+										pw.write(CBR);
+										pw.write("|^");
+										pw.write(TCE);
+										pw.write("|^");
+										pw.write(TTCE);
+										pw.write("|^");
+										pw.write(TCF);
+										pw.write("|^");
+										pw.write(CC);
+										pw.write("|^");
+										pw.write(DDE);
+										pw.write("|^");
+										pw.write(DCM);
+										pw.write("|^");
+										pw.write(BZ);
+										pw.write("|^");
+										pw.write(TOL);
+										pw.write("|^");
+										pw.write(EB);
+										pw.write("|^");
+										pw.write(XYL);
+										pw.write("|^");
+										pw.write(DBCP);
+										pw.write("|^");
+										pw.write(DIOX);
+										pw.write("|^");
+										pw.write(RC);
+										pw.write("|^");
+										pw.write(THMS);
+										pw.write("|^");
+										pw.write(CF);
+										pw.write("|^");
+										pw.write(BDCM);
+										pw.write("|^");
+										pw.write(DBCM);
+										pw.write("|^");
+										pw.write(CH);
+										pw.write("|^");
+										pw.write(DIT);
+										pw.write("|^");
+										pw.write(TRT);
+										pw.write("|^");
+										pw.write(TRL);
+										pw.write("|^");
+										pw.write(HAS);
+										pw.write("|^");
+										pw.write(FOAH);
+										pw.write("|^");
+										pw.write(HR);
+										pw.write("|^");
+										pw.write(KMN);
+										pw.write("|^");
+										pw.write(ODOR);
+										pw.write("|^");
+										pw.write(TW);
+										pw.write("|^");
+										pw.write(CU);
+										pw.write("|^");
+										pw.write(CW);
+										pw.write("|^");
+										pw.write(DTG);
+										pw.write("|^");
+										pw.write(PH);
+										pw.write("|^");
+										pw.write(ZN);
+										pw.write("|^");
+										pw.write(CL);
+										pw.write("|^");
+										pw.write(RE);
+										pw.write("|^");
+										pw.write(FE);
+										pw.write("|^");
+										pw.write(MN);
+										pw.write("|^");
+										pw.write(TU);
+										pw.write("|^");
+										pw.write(SO);
+										pw.write("|^");
+										pw.write(AL);
+										pw.write("|^");
+										pw.write(WCI_UPDATE_DAT);
+										pw.println();
+										pw.flush();
+										pw.close();
+
+									} catch (IOException e) {
+										e.printStackTrace();
+									}	
+									
 								}
 
 							} else {
@@ -431,18 +913,6 @@ public class MonPurification {
 
 							//Thread.sleep(1000);
 
-						}
-
-						// step 4. 파일에 쓰기
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write(resultSb.toString());
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
 						}
 
 						System.out.println("parsing complete!");

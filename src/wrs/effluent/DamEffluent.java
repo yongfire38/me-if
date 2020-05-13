@@ -77,22 +77,6 @@ public class DamEffluent {
 
 						// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-						StringBuffer resultSb = new StringBuffer("");
-
-						StringBuffer srymd = new StringBuffer(" "); // 측정월
-						StringBuffer dgr = new StringBuffer(" "); // 수온(℃)
-						StringBuffer ph = new StringBuffer(" "); // pH
-						StringBuffer do1 = new StringBuffer(" "); // DO(mg/L)
-						StringBuffer bod = new StringBuffer(" "); // BOD(mg/L)
-						StringBuffer cod = new StringBuffer(" "); // COD(mg/L)
-						StringBuffer ss = new StringBuffer(" "); // SS(mg/L)
-						StringBuffer tn = new StringBuffer(" "); // T-N(mg/L)
-						StringBuffer tp = new StringBuffer(" "); // T-P(mg/L)
-						StringBuffer pop = new StringBuffer(" "); // PO4-P(mg/L)
-						StringBuffer td = new StringBuffer(" "); // 탁도(NTU)
-						StringBuffer ec = new StringBuffer(" "); // 전기전도도
-						StringBuffer seqno = new StringBuffer(" "); // 순번
-
 						for (int i = 1; i <= pageCount; i++) {
 
 							json = JsonParser.parseWrsJson_eff(service_url, service_key, String.valueOf(i), args[0],
@@ -121,7 +105,19 @@ public class DamEffluent {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 								
-								
+								String srymd = " "; // 측정월
+								String dgr = " "; // 수온(℃)
+								String ph = " "; // pH
+								String do1 = " "; // DO(mg/L)
+								String bod = " "; // BOD(mg/L)
+								String cod = " "; // COD(mg/L)
+								String ss = " "; // SS(mg/L)
+								String tn = " "; // T-N(mg/L)
+								String tp = " "; // T-P(mg/L)
+								String pop = " "; // PO4-P(mg/L)
+								String td = " "; // 탁도(NTU)
+								String ec = " "; // 전기전도도
+								String seqno = " "; // 순번
 
 								JSONObject items = (JSONObject) body.get("items");
 
@@ -137,58 +133,159 @@ public class DamEffluent {
 									while (iter.hasNext()) {
 
 										String keyname = iter.next();
-
-										JsonParser.colWrite(srymd, keyname, "srymd", items_jsonObject);
-										JsonParser.colWrite(dgr, keyname, "dgr", items_jsonObject);
-										JsonParser.colWrite(ph, keyname, "ph", items_jsonObject);
-										JsonParser.colWrite(do1, keyname, "do1", items_jsonObject);
-										JsonParser.colWrite(bod, keyname, "bod", items_jsonObject);
-										JsonParser.colWrite(cod, keyname, "cod", items_jsonObject);
-										JsonParser.colWrite(ss, keyname, "ss", items_jsonObject);
-										JsonParser.colWrite(tn, keyname, "tn", items_jsonObject);
-										JsonParser.colWrite(tp, keyname, "tp", items_jsonObject);
-										JsonParser.colWrite(pop, keyname, "pop", items_jsonObject);
-										JsonParser.colWrite(td, keyname, "td", items_jsonObject);
-										JsonParser.colWrite(ec, keyname, "ec", items_jsonObject);
-										JsonParser.colWrite(seqno, keyname, "seqno", items_jsonObject);
+										
+										if(keyname.equals("srymd")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												srymd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												srymd = " ";
+											}
+										}
+										if(keyname.equals("dgr")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												dgr = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												dgr = " ";
+											}
+										}
+										if(keyname.equals("ph")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												ph = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												ph = " ";
+											}
+										}
+										if(keyname.equals("do1")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												do1 = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												do1 = " ";
+											}
+										}
+										if(keyname.equals("bod")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												bod = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												bod = " ";
+											}
+										}
+										if(keyname.equals("cod")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												cod = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												cod = " ";
+											}
+										}
+										if(keyname.equals("ss")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												ss = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												ss = " ";
+											}
+										}
+										if(keyname.equals("tn")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												tn = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												tn = " ";
+											}
+										}
+										if(keyname.equals("tp")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												tp = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												tp = " ";
+											}
+										}
+										if(keyname.equals("pop")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												pop = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												pop = " ";
+											}
+										}
+										if(keyname.equals("td")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												td = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												td = " ";
+											}
+										}
+										if(keyname.equals("ec")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												ec = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												ec = " ";
+											}
+										}
+										if(keyname.equals("seqno")) {
+											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
+												seqno = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												seqno = " ";
+											}
+										}
 
 									}
+									
+									// step 4. 파일에 쓰기
+									try {
+										PrintWriter pw = new PrintWriter(
+												new BufferedWriter(new FileWriter(file, true)));
 
-									// 한번에 문자열 합침
-									resultSb.append(args[0]);
-									resultSb.append("|^");
-									resultSb.append(args[1]);
-									resultSb.append("|^");
-									resultSb.append(resultCode);
-									resultSb.append("|^");
-									resultSb.append(resultMsg);
-									resultSb.append("|^");
-									resultSb.append(srymd);
-									resultSb.append("|^");
-									resultSb.append(dgr);
-									resultSb.append("|^");
-									resultSb.append(ph);
-									resultSb.append("|^");
-									resultSb.append(do1);
-									resultSb.append("|^");
-									resultSb.append(bod);
-									resultSb.append("|^");
-									resultSb.append(cod);
-									resultSb.append("|^");
-									resultSb.append(ss);
-									resultSb.append("|^");
-									resultSb.append(tn);
-									resultSb.append("|^");
-									resultSb.append(tp);
-									resultSb.append("|^");
-									resultSb.append(pop);
-									resultSb.append("|^");
-									resultSb.append(td);
-									resultSb.append("|^");
-									resultSb.append(ec);
-									resultSb.append("|^");
-									resultSb.append(seqno);
-									resultSb.append(System.getProperty("line.separator"));
+										pw.write(args[0]);
+										pw.write("|^");
+										pw.write(args[1]);
+										pw.write("|^");
+										pw.write(resultCode);
+										pw.write("|^");
+										pw.write(resultMsg);
+										pw.write("|^");
+										pw.write(srymd);
+										pw.write("|^");
+										pw.write(dgr);
+										pw.write("|^");
+										pw.write(ph);
+										pw.write("|^");
+										pw.write(do1);
+										pw.write("|^");
+										pw.write(bod);
+										pw.write("|^");
+										pw.write(cod);
+										pw.write("|^");
+										pw.write(ss);
+										pw.write("|^");
+										pw.write(tn);
+										pw.write("|^");
+										pw.write(tp);
+										pw.write("|^");
+										pw.write(pop);
+										pw.write("|^");
+										pw.write(td);
+										pw.write("|^");
+										pw.write(ec);
+										pw.write("|^");
+										pw.write(seqno);
+										pw.println();
+										pw.flush();
+										pw.close();
+
+									} catch (IOException e) {
+										e.printStackTrace();
+									}
 
 								} else if (items.get("item") instanceof JSONArray) {
 
@@ -206,57 +303,158 @@ public class DamEffluent {
 
 											String keyname = iter.next();
 
-											JsonParser.colWrite(srymd, keyname, "srymd", item_obj);
-											JsonParser.colWrite(dgr, keyname, "dgr", item_obj);
-											JsonParser.colWrite(ph, keyname, "ph", item_obj);
-											JsonParser.colWrite(do1, keyname, "do1", item_obj);
-											JsonParser.colWrite(bod, keyname, "bod", item_obj);
-											JsonParser.colWrite(cod, keyname, "cod", item_obj);
-											JsonParser.colWrite(ss, keyname, "ss", item_obj);
-											JsonParser.colWrite(tn, keyname, "tn", item_obj);
-											JsonParser.colWrite(tp, keyname, "tp", item_obj);
-											JsonParser.colWrite(pop, keyname, "pop", item_obj);
-											JsonParser.colWrite(td, keyname, "td", item_obj);
-											JsonParser.colWrite(ec, keyname, "ec", item_obj);
-											JsonParser.colWrite(seqno, keyname, "seqno", item_obj);
+											if(keyname.equals("srymd")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													srymd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													srymd = " ";
+												}
+											}
+											if(keyname.equals("dgr")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													dgr = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													dgr = " ";
+												}
+											}
+											if(keyname.equals("ph")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													ph = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													ph = " ";
+												}
+											}
+											if(keyname.equals("do1")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													do1 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													do1 = " ";
+												}
+											}
+											if(keyname.equals("bod")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													bod = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													bod = " ";
+												}
+											}
+											if(keyname.equals("cod")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													cod = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													cod = " ";
+												}
+											}
+											if(keyname.equals("ss")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													ss = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													ss = " ";
+												}
+											}
+											if(keyname.equals("tn")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													tn = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													tn = " ";
+												}
+											}
+											if(keyname.equals("tp")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													tp = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													tp = " ";
+												}
+											}
+											if(keyname.equals("pop")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													pop = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													pop = " ";
+												}
+											}
+											if(keyname.equals("td")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													td = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													td = " ";
+												}
+											}
+											if(keyname.equals("ec")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													ec = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													ec = " ";
+												}
+											}
+											if(keyname.equals("seqno")) {
+												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
+													seqno = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													seqno = " ";
+												}
+											}
 
 										}
 
-										// 한번에 문자열 합침
-										resultSb.append(args[0]);
-										resultSb.append("|^");
-										resultSb.append(args[1]);
-										resultSb.append("|^");
-										resultSb.append(resultCode);
-										resultSb.append("|^");
-										resultSb.append(resultMsg);
-										resultSb.append("|^");
-										resultSb.append(srymd);
-										resultSb.append("|^");
-										resultSb.append(dgr);
-										resultSb.append("|^");
-										resultSb.append(ph);
-										resultSb.append("|^");
-										resultSb.append(do1);
-										resultSb.append("|^");
-										resultSb.append(bod);
-										resultSb.append("|^");
-										resultSb.append(cod);
-										resultSb.append("|^");
-										resultSb.append(ss);
-										resultSb.append("|^");
-										resultSb.append(tn);
-										resultSb.append("|^");
-										resultSb.append(tp);
-										resultSb.append("|^");
-										resultSb.append(pop);
-										resultSb.append("|^");
-										resultSb.append(td);
-										resultSb.append("|^");
-										resultSb.append(ec);
-										resultSb.append("|^");
-										resultSb.append(seqno);
-										resultSb.append(System.getProperty("line.separator"));
+										// step 4. 파일에 쓰기
+										try {
+											PrintWriter pw = new PrintWriter(
+													new BufferedWriter(new FileWriter(file, true)));
+
+											pw.write(args[0]);
+											pw.write("|^");
+											pw.write(args[1]);
+											pw.write("|^");
+											pw.write(resultCode);
+											pw.write("|^");
+											pw.write(resultMsg);
+											pw.write("|^");
+											pw.write(srymd);
+											pw.write("|^");
+											pw.write(dgr);
+											pw.write("|^");
+											pw.write(ph);
+											pw.write("|^");
+											pw.write(do1);
+											pw.write("|^");
+											pw.write(bod);
+											pw.write("|^");
+											pw.write(cod);
+											pw.write("|^");
+											pw.write(ss);
+											pw.write("|^");
+											pw.write(tn);
+											pw.write("|^");
+											pw.write(tp);
+											pw.write("|^");
+											pw.write(pop);
+											pw.write("|^");
+											pw.write(td);
+											pw.write("|^");
+											pw.write(ec);
+											pw.write("|^");
+											pw.write(seqno);
+											pw.println();
+											pw.flush();
+											pw.close();
+
+										} catch (IOException e) {
+											e.printStackTrace();
+										}
 
 									}
 
@@ -270,18 +468,6 @@ public class DamEffluent {
 
 							//Thread.sleep(1000);
 
-						}
-
-						// step 4. 파일에 쓰기
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write(resultSb.toString());
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
 						}
 
 						System.out.println("parsing complete!");
