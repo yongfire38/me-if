@@ -49,8 +49,12 @@ public class FcltyList {
 					
 					//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 					//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
+					
+					//이 api는 전체가 다 조회되어야 하므로 한번이라도 비정상응답이 되면 익셉션 발생 처리
 					if(json.indexOf("</") > -1){
 						json ="{\"response\":{\"header\":{\"resultCode\":\"03\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
+						System.out.println("공공데이터 서버 측 비정상 응답");
+						throw new Exception();
 					}
 
 					JSONParser count_parser = new JSONParser();
