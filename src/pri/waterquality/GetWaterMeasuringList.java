@@ -79,7 +79,7 @@ public class GetWaterMeasuringList {
 
 					
 
-					for (int i = 1; i <= 50; i++) {
+					for (int i = 1; i <= pageCount; i++) {
 
 						// 물환경 수질측정망 운영결과 DB API에서는 siteId는 필요 없음
 						json = JsonParser.parsePriJson_waterMeasuring(service_url, service_key, String.valueOf(i), args);
