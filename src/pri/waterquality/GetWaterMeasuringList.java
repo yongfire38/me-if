@@ -39,7 +39,7 @@ public class GetWaterMeasuringList {
 					String service_key = JsonParser.getProperty("PRI_WaterQualityService_key");
 
 					// step 1.파일의 작성
-					File file = new File("TIF_PRI_01.dat");
+					File file = new File(JsonParser.getProperty("file_path") + "PRI/TIF_PRI_01.dat");
 
 					// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
 					String json = "";
