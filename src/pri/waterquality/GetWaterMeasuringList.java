@@ -29,7 +29,7 @@ public class GetWaterMeasuringList {
 
 				// '측정소 코드', '측정년도', '측정월'을 파라미터로 받음 (년도와 월은 필수는 아님)
 				// 측정소 코드는 필수
-				if (args.length >= 0 && args.length <= 3) {
+				if (args.length > 0 && args.length <= 3) {
 					
 					System.out.println("firstLine start..");
 					long start = System.currentTimeMillis(); // 시작시간
@@ -39,7 +39,7 @@ public class GetWaterMeasuringList {
 					String service_key = JsonParser.getProperty("PRI_WaterQualityService_key");
 
 					// step 1.파일의 작성
-					File file = new File(JsonParser.getProperty("file_path") + "PRI/TIF_PRI_01.dat");
+					File file = new File("TIF_PRI_01.dat");
 
 					// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
 					String json = "";
@@ -292,6 +292,7 @@ public class GetWaterMeasuringList {
 																			// 수
 							String pageNo_str = " "; // 페이지 번호
 							String totalCount = " "; // 전체 결과 수
+							
 							
 							numOfRows = getWaterMeasuringList.get("numOfRows").toString().trim();
 
