@@ -217,6 +217,12 @@ public class GetRealTimeWaterQualityList {
 							String  numOfRows = " "; // 한 페이지 결과수
 							String  pageNo_str = " "; // 페이지 번호
 							String  totalCount = " "; // 전체 결과 수
+							
+							numOfRows = getRealTimeWaterQualityList.get("numOfRows").toString().trim();
+
+							pageNo_str = String.valueOf(i).trim();
+
+							totalCount = getRealTimeWaterQualityList.get("totalCount").toString().trim();
 
 							JSONArray items = (JSONArray) getRealTimeWaterQualityList.get("item");
 

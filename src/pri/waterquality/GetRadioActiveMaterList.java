@@ -115,6 +115,12 @@ public class GetRadioActiveMaterList {
 							String numOfRows = " "; // 한 페이지 결과 수
 							String pageNo_str = " "; // 페이지 번호
 							String totalCount = " "; // 전체 결과 수
+							
+							numOfRows = getRadioActiveMaterList.get("numOfRows").toString().trim();
+
+							pageNo_str = String.valueOf(i).trim();
+
+							totalCount = getRadioActiveMaterList.get("totalCount").toString().trim();
 
 							JSONArray items = (JSONArray) getRadioActiveMaterList.get("item");
 

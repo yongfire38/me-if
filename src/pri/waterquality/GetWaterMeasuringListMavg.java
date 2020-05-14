@@ -277,6 +277,12 @@ public class GetWaterMeasuringListMavg {
 																			// 수
 							String pageNo_str = " "; // 페이지 번호
 							String totalCount = " "; // 전체 결과 수	
+							
+							numOfRows = getWaterMeasuringListMavgList.get("numOfRows").toString().trim();
+
+							pageNo_str = String.valueOf(i).trim();
+
+							totalCount = getWaterMeasuringListMavgList.get("totalCount").toString().trim();
 
 							JSONArray items = (JSONArray) getWaterMeasuringListMavgList.get("item");
 
