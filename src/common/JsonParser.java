@@ -267,6 +267,22 @@ public class JsonParser {
 		return sb;
 	}
 	
+	//colWrite의 String 버전
+	public static String colWrite_String(String content, String keyname, String chkCol, JSONObject item) {
+		
+		if (keyname.equals(chkCol)) {
+			if (!(JsonParser.isEmpty(item.get(keyname)))) {
+				content = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+						.replaceAll("(\\s{2,}|\\t{2,})", " ");
+			} else {
+				content = " ";
+			}
+		}
+		return content;
+	}
+	
+	
+	
 	// 파싱한 데이터를 StringBuffer에 씀(null 체크, trim처리와 줄바꿈 없애는 것, utf8 인코딩 처리도 같이)
 	// sns 쪽 데이터에서 문제되는 emoji와 홑따옴표도 제거함
 	public static StringBuffer colWrite_sns(StringBuffer sb, String keyname, String chkCol, JSONObject item) {
@@ -422,7 +438,7 @@ public class JsonParser {
 		System.out.println("dms::::" + dms);
 
 		String[] dms_inds = dms
-				.split("[°|＇|．|，|,|;|:|；|^|´|'|′|’|“|″|˝|‘|”|/|`|?|(|)|{|}|[|]|<|>|&|#|$|%|!|-|_|~|`|=|+|@|\"]");
+				.split("[°|˚|＇|．|，|,|;|:|；|^|´|'|′|’|“|″|˝|‘|”|/|`|?|(|)|{|}|[|]|<|>|&|#|$|%|!|-|_|~|`|=|+|@|\"]");
 
 		int dmsDo = 0;
 		int dmsMinute = 0;
