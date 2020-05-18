@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -110,32 +112,80 @@ public class Web {
 								
 								if(keyname.equals("title")) {
 									if(!(JsonParser.isEmpty(document.get(keyname)))){
-										title = document.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+										title = document.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replace("'", "").replace("&#39;", "").replace("&#34;", "")
 												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										
+										// 에러 유발자들인 emoji 제거..
+										Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
+										Matcher emoticonsMatcher = emoticons.matcher(title);
+										title = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
+												.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
+
+										// 내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
+										if (title.isEmpty()) {
+											title = " ";
+										}
 									}else{
 										title = " ";
 									}
 								}
 								if(keyname.equals("contents")) {
 									if(!(JsonParser.isEmpty(document.get(keyname)))){
-										contents = document.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+										contents = document.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replace("'", "").replace("&#39;", "").replace("&#34;", "")
 												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										
+										// 에러 유발자들인 emoji 제거..
+										Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
+										Matcher emoticonsMatcher = emoticons.matcher(contents);
+										contents = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
+												.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
+
+										// 내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
+										if (contents.isEmpty()) {
+											contents = " ";
+										}
 									}else{
 										contents = " ";
 									}
 								}
 								if(keyname.equals("url")) {
 									if(!(JsonParser.isEmpty(document.get(keyname)))){
-										url = document.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+										url = document.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replace("'", "").replace("&#39;", "").replace("&#34;", "")
 												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										
+										// 에러 유발자들인 emoji 제거..
+										Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
+										Matcher emoticonsMatcher = emoticons.matcher(url);
+										url = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
+												.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
+
+										// 내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
+										if (url.isEmpty()) {
+											url = " ";
+										}
 									}else{
 										url = " ";
 									}
 								}
 								if(keyname.equals("datetime")) {
 									if(!(JsonParser.isEmpty(document.get(keyname)))){
-										datetime = document.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+										datetime = document.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replace("'", "").replace("&#39;", "").replace("&#34;", "")
 												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+										
+										// 에러 유발자들인 emoji 제거..
+										Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
+										Matcher emoticonsMatcher = emoticons.matcher(datetime);
+										datetime = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
+												.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
+
+										// 내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
+										if (datetime.isEmpty()) {
+											datetime = " ";
+										}
 									}else{
 										datetime = " ";
 									}
