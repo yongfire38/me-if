@@ -86,18 +86,6 @@ public class Blog {
 
 						pageCount = (totalCount / display) + 1;
 
-						StringBuffer resultSb = new StringBuffer("");
-
-						StringBuffer postdate = new StringBuffer(" "); // 작성날짜
-						StringBuffer title = new StringBuffer(" "); // 블로그 제목
-						StringBuffer link = new StringBuffer(" "); // 블로그 링크
-						StringBuffer description = new StringBuffer(" "); // 블로그
-																			// 내용
-						StringBuffer bloggername = new StringBuffer(" "); // 블로거
-																			// 이름
-						StringBuffer bloggerlink = new StringBuffer(" "); // 블로거
-																			// 링크
-
 						// step 3. 페이지 숫자만큼 반복하면서 파싱
 
 						for (int i = 1; i <= pageCount; i++) {
@@ -118,6 +106,16 @@ public class Blog {
 									// 정상 json이 아닌 xml 형식의 리턴
 									json = "{\"start\": 1,\"display\": 100,\"total\": 1,\"items\": []}";
 								}
+								
+								String postdate = " "; // 작성날짜
+								String title = " ";// 블로그 제목
+								String link = " ";// 블로그 링크
+								String description = " ";// 블로그
+																					// 내용
+								String bloggername = " ";// 블로거
+																					// 이름
+								String bloggerlink = " ";// 블로거
+																					// 링크
 
 								// 테스트 출력
 								// System.out.println(json);
@@ -138,52 +136,101 @@ public class Blog {
 									while (iter.hasNext()) {
 
 										String keyname = iter.next();
-
-										JsonParser.colWrite_sns(postdate, keyname, "postdate", item);
-										JsonParser.colWrite_sns(title, keyname, "title", item);
-										JsonParser.colWrite_sns(link, keyname, "link", item);
-										JsonParser.colWrite_sns(description, keyname, "description", item);
-										JsonParser.colWrite_sns(bloggername, keyname, "bloggername", item);
-										JsonParser.colWrite_sns(bloggerlink, keyname, "bloggerlink", item);
+										
+										if(keyname.equals("postdate")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												postdate = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												postdate = " ";
+											}
+										}
+										if(keyname.equals("title")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												title = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												title = " ";
+											}
+										}
+										if(keyname.equals("link")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												link = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												link = " ";
+											}
+										}
+										if(keyname.equals("description")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												description = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												description = " ";
+											}
+										}
+										if(keyname.equals("bloggername")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												bloggername = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												bloggername = " ";
+											}
+										}
+										if(keyname.equals("bloggerlink")) {
+											if(!(JsonParser.isEmpty(item.get(keyname)))){
+												bloggerlink = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+														.replaceAll("(\\s{2,}|\\t{2,})", " ");
+											}else{
+												bloggerlink = " ";
+											}
+										}
 
 									}
+									
+									// step 4. 파일에 쓰기
+									try {
+										PrintWriter pw = new PrintWriter(
+												new BufferedWriter(new FileWriter(file, true)));
 
-									// 한번에 문자열 합침
-									resultSb.append("'");
-									resultSb.append(job_dt); // 시스템 일자 (파라미터로 준
-																// 경우는
-																// 입력값)
-									resultSb.append("'");
-									resultSb.append("|^");
-									resultSb.append("'");
-									resultSb.append(args[0]); // 검색어
-									resultSb.append("'");
-									resultSb.append("|^");
-									resultSb.append("'");
-									resultSb.append(postdate);
-									resultSb.append("'");
-									resultSb.append("|^");
-									resultSb.append("'");
-									resultSb.append(title);
-									resultSb.append("'");
-									resultSb.append("|^");
-									resultSb.append("'");
-									resultSb.append(link);
-									resultSb.append("'");
-									resultSb.append("|^");
-									resultSb.append("'");
-									resultSb.append(description);
-									resultSb.append("'");
-									resultSb.append("|^");
-									resultSb.append("'");
-									resultSb.append(bloggername);
-									resultSb.append("'");
-									resultSb.append("|^");
-									resultSb.append("'");
-									resultSb.append(bloggerlink);
-									resultSb.append("'");
-									resultSb.append(System.getProperty("line.separator"));
+										pw.write("'");
+										pw.write(job_dt); // 시스템 일자 (파라미터로 준
+										pw.write("'");
+										pw.write("|^");
+										pw.write("'");
+										pw.write(args[0]); // 검색어
+										pw.write("'");
+										pw.write("|^");
+										pw.write("'");
+										pw.write(postdate);
+										pw.write("'");
+										pw.write("|^");
+										pw.write("'");
+										pw.write(title);
+										pw.write("'");
+										pw.write("|^");
+										pw.write("'");
+										pw.write(link);
+										pw.write("'");
+										pw.write("|^");
+										pw.write("'");
+										pw.write(description);
+										pw.write("'");
+										pw.write("|^");
+										pw.write("'");
+										pw.write(bloggername);
+										pw.write("'");
+										pw.write("|^");
+										pw.write("'");
+										pw.write(bloggerlink);
+										pw.write("'");
+										pw.println();
+										pw.flush();
+										pw.close();
 
+									} catch (IOException e) {
+										e.printStackTrace();
+									}	
 								}
 
 								System.out.println("진행도::::::" + i + "/" + pageCount);
@@ -192,18 +239,6 @@ public class Blog {
 
 							}
 
-						}
-
-						// step 4. 파일에 쓰기
-						try {
-							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-							pw.write(resultSb.toString());
-							pw.flush();
-							pw.close();
-
-						} catch (IOException e) {
-							e.printStackTrace();
 						}
 
 						System.out.println("parsing complete!");

@@ -78,17 +78,6 @@ public class Cafe {
 						pageCount = 1;
 					}
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer title = new StringBuffer(" "); // 카페 제목
-					StringBuffer contents = new StringBuffer(" "); // 카페 글 요약
-					StringBuffer url = new StringBuffer(" "); // 카페 글 url
-					StringBuffer cafename = new StringBuffer(" "); // 카페 이름
-					StringBuffer thumbnail = new StringBuffer(" "); // 대표썸네일
-					StringBuffer datetime = new StringBuffer(" "); // 카페 글 작성일시
-					
-					
-
 					// step 3. 페이지 숫자만큼 반복하면서 파싱
 
 					for (int i = 1; i <= pageCount; i++) {
@@ -96,6 +85,13 @@ public class Cafe {
 						// 블로그와 다른 건 url 하나 뿐이므로 블로그 쪽 메서드 사용 가능
 						json = JsonParser.parseBlogJson_daum(service_url, daum_api_key, args[0], job_dt,
 								Integer.toString(i));
+
+						String title = " "; // 카페 제목
+						String contents = " "; // 카페 글 요약
+						String url = " "; // 카페 글 url
+						String cafename = " "; // 카페 이름
+						String thumbnail = " "; // 대표썸네일
+						String datetime = " "; // 카페 글 작성일시
 
 						JSONParser parser = new JSONParser();
 						JSONObject obj = (JSONObject) parser.parse(json);
@@ -113,67 +109,109 @@ public class Cafe {
 							while (iter.hasNext()) {
 
 								String keyname = iter.next();
-
-								JsonParser.colWrite_sns(title, keyname, "title", document);
-								JsonParser.colWrite_sns(contents, keyname, "contents", document);
-								JsonParser.colWrite_sns(url, keyname, "url", document);
-								JsonParser.colWrite_sns(cafename, keyname, "cafename", document);
-								JsonParser.colWrite_sns(thumbnail, keyname, "thumbnail", document);
-								JsonParser.colWrite_sns(datetime, keyname, "datetime", document);
+								
+								if(keyname.equals("title")) {
+									if(!(JsonParser.isEmpty(document.get(keyname)))){
+										title = document.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										title = " ";
+									}
+								}
+								if(keyname.equals("contents")) {
+									if(!(JsonParser.isEmpty(document.get(keyname)))){
+										contents = document.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										contents = " ";
+									}
+								}
+								if(keyname.equals("url")) {
+									if(!(JsonParser.isEmpty(document.get(keyname)))){
+										url = document.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										url = " ";
+									}
+								}
+								if(keyname.equals("cafename")) {
+									if(!(JsonParser.isEmpty(document.get(keyname)))){
+										cafename = document.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										cafename = " ";
+									}
+								}
+								if(keyname.equals("thumbnail")) {
+									if(!(JsonParser.isEmpty(document.get(keyname)))){
+										thumbnail = document.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										thumbnail = " ";
+									}
+								}
+								if(keyname.equals("datetime")) {
+									if(!(JsonParser.isEmpty(document.get(keyname)))){
+										datetime = document.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+												.replaceAll("(\\s{2,}|\\t{2,})", " ");
+									}else{
+										datetime = " ";
+									}
+								}			
 
 							}
+							
+							// step 4. 파일에 쓰기
+							try {
+								PrintWriter pw = new PrintWriter(
+										new BufferedWriter(new FileWriter(file, true)));
 
-							// 한번에 문자열 합침
-							resultSb.append("'");
-							resultSb.append(job_dt); // 시스템 일자 (파라미터로 준 경우는 입력값)
-							resultSb.append("'");
-							resultSb.append("|^");
-							resultSb.append("'");
-							resultSb.append(args[0]); // 검색어
-							resultSb.append("'");
-							resultSb.append("|^");
-							resultSb.append("'");
-							resultSb.append(title);
-							resultSb.append("'");
-							resultSb.append("|^");
-							resultSb.append("'");
-							resultSb.append(contents);
-							resultSb.append("'");
-							resultSb.append("|^");
-							resultSb.append("'");
-							resultSb.append(url);
-							resultSb.append("'");
-							resultSb.append("|^");
-							resultSb.append("'");
-							resultSb.append(cafename);
-							resultSb.append("'");
-							resultSb.append("|^");
-							resultSb.append("'");
-							resultSb.append(thumbnail);
-							resultSb.append("'");
-							resultSb.append("|^");
-							resultSb.append("'");
-							resultSb.append(datetime);
-							resultSb.append("'");
-							resultSb.append(System.getProperty("line.separator"));
+								pw.write("'");
+								pw.write(job_dt); // 시스템 일자 (파라미터로 준 경우는 입력값)
+								pw.write("'");
+								pw.write("|^");
+								pw.write("'");
+								pw.write(args[0]); // 검색어
+								pw.write("'");
+								pw.write("|^");
+								pw.write("'");
+								pw.write(title);
+								pw.write("'");
+								pw.write("|^");
+								pw.write("'");
+								pw.write(contents);
+								pw.write("'");
+								pw.write("|^");
+								pw.write("'");
+								pw.write(url);
+								pw.write("'");
+								pw.write("|^");
+								pw.write("'");
+								pw.write(cafename);
+								pw.write("'");
+								pw.write("|^");
+								pw.write("'");
+								pw.write(thumbnail);
+								pw.write("'");
+								pw.write("|^");
+								pw.write("'");
+								pw.write(datetime);
+								pw.write("'");
+								pw.println();
+								pw.flush();
+								pw.close();
+
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+
+							
 
 						}
 
 						System.out.println("진행도::::::" + i + "/" + pageCount);
 
 						//Thread.sleep(1000);
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");

@@ -59,14 +59,6 @@ public class CustomSearch {
 
 					// System.out.println("json::::" + json);
 
-					StringBuffer resultSb = new StringBuffer("");
-
-					StringBuffer title = new StringBuffer(" "); // 문서 제목
-					StringBuffer snippet = new StringBuffer(" "); // 문서 내용
-					StringBuffer link = new StringBuffer(" "); // 링크
-					
-					
-
 					// step 3. 페이지 숫자만큼 반복하면서 파싱
 					// 구글의 검색 api는 한 페이지 당 건수는 10, 검색 최대값은 100건으로 고정되어 있음
 
@@ -81,6 +73,10 @@ public class CustomSearch {
 
 							json = JsonParser.parseJson_google(service_url, google_api_key, google_api_cx, args[0],
 									job_dt, Integer.toString(i));
+							
+							String title = " "; // 문서 제목
+							String snippet = " "; // 문서 내용
+							String link = " "; // 링크
 							
 							//System.out.println("json::::"+json);
 
@@ -117,36 +113,65 @@ public class CustomSearch {
 										while (iter.hasNext()) {
 
 											String keyname = iter.next();
-
-											JsonParser.colWrite_sns(title, keyname, "title", item);
-											JsonParser.colWrite_sns(snippet, keyname, "snippet", item);
-											JsonParser.colWrite_sns(link, keyname, "link", item);
+											
+											if(keyname.equals("title")) {
+												if(!(JsonParser.isEmpty(item.get(keyname)))){
+													title = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													title = " ";
+												}
+											}
+											if(keyname.equals("snippet")) {
+												if(!(JsonParser.isEmpty(item.get(keyname)))){
+													snippet = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													snippet = " ";
+												}
+											}
+											if(keyname.equals("link")) {
+												if(!(JsonParser.isEmpty(item.get(keyname)))){
+													link = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+															.replaceAll("(\\s{2,}|\\t{2,})", " ");
+												}else{
+													link = " ";
+												}
+											}
 
 										}
+										
+										// step 4. 파일에 쓰기
+										try {
+											PrintWriter pw = new PrintWriter(
+													new BufferedWriter(new FileWriter(file, true)));
 
-										// 한번에 문자열 합침
-										resultSb.append("'");
-										resultSb.append(job_dt); // 시스템 일자 (파라미터로 준 경우는
-																	// 입력값)
-										resultSb.append("'");
-										resultSb.append("|^");
-										resultSb.append("'");
-										resultSb.append(args[0]); // 검색어
-										resultSb.append("'");
-										resultSb.append("|^");
-										resultSb.append("'");
-										resultSb.append(title);
-										resultSb.append("'");
-										resultSb.append("|^");
-										resultSb.append("'");
-										resultSb.append(snippet);
-										resultSb.append("'");
-										resultSb.append("|^");
-										resultSb.append("'");
-										resultSb.append(link);
-										resultSb.append("'");
-										resultSb.append(System.getProperty("line.separator"));
+											pw.write("'");
+											pw.write(job_dt); // 시스템 일자 (파라미터로 준 경우는
+											pw.write("'");
+											pw.write("|^");
+											pw.write("'");
+											pw.write(args[0]); // 검색어
+											pw.write("'");
+											pw.write("|^");
+											pw.write("'");
+											pw.write(title);
+											pw.write("'");
+											pw.write("|^");
+											pw.write("'");
+											pw.write(snippet);
+											pw.write("'");
+											pw.write("|^");
+											pw.write("'");
+											pw.write(link);
+											pw.write("'");
+											pw.println();
+											pw.flush();
+											pw.close();
 
+										} catch (IOException e) {
+											e.printStackTrace();
+										}
 									}
 								}
 	
@@ -158,18 +183,6 @@ public class CustomSearch {
 							
 						}
 
-					}
-
-					// step 4. 파일에 쓰기
-					try {
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
-
-						pw.write(resultSb.toString());
-						pw.flush();
-						pw.close();
-
-					} catch (IOException e) {
-						e.printStackTrace();
 					}
 
 					System.out.println("parsing complete!");
