@@ -143,13 +143,14 @@ public class Web {
 
 							}
 							
+							
 							// step 4. 파일에 쓰기
 							try {
 								PrintWriter pw = new PrintWriter(
 										new BufferedWriter(new FileWriter(file, true)));
 
 								pw.write("'");
-								pw.write((r + ((i-1) * 50)) +1); // 행 번호
+								pw.write(Integer.toString((r + ((i-1) * 50)) +1)); // 행 번호
 								pw.write("'");
 								pw.write("|^");
 								pw.write("'");
