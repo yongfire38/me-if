@@ -155,15 +155,15 @@ public class CustomSearch {
 											pw.write("'");
 											pw.write("|^");
 											pw.write("'");
-											pw.write(title);
+											pw.write(title.replace("'",""));
 											pw.write("'");
 											pw.write("|^");
 											pw.write("'");
-											pw.write(snippet);
+											pw.write(snippet.replace("'",""));
 											pw.write("'");
 											pw.write("|^");
 											pw.write("'");
-											pw.write(link);
+											pw.write(link.replace("'",""));
 											pw.write("'");
 											pw.println();
 											pw.flush();

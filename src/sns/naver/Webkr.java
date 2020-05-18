@@ -173,15 +173,15 @@ public class Webkr {
 											pw.write("'");
 											pw.write("|^");
 											pw.write("'");
-											pw.write(title);
+											pw.write(title.replace("'",""));
 											pw.write("'");
 											pw.write("|^");
 											pw.write("'");
-											pw.write(link);
+											pw.write(link.replace("'",""));
 											pw.write("'");
 											pw.write("|^");
 											pw.write("'");
-											pw.write(description);
+											pw.write(description.replace("'",""));
 											pw.write("'");
 											pw.println();
 											pw.flush();
