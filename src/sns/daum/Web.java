@@ -183,8 +183,6 @@ public class Web {
 								e.printStackTrace();
 							}
 
-							
-
 						}
 
 						System.out.println("진행도::::::" + i + "/" + pageCount);
