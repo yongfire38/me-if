@@ -107,16 +107,16 @@ public class GetBsnsStrtgySmallScaleDscssListInfoInqire {
 							String totalCount_str = body.get("totalCount").toString().trim();
 
 							JSONObject items = (JSONObject) body.get("items");
-							
-							String rnum = " "; // 정렬순서
-							String perCd = " "; // 사전환경성검토코드
-							String bizSeq = " "; // 사업 고유 번호
-							String bizNm = " "; // 사업명
-							String applyDt = " "; // 사업명
-							String ccilStepCd = " "; // 협의진행현황
 
 							// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 							if (items.get("item") instanceof JSONObject) {
+								
+								String rnum = " "; // 정렬순서
+								String perCd = " "; // 사전환경성검토코드
+								String bizSeq = " "; // 사업 고유 번호
+								String bizNm = " "; // 사업명
+								String applyDt = " "; // 사업명
+								String ccilStepCd = " "; // 협의진행현황
 
 								JSONObject items_jsonObject = (JSONObject) items.get("item");
 
@@ -127,55 +127,13 @@ public class GetBsnsStrtgySmallScaleDscssListInfoInqire {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									if(keyname.equals("rnum")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											rnum = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											rnum = " ";
-										}
-									}
-									if(keyname.equals("perCd")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											perCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											perCd = " ";
-										}
-									}
-									if(keyname.equals("bizSeq")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											bizSeq = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											bizSeq = " ";
-										}
-									}
-									if(keyname.equals("bizNm")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											bizNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											bizNm = " ";
-										}
-									}
-									if(keyname.equals("applyDt")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											applyDt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											applyDt = " ";
-										}
-									}
-									if(keyname.equals("ccilStepCd")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											ccilStepCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											ccilStepCd = " ";
-										}
-									}
+									
+									rnum = JsonParser.colWrite_String(rnum, keyname, "rnum", items_jsonObject);
+									perCd = JsonParser.colWrite_String(perCd, keyname, "perCd", items_jsonObject);
+									bizSeq = JsonParser.colWrite_String(bizSeq, keyname, "bizSeq", items_jsonObject);
+									bizNm = JsonParser.colWrite_String(bizNm, keyname, "bizNm", items_jsonObject);
+									applyDt = JsonParser.colWrite_String(applyDt, keyname, "applyDt", items_jsonObject);
+									ccilStepCd = JsonParser.colWrite_String(ccilStepCd, keyname, "ccilStepCd", items_jsonObject);
 
 								}
 
@@ -218,6 +176,13 @@ public class GetBsnsStrtgySmallScaleDscssListInfoInqire {
 								JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 								for (int r = 0; r < items_jsonArray.size(); r++) {
+									
+									String rnum = " "; // 정렬순서
+									String perCd = " "; // 사전환경성검토코드
+									String bizSeq = " "; // 사업 고유 번호
+									String bizNm = " "; // 사업명
+									String applyDt = " "; // 사업명
+									String ccilStepCd = " "; // 협의진행현황
 
 									JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -228,55 +193,13 @@ public class GetBsnsStrtgySmallScaleDscssListInfoInqire {
 									while (iter.hasNext()) {
 
 										String keyname = iter.next();
-
-										if(keyname.equals("rnum")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												rnum = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												rnum = " ";
-											}
-										}
-										if(keyname.equals("perCd")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												perCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												perCd = " ";
-											}
-										}
-										if(keyname.equals("bizSeq")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												bizSeq = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												bizSeq = " ";
-											}
-										}
-										if(keyname.equals("bizNm")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												bizNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												bizNm = " ";
-											}
-										}
-										if(keyname.equals("applyDt")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												applyDt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												applyDt = " ";
-											}
-										}
-										if(keyname.equals("ccilStepCd")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												ccilStepCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												ccilStepCd = " ";
-											}
-										}
+										
+										rnum = JsonParser.colWrite_String(rnum, keyname, "rnum", item_obj);
+										perCd = JsonParser.colWrite_String(perCd, keyname, "perCd", item_obj);
+										bizSeq = JsonParser.colWrite_String(bizSeq, keyname, "bizSeq", item_obj);
+										bizNm = JsonParser.colWrite_String(bizNm, keyname, "bizNm", item_obj);
+										applyDt = JsonParser.colWrite_String(applyDt, keyname, "applyDt", item_obj);
+										ccilStepCd = JsonParser.colWrite_String(ccilStepCd, keyname, "ccilStepCd", item_obj);
 
 									}
 

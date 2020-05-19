@@ -102,18 +102,18 @@ public class GetStrategyDraftPblancDsplayListInfoInqire {
 							System.out.println("data not exist!!");
 						} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 							
-							String rnum = " "; // 정렬순서
-							String perCd = " "; // 사전환경성 검토 코드
-							String bizSeq = " "; // 사업고유 번호
-							String bizNm = " "; // 사업명
-							String ccilOrganCd = " "; // 협의기관
-							String drfopTmdt = " "; // 초안공람 기간
-							
 							String numOfRows_str = body.get("numOfRows").toString();
 							String totalCount_str = body.get("totalCount").toString();
 
 							// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 							if (body.get("item") instanceof JSONObject) {
+								
+								String rnum = " "; // 정렬순서
+								String perCd = " "; // 사전환경성 검토 코드
+								String bizSeq = " "; // 사업고유 번호
+								String bizNm = " "; // 사업명
+								String ccilOrganCd = " "; // 협의기관
+								String drfopTmdt = " "; // 초안공람 기간
 
 								JSONObject items_jsonObject = (JSONObject) body.get("item");
 
@@ -125,54 +125,12 @@ public class GetStrategyDraftPblancDsplayListInfoInqire {
 
 									String keyname = iter.next();
 									
-									if(keyname.equals("rnum")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											rnum = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											rnum = " ";
-										}
-									}
-									if(keyname.equals("perCd")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											perCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											perCd = " ";
-										}
-									}
-									if(keyname.equals("bizSeq")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											bizSeq = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											bizSeq = " ";
-										}
-									}
-									if(keyname.equals("bizNm")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											bizNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											bizNm = " ";
-										}
-									}
-									if(keyname.equals("ccilOrganCd")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											ccilOrganCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											ccilOrganCd = " ";
-										}
-									}
-									if(keyname.equals("drfopTmdt")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											drfopTmdt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											drfopTmdt = " ";
-										}
-									}
+									rnum = JsonParser.colWrite_String(rnum, keyname, "rnum", items_jsonObject);
+									perCd = JsonParser.colWrite_String(perCd, keyname, "perCd", items_jsonObject);
+									bizSeq = JsonParser.colWrite_String(bizSeq, keyname, "bizSeq", items_jsonObject);
+									bizNm = JsonParser.colWrite_String(bizNm, keyname, "bizNm", items_jsonObject);
+									ccilOrganCd = JsonParser.colWrite_String(ccilOrganCd, keyname, "ccilOrganCd", items_jsonObject);
+									drfopTmdt = JsonParser.colWrite_String(drfopTmdt, keyname, "drfopTmdt", items_jsonObject);
 
 								}
 								
@@ -216,6 +174,13 @@ public class GetStrategyDraftPblancDsplayListInfoInqire {
 								JSONArray items_jsonArray = (JSONArray) body.get("item");
 
 								for (int r = 0; r < items_jsonArray.size(); r++) {
+									
+									String rnum = " "; // 정렬순서
+									String perCd = " "; // 사전환경성 검토 코드
+									String bizSeq = " "; // 사업고유 번호
+									String bizNm = " "; // 사업명
+									String ccilOrganCd = " "; // 협의기관
+									String drfopTmdt = " "; // 초안공람 기간
 
 									JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -226,55 +191,13 @@ public class GetStrategyDraftPblancDsplayListInfoInqire {
 									while (iter.hasNext()) {
 
 										String keyname = iter.next();
-
-										if(keyname.equals("rnum")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												rnum = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												rnum = " ";
-											}
-										}
-										if(keyname.equals("perCd")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												perCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												perCd = " ";
-											}
-										}
-										if(keyname.equals("bizSeq")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												bizSeq = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												bizSeq = " ";
-											}
-										}
-										if(keyname.equals("bizNm")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												bizNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												bizNm = " ";
-											}
-										}
-										if(keyname.equals("ccilOrganCd")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												ccilOrganCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												ccilOrganCd = " ";
-											}
-										}
-										if(keyname.equals("drfopTmdt")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												drfopTmdt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												drfopTmdt = " ";
-											}
-										}
+										
+										rnum = JsonParser.colWrite_String(rnum, keyname, "rnum", item_obj);
+										perCd = JsonParser.colWrite_String(perCd, keyname, "perCd", item_obj);
+										bizSeq = JsonParser.colWrite_String(bizSeq, keyname, "bizSeq", item_obj);
+										bizNm = JsonParser.colWrite_String(bizNm, keyname, "bizNm", item_obj);
+										ccilOrganCd = JsonParser.colWrite_String(ccilOrganCd, keyname, "ccilOrganCd", item_obj);
+										drfopTmdt = JsonParser.colWrite_String(drfopTmdt, keyname, "drfopTmdt", item_obj);
 
 									}
 

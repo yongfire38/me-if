@@ -102,19 +102,19 @@ public class SupplyLgldCodeList {
 						} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 							System.out.println("data not exist!!");
 						} else if (resultCode.equals("00")) {
-							
-							String addrName = " ";
-							String fcltyMngNm = " ";
-							String fcltyMngNo = " ";
-							String lgldCode = " ";
-							String lgldFullAddr = " ";
-							String sujCode = " ";
-							String upprLgldCode = " ";
 
 							JSONObject items = (JSONObject) body.get("items");
 
 							// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 							if (items.get("item") instanceof JSONObject) {
+								
+								String addrName = " ";
+								String fcltyMngNm = " ";
+								String fcltyMngNo = " ";
+								String lgldCode = " ";
+								String lgldFullAddr = " ";
+								String sujCode = " ";
+								String upprLgldCode = " ";
 
 								JSONObject items_jsonObject = (JSONObject) items.get("item");
 
@@ -126,62 +126,13 @@ public class SupplyLgldCodeList {
 
 									String keyname = iter.next();
 									
-									if(keyname.equals("addrName")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											addrName = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											addrName = " ";
-										}
-									}
-									if(keyname.equals("fcltyMngNm")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											fcltyMngNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											fcltyMngNm = " ";
-										}
-									}
-									if(keyname.equals("fcltyMngNo")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											fcltyMngNo = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											fcltyMngNo = " ";
-										}
-									}
-									if(keyname.equals("lgldCode")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											lgldCode = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											lgldCode = " ";
-										}
-									}
-									if(keyname.equals("lgldFullAddr")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											lgldFullAddr = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											lgldFullAddr = " ";
-										}
-									}
-									if(keyname.equals("sujCode")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											sujCode = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											sujCode = " ";
-										}
-									}
-									if(keyname.equals("upprLgldCode")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											upprLgldCode = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											upprLgldCode = " ";
-										}
-									}
+									addrName = JsonParser.colWrite_String(addrName, keyname, "addrName", items_jsonObject);
+									fcltyMngNm = JsonParser.colWrite_String(fcltyMngNm, keyname, "fcltyMngNm", items_jsonObject);
+									fcltyMngNo = JsonParser.colWrite_String(fcltyMngNo, keyname, "fcltyMngNo", items_jsonObject);
+									lgldCode = JsonParser.colWrite_String(lgldCode, keyname, "lgldCode", items_jsonObject);
+									lgldFullAddr = JsonParser.colWrite_String(lgldFullAddr, keyname, "lgldFullAddr", items_jsonObject);
+									sujCode = JsonParser.colWrite_String(sujCode, keyname, "sujCode", items_jsonObject);
+									upprLgldCode = JsonParser.colWrite_String(upprLgldCode, keyname, "upprLgldCode", items_jsonObject);
 
 								}
 								
@@ -216,6 +167,14 @@ public class SupplyLgldCodeList {
 								JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 								for (int r = 0; r < items_jsonArray.size(); r++) {
+									
+									String addrName = " ";
+									String fcltyMngNm = " ";
+									String fcltyMngNo = " ";
+									String lgldCode = " ";
+									String lgldFullAddr = " ";
+									String sujCode = " ";
+									String upprLgldCode = " ";
 
 									JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -226,63 +185,14 @@ public class SupplyLgldCodeList {
 									while (iter.hasNext()) {
 
 										String keyname = iter.next();
-
-										if(keyname.equals("addrName")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												addrName = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												addrName = " ";
-											}
-										}
-										if(keyname.equals("fcltyMngNm")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												fcltyMngNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												fcltyMngNm = " ";
-											}
-										}
-										if(keyname.equals("fcltyMngNo")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												fcltyMngNo = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												fcltyMngNo = " ";
-											}
-										}
-										if(keyname.equals("lgldCode")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												lgldCode = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												lgldCode = " ";
-											}
-										}
-										if(keyname.equals("lgldFullAddr")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												lgldFullAddr = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												lgldFullAddr = " ";
-											}
-										}
-										if(keyname.equals("sujCode")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												sujCode = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												sujCode = " ";
-											}
-										}
-										if(keyname.equals("upprLgldCode")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												upprLgldCode = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												upprLgldCode = " ";
-											}
-										}
+										
+										addrName = JsonParser.colWrite_String(addrName, keyname, "addrName", item_obj);
+										fcltyMngNm = JsonParser.colWrite_String(fcltyMngNm, keyname, "fcltyMngNm", item_obj);
+										fcltyMngNo = JsonParser.colWrite_String(fcltyMngNo, keyname, "fcltyMngNo", item_obj);
+										lgldCode = JsonParser.colWrite_String(lgldCode, keyname, "lgldCode", item_obj);
+										lgldFullAddr = JsonParser.colWrite_String(lgldFullAddr, keyname, "lgldFullAddr", item_obj);
+										sujCode = JsonParser.colWrite_String(sujCode, keyname, "sujCode", item_obj);
+										upprLgldCode = JsonParser.colWrite_String(upprLgldCode, keyname, "upprLgldCode", item_obj);
 
 									}
 

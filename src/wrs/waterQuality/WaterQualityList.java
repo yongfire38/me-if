@@ -109,24 +109,24 @@ public class WaterQualityList {
 							} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
-								
-								String no = " "; // 번호
-								String occrrncDt = " "; // 발생일시
-								String fcltyMngNm = " "; // 시설관리명
-								String fcltyMngNo = " "; // 시설관리번호
-								String fcltyAddr = " "; // 시설주소
-								String liIndDivName = " "; // 용수구분명
-								String clVal = " "; // 잔류염소
-								String phVal = " "; // pH
-								String tbVal = " "; // 탁도
-								String phUnit = " "; // pH단위
-								String tbUnit = " "; // 탁도단위
-								String clUnit = " "; // 잔류단위
 
 								JSONObject items = (JSONObject) body.get("items");
 
 								// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 								if (items.get("item") instanceof JSONObject) {
+									
+									String no = " "; // 번호
+									String occrrncDt = " "; // 발생일시
+									String fcltyMngNm = " "; // 시설관리명
+									String fcltyMngNo = " "; // 시설관리번호
+									String fcltyAddr = " "; // 시설주소
+									String liIndDivName = " "; // 용수구분명
+									String clVal = " "; // 잔류염소
+									String phVal = " "; // pH
+									String tbVal = " "; // 탁도
+									String phUnit = " "; // pH단위
+									String tbUnit = " "; // 탁도단위
+									String clUnit = " "; // 잔류단위
 
 									JSONObject items_jsonObject = (JSONObject) items.get("item");
 
@@ -138,102 +138,18 @@ public class WaterQualityList {
 
 										String keyname = iter.next();
 										
-										if(keyname.equals("no")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												no = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												no = " ";
-											}
-										}
-										if(keyname.equals("occrrncDt")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												occrrncDt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												occrrncDt = " ";
-											}
-										}
-										if(keyname.equals("fcltyMngNm")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												fcltyMngNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												fcltyMngNm = " ";
-											}
-										}
-										if(keyname.equals("fcltyMngNo")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												fcltyMngNo = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												fcltyMngNo = " ";
-											}
-										}
-										if(keyname.equals("fcltyAddr")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												fcltyAddr = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												fcltyAddr = " ";
-											}
-										}
-										if(keyname.equals("liIndDivName")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												liIndDivName = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												liIndDivName = " ";
-											}
-										}
-										if(keyname.equals("clVal")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												clVal = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												clVal = " ";
-											}
-										}
-										if(keyname.equals("phVal")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												phVal = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												phVal = " ";
-											}
-										}
-										if(keyname.equals("tbVal")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												tbVal = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												tbVal = " ";
-											}
-										}
-										if(keyname.equals("phUnit")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												phUnit = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												phUnit = " ";
-											}
-										}
-										if(keyname.equals("tbUnit")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												tbUnit = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												tbUnit = " ";
-											}
-										}
-										if(keyname.equals("clUnit")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												clUnit = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												clUnit = " ";
-											}
-										}
+										no = JsonParser.colWrite_String(no, keyname, "no", items_jsonObject);
+										occrrncDt = JsonParser.colWrite_String(occrrncDt, keyname, "occrrncDt", items_jsonObject);
+										fcltyMngNm = JsonParser.colWrite_String(fcltyMngNm, keyname, "fcltyMngNm", items_jsonObject);
+										fcltyMngNo = JsonParser.colWrite_String(fcltyMngNo, keyname, "fcltyMngNo", items_jsonObject);
+										fcltyAddr = JsonParser.colWrite_String(fcltyAddr, keyname, "fcltyAddr", items_jsonObject);
+										liIndDivName = JsonParser.colWrite_String(liIndDivName, keyname, "liIndDivName", items_jsonObject);
+										clVal = JsonParser.colWrite_String(clVal, keyname, "clVal", items_jsonObject);
+										phVal = JsonParser.colWrite_String(phVal, keyname, "phVal", items_jsonObject);
+										tbVal = JsonParser.colWrite_String(tbVal, keyname, "tbVal", items_jsonObject);
+										phUnit = JsonParser.colWrite_String(phUnit, keyname, "phUnit", items_jsonObject);
+										tbUnit = JsonParser.colWrite_String(tbUnit, keyname, "tbUnit", items_jsonObject);
+										clUnit = JsonParser.colWrite_String(clUnit, keyname, "clUnit", items_jsonObject);
 
 									}
 									
@@ -286,6 +202,19 @@ public class WaterQualityList {
 									JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 									for (int r = 0; r < items_jsonArray.size(); r++) {
+										
+										String no = " "; // 번호
+										String occrrncDt = " "; // 발생일시
+										String fcltyMngNm = " "; // 시설관리명
+										String fcltyMngNo = " "; // 시설관리번호
+										String fcltyAddr = " "; // 시설주소
+										String liIndDivName = " "; // 용수구분명
+										String clVal = " "; // 잔류염소
+										String phVal = " "; // pH
+										String tbVal = " "; // 탁도
+										String phUnit = " "; // pH단위
+										String tbUnit = " "; // 탁도단위
+										String clUnit = " "; // 잔류단위
 
 										JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -296,103 +225,19 @@ public class WaterQualityList {
 										while (iter.hasNext()) {
 
 											String keyname = iter.next();
-
-											if(keyname.equals("no")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													no = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													no = " ";
-												}
-											}
-											if(keyname.equals("occrrncDt")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													occrrncDt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													occrrncDt = " ";
-												}
-											}
-											if(keyname.equals("fcltyMngNm")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													fcltyMngNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													fcltyMngNm = " ";
-												}
-											}
-											if(keyname.equals("fcltyMngNo")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													fcltyMngNo = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													fcltyMngNo = " ";
-												}
-											}
-											if(keyname.equals("fcltyAddr")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													fcltyAddr = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													fcltyAddr = " ";
-												}
-											}
-											if(keyname.equals("liIndDivName")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													liIndDivName = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													liIndDivName = " ";
-												}
-											}
-											if(keyname.equals("clVal")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													clVal = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													clVal = " ";
-												}
-											}
-											if(keyname.equals("phVal")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													phVal = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													phVal = " ";
-												}
-											}
-											if(keyname.equals("tbVal")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													tbVal = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													tbVal = " ";
-												}
-											}
-											if(keyname.equals("phUnit")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													phUnit = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													phUnit = " ";
-												}
-											}
-											if(keyname.equals("tbUnit")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													tbUnit = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													tbUnit = " ";
-												}
-											}
-											if(keyname.equals("clUnit")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													clUnit = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													clUnit = " ";
-												}
-											}
+											
+											no = JsonParser.colWrite_String(no, keyname, "no", item_obj);
+											occrrncDt = JsonParser.colWrite_String(occrrncDt, keyname, "occrrncDt", item_obj);
+											fcltyMngNm = JsonParser.colWrite_String(fcltyMngNm, keyname, "fcltyMngNm", item_obj);
+											fcltyMngNo = JsonParser.colWrite_String(fcltyMngNo, keyname, "fcltyMngNo", item_obj);
+											fcltyAddr = JsonParser.colWrite_String(fcltyAddr, keyname, "fcltyAddr", item_obj);
+											liIndDivName = JsonParser.colWrite_String(liIndDivName, keyname, "liIndDivName", item_obj);
+											clVal = JsonParser.colWrite_String(clVal, keyname, "clVal", item_obj);
+											phVal = JsonParser.colWrite_String(phVal, keyname, "phVal", item_obj);
+											tbVal = JsonParser.colWrite_String(tbVal, keyname, "tbVal", item_obj);
+											phUnit = JsonParser.colWrite_String(phUnit, keyname, "phUnit", item_obj);
+											tbUnit = JsonParser.colWrite_String(tbUnit, keyname, "tbUnit", item_obj);
+											clUnit = JsonParser.colWrite_String(clUnit, keyname, "clUnit", item_obj);
 
 										}
 

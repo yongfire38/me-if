@@ -105,17 +105,16 @@ public class Sihwavalue {
 							} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
-								
-								String bidno = " "; // 번호
-								String obsdt = " "; // 일자
-								String lakeRwl = " "; // 호소위(EL.m)
-								String seaRwl = " "; // 해수위(EL.m)
-
 
 								JSONObject items = (JSONObject) body.get("items");
 
 								// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 								if (items.get("item") instanceof JSONObject) {
+									
+									String bidno = " "; // 번호
+									String obsdt = " "; // 일자
+									String lakeRwl = " "; // 호소위(EL.m)
+									String seaRwl = " "; // 해수위(EL.m)
 
 									JSONObject items_jsonObject = (JSONObject) items.get("item");
 
@@ -127,38 +126,10 @@ public class Sihwavalue {
 
 										String keyname = iter.next();
 										
-										if(keyname.equals("bidno")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												bidno = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												bidno = " ";
-											}
-										}
-										if(keyname.equals("obsdt")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												obsdt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												obsdt = " ";
-											}
-										}
-										if(keyname.equals("lakeRwl")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												lakeRwl = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												lakeRwl = " ";
-											}
-										}
-										if(keyname.equals("seaRwl")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												seaRwl = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												seaRwl = " ";
-											}
-										}
+										bidno = JsonParser.colWrite_String(bidno, keyname, "bidno", items_jsonObject);
+										obsdt = JsonParser.colWrite_String(obsdt, keyname, "obsdt", items_jsonObject);
+										lakeRwl = JsonParser.colWrite_String(lakeRwl, keyname, "lakeRwl", items_jsonObject);
+										seaRwl = JsonParser.colWrite_String(seaRwl, keyname, "seaRwl", items_jsonObject);
 
 									}
 									
@@ -193,6 +164,11 @@ public class Sihwavalue {
 									JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 									for (int r = 0; r < items_jsonArray.size(); r++) {
+										
+										String bidno = " "; // 번호
+										String obsdt = " "; // 일자
+										String lakeRwl = " "; // 호소위(EL.m)
+										String seaRwl = " "; // 해수위(EL.m)
 
 										JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -203,39 +179,11 @@ public class Sihwavalue {
 										while (iter.hasNext()) {
 
 											String keyname = iter.next();
-
-											if(keyname.equals("bidno")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													bidno = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													bidno = " ";
-												}
-											}
-											if(keyname.equals("obsdt")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													obsdt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													obsdt = " ";
-												}
-											}
-											if(keyname.equals("lakeRwl")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													lakeRwl = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													lakeRwl = " ";
-												}
-											}
-											if(keyname.equals("seaRwl")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													seaRwl = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													seaRwl = " ";
-												}
-											}
+											
+											bidno = JsonParser.colWrite_String(bidno, keyname, "bidno", item_obj);
+											obsdt = JsonParser.colWrite_String(obsdt, keyname, "obsdt", item_obj);
+											lakeRwl = JsonParser.colWrite_String(lakeRwl, keyname, "lakeRwl", item_obj);
+											seaRwl = JsonParser.colWrite_String(seaRwl, keyname, "seaRwl", item_obj);
 
 										}
 

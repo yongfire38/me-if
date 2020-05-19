@@ -99,14 +99,14 @@ public class MultidamdidamCode {
 							System.out.println(
 									"parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
 						} else if (resultCode.equals("00")) {
-							
-							String damcdcrd = " "; // 댐코드
-							String damnm = " ";  // 댐명칭
-							String seqno = " ";  // 순번
 
 							JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 							for (int r = 0; r < items_jsonArray.size(); r++) {
+								
+								String damcdcrd = " "; // 댐코드
+								String damnm = " ";  // 댐명칭
+								String seqno = " ";  // 순번
 
 								JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -118,30 +118,9 @@ public class MultidamdidamCode {
 
 									String keyname = iter.next();
 									
-									if(keyname.equals("damcode")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											damcdcrd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											damcdcrd = " ";
-										}
-									}
-									if(keyname.equals("damnm")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											damnm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											damnm = " ";
-										}
-									}
-									if(keyname.equals("seqno")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											seqno = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											seqno = " ";
-										}
-									}
+									damcdcrd = JsonParser.colWrite_String(damcdcrd, keyname, "damcode", item_obj);
+									damnm = JsonParser.colWrite_String(damnm, keyname, "damnm", item_obj);
+									seqno = JsonParser.colWrite_String(seqno, keyname, "seqno", item_obj);
 
 								}
 								

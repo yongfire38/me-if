@@ -65,20 +65,19 @@ public class GetDscssSttusDscssOpinionDetailInfoInqire {
 					} else if (resultCode.equals("00") && response.get("body") instanceof String) {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(response.get("body") instanceof String)) {
-						
-
-						String eiaCd = " "; // 환경영향평가코드
-						String eiaSeq = " "; // 환경영향평가고유번호
-						String bizNm = " "; // 사업명
-						String bizGubunNm = " "; // 사업구분
-						String ccilOrganNm = " "; // 협의기관
-						String ccilMemNm = " "; // 담당자
-						String ccilMemEmail = " "; // 연락처
 
 						JSONObject body = (JSONObject) response.get("body");
 
 						// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 						if (body.get("item") instanceof JSONObject) {
+							
+							String eiaCd = " "; // 환경영향평가코드
+							String eiaSeq = " "; // 환경영향평가고유번호
+							String bizNm = " "; // 사업명
+							String bizGubunNm = " "; // 사업구분
+							String ccilOrganNm = " "; // 협의기관
+							String ccilMemNm = " "; // 담당자
+							String ccilMemEmail = " "; // 연락처
 
 							JSONObject items_jsonObject = (JSONObject) body.get("item");
 
@@ -90,63 +89,13 @@ public class GetDscssSttusDscssOpinionDetailInfoInqire {
 
 								String keyname = iter.next();
 								
-								if(keyname.equals("eiaCd")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										eiaCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										eiaCd = " ";
-									}
-								}
-								if(keyname.equals("eiaSeq")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										eiaSeq = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										eiaSeq = " ";
-									}
-								}
-								if(keyname.equals("bizNm")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										bizNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										bizNm = " ";
-									}
-								}
-								if(keyname.equals("bizGubunNm")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										bizGubunNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										bizGubunNm = " ";
-									}
-								}
-								if(keyname.equals("ccilOrganNm")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										ccilOrganNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										ccilOrganNm = " ";
-									}
-								}
-								if(keyname.equals("ccilMemNm")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										ccilMemNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										ccilMemNm = " ";
-									}
-								}
-								if(keyname.equals("ccilMemEmail")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										ccilMemEmail = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										ccilMemEmail = " ";
-									}
-								}
-
+								eiaCd = JsonParser.colWrite_String(eiaCd, keyname, "eiaCd", items_jsonObject);
+								eiaSeq = JsonParser.colWrite_String(eiaSeq, keyname, "eiaSeq", items_jsonObject);
+								bizNm = JsonParser.colWrite_String(bizNm, keyname, "bizNm", items_jsonObject);
+								bizGubunNm = JsonParser.colWrite_String(bizGubunNm, keyname, "bizGubunNm", items_jsonObject);
+								ccilOrganNm = JsonParser.colWrite_String(ccilOrganNm, keyname, "ccilOrganNm", items_jsonObject);
+								ccilMemNm = JsonParser.colWrite_String(ccilMemNm, keyname, "ccilMemNm", items_jsonObject);
+								ccilMemEmail = JsonParser.colWrite_String(ccilMemEmail, keyname, "ccilMemEmail", items_jsonObject);
 
 							}
 							
@@ -181,6 +130,14 @@ public class GetDscssSttusDscssOpinionDetailInfoInqire {
 							JSONArray items_jsonArray = (JSONArray) body.get("item");
 
 							for (int r = 0; r < items_jsonArray.size(); r++) {
+								
+								String eiaCd = " "; // 환경영향평가코드
+								String eiaSeq = " "; // 환경영향평가고유번호
+								String bizNm = " "; // 사업명
+								String bizGubunNm = " "; // 사업구분
+								String ccilOrganNm = " "; // 협의기관
+								String ccilMemNm = " "; // 담당자
+								String ccilMemEmail = " "; // 연락처
 
 								JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -191,63 +148,14 @@ public class GetDscssSttusDscssOpinionDetailInfoInqire {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									if(keyname.equals("eiaCd")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											eiaCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											eiaCd = " ";
-										}
-									}
-									if(keyname.equals("eiaSeq")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											eiaSeq = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											eiaSeq = " ";
-										}
-									}
-									if(keyname.equals("bizNm")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											bizNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											bizNm = " ";
-										}
-									}
-									if(keyname.equals("bizGubunNm")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											bizGubunNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											bizGubunNm = " ";
-										}
-									}
-									if(keyname.equals("ccilOrganNm")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											ccilOrganNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											ccilOrganNm = " ";
-										}
-									}
-									if(keyname.equals("ccilMemNm")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											ccilMemNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											ccilMemNm = " ";
-										}
-									}
-									if(keyname.equals("ccilMemEmail")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											ccilMemEmail = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											ccilMemEmail = " ";
-										}
-									}
+									
+									eiaCd = JsonParser.colWrite_String(eiaCd, keyname, "eiaCd", item_obj);
+									eiaSeq = JsonParser.colWrite_String(eiaSeq, keyname, "eiaSeq", item_obj);
+									bizNm = JsonParser.colWrite_String(bizNm, keyname, "bizNm", item_obj);
+									bizGubunNm = JsonParser.colWrite_String(bizGubunNm, keyname, "bizGubunNm", item_obj);
+									ccilOrganNm = JsonParser.colWrite_String(ccilOrganNm, keyname, "ccilOrganNm", item_obj);
+									ccilMemNm = JsonParser.colWrite_String(ccilMemNm, keyname, "ccilMemNm", item_obj);
+									ccilMemEmail = JsonParser.colWrite_String(ccilMemEmail, keyname, "ccilMemEmail", item_obj);
 
 								}
 

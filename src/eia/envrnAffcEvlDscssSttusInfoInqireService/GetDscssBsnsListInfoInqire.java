@@ -101,16 +101,7 @@ public class GetDscssBsnsListInfoInqire {
 							} else  if (body.get("items") instanceof String) {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
-								
 
-								String rnum = " "; // 정렬순서
-								String eiaCd = " "; // 환경영향평가코드
-								String eiaSeq = " "; // 환경영향평가고유번호
-								String bizNm = " "; // 사업명
-								String ccilOrganNm = " "; // 협의기관
-								String firstCtgCd = " "; // 현재단계
-								String stepChangeDt = " "; // 단계변경일
-								
 								String numOfRows_str = body.get("numOfRows").toString();
 								String totalCount_str = body.get("totalCount").toString();
 								
@@ -119,6 +110,14 @@ public class GetDscssBsnsListInfoInqire {
 								JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 								for (int r = 0; r < items_jsonArray.size(); r++) {
+									
+									String rnum = " "; // 정렬순서
+									String eiaCd = " "; // 환경영향평가코드
+									String eiaSeq = " "; // 환경영향평가고유번호
+									String bizNm = " "; // 사업명
+									String ccilOrganNm = " "; // 협의기관
+									String firstCtgCd = " "; // 현재단계
+									String stepChangeDt = " "; // 단계변경일
 
 									JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -130,62 +129,13 @@ public class GetDscssBsnsListInfoInqire {
 
 										String keyname = iter.next();
 										
-										if(keyname.equals("rnum")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												rnum = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												rnum = " ";
-											}
-										}
-										if(keyname.equals("eiaCd")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												eiaCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												eiaCd = " ";
-											}
-										}
-										if(keyname.equals("eiaSeq")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												eiaSeq = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												eiaSeq = " ";
-											}
-										}
-										if(keyname.equals("bizNm")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												bizNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												bizNm = " ";
-											}
-										}
-										if(keyname.equals("ccilOrganNm")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												ccilOrganNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												ccilOrganNm = " ";
-											}
-										}
-										if(keyname.equals("firstCtgCd")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												firstCtgCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												firstCtgCd = " ";
-											}
-										}
-										if(keyname.equals("stepChangeDt")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												stepChangeDt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												stepChangeDt = " ";
-											}
-										}
+										rnum = JsonParser.colWrite_String(rnum, keyname, "rnum", item_obj);
+										eiaCd = JsonParser.colWrite_String(eiaCd, keyname, "eiaCd", item_obj);
+										eiaSeq = JsonParser.colWrite_String(eiaSeq, keyname, "eiaSeq", item_obj);
+										bizNm = JsonParser.colWrite_String(bizNm, keyname, "bizNm", item_obj);
+										ccilOrganNm = JsonParser.colWrite_String(ccilOrganNm, keyname, "ccilOrganNm", item_obj);
+										firstCtgCd = JsonParser.colWrite_String(firstCtgCd, keyname, "firstCtgCd", item_obj);
+										stepChangeDt = JsonParser.colWrite_String(stepChangeDt, keyname, "stepChangeDt", item_obj);
 
 									}
 									

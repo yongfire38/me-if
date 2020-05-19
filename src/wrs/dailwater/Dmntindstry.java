@@ -106,21 +106,21 @@ public class Dmntindstry {
 							} else if (body.get("items") instanceof String) {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
-								
-								String mesurede = " ";
-								String item1 = " ";
-								String item2 = " ";
-								String item3 = " ";
-								String item4 = " ";
-								String item5 = " ";
-								String item6 = " ";
-								
+
 								String numOfRows_str = body.get("numOfRows").toString();
 
 								JSONObject items = (JSONObject) body.get("items");
 
 								// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 								if (items.get("item") instanceof JSONObject) {
+									
+									String mesurede = " ";
+									String item1 = " ";
+									String item2 = " ";
+									String item3 = " ";
+									String item4 = " ";
+									String item5 = " ";
+									String item6 = " ";
 
 									JSONObject items_jsonObject = (JSONObject) items.get("item");
 
@@ -132,62 +132,13 @@ public class Dmntindstry {
 
 										String keyname = iter.next();
 										
-										if(keyname.equals("mesurede")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												mesurede = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												mesurede = " ";
-											}
-										}
-										if(keyname.equals("item1")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												item1 = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												item1 = " ";
-											}
-										}
-										if(keyname.equals("item2")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												item2 = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												item2 = " ";
-											}
-										}
-										if(keyname.equals("item3")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												item3 = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												item3 = " ";
-											}
-										}
-										if(keyname.equals("item4")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												item4 = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												item4 = " ";
-											}
-										}
-										if(keyname.equals("item5")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												item5 = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												item5 = " ";
-											}
-										}
-										if(keyname.equals("item6")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												item6 = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												item6 = " ";
-											}
-										}
+										mesurede = JsonParser.colWrite_String(mesurede, keyname, "mesurede", items_jsonObject);
+										item1 = JsonParser.colWrite_String(item1, keyname, "item1", items_jsonObject);
+										item2 = JsonParser.colWrite_String(item2, keyname, "item2", items_jsonObject);
+										item3 = JsonParser.colWrite_String(item3, keyname, "item3", items_jsonObject);
+										item4 = JsonParser.colWrite_String(item4, keyname, "item4", items_jsonObject);
+										item5 = JsonParser.colWrite_String(item5, keyname, "item5", items_jsonObject);
+										item6 = JsonParser.colWrite_String(item6, keyname, "item6", items_jsonObject);
 
 									}
 									
@@ -228,6 +179,14 @@ public class Dmntindstry {
 									}
 
 								} else if (items.get("item") instanceof JSONArray) {
+									
+									String mesurede = " ";
+									String item1 = " ";
+									String item2 = " ";
+									String item3 = " ";
+									String item4 = " ";
+									String item5 = " ";
+									String item6 = " ";
 
 									JSONArray items_jsonArray = (JSONArray) items.get("item");
 
@@ -242,63 +201,14 @@ public class Dmntindstry {
 										while (iter.hasNext()) {
 
 											String keyname = iter.next();
-
-											if(keyname.equals("mesurede")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													mesurede = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													mesurede = " ";
-												}
-											}
-											if(keyname.equals("item1")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													item1 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													item1 = " ";
-												}
-											}
-											if(keyname.equals("item2")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													item2 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													item2 = " ";
-												}
-											}
-											if(keyname.equals("item3")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													item3 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													item3 = " ";
-												}
-											}
-											if(keyname.equals("item4")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													item4 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													item4 = " ";
-												}
-											}
-											if(keyname.equals("item5")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													item5 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													item5 = " ";
-												}
-											}
-											if(keyname.equals("item6")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													item6 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													item6 = " ";
-												}
-											}
+											
+											mesurede = JsonParser.colWrite_String(mesurede, keyname, "mesurede", item_obj);
+											item1 = JsonParser.colWrite_String(item1, keyname, "item1", item_obj);
+											item2 = JsonParser.colWrite_String(item2, keyname, "item2", item_obj);
+											item3 = JsonParser.colWrite_String(item3, keyname, "item3", item_obj);
+											item4 = JsonParser.colWrite_String(item4, keyname, "item4", item_obj);
+											item5 = JsonParser.colWrite_String(item5, keyname, "item5", item_obj);
+											item6 = JsonParser.colWrite_String(item6, keyname, "item6", item_obj);
 
 										}
 

@@ -128,54 +128,12 @@ public class GetBeffatEnvrnExmntBeffatBsnsPlaceInfoInqire {
 
 									String keyname = iter.next();
 									
-									if(keyname.equals("rnum")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											rnum = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											rnum = " ";
-										}
-									}
-									if(keyname.equals("num")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											num = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											num = " ";
-										}
-									}
-									if(keyname.equals("name")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											name = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											name = " ";
-										}
-									}
-									if(keyname.equals("centerx")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											centerx = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											centerx = " ";
-										}
-									}
-									if(keyname.equals("centery")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											centery = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											centery = " ";
-										}
-									}
-									if(keyname.equals("distance")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											distance = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											distance = " ";
-										}
-									}
+									rnum = JsonParser.colWrite_String(rnum, keyname, "rnum", items_jsonObject);
+									num = JsonParser.colWrite_String(num, keyname, "num", items_jsonObject);
+									name = JsonParser.colWrite_String(name, keyname, "name", items_jsonObject);
+									centerx = JsonParser.colWrite_String(centerx, keyname, "centerx", items_jsonObject);
+									centery = JsonParser.colWrite_String(centery, keyname, "centery", items_jsonObject);
+									distance = JsonParser.colWrite_String(distance, keyname, "distance", items_jsonObject);
 
 								}
 								
@@ -228,55 +186,13 @@ public class GetBeffatEnvrnExmntBeffatBsnsPlaceInfoInqire {
 									while (iter.hasNext()) {
 
 										String keyname = iter.next();
-
-										if(keyname.equals("rnum")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												rnum = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												rnum = " ";
-											}
-										}
-										if(keyname.equals("num")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												num = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												num = " ";
-											}
-										}
-										if(keyname.equals("name")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												name = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												name = " ";
-											}
-										}
-										if(keyname.equals("centerx")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												centerx = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												centerx = " ";
-											}
-										}
-										if(keyname.equals("centery")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												centery = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												centery = " ";
-											}
-										}
-										if(keyname.equals("distance")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												distance = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												distance = " ";
-											}
-										}
+										
+										rnum = JsonParser.colWrite_String(rnum, keyname, "rnum", item_obj);
+										num = JsonParser.colWrite_String(num, keyname, "num", item_obj);
+										name = JsonParser.colWrite_String(name, keyname, "name", item_obj);
+										centerx = JsonParser.colWrite_String(centerx, keyname, "centerx", item_obj);
+										centery = JsonParser.colWrite_String(centery, keyname, "centery", item_obj);
+										distance = JsonParser.colWrite_String(distance, keyname, "distance", item_obj);
 
 									}
 

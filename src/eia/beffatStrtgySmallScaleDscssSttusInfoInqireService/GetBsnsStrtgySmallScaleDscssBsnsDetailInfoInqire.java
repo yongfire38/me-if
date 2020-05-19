@@ -68,20 +68,20 @@ public class GetBsnsStrtgySmallScaleDscssBsnsDetailInfoInqire {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 						
-						String perCd = " "; // 사전환경성검토코드
-						String bizNm = " "; // 사업명
-						String ccilOrganCd = " "; // 협의기관
-						String ctcMemNm = " "; // 담당자
-						String ctcMemTeam = " "; // 담당부서
-						String ctcMemEmail = " "; // E-mail
-						String ctcMemTel = " "; // 전화번호
-						String ctcMemFax = " "; // Fax 번호
-						String ccilResFl = " "; // 협의결과
-						
 						JSONObject items = (JSONObject) body.get("items");
 
 						// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 						if (items.get("item") instanceof JSONObject) {
+							
+							String perCd = " "; // 사전환경성검토코드
+							String bizNm = " "; // 사업명
+							String ccilOrganCd = " "; // 협의기관
+							String ctcMemNm = " "; // 담당자
+							String ctcMemTeam = " "; // 담당부서
+							String ctcMemEmail = " "; // E-mail
+							String ctcMemTel = " "; // 전화번호
+							String ctcMemFax = " "; // Fax 번호
+							String ccilResFl = " "; // 협의결과
 
 							JSONObject items_jsonObject = (JSONObject) items.get("item");
 
@@ -93,71 +93,14 @@ public class GetBsnsStrtgySmallScaleDscssBsnsDetailInfoInqire {
 
 								String keyname = iter.next();
 								
-								if(keyname.equals("perCd")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										perCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										perCd = " ";
-									}
-								}
-								if(keyname.equals("bizNm")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										bizNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										bizNm = " ";
-									}
-								}
-								if(keyname.equals("ctcMemNm")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										ctcMemNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										ctcMemNm = " ";
-									}
-								}
-								if(keyname.equals("ctcMemTeam")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										ctcMemTeam = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										ctcMemTeam = " ";
-									}
-								}
-								if(keyname.equals("ctcMemEmail")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										ctcMemEmail = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										ctcMemEmail = " ";
-									}
-								}
-								if(keyname.equals("ctcMemTel")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										ctcMemTel = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										ctcMemTel = " ";
-									}
-								}
-								if(keyname.equals("ctcMemFax")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										ctcMemFax = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										ctcMemFax = " ";
-									}
-								}
-								if(keyname.equals("ccilResFl")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										ccilResFl = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										ccilResFl = " ";
-									}
-								}
-
+								perCd = JsonParser.colWrite_String(perCd, keyname, "perCd", items_jsonObject);
+								bizNm = JsonParser.colWrite_String(bizNm, keyname, "bizNm", items_jsonObject);
+								ctcMemNm = JsonParser.colWrite_String(ctcMemNm, keyname, "ctcMemNm", items_jsonObject);
+								ctcMemTeam = JsonParser.colWrite_String(ctcMemTeam, keyname, "ctcMemTeam", items_jsonObject);
+								ctcMemEmail = JsonParser.colWrite_String(ctcMemEmail, keyname, "ctcMemEmail", items_jsonObject);
+								ctcMemTel = JsonParser.colWrite_String(ctcMemTel, keyname, "ctcMemTel", items_jsonObject);
+								ctcMemFax = JsonParser.colWrite_String(ctcMemFax, keyname, "ctcMemFax", items_jsonObject);
+								ccilResFl = JsonParser.colWrite_String(ccilResFl, keyname, "ccilResFl", items_jsonObject);
 
 							}
 
@@ -200,6 +143,16 @@ public class GetBsnsStrtgySmallScaleDscssBsnsDetailInfoInqire {
 							JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 							for (int r = 0; r < items_jsonArray.size(); r++) {
+								
+								String perCd = " "; // 사전환경성검토코드
+								String bizNm = " "; // 사업명
+								String ccilOrganCd = " "; // 협의기관
+								String ctcMemNm = " "; // 담당자
+								String ctcMemTeam = " "; // 담당부서
+								String ctcMemEmail = " "; // E-mail
+								String ctcMemTel = " "; // 전화번호
+								String ctcMemFax = " "; // Fax 번호
+								String ccilResFl = " "; // 협의결과
 
 								JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -210,71 +163,15 @@ public class GetBsnsStrtgySmallScaleDscssBsnsDetailInfoInqire {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									if(keyname.equals("perCd")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											perCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											perCd = " ";
-										}
-									}
-									if(keyname.equals("bizNm")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											bizNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											bizNm = " ";
-										}
-									}
-									if(keyname.equals("ctcMemNm")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											ctcMemNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											ctcMemNm = " ";
-										}
-									}
-									if(keyname.equals("ctcMemTeam")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											ctcMemTeam = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											ctcMemTeam = " ";
-										}
-									}
-									if(keyname.equals("ctcMemEmail")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											ctcMemEmail = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											ctcMemEmail = " ";
-										}
-									}
-									if(keyname.equals("ctcMemTel")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											ctcMemTel = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											ctcMemTel = " ";
-										}
-									}
-									if(keyname.equals("ctcMemFax")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											ctcMemFax = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											ctcMemFax = " ";
-										}
-									}
-									if(keyname.equals("ccilResFl")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											ccilResFl = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											ccilResFl = " ";
-										}
-									}
+									
+									perCd = JsonParser.colWrite_String(perCd, keyname, "perCd", item_obj);
+									bizNm = JsonParser.colWrite_String(bizNm, keyname, "bizNm", item_obj);
+									ctcMemNm = JsonParser.colWrite_String(ctcMemNm, keyname, "ctcMemNm", item_obj);
+									ctcMemTeam = JsonParser.colWrite_String(ctcMemTeam, keyname, "ctcMemTeam", item_obj);
+									ctcMemEmail = JsonParser.colWrite_String(ctcMemEmail, keyname, "ctcMemEmail", item_obj);
+									ctcMemTel = JsonParser.colWrite_String(ctcMemTel, keyname, "ctcMemTel", item_obj);
+									ctcMemFax = JsonParser.colWrite_String(ctcMemFax, keyname, "ctcMemFax", item_obj);
+									ccilResFl = JsonParser.colWrite_String(ccilResFl, keyname, "ccilResFl", item_obj);
 
 								}
 

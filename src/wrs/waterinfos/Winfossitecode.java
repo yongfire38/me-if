@@ -67,14 +67,14 @@ public class Winfossitecode {
 					} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
-						
-						String sitecd = " "; // 정수장코드
-						String sitenm = " "; // 정수장명
 
 						JSONObject items = (JSONObject) body.get("items");
 
 						// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 						if (items.get("item") instanceof JSONObject) {
+							
+							String sitecd = " "; // 정수장코드
+							String sitenm = " "; // 정수장명
 
 							JSONObject items_jsonObject = (JSONObject) items.get("item");
 
@@ -86,22 +86,8 @@ public class Winfossitecode {
 
 								String keyname = iter.next();
 								
-								if(keyname.equals("sitecd")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										sitecd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										sitecd = " ";
-									}
-								}
-								if(keyname.equals("sitenm")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										sitenm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										sitenm = " ";
-									}
-								}
+								sitecd = JsonParser.colWrite_String(sitecd, keyname, "sitecd", items_jsonObject);
+								sitenm = JsonParser.colWrite_String(sitenm, keyname, "sitenm", items_jsonObject);
 
 							}
 							
@@ -126,6 +112,9 @@ public class Winfossitecode {
 							JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 							for (int r = 0; r < items_jsonArray.size(); r++) {
+								
+								String sitecd = " "; // 정수장코드
+								String sitenm = " "; // 정수장명
 
 								JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -136,23 +125,9 @@ public class Winfossitecode {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									if(keyname.equals("sitecd")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											sitecd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											sitecd = " ";
-										}
-									}
-									if(keyname.equals("sitenm")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											sitenm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											sitenm = " ";
-										}
-									}
+									
+									sitecd = JsonParser.colWrite_String(sitecd, keyname, "sitecd", item_obj);
+									sitenm = JsonParser.colWrite_String(sitenm, keyname, "sitenm", item_obj);
 
 								}
 

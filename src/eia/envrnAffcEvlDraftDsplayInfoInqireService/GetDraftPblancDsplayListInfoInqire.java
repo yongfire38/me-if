@@ -102,18 +102,18 @@ public class GetDraftPblancDsplayListInfoInqire {
 							System.out.println("data not exist!!");
 						} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 							
-							String rnum = " "; // 정렬순서
-							String eiaCd = " ";  // 환경영향평가코드
-							String eiaSeq = " ";  // 환경영향평가고유번호
-							String bizNm = " ";  // 사업명
-							String bizGubunNm = " "; // 사업구분
-							String drfopTmdt = " ";  // 초안공람 기간
-							
 							String numOfRows_str = body.get("numOfRows").toString();
 							String totalCount_str = body.get("totalCount").toString();
 
 							// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 							if (body.get("item") instanceof JSONObject) {
+								
+								String rnum = " "; // 정렬순서
+								String eiaCd = " ";  // 환경영향평가코드
+								String eiaSeq = " ";  // 환경영향평가고유번호
+								String bizNm = " ";  // 사업명
+								String bizGubunNm = " "; // 사업구분
+								String drfopTmdt = " ";  // 초안공람 기간
 
 								JSONObject items_jsonObject = (JSONObject) body.get("item");
 
@@ -124,55 +124,13 @@ public class GetDraftPblancDsplayListInfoInqire {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									if(keyname.equals("rnum")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											rnum = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											rnum = " ";
-										}
-									}
-									if(keyname.equals("eiaCd")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											eiaCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											eiaCd = " ";
-										}
-									}
-									if(keyname.equals("eiaSeq")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											eiaSeq = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											eiaSeq = " ";
-										}
-									}
-									if(keyname.equals("bizNm")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											bizNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											bizNm = " ";
-										}
-									}
-									if(keyname.equals("bizGubunNm")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											bizGubunNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											bizGubunNm = " ";
-										}
-									}
-									if(keyname.equals("drfopTmdt")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											drfopTmdt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											drfopTmdt = " ";
-										}
-									}
+									
+									rnum = JsonParser.colWrite_String(rnum, keyname, "rnum", items_jsonObject);
+									eiaCd = JsonParser.colWrite_String(eiaCd, keyname, "eiaCd", items_jsonObject);
+									eiaSeq = JsonParser.colWrite_String(eiaSeq, keyname, "eiaSeq", items_jsonObject);
+									bizNm = JsonParser.colWrite_String(bizNm, keyname, "bizNm", items_jsonObject);
+									bizGubunNm = JsonParser.colWrite_String(bizGubunNm, keyname, "bizGubunNm", items_jsonObject);
+									drfopTmdt = JsonParser.colWrite_String(drfopTmdt, keyname, "drfopTmdt", items_jsonObject);
 
 								}
 								
@@ -215,6 +173,13 @@ public class GetDraftPblancDsplayListInfoInqire {
 								JSONArray items_jsonArray = (JSONArray) body.get("item");
 
 								for (int r = 0; r < items_jsonArray.size(); r++) {
+									
+									String rnum = " "; // 정렬순서
+									String eiaCd = " ";  // 환경영향평가코드
+									String eiaSeq = " ";  // 환경영향평가고유번호
+									String bizNm = " ";  // 사업명
+									String bizGubunNm = " "; // 사업구분
+									String drfopTmdt = " ";  // 초안공람 기간
 
 									JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -225,55 +190,13 @@ public class GetDraftPblancDsplayListInfoInqire {
 									while (iter.hasNext()) {
 
 										String keyname = iter.next();
-
-										if(keyname.equals("rnum")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												rnum = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												rnum = " ";
-											}
-										}
-										if(keyname.equals("eiaCd")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												eiaCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												eiaCd = " ";
-											}
-										}
-										if(keyname.equals("eiaSeq")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												eiaSeq = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												eiaSeq = " ";
-											}
-										}
-										if(keyname.equals("bizNm")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												bizNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												bizNm = " ";
-											}
-										}
-										if(keyname.equals("bizGubunNm")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												bizGubunNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												bizGubunNm = " ";
-											}
-										}
-										if(keyname.equals("drfopTmdt")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												drfopTmdt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												drfopTmdt = " ";
-											}
-										}
+										
+										rnum = JsonParser.colWrite_String(rnum, keyname, "rnum", item_obj);
+										eiaCd = JsonParser.colWrite_String(eiaCd, keyname, "eiaCd", item_obj);
+										eiaSeq = JsonParser.colWrite_String(eiaSeq, keyname, "eiaSeq", item_obj);
+										bizNm = JsonParser.colWrite_String(bizNm, keyname, "bizNm", item_obj);
+										bizGubunNm = JsonParser.colWrite_String(bizGubunNm, keyname, "bizGubunNm", item_obj);
+										drfopTmdt = JsonParser.colWrite_String(drfopTmdt, keyname, "drfopTmdt", item_obj);
 
 									}
 

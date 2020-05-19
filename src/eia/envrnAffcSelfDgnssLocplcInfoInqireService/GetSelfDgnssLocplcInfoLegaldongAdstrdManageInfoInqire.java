@@ -91,38 +91,10 @@ public class GetSelfDgnssLocplcInfoLegaldongAdstrdManageInfoInqire {
 
 									String keyname = iter.next();
 									
-									if(keyname.equals("sido")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											sido = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											sido = " ";
-										}
-									}
-									if(keyname.equals("sgg")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											sgg = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											sgg = " ";
-										}
-									}
-									if(keyname.equals("emd")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											emd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											emd = " ";
-										}
-									}
-									if(keyname.equals("ri")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											ri = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											ri = " ";
-										}
-									}
+									sido = JsonParser.colWrite_String(sido, keyname, "sido", items_jsonObject);
+									sgg = JsonParser.colWrite_String(sgg, keyname, "sgg", items_jsonObject);
+									emd = JsonParser.colWrite_String(emd, keyname, "emd", items_jsonObject);
+									ri = JsonParser.colWrite_String(ri, keyname, "ri", items_jsonObject);
 
 								}
 								
@@ -169,39 +141,11 @@ public class GetSelfDgnssLocplcInfoLegaldongAdstrdManageInfoInqire {
 									while (iter.hasNext()) {
 
 										String keyname = iter.next();
-
-										if(keyname.equals("sido")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												sido = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												sido = " ";
-											}
-										}
-										if(keyname.equals("sgg")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												sgg = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												sgg = " ";
-											}
-										}
-										if(keyname.equals("emd")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												emd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												emd = " ";
-											}
-										}
-										if(keyname.equals("ri")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												ri = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												ri = " ";
-											}
-										}
+										
+										sido = JsonParser.colWrite_String(sido, keyname, "sido", item_obj);
+										sgg = JsonParser.colWrite_String(sgg, keyname, "sgg", item_obj);
+										emd = JsonParser.colWrite_String(emd, keyname, "emd", item_obj);
+										ri = JsonParser.colWrite_String(ri, keyname, "ri", item_obj);
 
 									}
 

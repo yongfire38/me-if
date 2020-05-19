@@ -66,25 +66,24 @@ public class GetDecsnCnIngbtntOpinionDetailInfoInqire {
 					} else if (resultCode.equals("00") && response.get("body") instanceof String) {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(response.get("body") instanceof String)) {
-						
-						String resultCd = " "; // 결정내용코드
-						String bizNm = " "; // 사업명
-						String approvOrganTeam = " "; // 승인기관
-						String openPclDt = " "; // 공고일
-						String openTmdtStartDt = " "; // 공람기간시작일
-						String openTmdtEndDt = " "; // 공람기간종료일
-						String openOpnEndDt = " "; // 의견종료일
-						String openOpnStartDt = " "; // 의견시작일
-						String openOpnEtc = " "; // 결정내용
-						String openTeamNm = " "; // 부서명
-						String bizManTxt = " "; // 사업자
-						String discOrganNm = " "; // 협의기관
-						
 
 						JSONObject body = (JSONObject) response.get("body");
 
 						// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 						if (body.get("item") instanceof JSONObject) {
+							
+							String resultCd = " "; // 결정내용코드
+							String bizNm = " "; // 사업명
+							String approvOrganTeam = " "; // 승인기관
+							String openPclDt = " "; // 공고일
+							String openTmdtStartDt = " "; // 공람기간시작일
+							String openTmdtEndDt = " "; // 공람기간종료일
+							String openOpnEndDt = " "; // 의견종료일
+							String openOpnStartDt = " "; // 의견시작일
+							String openOpnEtc = " "; // 결정내용
+							String openTeamNm = " "; // 부서명
+							String bizManTxt = " "; // 사업자
+							String discOrganNm = " "; // 협의기관
 
 							JSONObject items_jsonObject = (JSONObject) body.get("item");
 
@@ -96,102 +95,18 @@ public class GetDecsnCnIngbtntOpinionDetailInfoInqire {
 
 								String keyname = iter.next();
 
-								if(keyname.equals("resultCd")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										resultCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										resultCd = " ";
-									}
-								}
-								if(keyname.equals("bizNm")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										bizNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										bizNm = " ";
-									}
-								}
-								if(keyname.equals("approvOrganTeam")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										approvOrganTeam = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										approvOrganTeam = " ";
-									}
-								}
-								if(keyname.equals("openPclDt")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										openPclDt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										openPclDt = " ";
-									}
-								}
-								if(keyname.equals("openTmdtStartDt")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										openTmdtStartDt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										openTmdtStartDt = " ";
-									}
-								}
-								if(keyname.equals("openTmdtEndDt")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										openTmdtEndDt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										openTmdtEndDt = " ";
-									}
-								}
-								if(keyname.equals("openOpnEndDt")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										openOpnEndDt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										openOpnEndDt = " ";
-									}
-								}
-								if(keyname.equals("openOpnStartDt")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										openOpnStartDt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										openOpnStartDt = " ";
-									}
-								}
-								if(keyname.equals("openOpnEtc")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										openOpnEtc = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										openOpnEtc = " ";
-									}
-								}
-								if(keyname.equals("openTeamNm")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										openTeamNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										openTeamNm = " ";
-									}
-								}
-								if(keyname.equals("bizManTxt")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										bizManTxt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										bizManTxt = " ";
-									}
-								}
-								if(keyname.equals("discOrganNm")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										discOrganNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										discOrganNm = " ";
-									}
-								}
+								resultCd = JsonParser.colWrite_String(resultCd, keyname, "resultCd", items_jsonObject);
+								bizNm = JsonParser.colWrite_String(bizNm, keyname, "bizNm", items_jsonObject);
+								approvOrganTeam = JsonParser.colWrite_String(approvOrganTeam, keyname, "approvOrganTeam", items_jsonObject);
+								openPclDt = JsonParser.colWrite_String(openPclDt, keyname, "openPclDt", items_jsonObject);
+								openTmdtStartDt = JsonParser.colWrite_String(openTmdtStartDt, keyname, "openTmdtStartDt", items_jsonObject);
+								openTmdtEndDt = JsonParser.colWrite_String(openTmdtEndDt, keyname, "openTmdtEndDt", items_jsonObject);
+								openOpnEndDt = JsonParser.colWrite_String(openOpnEndDt, keyname, "openOpnEndDt", items_jsonObject);
+								openOpnStartDt = JsonParser.colWrite_String(openOpnStartDt, keyname, "openOpnStartDt", items_jsonObject);
+								openOpnEtc = JsonParser.colWrite_String(openOpnEtc, keyname, "openOpnEtc", items_jsonObject);
+								openTeamNm = JsonParser.colWrite_String(openTeamNm, keyname, "openTeamNm", items_jsonObject);
+								bizManTxt = JsonParser.colWrite_String(bizManTxt, keyname, "bizManTxt", items_jsonObject);
+								discOrganNm = JsonParser.colWrite_String(discOrganNm, keyname, "discOrganNm", items_jsonObject);
 
 							}
 
@@ -240,6 +155,19 @@ public class GetDecsnCnIngbtntOpinionDetailInfoInqire {
 							JSONArray items_jsonArray = (JSONArray) body.get("item");
 
 							for (int r = 0; r < items_jsonArray.size(); r++) {
+								
+								String resultCd = " "; // 결정내용코드
+								String bizNm = " "; // 사업명
+								String approvOrganTeam = " "; // 승인기관
+								String openPclDt = " "; // 공고일
+								String openTmdtStartDt = " "; // 공람기간시작일
+								String openTmdtEndDt = " "; // 공람기간종료일
+								String openOpnEndDt = " "; // 의견종료일
+								String openOpnStartDt = " "; // 의견시작일
+								String openOpnEtc = " "; // 결정내용
+								String openTeamNm = " "; // 부서명
+								String bizManTxt = " "; // 사업자
+								String discOrganNm = " "; // 협의기관
 
 								JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -250,103 +178,19 @@ public class GetDecsnCnIngbtntOpinionDetailInfoInqire {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									if(keyname.equals("resultCd")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											resultCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											resultCd = " ";
-										}
-									}
-									if(keyname.equals("bizNm")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											bizNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											bizNm = " ";
-										}
-									}
-									if(keyname.equals("approvOrganTeam")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											approvOrganTeam = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											approvOrganTeam = " ";
-										}
-									}
-									if(keyname.equals("openPclDt")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											openPclDt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											openPclDt = " ";
-										}
-									}
-									if(keyname.equals("openTmdtStartDt")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											openTmdtStartDt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											openTmdtStartDt = " ";
-										}
-									}
-									if(keyname.equals("openTmdtEndDt")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											openTmdtEndDt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											openTmdtEndDt = " ";
-										}
-									}
-									if(keyname.equals("openOpnEndDt")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											openOpnEndDt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											openOpnEndDt = " ";
-										}
-									}
-									if(keyname.equals("openOpnStartDt")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											openOpnStartDt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											openOpnStartDt = " ";
-										}
-									}
-									if(keyname.equals("openOpnEtc")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											openOpnEtc = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											openOpnEtc = " ";
-										}
-									}
-									if(keyname.equals("openTeamNm")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											openTeamNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											openTeamNm = " ";
-										}
-									}
-									if(keyname.equals("bizManTxt")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											bizManTxt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											bizManTxt = " ";
-										}
-									}
-									if(keyname.equals("discOrganNm")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											discOrganNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											discOrganNm = " ";
-										}
-									}
+									
+									resultCd = JsonParser.colWrite_String(resultCd, keyname, "resultCd", item_obj);
+									bizNm = JsonParser.colWrite_String(bizNm, keyname, "bizNm", item_obj);
+									approvOrganTeam = JsonParser.colWrite_String(approvOrganTeam, keyname, "approvOrganTeam", item_obj);
+									openPclDt = JsonParser.colWrite_String(openPclDt, keyname, "openPclDt", item_obj);
+									openTmdtStartDt = JsonParser.colWrite_String(openTmdtStartDt, keyname, "openTmdtStartDt", item_obj);
+									openTmdtEndDt = JsonParser.colWrite_String(openTmdtEndDt, keyname, "openTmdtEndDt", item_obj);
+									openOpnEndDt = JsonParser.colWrite_String(openOpnEndDt, keyname, "openOpnEndDt", item_obj);
+									openOpnStartDt = JsonParser.colWrite_String(openOpnStartDt, keyname, "openOpnStartDt", item_obj);
+									openOpnEtc = JsonParser.colWrite_String(openOpnEtc, keyname, "openOpnEtc", item_obj);
+									openTeamNm = JsonParser.colWrite_String(openTeamNm, keyname, "openTeamNm", item_obj);
+									bizManTxt = JsonParser.colWrite_String(bizManTxt, keyname, "bizManTxt", item_obj);
+									discOrganNm = JsonParser.colWrite_String(discOrganNm, keyname, "discOrganNm", item_obj);
 
 								}
 

@@ -89,38 +89,10 @@ public class GetEnvrnExmntInfoInqire {
 
 								String keyname = iter.next();
 								
-								if(keyname.equals("pnu")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										pnu = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										pnu = " ";
-									}
-								}
-								if(keyname.equals("jibun")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										jibun = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										jibun = " ";
-									}
-								}
-								if(keyname.equals("centerx")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										centerx = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										centerx = " ";
-									}
-								}
-								if(keyname.equals("centery")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										centery = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										centery = " ";
-									}
-								}
+								pnu = JsonParser.colWrite_String(pnu, keyname, "pnu", items_jsonObject);
+								jibun = JsonParser.colWrite_String(jibun, keyname, "jibun", items_jsonObject);
+								centerx = JsonParser.colWrite_String(centerx, keyname, "centerx", items_jsonObject);
+								centery = JsonParser.colWrite_String(centery, keyname, "centery", items_jsonObject);
 
 							}
 							
@@ -165,39 +137,11 @@ public class GetEnvrnExmntInfoInqire {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									if(keyname.equals("pnu")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											pnu = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											pnu = " ";
-										}
-									}
-									if(keyname.equals("jibun")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											jibun = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											jibun = " ";
-										}
-									}
-									if(keyname.equals("centerx")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											centerx = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											centerx = " ";
-										}
-									}
-									if(keyname.equals("centery")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											centery = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											centery = " ";
-										}
-									}
+									
+									pnu = JsonParser.colWrite_String(pnu, keyname, "pnu", item_obj);
+									jibun = JsonParser.colWrite_String(jibun, keyname, "jibun", item_obj);
+									centerx = JsonParser.colWrite_String(centerx, keyname, "centerx", item_obj);
+									centery = JsonParser.colWrite_String(centery, keyname, "centery", item_obj);
 
 								}
 

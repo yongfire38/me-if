@@ -69,15 +69,15 @@ public class GetComCodeInfoInqire {
 					} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 
 						JSONObject items = (JSONObject) body.get("items");
-						
-						String comCd = " "; // 공통코드
-						String jongCd = " "; // 코드종류
-						String cdNm = " "; // 코드명
-						String gubunFl = " "; // 구분상태
-						String sortSeq = " "; // 소팅 일련번호
 
 						// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 						if (items.get("item") instanceof JSONObject) {
+							
+							String comCd = " "; // 공통코드
+							String jongCd = " "; // 코드종류
+							String cdNm = " "; // 코드명
+							String gubunFl = " "; // 구분상태
+							String sortSeq = " "; // 소팅 일련번호
 
 							JSONObject items_jsonObject = (JSONObject) items.get("item");
 
@@ -88,49 +88,13 @@ public class GetComCodeInfoInqire {
 							while (iter.hasNext()) {
 
 								String keyname = iter.next();
-
-								if(keyname.equals("comCd")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										comCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										comCd = " ";
-									}
-								}
-								if(keyname.equals("jongCd")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										jongCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										jongCd = " ";
-									}
-								}
-								if(keyname.equals("cdNm")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										cdNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										cdNm = " ";
-									}
-								}
-								if(keyname.equals("gubunFl")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										gubunFl = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										gubunFl = " ";
-									}
-								}
-								if(keyname.equals("sortSeq")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										sortSeq = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										sortSeq = " ";
-									}
-								}
 								
-
+								comCd = JsonParser.colWrite_String(comCd, keyname, "comCd", items_jsonObject);
+								jongCd = JsonParser.colWrite_String(jongCd, keyname, "jongCd", items_jsonObject);
+								cdNm = JsonParser.colWrite_String(cdNm, keyname, "cdNm", items_jsonObject);
+								gubunFl = JsonParser.colWrite_String(gubunFl, keyname, "gubunFl", items_jsonObject);
+								sortSeq = JsonParser.colWrite_String(sortSeq, keyname, "sortSeq", items_jsonObject);
+								
 							}
 							
 							// step 4. 파일에 쓰기
@@ -166,6 +130,12 @@ public class GetComCodeInfoInqire {
 							JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 							for (int r = 0; r < items_jsonArray.size(); r++) {
+								
+								String comCd = " "; // 공통코드
+								String jongCd = " "; // 코드종류
+								String cdNm = " "; // 코드명
+								String gubunFl = " "; // 구분상태
+								String sortSeq = " "; // 소팅 일련번호
 
 								JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -176,47 +146,12 @@ public class GetComCodeInfoInqire {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									if(keyname.equals("comCd")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											comCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											comCd = " ";
-										}
-									}
-									if(keyname.equals("jongCd")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											jongCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											jongCd = " ";
-										}
-									}
-									if(keyname.equals("cdNm")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											cdNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											cdNm = " ";
-										}
-									}
-									if(keyname.equals("gubunFl")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											gubunFl = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											gubunFl = " ";
-										}
-									}
-									if(keyname.equals("sortSeq")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											sortSeq = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											sortSeq = " ";
-										}
-									}
+									
+									comCd = JsonParser.colWrite_String(comCd, keyname, "comCd", item_obj);
+									jongCd = JsonParser.colWrite_String(jongCd, keyname, "jongCd", item_obj);
+									cdNm = JsonParser.colWrite_String(cdNm, keyname, "cdNm", item_obj);
+									gubunFl = JsonParser.colWrite_String(gubunFl, keyname, "gubunFl", item_obj);
+									sortSeq = JsonParser.colWrite_String(sortSeq, keyname, "sortSeq", item_obj);
 
 								}
 

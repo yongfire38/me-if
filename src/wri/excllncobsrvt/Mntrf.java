@@ -109,16 +109,16 @@ public class Mntrf {
 							} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
-								
-								String acmtlprcptqy = " "; // 누적우량 현저수량
-								String no = " "; // 순번
-								String obsrdtmnt = " "; // 시간
-								String prcptqy = " "; // 우량
 
 								JSONObject items = (JSONObject) body.get("items");
 
 								// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 								if (items.get("item") instanceof JSONObject) {
+									
+									String acmtlprcptqy = " "; // 누적우량 현저수량
+									String no = " "; // 순번
+									String obsrdtmnt = " "; // 시간
+									String prcptqy = " "; // 우량
 
 									JSONObject items_jsonObject = (JSONObject) items.get("item");
 
@@ -130,38 +130,10 @@ public class Mntrf {
 
 										String keyname = iter.next();
 										
-										if(keyname.equals("acmtlprcptqy")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												acmtlprcptqy = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												acmtlprcptqy = " ";
-											}
-										}
-										if(keyname.equals("no")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												no = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												no = " ";
-											}
-										}
-										if(keyname.equals("obsrdtmnt")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												obsrdtmnt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												obsrdtmnt = " ";
-											}
-										}
-										if(keyname.equals("prcptqy")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												prcptqy = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												prcptqy = " ";
-											}
-										}
+										acmtlprcptqy = JsonParser.colWrite_String(acmtlprcptqy, keyname, "acmtlprcptqy", items_jsonObject);
+										no = JsonParser.colWrite_String(no, keyname, "no", items_jsonObject);
+										obsrdtmnt = JsonParser.colWrite_String(obsrdtmnt, keyname, "obsrdtmnt", items_jsonObject);
+										prcptqy = JsonParser.colWrite_String(prcptqy, keyname, "prcptqy", items_jsonObject);
 
 									}
 									
@@ -200,6 +172,11 @@ public class Mntrf {
 									JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 									for (int r = 0; r < items_jsonArray.size(); r++) {
+										
+										String acmtlprcptqy = " "; // 누적우량 현저수량
+										String no = " "; // 순번
+										String obsrdtmnt = " "; // 시간
+										String prcptqy = " "; // 우량
 
 										JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -210,39 +187,13 @@ public class Mntrf {
 										while (iter.hasNext()) {
 
 											String keyname = iter.next();
+											
+											acmtlprcptqy = JsonParser.colWrite_String(acmtlprcptqy, keyname, "acmtlprcptqy", item_obj);
+											no = JsonParser.colWrite_String(no, keyname, "no", item_obj);
+											obsrdtmnt = JsonParser.colWrite_String(obsrdtmnt, keyname, "obsrdtmnt", item_obj);
+											prcptqy = JsonParser.colWrite_String(prcptqy, keyname, "prcptqy", item_obj);
 
-											if(keyname.equals("acmtlprcptqy")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													acmtlprcptqy = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													acmtlprcptqy = " ";
-												}
-											}
-											if(keyname.equals("no")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													no = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													no = " ";
-												}
-											}
-											if(keyname.equals("obsrdtmnt")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													obsrdtmnt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													obsrdtmnt = " ";
-												}
-											}
-											if(keyname.equals("prcptqy")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													prcptqy = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													prcptqy = " ";
-												}
-											}
+											
 
 										}
 

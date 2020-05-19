@@ -106,37 +106,37 @@ public class MultiPoseDam {
 							} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
-								
-								String suge = " "; // 수계
-								String damnm = " "; // 댐이름
-								String zerosevenhourprcptqy = " "; // 강우량(금일)
-								String prcptqy = " "; // 강우량(전일)
-								String pyacurf = " "; // 누계(금년)
-								String vyacurf = " "; // 누계(전년)
-								String oyaacurf = " "; // 누계(예년)
-								String inflowqy = " "; // 일유입량
-								String totdcwtrqy = " "; // 전일
-																					// 방류량(본댐)
-								String totdcwtrqyjo = " "; // 전일
-																					// 방류량(조정치)
-								String nowlowlevel = " "; // 저수위(현재)
-								String lastlowlevel = " "; // 저수위(전년)
-								String nyearlowlevel = " "; // 저수위(예년)
-								String nowrsvwtqy = " "; // 저수량(현재)
-								String lastrsvwtqy = " "; // 저수량(전년)
-								String nyearrsvwtqy = " "; // 저수량(예년)
-								String rsvwtrt = " "; // 현재저수율
-								String dvlpqyacmtlacmslt = " "; // 발전량(실적)
-								String dvlpqyacmtlplan = " "; // 발전량(계획)
-								String dvlpqyacmtlversus = " "; // 발전량(대비)
-								String dvlpqyfyerplan = " "; // 연간(계획)
-								String dvlpqyfyerversus = " "; // 연간(대비)
 
 								JSONObject items = (JSONObject) body.get("items");
 
 								JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 								for (int r = 0; r < items_jsonArray.size(); r++) {
+									
+									String suge = " "; // 수계
+									String damnm = " "; // 댐이름
+									String zerosevenhourprcptqy = " "; // 강우량(금일)
+									String prcptqy = " "; // 강우량(전일)
+									String pyacurf = " "; // 누계(금년)
+									String vyacurf = " "; // 누계(전년)
+									String oyaacurf = " "; // 누계(예년)
+									String inflowqy = " "; // 일유입량
+									String totdcwtrqy = " "; // 전일
+																						// 방류량(본댐)
+									String totdcwtrqyjo = " "; // 전일
+																						// 방류량(조정치)
+									String nowlowlevel = " "; // 저수위(현재)
+									String lastlowlevel = " "; // 저수위(전년)
+									String nyearlowlevel = " "; // 저수위(예년)
+									String nowrsvwtqy = " "; // 저수량(현재)
+									String lastrsvwtqy = " "; // 저수량(전년)
+									String nyearrsvwtqy = " "; // 저수량(예년)
+									String rsvwtrt = " "; // 현재저수율
+									String dvlpqyacmtlacmslt = " "; // 발전량(실적)
+									String dvlpqyacmtlplan = " "; // 발전량(계획)
+									String dvlpqyacmtlversus = " "; // 발전량(대비)
+									String dvlpqyfyerplan = " "; // 연간(계획)
+									String dvlpqyfyerversus = " "; // 연간(대비)
 
 									JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -148,182 +148,28 @@ public class MultiPoseDam {
 
 										String keyname = iter.next();
 										
-										if(keyname.equals("suge")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												suge = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												suge = " ";
-											}
-										}
-										if(keyname.equals("damnm")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												damnm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												damnm = " ";
-											}
-										}
-										if(keyname.equals("zerosevenhourprcptqy")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												zerosevenhourprcptqy = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												zerosevenhourprcptqy = " ";
-											}
-										}
-										if(keyname.equals("prcptqy")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												prcptqy = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												prcptqy = " ";
-											}
-										}
-										if(keyname.equals("pyacurf")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												pyacurf = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												pyacurf = " ";
-											}
-										}
-										if(keyname.equals("vyacurf")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												vyacurf = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												vyacurf = " ";
-											}
-										}
-										if(keyname.equals("oyaacurf")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												oyaacurf = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												oyaacurf = " ";
-											}
-										}
-										if(keyname.equals("inflowqy")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												inflowqy = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												inflowqy = " ";
-											}
-										}
-										if(keyname.equals("totdcwtrqy")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												totdcwtrqy = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												totdcwtrqy = " ";
-											}
-										}
-										if(keyname.equals("totdcwtrqyjo")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												totdcwtrqyjo = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												totdcwtrqyjo = " ";
-											}
-										}
-										if(keyname.equals("nowlowlevel")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												nowlowlevel = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												nowlowlevel = " ";
-											}
-										}
-										if(keyname.equals("lastlowlevel")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												lastlowlevel = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												lastlowlevel = " ";
-											}
-										}
-										if(keyname.equals("nyearlowlevel")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												nyearlowlevel = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												nyearlowlevel = " ";
-											}
-										}
-										if(keyname.equals("nowrsvwtqy")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												nowrsvwtqy = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												nowrsvwtqy = " ";
-											}
-										}
-										if(keyname.equals("lastrsvwtqy")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												lastrsvwtqy = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												lastrsvwtqy = " ";
-											}
-										}
-										if(keyname.equals("nyearrsvwtqy")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												nyearrsvwtqy = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												nyearrsvwtqy = " ";
-											}
-										}
-										if(keyname.equals("rsvwtrt")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												rsvwtrt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												rsvwtrt = " ";
-											}
-										}
-										if(keyname.equals("dvlpqyacmtlacmslt")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												dvlpqyacmtlacmslt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												dvlpqyacmtlacmslt = " ";
-											}
-										}
-										if(keyname.equals("dvlpqyacmtlplan")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												dvlpqyacmtlplan = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												dvlpqyacmtlplan = " ";
-											}
-										}
-										if(keyname.equals("dvlpqyacmtlversus")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												dvlpqyacmtlversus = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												dvlpqyacmtlversus = " ";
-											}
-										}
-										if(keyname.equals("dvlpqyfyerplan")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												dvlpqyfyerplan = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												dvlpqyfyerplan = " ";
-											}
-										}
-										if(keyname.equals("dvlpqyfyerversus")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												dvlpqyfyerversus = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												dvlpqyfyerversus = " ";
-											}
-										}
+										suge = JsonParser.colWrite_String(suge, keyname, "suge", item_obj);
+										damnm = JsonParser.colWrite_String(damnm, keyname, "damnm", item_obj);
+										zerosevenhourprcptqy = JsonParser.colWrite_String(zerosevenhourprcptqy, keyname, "zerosevenhourprcptqy", item_obj);
+										prcptqy = JsonParser.colWrite_String(prcptqy, keyname, "prcptqy", item_obj);
+										pyacurf = JsonParser.colWrite_String(pyacurf, keyname, "pyacurf", item_obj);
+										vyacurf = JsonParser.colWrite_String(vyacurf, keyname, "vyacurf", item_obj);
+										oyaacurf = JsonParser.colWrite_String(oyaacurf, keyname, "oyaacurf", item_obj);
+										inflowqy = JsonParser.colWrite_String(inflowqy, keyname, "inflowqy", item_obj);
+										totdcwtrqy = JsonParser.colWrite_String(totdcwtrqy, keyname, "totdcwtrqy", item_obj);
+										totdcwtrqyjo = JsonParser.colWrite_String(totdcwtrqyjo, keyname, "totdcwtrqyjo", item_obj);
+										nowlowlevel = JsonParser.colWrite_String(nowlowlevel, keyname, "nowlowlevel", item_obj);
+										lastlowlevel = JsonParser.colWrite_String(lastlowlevel, keyname, "lastlowlevel", item_obj);
+										nyearlowlevel = JsonParser.colWrite_String(nyearlowlevel, keyname, "nyearlowlevel", item_obj);
+										nowrsvwtqy = JsonParser.colWrite_String(nowrsvwtqy, keyname, "nowrsvwtqy", item_obj);
+										lastrsvwtqy = JsonParser.colWrite_String(lastrsvwtqy, keyname, "lastrsvwtqy", item_obj);
+										nyearrsvwtqy = JsonParser.colWrite_String(nyearrsvwtqy, keyname, "nyearrsvwtqy", item_obj);
+										rsvwtrt = JsonParser.colWrite_String(rsvwtrt, keyname, "rsvwtrt", item_obj);
+										dvlpqyacmtlacmslt = JsonParser.colWrite_String(dvlpqyacmtlacmslt, keyname, "dvlpqyacmtlacmslt", item_obj);
+										dvlpqyacmtlplan = JsonParser.colWrite_String(dvlpqyacmtlplan, keyname, "dvlpqyacmtlplan", item_obj);
+										dvlpqyacmtlversus = JsonParser.colWrite_String(dvlpqyacmtlversus, keyname, "dvlpqyacmtlversus", item_obj);
+										dvlpqyfyerplan = JsonParser.colWrite_String(dvlpqyfyerplan, keyname, "dvlpqyfyerplan", item_obj);
+										dvlpqyfyerversus = JsonParser.colWrite_String(dvlpqyfyerversus, keyname, "dvlpqyfyerversus", item_obj);
 
 									}
 									

@@ -107,14 +107,14 @@ public class FcltyList {
 						} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 							System.out.println("data not exist!!");
 						} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
-							
-							String fcltyMngNm = " "; // 시설관리명
-							String sujCode = " "; // 사업장코드
 
 							JSONObject items = (JSONObject) body.get("items");
 
 							// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 							if (items.get("item") instanceof JSONObject) {
+								
+								String fcltyMngNm = " "; // 시설관리명
+								String sujCode = " "; // 사업장코드
 
 								JSONObject items_jsonObject = (JSONObject) items.get("item");
 
@@ -126,22 +126,8 @@ public class FcltyList {
 
 									String keyname = iter.next();
 									
-									if(keyname.equals("fcltyMngNm")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											fcltyMngNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											fcltyMngNm = " ";
-										}
-									}
-									if(keyname.equals("sujCode")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											sujCode = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											sujCode = " ";
-										}
-									}
+									fcltyMngNm = JsonParser.colWrite_String(fcltyMngNm, keyname, "fcltyMngNm", items_jsonObject);
+									sujCode = JsonParser.colWrite_String(sujCode, keyname, "sujCode", items_jsonObject);
 
 								}
 								
@@ -168,6 +154,9 @@ public class FcltyList {
 								JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 								for (int r = 0; r < items_jsonArray.size(); r++) {
+									
+									String fcltyMngNm = " "; // 시설관리명
+									String sujCode = " "; // 사업장코드
 
 									JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -179,22 +168,8 @@ public class FcltyList {
 
 										String keyname = iter.next();
 										
-										if(keyname.equals("fcltyMngNm")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												fcltyMngNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												fcltyMngNm = " ";
-											}
-										}
-										if(keyname.equals("sujCode")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												sujCode = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												sujCode = " ";
-											}
-										}
+										fcltyMngNm = JsonParser.colWrite_String(fcltyMngNm, keyname, "fcltyMngNm", item_obj);
+										sujCode = JsonParser.colWrite_String(sujCode, keyname, "sujCode", item_obj);
 
 									}
 

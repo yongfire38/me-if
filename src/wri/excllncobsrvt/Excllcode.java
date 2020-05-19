@@ -67,13 +67,13 @@ public class Excllcode {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 						
-						String excllncobsrvtcode = " "; // 우량관측소코드
-						String obsrvtNm = " "; // 관측소이름
-						
 						JSONObject items = (JSONObject) body.get("items");
 
 						// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 						if (items.get("item") instanceof JSONObject) {
+							
+							String excllncobsrvtcode = " "; // 우량관측소코드
+							String obsrvtNm = " "; // 관측소이름
 
 							JSONObject items_jsonObject = (JSONObject) items.get("item");
 
@@ -85,22 +85,8 @@ public class Excllcode {
 
 								String keyname = iter.next();
 								
-								if(keyname.equals("excllncobsrvtcode")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										excllncobsrvtcode = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										excllncobsrvtcode = " ";
-									}
-								}
-								if(keyname.equals("obsrvtNm")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										obsrvtNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										obsrvtNm = " ";
-									}
-								}
+								excllncobsrvtcode = JsonParser.colWrite_String(excllncobsrvtcode, keyname, "excllncobsrvtcode", items_jsonObject);
+								obsrvtNm = JsonParser.colWrite_String(obsrvtNm, keyname, "obsrvtNm", items_jsonObject);
 
 							}
 							
@@ -127,6 +113,9 @@ public class Excllcode {
 							JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 							for (int r = 0; r < items_jsonArray.size(); r++) {
+								
+								String excllncobsrvtcode = " "; // 우량관측소코드
+								String obsrvtNm = " "; // 관측소이름
 
 								JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -137,23 +126,9 @@ public class Excllcode {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									if(keyname.equals("excllncobsrvtcode")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											excllncobsrvtcode = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											excllncobsrvtcode = " ";
-										}
-									}
-									if(keyname.equals("obsrvtNm")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											obsrvtNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											obsrvtNm = " ";
-										}
-									}
+									
+									excllncobsrvtcode = JsonParser.colWrite_String(excllncobsrvtcode, keyname, "excllncobsrvtcode", item_obj);
+									obsrvtNm = JsonParser.colWrite_String(obsrvtNm, keyname, "obsrvtNm", item_obj);
 
 								}
 

@@ -76,9 +76,6 @@ public class Waterfltplt {
 
 					// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
-					String fltplt = " "; // 정수장코드
-					String fltpltnm = " "; // 정수장명
-
 					for (int i = 1; i <= pageCount; i++) {
 
 						json = JsonParser.parseWatJson(service_url, service_key, String.valueOf(i));
@@ -112,6 +109,9 @@ public class Waterfltplt {
 
 							// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 							if (items.get("item") instanceof JSONObject) {
+								
+								String fltplt = " "; // 정수장코드
+								String fltpltnm = " "; // 정수장명
 
 								JSONObject items_jsonObject = (JSONObject) items.get("item");
 
@@ -123,22 +123,8 @@ public class Waterfltplt {
 
 									String keyname = iter.next();
 									
-									if(keyname.equals("fltplt")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											fltplt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											fltplt = " ";
-										}
-									}
-									if(keyname.equals("fltpltnm")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											fltpltnm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											fltpltnm = " ";
-										}
-									}
+									fltplt = JsonParser.colWrite_String(fltplt, keyname, "fltplt", items_jsonObject);
+									fltpltnm = JsonParser.colWrite_String(fltpltnm, keyname, "fltpltnm", items_jsonObject);	
 
 								}
 								
@@ -167,6 +153,9 @@ public class Waterfltplt {
 								JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 								for (int r = 0; r < items_jsonArray.size(); r++) {
+									
+									String fltplt = " "; // 정수장코드
+									String fltpltnm = " "; // 정수장명
 
 									JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -177,23 +166,10 @@ public class Waterfltplt {
 									while (iter.hasNext()) {
 
 										String keyname = iter.next();
+										
+										fltplt = JsonParser.colWrite_String(fltplt, keyname, "fltplt", item_obj);
+										fltpltnm = JsonParser.colWrite_String(fltpltnm, keyname, "fltpltnm", item_obj);	
 
-										if(keyname.equals("fltplt")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												fltplt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												fltplt = " ";
-											}
-										}
-										if(keyname.equals("fltpltnm")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												fltpltnm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												fltpltnm = " ";
-											}
-										}
 									}
 
 									// step 4. 파일에 쓰기

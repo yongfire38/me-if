@@ -101,23 +101,23 @@ public class Multidamdilist {
 							System.out.println(
 									"parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
 						} else if (resultCode.equals("00")) {
-							
-							String seqno = " "; // 순번
-							String damcdcrd = " "; // 댐코드
-							String damnm = " "; // 댐명칭
-							String obsymd = " "; // 측정일자
-							String rsqtysum = " "; // 저수량합계(백만m3)
-							String stagenow = " "; // 현재저수지가뭄단계명
-							String limobsymd = " "; // 용수공급가능일
-							String stage_1 = " "; // 관심단계저수량
-							String stage_2 = " "; // 주의단계저수량
-							String stage_3 = " "; // 경계단계저수량
-							String stage_4 = " "; // 심각단계저수량
-							String stage_0 = " "; // 정상공급환원단계저수량
 
 							JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 							for (int r = 0; r < items_jsonArray.size(); r++) {
+								
+								String seqno = " "; // 순번
+								String damcdcrd = " "; // 댐코드
+								String damnm = " "; // 댐명칭
+								String obsymd = " "; // 측정일자
+								String rsqtysum = " "; // 저수량합계(백만m3)
+								String stagenow = " "; // 현재저수지가뭄단계명
+								String limobsymd = " "; // 용수공급가능일
+								String stage_1 = " "; // 관심단계저수량
+								String stage_2 = " "; // 주의단계저수량
+								String stage_3 = " "; // 경계단계저수량
+								String stage_4 = " "; // 심각단계저수량
+								String stage_0 = " "; // 정상공급환원단계저수량
 
 								JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -129,103 +129,18 @@ public class Multidamdilist {
 
 									String keyname = iter.next();
 									
-									
-									if(keyname.equals("seqno")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											seqno = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											seqno = " ";
-										}
-									}
-									if(keyname.equals("damcdcrd")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											damcdcrd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											damcdcrd = " ";
-										}
-									}
-									if(keyname.equals("damnm")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											damnm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											damnm = " ";
-										}
-									}
-									if(keyname.equals("obsymd")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											obsymd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											obsymd = " ";
-										}
-									}
-									if(keyname.equals("rsqtysum")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											rsqtysum = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											rsqtysum = " ";
-										}
-									}
-									if(keyname.equals("stagenow")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											stagenow = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											stagenow = " ";
-										}
-									}
-									if(keyname.equals("limobsymd")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											limobsymd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											limobsymd = " ";
-										}
-									}
-									if(keyname.equals("stage_1")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											stage_1 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											stage_1 = " ";
-										}
-									}
-									if(keyname.equals("stage_2")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											stage_2 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											stage_2 = " ";
-										}
-									}
-									if(keyname.equals("stage_3")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											stage_3 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											stage_3 = " ";
-										}
-									}
-									if(keyname.equals("stage_4")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											stage_4 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											stage_4 = " ";
-										}
-									}	
-									if(keyname.equals("stage_0")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											stage_0 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											stage_0 = " ";
-										}
-									}
+									seqno = JsonParser.colWrite_String(seqno, keyname, "seqno", item_obj);
+									damcdcrd = JsonParser.colWrite_String(damcdcrd, keyname, "damcdcrd", item_obj);
+									damnm = JsonParser.colWrite_String(damnm, keyname, "damnm", item_obj);
+									obsymd = JsonParser.colWrite_String(obsymd, keyname, "obsymd", item_obj);
+									rsqtysum = JsonParser.colWrite_String(rsqtysum, keyname, "rsqtysum", item_obj);
+									stagenow = JsonParser.colWrite_String(stagenow, keyname, "stagenow", item_obj);
+									limobsymd = JsonParser.colWrite_String(limobsymd, keyname, "limobsymd", item_obj);
+									stage_1 = JsonParser.colWrite_String(stage_1, keyname, "stage_1", item_obj);
+									stage_2 = JsonParser.colWrite_String(stage_2, keyname, "stage_2", item_obj);
+									stage_3 = JsonParser.colWrite_String(stage_3, keyname, "stage_3", item_obj);
+									stage_4 = JsonParser.colWrite_String(stage_4, keyname, "stage_4", item_obj);
+									stage_0 = JsonParser.colWrite_String(stage_0, keyname, "stage_0", item_obj);
 
 								}
 								

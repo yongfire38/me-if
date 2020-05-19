@@ -67,14 +67,14 @@ public class Walcode {
 					} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
-						
-						String walobsrvtcode = " "; // 수위 관측소코드
-						String obsrvtNm = " ";  // 관측소이름
 
 						JSONObject items = (JSONObject) body.get("items");
 
 						// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 						if (items.get("item") instanceof JSONObject) {
+							
+							String walobsrvtcode = " "; // 수위 관측소코드
+							String obsrvtNm = " ";  // 관측소이름
 
 							JSONObject items_jsonObject = (JSONObject) items.get("item");
 
@@ -86,22 +86,8 @@ public class Walcode {
 
 								String keyname = iter.next();
 								
-								if(keyname.equals("walobsrvtcode")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										walobsrvtcode = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										walobsrvtcode = " ";
-									}
-								}
-								if(keyname.equals("obsrvtNm")) {
-									if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-										obsrvtNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-									}else{
-										obsrvtNm = " ";
-									}
-								}
+								walobsrvtcode = JsonParser.colWrite_String(walobsrvtcode, keyname, "walobsrvtcode", items_jsonObject);
+								obsrvtNm = JsonParser.colWrite_String(obsrvtNm, keyname, "obsrvtNm", items_jsonObject);
 
 							}
 							
@@ -128,6 +114,9 @@ public class Walcode {
 							JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 							for (int r = 0; r < items_jsonArray.size(); r++) {
+								
+								String walobsrvtcode = " "; // 수위 관측소코드
+								String obsrvtNm = " ";  // 관측소이름
 
 								JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -138,23 +127,9 @@ public class Walcode {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									if(keyname.equals("walobsrvtcode")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											walobsrvtcode = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											walobsrvtcode = " ";
-										}
-									}
-									if(keyname.equals("obsrvtNm")) {
-										if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-											obsrvtNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											obsrvtNm = " ";
-										}
-									}
+									
+									walobsrvtcode = JsonParser.colWrite_String(walobsrvtcode, keyname, "walobsrvtcode", item_obj);
+									obsrvtNm = JsonParser.colWrite_String(obsrvtNm, keyname, "obsrvtNm", item_obj);
 
 								}
 

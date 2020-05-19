@@ -107,16 +107,16 @@ public class GetBsnsPlaceLnMyeonInfoInqire {
 							String totalCount_str = body.get("totalCount").toString().trim();
 
 							JSONObject items = (JSONObject) body.get("items");
-							
-							String rnum = " "; // 정렬순서
-							String num = " "; // 고유번호
-							String name = " "; // 사업명
-							String centerx = " "; // 좌표 X
-							String centery = " "; // 좌표 Y
-							String distance = " "; // 반경
 
 							// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 							if (items.get("item") instanceof JSONObject) {
+								
+								String rnum = " "; // 정렬순서
+								String num = " "; // 고유번호
+								String name = " "; // 사업명
+								String centerx = " "; // 좌표 X
+								String centery = " "; // 좌표 Y
+								String distance = " "; // 반경
 
 								JSONObject items_jsonObject = (JSONObject) items.get("item");
 
@@ -128,54 +128,12 @@ public class GetBsnsPlaceLnMyeonInfoInqire {
 
 									String keyname = iter.next();
 									
-									if(keyname.equals("rnum")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											rnum = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											rnum = " ";
-										}
-									}
-									if(keyname.equals("num")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											num = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											num = " ";
-										}
-									}
-									if(keyname.equals("name")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											name = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											name = " ";
-										}
-									}
-									if(keyname.equals("centerx")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											centerx = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											centerx = " ";
-										}
-									}
-									if(keyname.equals("centery")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											centery = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											centery = " ";
-										}
-									}
-									if(keyname.equals("distance")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											distance = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											distance = " ";
-										}
-									}
+									rnum = JsonParser.colWrite_String(rnum, keyname, "rnum", items_jsonObject);
+									num = JsonParser.colWrite_String(num, keyname, "num", items_jsonObject);
+									name = JsonParser.colWrite_String(name, keyname, "name", items_jsonObject);
+									centerx = JsonParser.colWrite_String(centerx, keyname, "centerx", items_jsonObject);
+									centery = JsonParser.colWrite_String(centery, keyname, "centery", items_jsonObject);
+									distance = JsonParser.colWrite_String(distance, keyname, "distance", items_jsonObject);
 
 								}
 								
@@ -220,6 +178,13 @@ public class GetBsnsPlaceLnMyeonInfoInqire {
 								JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 								for (int r = 0; r < items_jsonArray.size(); r++) {
+									
+									String rnum = " "; // 정렬순서
+									String num = " "; // 고유번호
+									String name = " "; // 사업명
+									String centerx = " "; // 좌표 X
+									String centery = " "; // 좌표 Y
+									String distance = " "; // 반경
 
 									JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -230,55 +195,13 @@ public class GetBsnsPlaceLnMyeonInfoInqire {
 									while (iter.hasNext()) {
 
 										String keyname = iter.next();
-
-										if(keyname.equals("rnum")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												rnum = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												rnum = " ";
-											}
-										}
-										if(keyname.equals("num")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												num = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												num = " ";
-											}
-										}
-										if(keyname.equals("name")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												name = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												name = " ";
-											}
-										}
-										if(keyname.equals("centerx")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												centerx = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												centerx = " ";
-											}
-										}
-										if(keyname.equals("centery")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												centery = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												centery = " ";
-											}
-										}
-										if(keyname.equals("distance")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												distance = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												distance = " ";
-											}
-										}	
+										
+										rnum = JsonParser.colWrite_String(rnum, keyname, "rnum", item_obj);
+										num = JsonParser.colWrite_String(num, keyname, "num", item_obj);
+										name = JsonParser.colWrite_String(name, keyname, "name", item_obj);
+										centerx = JsonParser.colWrite_String(centerx, keyname, "centerx", item_obj);
+										centery = JsonParser.colWrite_String(centery, keyname, "centery", item_obj);
+										distance = JsonParser.colWrite_String(distance, keyname, "distance", item_obj);
 
 									}
 

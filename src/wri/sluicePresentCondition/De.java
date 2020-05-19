@@ -107,19 +107,19 @@ public class De {
 							} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
-								
-								String obsryymtde = " "; // 일시
-								String lowlevel = " "; // 댐수위
-								String prcptqy = " "; // 강우량
-								String inflowqy = " "; // 유입량
-								String totdcwtrqy = " "; // 총방류량
-								String rsvwtqy = " "; // 저수량
-								String rsvwtrt = " "; // 저수율
 
 								JSONObject items = (JSONObject) body.get("items");
 
 								// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 								if (items.get("item") instanceof JSONObject) {
+									
+									String obsryymtde = " "; // 일시
+									String lowlevel = " "; // 댐수위
+									String prcptqy = " "; // 강우량
+									String inflowqy = " "; // 유입량
+									String totdcwtrqy = " "; // 총방류량
+									String rsvwtqy = " "; // 저수량
+									String rsvwtrt = " "; // 저수율
 
 									JSONObject items_jsonObject = (JSONObject) items.get("item");
 
@@ -131,62 +131,13 @@ public class De {
 
 										String keyname = iter.next();
 										
-										if(keyname.equals("obsryymtde")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												obsryymtde = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												obsryymtde = " ";
-											}
-										}
-										if(keyname.equals("lowlevel")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												lowlevel = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												lowlevel = " ";
-											}
-										}
-										if(keyname.equals("prcptqy")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												prcptqy = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												prcptqy = " ";
-											}
-										}
-										if(keyname.equals("inflowqy")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												inflowqy = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												inflowqy = " ";
-											}
-										}
-										if(keyname.equals("totdcwtrqy")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												totdcwtrqy = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												totdcwtrqy = " ";
-											}
-										}
-										if(keyname.equals("rsvwtqy")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												rsvwtqy = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												rsvwtqy = " ";
-											}
-										}
-										if(keyname.equals("rsvwtrt")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												rsvwtrt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												rsvwtrt = " ";
-											}
-										}
+										obsryymtde = JsonParser.colWrite_String(obsryymtde, keyname, "obsryymtde", items_jsonObject);
+										lowlevel = JsonParser.colWrite_String(lowlevel, keyname, "lowlevel", items_jsonObject);
+										prcptqy = JsonParser.colWrite_String(prcptqy, keyname, "prcptqy", items_jsonObject);
+										inflowqy = JsonParser.colWrite_String(inflowqy, keyname, "inflowqy", items_jsonObject);
+										totdcwtrqy = JsonParser.colWrite_String(totdcwtrqy, keyname, "totdcwtrqy", items_jsonObject);
+										rsvwtqy = JsonParser.colWrite_String(rsvwtqy, keyname, "rsvwtqy", items_jsonObject);
+										rsvwtrt = JsonParser.colWrite_String(rsvwtrt, keyname, "rsvwtrt", items_jsonObject);
 
 									}
 									
@@ -231,6 +182,14 @@ public class De {
 									JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 									for (int r = 0; r < items_jsonArray.size(); r++) {
+										
+										String obsryymtde = " "; // 일시
+										String lowlevel = " "; // 댐수위
+										String prcptqy = " "; // 강우량
+										String inflowqy = " "; // 유입량
+										String totdcwtrqy = " "; // 총방류량
+										String rsvwtqy = " "; // 저수량
+										String rsvwtrt = " "; // 저수율
 
 										JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -241,63 +200,14 @@ public class De {
 										while (iter.hasNext()) {
 
 											String keyname = iter.next();
-
-											if(keyname.equals("obsryymtde")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													obsryymtde = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													obsryymtde = " ";
-												}
-											}
-											if(keyname.equals("lowlevel")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													lowlevel = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													lowlevel = " ";
-												}
-											}
-											if(keyname.equals("prcptqy")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													prcptqy = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													prcptqy = " ";
-												}
-											}
-											if(keyname.equals("inflowqy")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													inflowqy = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													inflowqy = " ";
-												}
-											}
-											if(keyname.equals("totdcwtrqy")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													totdcwtrqy = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													totdcwtrqy = " ";
-												}
-											}
-											if(keyname.equals("rsvwtqy")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													rsvwtqy = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													rsvwtqy = " ";
-												}
-											}
-											if(keyname.equals("rsvwtrt")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													rsvwtrt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													rsvwtrt = " ";
-												}
-											}
+											
+											obsryymtde = JsonParser.colWrite_String(obsryymtde, keyname, "obsryymtde", item_obj);
+											lowlevel = JsonParser.colWrite_String(lowlevel, keyname, "lowlevel", item_obj);
+											prcptqy = JsonParser.colWrite_String(prcptqy, keyname, "prcptqy", item_obj);
+											inflowqy = JsonParser.colWrite_String(inflowqy, keyname, "inflowqy", item_obj);
+											totdcwtrqy = JsonParser.colWrite_String(totdcwtrqy, keyname, "totdcwtrqy", item_obj);
+											rsvwtqy = JsonParser.colWrite_String(rsvwtqy, keyname, "rsvwtqy", item_obj);
+											rsvwtrt = JsonParser.colWrite_String(rsvwtrt, keyname, "rsvwtrt", item_obj);
 
 										}
 

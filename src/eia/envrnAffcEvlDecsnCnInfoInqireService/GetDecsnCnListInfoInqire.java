@@ -109,15 +109,15 @@ public class GetDecsnCnListInfoInqire {
 								String totalCount_str = body.get("totalCount").toString().trim();
 								
 								JSONObject items = (JSONObject) body.get("items");
-								
-								String rnum = " "; // 넘버링
-								String resultCd = " "; // 결정내용코드
-								String discOrganNm = " "; // 협의기관명
-								String bizNm = " "; // 사업명
-								String drfopTmdt = " "; // 공람기간
 
 								// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 								if (items.get("item") instanceof JSONObject) {
+									
+									String rnum = " "; // 넘버링
+									String resultCd = " "; // 결정내용코드
+									String discOrganNm = " "; // 협의기관명
+									String bizNm = " "; // 사업명
+									String drfopTmdt = " "; // 공람기간
 
 									JSONObject items_jsonObject = (JSONObject) items.get("item");
 
@@ -129,46 +129,11 @@ public class GetDecsnCnListInfoInqire {
 
 										String keyname = iter.next();
 										
-										if(keyname.equals("rnum")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												rnum = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												rnum = " ";
-											}
-										}
-										if(keyname.equals("resultCd")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												resultCd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												resultCd = " ";
-											}
-										}
-										if(keyname.equals("discOrganNm")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												discOrganNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												discOrganNm = " ";
-											}
-										}
-										if(keyname.equals("bizNm")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												bizNm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												bizNm = " ";
-											}
-										}
-										if(keyname.equals("drfopTmdt")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												drfopTmdt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												drfopTmdt = " ";
-											}
-										}
+										rnum = JsonParser.colWrite_String(rnum, keyname, "rnum", items_jsonObject);
+										resultCd = JsonParser.colWrite_String(resultCd, keyname, "resultCd", items_jsonObject);
+										discOrganNm = JsonParser.colWrite_String(discOrganNm, keyname, "discOrganNm", items_jsonObject);
+										bizNm = JsonParser.colWrite_String(bizNm, keyname, "bizNm", items_jsonObject);
+										drfopTmdt = JsonParser.colWrite_String(drfopTmdt, keyname, "drfopTmdt", items_jsonObject);
 
 									}
 									
@@ -212,6 +177,12 @@ public class GetDecsnCnListInfoInqire {
 									JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 									for (int r = 0; r < items_jsonArray.size(); r++) {
+										
+										String rnum = " "; // 넘버링
+										String resultCd = " "; // 결정내용코드
+										String discOrganNm = " "; // 협의기관명
+										String bizNm = " "; // 사업명
+										String drfopTmdt = " "; // 공람기간
 
 										JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -222,47 +193,12 @@ public class GetDecsnCnListInfoInqire {
 										while (iter.hasNext()) {
 
 											String keyname = iter.next();
-
-											if(keyname.equals("rnum")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													rnum = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													rnum = " ";
-												}
-											}
-											if(keyname.equals("resultCd")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													resultCd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													resultCd = " ";
-												}
-											}
-											if(keyname.equals("discOrganNm")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													discOrganNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													discOrganNm = " ";
-												}
-											}
-											if(keyname.equals("bizNm")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													bizNm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													bizNm = " ";
-												}
-											}
-											if(keyname.equals("drfopTmdt")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													drfopTmdt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													drfopTmdt = " ";
-												}
-											}
+											
+											rnum = JsonParser.colWrite_String(rnum, keyname, "rnum", item_obj);
+											resultCd = JsonParser.colWrite_String(resultCd, keyname, "resultCd", item_obj);
+											discOrganNm = JsonParser.colWrite_String(discOrganNm, keyname, "discOrganNm", item_obj);
+											bizNm = JsonParser.colWrite_String(bizNm, keyname, "bizNm", item_obj);
+											drfopTmdt = JsonParser.colWrite_String(drfopTmdt, keyname, "drfopTmdt", item_obj);
 
 										}
 

@@ -106,21 +106,21 @@ public class Winfosdaywater {
 							} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
-
-								String sgcnm = " "; // 지자체명
-								String sitenm = " "; // 정수장명
-								String cltdt = " "; // 측정일자
-								String data1 = " "; // 맛
-								String data2 = " "; // 냄새
-								String data3 = " "; // 색도(도)
-								String data4 = " "; // pH(-)
-								String data5 = " "; // 탁도(NTU)
-								String data6 = " "; // 잔류염소(mg/L)
 								
 								JSONObject items = (JSONObject) body.get("items");
 
 								// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 								if (items.get("item") instanceof JSONObject) {
+									
+									String sgcnm = " "; // 지자체명
+									String sitenm = " "; // 정수장명
+									String cltdt = " "; // 측정일자
+									String data1 = " "; // 맛
+									String data2 = " "; // 냄새
+									String data3 = " "; // 색도(도)
+									String data4 = " "; // pH(-)
+									String data5 = " "; // 탁도(NTU)
+									String data6 = " "; // 잔류염소(mg/L)
 
 									JSONObject items_jsonObject = (JSONObject) items.get("item");
 
@@ -132,78 +132,15 @@ public class Winfosdaywater {
 
 										String keyname = iter.next();
 										
-										if(keyname.equals("sgcnm")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												sgcnm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												sgcnm = " ";
-											}
-										}
-										if(keyname.equals("sitenm")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												sitenm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												sitenm = " ";
-											}
-										}
-										if(keyname.equals("cltdt")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												cltdt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												cltdt = " ";
-											}
-										}
-										if(keyname.equals("data1")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												data1 = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												data1 = " ";
-											}
-										}
-										if(keyname.equals("data2")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												data2 = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												data2 = " ";
-											}
-										}
-										if(keyname.equals("data3")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												data3 = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												data3 = " ";
-											}
-										}
-										if(keyname.equals("data4")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												data4 = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												data4 = " ";
-											}
-										}
-										if(keyname.equals("data5")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												data5 = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												data5 = " ";
-											}
-										}
-										if(keyname.equals("data6")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												data6 = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												data6 = " ";
-											}
-										}
+										sgcnm = JsonParser.colWrite_String(sgcnm, keyname, "sgcnm", items_jsonObject);
+										sitenm = JsonParser.colWrite_String(sitenm, keyname, "sitenm", items_jsonObject);
+										cltdt = JsonParser.colWrite_String(cltdt, keyname, "cltdt", items_jsonObject);
+										data1 = JsonParser.colWrite_String(data1, keyname, "data1", items_jsonObject);
+										data2 = JsonParser.colWrite_String(data2, keyname, "data2", items_jsonObject);
+										data3 = JsonParser.colWrite_String(data3, keyname, "data3", items_jsonObject);
+										data4 = JsonParser.colWrite_String(data4, keyname, "data4", items_jsonObject);
+										data5 = JsonParser.colWrite_String(data5, keyname, "data5", items_jsonObject);
+										data6 = JsonParser.colWrite_String(data6, keyname, "data6", items_jsonObject);
 
 									}
 									
@@ -246,6 +183,16 @@ public class Winfosdaywater {
 									JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 									for (int r = 0; r < items_jsonArray.size(); r++) {
+										
+										String sgcnm = " "; // 지자체명
+										String sitenm = " "; // 정수장명
+										String cltdt = " "; // 측정일자
+										String data1 = " "; // 맛
+										String data2 = " "; // 냄새
+										String data3 = " "; // 색도(도)
+										String data4 = " "; // pH(-)
+										String data5 = " "; // 탁도(NTU)
+										String data6 = " "; // 잔류염소(mg/L)
 
 										JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -256,79 +203,17 @@ public class Winfosdaywater {
 										while (iter.hasNext()) {
 
 											String keyname = iter.next();
+											
+											sgcnm = JsonParser.colWrite_String(sgcnm, keyname, "sgcnm", item_obj);
+											sitenm = JsonParser.colWrite_String(sitenm, keyname, "sitenm", item_obj);
+											cltdt = JsonParser.colWrite_String(cltdt, keyname, "cltdt", item_obj);
+											data1 = JsonParser.colWrite_String(data1, keyname, "data1", item_obj);
+											data2 = JsonParser.colWrite_String(data2, keyname, "data2", item_obj);
+											data3 = JsonParser.colWrite_String(data3, keyname, "data3", item_obj);
+											data4 = JsonParser.colWrite_String(data4, keyname, "data4", item_obj);
+											data5 = JsonParser.colWrite_String(data5, keyname, "data5", item_obj);
+											data6 = JsonParser.colWrite_String(data6, keyname, "data6", item_obj);
 
-											if(keyname.equals("sgcnm")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													sgcnm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													sgcnm = " ";
-												}
-											}
-											if(keyname.equals("sitenm")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													sitenm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													sitenm = " ";
-												}
-											}
-											if(keyname.equals("cltdt")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													cltdt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													cltdt = " ";
-												}
-											}
-											if(keyname.equals("data1")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													data1 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													data1 = " ";
-												}
-											}
-											if(keyname.equals("data2")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													data2 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													data2 = " ";
-												}
-											}
-											if(keyname.equals("data3")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													data3 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													data3 = " ";
-												}
-											}
-											if(keyname.equals("data4")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													data4 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													data4 = " ";
-												}
-											}
-											if(keyname.equals("data5")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													data5 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													data5 = " ";
-												}
-											}
-											if(keyname.equals("data6")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													data6 = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													data6 = " ";
-												}
-											}
 										}
 
 										// step 4. 파일에 쓰기

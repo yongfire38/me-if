@@ -111,16 +111,16 @@ public class Hourwal {
 							} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
-								
-								String no = " "; // 순번
-								String obsrdt = " "; // 시간
-								String flux = " "; // 수위
-								String hourwal = " "; // 우량
 
 								JSONObject items = (JSONObject) body.get("items");
 
 								// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 								if (items.get("item") instanceof JSONObject) {
+									
+									String no = " "; // 순번
+									String obsrdt = " "; // 시간
+									String flux = " "; // 수위
+									String hourwal = " "; // 우량
 
 									JSONObject items_jsonObject = (JSONObject) items.get("item");
 
@@ -132,39 +132,11 @@ public class Hourwal {
 
 										String keyname = iter.next();
 										
-										if(keyname.equals("no")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												no = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												no = " ";
-											}
-										}
-										if(keyname.equals("obsrdt")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												obsrdt = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												obsrdt = " ";
-											}
-										}
-										if(keyname.equals("flux")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												flux = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												flux = " ";
-											}
-										}
-										if(keyname.equals("hourwal")) {
-											if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-												hourwal = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												hourwal = " ";
-											}
-										}
-
+										no = JsonParser.colWrite_String(no, keyname, "no", items_jsonObject);
+										obsrdt = JsonParser.colWrite_String(obsrdt, keyname, "obsrdt", items_jsonObject);
+										flux = JsonParser.colWrite_String(flux, keyname, "flux", items_jsonObject);
+										hourwal = JsonParser.colWrite_String(hourwal, keyname, "hourwal", items_jsonObject);
+										
 									}
 									
 									// step 4. 파일에 쓰기
@@ -204,6 +176,11 @@ public class Hourwal {
 									JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 									for (int r = 0; r < items_jsonArray.size(); r++) {
+										
+										String no = " "; // 순번
+										String obsrdt = " "; // 시간
+										String flux = " "; // 수위
+										String hourwal = " "; // 우량
 
 										JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -214,39 +191,11 @@ public class Hourwal {
 										while (iter.hasNext()) {
 
 											String keyname = iter.next();
-
-											if(keyname.equals("no")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													no = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													no = " ";
-												}
-											}
-											if(keyname.equals("obsrdt")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													obsrdt = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													obsrdt = " ";
-												}
-											}
-											if(keyname.equals("flux")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													flux = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													flux = " ";
-												}
-											}
-											if(keyname.equals("hourwal")) {
-												if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-													hourwal = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-															.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												}else{
-													hourwal = " ";
-												}
-											}
+											
+											no = JsonParser.colWrite_String(no, keyname, "no", item_obj);
+											obsrdt = JsonParser.colWrite_String(obsrdt, keyname, "obsrdt", item_obj);
+											flux = JsonParser.colWrite_String(flux, keyname, "flux", item_obj);
+											hourwal = JsonParser.colWrite_String(hourwal, keyname, "hourwal", item_obj);
 
 										}
 

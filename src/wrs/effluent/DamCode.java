@@ -103,15 +103,15 @@ public class DamCode {
 						} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 							System.out.println("data not exist!!");
 						} else if (resultCode.equals("00")) {
-							
-							String damcd = " "; // 댐코드
-							String damnm = " "; // 댐명칭
-							String seqno = " "; // 순번
 
 							JSONObject items = (JSONObject) body.get("items");
 
 							// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
 							if (items.get("item") instanceof JSONObject) {
+								
+								String damcd = " "; // 댐코드
+								String damnm = " "; // 댐명칭
+								String seqno = " "; // 순번
 
 								JSONObject items_jsonObject = (JSONObject) items.get("item");
 
@@ -123,30 +123,9 @@ public class DamCode {
 
 									String keyname = iter.next();
 									
-									if(keyname.equals("damcd")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											damcd = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											damcd = " ";
-										}
-									}
-									if(keyname.equals("damnm")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											damnm = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											damnm = " ";
-										}
-									}
-									if(keyname.equals("seqno")) {
-										if(!(JsonParser.isEmpty(items_jsonObject.get(keyname)))){
-											seqno = items_jsonObject.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											seqno = " ";
-										}
-									}
+									damcd = JsonParser.colWrite_String(damcd, keyname, "damcd", items_jsonObject);
+									damnm = JsonParser.colWrite_String(damnm, keyname, "damnm", items_jsonObject);
+									seqno = JsonParser.colWrite_String(seqno, keyname, "seqno", items_jsonObject);
 
 								}
 								
@@ -177,6 +156,10 @@ public class DamCode {
 								JSONArray items_jsonArray = (JSONArray) items.get("item");
 
 								for (int r = 0; r < items_jsonArray.size(); r++) {
+									
+									String damcd = " "; // 댐코드
+									String damnm = " "; // 댐명칭
+									String seqno = " "; // 순번
 
 									JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
 
@@ -187,31 +170,10 @@ public class DamCode {
 									while (iter.hasNext()) {
 
 										String keyname = iter.next();
-
-										if(keyname.equals("damcd")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												damcd = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												damcd = " ";
-											}
-										}
-										if(keyname.equals("damnm")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												damnm = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												damnm = " ";
-											}
-										}
-										if(keyname.equals("seqno")) {
-											if(!(JsonParser.isEmpty(item_obj.get(keyname)))){
-												seqno = item_obj.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												seqno = " ";
-											}
-										}
+										
+										damcd = JsonParser.colWrite_String(damcd, keyname, "damcd", item_obj);
+										damnm = JsonParser.colWrite_String(damnm, keyname, "damnm", item_obj);
+										seqno = JsonParser.colWrite_String(seqno, keyname, "seqno", item_obj);
 
 									}
 
