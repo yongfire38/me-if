@@ -114,80 +114,80 @@ public class MonPurification {
 								System.out.println(
 										"parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
 							} else if (resultCode.equals("00")) {
-								
-								String RNUM = " "; // 순번
-								String FIM_FCLT_NAM = " "; // 정수장명
-								String FIM_REGN_CTY = " "; // 관리기관명
-								String BRTC_NM = " "; // 시도명
-								String SIGNGU_NM = " "; // 시군구명
-								String TELNO = " "; // 관리기관전화번호
-								String WCI_COLL_DAT = " "; // 채수일자
-								String WCI_INORG_NAM = " "; // 검사기관명
-								String TCC = " "; // 일반세균
-								String TC = " "; // 총대장균군
-								String EFC = " "; // 대장균/분원성대장균군
-								String PB = " "; // 납
-								String FL = " "; // 불소
-								String AS = " "; // 비소
-								String SE = " "; // 셀레늄
-								String HG = " "; // 수은
-								String CN = " "; // 시안
-								String CR = " "; // 크롬
-								String NHN = " "; // 암모니아성질소
-								String NON = " "; // 질산성질소
-								String CD = " "; // 카드뮴
-								String BOR = " "; // 붕소
-								String BRO = " "; // 브롬산염
-								String D_URNM = " "; // 우라늄
-								String PHEN = " "; // 페놀
-								String DIA = " "; // 다이아지논
-								String PARA = " "; // 파라티온
-								String PENI = " "; // 페니트로티온
-								String CBR = " "; // 카바릴
-								String TCE = " "; // 1_1_1-트리클로로에탄
-								String TTCE = " "; // 테트라클로로에틸렌
-								String TCF = " "; // 트리클로로에틸렌
-								String CC = " "; // 사염화탄소
-								String DDE = " "; // 1_1-디클로로에틸렌
-								String DCM = " "; // 디클로로메탄
-								String BZ = " "; // 벤젠
-								String TOL = " "; // 톨루엔
-								String EB = " "; // 에틸벤젠
-								String XYL = " "; // 크실렌
-								String DBCP = " "; // 1_2-디브로모-3-클로로프로판
-								String DIOX = " "; // 1_4-다이옥산
-								String RC = " "; // 잔류염소
-								String THMS = " "; // 총트리할로메탄
-								String CF = " "; // 클로로포름
-								String BDCM = " "; // 브로모디클로로메탄
-								String DBCM = " "; // 디브로모클로로메탄
-								String CH = " "; // 클로랄하이드레이트
-								String DIT = " "; // 디브로모아세토니트릴
-								String TRT = " "; // 디클로로아세토니트릴
-								String TRL = " "; // 트리클로로아세토니트릴
-								String HAS = " "; // 할로아세틱에시드
-								String FOAH = " "; // 포름알데히드
-								String HR = " "; // 경도
-								String KMN = " "; // 과망간산칼륨소비량
-								String ODOR = " "; // 냄새
-								String TW = " "; // 맛
-								String CU = " "; // 동
-								String CW = " "; // 색도
-								String DTG = " "; // 세제
-								String PH = " "; // 수소이온농도
-								String ZN = " "; // 아연
-								String CL = " "; // 염소이온
-								String RE = " "; // 증발잔류물
-								String FE = " "; // 철
-								String MN = " "; // 망간
-								String TU = " "; // 탁도
-								String SO = " "; // 황산이온
-								String AL = " "; // 알루미늄
-								String WCI_UPDATE_DAT = " "; // 데이터기준일자
 
 								JSONArray items = (JSONArray) body.get("items");
 
 								for (int r = 0; r < items.size(); r++) {
+									
+									String RNUM = " "; // 순번
+									String FIM_FCLT_NAM = " "; // 정수장명
+									String FIM_REGN_CTY = " "; // 관리기관명
+									String BRTC_NM = " "; // 시도명
+									String SIGNGU_NM = " "; // 시군구명
+									String TELNO = " "; // 관리기관전화번호
+									String WCI_COLL_DAT = " "; // 채수일자
+									String WCI_INORG_NAM = " "; // 검사기관명
+									String TCC = " "; // 일반세균
+									String TC = " "; // 총대장균군
+									String EFC = " "; // 대장균/분원성대장균군
+									String PB = " "; // 납
+									String FL = " "; // 불소
+									String AS = " "; // 비소
+									String SE = " "; // 셀레늄
+									String HG = " "; // 수은
+									String CN = " "; // 시안
+									String CR = " "; // 크롬
+									String NHN = " "; // 암모니아성질소
+									String NON = " "; // 질산성질소
+									String CD = " "; // 카드뮴
+									String BOR = " "; // 붕소
+									String BRO = " "; // 브롬산염
+									String D_URNM = " "; // 우라늄
+									String PHEN = " "; // 페놀
+									String DIA = " "; // 다이아지논
+									String PARA = " "; // 파라티온
+									String PENI = " "; // 페니트로티온
+									String CBR = " "; // 카바릴
+									String TCE = " "; // 1_1_1-트리클로로에탄
+									String TTCE = " "; // 테트라클로로에틸렌
+									String TCF = " "; // 트리클로로에틸렌
+									String CC = " "; // 사염화탄소
+									String DDE = " "; // 1_1-디클로로에틸렌
+									String DCM = " "; // 디클로로메탄
+									String BZ = " "; // 벤젠
+									String TOL = " "; // 톨루엔
+									String EB = " "; // 에틸벤젠
+									String XYL = " "; // 크실렌
+									String DBCP = " "; // 1_2-디브로모-3-클로로프로판
+									String DIOX = " "; // 1_4-다이옥산
+									String RC = " "; // 잔류염소
+									String THMS = " "; // 총트리할로메탄
+									String CF = " "; // 클로로포름
+									String BDCM = " "; // 브로모디클로로메탄
+									String DBCM = " "; // 디브로모클로로메탄
+									String CH = " "; // 클로랄하이드레이트
+									String DIT = " "; // 디브로모아세토니트릴
+									String TRT = " "; // 디클로로아세토니트릴
+									String TRL = " "; // 트리클로로아세토니트릴
+									String HAS = " "; // 할로아세틱에시드
+									String FOAH = " "; // 포름알데히드
+									String HR = " "; // 경도
+									String KMN = " "; // 과망간산칼륨소비량
+									String ODOR = " "; // 냄새
+									String TW = " "; // 맛
+									String CU = " "; // 동
+									String CW = " "; // 색도
+									String DTG = " "; // 세제
+									String PH = " "; // 수소이온농도
+									String ZN = " "; // 아연
+									String CL = " "; // 염소이온
+									String RE = " "; // 증발잔류물
+									String FE = " "; // 철
+									String MN = " "; // 망간
+									String TU = " "; // 탁도
+									String SO = " "; // 황산이온
+									String AL = " "; // 알루미늄
+									String WCI_UPDATE_DAT = " "; // 데이터기준일자
 
 									JSONObject item = (JSONObject) items.get(r);
 
@@ -196,552 +196,78 @@ public class MonPurification {
 									Iterator<String> iter = key.iterator();
 
 									while (iter.hasNext()) {
+										
 										String keyname = iter.next();
 										
-										if(keyname.equals("RNUM")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												RNUM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												RNUM = " ";
-											}
-										}
-										if(keyname.equals("FIM_FCLT_NAM")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												FIM_FCLT_NAM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												FIM_FCLT_NAM = " ";
-											}
-										}
-										if(keyname.equals("FIM_REGN_CTY")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												FIM_REGN_CTY = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												FIM_REGN_CTY = " ";
-											}
-										}
-										if(keyname.equals("BRTC_NM")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												BRTC_NM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												BRTC_NM = " ";
-											}
-										}
-										if(keyname.equals("SIGNGU_NM")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												SIGNGU_NM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												SIGNGU_NM = " ";
-											}
-										}
-										if(keyname.equals("TELNO")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												TELNO = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												TELNO = " ";
-											}
-										}
-										if(keyname.equals("WCI_COLL_DAT")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												WCI_COLL_DAT = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												WCI_COLL_DAT = " ";
-											}
-										}
-										if(keyname.equals("WCI_INORG_NAM")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												WCI_INORG_NAM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												WCI_INORG_NAM = " ";
-											}
-										}
-										if(keyname.equals("TCC")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												TCC = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												TCC = " ";
-											}
-										}
-										if(keyname.equals("TC")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												TC = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												TC = " ";
-											}
-										}
-										if(keyname.equals("EFC")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												EFC = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												EFC = " ";
-											}
-										}
-										if(keyname.equals("PB")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												PB = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												PB = " ";
-											}
-										}
-										if(keyname.equals("FL")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												FL = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												FL = " ";
-											}
-										}
-										if(keyname.equals("AS")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												AS = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												AS = " ";
-											}
-										}
-										if(keyname.equals("SE")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												SE = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												SE = " ";
-											}
-										}
-										if(keyname.equals("HG")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												HG = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												HG = " ";
-											}
-										}
-										if(keyname.equals("CN")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												CN = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												CN = " ";
-											}
-										}
-										if(keyname.equals("CR")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												CR = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												CR = " ";
-											}
-										}
-										if(keyname.equals("NHN")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												NHN = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												NHN = " ";
-											}
-										}
-										if(keyname.equals("NON")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												NON = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												NON = " ";
-											}
-										}
-										if(keyname.equals("CD")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												CD = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												CD = " ";
-											}
-										}
-										if(keyname.equals("BOR")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												BOR = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												BOR = " ";
-											}
-										}
-										if(keyname.equals("BRO")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												BRO = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												BRO = " ";
-											}
-										}
-										if(keyname.equals("D-URNM")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												D_URNM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												D_URNM = " ";
-											}
-										}
-										if(keyname.equals("PHEN")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												PHEN = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												PHEN = " ";
-											}
-										}
-										if(keyname.equals("DIA")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												DIA = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												DIA = " ";
-											}
-										}
-										if(keyname.equals("PARA")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												PARA = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												PARA = " ";
-											}
-										}
-										if(keyname.equals("PENI")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												PENI = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												PENI = " ";
-											}
-										}
-										if(keyname.equals("CBR")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												CBR = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												CBR = " ";
-											}
-										}
-										if(keyname.equals("TCE")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												TCE = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												TCE = " ";
-											}
-										}
-										if(keyname.equals("TTCE")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												TTCE = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												TTCE = " ";
-											}
-										}
-										if(keyname.equals("TCF")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												TCF = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												TCF = " ";
-											}
-										}
-										if(keyname.equals("CC")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												CC = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												CC = " ";
-											}
-										}
-										if(keyname.equals("DDE")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												DDE = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												DDE = " ";
-											}
-										}
-										if(keyname.equals("DCM")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												DCM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												DCM = " ";
-											}
-										}
-										if(keyname.equals("BZ")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												BZ = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												BZ = " ";
-											}
-										}
-										if(keyname.equals("TOL")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												TOL = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												TOL = " ";
-											}
-										}
-										if(keyname.equals("EB")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												EB = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												EB = " ";
-											}
-										}
-										if(keyname.equals("XYL")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												XYL = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												XYL = " ";
-											}
-										}
-										if(keyname.equals("DIOX")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												DIOX = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												DIOX = " ";
-											}
-										}
-										if(keyname.equals("RC")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												RC = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												RC = " ";
-											}
-										}
-										if(keyname.equals("THMS")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												THMS = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												THMS = " ";
-											}
-										}
-										if(keyname.equals("CF")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												CF = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												CF = " ";
-											}
-										}
-										if(keyname.equals("BDCM")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												BDCM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												BDCM = " ";
-											}
-										}
-										if(keyname.equals("DBCM")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												DBCM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												DBCM = " ";
-											}
-										}
-										if(keyname.equals("CH")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												CH = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												CH = " ";
-											}
-										}
-										if(keyname.equals("DIT")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												DIT = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												DIT = " ";
-											}
-										}
-										if(keyname.equals("TRT")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												TRT = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												TRT = " ";
-											}
-										}
-										if(keyname.equals("TRL")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												TRL = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												TRL = " ";
-											}
-										}
-										if(keyname.equals("HAS")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												HAS = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												HAS = " ";
-											}
-										}
-										if(keyname.equals("FOAH")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												FOAH = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												FOAH = " ";
-											}
-										}
-										if(keyname.equals("HR")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												HR = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												HR = " ";
-											}
-										}
-										if(keyname.equals("KMN")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												KMN = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												KMN = " ";
-											}
-										}
-										if(keyname.equals("ODOR")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												ODOR = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												ODOR = " ";
-											}
-										}
-										if(keyname.equals("TW")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												TW = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												TW = " ";
-											}
-										}
-										if(keyname.equals("CU")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												CU = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												CU = " ";
-											}
-										}
-										if(keyname.equals("CW")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												CW = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												CW = " ";
-											}
-										}
-										if(keyname.equals("DTG")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												DTG = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												DTG = " ";
-											}
-										}
-										if(keyname.equals("PH")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												PH = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												PH = " ";
-											}
-										}
-										if(keyname.equals("ZN")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												ZN = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												ZN = " ";
-											}
-										}
-										if(keyname.equals("CL")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												CL = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												CL = " ";
-											}
-										}
-										if(keyname.equals("RE")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												RE = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												RE = " ";
-											}
-										}
-										if(keyname.equals("FE")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												FE = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												FE = " ";
-											}
-										}
-										if(keyname.equals("MN")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												MN = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												MN = " ";
-											}
-										}
-										if(keyname.equals("TU")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												TU = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												TU = " ";
-											}
-										}
-										if(keyname.equals("SO")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												SO = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												SO = " ";
-											}
-										}
-										if(keyname.equals("AL")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												AL = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												AL = " ";
-											}
-										}
-										if(keyname.equals("WCI_UPDATE_DAT")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												WCI_UPDATE_DAT = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-											}else{
-												WCI_UPDATE_DAT = " ";
-											}
-										}
+										RNUM = JsonParser.colWrite_String(RNUM, keyname, "RNUM", item);
+										FIM_FCLT_NAM = JsonParser.colWrite_String(FIM_FCLT_NAM, keyname, "FIM_FCLT_NAM", item);
+										FIM_REGN_CTY = JsonParser.colWrite_String(FIM_REGN_CTY, keyname, "FIM_REGN_CTY", item);
+										BRTC_NM = JsonParser.colWrite_String(BRTC_NM, keyname, "BRTC_NM", item);
+										SIGNGU_NM = JsonParser.colWrite_String(SIGNGU_NM, keyname, "SIGNGU_NM", item);
+										TELNO = JsonParser.colWrite_String(TELNO, keyname, "TELNO", item);
+										WCI_COLL_DAT = JsonParser.colWrite_String(WCI_COLL_DAT, keyname, "WCI_COLL_DAT", item);
+										WCI_INORG_NAM = JsonParser.colWrite_String(WCI_INORG_NAM, keyname, "WCI_INORG_NAM", item);
+										TCC = JsonParser.colWrite_String(TCC, keyname, "TCC", item);
+										TC = JsonParser.colWrite_String(TC, keyname, "TC", item);
+										EFC = JsonParser.colWrite_String(EFC, keyname, "EFC", item);
+										PB = JsonParser.colWrite_String(PB, keyname, "PB", item);
+										FL = JsonParser.colWrite_String(FL, keyname, "FL", item);
+										AS = JsonParser.colWrite_String(AS, keyname, "AS", item);
+										SE = JsonParser.colWrite_String(SE, keyname, "SE", item);
+										HG = JsonParser.colWrite_String(HG, keyname, "HG", item);
+										CN = JsonParser.colWrite_String(CN, keyname, "CN", item);
+										CR = JsonParser.colWrite_String(CR, keyname, "CR", item);
+										NHN = JsonParser.colWrite_String(NHN, keyname, "NHN", item);
+										NON = JsonParser.colWrite_String(NON, keyname, "NON", item);
+										CD = JsonParser.colWrite_String(CD, keyname, "CD", item);
+										BOR = JsonParser.colWrite_String(BOR, keyname, "BOR", item);
+										BRO = JsonParser.colWrite_String(BRO, keyname, "BRO", item);
+										D_URNM = JsonParser.colWrite_String(D_URNM, keyname, "D-URNM", item);
+										PHEN = JsonParser.colWrite_String(PHEN, keyname, "PHEN", item);
+										DIA = JsonParser.colWrite_String(DIA, keyname, "DIA", item);
+										PARA = JsonParser.colWrite_String(PARA, keyname, "PARA", item);
+										PENI = JsonParser.colWrite_String(PENI, keyname, "PENI", item);
+										CBR = JsonParser.colWrite_String(CBR, keyname, "CBR", item);
+										TCE = JsonParser.colWrite_String(TCE, keyname, "TCE", item);
+										TTCE = JsonParser.colWrite_String(TTCE, keyname, "TTCE", item);
+										TCF = JsonParser.colWrite_String(TCF, keyname, "TCF", item);
+										CC = JsonParser.colWrite_String(CC, keyname, "CC", item);
+										DDE = JsonParser.colWrite_String(DDE, keyname, "DDE", item);
+										DCM = JsonParser.colWrite_String(DCM, keyname, "DCM", item);
+										BZ = JsonParser.colWrite_String(BZ, keyname, "BZ", item);
+										TOL = JsonParser.colWrite_String(TOL, keyname, "TOL", item);
+										EB = JsonParser.colWrite_String(EB, keyname, "EB", item);
+										XYL = JsonParser.colWrite_String(XYL, keyname, "XYL", item);
+										DBCP = JsonParser.colWrite_String(DBCP, keyname, "DBCP", item);
+										DIOX = JsonParser.colWrite_String(DIOX, keyname, "DIOX", item);
+										RC = JsonParser.colWrite_String(RC, keyname, "RC", item);
+										THMS = JsonParser.colWrite_String(THMS, keyname, "THMS", item);
+										CF = JsonParser.colWrite_String(CF, keyname, "CF", item);
+										BDCM = JsonParser.colWrite_String(BDCM, keyname, "BDCM", item);
+										DBCM = JsonParser.colWrite_String(DBCM, keyname, "DBCM", item);
+										CH = JsonParser.colWrite_String(CH, keyname, "CH", item);
+										DIT = JsonParser.colWrite_String(DIT, keyname, "DIT", item);
+										TRT = JsonParser.colWrite_String(TRT, keyname, "TRT", item);
+										TRL = JsonParser.colWrite_String(TRL, keyname, "TRL", item);
+										HAS = JsonParser.colWrite_String(HAS, keyname, "HAS", item);
+										FOAH = JsonParser.colWrite_String(FOAH, keyname, "FOAH", item);
+										HR = JsonParser.colWrite_String(HR, keyname, "HR", item);
+										KMN = JsonParser.colWrite_String(KMN, keyname, "KMN", item);
+										ODOR = JsonParser.colWrite_String(ODOR, keyname, "ODOR", item);
+										TW = JsonParser.colWrite_String(TW, keyname, "TW", item);
+										CU = JsonParser.colWrite_String(CU, keyname, "CU", item);
+										CW = JsonParser.colWrite_String(CW, keyname, "CW", item);
+										DTG = JsonParser.colWrite_String(DTG, keyname, "DTG", item);
+										PH = JsonParser.colWrite_String(PH, keyname, "PH", item);
+										ZN = JsonParser.colWrite_String(ZN, keyname, "ZN", item);
+										CL = JsonParser.colWrite_String(CL, keyname, "CL", item);
+										RE = JsonParser.colWrite_String(RE, keyname, "RE", item);
+										FE = JsonParser.colWrite_String(FE, keyname, "FE", item);
+										MN = JsonParser.colWrite_String(MN, keyname, "MN", item);
+										TU = JsonParser.colWrite_String(TU, keyname, "TU", item);
+										SO = JsonParser.colWrite_String(SO, keyname, "SO", item);
+										AL = JsonParser.colWrite_String(AL, keyname, "AL", item);
+										WCI_UPDATE_DAT = JsonParser.colWrite_String(WCI_UPDATE_DAT, keyname, "WCI_UPDATE_DAT", item);
 
 									}
 

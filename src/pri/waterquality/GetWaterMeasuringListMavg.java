@@ -109,172 +109,7 @@ public class GetWaterMeasuringListMavg {
 									+ "::resultMsg::" + resultMsg_col.toString());
 						} else if (resultCode_col.toString().equals("00")) {
 							
-							String rowno = " "; // 순번
-							String ptNo = " "; // 조사지점코드
-							String ptNm = " "; // 조사지점명
-							String wmyr = " "; // 측정년도
-							String wmod = " "; // 측정월
-							String itemAmnt = " "; // 측정값(유량)
-																			// (단위 :
-																			// ㎥/sec)
-							String itemTemp = " "; // 측정값(수온)
-																			// (단위 : ℃)
-							String itemPh = " "; // 측정값(수소이온농도(pH))
-							String itemDoc = " "; // 측정값(용존산소(DO))
-																			// (단위 :
-																			// ㎎/L)
-							String itemBod = " "; // 측정값(생물화학적산소요구량(BOD))
-																			// (단위 :
-																			// ㎎/L)
-							String itemCod = " "; // 측정값(화학적산소요구량(COD))
-																			// (단위 :
-																			// ㎎/L)
-							String itemSs = " ";// 측정값(부유물질(SS))
-																			// (단위 :
-																			// ㎎/L)
-							String itemTcoli = " "; // 측정값(총대장균군)(단위
-																			// :
-																			// 총대장균군수/100㎖)
-							String itemTn = " "; // 측정값(총질소(T-N))
-																			// (단위 :
-																			// ㎎/L)
-							String itemTp = " "; // 측정값(총인(T-P))
-																			// (단위 :
-																			// ㎎/L)
-							String itemCd = " "; // 측정값(카드뮴(Cd))
-																			// (단위 :
-																			// ㎎/L)
-							String itemCn = " "; // 측정값(시안(CN))
-																			// (단위 :
-																			// ㎎/L)
-							String itemPb = " "; // 측정값(납(Pb))
-																			// (단위 :
-																			// ㎎/L)
-							String itemCr6 = " "; // 측정값(6가크롬(Cr6+))
-																			// (단위
-																			// : ㎎/L)
-							String itemAs = " "; // 측정값(비소(As))
-																			// (단위 :
-																			// ㎎/L)
-							String itemHg = " "; // 측정값(수은(Hg))
-																			// (단위 :
-																			// ㎎/L)
-							String itemCu = " "; // 측정값(구리(Cu))
-																			// (단위 :
-																			// ㎎/L)
-							String itemAbs = " "; // 측정값(음이온계면활성제(ABS))
-																			// (단위 :
-																			// ㎎/L)
-							String itemPcb = " "; // 측정값(폴리클로리네이티드비페닐(PCB))
-																			// (단위 :
-																			// ㎎/L)
-							String itemOp = " ";// 측정값(유기인) (단위
-																			// : ㎎/L)
-							String itemMn = " "; // 측정값(용해성
-																			// 망간(Mn))
-																			// (단위
-																			// : ㎎/L)
-							String itemTrans = " "; // 측정값(투명도)
-																			// (단위 :
-																			// ㎎/L)
-							String itemCloa = " "; // 측정값(클로로필-a(Chlorophyll-a))
-																			// (단위 :
-																			// ㎎/L)
-							String itemCl = " "; // 측정값(염소이온(Cl-))
-																			// (단위 :
-																			// ㎎/L)
-							String itemZn = " "; // 측정값(아연(Zn))
-																			// (단위 :
-																			// ㎎/L)
-							String itemCr = " "; // 측정값(크롬(Cr))
-																			// (단위 :
-																			// ㎎/L)
-							String itemFe = " "; // 측정값(용해성
-																			// 철(Fe))
-																			// (단위 :
-																			// ㎎/L)
-							String itemPhenol = " "; // 측정값(페놀류(phenols))
-																				// (단위 :
-																				// ㎎/L)
-							String itemNhex = " "; // 측정값(노말헥산추출물질)
-																			// (단위
-																			// : ㎎/L)
-							String itemEc = " "; // 측정값(전기전도도(EC))
-																			// (단위 :
-																			// µS/㎝)
-							String itemTce = " "; // 측정값(트리클로로에틸렌(TCE))
-																			// (단위 :
-																			// ㎎/L)
-							String itemPce = " "; // 측정값(테트라클로로에틸렌(PCE))
-																			// (단위 :
-																			// ㎎/L)
-							String itemNo3n = " "; // 측정값(질산성질소(NO3-N))
-																			// (단위 :
-																			// ㎎/L)
-							String itemNh3n = " "; // 측정값(암모니아성
-																			// 질소(NH3-N))
-																			// (단위 :
-																			// ㎎/L)
-							String itemEcoli = " "; // 측정값(분원성대장균군)
-																			// (단위
-																			// :
-																			// 분원성대장균군수/100㎖)
-							String itemPop = " "; // 측정값(인산염
-																			// 인(PO4-P))
-																			// (단위 :
-																			// ㎎/L)
-							String itemDtn = " "; // 측정값(용존총질소(DTN))
-																			// (단위
-																			// : ㎎/L)
-							String itemDtp = " "; // 측정값(용존총인(DTP))
-																			// (단위
-																			// : ㎎/L)
-							String itemFl = " "; // 측정값(불소(F))
-																			// (단위 :
-																			// ㎎/L)
-							String itemCol = " "; // 측정값(색도) (단위
-																			// : 도)
-							String itemCcl4 = " "; // 측정값(사염화탄소)
-																			// (단위 :
-																			// ㎎/L)
-							String itemDceth = " "; // 측정값(1,2-다이클로로에탄)
-																			// (단위 :
-																			// ㎎/L)
-							String itemDcm = " "; // 측정값(다이클로로메탄)
-																			// (단위 :
-																			// ㎎/L)
-							String itemBenzene = " "; // 측정값(벤젠)
-																				// (단위 :
-																				// ㎎/L)
-							String itemChcl3 = " "; // 측정값(클로로포름)
-																			// (단위 :
-																			// ㎎/L)
-							String itemToc = " "; // 측정값(총유기탄소(TOC))
-																			// (단위
-																			// : ㎎/L)
-							String itemDehp = " "; // 측정값(다이에틸헥실프탈레이트(DEHP))
-																			// (단위 :
-																			// ㎎/L)
-							String itemAntimon = " "; // 측정값(안티몬(Sb))
-																				// (단위 :
-																				// ㎎/L)
-							String itemDiox = " "; // 측정값(1,4-다이옥세인)
-																			// (단위
-																			// : ㎎/L)
-							String itemHcho = " "; // 측정값(포름알데히드)
-																			// (단위 :
-																			// ㎎/L)
-							String itemHcb = " "; // 측정값(헥사클로로벤젠)
-																			// (단위 :
-																			// ㎎/L)
-							String itemNi = " "; // 측정값(니켈) (단위
-																			// : ㎎/L)
-							String itemBa = " "; // 측정값(바륨) (단위
-																			// : ㎎/L)
-							String itemSe = " "; // 측정값(셀레늄) (단위
-																			// : ㎎/L)
-							String numOfRows = " "; // 한 페이지 결과
-																			// 수
+							String numOfRows = " "; // 한 페이지 결과수
 							String pageNo_str = " "; // 페이지 번호
 							String totalCount = " "; // 전체 결과 수	
 							
@@ -287,6 +122,171 @@ public class GetWaterMeasuringListMavg {
 							JSONArray items = (JSONArray) getWaterMeasuringListMavgList.get("item");
 
 							for (int r = 0; r < items.size(); r++) {
+								
+								String rowno = " "; // 순번
+								String ptNo = " "; // 조사지점코드
+								String ptNm = " "; // 조사지점명
+								String wmyr = " "; // 측정년도
+								String wmod = " "; // 측정월
+								String itemAmnt = " "; // 측정값(유량)
+																				// (단위 :
+																				// ㎥/sec)
+								String itemTemp = " "; // 측정값(수온)
+																				// (단위 : ℃)
+								String itemPh = " "; // 측정값(수소이온농도(pH))
+								String itemDoc = " "; // 측정값(용존산소(DO))
+																				// (단위 :
+																				// ㎎/L)
+								String itemBod = " "; // 측정값(생물화학적산소요구량(BOD))
+																				// (단위 :
+																				// ㎎/L)
+								String itemCod = " "; // 측정값(화학적산소요구량(COD))
+																				// (단위 :
+																				// ㎎/L)
+								String itemSs = " ";// 측정값(부유물질(SS))
+																				// (단위 :
+																				// ㎎/L)
+								String itemTcoli = " "; // 측정값(총대장균군)(단위
+																				// :
+																				// 총대장균군수/100㎖)
+								String itemTn = " "; // 측정값(총질소(T-N))
+																				// (단위 :
+																				// ㎎/L)
+								String itemTp = " "; // 측정값(총인(T-P))
+																				// (단위 :
+																				// ㎎/L)
+								String itemCd = " "; // 측정값(카드뮴(Cd))
+																				// (단위 :
+																				// ㎎/L)
+								String itemCn = " "; // 측정값(시안(CN))
+																				// (단위 :
+																				// ㎎/L)
+								String itemPb = " "; // 측정값(납(Pb))
+																				// (단위 :
+																				// ㎎/L)
+								String itemCr6 = " "; // 측정값(6가크롬(Cr6+))
+																				// (단위
+																				// : ㎎/L)
+								String itemAs = " "; // 측정값(비소(As))
+																				// (단위 :
+																				// ㎎/L)
+								String itemHg = " "; // 측정값(수은(Hg))
+																				// (단위 :
+																				// ㎎/L)
+								String itemCu = " "; // 측정값(구리(Cu))
+																				// (단위 :
+																				// ㎎/L)
+								String itemAbs = " "; // 측정값(음이온계면활성제(ABS))
+																				// (단위 :
+																				// ㎎/L)
+								String itemPcb = " "; // 측정값(폴리클로리네이티드비페닐(PCB))
+																				// (단위 :
+																				// ㎎/L)
+								String itemOp = " ";// 측정값(유기인) (단위
+																				// : ㎎/L)
+								String itemMn = " "; // 측정값(용해성
+																				// 망간(Mn))
+																				// (단위
+																				// : ㎎/L)
+								String itemTrans = " "; // 측정값(투명도)
+																				// (단위 :
+																				// ㎎/L)
+								String itemCloa = " "; // 측정값(클로로필-a(Chlorophyll-a))
+																				// (단위 :
+																				// ㎎/L)
+								String itemCl = " "; // 측정값(염소이온(Cl-))
+																				// (단위 :
+																				// ㎎/L)
+								String itemZn = " "; // 측정값(아연(Zn))
+																				// (단위 :
+																				// ㎎/L)
+								String itemCr = " "; // 측정값(크롬(Cr))
+																				// (단위 :
+																				// ㎎/L)
+								String itemFe = " "; // 측정값(용해성
+																				// 철(Fe))
+																				// (단위 :
+																				// ㎎/L)
+								String itemPhenol = " "; // 측정값(페놀류(phenols))
+																					// (단위 :
+																					// ㎎/L)
+								String itemNhex = " "; // 측정값(노말헥산추출물질)
+																				// (단위
+																				// : ㎎/L)
+								String itemEc = " "; // 측정값(전기전도도(EC))
+																				// (단위 :
+																				// µS/㎝)
+								String itemTce = " "; // 측정값(트리클로로에틸렌(TCE))
+																				// (단위 :
+																				// ㎎/L)
+								String itemPce = " "; // 측정값(테트라클로로에틸렌(PCE))
+																				// (단위 :
+																				// ㎎/L)
+								String itemNo3n = " "; // 측정값(질산성질소(NO3-N))
+																				// (단위 :
+																				// ㎎/L)
+								String itemNh3n = " "; // 측정값(암모니아성
+																				// 질소(NH3-N))
+																				// (단위 :
+																				// ㎎/L)
+								String itemEcoli = " "; // 측정값(분원성대장균군)
+																				// (단위
+																				// :
+																				// 분원성대장균군수/100㎖)
+								String itemPop = " "; // 측정값(인산염
+																				// 인(PO4-P))
+																				// (단위 :
+																				// ㎎/L)
+								String itemDtn = " "; // 측정값(용존총질소(DTN))
+																				// (단위
+																				// : ㎎/L)
+								String itemDtp = " "; // 측정값(용존총인(DTP))
+																				// (단위
+																				// : ㎎/L)
+								String itemFl = " "; // 측정값(불소(F))
+																				// (단위 :
+																				// ㎎/L)
+								String itemCol = " "; // 측정값(색도) (단위
+																				// : 도)
+								String itemCcl4 = " "; // 측정값(사염화탄소)
+																				// (단위 :
+																				// ㎎/L)
+								String itemDceth = " "; // 측정값(1,2-다이클로로에탄)
+																				// (단위 :
+																				// ㎎/L)
+								String itemDcm = " "; // 측정값(다이클로로메탄)
+																				// (단위 :
+																				// ㎎/L)
+								String itemBenzene = " "; // 측정값(벤젠)
+																					// (단위 :
+																					// ㎎/L)
+								String itemChcl3 = " "; // 측정값(클로로포름)
+																				// (단위 :
+																				// ㎎/L)
+								String itemToc = " "; // 측정값(총유기탄소(TOC))
+																				// (단위
+																				// : ㎎/L)
+								String itemDehp = " "; // 측정값(다이에틸헥실프탈레이트(DEHP))
+																				// (단위 :
+																				// ㎎/L)
+								String itemAntimon = " "; // 측정값(안티몬(Sb))
+																					// (단위 :
+																					// ㎎/L)
+								String itemDiox = " "; // 측정값(1,4-다이옥세인)
+																				// (단위
+																				// : ㎎/L)
+								String itemHcho = " "; // 측정값(포름알데히드)
+																				// (단위 :
+																				// ㎎/L)
+								String itemHcb = " "; // 측정값(헥사클로로벤젠)
+																				// (단위 :
+																				// ㎎/L)
+								String itemNi = " "; // 측정값(니켈) (단위
+																				// : ㎎/L)
+								String itemBa = " "; // 측정값(바륨) (단위
+																				// : ㎎/L)
+								String itemSe = " "; // 측정값(셀레늄) (단위
+																				// : ㎎/L)
 
 								JSONObject item = (JSONObject) items.get(r);
 
@@ -298,505 +298,68 @@ public class GetWaterMeasuringListMavg {
 
 									String keyname = iter.next();
 									
-									if(keyname.equals("ROWNO")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											rowno = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											rowno = " ";
-										}	
-									}
-									if(keyname.equals("PTNO")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											ptNo = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											ptNo = " ";
-										}	
-									}
-									if(keyname.equals("PTNM")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											ptNm = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											ptNm = " ";
-										}
-									}
-									if(keyname.equals("WMYR")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											wmyr = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											wmyr = " ";
-										}
-									}
-									if(keyname.equals("WMOD")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											wmod = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											wmod = " ";
-										}
-									}
-									if(keyname.equals("ITEMAMNT")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemAmnt = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemAmnt = " ";
-										}
-									}
-									if(keyname.equals("ITEMTEMP")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemTemp = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemTemp = " ";
-										}
-									}
-									if(keyname.equals("ITEMPH")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemPh = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemPh = " ";
-										}
-									}
-									if(keyname.equals("ITEMDOC")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemDoc = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemDoc = " ";
-										}
-									}
-									if(keyname.equals("ITEMBOD")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemBod = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemBod = " ";
-										}
-									}
-									if(keyname.equals("ITEMCOD")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemCod = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemCod = " ";
-										}
-									}
-									if(keyname.equals("ITEMSS")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemSs = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemSs = " ";
-										}
-									}
-									if(keyname.equals("ITEMTCOLI")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemTcoli = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemTcoli = " ";
-										}
-									}
-									if(keyname.equals("ITEMTN")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemTn = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemTn = " ";
-										}
-									}
-									if(keyname.equals("ITEMTP")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemTp = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemTp = " ";
-										}
-									}	
-									if(keyname.equals("ITEMCD")) {
-										
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemCd = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemCd = " ";
-										}
-	
-									}
-									if(keyname.equals("ITEMCN")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemCn = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemCn = " ";
-										}
-									}
-									if(keyname.equals("ITEMPB")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemPb = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemPb = " ";
-										}
-									}
-									if(keyname.equals("ITEMCR6")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemCr6 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemCr6 = " ";
-										}
-									}
-									if(keyname.equals("ITEMAS")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemAs = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemAs = " ";
-										}
-									}
-									if(keyname.equals("ITEMHG")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemHg = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemHg = " ";
-										}
-									}
-									if(keyname.equals("ITEMCU")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemCu = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemCu = " ";
-										}
-									}
-									if(keyname.equals("ITEMABS")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemAbs = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemAbs = " ";
-										}
-									}
-									if(keyname.equals("ITEMPCB")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemPcb = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemPcb = " ";
-										}
-									}
-									if(keyname.equals("ITEMOP")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemOp = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemOp = " ";
-										}
-									}
-									if(keyname.equals("ITEMMN")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemMn = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemMn = " ";
-										}
-									}
-									if(keyname.equals("ITEMTRANS")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemTrans = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemTrans = " ";
-										}
-									}
-									if(keyname.equals("ITEMCLOA")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemCloa = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemCloa = " ";
-										}
-									}
-									if(keyname.equals("ITEMCL")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemCl = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemCl = " ";
-										}
-									}
-									if(keyname.equals("ITEMZN")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemZn = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemZn = " ";
-										}
-									}
-									if(keyname.equals("ITEMCR")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemCr = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemCr = " ";
-										}
-									}
-									if(keyname.equals("ITEMFE")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemFe = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemFe = " ";
-										}
-									}
-									if(keyname.equals("ITEMPHENOL")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemPhenol = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemPhenol = " ";
-										}
-									}
-									if(keyname.equals("ITEMNHEX")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemNhex = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemNhex = " ";
-										}
-									}
-									if(keyname.equals("ITEMEC")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemEc = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemEc = " ";
-										}
-									}
-									if(keyname.equals("ITEMTCE")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemTce = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemTce = " ";
-										}
-									}
-									if(keyname.equals("ITEMPCE")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemPce = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemPce = " ";
-										}
-									}
-									if(keyname.equals("ITEMNO3N")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemNo3n = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemNo3n = " ";
-										}
-									}
-									if(keyname.equals("ITEMNH3N")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemNh3n = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemNh3n = " ";
-										}
-									}
-									if(keyname.equals("ITEMECOLI")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemEcoli = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemEcoli = " ";
-										}
-									}
-									if(keyname.equals("ITEMPOP")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemPop = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemPop = " ";
-										}
-									}
-									if(keyname.equals("ITEMDTN")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemDtn = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemDtn = " ";
-										}
-									}
-									if(keyname.equals("ITEMDTP")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemDtp = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemDtp = " ";
-										}
-									}
-									if(keyname.equals("ITEMFL")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemFl = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemFl = " ";
-										}
-									}
-									if(keyname.equals("ITEMCOL")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemCol = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemCol = " ";
-										}
-									}
-									if(keyname.equals("ITEMCCL4")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemCcl4 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemCcl4 = " ";
-										}
-									}
-									if(keyname.equals("ITEMDCETH")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemDceth = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemDceth = " ";
-										}
-									}
-									if(keyname.equals("ITEMDCM")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemDcm = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemDcm = " ";
-										}
-									}
-									if(keyname.equals("ITEMBENZENE")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemBenzene = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemBenzene = " ";
-										}
-									}
-									if(keyname.equals("ITEMCHCL3")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemChcl3 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemChcl3 = " ";
-										}
-									}
-									if(keyname.equals("ITEMTOC")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemToc = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemToc = " ";
-										}
-									}
-									if(keyname.equals("ITEMDEHP")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemDehp = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemDehp = " ";
-										}
-									}
-									if(keyname.equals("ITEMANTIMON")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemAntimon = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemAntimon = " ";
-										}
-									}
-									if(keyname.equals("ITEMDIOX")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemDiox = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemDiox = " ";
-										}
-									}
-									if(keyname.equals("ITEMHCHO")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemHcho = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemHcho = " ";
-										}
-									}
-									if(keyname.equals("ITEMHCB")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemHcb = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemHcb = " ";
-										}
-									}
-									if(keyname.equals("ITEMNI")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemNi = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemNi = " ";
-										}
-									}
-									if(keyname.equals("ITEMBA")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemBa = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemBa = " ";
-										}
-									}
-									if(keyname.equals("ITEMSE")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											itemSe = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											itemSe = " ";
-										}
-									}
-									if(keyname.equals("numOfRows")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											numOfRows = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											numOfRows = " ";
-										}
-									}
-									if(keyname.equals("pageNo")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											pageNo_str = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											pageNo_str = " ";
-										}
-									}
-									if(keyname.equals("totalCount")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											totalCount = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											totalCount = " ";
-										}
-									}
-									
+									rowno = JsonParser.colWrite_String(rowno, keyname, "ROWNO", item);
+									ptNo = JsonParser.colWrite_String(ptNo, keyname, "PTNO", item);
+									ptNm = JsonParser.colWrite_String(ptNm, keyname, "PTNM", item);
+									wmyr = JsonParser.colWrite_String(wmyr, keyname, "WMYR", item);
+									wmod = JsonParser.colWrite_String(wmod, keyname, "WMOD", item);
+									itemAmnt = JsonParser.colWrite_String(itemAmnt, keyname, "ITEMAMNT", item);
+									itemTemp = JsonParser.colWrite_String(itemTemp, keyname, "ITEMTEMP", item);
+									itemPh = JsonParser.colWrite_String(itemPh, keyname, "ITEMPH", item);
+									itemDoc = JsonParser.colWrite_String(itemDoc, keyname, "ITEMDOC", item);
+									itemBod = JsonParser.colWrite_String(itemBod, keyname, "ITEMBOD", item);
+									itemCod = JsonParser.colWrite_String(itemCod, keyname, "ITEMCOD", item);
+									itemSs = JsonParser.colWrite_String(itemSs, keyname, "ITEMSS", item);
+									itemTcoli = JsonParser.colWrite_String(itemTcoli, keyname, "ITEMTCOLI", item);
+									itemTn = JsonParser.colWrite_String(itemTn, keyname, "ITEMTN", item);
+									itemTp = JsonParser.colWrite_String(itemTp, keyname, "ITEMTP", item);
+									itemCd = JsonParser.colWrite_String(itemCd, keyname, "ITEMCD", item);
+									itemCn = JsonParser.colWrite_String(itemCn, keyname, "ITEMCN", item);
+									itemPb = JsonParser.colWrite_String(itemPb, keyname, "ITEMPB", item);
+									itemCr6 = JsonParser.colWrite_String(itemCr6, keyname, "ITEMCR6", item);
+									itemAs = JsonParser.colWrite_String(itemAs, keyname, "ITEMAS", item);
+									itemHg = JsonParser.colWrite_String(itemHg, keyname, "ITEMHG", item);
+									itemCu = JsonParser.colWrite_String(itemCu, keyname, "ITEMCU", item);
+									itemAbs = JsonParser.colWrite_String(itemAbs, keyname, "ITEMABS", item);
+									itemPcb = JsonParser.colWrite_String(itemPcb, keyname, "ITEMPCB", item);
+									itemOp = JsonParser.colWrite_String(itemOp, keyname, "ITEMOP", item);
+									itemMn = JsonParser.colWrite_String(itemMn, keyname, "ITEMMN", item);
+									itemTrans = JsonParser.colWrite_String(itemTrans, keyname, "ITEMTRANS", item);
+									itemCloa = JsonParser.colWrite_String(itemCloa, keyname, "ITEMCLOA", item);
+									itemCl = JsonParser.colWrite_String(itemCl, keyname, "ITEMCL", item);
+									itemZn = JsonParser.colWrite_String(itemZn, keyname, "ITEMZN", item);
+									itemCr = JsonParser.colWrite_String(itemCr, keyname, "ITEMCR", item);
+									itemFe = JsonParser.colWrite_String(itemFe, keyname, "ITEMFE", item);
+									itemPhenol = JsonParser.colWrite_String(itemPhenol, keyname, "ITEMPHENOL", item);
+									itemNhex = JsonParser.colWrite_String(itemNhex, keyname, "ITEMNHEX", item);
+									itemEc = JsonParser.colWrite_String(itemEc, keyname, "ITEMEC", item);
+									itemTce = JsonParser.colWrite_String(itemTce, keyname, "ITEMTCE", item);
+									itemPce = JsonParser.colWrite_String(itemPce, keyname, "ITEMPCE", item);
+									itemNo3n = JsonParser.colWrite_String(itemNo3n, keyname, "ITEMNO3N", item);
+									itemNh3n = JsonParser.colWrite_String(itemNh3n, keyname, "ITEMNH3N", item);
+									itemEcoli = JsonParser.colWrite_String(itemEcoli, keyname, "ITEMECOLI", item);
+									itemPop = JsonParser.colWrite_String(itemPop, keyname, "ITEMPOP", item);
+									itemDtn = JsonParser.colWrite_String(itemDtn, keyname, "ITEMDTN", item);
+									itemDtp = JsonParser.colWrite_String(itemDtp, keyname, "ITEMDTP", item);
+									itemFl = JsonParser.colWrite_String(itemFl, keyname, "ITEMFL", item);
+									itemCol = JsonParser.colWrite_String(itemCol, keyname, "ITEMCOL", item);
+									itemCcl4 = JsonParser.colWrite_String(itemCcl4, keyname, "ITEMCCL4", item);
+									itemDceth = JsonParser.colWrite_String(itemDceth, keyname, "ITEMDCETH", item);
+									itemDcm = JsonParser.colWrite_String(itemDcm, keyname, "ITEMDCM", item);
+									itemBenzene = JsonParser.colWrite_String(itemBenzene, keyname, "ITEMBENZENE", item);
+									itemChcl3 = JsonParser.colWrite_String(itemChcl3, keyname, "ITEMCHCL3", item);
+									itemToc = JsonParser.colWrite_String(itemToc, keyname, "ITEMTOC", item);
+									itemDehp = JsonParser.colWrite_String(itemDehp, keyname, "ITEMDEHP", item);
+									itemAntimon = JsonParser.colWrite_String(itemAntimon, keyname, "ITEMANTIMON", item);
+									itemDiox = JsonParser.colWrite_String(itemDiox, keyname, "ITEMDIOX", item);
+									itemHcho = JsonParser.colWrite_String(itemHcho, keyname, "ITEMHCHO", item);
+									itemHcb = JsonParser.colWrite_String(itemHcb, keyname, "ITEMHCB", item);
+									itemNi = JsonParser.colWrite_String(itemNi, keyname, "ITEMNI", item);
+									itemBa = JsonParser.colWrite_String(itemBa, keyname, "ITEMBA", item);
+									itemSe = JsonParser.colWrite_String(itemSe, keyname, "ITEMSE", item);
+									numOfRows = JsonParser.colWrite_String(numOfRows, keyname, "numOfRows", item);
+									pageNo_str = JsonParser.colWrite_String(pageNo_str, keyname, "pageNo", item);
+									totalCount = JsonParser.colWrite_String(totalCount, keyname, "totalCount", item);
 
 								}
 

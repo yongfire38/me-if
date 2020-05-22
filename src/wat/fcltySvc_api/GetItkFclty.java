@@ -113,21 +113,21 @@ public class GetItkFclty {
 							System.out.println(
 									"parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
 						} else if (resultCode.equals("00")) {
-							
-							String RNUM = " "; // 순번
-							String WILO_NAM = " "; // 수도구분
-							String WBIZ_NAM = " "; // 수도사업자
-							String FCLT_NAM = " "; // 취수장명
-							String DTL_ADR = " "; // 취수장명
-							String WSYS_NM = " "; // 대표수계
-							String WSRC_NM = " "; // 수원(취수원형태)
-							String PHONE_NUM = " "; // 전화번호
-							String COMPL_DAT = " "; // 준공일
-							String FCLT_VOL = " "; // 시설용량(㎥/일)
 
 							JSONArray items = (JSONArray) body.get("items");
 
 							for (int r = 0; r < items.size(); r++) {
+								
+								String RNUM = " "; // 순번
+								String WILO_NAM = " "; // 수도구분
+								String WBIZ_NAM = " "; // 수도사업자
+								String FCLT_NAM = " "; // 취수장명
+								String DTL_ADR = " "; // 취수장명
+								String WSYS_NM = " "; // 대표수계
+								String WSRC_NM = " "; // 수원(취수원형태)
+								String PHONE_NUM = " "; // 전화번호
+								String COMPL_DAT = " "; // 준공일
+								String FCLT_VOL = " "; // 시설용량(㎥/일)
 
 								JSONObject item = (JSONObject) items.get(r);
 
@@ -139,86 +139,16 @@ public class GetItkFclty {
 
 									String keyname = iter.next();
 									
-									if(keyname.equals("RNUM")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											RNUM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											RNUM = " ";
-										}
-									}
-									if(keyname.equals("WILO_NAM")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											WILO_NAM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											WILO_NAM = " ";
-										}
-									}
-									if(keyname.equals("WBIZ_NAM")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											WBIZ_NAM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											WBIZ_NAM = " ";
-										}
-									}
-									if(keyname.equals("FCLT_NAM")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											FCLT_NAM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											FCLT_NAM = " ";
-										}
-									}
-									if(keyname.equals("DTL_ADR")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											DTL_ADR = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											DTL_ADR = " ";
-										}
-									}
-									if(keyname.equals("WSYS_NM")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											WSYS_NM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											WSYS_NM = " ";
-										}
-									}
-									if(keyname.equals("WSRC_NM")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											WSRC_NM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											WSRC_NM = " ";
-										}
-									}
-									if(keyname.equals("PHONE_NUM")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											PHONE_NUM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											PHONE_NUM = " ";
-										}
-									}
-									if(keyname.equals("COMPL_DAT")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											COMPL_DAT = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											COMPL_DAT = " ";
-										}
-									}
-									if(keyname.equals("FCLT_VOL")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											FCLT_VOL = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											FCLT_VOL = " ";
-										}
-									}	
+									RNUM = JsonParser.colWrite_String(RNUM, keyname, "RNUM", item);
+									WILO_NAM = JsonParser.colWrite_String(WILO_NAM, keyname, "WILO_NAM", item);
+									WBIZ_NAM = JsonParser.colWrite_String(WBIZ_NAM, keyname, "WBIZ_NAM", item);
+									FCLT_NAM = JsonParser.colWrite_String(FCLT_NAM, keyname, "FCLT_NAM", item);
+									DTL_ADR = JsonParser.colWrite_String(DTL_ADR, keyname, "DTL_ADR", item);
+									WSYS_NM = JsonParser.colWrite_String(WSYS_NM, keyname, "WSYS_NM", item);
+									WSRC_NM = JsonParser.colWrite_String(WSRC_NM, keyname, "WSRC_NM", item);
+									PHONE_NUM = JsonParser.colWrite_String(PHONE_NUM, keyname, "PHONE_NUM", item);
+									COMPL_DAT = JsonParser.colWrite_String(COMPL_DAT, keyname, "COMPL_DAT", item);
+									FCLT_VOL = JsonParser.colWrite_String(FCLT_VOL, keyname, "FCLT_VOL", item);
 
 								}
 								

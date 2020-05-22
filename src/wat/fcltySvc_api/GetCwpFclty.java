@@ -106,22 +106,23 @@ public class GetCwpFclty {
 							System.out.println(
 									"parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
 						} else if (resultCode.equals("00")) {
-							
-							String RNUM = " "; // 순번
-							String WILO_NAM = " "; // 수도구분
-							String WBIZ_NAM = " "; // 수도사업자
-							String FCLT_NAM = " "; // 정수장명
-							String DTL_ADR = " "; // 정수장주소
-							String TOT_VOL = " "; // 시설용량(㎥/일)
-							String WSRC_NAM = " "; // 수원
-							String PHONE_NUM = " "; // 전화번호
-							String CWMETH_NAM = " "; // 정수방식
-							String COMPL_DAT = " "; // 준공일
-							String DINF_VOL = " "; // 소독제
 
 							JSONArray items = (JSONArray) body.get("items");
 
 							for (int r = 0; r < items.size(); r++) {
+								
+
+								String RNUM = " "; // 순번
+								String WILO_NAM = " "; // 수도구분
+								String WBIZ_NAM = " "; // 수도사업자
+								String FCLT_NAM = " "; // 정수장명
+								String DTL_ADR = " "; // 정수장주소
+								String TOT_VOL = " "; // 시설용량(㎥/일)
+								String WSRC_NAM = " "; // 수원
+								String PHONE_NUM = " "; // 전화번호
+								String CWMETH_NAM = " "; // 정수방식
+								String COMPL_DAT = " "; // 준공일
+								String DINF_VOL = " "; // 소독제
 
 								JSONObject item = (JSONObject) items.get(r);
 
@@ -133,94 +134,17 @@ public class GetCwpFclty {
 
 									String keyname = iter.next();
 									
-									if(keyname.equals("RNUM")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											RNUM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											RNUM = " ";
-										}
-									}
-									if(keyname.equals("WILO_NAM")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											WILO_NAM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											WILO_NAM = " ";
-										}
-									}
-									if(keyname.equals("WBIZ_NAM")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											WBIZ_NAM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											WBIZ_NAM = " ";
-										}
-									}
-									if(keyname.equals("FCLT_NAM")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											FCLT_NAM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											FCLT_NAM = " ";
-										}
-									}
-									if(keyname.equals("DTL_ADR")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											DTL_ADR = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											DTL_ADR = " ";
-										}
-									}
-									if(keyname.equals("TOT_VOL")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											TOT_VOL = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											TOT_VOL = " ";
-										}
-									}
-									if(keyname.equals("WSRC_NAM")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											WSRC_NAM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											WSRC_NAM = " ";
-										}
-									}
-									if(keyname.equals("PHONE_NUM")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											PHONE_NUM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											PHONE_NUM = " ";
-										}
-									}
-									if(keyname.equals("CWMETH_NAM")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											CWMETH_NAM = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											CWMETH_NAM = " ";
-										}
-									}
-									if(keyname.equals("COMPL_DAT")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											COMPL_DAT = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											COMPL_DAT = " ";
-										}
-									}
-									if(keyname.equals("DINF_VOL")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											DINF_VOL = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											DINF_VOL = " ";
-										}
-									}
+									RNUM = JsonParser.colWrite_String(RNUM, keyname, "RNUM", item);
+									WILO_NAM = JsonParser.colWrite_String(WILO_NAM, keyname, "WILO_NAM", item);
+									WBIZ_NAM = JsonParser.colWrite_String(WBIZ_NAM, keyname, "WBIZ_NAM", item);
+									FCLT_NAM = JsonParser.colWrite_String(FCLT_NAM, keyname, "FCLT_NAM", item);
+									DTL_ADR = JsonParser.colWrite_String(DTL_ADR, keyname, "DTL_ADR", item);
+									TOT_VOL = JsonParser.colWrite_String(TOT_VOL, keyname, "TOT_VOL", item);
+									WSRC_NAM = JsonParser.colWrite_String(WSRC_NAM, keyname, "WSRC_NAM", item);
+									PHONE_NUM = JsonParser.colWrite_String(PHONE_NUM, keyname, "PHONE_NUM", item);
+									CWMETH_NAM = JsonParser.colWrite_String(CWMETH_NAM, keyname, "CWMETH_NAM", item);
+									COMPL_DAT = JsonParser.colWrite_String(COMPL_DAT, keyname, "COMPL_DAT", item);
+									DINF_VOL = JsonParser.colWrite_String(DINF_VOL, keyname, "DINF_VOL", item);
 
 								}
 

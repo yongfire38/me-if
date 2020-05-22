@@ -105,13 +105,6 @@ public class GetRadioActiveMaterList {
 									+ "::resultMsg::" + resultMsg_col.toString());
 						} else if (resultCode_col.toString().equals("00")) {
 
-							String rn = " "; // 행번호
-							String ptNo = " "; // 조사지점코드
-							String ptNm = " "; // 조사지점명
-							String wmcymd = " "; // 채취일
-							String act1 = " "; // 측정값 Cs-134(세슘)
-							String act2 = " "; // 측정값 Cs-137(세슘)
-							String act3 = " "; // 측정값 I-131(요드)
 							String numOfRows = " "; // 한 페이지 결과 수
 							String pageNo_str = " "; // 페이지 번호
 							String totalCount = " "; // 전체 결과 수
@@ -125,6 +118,14 @@ public class GetRadioActiveMaterList {
 							JSONArray items = (JSONArray) getRadioActiveMaterList.get("item");
 
 							for (int r = 0; r < items.size(); r++) {
+								
+								String rn = " "; // 행번호
+								String ptNo = " "; // 조사지점코드
+								String ptNm = " "; // 조사지점명
+								String wmcymd = " "; // 채취일
+								String act1 = " "; // 측정값 Cs-134(세슘)
+								String act2 = " "; // 측정값 Cs-137(세슘)
+								String act3 = " "; // 측정값 I-131(요드)
 
 								JSONObject item = (JSONObject) items.get(r);
 
@@ -136,86 +137,16 @@ public class GetRadioActiveMaterList {
 
 									String keyname = iter.next();
 									
-									if(keyname.equals("RN")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											rn = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											rn = " ";
-										}
-									}
-									if(keyname.equals("PT_NO")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											ptNo = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											ptNo = " ";
-										}
-									}
-									if(keyname.equals("PT_NM")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											ptNm = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											ptNm = " ";
-										}
-									}
-									if(keyname.equals("WMCYMD")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											wmcymd = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											wmcymd = " ";
-										}
-									}
-									if(keyname.equals("ACT1")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											act1 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											act1 = " ";
-										}
-									}
-									if(keyname.equals("ACT2")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											act2 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											act2 = " ";
-										}
-									}
-									if(keyname.equals("ACT3")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											act3 = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											act3 = " ";
-										}
-									}
-									if(keyname.equals("numOfRows")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											numOfRows = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											numOfRows = " ";
-										}
-									}
-									if(keyname.equals("pageNo")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											pageNo_str = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											pageNo_str = " ";
-										}
-									}
-									if(keyname.equals("totalCount")) {
-										if(!(JsonParser.isEmpty(item.get(keyname)))){
-											totalCount = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-													.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										}else{
-											totalCount = " ";
-										}
-									}
+									rn = JsonParser.colWrite_String(rn, keyname, "RN", item);
+									ptNo = JsonParser.colWrite_String(ptNo, keyname, "PT_NO", item);
+									ptNm = JsonParser.colWrite_String(ptNm, keyname, "PT_NM", item);
+									wmcymd = JsonParser.colWrite_String(wmcymd, keyname, "WMCYMD", item);
+									act1 = JsonParser.colWrite_String(act1, keyname, "ACT1", item);
+									act2 = JsonParser.colWrite_String(act2, keyname, "ACT2", item);
+									act3 = JsonParser.colWrite_String(act3, keyname, "ACT3", item);
+									numOfRows = JsonParser.colWrite_String(numOfRows, keyname, "numOfRows", item);
+									pageNo_str = JsonParser.colWrite_String(pageNo_str, keyname, "pageNo", item);
+									totalCount = JsonParser.colWrite_String(totalCount, keyname, "totalCount", item);
 
 								}
 								

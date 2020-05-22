@@ -243,6 +243,40 @@ public class JsonParser {
 
 		return sb;
 	}
+	
+	public static String colWrite_waterMeasuring_String(String content, String keyname, String chkCol,
+			JSONObject item) {
+
+		if (keyname.equals(chkCol)) {
+
+			if (!(JsonParser.isEmpty(item.get(keyname)))) {
+
+				content = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+						.replaceAll("(\\s{2,}|\\t{2,})", " ").replace(".", "");
+
+				// System.out.println(content);
+
+				SimpleDateFormat dateFormatParser = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
+				dateFormatParser.setLenient(false);
+
+				try {
+					dateFormatParser.parse(content);
+
+				} catch (Exception e) {
+					System.out.println("잘못된 날짜 형식이므로 빈 값으로 바꿉니다.");
+
+					content = " ";
+
+				}
+
+			} else {
+				content = " ";
+			}
+
+		}
+
+		return content;
+	}
 
 	// 파싱한 데이터를 StringBuffer에 씀(null 체크, trim처리와 줄바꿈 없애는 것, 연속된 공백 치환도 같이)
 	// sns와 같은 로직이면 음수값이 없어져 버리는 이슈로 분리
