@@ -20,6 +20,8 @@ public class Mntrf_test {
 	// 우량 관측정보 조회 서비스 - 우량 분강우량 조회
 	// 전체 우량 관측소 대상
 	// 전체 댐 코드 -> 전체 우량관측소 -> 그걸 가지고 1년치...의 순서
+	
+	// 로직은 이상이 없지만 실제로 돌려보면 http 에러로 한번에 추출이 불가능.. 전체 우량관측소까지만 구하고 그걸 수기로 넣어서 파일을 작성하는 식으로 처리함
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
 
