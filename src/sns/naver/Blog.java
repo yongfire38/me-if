@@ -9,8 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -139,126 +137,12 @@ public class Blog {
 
 										String keyname = iter.next();
 										
-										if(keyname.equals("postdate")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												postdate = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replace("'", "").replace("&#39;", "").replace("&#34;", "")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												
-												// 에러 유발자들인 emoji 제거..
-												Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
-												Matcher emoticonsMatcher = emoticons.matcher(postdate);
-												postdate = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
-														.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
-
-												// 내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
-												if (postdate.isEmpty()) {
-													postdate = " ";
-												}
-											}else{
-												postdate = " ";
-											}
-										}
-										if(keyname.equals("title")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												title = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replace("'", "").replace("&#39;", "").replace("&#34;", "")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												
-												// 에러 유발자들인 emoji 제거..
-												Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
-												Matcher emoticonsMatcher = emoticons.matcher(title);
-												title = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
-														.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
-
-												// 내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
-												if (title.isEmpty()) {
-													title = " ";
-												}
-											}else{
-												title = " ";
-											}
-										}
-										if(keyname.equals("link")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												link = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replace("'", "").replace("&#39;", "").replace("&#34;", "")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												
-												// 에러 유발자들인 emoji 제거..
-												Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
-												Matcher emoticonsMatcher = emoticons.matcher(link);
-												link = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
-														.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
-
-												// 내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
-												if (link.isEmpty()) {
-													link = " ";
-												}
-											}else{
-												link = " ";
-											}
-										}
-										if(keyname.equals("description")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												description = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replace("'", "").replace("&#39;", "").replace("&#34;", "")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												
-												// 에러 유발자들인 emoji 제거..
-												Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
-												Matcher emoticonsMatcher = emoticons.matcher(description);
-												description = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
-														.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
-
-												// 내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
-												if (description.isEmpty()) {
-													description = " ";
-												}
-											}else{
-												description = " ";
-											}
-										}
-										if(keyname.equals("bloggername")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												bloggername = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replace("'", "").replace("&#39;", "").replace("&#34;", "")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												
-												// 에러 유발자들인 emoji 제거..
-												Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
-												Matcher emoticonsMatcher = emoticons.matcher(bloggername);
-												bloggername = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
-														.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
-
-												// 내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
-												if (bloggername.isEmpty()) {
-													bloggername = " ";
-												}
-											}else{
-												bloggername = " ";
-											}
-										}
-										if(keyname.equals("bloggerlink")) {
-											if(!(JsonParser.isEmpty(item.get(keyname)))){
-												bloggerlink = item.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-														.replace("'", "").replace("&#39;", "").replace("&#34;", "")
-														.replaceAll("(\\s{2,}|\\t{2,})", " ");
-												
-												// 에러 유발자들인 emoji 제거..
-												Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
-												Matcher emoticonsMatcher = emoticons.matcher(bloggerlink);
-												bloggerlink = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
-														.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
-
-												// 내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
-												if (bloggerlink.isEmpty()) {
-													bloggerlink = " ";
-												}
-											}else{
-												bloggerlink = " ";
-											}
-										}
+										postdate = JsonParser.colWrite_sns_String(postdate, keyname, "postdate", item);
+										title = JsonParser.colWrite_sns_String(title, keyname, "title", item);
+										link = JsonParser.colWrite_sns_String(link, keyname, "link", item);
+										description = JsonParser.colWrite_sns_String(description, keyname, "description", item);
+										bloggername = JsonParser.colWrite_sns_String(bloggername, keyname, "bloggername", item);
+										bloggerlink = JsonParser.colWrite_sns_String(bloggerlink, keyname, "bloggerlink", item);
 
 									}
 									

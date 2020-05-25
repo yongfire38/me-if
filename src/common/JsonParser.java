@@ -244,6 +244,8 @@ public class JsonParser {
 		return sb;
 	}
 	
+	
+	//colWrite_waterMeasuring의 String 버전
 	public static String colWrite_waterMeasuring_String(String content, String keyname, String chkCol,
 			JSONObject item) {
 
@@ -316,7 +318,6 @@ public class JsonParser {
 	}
 	
 	
-	
 	// 파싱한 데이터를 StringBuffer에 씀(null 체크, trim처리와 줄바꿈 없애는 것, utf8 인코딩 처리도 같이)
 	// sns 쪽 데이터에서 문제되는 emoji와 홑따옴표도 제거함
 	public static StringBuffer colWrite_sns(StringBuffer sb, String keyname, String chkCol, JSONObject item) {
@@ -351,6 +352,37 @@ public class JsonParser {
 
 		return sb;
 	}
+	
+	// colWrite_sns의 String 버전
+		public static String colWrite_sns_String(String content, String keyname, String chkCol, JSONObject item) {
+
+			if (keyname.equals(chkCol)) {
+
+				if (!(JsonParser.isEmpty(item.get(keyname)))) {
+
+					content = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
+							.replace("'", "").replace("&#39;", "").replace("&#34;", "")
+							.replaceAll("(\\s{2,}|\\t{2,})", " ");
+
+					// 에러 유발자들인 emoji 제거..
+					Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
+					Matcher emoticonsMatcher = emoticons.matcher(content);
+					content = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
+							.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
+
+					// 내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
+					if (content.isEmpty()) {
+						content = " ";
+					}
+
+				} else {
+					content = " ";
+				}
+
+			}
+
+			return content;
+		}
 
 	// dms to decimal, latitude
 	public static String dmsTodecimal_latitude(String dms) {

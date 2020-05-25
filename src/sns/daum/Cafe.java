@@ -9,8 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -88,19 +86,19 @@ public class Cafe {
 						json = JsonParser.parseBlogJson_daum(service_url, daum_api_key, args[0], job_dt,
 								Integer.toString(i));
 
-						String title = " "; // 카페 제목
-						String contents = " "; // 카페 글 요약
-						String url = " "; // 카페 글 url
-						String cafename = " "; // 카페 이름
-						String thumbnail = " "; // 대표썸네일
-						String datetime = " "; // 카페 글 작성일시
-
 						JSONParser parser = new JSONParser();
 						JSONObject obj = (JSONObject) parser.parse(json);
 
 						JSONArray documents = (JSONArray) obj.get("documents");
 
 						for (int r = 0; r < documents.size(); r++) {
+							
+							String title = " "; // 카페 제목
+							String contents = " "; // 카페 글 요약
+							String url = " "; // 카페 글 url
+							String cafename = " "; // 카페 이름
+							String thumbnail = " "; // 대표썸네일
+							String datetime = " "; // 카페 글 작성일시
 
 							JSONObject document = (JSONObject) documents.get(r);
 
@@ -112,126 +110,12 @@ public class Cafe {
 
 								String keyname = iter.next();
 								
-								if(keyname.equals("title")) {
-									if(!(JsonParser.isEmpty(document.get(keyname)))){
-										title = document.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replace("'", "").replace("&#39;", "").replace("&#34;", "")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										
-										// 에러 유발자들인 emoji 제거..
-										Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
-										Matcher emoticonsMatcher = emoticons.matcher(title);
-										title = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
-												.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
-
-										// 내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
-										if (title.isEmpty()) {
-											title = " ";
-										}
-									}else{
-										title = " ";
-									}
-								}
-								if(keyname.equals("contents")) {
-									if(!(JsonParser.isEmpty(document.get(keyname)))){
-										contents = document.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replace("'", "").replace("&#39;", "").replace("&#34;", "")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										
-										// 에러 유발자들인 emoji 제거..
-										Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
-										Matcher emoticonsMatcher = emoticons.matcher(contents);
-										contents = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
-												.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
-
-										// 내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
-										if (contents.isEmpty()) {
-											contents = " ";
-										}
-									}else{
-										contents = " ";
-									}
-								}
-								if(keyname.equals("url")) {
-									if(!(JsonParser.isEmpty(document.get(keyname)))){
-										url = document.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replace("'", "").replace("&#39;", "").replace("&#34;", "")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										
-										// 에러 유발자들인 emoji 제거..
-										Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
-										Matcher emoticonsMatcher = emoticons.matcher(url);
-										url = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
-												.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
-
-										// 내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
-										if (url.isEmpty()) {
-											url = " ";
-										}
-									}else{
-										url = " ";
-									}
-								}
-								if(keyname.equals("cafename")) {
-									if(!(JsonParser.isEmpty(document.get(keyname)))){
-										cafename = document.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replace("'", "").replace("&#39;", "").replace("&#34;", "")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										
-										// 에러 유발자들인 emoji 제거..
-										Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
-										Matcher emoticonsMatcher = emoticons.matcher(cafename);
-										cafename = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
-												.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
-
-										// 내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
-										if (cafename.isEmpty()) {
-											cafename = " ";
-										}
-									}else{
-										cafename = " ";
-									}
-								}
-								if(keyname.equals("thumbnail")) {
-									if(!(JsonParser.isEmpty(document.get(keyname)))){
-										thumbnail = document.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replace("'", "").replace("&#39;", "").replace("&#34;", "")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										
-										// 에러 유발자들인 emoji 제거..
-										Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
-										Matcher emoticonsMatcher = emoticons.matcher(thumbnail);
-										thumbnail = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
-												.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
-
-										// 내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
-										if (thumbnail.isEmpty()) {
-											thumbnail = " ";
-										}
-									}else{
-										thumbnail = " ";
-									}
-								}
-								if(keyname.equals("datetime")) {
-									if(!(JsonParser.isEmpty(document.get(keyname)))){
-										datetime = document.get(keyname).toString().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-												.replace("'", "").replace("&#39;", "").replace("&#34;", "")
-												.replaceAll("(\\s{2,}|\\t{2,})", " ");
-										
-										// 에러 유발자들인 emoji 제거..
-										Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
-										Matcher emoticonsMatcher = emoticons.matcher(datetime);
-										datetime = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
-												.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
-
-										// 내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
-										if (datetime.isEmpty()) {
-											datetime = " ";
-										}
-									}else{
-										datetime = " ";
-									}
-								}			
+								title = JsonParser.colWrite_sns_String(title, keyname, "title", document);
+								contents = JsonParser.colWrite_sns_String(contents, keyname, "contents", document);
+								url = JsonParser.colWrite_sns_String(url, keyname, "url", document);
+								cafename = JsonParser.colWrite_sns_String(cafename, keyname, "cafename", document);
+								thumbnail = JsonParser.colWrite_sns_String(thumbnail, keyname, "thumbnail", document);
+								datetime = JsonParser.colWrite_sns_String(datetime, keyname, "datetime", document);			
 
 							}
 							
