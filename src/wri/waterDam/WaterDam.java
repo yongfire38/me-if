@@ -40,7 +40,7 @@ public class WaterDam {
 						String service_key = JsonParser.getProperty("waterDam_service_key");
 
 						// step 1.파일의 작성
-						File file = new File("TIF_WRI_10.dat");
+						File file = new File(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_10.dat");
 
 						// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
 						String json = "";
