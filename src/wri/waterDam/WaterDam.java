@@ -40,7 +40,7 @@ public class WaterDam {
 						String service_key = JsonParser.getProperty("waterDam_service_key");
 
 						// step 1.파일의 작성
-						File file = new File(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_10.dat");
+						File file = new File("TIF_WRI_10.dat");
 
 						// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
 						String json = "";
@@ -108,10 +108,10 @@ public class WaterDam {
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 
 								JSONObject items = (JSONObject) body.get("items");
-
-								JSONArray items_jsonArray = (JSONArray) items.get("item");
-
-								for (int r = 0; r < items_jsonArray.size(); r++) {
+								
+								// 입력 파라미터에 따라 하위배열 존재 여부가 달라지므로 분기 처리
+								
+								if (items.get("item") instanceof JSONObject) {
 									
 									String suge = " "; // 수계
 									String damnm = " "; // 댐이름
@@ -138,39 +138,39 @@ public class WaterDam {
 									String lastrsvwtqy = " "; // 저수율(전년)
 									String nyearrsvwtqy = " "; // 저수율(예년)
 									String totrf = " "; // 총저수량
-
-									JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
-
-									Set<String> key = item_obj.keySet();
+									
+									JSONObject items_jsonObject = (JSONObject) items.get("item");
+									
+									Set<String> key = items_jsonObject.keySet();
 
 									Iterator<String> iter = key.iterator();
-
+									
 									while (iter.hasNext()) {
-
+										
 										String keyname = iter.next();
 										
-										suge = JsonParser.colWrite_String(suge, keyname, "suge", item_obj);
-										damnm = JsonParser.colWrite_String(damnm, keyname, "damnm", item_obj);
-										zerosevenhourprcptqy = JsonParser.colWrite_String(zerosevenhourprcptqy, keyname, "zerosevenhourprcptqy", item_obj);
-										prcptqy = JsonParser.colWrite_String(prcptqy, keyname, "prcptqy", item_obj);
-										nowthsyracmtlrf = JsonParser.colWrite_String(nowthsyracmtlrf, keyname, "nowthsyracmtlrf", item_obj);
-										thsyracmtlrf = JsonParser.colWrite_String(thsyracmtlrf, keyname, "thsyracmtlrf", item_obj);
-										nyearavrgacmtlrf = JsonParser.colWrite_String(nyearavrgacmtlrf, keyname, "nyearavrgacmtlrf", item_obj);
-										inflowqy = JsonParser.colWrite_String(inflowqy, keyname, "inflowqy", item_obj);
-										total = JsonParser.colWrite_String(total, keyname, "total", item_obj);
-										sangwater = JsonParser.colWrite_String(sangwater, keyname, "sangwater", item_obj);
-										river = JsonParser.colWrite_String(river, keyname, "river", item_obj);
-										spilldcwtrqy = JsonParser.colWrite_String(spilldcwtrqy, keyname, "spilldcwtrqy", item_obj);
-										lvlhindstryuswtrplan = JsonParser.colWrite_String(lvlhindstryuswtrplan, keyname, "lvlhindstryuswtrplan", item_obj);
-										nowlowlevel = JsonParser.colWrite_String(nowlowlevel, keyname, "nowlowlevel", item_obj);
-										lastlowlevel = JsonParser.colWrite_String(lastlowlevel, keyname, "lastlowlevel", item_obj);
-										nyearlowlevel = JsonParser.colWrite_String(nyearlowlevel, keyname, "nyearlowlevel", item_obj);
-										nowrsvwtqy = JsonParser.colWrite_String(nowrsvwtqy, keyname, "nowrsvwtqy", item_obj);
-										nowrsvwtqy2 = JsonParser.colWrite_String(nowrsvwtqy2, keyname, "nowrsvwtqy2", item_obj);
-										lastrsvwtqy = JsonParser.colWrite_String(lastrsvwtqy, keyname, "lastrsvwtqy", item_obj);
-										nyearrsvwtqy = JsonParser.colWrite_String(nyearrsvwtqy, keyname, "nyearrsvwtqy", item_obj);
-										totrf = JsonParser.colWrite_String(totrf, keyname, "totrf", item_obj);
-
+										suge = JsonParser.colWrite_String(suge, keyname, "suge", items_jsonObject);
+										damnm = JsonParser.colWrite_String(damnm, keyname, "damnm", items_jsonObject);
+										zerosevenhourprcptqy = JsonParser.colWrite_String(zerosevenhourprcptqy, keyname, "zerosevenhourprcptqy", items_jsonObject);
+										prcptqy = JsonParser.colWrite_String(prcptqy, keyname, "prcptqy", items_jsonObject);
+										nowthsyracmtlrf = JsonParser.colWrite_String(nowthsyracmtlrf, keyname, "nowthsyracmtlrf", items_jsonObject);
+										thsyracmtlrf = JsonParser.colWrite_String(thsyracmtlrf, keyname, "thsyracmtlrf", items_jsonObject);
+										nyearavrgacmtlrf = JsonParser.colWrite_String(nyearavrgacmtlrf, keyname, "nyearavrgacmtlrf", items_jsonObject);
+										inflowqy = JsonParser.colWrite_String(inflowqy, keyname, "inflowqy", items_jsonObject);
+										total = JsonParser.colWrite_String(total, keyname, "total", items_jsonObject);
+										sangwater = JsonParser.colWrite_String(sangwater, keyname, "sangwater", items_jsonObject);
+										river = JsonParser.colWrite_String(river, keyname, "river", items_jsonObject);
+										spilldcwtrqy = JsonParser.colWrite_String(spilldcwtrqy, keyname, "spilldcwtrqy", items_jsonObject);
+										lvlhindstryuswtrplan = JsonParser.colWrite_String(lvlhindstryuswtrplan, keyname, "lvlhindstryuswtrplan", items_jsonObject);
+										nowlowlevel = JsonParser.colWrite_String(nowlowlevel, keyname, "nowlowlevel", items_jsonObject);
+										lastlowlevel = JsonParser.colWrite_String(lastlowlevel, keyname, "lastlowlevel", items_jsonObject);
+										nyearlowlevel = JsonParser.colWrite_String(nyearlowlevel, keyname, "nyearlowlevel", items_jsonObject);
+										nowrsvwtqy = JsonParser.colWrite_String(nowrsvwtqy, keyname, "nowrsvwtqy", items_jsonObject);
+										nowrsvwtqy2 = JsonParser.colWrite_String(nowrsvwtqy2, keyname, "nowrsvwtqy2", items_jsonObject);
+										lastrsvwtqy = JsonParser.colWrite_String(lastrsvwtqy, keyname, "lastrsvwtqy", items_jsonObject);
+										nyearrsvwtqy = JsonParser.colWrite_String(nyearrsvwtqy, keyname, "nyearrsvwtqy", items_jsonObject);
+										totrf = JsonParser.colWrite_String(totrf, keyname, "totrf", items_jsonObject);
+											
 									}
 									
 									// step 4. 파일에 쓰기
@@ -234,7 +234,138 @@ public class WaterDam {
 									} catch (IOException e) {
 										e.printStackTrace();
 									}
+									
+								} else if (items.get("item") instanceof JSONArray) {
+									
+									JSONArray items_jsonArray = (JSONArray) items.get("item");
+									
+									for (int r = 0; r < items_jsonArray.size(); r++) {
+										
+										String suge = " "; // 수계
+										String damnm = " "; // 댐이름
+										String zerosevenhourprcptqy = " "; // 강우량(금일)
+										String prcptqy = " "; // 강우량(전일)
+										String nowthsyracmtlrf = " "; // 전일누계(금년)
+										String thsyracmtlrf = " "; // 전일누계(전년)
+										String nyearavrgacmtlrf = " "; // 전일누계(예년)
+										String inflowqy = " "; // 전일유입량
+										String total = " "; // 전일
+																					// 방류량(전체)
+										String sangwater = " "; // 전일
+																						// 방류량(생공용수)
+										String river = " "; // 전일
+																					// 방류량(하천,관개)
+										String spilldcwtrqy = " "; // 전일
+																							// 방류량(여수로)
+										String lvlhindstryuswtrplan = " "; // 영수공급계획
+										String nowlowlevel = " "; // 저수위(현재)
+										String lastlowlevel = " "; // 저수위(전년)
+										String nyearlowlevel = " "; // 저수위(예년)
+										String nowrsvwtqy = " "; // 현저수량
+										String nowrsvwtqy2 = " "; // 저수율(현재)
+										String lastrsvwtqy = " "; // 저수율(전년)
+										String nyearrsvwtqy = " "; // 저수율(예년)
+										String totrf = " "; // 총저수량
 
+										JSONObject item_obj = (JSONObject) items_jsonArray.get(r);
+
+										Set<String> key = item_obj.keySet();
+
+										Iterator<String> iter = key.iterator();
+
+										while (iter.hasNext()) {
+
+											String keyname = iter.next();
+											
+											suge = JsonParser.colWrite_String(suge, keyname, "suge", item_obj);
+											damnm = JsonParser.colWrite_String(damnm, keyname, "damnm", item_obj);
+											zerosevenhourprcptqy = JsonParser.colWrite_String(zerosevenhourprcptqy, keyname, "zerosevenhourprcptqy", item_obj);
+											prcptqy = JsonParser.colWrite_String(prcptqy, keyname, "prcptqy", item_obj);
+											nowthsyracmtlrf = JsonParser.colWrite_String(nowthsyracmtlrf, keyname, "nowthsyracmtlrf", item_obj);
+											thsyracmtlrf = JsonParser.colWrite_String(thsyracmtlrf, keyname, "thsyracmtlrf", item_obj);
+											nyearavrgacmtlrf = JsonParser.colWrite_String(nyearavrgacmtlrf, keyname, "nyearavrgacmtlrf", item_obj);
+											inflowqy = JsonParser.colWrite_String(inflowqy, keyname, "inflowqy", item_obj);
+											total = JsonParser.colWrite_String(total, keyname, "total", item_obj);
+											sangwater = JsonParser.colWrite_String(sangwater, keyname, "sangwater", item_obj);
+											river = JsonParser.colWrite_String(river, keyname, "river", item_obj);
+											spilldcwtrqy = JsonParser.colWrite_String(spilldcwtrqy, keyname, "spilldcwtrqy", item_obj);
+											lvlhindstryuswtrplan = JsonParser.colWrite_String(lvlhindstryuswtrplan, keyname, "lvlhindstryuswtrplan", item_obj);
+											nowlowlevel = JsonParser.colWrite_String(nowlowlevel, keyname, "nowlowlevel", item_obj);
+											lastlowlevel = JsonParser.colWrite_String(lastlowlevel, keyname, "lastlowlevel", item_obj);
+											nyearlowlevel = JsonParser.colWrite_String(nyearlowlevel, keyname, "nyearlowlevel", item_obj);
+											nowrsvwtqy = JsonParser.colWrite_String(nowrsvwtqy, keyname, "nowrsvwtqy", item_obj);
+											nowrsvwtqy2 = JsonParser.colWrite_String(nowrsvwtqy2, keyname, "nowrsvwtqy2", item_obj);
+											lastrsvwtqy = JsonParser.colWrite_String(lastrsvwtqy, keyname, "lastrsvwtqy", item_obj);
+											nyearrsvwtqy = JsonParser.colWrite_String(nyearrsvwtqy, keyname, "nyearrsvwtqy", item_obj);
+											totrf = JsonParser.colWrite_String(totrf, keyname, "totrf", item_obj);
+
+										}
+										
+										// step 4. 파일에 쓰기
+										try {
+											PrintWriter pw = new PrintWriter(
+													new BufferedWriter(new FileWriter(file, true)));
+
+											pw.write(args[0]);
+											pw.write("|^");
+											pw.write(args[1]);
+											pw.write("|^");
+											pw.write(args[2]);
+											pw.write("|^");
+											pw.write(args[3]);
+											pw.write("|^");
+											pw.write(suge);
+											pw.write("|^");
+											pw.write(damnm);
+											pw.write("|^");
+											pw.write(zerosevenhourprcptqy);
+											pw.write("|^");
+											pw.write(prcptqy);
+											pw.write("|^");
+											pw.write(nowthsyracmtlrf);
+											pw.write("|^");
+											pw.write(thsyracmtlrf);
+											pw.write("|^");
+											pw.write(nyearavrgacmtlrf);
+											pw.write("|^");
+											pw.write(inflowqy);
+											pw.write("|^");
+											pw.write(total);
+											pw.write("|^");
+											pw.write(sangwater);
+											pw.write("|^");
+											pw.write(river);
+											pw.write("|^");
+											pw.write(spilldcwtrqy);
+											pw.write("|^");
+											pw.write(lvlhindstryuswtrplan);
+											pw.write("|^");
+											pw.write(nowlowlevel);
+											pw.write("|^");
+											pw.write(lastlowlevel);
+											pw.write("|^");
+											pw.write(nyearlowlevel);
+											pw.write("|^");
+											pw.write(nowrsvwtqy);
+											pw.write("|^");
+											pw.write(nowrsvwtqy2);
+											pw.write("|^");
+											pw.write(lastrsvwtqy);
+											pw.write("|^");
+											pw.write(nyearrsvwtqy);
+											pw.write("|^");
+											pw.write(totrf);
+											pw.println();
+											pw.flush();
+											pw.close();
+
+										} catch (IOException e) {
+											e.printStackTrace();
+										}
+
+									}
+									
+									
 								}
 
 							} else {
