@@ -31,7 +31,7 @@ public class Hourwal {
 				// 2자리, 댐 코드, 수위관측소 코드
 				// 댐코드는 수문제원현황 코드조회 api에서 조회, 수위관측소 코드는 수위관측소 코드 조회 api에서 조회
 
-				if (args.length == 6) {
+				if (args.length == 6 || args.length == 7) {
 
 					if (args[0].length() == 8 && args[1].length() == 2 && args[2].length() == 8
 							&& args[3].length() == 2) {
@@ -42,9 +42,16 @@ public class Hourwal {
 						// step 0.open api url과 서비스 키.
 						String service_url = JsonParser.getProperty("excllncobsrvt_hourwal_url");
 						String service_key = JsonParser.getProperty("excllncobsrvt_service_key");
+						
+						File file = null;
 
 						// step 1.파일의 작성
-						File file = new File(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_15.dat");
+						// 파일 경로 파라미터 유무에 따라 달라짐 
+						if(args.length == 6){
+							 file = new File(JsonParser.getProperty("file_path") + "WRI/TIF_WRI_15.dat");
+						} else if(args.length == 7){
+							file = new File(args[6]);
+						}
 
 						// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
 						String json = "";
