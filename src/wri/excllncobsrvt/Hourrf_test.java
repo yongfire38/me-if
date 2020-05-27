@@ -228,7 +228,7 @@ public class Hourrf_test {
 								String count_resultMsg = count_header.get("resultMsg").toString().trim();
 
 								if (!(count_resultCode.equals("00"))) {
-									System.out.println("parsing error!!::resultCode::" + count_resultCode + "::resultMsg::"
+									System.out.println("공공데이터 서버 비정상 응답!!::resultCode::" + count_resultCode + "::resultMsg::"
 											+ count_resultMsg);
 								} else {
 
@@ -264,7 +264,7 @@ public class Hourrf_test {
 
 									if (!(resultCode.equals("00"))) {
 										System.out.println(
-												"parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
+												"공공데이터 서버 비정상 응답!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
 									} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 										System.out.println("data not exist!!");
 									} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {

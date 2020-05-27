@@ -64,7 +64,7 @@ public class News {
 
 					if(json.substring(0, 1).equals("<")) {
 						//정상 json 응답이 아님
-						System.out.println("indexing parsing error!!::query::" +args[0]);
+						System.out.println("비정상 응답!!::query::" +args[0]);
 						
 					} else {
 						

@@ -68,7 +68,7 @@ public class Walcode_test {
 			String resultMsg = header.get("resultMsg").toString().trim();
 			
 			if(!(resultCode.equals("00"))){
-				System.out.println("parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
+				System.out.println("공공데이터 서버 비정상 응답!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
 			} else if (resultCode.equals("00")) {
 				
 				
@@ -142,7 +142,7 @@ public class Walcode_test {
 				String resultMsg = header.get("resultMsg").toString().trim();
 
 				if(!(resultCode.equals("00"))){
-					System.out.println("parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
+					System.out.println("공공데이터 서버 비정상 응답!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
 				} else if (resultCode.equals("00") && body.get("items") instanceof String) {
 					System.out.println("data not exist!!");
 				} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {

@@ -52,9 +52,10 @@ public class Winfosmonthwater {
 						
 						//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 						//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
-						if(json.indexOf("</") > -1){
+						//공통 클래스로 로직 빼 놓음
+						/*if(json.indexOf("</") > -1){
 							json ="{\"response\":{\"header\":{\"resultCode\":\"03\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
-						}
+						}*/
 
 						JSONParser count_parser = new JSONParser();
 						JSONObject count_obj = (JSONObject) count_parser.parse(json);
@@ -67,7 +68,7 @@ public class Winfosmonthwater {
 						String count_resultMsg = count_header.get("resultMsg").toString().trim();
 
 						if (!(count_resultCode.equals("00"))) {
-							System.out.println("parsing error!!::resultCode::" + count_resultCode + "::resultMsg::"
+							System.out.println("공공데이터 서버 비정상 응답!!::resultCode::" + count_resultCode + "::resultMsg::"
 									+ count_resultMsg);
 						} else {
 
@@ -86,9 +87,10 @@ public class Winfosmonthwater {
 							
 							//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 							//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
-							if(json.indexOf("</") > -1){
+							//공통 클래스로 로직 빼 놓음
+							/*if(json.indexOf("</") > -1){
 								json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
-							}
+							}*/
 
 							JSONParser parser = new JSONParser();
 							JSONObject obj = (JSONObject) parser.parse(json);
@@ -102,7 +104,7 @@ public class Winfosmonthwater {
 
 							if (!(resultCode.equals("00"))) {
 								System.out.println(
-										"parsing error!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
+										"공공데이터 서버 비정상 응답!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
 							} else if (body.get("items") instanceof String) {
 								System.out.println("data not exist!!");
 							} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
