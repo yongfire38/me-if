@@ -97,67 +97,27 @@ public class Mnt {
 							while (iter.hasNext()) {
 
 								String keyname = iter.next();
-
-								if (keyname.equals("competDe")) {
-									competDe = item_obj.get(keyname).toString().trim();
-								}
-								if (keyname.equals("damFom")) {
-									damFom = item_obj.get(keyname).toString().trim();
-								}
-								if (keyname.equals("damdgr")) {
-									damdgr = item_obj.get(keyname).toString().trim();
-								}
-								if (keyname.equals("damnm")) {
-									damnm = item_obj.get(keyname).toString().trim();
-								}
-								if (keyname.equals("dgrar")) {
-									dgrar = item_obj.get(keyname).toString().trim();
-								}
-								if (keyname.equals("floodadjstCpcty")) {
-									floodadjstCpcty = item_obj.get(keyname).toString().trim();
-								}
-								if (keyname.equals("floodseLmttWal")) {
-									floodseLmttWal = item_obj.get(keyname).toString().trim();
-								}
-								if (keyname.equals("fyerUswtrsuplyplanqy")) {
-									fyerUswtrsuplyplanqy = item_obj.get(keyname).toString().trim();
-								}
-								if (keyname.equals("hg")) {
-									hg = item_obj.get(keyname).toString().trim();
-								}
-								if (keyname.equals("lowlevel")) {
-									lowlevel = item_obj.get(keyname).toString().trim();
-								}
-								if (keyname.equals("lt")) {
-									lt = item_obj.get(keyname).toString().trim();
-								}
-								if (keyname.equals("nrmltAl")) {
-									nrmltAl = item_obj.get(keyname).toString().trim();
-								}
-								if (keyname.equals("ordtmFwal")) {
-									ordtmFwal = item_obj.get(keyname).toString().trim();
-								}
-								if (keyname.equals("planFwal")) {
-									planFwal = item_obj.get(keyname).toString().trim();
-								}
-								if (keyname.equals("rsvwtAr")) {
-									rsvwtAr = item_obj.get(keyname).toString().trim();
-								}
-								if (keyname.equals("strwrkDe")) {
-									strwrkDe = item_obj.get(keyname).toString().trim();
-								}
-								if (keyname.equals("totRsvwtcpcty")) {
-									totRsvwtcpcty = item_obj.get(keyname).toString().trim();
-								}
-								if (keyname.equals("validRsvwtcpcty")) {
-									validRsvwtcpcty = item_obj.get(keyname).toString().trim();
-								}
-								if (keyname.equals("vl")) {
-									vl = item_obj.get(keyname).toString().trim();
-								}
-								if (keyname.equals("wollyupvlAl")) {
-									wollyupvlAl = item_obj.get(keyname).toString().trim();
-								}
+								
+								competDe = JsonParser.colWrite_String(competDe, keyname, "competDe", item_obj);
+								damFom = JsonParser.colWrite_String(damFom, keyname, "damFom", item_obj);
+								damdgr = JsonParser.colWrite_String(damdgr, keyname, "damdgr", item_obj);
+								damnm = JsonParser.colWrite_String(damnm, keyname, "damnm", item_obj);
+								dgrar = JsonParser.colWrite_String(dgrar, keyname, "dgrar", item_obj);
+								floodadjstCpcty = JsonParser.colWrite_String(floodadjstCpcty, keyname, "floodadjstCpcty", item_obj);
+								floodseLmttWal = JsonParser.colWrite_String(floodseLmttWal, keyname, "floodseLmttWal", item_obj);
+								fyerUswtrsuplyplanqy = JsonParser.colWrite_String(fyerUswtrsuplyplanqy, keyname, "fyerUswtrsuplyplanqy", item_obj);
+								hg = JsonParser.colWrite_String(hg, keyname, "hg", item_obj);
+								lowlevel = JsonParser.colWrite_String(lowlevel, keyname, "lowlevel", item_obj);
+								lt = JsonParser.colWrite_String(lt, keyname, "lt", item_obj);
+								nrmltAl = JsonParser.colWrite_String(nrmltAl, keyname, "nrmltAl", item_obj);
+								ordtmFwal = JsonParser.colWrite_String(ordtmFwal, keyname, "ordtmFwal", item_obj);
+								planFwal = JsonParser.colWrite_String(planFwal, keyname, "planFwal", item_obj);
+								rsvwtAr = JsonParser.colWrite_String(rsvwtAr, keyname, "rsvwtAr", item_obj);
+								strwrkDe = JsonParser.colWrite_String(strwrkDe, keyname, "strwrkDe", item_obj);
+								totRsvwtcpcty = JsonParser.colWrite_String(totRsvwtcpcty, keyname, "totRsvwtcpcty", item_obj);
+								validRsvwtcpcty = JsonParser.colWrite_String(validRsvwtcpcty, keyname, "validRsvwtcpcty", item_obj);
+								vl = JsonParser.colWrite_String(vl, keyname, "vl", item_obj);
+								wollyupvlAl = JsonParser.colWrite_String(wollyupvlAl, keyname, "wollyupvlAl", item_obj);
 
 							}
 

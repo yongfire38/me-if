@@ -138,28 +138,14 @@ public class GetDscssSttusDscssIngDetailInfoInqire {
 								while (iter.hasNext()) {
 
 									String keyname = iter.next();
-
-									if (keyname.equals("stateNm")) {
-										stateNm = items_jsonObject.get(keyname).toString().trim();
-									}
-									if (keyname.equals("applyDt")) {
-										applyDt = items_jsonObject.get(keyname).toString().trim();
-									}
-									if (keyname.equals("reviExaDt")) {
-										reviExaDt = items_jsonObject.get(keyname).toString().trim();
-									}
-									if (keyname.equals("resApplyDt")) {
-										resApplyDt = items_jsonObject.get(keyname).toString().trim();
-									}
-									if (keyname.equals("resReplyDt")) {
-										resReplyDt = items_jsonObject.get(keyname).toString().trim();
-									}
-									if (keyname.equals("rtnDt")) {
-										rtnDt = items_jsonObject.get(keyname).toString().trim();
-									}
-									if (keyname.equals("wdwlDt")) {
-										wdwlDt = items_jsonObject.get(keyname).toString().trim();
-									}
+									
+									stateNm = JsonParser.colWrite_String(stateNm, keyname, "stateNm", items_jsonObject);
+									applyDt = JsonParser.colWrite_String(applyDt, keyname, "applyDt", items_jsonObject);
+									reviExaDt = JsonParser.colWrite_String(reviExaDt, keyname, "reviExaDt", items_jsonObject);
+									resApplyDt = JsonParser.colWrite_String(resApplyDt, keyname, "resApplyDt", items_jsonObject);
+									resReplyDt = JsonParser.colWrite_String(resReplyDt, keyname, "resReplyDt", items_jsonObject);
+									rtnDt = JsonParser.colWrite_String(rtnDt, keyname, "rtnDt", items_jsonObject);
+									wdwlDt = JsonParser.colWrite_String(wdwlDt, keyname, "wdwlDt", items_jsonObject);
 
 								}
 
@@ -214,27 +200,13 @@ public class GetDscssSttusDscssIngDetailInfoInqire {
 
 										String keyname = iter.next();
 
-										if (keyname.equals("stateNm")) {
-											stateNm = item_obj.get(keyname).toString().trim();
-										}
-										if (keyname.equals("applyDt")) {
-											applyDt = item_obj.get(keyname).toString().trim();
-										}
-										if (keyname.equals("reviExaDt")) {
-											reviExaDt = item_obj.get(keyname).toString().trim();
-										}
-										if (keyname.equals("resApplyDt")) {
-											resApplyDt = item_obj.get(keyname).toString().trim();
-										}
-										if (keyname.equals("resReplyDt")) {
-											resReplyDt = item_obj.get(keyname).toString().trim();
-										}
-										if (keyname.equals("rtnDt")) {
-											rtnDt = item_obj.get(keyname).toString().trim();
-										}
-										if (keyname.equals("wdwlDt")) {
-											wdwlDt = item_obj.get(keyname).toString().trim();
-										}
+										stateNm = JsonParser.colWrite_String(stateNm, keyname, "stateNm", item_obj);
+										applyDt = JsonParser.colWrite_String(applyDt, keyname, "applyDt", item_obj);
+										reviExaDt = JsonParser.colWrite_String(reviExaDt, keyname, "reviExaDt", item_obj);
+										resApplyDt = JsonParser.colWrite_String(resApplyDt, keyname, "resApplyDt", item_obj);
+										resReplyDt = JsonParser.colWrite_String(resReplyDt, keyname, "resReplyDt", item_obj);
+										rtnDt = JsonParser.colWrite_String(rtnDt, keyname, "rtnDt", item_obj);
+										wdwlDt = JsonParser.colWrite_String(wdwlDt, keyname, "wdwlDt", item_obj);
 
 									}
 

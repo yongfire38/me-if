@@ -79,13 +79,9 @@ public class DamCode {
 							while (iter.hasNext()) {
 
 								String keyname = iter.next();
-
-								if (keyname.equals("damcode")) {
-									damcode = item_obj.get(keyname).toString().trim();
-								}
-								if (keyname.equals("damnm")) {
-									damnm = item_obj.get(keyname).toString().trim();
-								}
+								
+								damcode = JsonParser.colWrite_String(damcode, keyname, "damcode", item_obj);
+								damnm = JsonParser.colWrite_String(damnm, keyname, "damnm", item_obj);
 
 							}
 

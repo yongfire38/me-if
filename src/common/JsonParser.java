@@ -254,7 +254,7 @@ public class JsonParser {
 			if (!(JsonParser.isEmpty(item.get(keyname)))) {
 
 				content = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-						.replaceAll("(\\s{2,}|\\t{2,})", " ").replace(".", "");
+						.replaceAll("(\\s{2,}|\\t{2,})", " ").replace(".", "").replace(",", "");
 
 				// System.out.println(content);
 
@@ -309,7 +309,7 @@ public class JsonParser {
 		if (keyname.equals(chkCol)) {
 			if (!(JsonParser.isEmpty(item.get(keyname)))) {
 				content = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-						.replaceAll("(\\s{2,}|\\t{2,})", " ");
+						.replaceAll("(\\s{2,}|\\t{2,})", " ").replace(",", "");
 			} else {
 				content = " ";
 			}

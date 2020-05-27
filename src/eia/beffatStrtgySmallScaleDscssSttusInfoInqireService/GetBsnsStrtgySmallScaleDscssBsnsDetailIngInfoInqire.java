@@ -100,22 +100,12 @@ public class GetBsnsStrtgySmallScaleDscssBsnsDetailIngInfoInqire {
 							while (iter.hasNext()) {
 
 								String keyname = iter.next();
-
-								if (keyname.equals("ccilStep1Nm")) {
-									ccilStep1Nm = items_jsonObject.get(keyname).toString().trim();
-								}
-								if (keyname.equals("applyDt")) {
-									applyDt = items_jsonObject.get(keyname).toString().trim();
-								}
-								if (keyname.equals("exaDt")) {
-									exaDt = items_jsonObject.get(keyname).toString().trim();
-								}
-								if (keyname.equals("resApplyDt")) {
-									resApplyDt = items_jsonObject.get(keyname).toString().trim();
-								}
-								if (keyname.equals("resReplyDt")) {
-									resReplyDt = items_jsonObject.get(keyname).toString().trim();
-								}
+								
+								ccilStep1Nm = JsonParser.colWrite_String(ccilStep1Nm, keyname, "ccilStep1Nm", items_jsonObject);
+								applyDt = JsonParser.colWrite_String(applyDt, keyname, "applyDt", items_jsonObject);
+								exaDt = JsonParser.colWrite_String(exaDt, keyname, "exaDt", items_jsonObject);
+								resApplyDt = JsonParser.colWrite_String(resApplyDt, keyname, "resApplyDt", items_jsonObject);
+								resReplyDt = JsonParser.colWrite_String(resReplyDt, keyname, "resReplyDt", items_jsonObject);
 
 							}
 
@@ -168,21 +158,11 @@ public class GetBsnsStrtgySmallScaleDscssBsnsDetailIngInfoInqire {
 
 									String keyname = iter.next();
 
-									if (keyname.equals("ccilStep1Nm")) {
-										ccilStep1Nm = item_obj.get(keyname).toString().trim();
-									}
-									if (keyname.equals("applyDt")) {
-										applyDt = item_obj.get(keyname).toString().trim();
-									}
-									if (keyname.equals("exaDt")) {
-										exaDt = item_obj.get(keyname).toString().trim();
-									}
-									if (keyname.equals("resApplyDt")) {
-										resApplyDt = item_obj.get(keyname).toString().trim();
-									}
-									if (keyname.equals("resReplyDt")) {
-										resReplyDt = item_obj.get(keyname).toString().trim();
-									}
+									ccilStep1Nm = JsonParser.colWrite_String(ccilStep1Nm, keyname, "ccilStep1Nm", item_obj);
+									applyDt = JsonParser.colWrite_String(applyDt, keyname, "applyDt", item_obj);
+									exaDt = JsonParser.colWrite_String(exaDt, keyname, "exaDt", item_obj);
+									resApplyDt = JsonParser.colWrite_String(resApplyDt, keyname, "resApplyDt", item_obj);
+									resReplyDt = JsonParser.colWrite_String(resReplyDt, keyname, "resReplyDt", item_obj);
 
 								}
 
