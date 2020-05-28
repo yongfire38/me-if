@@ -565,12 +565,16 @@ public class JsonParser {
 		String json = "";
 
 		String urlstr = service_url + mgtNo + "&serviceKey=" + service_key;
+		
 
 		while (retry < 5) {
-
+			
 			URL url = new URL(urlstr);
+			
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-
+			
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -596,12 +600,14 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : mgtNo :" + mgtNo );
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : mgtNo :" + mgtNo );
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -616,7 +622,11 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : mgtNo :" + mgtNo);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println("JSON 요청 에러 : mgtNo :" + mgtNo);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
 				System.out.println(retry +"번째 재시도..");
@@ -625,6 +635,8 @@ public class JsonParser {
 		}
 
 		System.out.println("재시도 회수 초과");
+		
+		
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 
@@ -640,12 +652,14 @@ public class JsonParser {
 		String json = "";
 
 		String urlstr = service_url + code + "&serviceKey=" + service_key + "&type=" + type;
-
+		
 		while (retry < 5) {
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -671,12 +685,14 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : code :" + code + ": type :" + type);
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : code :" + code + ": type :" + type);
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -691,9 +707,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : code :" + code + ": type :" + type);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println("JSON 요청 에러 : code :" + code + ": type :" + type);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
@@ -720,6 +741,8 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -745,12 +768,14 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : pageNo :" + pageNo + ": code :" + code);
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : pageNo :" + pageNo + ": code :" + code);
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -765,9 +790,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : pageNo :" + pageNo + ": code :" + code);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println("JSON 요청 에러 : pageNo :" + pageNo + ": code :" + code);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
@@ -796,6 +826,8 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -821,12 +853,14 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : center_X :" + center_X + ": center_Y :" + center_Y);
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : center_X :" + center_X + ": center_Y :" + center_Y);
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -841,9 +875,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : center_X :" + center_X + ": center_Y :" + center_Y);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println("JSON 요청 에러 : center_X :" + center_X + ": center_Y :" + center_Y);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
@@ -871,6 +910,8 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -896,12 +937,14 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : year :" + year + ": month :" + month);
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : year :" + year + ": month :" + month);
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -916,9 +959,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : year :" + year + ": month :" + month);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println("JSON 요청 에러 : year :" + year + ": month :" + month);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
@@ -945,6 +993,8 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -970,12 +1020,14 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : pageNo :" + pageNo);
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : pageNo :" + pageNo);
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -990,9 +1042,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : pageNo :" + pageNo);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println("JSON 요청 에러 : pageNo :" + pageNo);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
@@ -1021,6 +1078,8 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -1046,12 +1105,14 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : siteId :" + siteId + ": ptNoList :" + ptNoList);
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : siteId :" + siteId + ": ptNoList :" + ptNoList);
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -1066,9 +1127,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : siteId :" + siteId + ": ptNoList :" + ptNoList);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println("JSON 요청 에러 : siteId :" + siteId + ": ptNoList :" + ptNoList);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
@@ -1112,6 +1178,8 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -1137,12 +1205,14 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : ptNoList :" + ptNoList + ": wmyrList :" + wmyrList + ": wmodList :" + wmodList);
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : ptNoList :" + ptNoList + ": wmyrList :" + wmyrList + ": wmodList :" + wmodList);
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -1157,10 +1227,15 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println(
-						"JSON 요청 에러 : ptNoList :" + ptNoList + ": wmyrList :" + wmyrList + ": wmodList :" + wmodList);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println(
+							"JSON 요청 에러 : ptNoList :" + ptNoList + ": wmyrList :" + wmyrList + ": wmodList :" + wmodList);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
@@ -1195,6 +1270,8 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -1220,12 +1297,14 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : yyyy :" + yyyy);
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : yyyy :" + yyyy);
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -1240,9 +1319,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : yyyy :" + yyyy);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println("JSON 요청 에러 : yyyy :" + yyyy);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
@@ -1275,6 +1359,8 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -1300,12 +1386,14 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : startDate :" + startDate + ": endDate :" + endDate);
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : startDate :" + startDate + ": endDate :" + endDate);
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -1320,9 +1408,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : startDate :" + startDate + ": endDate :" + endDate);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println("JSON 요청 에러 : startDate :" + startDate + ": endDate :" + endDate);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
@@ -1360,6 +1453,8 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -1385,12 +1480,14 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": eddt :" + eddt);
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": eddt :" + eddt);
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -1405,9 +1502,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
@@ -1445,6 +1547,8 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -1470,12 +1574,14 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -1490,9 +1596,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println("JSON 요청 에러 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
@@ -1530,6 +1641,8 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -1555,12 +1668,14 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -1575,9 +1690,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println("JSON 요청 에러 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
@@ -1617,6 +1737,8 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -1642,13 +1764,15 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : tdate :" + tdate + ": ldate :" + ldate + ": vdate :" + vdate
-						+ ": vtime :" + vtime);
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : tdate :" + tdate + ": ldate :" + ldate + ": vdate :" + vdate
+									+ ": vtime :" + vtime);
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -1663,10 +1787,15 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : tdate :" + tdate + ": ldate :" + ldate + ": vdate :" + vdate
-						+ ": vtime :" + vtime);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println("JSON 요청 에러 : tdate :" + tdate + ": ldate :" + ldate + ": vdate :" + vdate
+							+ ": vtime :" + vtime);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
@@ -1706,6 +1835,8 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -1731,13 +1862,15 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
-						+ ": etime :" + etime + ": excll :" + excll);
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+									+ ": etime :" + etime + ": excll :" + excll);
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -1752,10 +1885,15 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
-						+ ": etime :" + etime + ": excll :" + excll);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+							+ ": etime :" + etime + ": excll :" + excll);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
@@ -1795,6 +1933,8 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -1820,13 +1960,15 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
-						+ ": etime :" + etime + ": damcode :" + damcode + ": excll :" + excll);
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+									+ ": etime :" + etime + ": damcode :" + damcode + ": excll :" + excll);
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -1841,10 +1983,15 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
-						+ ": etime :" + etime + ": damcode :" + damcode + ": excll :" + excll);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+							+ ": etime :" + etime + ": damcode :" + damcode + ": excll :" + excll);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
@@ -1884,6 +2031,8 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -1909,13 +2058,15 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
-						+ ": etime :" + etime + ": damcode :" + damcode + ": wal :" + wal);
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+									+ ": etime :" + etime + ": damcode :" + damcode + ": wal :" + wal);
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -1930,10 +2081,15 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
-						+ ": etime :" + etime + ": damcode :" + damcode + ": wal :" + wal);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+							+ ": etime :" + etime + ": damcode :" + damcode + ": wal :" + wal);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
@@ -1960,6 +2116,8 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -1985,11 +2143,13 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답");
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
+						 System.out.print("공공데이터 서버 비정상 응답");
 			             System.out.print("호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
@@ -2005,9 +2165,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 ");
+				
+				if(returnFlag.equals("Y")){
+					System.out.println("JSON 요청 에러 ");
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
@@ -2046,6 +2211,8 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -2071,12 +2238,14 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt + ": edTm :" + edTm);
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt + ": edTm :" + edTm);
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -2091,10 +2260,15 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println(
-						"JSON 요청 에러 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt + ": edTm :" + edTm);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println(
+							"JSON 요청 에러 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt + ": edTm :" + edTm);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
@@ -2122,6 +2296,8 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -2147,12 +2323,14 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : code :" + code);
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : code :" + code);
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -2167,9 +2345,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : code :" + code);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println("JSON 요청 에러 : code :" + code);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
@@ -2207,6 +2390,8 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -2232,12 +2417,14 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": eddt :" + eddt);
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": eddt :" + eddt);
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -2252,9 +2439,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
@@ -2292,6 +2484,8 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -2317,12 +2511,14 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": eddt :" + eddt + ": sgccd :" + sgccd);
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": eddt :" + eddt + ": sgccd :" + sgccd);
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -2337,9 +2533,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt + ": sgccd :" + sgccd);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt + ": sgccd :" + sgccd);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
@@ -2368,6 +2569,8 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
+			String returnFlag = "N";
+			
 			try {
 
 				Thread.sleep(3000);
@@ -2393,12 +2596,14 @@ public class JsonParser {
 				
 				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if(json.indexOf("</") > -1){
-					System.out.println("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": damcd :" + damcd);
+					
+					returnFlag = "Y";
 					
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
 					 for(int i = a.length - 1; i > 0 ; i--){
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
+						 System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": damcd :" + damcd);
+			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
 			             System.out.print(", 메소드 - "+a[i].getMethodName());
 			             System.out.print(", 라인 - "+a[i].getLineNumber());
 			            
@@ -2413,9 +2618,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("JSON 요청 에러 : stdt :" + stdt + ": damcd :" + damcd);
+				
+				if(returnFlag.equals("Y")){
+					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": damcd :" + damcd);
+				}
+				
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
