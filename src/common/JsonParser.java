@@ -619,6 +619,7 @@ public class JsonParser {
 				System.out.println("JSON 요청 에러 : mgtNo :" + mgtNo);
 				urlconnection.disconnect();
 				retry++;
+				System.out.println(retry +"번째 재시도..");
 			}
 
 		}
