@@ -198,7 +198,7 @@ public class FcltyList {
 
 						System.out.println("진행도::::::" + i + "/" + pageCount);
 
-						//Thread.sleep(1000);
+						Thread.sleep(3000);
 
 					}
 
