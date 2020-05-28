@@ -23,6 +23,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 public class JsonParser {
 
@@ -243,9 +244,8 @@ public class JsonParser {
 
 		return sb;
 	}
-	
-	
-	//colWrite_waterMeasuring의 String 버전
+
+	// colWrite_waterMeasuring의 String 버전
 	public static String colWrite_waterMeasuring_String(String content, String keyname, String chkCol,
 			JSONObject item) {
 
@@ -302,10 +302,10 @@ public class JsonParser {
 
 		return sb;
 	}
-	
-	//colWrite의 String 버전
+
+	// colWrite의 String 버전
 	public static String colWrite_String(String content, String keyname, String chkCol, JSONObject item) {
-		
+
 		if (keyname.equals(chkCol)) {
 			if (!(JsonParser.isEmpty(item.get(keyname)))) {
 				content = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
@@ -316,8 +316,7 @@ public class JsonParser {
 		}
 		return content;
 	}
-	
-	
+
 	// 파싱한 데이터를 StringBuffer에 씀(null 체크, trim처리와 줄바꿈 없애는 것, utf8 인코딩 처리도 같이)
 	// sns 쪽 데이터에서 문제되는 emoji와 홑따옴표도 제거함
 	public static StringBuffer colWrite_sns(StringBuffer sb, String keyname, String chkCol, JSONObject item) {
@@ -352,37 +351,36 @@ public class JsonParser {
 
 		return sb;
 	}
-	
+
 	// colWrite_sns의 String 버전
-		public static String colWrite_sns_String(String content, String keyname, String chkCol, JSONObject item) {
+	public static String colWrite_sns_String(String content, String keyname, String chkCol, JSONObject item) {
 
-			if (keyname.equals(chkCol)) {
+		if (keyname.equals(chkCol)) {
 
-				if (!(JsonParser.isEmpty(item.get(keyname)))) {
+			if (!(JsonParser.isEmpty(item.get(keyname)))) {
 
-					content = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ")
-							.replace("'", "").replace("&#39;", "").replace("&#34;", "")
-							.replaceAll("(\\s{2,}|\\t{2,})", " ");
+				content = item.get(keyname).toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ").replace("'", "")
+						.replace("&#39;", "").replace("&#34;", "").replaceAll("(\\s{2,}|\\t{2,})", " ");
 
-					// 에러 유발자들인 emoji 제거..
-					Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
-					Matcher emoticonsMatcher = emoticons.matcher(content);
-					content = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
-							.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
+				// 에러 유발자들인 emoji 제거..
+				Pattern emoticons = Pattern.compile("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+");
+				Matcher emoticonsMatcher = emoticons.matcher(content);
+				content = emoticonsMatcher.replaceAll(" ").replaceAll("\\p{InEmoticons}+", "")
+						.replaceAll("\\p{So}+", "").replaceAll("\\p{InMiscellaneousSymbolsAndPictographs}+", "");
 
-					// 내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
-					if (content.isEmpty()) {
-						content = " ";
-					}
-
-				} else {
+				// 내용이 특수문자만으로 구성되어 있을 경우가 있으므로 특문제거 로직 완료 후 아무 것도 없으면 초기화
+				if (content.isEmpty()) {
 					content = " ";
 				}
 
+			} else {
+				content = " ";
 			}
 
-			return content;
 		}
+
+		return content;
+	}
 
 	// dms to decimal, latitude
 	public static String dmsTodecimal_latitude(String dms) {
@@ -562,18 +560,18 @@ public class JsonParser {
 		int retry = 0;
 
 		String urlstr = service_url + mgtNo + "&serviceKey=" + service_key;
-		
+
 		while (retry < 5) {
-			
+
 			String json = "";
 			BufferedReader br = null;
-			
+
 			URL url = new URL(urlstr);
-			
+
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-			
+
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -594,50 +592,137 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : mgtNo :" + mgtNo );
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
-				}	
+						System.out.print("공공데이터 서버 비정상 응답 : mgtNo :" + mgtNo);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : mgtNo :" + mgtNo);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
-				
+				System.out.println(retry + "번째 재시도..");
+
 			}
 
 		}
 
 		System.out.println("재시도 회수 초과");
-		
-		
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 환경영향평가 파싱 (사업코드 하나를 파라미터로 받아서 파싱)
+	// JSONObject 버전
+	public static JSONObject parseEiaJson_obj(String service_url, String service_key, String mgtNo) throws Exception {
+
+		int retry = 0;
+
+		String urlstr = service_url + mgtNo + "&serviceKey=" + service_key;
+
+		while (retry < 5) {
+
+			String json = "";
+			BufferedReader br = null;
+
+			URL url = new URL(urlstr);
+
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : mgtNo :" + mgtNo);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : mgtNo :" + mgtNo);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
+
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
 
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 
@@ -650,9 +735,9 @@ public class JsonParser {
 		int retry = 0;
 
 		String urlstr = service_url + code + "&serviceKey=" + service_key + "&type=" + type;
-		
+
 		while (retry < 5) {
-			
+
 			String json = "";
 			BufferedReader br = null;
 
@@ -660,7 +745,7 @@ public class JsonParser {
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -681,42 +766,130 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : code :" + code + ": type :" + type);
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답 : code :" + code + ": type :" + type);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : code :" + code + ": type :" + type);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 환경영향평가 파싱 (타입 구분자와 코드 하나를 파라미터로 받아서 파싱)
+	// JSONObject 버전
+	public static JSONObject parseEiaJson_obj(String service_url, String service_key, String code, String type)
+			throws Exception {
+
+		int retry = 0;
+
+		String urlstr = service_url + code + "&serviceKey=" + service_key + "&type=" + type;
+
+		while (retry < 5) {
+
+			String json = "";
+			BufferedReader br = null;
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : code :" + code + ": type :" + type);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : code :" + code + ": type :" + type);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
 			}
 
 		}
@@ -736,7 +909,7 @@ public class JsonParser {
 		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
 
 		while (retry < 5) {
-			
+
 			String json = "";
 			BufferedReader br = null;
 
@@ -744,7 +917,7 @@ public class JsonParser {
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -765,42 +938,130 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : pageNo :" + pageNo + ": code :" + code);
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답 : pageNo :" + pageNo + ": code :" + code);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : pageNo :" + pageNo + ": code :" + code);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 환경영향평가 파싱 (반경 수치와 페이지 번호를 받아서 파싱)
+	// JSONObject 버전
+	public static JSONObject parseEiaJson_distance_obj(String service_url, String service_key, String pageNo,
+			String code) throws Exception {
+
+		int retry = 0;
+
+		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
+
+		while (retry < 5) {
+
+			String json = "";
+			BufferedReader br = null;
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : pageNo :" + pageNo + ": code :" + code);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : pageNo :" + pageNo + ": code :" + code);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
 			}
 
 		}
@@ -822,7 +1083,7 @@ public class JsonParser {
 				+ "&numOfRows=999" + "&pageNo=" + pageNo;
 
 		while (retry < 5) {
-			
+
 			String json = "";
 			BufferedReader br = null;
 
@@ -830,7 +1091,7 @@ public class JsonParser {
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -851,43 +1112,134 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : center_X :" + center_X + ": center_Y :" + center_Y);
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답 : center_X :" + center_X + ": center_Y :" + center_Y);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : center_X :" + center_X + ": center_Y :" + center_Y);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
-				
+				System.out.println(retry + "번째 재시도..");
+
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 페이지 번호와 x,y 좌표를 받아서 조회
+	// 환경영향평가 정보 서비스
+	// JSONObject 버전
+	public static JSONObject parseEiaJson_obj(String service_url, String service_key, String pageNo, String center_X,
+			String center_Y) throws Exception {
+
+		int retry = 0;
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&centerX=" + center_X + "&centerY=" + center_Y
+				+ "&numOfRows=999" + "&pageNo=" + pageNo;
+
+		while (retry < 5) {
+
+			String json = "";
+			BufferedReader br = null;
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : center_X :" + center_X + ": center_Y :" + center_Y);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : center_X :" + center_X + ": center_Y :" + center_Y);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
+
 			}
 
 		}
@@ -906,7 +1258,7 @@ public class JsonParser {
 
 		String urlstr = service_url + "&serviceKey=" + service_key + "&year=" + year + "&month=" + month + "&pageNo="
 				+ pageNo;
-		
+
 		URL url = new URL(urlstr);
 
 		while (retry < 5) {
@@ -915,14 +1267,14 @@ public class JsonParser {
 			BufferedReader br = null;
 
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-			
+
 			String returnFlag = "N";
-			
+
 			try {
-				
+
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
-				
+
 				int responseCode = urlconnection.getResponseCode();
 
 				if (responseCode == 200 || responseCode == 201) {
@@ -932,48 +1284,138 @@ public class JsonParser {
 				}
 
 				String line;
-				
+
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : year :" + year + ": month :" + month);
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답 : year :" + year + ": month :" + month);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : year :" + year + ": month :" + month);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 상수도 정보 시스템 파싱 (년과 월, 페이지 번호를 받아서 파싱)
+	// JSONObject 버전
+	public static JSONObject parseWatJson_obj(String service_url, String service_key, String year, String month,
+			String pageNo) throws Exception {
+
+		int retry = 0;
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&year=" + year + "&month=" + month + "&pageNo="
+				+ pageNo;
+
+		URL url = new URL(urlstr);
+
+		while (retry < 5) {
+
+			String json = "";
+			BufferedReader br = null;
+
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : year :" + year + ": month :" + month);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : year :" + year + ": month :" + month);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
 			}
 
 		}
@@ -993,7 +1435,7 @@ public class JsonParser {
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
 
 		while (retry < 5) {
-			
+
 			BufferedReader br = null;
 			String json = "";
 
@@ -1001,7 +1443,7 @@ public class JsonParser {
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -1022,43 +1464,131 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : pageNo :" + pageNo);
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답 : pageNo :" + pageNo);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : pageNo :" + pageNo);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
 
-				System.out.println(retry +"번째 재시도..");
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 상수도 정보 시스템 파싱 (페이지 번호를 받아서 파싱)
+	// 요청 형식이 동일한 경우 다른 시스템에서도 사용 가능 - 페이지 번호 외에는 요청 파라미터가 없는 경우
+	public static JSONObject parseWatJson_obj(String service_url, String service_key, String pageNo) throws Exception {
+
+		int retry = 0;
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
+
+		while (retry < 5) {
+
+			BufferedReader br = null;
+			String json = "";
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : pageNo :" + pageNo);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : pageNo :" + pageNo);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+
+				System.out.println(retry + "번째 재시도..");
 			}
 
 		}
@@ -1080,7 +1610,7 @@ public class JsonParser {
 				+ "&ptNoList=" + ptNoList + "&numOfRows=999";
 
 		while (retry < 5) {
-			
+
 			BufferedReader br = null;
 			String json = "";
 
@@ -1088,7 +1618,7 @@ public class JsonParser {
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -1109,42 +1639,132 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : siteId :" + siteId + ": ptNoList :" + ptNoList);
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답 : siteId :" + siteId + ": ptNoList :" + ptNoList);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : siteId :" + siteId + ": ptNoList :" + ptNoList);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 수질 DB 정보 시스템 파싱 (페이지 번호와 측정소 코드를 받아서 파싱)
+	// 수질자동측정망 운영결과 DB
+	// JSONObject 버전
+	public static JSONObject parsePriJson_obj(String service_url, String service_key, String pageNo, String siteId,
+			String ptNoList) throws Exception {
+
+		int retry = 0;
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&siteId=" + siteId
+				+ "&ptNoList=" + ptNoList + "&numOfRows=999";
+
+		while (retry < 5) {
+
+			BufferedReader br = null;
+			String json = "";
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : siteId :" + siteId + ": ptNoList :" + ptNoList);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : siteId :" + siteId + ": ptNoList :" + ptNoList);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
 			}
 
 		}
@@ -1181,7 +1801,7 @@ public class JsonParser {
 				+ "&wmyrList=" + wmyrList + "&wmodList=" + wmodList + "&numOfRows=999";
 
 		while (retry < 5) {
-			
+
 			BufferedReader br = null;
 			String json = "";
 
@@ -1189,7 +1809,7 @@ public class JsonParser {
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -1210,43 +1830,151 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : ptNoList :" + ptNoList + ": wmyrList :" + wmyrList + ": wmodList :" + wmodList);
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답 : ptNoList :" + ptNoList + ": wmyrList :" + wmyrList
+								+ ": wmodList :" + wmodList);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
-					System.out.println(
-							"JSON 요청 에러 : ptNoList :" + ptNoList + ": wmyrList :" + wmyrList + ": wmodList :" + wmodList);
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : ptNoList :" + ptNoList + ": wmyrList :" + wmyrList + ": wmodList :"
+							+ wmodList);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 수질 DB 정보 시스템 파싱 (페이지 번호와 측정소 코드, 측정년도, 측정월을 받아서 파싱)
+	// 페이지 번호만 필수값 (값이 없으면 메서드를 부르는 쪽에서 공백값으로 치환)
+	// JSONObject 버전
+	public static JSONObject parsePriJson_waterMeasuring_obj(String service_url, String service_key, String pageNo,
+			String... params) throws Exception {
+
+		String ptNoList = "";
+		String wmyrList = "";
+		String wmodList = "";
+
+		if (params.length == 1) {
+			ptNoList = params[0];
+		} else if (params.length == 2) {
+			ptNoList = params[0];
+			wmyrList = params[1];
+		} else if (params.length == 3) {
+			ptNoList = params[0];
+			wmyrList = params[1];
+			wmodList = params[2];
+		}
+
+		int retry = 0;
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&ptNoList=" + ptNoList
+				+ "&wmyrList=" + wmyrList + "&wmodList=" + wmodList + "&numOfRows=999";
+
+		while (retry < 5) {
+
+			BufferedReader br = null;
+			String json = "";
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : ptNoList :" + ptNoList + ": wmyrList :" + wmyrList
+								+ ": wmodList :" + wmodList);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : ptNoList :" + ptNoList + ": wmyrList :" + wmyrList + ": wmodList :"
+							+ wmodList);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
 			}
 
 		}
@@ -1274,7 +2002,7 @@ public class JsonParser {
 				+ "&numOfRows=999";
 
 		while (retry < 5) {
-			
+
 			BufferedReader br = null;
 			String json = "";
 
@@ -1282,7 +2010,7 @@ public class JsonParser {
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -1303,42 +2031,138 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : yyyy :" + yyyy);
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답 : yyyy :" + yyyy);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : yyyy :" + yyyy);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 수질 DB 정보 시스템 - 토양지하수 먹는물 공동시설 운영결과 파싱 (년도를 받아서 파싱, 필수값은 아님)
+	// 페이지 번호만 필수값 (값이 없으면 메서드를 부르는 쪽에서 공백값으로 치환)
+	// JSONObject 버전
+	public static JSONObject parsePriJson_drinkWater_obj(String service_url, String service_key, String pageNo,
+			String... params) throws Exception {
+
+		String yyyy = "";
+
+		if (params.length == 1) {
+			yyyy = params[0];
+		}
+
+		int retry = 0;
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&yyyy=" + yyyy
+				+ "&numOfRows=999";
+
+		while (retry < 5) {
+
+			BufferedReader br = null;
+			String json = "";
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : yyyy :" + yyyy);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : yyyy :" + yyyy);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
 			}
 
 		}
@@ -1351,20 +2175,21 @@ public class JsonParser {
 
 	// 수질 DB 정보 시스템 - 수질자동측정망 운영결과 DB 파싱 (년도를 받아서 파싱, 필수값은 아님)
 	// 페이지 번호만 필수값 (값이 없으면 메서드를 부르는 쪽에서 공백값으로 치환)
-	public static String parsePriJson_realTimeWater(String service_url, String service_key, String pageNo, String startDate, String endDate) throws Exception {
+	public static String parsePriJson_realTimeWater(String service_url, String service_key, String pageNo,
+			String startDate, String endDate) throws Exception {
 
 		int retry = 0;
-		
-		//api문서상의 요청 형식은 yyyyMMddHHmmss 
-		//결과값은 날짜까지밖에 안 나오므로 통일 시켜 줌.. 어차피 검색 범위는 하루 단위
+
+		// api문서상의 요청 형식은 yyyyMMddHHmmss
+		// 결과값은 날짜까지밖에 안 나오므로 통일 시켜 줌.. 어차피 검색 범위는 하루 단위
 		startDate = startDate + "000000";
 		endDate = endDate + "999999";
 
-		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&startDate=" + startDate + "&endDate=" + endDate 
-				+ "&numOfRows=999";
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&startDate=" + startDate
+				+ "&endDate=" + endDate + "&numOfRows=999";
 
 		while (retry < 5) {
-			
+
 			BufferedReader br = null;
 			String json = "";
 
@@ -1372,7 +2197,7 @@ public class JsonParser {
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -1393,42 +2218,137 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : startDate :" + startDate + ": endDate :" + endDate);
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답 : startDate :" + startDate + ": endDate :" + endDate);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : startDate :" + startDate + ": endDate :" + endDate);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 수질 DB 정보 시스템 - 수질자동측정망 운영결과 DB 파싱 (년도를 받아서 파싱, 필수값은 아님)
+	// 페이지 번호만 필수값 (값이 없으면 메서드를 부르는 쪽에서 공백값으로 치환)
+	// JSONObject 버전
+	public static JSONObject parsePriJson_realTimeWater_obj(String service_url, String service_key, String pageNo,
+			String startDate, String endDate) throws Exception {
+
+		int retry = 0;
+
+		// api문서상의 요청 형식은 yyyyMMddHHmmss
+		// 결과값은 날짜까지밖에 안 나오므로 통일 시켜 줌.. 어차피 검색 범위는 하루 단위
+		startDate = startDate + "000000";
+		endDate = endDate + "999999";
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&startDate=" + startDate
+				+ "&endDate=" + endDate + "&numOfRows=999";
+
+		while (retry < 5) {
+
+			BufferedReader br = null;
+			String json = "";
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : startDate :" + startDate + ": endDate :" + endDate);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : startDate :" + startDate + ": endDate :" + endDate);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
 			}
 
 		}
@@ -1459,7 +2379,7 @@ public class JsonParser {
 				+ "&eddt=" + parse_eddt + "&numOfRows=999";
 
 		while (retry < 5) {
-			
+
 			BufferedReader br = null;
 			String json = "";
 
@@ -1467,7 +2387,7 @@ public class JsonParser {
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -1488,42 +2408,141 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": eddt :" + eddt);
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": eddt :" + eddt);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 시작 날짜랑 끝 날짜를 받아서 파싱, 형식은 yyyymmdd
+	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
+	// JSONObject 버전
+	public static JSONObject parseWriJson_obj(String service_url, String service_key, String pageNo, String stdt,
+			String eddt) throws Exception {
+
+		int retry = 0;
+
+		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		Date origin_stdt = originFormat.parse(stdt);
+		Date origin_eddt = originFormat.parse(eddt);
+
+		String parse_stdt = parseFormat.format(origin_stdt);
+		String parse_eddt = parseFormat.format(origin_eddt);
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + parse_stdt
+				+ "&eddt=" + parse_eddt + "&numOfRows=999";
+
+		while (retry < 5) {
+
+			BufferedReader br = null;
+			String json = "";
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": eddt :" + eddt);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
 			}
 
 		}
@@ -1554,7 +2573,7 @@ public class JsonParser {
 				+ "&eddt=" + parse_eddt + "&numOfRows=999";
 
 		while (retry < 5) {
-			
+
 			BufferedReader br = null;
 			String json = "";
 
@@ -1562,7 +2581,7 @@ public class JsonParser {
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -1583,42 +2602,141 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 코드 1개와 시작 날짜랑 끝 날짜를 받아서 파싱, 형식은 yyyymmdd
+	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
+	// JSONObject 버전
+	public static JSONObject parseWriJson_obj(String service_url, String service_key, String pageNo, String code,
+			String stdt, String eddt) throws Exception {
+
+		int retry = 0;
+
+		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		Date origin_stdt = originFormat.parse(stdt);
+		Date origin_eddt = originFormat.parse(eddt);
+
+		String parse_stdt = parseFormat.format(origin_stdt);
+		String parse_eddt = parseFormat.format(origin_eddt);
+
+		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + parse_stdt
+				+ "&eddt=" + parse_eddt + "&numOfRows=999";
+
+		while (retry < 5) {
+
+			BufferedReader br = null;
+			String json = "";
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
 			}
 
 		}
@@ -1649,7 +2767,7 @@ public class JsonParser {
 				+ "&eddt=" + parse_eddt + "&numOfRows=999";
 
 		while (retry < 5) {
-			
+
 			BufferedReader br = null;
 			String json = "";
 
@@ -1657,7 +2775,7 @@ public class JsonParser {
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -1678,42 +2796,141 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 코드 1개와 시작 날짜랑 끝 날짜를 받아서 파싱, 형식은 yyyymm
+	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
+	// JSONObject 버전
+	public static JSONObject parseWriJson_month_obj(String service_url, String service_key, String pageNo, String code,
+			String stdt, String eddt) throws Exception {
+
+		int retry = 0;
+
+		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMM");
+		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM");
+
+		Date origin_stdt = originFormat.parse(stdt);
+		Date origin_eddt = originFormat.parse(eddt);
+
+		String parse_stdt = parseFormat.format(origin_stdt);
+		String parse_eddt = parseFormat.format(origin_eddt);
+
+		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + parse_stdt
+				+ "&eddt=" + parse_eddt + "&numOfRows=999";
+
+		while (retry < 5) {
+
+			BufferedReader br = null;
+			String json = "";
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
 			}
 
 		}
@@ -1746,7 +2963,7 @@ public class JsonParser {
 				+ "&ldate=" + parse_ldate + "&vdate=" + parse_vdate + "&vtime=" + vtime + "&numOfRows=999";
 
 		while (retry < 5) {
-			
+
 			BufferedReader br = null;
 			String json = "";
 
@@ -1754,7 +2971,7 @@ public class JsonParser {
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -1775,44 +2992,147 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : tdate :" + tdate + ": ldate :" + ldate + ": vdate :" + vdate
-									+ ": vtime :" + vtime);
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답 : tdate :" + tdate + ": ldate :" + ldate + ": vdate :" + vdate
+								+ ": vtime :" + vtime);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : tdate :" + tdate + ": ldate :" + ldate + ": vdate :" + vdate
 							+ ": vtime :" + vtime);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 전일 날짜, 전년날짜, 검색날짜 (yyyyMMdd), 검색 시간(2자리)를 받아서 파싱
+	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
+	// JSONObject 버전
+	public static JSONObject parseWriJson_obj(String service_url, String service_key, String pageNo, String tdate,
+			String ldate, String vdate, String vtime) throws Exception {
+
+		int retry = 0;
+
+		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		Date origin_tdate = originFormat.parse(tdate);
+		Date origin_ldate = originFormat.parse(ldate);
+		Date origin_vdate = originFormat.parse(vdate);
+
+		String parse_tdate = parseFormat.format(origin_tdate);
+		String parse_ldate = parseFormat.format(origin_ldate);
+		String parse_vdate = parseFormat.format(origin_vdate);
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&tdate=" + parse_tdate
+				+ "&ldate=" + parse_ldate + "&vdate=" + parse_vdate + "&vtime=" + vtime + "&numOfRows=999";
+
+		while (retry < 5) {
+
+			BufferedReader br = null;
+			String json = "";
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : tdate :" + tdate + ": ldate :" + ldate + ": vdate :" + vdate
+								+ ": vtime :" + vtime);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : tdate :" + tdate + ": ldate :" + ldate + ": vdate :" + vdate
+							+ ": vtime :" + vtime);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
 			}
 
 		}
@@ -1845,7 +3165,7 @@ public class JsonParser {
 				+ "&numOfRows=999";
 
 		while (retry < 5) {
-			
+
 			BufferedReader br = null;
 			String json = "";
 
@@ -1853,7 +3173,7 @@ public class JsonParser {
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -1874,44 +3194,147 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
-									+ ": etime :" + etime + ": excll :" + excll);
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+								+ ": etime :" + etime + ": excll :" + excll);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
 							+ ": etime :" + etime + ": excll :" + excll);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 조회시작일 (yyyyMMdd), 조회시작시각 2자리, 조회 종료일 (yyyyMMdd), 조회종료 시각 2자리, 우량관측소 코드를
+	// 받아서 파싱
+	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
+	// JSONObject 버전
+	public static JSONObject parseWriJson_obj(String service_url, String service_key, String pageNo, String sdate,
+			String stime, String edate, String etime, String excll) throws Exception {
+
+		int retry = 0;
+
+		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		Date origin_sdate = originFormat.parse(sdate);
+		Date origin_edate = originFormat.parse(edate);
+
+		String parse_sdate = parseFormat.format(origin_sdate);
+		String parse_edate = parseFormat.format(origin_edate);
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&sdate=" + parse_sdate
+				+ "&stime=" + stime + "&edate=" + parse_edate + "&etime=" + etime + "&excll=" + excll
+				+ "&numOfRows=999";
+
+		while (retry < 5) {
+
+			BufferedReader br = null;
+			String json = "";
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+								+ ": etime :" + etime + ": excll :" + excll);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+							+ ": etime :" + etime + ": excll :" + excll);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
 			}
 
 		}
@@ -1944,7 +3367,7 @@ public class JsonParser {
 				+ damcode + "&numOfRows=999";
 
 		while (retry < 5) {
-			
+
 			BufferedReader br = null;
 			String json = "";
 
@@ -1952,7 +3375,7 @@ public class JsonParser {
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -1973,44 +3396,147 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
-									+ ": etime :" + etime + ": damcode :" + damcode + ": excll :" + excll);
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+								+ ": etime :" + etime + ": damcode :" + damcode + ": excll :" + excll);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
 							+ ": etime :" + etime + ": damcode :" + damcode + ": excll :" + excll);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 조회시작일 (yyyyMMdd), 조회시작시각 2자리, 조회 종료일 (yyyyMMdd), 조회종료 시각 2자리, 댐코드, 우량관측소
+	// 코드를 받아서 파싱
+	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
+	// JSONObject 버전
+	public static JSONObject parseWriJson_excll_obj(String service_url, String service_key, String pageNo, String sdate,
+			String stime, String edate, String etime, String damcode, String excll) throws Exception {
+
+		int retry = 0;
+
+		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		Date origin_sdate = originFormat.parse(sdate);
+		Date origin_edate = originFormat.parse(edate);
+
+		String parse_sdate = parseFormat.format(origin_sdate);
+		String parse_edate = parseFormat.format(origin_edate);
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&sdate=" + parse_sdate
+				+ "&stime=" + stime + "&edate=" + parse_edate + "&etime=" + etime + "&excll=" + excll + "&damcode="
+				+ damcode + "&numOfRows=999";
+
+		while (retry < 5) {
+
+			BufferedReader br = null;
+			String json = "";
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+								+ ": etime :" + etime + ": damcode :" + damcode + ": excll :" + excll);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+							+ ": etime :" + etime + ": damcode :" + damcode + ": excll :" + excll);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
 			}
 
 		}
@@ -2043,7 +3569,7 @@ public class JsonParser {
 				+ damcode + "&numOfRows=999";
 
 		while (retry < 5) {
-			
+
 			BufferedReader br = null;
 			String json = "";
 
@@ -2051,7 +3577,7 @@ public class JsonParser {
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -2072,44 +3598,147 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
-									+ ": etime :" + etime + ": damcode :" + damcode + ": wal :" + wal);
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+								+ ": etime :" + etime + ": damcode :" + damcode + ": wal :" + wal);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
 							+ ": etime :" + etime + ": damcode :" + damcode + ": wal :" + wal);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 조회시작일 (yyyyMMdd), 조회시작시각 2자리, 조회 종료일 (yyyyMMdd), 조회종료 시각 2자리, 댐코드, 수위관측소
+	// 코드를 받아서 파싱
+	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
+	// JSONObject 버전
+	public static JSONObject parseWriJson_wal_obj(String service_url, String service_key, String pageNo, String sdate,
+			String stime, String edate, String etime, String damcode, String wal) throws Exception {
+
+		int retry = 0;
+
+		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		Date origin_sdate = originFormat.parse(sdate);
+		Date origin_edate = originFormat.parse(edate);
+
+		String parse_sdate = parseFormat.format(origin_sdate);
+		String parse_edate = parseFormat.format(origin_edate);
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&sdate=" + parse_sdate
+				+ "&stime=" + stime + "&edate=" + parse_edate + "&etime=" + etime + "&wal=" + wal + "&damcode="
+				+ damcode + "&numOfRows=999";
+
+		while (retry < 5) {
+
+			BufferedReader br = null;
+			String json = "";
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+								+ ": etime :" + etime + ": damcode :" + damcode + ": wal :" + wal);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+							+ ": etime :" + etime + ": damcode :" + damcode + ": wal :" + wal);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
 			}
 
 		}
@@ -2129,7 +3758,7 @@ public class JsonParser {
 		String urlstr = service_url + "&serviceKey=" + service_key;
 
 		while (retry < 5) {
-			
+
 			BufferedReader br = null;
 			String json = "";
 
@@ -2137,7 +3766,7 @@ public class JsonParser {
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -2158,42 +3787,130 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답");
-			             System.out.print("호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답");
+						System.out.print("호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 ");
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// url과 서비스 키 이외 추가 파라미터 없이 파싱
+	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
+	// JSONObject 버전
+	public static JSONObject parseWriJson_obj(String service_url, String service_key) throws Exception {
+
+		int retry = 0;
+
+		String urlstr = service_url + "&serviceKey=" + service_key;
+
+		while (retry < 5) {
+
+			BufferedReader br = null;
+			String json = "";
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답");
+						System.out.print("호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 ");
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
 			}
 
 		}
@@ -2225,7 +3942,7 @@ public class JsonParser {
 				+ "&stTm=" + stTm + "&edDt=" + parse_edDt + "&edTm=" + edTm + "&numOfRows=999";
 
 		while (retry < 5) {
-			
+
 			BufferedReader br = null;
 			String json = "";
 
@@ -2233,7 +3950,7 @@ public class JsonParser {
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -2254,43 +3971,146 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt + ": edTm :" + edTm);
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt
+								+ ": edTm :" + edTm);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println(
 							"JSON 요청 에러 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt + ": edTm :" + edTm);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 조회시작일 (yyyyMMdd), 조회시작시각 2자리, 조회 종료일 (yyyyMMdd), 조회종료 시각 2자리
+	// 코드를 받아서 파싱
+	// 수도통합(WIS)-운영통합시스템(댐보발전통합)
+	// JSONObject 버전
+	public static JSONObject parseWrsJson_obj(String service_url, String service_key, String pageNo, String stDt,
+			String stTm, String edDt, String edTm) throws Exception {
+
+		int retry = 0;
+
+		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		Date origin_stDt = originFormat.parse(stDt);
+		Date origin_edDt = originFormat.parse(edDt);
+
+		String parse_stDt = parseFormat.format(origin_stDt);
+		String parse_edDt = parseFormat.format(origin_edDt);
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stDt=" + parse_stDt
+				+ "&stTm=" + stTm + "&edDt=" + parse_edDt + "&edTm=" + edTm + "&numOfRows=999";
+
+		while (retry < 5) {
+
+			BufferedReader br = null;
+			String json = "";
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt
+								+ ": edTm :" + edTm);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println(
+							"JSON 요청 에러 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt + ": edTm :" + edTm);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
 			}
 
 		}
@@ -2311,7 +4131,7 @@ public class JsonParser {
 		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
 
 		while (retry < 5) {
-			
+
 			BufferedReader br = null;
 			String json = "";
 
@@ -2319,7 +4139,7 @@ public class JsonParser {
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -2340,42 +4160,131 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : code :" + code);
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답 : code :" + code);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : code :" + code);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 구분코드 와 페이지 번호를 받아서 파싱
+	// 수도통합(WIS)-운영통합시스템(댐보발전통합)
+	// JSONObject 버전
+	public static JSONObject parseWrsJson_obj(String service_url, String service_key, String pageNo, String code)
+			throws Exception {
+
+		int retry = 0;
+
+		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
+
+		while (retry < 5) {
+
+			BufferedReader br = null;
+			String json = "";
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : code :" + code);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : code :" + code);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
 			}
 
 		}
@@ -2406,7 +4315,7 @@ public class JsonParser {
 				+ "&eddt=" + parse_eddt + "&numOfRows=999";
 
 		while (retry < 5) {
-			
+
 			BufferedReader br = null;
 			String json = "";
 
@@ -2414,7 +4323,7 @@ public class JsonParser {
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -2435,42 +4344,141 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": eddt :" + eddt);
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": eddt :" + eddt);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 시작 날짜랑 끝 날짜를 받아서 파싱, 형식은 yyyymm
+	// 수자원통합(WIS)-운영통합시스템(댐보발전통합)
+	// JSONObject 버전
+	public static JSONObject parseWrsJson_obj(String service_url, String service_key, String pageNo, String stdt,
+			String eddt) throws Exception {
+
+		int retry = 0;
+
+		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMM");
+		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM");
+
+		Date origin_stdt = originFormat.parse(stdt);
+		Date origin_eddt = originFormat.parse(eddt);
+
+		String parse_stdt = parseFormat.format(origin_stdt);
+		String parse_eddt = parseFormat.format(origin_eddt);
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + parse_stdt
+				+ "&eddt=" + parse_eddt + "&numOfRows=999";
+
+		while (retry < 5) {
+
+			BufferedReader br = null;
+			String json = "";
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": eddt :" + eddt);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
 			}
 
 		}
@@ -2501,7 +4509,7 @@ public class JsonParser {
 				+ "&eddt=" + parse_eddt + "&sgccd=" + sgccd + "&numOfRows=999";
 
 		while (retry < 5) {
-			
+
 			BufferedReader br = null;
 			String json = "";
 
@@ -2509,7 +4517,7 @@ public class JsonParser {
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -2530,42 +4538,141 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": eddt :" + eddt + ": sgccd :" + sgccd);
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": eddt :" + eddt + ": sgccd :" + sgccd);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt + ": sgccd :" + sgccd);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 시작 날짜랑 끝 날짜, 지자체코드를 받아서 파싱, 날짜형식은 yyyymm
+	// 수자원통합(WIS)-운영통합시스템(댐보발전통합)
+	// JSONObject 버전
+	public static JSONObject parseWrsJson_obj(String service_url, String service_key, String pageNo, String stdt,
+			String eddt, String sgccd) throws Exception {
+
+		int retry = 0;
+
+		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMM");
+		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM");
+
+		Date origin_stdt = originFormat.parse(stdt);
+		Date origin_eddt = originFormat.parse(eddt);
+
+		String parse_stdt = parseFormat.format(origin_stdt);
+		String parse_eddt = parseFormat.format(origin_eddt);
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + parse_stdt
+				+ "&eddt=" + parse_eddt + "&sgccd=" + sgccd + "&numOfRows=999";
+
+		while (retry < 5) {
+
+			BufferedReader br = null;
+			String json = "";
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": eddt :" + eddt + ": sgccd :" + sgccd);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt + ": sgccd :" + sgccd);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
 			}
 
 		}
@@ -2587,7 +4694,7 @@ public class JsonParser {
 				+ damcd + "&numOfRows=999";
 
 		while (retry < 5) {
-			
+
 			BufferedReader br = null;
 			String json = "";
 
@@ -2595,7 +4702,7 @@ public class JsonParser {
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
 			String returnFlag = "N";
-			
+
 			try {
 
 				urlconnection.setRequestMethod("GET");
@@ -2616,42 +4723,132 @@ public class JsonParser {
 				}
 
 				urlconnection.disconnect();
-				
-				//http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if(json.indexOf("</") > -1){
-					
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
 					returnFlag = "Y";
-					
+
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
-					 for(int i = a.length - 1; i > 0 ; i--){
-						 System.out.println("비정상 응답 : json :" + json );
-						 
-						 System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": damcd :" + damcd);
-			             System.out.print(", 호출 클래스 - " + a[i].getClassName());
-			             System.out.print(", 메소드 - "+a[i].getMethodName());
-			             System.out.print(", 라인 - "+a[i].getLineNumber());
-			            
-			             System.out.println();
-			         }
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
 
-					 throw new Exception();
-					 
+						System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": damcd :" + damcd);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
 				}
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				
-				if(returnFlag.equals("Y")){
+
+				if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": damcd :" + damcd);
 				}
-				
+
 				urlconnection.disconnect();
 				retry++;
 				Thread.sleep(3000);
-				System.out.println(retry +"번째 재시도..");
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+
+	// 시작년도(yyyy)와 댐 코드를 받아서 파싱
+	// 수도통합(WIS)-운영통합시스템(댐보발전통합)
+	// JSONObject 버전
+	public static JSONObject parseWrsJson_eff_obj(String service_url, String service_key, String pageNo, String stdt,
+			String damcd) throws Exception {
+
+		int retry = 0;
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + stdt + "&damcd="
+				+ damcd + "&numOfRows=999";
+
+		while (retry < 5) {
+
+			BufferedReader br = null;
+			String json = "";
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				if (json.indexOf("</") > -1) {
+
+					returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": damcd :" + damcd);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": damcd :" + damcd);
+				}
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+				System.out.println(retry + "번째 재시도..");
 			}
 
 		}
@@ -2674,7 +4871,7 @@ public class JsonParser {
 		String urlstr = service_url + query + "&start=" + start;
 
 		while (retry < 5) {
-			
+
 			String json = "";
 			BufferedReader br = null;
 
@@ -2734,7 +4931,7 @@ public class JsonParser {
 		String urlstr = service_url + query + "&page=" + page;
 
 		while (retry < 5) {
-			
+
 			String json = "";
 			BufferedReader br = null;
 
@@ -2793,7 +4990,7 @@ public class JsonParser {
 		String urlstr = service_url + query + "&key=" + google_api_key + "&cx=" + google_api_cx + "&start=" + start;
 
 		while (retry < 5) {
-			
+
 			String json = "";
 			BufferedReader br = null;
 
@@ -2848,7 +5045,7 @@ public class JsonParser {
 		String urlstr = service_url + pageIndex + "&accessKey=" + service_key + "&userId=bigdata";
 
 		while (retry < 5) {
-			
+
 			BufferedReader br = null;
 			String json = "";
 
