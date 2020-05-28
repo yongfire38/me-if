@@ -561,13 +561,12 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		String urlstr = service_url + mgtNo + "&serviceKey=" + service_key;
 		
-
 		while (retry < 5) {
+			
+			String json = "";
+			BufferedReader br = null;
 			
 			URL url = new URL(urlstr);
 			
@@ -576,8 +575,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -631,7 +628,9 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
+				
 			}
 
 		}
@@ -650,12 +649,12 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		String urlstr = service_url + code + "&serviceKey=" + service_key + "&type=" + type;
 		
 		while (retry < 5) {
+			
+			String json = "";
+			BufferedReader br = null;
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -663,8 +662,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -718,6 +715,7 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
 			}
 
@@ -735,12 +733,12 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
 
 		while (retry < 5) {
+			
+			String json = "";
+			BufferedReader br = null;
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -748,8 +746,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -803,6 +799,7 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
 			}
 
@@ -821,13 +818,13 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		String urlstr = service_url + "&serviceKey=" + service_key + "&centerX=" + center_X + "&centerY=" + center_Y
 				+ "&numOfRows=999" + "&pageNo=" + pageNo;
 
 		while (retry < 5) {
+			
+			String json = "";
+			BufferedReader br = null;
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -835,8 +832,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -890,7 +885,9 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
+				
 			}
 
 		}
@@ -907,26 +904,25 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		String urlstr = service_url + "&serviceKey=" + service_key + "&year=" + year + "&month=" + month + "&pageNo="
 				+ pageNo;
+		
+		URL url = new URL(urlstr);
 
 		while (retry < 5) {
 
-			URL url = new URL(urlstr);
-			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+			String json = "";
+			BufferedReader br = null;
 
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+			
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
-
+				
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
-
+				
 				int responseCode = urlconnection.getResponseCode();
 
 				if (responseCode == 200 || responseCode == 201) {
@@ -936,7 +932,7 @@ public class JsonParser {
 				}
 
 				String line;
-
+				
 				while ((line = br.readLine()) != null) {
 					json = json + line + "\n";
 				}
@@ -976,6 +972,7 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
 			}
 
@@ -993,12 +990,12 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
 
 		while (retry < 5) {
+			
+			BufferedReader br = null;
+			String json = "";
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1006,8 +1003,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -1061,6 +1056,8 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
+
 				System.out.println(retry +"번째 재시도..");
 			}
 
@@ -1079,13 +1076,13 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&siteId=" + siteId
 				+ "&ptNoList=" + ptNoList + "&numOfRows=999";
 
 		while (retry < 5) {
+			
+			BufferedReader br = null;
+			String json = "";
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1093,8 +1090,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -1148,6 +1143,7 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
 			}
 
@@ -1181,13 +1177,13 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&ptNoList=" + ptNoList
 				+ "&wmyrList=" + wmyrList + "&wmodList=" + wmodList + "&numOfRows=999";
 
 		while (retry < 5) {
+			
+			BufferedReader br = null;
+			String json = "";
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1195,8 +1191,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -1251,6 +1245,7 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
 			}
 
@@ -1275,13 +1270,13 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&yyyy=" + yyyy
 				+ "&numOfRows=999";
 
 		while (retry < 5) {
+			
+			BufferedReader br = null;
+			String json = "";
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1289,8 +1284,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -1344,6 +1337,7 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
 			}
 
@@ -1360,9 +1354,6 @@ public class JsonParser {
 	public static String parsePriJson_realTimeWater(String service_url, String service_key, String pageNo, String startDate, String endDate) throws Exception {
 
 		int retry = 0;
-
-		BufferedReader br = null;
-		String json = "";
 		
 		//api문서상의 요청 형식은 yyyyMMddHHmmss 
 		//결과값은 날짜까지밖에 안 나오므로 통일 시켜 줌.. 어차피 검색 범위는 하루 단위
@@ -1373,6 +1364,9 @@ public class JsonParser {
 				+ "&numOfRows=999";
 
 		while (retry < 5) {
+			
+			BufferedReader br = null;
+			String json = "";
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1380,8 +1374,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -1435,6 +1427,7 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
 			}
 
@@ -1453,9 +1446,6 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -1469,6 +1459,9 @@ public class JsonParser {
 				+ "&eddt=" + parse_eddt + "&numOfRows=999";
 
 		while (retry < 5) {
+			
+			BufferedReader br = null;
+			String json = "";
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1476,8 +1469,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -1531,6 +1522,7 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
 			}
 
@@ -1549,9 +1541,6 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -1565,6 +1554,9 @@ public class JsonParser {
 				+ "&eddt=" + parse_eddt + "&numOfRows=999";
 
 		while (retry < 5) {
+			
+			BufferedReader br = null;
+			String json = "";
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1572,8 +1564,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -1627,6 +1617,7 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
 			}
 
@@ -1645,9 +1636,6 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMM");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM");
 
@@ -1661,6 +1649,9 @@ public class JsonParser {
 				+ "&eddt=" + parse_eddt + "&numOfRows=999";
 
 		while (retry < 5) {
+			
+			BufferedReader br = null;
+			String json = "";
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1668,8 +1659,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -1723,6 +1712,7 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
 			}
 
@@ -1741,9 +1731,6 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -1759,6 +1746,9 @@ public class JsonParser {
 				+ "&ldate=" + parse_ldate + "&vdate=" + parse_vdate + "&vtime=" + vtime + "&numOfRows=999";
 
 		while (retry < 5) {
+			
+			BufferedReader br = null;
+			String json = "";
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1766,8 +1756,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -1823,6 +1811,7 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
 			}
 
@@ -1842,9 +1831,6 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -1859,6 +1845,9 @@ public class JsonParser {
 				+ "&numOfRows=999";
 
 		while (retry < 5) {
+			
+			BufferedReader br = null;
+			String json = "";
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1866,8 +1855,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -1923,6 +1910,7 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
 			}
 
@@ -1942,9 +1930,6 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -1959,6 +1944,9 @@ public class JsonParser {
 				+ damcode + "&numOfRows=999";
 
 		while (retry < 5) {
+			
+			BufferedReader br = null;
+			String json = "";
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -1966,8 +1954,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -2023,6 +2009,7 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
 			}
 
@@ -2042,9 +2029,6 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -2059,6 +2043,9 @@ public class JsonParser {
 				+ damcode + "&numOfRows=999";
 
 		while (retry < 5) {
+			
+			BufferedReader br = null;
+			String json = "";
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -2066,8 +2053,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -2123,6 +2108,7 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
 			}
 
@@ -2140,12 +2126,12 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		String urlstr = service_url + "&serviceKey=" + service_key;
 
 		while (retry < 5) {
+			
+			BufferedReader br = null;
+			String json = "";
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -2153,8 +2139,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -2208,6 +2192,7 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
 			}
 
@@ -2227,9 +2212,6 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -2243,6 +2225,9 @@ public class JsonParser {
 				+ "&stTm=" + stTm + "&edDt=" + parse_edDt + "&edTm=" + edTm + "&numOfRows=999";
 
 		while (retry < 5) {
+			
+			BufferedReader br = null;
+			String json = "";
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -2250,8 +2235,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -2306,6 +2289,7 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
 			}
 
@@ -2324,12 +2308,12 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		String urlstr = service_url + code + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
 
 		while (retry < 5) {
+			
+			BufferedReader br = null;
+			String json = "";
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -2337,8 +2321,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -2392,6 +2374,7 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
 			}
 
@@ -2410,9 +2393,6 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMM");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM");
 
@@ -2426,6 +2406,9 @@ public class JsonParser {
 				+ "&eddt=" + parse_eddt + "&numOfRows=999";
 
 		while (retry < 5) {
+			
+			BufferedReader br = null;
+			String json = "";
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -2433,8 +2416,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -2488,6 +2469,7 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
 			}
 
@@ -2506,9 +2488,6 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		SimpleDateFormat originFormat = new SimpleDateFormat("yyyyMM");
 		SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-MM");
 
@@ -2522,6 +2501,9 @@ public class JsonParser {
 				+ "&eddt=" + parse_eddt + "&sgccd=" + sgccd + "&numOfRows=999";
 
 		while (retry < 5) {
+			
+			BufferedReader br = null;
+			String json = "";
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -2529,8 +2511,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -2584,6 +2564,7 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
 			}
 
@@ -2602,13 +2583,13 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&stdt=" + stdt + "&damcd="
 				+ damcd + "&numOfRows=999";
 
 		while (retry < 5) {
+			
+			BufferedReader br = null;
+			String json = "";
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -2616,8 +2597,6 @@ public class JsonParser {
 			String returnFlag = "N";
 			
 			try {
-
-				Thread.sleep(3000);
 
 				urlconnection.setRequestMethod("GET");
 				urlconnection.setRequestProperty("Accept", "application/json");
@@ -2671,6 +2650,7 @@ public class JsonParser {
 				
 				urlconnection.disconnect();
 				retry++;
+				Thread.sleep(3000);
 				System.out.println(retry +"번째 재시도..");
 			}
 
@@ -2688,16 +2668,15 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-
 		// utf8 인코딩
 		query = encode_UTF8(query);
-
-		String json = "";
 
 		String urlstr = service_url + query + "&start=" + start;
 
 		while (retry < 5) {
+			
+			String json = "";
+			BufferedReader br = null;
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -2749,16 +2728,15 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-
 		// utf8 인코딩
 		query = encode_UTF8(query);
-
-		String json = "";
 
 		String urlstr = service_url + query + "&page=" + page;
 
 		while (retry < 5) {
+			
+			String json = "";
+			BufferedReader br = null;
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -2809,16 +2787,15 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-
 		// utf8 인코딩
 		query = encode_UTF8(query);
-
-		String json = "";
 
 		String urlstr = service_url + query + "&key=" + google_api_key + "&cx=" + google_api_cx + "&start=" + start;
 
 		while (retry < 5) {
+			
+			String json = "";
+			BufferedReader br = null;
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -2868,12 +2845,12 @@ public class JsonParser {
 
 		int retry = 0;
 
-		BufferedReader br = null;
-		String json = "";
-
 		String urlstr = service_url + pageIndex + "&accessKey=" + service_key + "&userId=bigdata";
 
 		while (retry < 5) {
+			
+			BufferedReader br = null;
+			String json = "";
 
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
