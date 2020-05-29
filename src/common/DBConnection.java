@@ -74,7 +74,7 @@ public class DBConnection {
 	}
 	
 	//오라클 로컬 커넥션
-	static Connection getOraConnection() throws SQLException, ClassNotFoundException {
+	static Connection getOraConnection_local() throws SQLException, ClassNotFoundException {
 		
 		 Connection conn = null;
          try {
@@ -96,6 +96,31 @@ public class DBConnection {
              e.printStackTrace();
          }
          return conn;   
+
+	}
+	
+	public static Connection getOraConnection_eic() throws SQLException, ClassNotFoundException {
+		
+		 Connection conn = null;
+        try {
+            String user = "envdata"; 
+            String pw = "envqlrepdlxj1!";
+            String url = "jdbc:oracle:thin:10.10.20.10:1521:esxdb1";
+            
+            Class.forName("oracle.jdbc.driver.OracleDriver");        
+            conn = DriverManager.getConnection(url, user, pw);
+            
+            System.out.println("Database에 연결되었습니다.\n");
+            
+        } catch (ClassNotFoundException cnfe) {
+            System.out.println("DB 드라이버 로딩 실패 :"+cnfe.toString());
+        } catch (SQLException sqle) {
+            System.out.println("DB 접속실패 : "+sqle.toString());
+        } catch (Exception e) {
+            System.out.println("Unkonwn error");
+            e.printStackTrace();
+        }
+        return conn;   
 
 	}
 	
