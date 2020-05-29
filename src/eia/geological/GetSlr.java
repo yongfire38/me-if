@@ -219,6 +219,7 @@ public class GetSlr {
 					} else {
 						System.out.println("공공데이터 서버 비정상 응답!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg
 								+ "::mgtNo::" + mgtNo);
+						throw new Exception();
 					}
 
 				} else {

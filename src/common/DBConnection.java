@@ -12,26 +12,37 @@ import java.util.Properties;
 
 public class DBConnection {
 	
-	public static String getProperty(String keyName) {
-		
-		String value = "";
-		String resource = "conf/apiConfig.properties";
-		
-		try {
-			Properties props = new Properties();
-			FileInputStream fis = new FileInputStream(resource);
+	//수집서버의 프로퍼티 파일 용
+		public static String getProperty(String keyName) {
 
-			// 프로퍼티 파일 로딩
-			props.load(new java.io.BufferedInputStream(fis));
-			
-			value = props.getProperty(keyName).trim();
-			
-            fis.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+			String os = System.getProperty("os.name").toLowerCase();
+
+			String value = "";
+			String resource = "";
+
+			if (os.indexOf("windows") > -1) {
+				// 윈도우면 현재 실행위치 내 conf 폴더 안
+				resource = System.getProperty("user.dir") + "\\conf\\apiConfig.properties";
+			} else {
+				// 윈도우 외에는 (사실상 리눅스 서버) 서버 절대경로를 하드코딩
+				resource = "/home/eibpadm/EIBP2_APP/conf/apiConfig.properties";
+			}
+
+			try {
+				Properties props = new Properties();
+				FileInputStream fis = new FileInputStream(resource);
+
+				// 프로퍼티 파일 로딩
+				props.load(new java.io.BufferedInputStream(fis));
+
+				value = props.getProperty(keyName).trim();
+
+				fis.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return value;
 		}
-		 return value;
-	}
 
 	public static Connection getConnection() throws SQLException, ClassNotFoundException {
 		
@@ -99,23 +110,40 @@ public class DBConnection {
 
 	}
 	
-	public static Connection getOraConnection_eic() throws SQLException, ClassNotFoundException {
+	public static Connection getOraConnection(String sysNm) throws SQLException, ClassNotFoundException {
 		
 		 Connection conn = null;
+		 
+		 String user = "";
+         String pw = "";
+         String url = "";
+		 
+		 if(sysNm.equals("eic")){
+			 
+			  user = getProperty("eic_oracle_user");
+	          pw = getProperty("eic_oracle_pw");
+	          url = getProperty("eic_oracle_url");
+	          
+		 } else if(sysNm.equals("kwa")){
+			 
+			  user = getProperty("kwa_oracle_user");
+	          pw = getProperty("kwa_oracle_pw");
+	          url = getProperty("kwa_oracle_url");
+	          
+		 }
+       
         try {
-            String user = "envdata"; 
-            String pw = "envqlrepdlxj1!";
-            String url = "jdbc:oracle:thin:10.10.20.10:1521:esxdb1";
-            
-            Class.forName("oracle.jdbc.driver.OracleDriver");        
+        	       	
+            Class.forName(getProperty("eic_oracle_driver"));        
             conn = DriverManager.getConnection(url, user, pw);
             
             System.out.println("Database에 연결되었습니다.\n");
             
         } catch (ClassNotFoundException cnfe) {
-            System.out.println("DB 드라이버 로딩 실패 :"+cnfe.toString());
+            System.out.println("DB 드라이버 로딩 실패 :"+ cnfe.toString());
         } catch (SQLException sqle) {
-            System.out.println("DB 접속실패 : "+sqle.toString());
+            System.out.println("DB 접속실패 : "+ sqle.toString());
+            System.out.println("DB 접속시도 정보  user :"+ user +": pw : "+ pw +": url :"+ url);
         } catch (Exception e) {
             System.out.println("Unkonwn error");
             e.printStackTrace();
@@ -123,6 +151,7 @@ public class DBConnection {
         return conn;   
 
 	}
+	
 	
 
 }

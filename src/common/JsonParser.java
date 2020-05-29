@@ -27,6 +27,7 @@ import org.json.simple.parser.JSONParser;
 
 public class JsonParser {
 
+	//인터넷 연계서버의 프로퍼티 파일 용
 	public static String getProperty(String keyName) {
 
 		String os = System.getProperty("os.name").toLowerCase();

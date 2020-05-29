@@ -21,7 +21,7 @@ public class GetEntrpsInfo {
             // 그 결과를 담을 ResulSet 객체를 준비한 후 실행시킨다.
             String quary = "SELECT * FROM V_ENTRPS_INFO";
             
-            conn = DBConnection.getOraConnection_eic();
+            conn = DBConnection.getOraConnection("eic");
             pstm = conn.prepareStatement(quary, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             rs = pstm.executeQuery();
             

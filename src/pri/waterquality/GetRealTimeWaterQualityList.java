@@ -65,6 +65,7 @@ public class GetRealTimeWaterQualityList {
 					if (!(count_resultCode.equals("00"))) {
 						System.out.println(
 								"공공데이터 서버 비정상 응답!!::resultCode::" + count_resultCode + "::resultMsg::" + count_resultMsg);
+						throw new Exception();
 					} else {
 						int numOfRows = ((Long) count_getRealTimeWaterQualityList.get("numOfRows")).intValue();
 						int totalCount = ((Long) count_getRealTimeWaterQualityList.get("totalCount")).intValue();
@@ -101,9 +102,12 @@ public class GetRealTimeWaterQualityList {
 						resultMsg_col = header.get("message").toString().trim(); // 결과
 																						// 메시지
 						
-						if (!(resultCode_col.toString().equals("00"))) {
-							System.out.println("공공데이터 서버 비정상 응답!!::resultCode::" + resultCode_col.toString()
-									+ "::resultMsg::" + resultMsg_col.toString());
+						if((resultCode_col.equals("03"))){
+							System.out.println("data not exist!!");
+						} else if ((!(resultCode_col.equals("00")) && !(resultCode_col.equals("03")))) {
+							System.out.println(
+									"공공데이터 서버 비정상 응답!!::resultCode::" + resultCode_col + "::resultMsg::" + resultCode_col);
+							throw new Exception();
 						} else if (resultCode_col.toString().equals("00")) {
 							
 							String  numOfRows = " "; // 한 페이지 결과수

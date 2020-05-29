@@ -64,6 +64,7 @@ public class GetCwpFclty {
 					if (!(count_resultCode.equals("00"))) {
 						System.out.println(
 								"공공데이터 서버 비정상 응답!!::resultCode::" + count_resultCode + "::resultMsg::" + count_resultMsg);
+						throw new Exception();
 					} else {
 						// json 값에서 가져온 전체 데이터 캐수와 한 페이지 당 개수
 						int totalCount = ((Long) count_itemsInfo.get("totalCount")).intValue();
@@ -96,9 +97,12 @@ public class GetCwpFclty {
 						String resultCode = header.get("resultCode").toString().trim();
 						String resultMsg = header.get("resultMsg").toString().trim();
 
-						if (!(resultCode.equals("00"))) {
+						if((resultCode.equals("03"))){
+							System.out.println("data not exist!!");
+						} else if ((!(resultCode.equals("00")) && !(resultCode.equals("03")))) {
 							System.out.println(
 									"공공데이터 서버 비정상 응답!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
+							throw new Exception();
 						} else if (resultCode.equals("00")) {
 
 							JSONArray items = (JSONArray) body.get("items");

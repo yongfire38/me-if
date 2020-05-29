@@ -69,9 +69,10 @@ public class GetBsnsStrtgySmallScaleDscssBsnsDetailIngInfoInqire {
 					String resultCode = header.get("resultCode").toString().trim();
 					String resultMsg = header.get("resultMsg").toString().trim();
 
-					if (!(resultCode.equals("00"))) {
+					if ((!(resultCode.equals("00")) && !(resultCode.equals("03")))) {
 						System.out.println("공공데이터 서버 비정상 응답!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
-					} else if (resultCode.equals("00") && body.get("items") instanceof String) {
+						throw new Exception();
+					} else if ((resultCode.equals("00") && body.get("items") instanceof String)||(resultCode.equals("03"))) {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {
 
