@@ -10,7 +10,6 @@ import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import common.JsonParser;
 //import common.TransSftp;
@@ -41,7 +40,6 @@ public class MonPurification {
 						File file = new File(JsonParser.getProperty("file_path") + "WAT/TIF_WAT_04.dat");
 
 						// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
-						String json = "";
 
 						int pageNo = 0;
 						int pageCount = 0;
@@ -49,10 +47,6 @@ public class MonPurification {
 						String totalCount_str = "";
 
 						// 년과 월 입력이 필수사항. 페이지 당 데이터 개수는 100으로 고정됨(변경 불가)
-						json = JsonParser.parseWatJson(service_url, service_key, args[0], args[1],
-								String.valueOf(pageNo));
-						
-						System.out.println(json);
 						
 						//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 						//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
@@ -61,8 +55,8 @@ public class MonPurification {
 							json ="{\"OPERATION\":\"MonPurification\",\"response\":{\"body\":{\"itemsInfo\":{\"totalCount\":0,\"pageNo\":\"1\",\"numberOfRows\":100},\"items\":[],\"measurementItems\":null},\"header\":{\"resultMsg\":\"NODATA_ERROR\",\"resultCode\":\"03\"}}}";
 						}*/
 
-						JSONParser count_parser = new JSONParser();
-						JSONObject count_obj = (JSONObject) count_parser.parse(json);
+						JSONObject count_obj = JsonParser.parseWatJson_obj(service_url, service_key, args[0], args[1],
+								String.valueOf(pageNo));
 						JSONObject count_response = (JSONObject) count_obj.get("response");
 
 						JSONObject count_header = (JSONObject) count_response.get("header");
@@ -91,9 +85,6 @@ public class MonPurification {
 						// step 2. 위에서 구한 pageCount 숫자만큼 반복하면서 파싱
 
 						for (int i = 1; i <= pageCount; ++i) {
-
-							json = JsonParser.parseWatJson(service_url, service_key, args[0], args[1],
-									String.valueOf(i));
 							
 							//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 							//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
@@ -102,8 +93,8 @@ public class MonPurification {
 								json ="{\"OPERATION\":\"MonPurification\",\"response\":{\"body\":{\"itemsInfo\":{\"totalCount\":0,\"pageNo\":\"1\",\"numberOfRows\":100},\"items\":[],\"measurementItems\":null},\"header\":{\"resultMsg\":\"NODATA_ERROR\",\"resultCode\":\"03\"}}}";
 							}*/
 
-							JSONParser parser = new JSONParser();
-							JSONObject obj = (JSONObject) parser.parse(json);
+							JSONObject obj = JsonParser.parseWatJson_obj(service_url, service_key, args[0], args[1],
+									String.valueOf(i));
 							JSONObject response = (JSONObject) obj.get("response");
 
 							JSONObject body = (JSONObject) response.get("body");

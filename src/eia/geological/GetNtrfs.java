@@ -10,7 +10,6 @@ import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import common.JsonParser;
 //import common.TransSftp;
@@ -50,10 +49,6 @@ public class GetNtrfs {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-
-					String json = "";
-
-					json = JsonParser.parseEiaJson(service_url, service_key, mgtNo);
 					
 					//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 					//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
@@ -64,8 +59,7 @@ public class GetNtrfs {
 
 					// step 3.필요에 맞게 파싱
 
-					JSONParser parser = new JSONParser();
-					JSONObject obj = (JSONObject) parser.parse(json);
+					JSONObject obj = JsonParser.parseEiaJson_obj(service_url, service_key, mgtNo);
 					JSONObject response = (JSONObject) obj.get("response");
 
 					// response는 결과값 코드와 메시지를 가지는 header와 데이터 부분인 body로 구분

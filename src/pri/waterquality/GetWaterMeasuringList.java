@@ -10,7 +10,6 @@ import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import common.JsonParser;
 //import common.TransSftp;
@@ -40,13 +39,11 @@ public class GetWaterMeasuringList {
 					File file = new File(JsonParser.getProperty("file_path") + "PRI/TIF_PRI_01.dat");
 
 					// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
-					String json = "";
 
 					int pageNo = 0;
 					int pageCount = 0;
 
 					// 물환경 수질측정망 운영결과 DB API에서는 siteId는 필요 없음
-					json = JsonParser.parsePriJson_waterMeasuring(service_url, service_key, String.valueOf(pageNo), args);
 					
 					//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 					//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
@@ -55,8 +52,7 @@ public class GetWaterMeasuringList {
 						json ="{\"getWaterMeasuringList\":{\"header\":{\"code\":\"03\",\"message\":\"NODATA_ERROR\"}}}";
 					}*/
 
-					JSONParser count_parser = new JSONParser();
-					JSONObject count_obj = (JSONObject) count_parser.parse(json);
+					JSONObject count_obj = JsonParser.parsePriJson_waterMeasuring_obj(service_url, service_key, String.valueOf(pageNo), args);
 
 					JSONObject count_getWaterMeasuringList = (JSONObject) count_obj.get("getWaterMeasuringList");
 
@@ -81,7 +77,6 @@ public class GetWaterMeasuringList {
 					for (int i = 1; i <= pageCount; i++) {
 
 						// 물환경 수질측정망 운영결과 DB API에서는 siteId는 필요 없음
-						json = JsonParser.parsePriJson_waterMeasuring(service_url, service_key, String.valueOf(i), args);
 						
 						//System.out.println("json:::"+json);
 						
@@ -92,8 +87,7 @@ public class GetWaterMeasuringList {
 							json ="{\"getWaterMeasuringList\":{\"header\":{\"code\":\"03\",\"message\":\"NODATA_ERROR\"}}}";
 						}*/
 
-						JSONParser parser = new JSONParser();
-						JSONObject obj = (JSONObject) parser.parse(json);
+						JSONObject obj = JsonParser.parsePriJson_waterMeasuring_obj(service_url, service_key, String.valueOf(i), args);
 
 						JSONObject getWaterMeasuringList = (JSONObject) obj.get("getWaterMeasuringList");
 

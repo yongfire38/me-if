@@ -10,7 +10,6 @@ import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import common.JsonParser;
 //import common.TransSftp;
@@ -44,13 +43,9 @@ public class WaterQualityList {
 						File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_07.dat");
 
 						// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
-						String json = "";
 
 						int pageNo = 0;
 						int pageCount = 0;
-
-						json = JsonParser.parseWrsJson(service_url, service_key, String.valueOf(pageNo), args[0],
-								args[1], args[2], args[3]);
 						
 						//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 						//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
@@ -59,8 +54,8 @@ public class WaterQualityList {
 							json ="{\"response\":{\"header\":{\"resultCode\":\"03\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
 						}*/
 
-						JSONParser count_parser = new JSONParser();
-						JSONObject count_obj = (JSONObject) count_parser.parse(json);
+						JSONObject count_obj = JsonParser.parseWrsJson_obj(service_url, service_key, String.valueOf(pageNo), args[0],
+								args[1], args[2], args[3]);
 						JSONObject count_response = (JSONObject) count_obj.get("response");
 
 						JSONObject count_body = (JSONObject) count_response.get("body");
@@ -85,9 +80,6 @@ public class WaterQualityList {
 
 						for (int i = 1; i <= pageCount; i++) {
 
-							json = JsonParser.parseWrsJson(service_url, service_key, String.valueOf(i), args[0],
-									args[1], args[2], args[3]);
-							
 							//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 							//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
 							//공통 클래스로 로직 빼 놓음
@@ -95,8 +87,8 @@ public class WaterQualityList {
 								json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
 							}*/
 
-							JSONParser parser = new JSONParser();
-							JSONObject obj = (JSONObject) parser.parse(json);
+							JSONObject obj = JsonParser.parseWrsJson_obj(service_url, service_key, String.valueOf(i), args[0],
+									args[1], args[2], args[3]);
 							JSONObject response = (JSONObject) obj.get("response");
 
 							JSONObject body = (JSONObject) response.get("body");
@@ -299,7 +291,7 @@ public class WaterQualityList {
 
 							System.out.println("진행도::::::" + i + "/" + pageCount);
 
-							Thread.sleep(3000);
+							Thread.sleep(2000);
 
 						}
 

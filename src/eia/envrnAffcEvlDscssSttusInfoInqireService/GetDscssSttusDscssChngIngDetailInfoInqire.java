@@ -10,7 +10,6 @@ import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import common.JsonParser;
 //import common.TransSftp;
@@ -48,10 +47,6 @@ public class GetDscssSttusDscssChngIngDetailInfoInqire {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-
-					String json = "";
-
-					json = JsonParser.parseEiaJson(service_url, service_key, args[0]);
 					
 					//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 					//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
@@ -60,8 +55,7 @@ public class GetDscssSttusDscssChngIngDetailInfoInqire {
 						json = "{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\"}}}";
 					}*/
 
-					JSONParser parser = new JSONParser();
-					JSONObject obj = (JSONObject) parser.parse(json);
+					JSONObject obj = JsonParser.parseEiaJson_obj(service_url, service_key, args[0]);
 					JSONObject response = (JSONObject) obj.get("response");
 
 					JSONObject body = (JSONObject) response.get("body");
