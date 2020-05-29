@@ -529,6 +529,7 @@ public class GetSgisDrinkWaterList {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				System.exit(-1);
 			}
 
 

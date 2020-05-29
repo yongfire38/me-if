@@ -280,6 +280,7 @@ public class De {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("damcode :" + args[0] + ": stdt :" + args[1] + ": eddt :" + args[2]);
+				System.exit(-1);
 			}
 
 

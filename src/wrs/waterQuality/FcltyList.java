@@ -213,6 +213,7 @@ public class FcltyList {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("fcltyDivCode :" + args[0]);
+				System.exit(-1);
 			}
 
 

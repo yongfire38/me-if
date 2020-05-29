@@ -522,6 +522,7 @@ public class Taxons_all {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.exit(-1);
 		}
 
 	}

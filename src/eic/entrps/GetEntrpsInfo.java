@@ -19,10 +19,13 @@ public class GetEntrpsInfo {
 			
 			// SQL 문장을 만들고 만약 문장이 질의어(SELECT문)라면
             // 그 결과를 담을 ResulSet 객체를 준비한 후 실행시킨다.
-            String quary = "SELECT * FROM V_ENTRPS_INFO";
+            //String quary = "SELECT * FROM ESXDB1.V_ENTRPS_INFO";
+			String query = DBConnection.getProperty("eic_oracle_table_query");
+			System.out.println("query :::"+query);
+			
             
             conn = DBConnection.getOraConnection("eic");
-            pstm = conn.prepareStatement(quary, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            pstm = conn.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             rs = pstm.executeQuery();
             
           //전체 레코드 수를 구하기 위해 커서를 마지막으로 이동
@@ -51,6 +54,7 @@ public class GetEntrpsInfo {
 				rprntNm[i] = rs.getString(5);
 				
 				System.out.println("registNo::"+registNo[i]+"::insttNm::"+insttNm[i]+"::spcsSeNm::"+spcsSeNm[i]+"::entrpsNm::"+entrpsNm[i]+"::rprntNm::"+rprntNm[i]);
+				//System.out.println("registNo::"+registNo[i]);
 				 i++;
 				
 			}

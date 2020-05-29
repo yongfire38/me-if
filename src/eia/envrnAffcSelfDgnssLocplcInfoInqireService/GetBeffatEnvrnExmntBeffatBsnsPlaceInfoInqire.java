@@ -257,6 +257,7 @@ public class GetBeffatEnvrnExmntBeffatBsnsPlaceInfoInqire {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("distance :" + args[0]);
+				System.exit(-1);
 			}
 
 

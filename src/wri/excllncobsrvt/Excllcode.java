@@ -176,6 +176,7 @@ public class Excllcode {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("damcode :" + args[0]);
+				System.exit(-1);
 			}
 
 

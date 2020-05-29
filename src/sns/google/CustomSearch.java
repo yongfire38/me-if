@@ -182,6 +182,7 @@ public class CustomSearch {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("query :" + args[0]);
+				System.exit(-1);
 			}
 
 

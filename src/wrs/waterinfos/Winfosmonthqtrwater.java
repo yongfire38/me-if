@@ -288,6 +288,7 @@ public class Winfosmonthqtrwater {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("stdt :" + args[0] + ": eddt :" + args[1] + ": sgccd :" + args[2]);
+				System.exit(-1);
 			}
 
 

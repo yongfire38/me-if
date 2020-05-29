@@ -258,6 +258,7 @@ public class MultiFunctionBarrier {
 				e.printStackTrace();
 				System.out.println(
 						"tdate :" + args[0] + ": ldate :" + args[1] + ": vdate :" + args[2] + ": vtime :" + args[3]);
+				System.exit(-1);
 			}
 
 

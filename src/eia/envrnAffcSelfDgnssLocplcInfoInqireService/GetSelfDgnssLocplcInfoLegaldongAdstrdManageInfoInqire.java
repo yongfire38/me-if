@@ -206,6 +206,7 @@ public class GetSelfDgnssLocplcInfoLegaldongAdstrdManageInfoInqire {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("addr :" + args[0] + ": type :" + args[1]);
+				System.exit(-1);
 			}
 
 

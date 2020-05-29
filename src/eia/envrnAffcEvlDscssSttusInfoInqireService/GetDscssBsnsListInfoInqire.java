@@ -201,6 +201,7 @@ public class GetDscssBsnsListInfoInqire {
 				
 			} catch (Exception e) {
 				e.printStackTrace();
+				System.exit(-1);
 			}
 			
 

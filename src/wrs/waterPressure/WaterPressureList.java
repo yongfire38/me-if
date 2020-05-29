@@ -302,6 +302,7 @@ public class WaterPressureList {
 				e.printStackTrace();
 				System.out.println(
 						"stDt :" + args[0] + ": stTm :" + args[1] + ": edDt :" + args[2] + ": edTm :" + args[3]);
+				System.exit(-1);
 			}
 
 

@@ -217,6 +217,7 @@ public class GetItkFclty {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				System.exit(-1);
 			}
 
 

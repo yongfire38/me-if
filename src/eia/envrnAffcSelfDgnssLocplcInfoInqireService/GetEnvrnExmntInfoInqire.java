@@ -192,6 +192,7 @@ public class GetEnvrnExmntInfoInqire {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("buBun :" + args[0]);
+				System.exit(-1);
 			}
 
 

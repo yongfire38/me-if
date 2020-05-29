@@ -172,6 +172,7 @@ public class Winfossgccode {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				System.exit(-1);
 			}
 
 

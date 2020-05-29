@@ -588,6 +588,7 @@ public class GetWaterMeasuringList {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("ptNoList :" + args[0]);
+				System.exit(-1);
 			}
 
 

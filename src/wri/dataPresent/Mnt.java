@@ -194,6 +194,7 @@ public class Mnt {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.exit(-1);
 		}
 
 	}

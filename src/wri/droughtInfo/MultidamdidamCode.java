@@ -169,6 +169,7 @@ public class MultidamdidamCode {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				System.exit(-1);
 			}
 
 

@@ -266,6 +266,7 @@ public class GetBsnsPlaceLnMyeonInfoInqire {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("centerx :" + args[0] + ": centery :" + args[1]);
+				System.exit(-1);
 			}
 
 

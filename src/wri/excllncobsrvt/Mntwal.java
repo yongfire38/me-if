@@ -273,6 +273,7 @@ public class Mntwal {
 				e.printStackTrace();
 				System.out.println("sdate :" + args[0] + ": stime :" + args[1] + ": edate :" + args[2] + ": etime :"
 						+ args[3] + ": damcode :" + args[4] + ": walcode :" + args[5]);
+				System.exit(-1);
 			}
 
 

@@ -326,6 +326,7 @@ public class Dailindwater {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("fcode :" + args[0] + ": stdt :" + args[1] + ": eddt :" + args[2]);
+				System.exit(-1);
 			}
 
 

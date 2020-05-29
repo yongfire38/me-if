@@ -461,6 +461,7 @@ public class MonPurification {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("year :" + args[0] + ": month :" + args[1]);
+				System.exit(-1);
 			}
 
 

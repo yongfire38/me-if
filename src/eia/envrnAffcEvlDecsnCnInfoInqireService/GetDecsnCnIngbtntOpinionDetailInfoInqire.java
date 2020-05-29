@@ -256,6 +256,7 @@ public class GetDecsnCnIngbtntOpinionDetailInfoInqire {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("resultCd :" + args[0]);
+				System.exit(-1);
 			}
 
 

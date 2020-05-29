@@ -269,6 +269,7 @@ public class GetDecsnCnListInfoInqire {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("type :" + args[0]);
+				System.exit(-1);
 			}
 
 

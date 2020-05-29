@@ -192,6 +192,7 @@ public class Blog {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("mgtNo :" + args[0]);
+				System.exit(-1);
 			}
 
 

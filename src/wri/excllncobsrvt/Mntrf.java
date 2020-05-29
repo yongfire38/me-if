@@ -262,6 +262,7 @@ public class Mntrf {
 				e.printStackTrace();
 				System.out.println("sdate :" + args[0] + ": stime :" + args[1] + ": edate :" + args[2] + ": etime :"
 						+ args[3] + ": excll :" + args[4]);
+				System.exit(-1);
 			}
 
 

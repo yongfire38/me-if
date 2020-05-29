@@ -227,6 +227,7 @@ public class DamCode {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				System.exit(-1);
 			}
 
 	}

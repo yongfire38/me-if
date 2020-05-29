@@ -265,6 +265,7 @@ public class GetDscssSttusDscssIngDetailInfoInqire {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("eiaCd :" + args[0]);
+				System.exit(-1);
 			}
 
 

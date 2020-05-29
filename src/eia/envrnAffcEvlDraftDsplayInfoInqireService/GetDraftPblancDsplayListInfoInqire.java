@@ -265,6 +265,7 @@ public class GetDraftPblancDsplayListInfoInqire {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				System.exit(-1);
 			}
 
 
