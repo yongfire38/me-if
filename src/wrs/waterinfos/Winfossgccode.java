@@ -172,6 +172,7 @@ public class Winfossgccode {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				System.out.println("클래스명 : "+ Thread.currentThread().getStackTrace()[1].getClassName());
 				System.exit(-1);
 			}
 

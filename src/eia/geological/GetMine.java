@@ -154,7 +154,7 @@ public class GetMine {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("mgtNo :" + args[0]);
+				System.out.println("클래스명 : "+ Thread.currentThread().getStackTrace()[1].getClassName() +", mgtNo :" + args[0]);
 				System.exit(-1);
 			}
 

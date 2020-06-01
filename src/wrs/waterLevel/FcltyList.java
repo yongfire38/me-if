@@ -61,10 +61,12 @@ public class FcltyList {
 					String count_resultCode = count_header.get("resultCode").toString().trim();
 					String count_resultMsg = count_header.get("resultMsg").toString().trim();
 
-					if (!(count_resultCode.equals("00"))) {
+					if ((!(count_resultCode.equals("00")) && !(count_resultCode.equals("03")))) {
 						System.out.println(
 								"공공데이터 서버 비정상 응답!!::resultCode::" + count_resultCode + "::resultMsg::" + count_resultMsg);
 						throw new Exception();
+					} else if (count_resultCode.equals("03")){
+						pageCount = 1;
 					} else {
 						int numOfRows = ((Long) count_body.get("numOfRows")).intValue();
 						int totalCount = ((Long) count_body.get("totalCount")).intValue();
@@ -195,7 +197,7 @@ public class FcltyList {
 
 						System.out.println("진행도::::::" + i + "/" + pageCount);
 
-						Thread.sleep(2000);
+						//Thread.sleep(2000);
 
 					}
 
@@ -216,7 +218,7 @@ public class FcltyList {
 				
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("fcltyDivCode :" + args[0]);
+				System.out.println("클래스명 : "+ Thread.currentThread().getStackTrace()[1].getClassName() + "fcltyDivCode :" + args[0]);
 				System.exit(-1);
 			}
 

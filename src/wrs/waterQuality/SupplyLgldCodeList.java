@@ -59,10 +59,12 @@ public class SupplyLgldCodeList {
 					String count_resultCode = count_header.get("resultCode").toString().trim();
 					String count_resultMsg = count_header.get("resultMsg").toString().trim();
 
-					if (!(count_resultCode.equals("00"))) {
+					if ((!(count_resultCode.equals("00")) && !(count_resultCode.equals("03")))) {
 						System.out.println(
 								"공공데이터 서버 비정상 응답!!::resultCode::" + count_resultCode + "::resultMsg::" + count_resultMsg);
 						throw new Exception();
+					} else if (count_resultCode.equals("03")){
+						pageCount = 1;
 					} else {
 						int numOfRows = ((Long) count_body.get("numOfRows")).intValue();
 						int totalCount = ((Long) count_body.get("totalCount")).intValue();
@@ -227,7 +229,7 @@ public class SupplyLgldCodeList {
 
 						System.out.println("진행도::::::" + i + "/" + pageCount);
 
-						Thread.sleep(2000);
+						//Thread.sleep(2000);
 
 					}
 
@@ -247,7 +249,7 @@ public class SupplyLgldCodeList {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("mgtNo :" + args[0]);
+				System.out.println("클래스명 : "+ Thread.currentThread().getStackTrace()[1].getClassName());
 				System.exit(-1);
 			}
 

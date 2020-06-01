@@ -218,7 +218,7 @@ public class GetDscssSttusDscssChngIngDetailInfoInqire {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("eiaCd :" + args[0]);
+				System.out.println("클래스명 : "+ Thread.currentThread().getStackTrace()[1].getClassName() +", eiaCd :" + args[0]);
 				System.exit(-1);
 			}
 

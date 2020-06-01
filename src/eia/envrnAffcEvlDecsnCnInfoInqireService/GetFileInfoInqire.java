@@ -225,7 +225,7 @@ public class GetFileInfoInqire {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("resultCd :" + args[0] + " : type :" + args[1]);
+				System.out.println("클래스명 : "+ Thread.currentThread().getStackTrace()[1].getClassName() +", resultCd :" + args[0] +", type :" + args[1]);
 				System.exit(-1);
 			}
 

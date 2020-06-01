@@ -63,10 +63,12 @@ public class MultiFunctionBarrier {
 						String count_resultCode = count_header.get("resultCode").toString().trim();
 						String count_resultMsg = count_header.get("resultMsg").toString().trim();
 
-						if (!(count_resultCode.equals("00"))) {
+						if ((!(count_resultCode.equals("00")) && !(count_resultCode.equals("03")))) {
 							System.out.println("공공데이터 서버 비정상 응답!!::resultCode::" + count_resultCode + "::resultMsg::"
 									+ count_resultMsg);
 							throw new Exception();
+						} else if (count_resultCode.equals("03")){
+							pageCount = 1;
 						} else {
 							int numOfRows = ((Long) count_body.get("numOfRows")).intValue();
 							int totalCount = ((Long) count_body.get("totalCount")).intValue();
@@ -257,7 +259,7 @@ public class MultiFunctionBarrier {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println(
-						"tdate :" + args[0] + ": ldate :" + args[1] + ": vdate :" + args[2] + ": vtime :" + args[3]);
+						"클래스명 : "+ Thread.currentThread().getStackTrace()[1].getClassName() + "tdate :" + args[0] + ": ldate :" + args[1] + ": vdate :" + args[2] + ": vtime :" + args[3]);
 				System.exit(-1);
 			}
 

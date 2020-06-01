@@ -62,10 +62,12 @@ public class Mnt {
 						String count_resultCode = count_header.get("resultCode").toString().trim();
 						String count_resultMsg = count_header.get("resultMsg").toString().trim();
 
-						if (!(count_resultCode.equals("00"))) {
+						if ((!(count_resultCode.equals("00")) && !(count_resultCode.equals("03")))) {
 							System.out.println("공공데이터 서버 비정상 응답!!::resultCode::" + count_resultCode + "::resultMsg::"
 									+ count_resultMsg);
 							throw new Exception();
+						} else if (count_resultCode.equals("03")){
+							pageCount = 1;
 						} else {
 							int numOfRows = ((Long) count_body.get("numOfRows")).intValue();
 							int totalCount = ((Long) count_body.get("totalCount")).intValue();
@@ -279,7 +281,7 @@ public class Mnt {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("damcode :" + args[0] + ": stdt :" + args[1] + ": eddt :" + args[2]);
+				System.out.println("클래스명 : "+ Thread.currentThread().getStackTrace()[1].getClassName() + "damcode :" + args[0] + ": stdt :" + args[1] + ": eddt :" + args[2]);
 				System.exit(-1);
 			}
 

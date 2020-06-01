@@ -191,7 +191,7 @@ public class GetEnvrnExmntInfoInqire {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("buBun :" + args[0]);
+				System.out.println("클래스명 : "+ Thread.currentThread().getStackTrace()[1].getClassName() +", buBun :" + args[0]);
 				System.exit(-1);
 			}
 

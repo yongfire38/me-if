@@ -1,5 +1,10 @@
 package eic.entrps;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +15,8 @@ import common.DBConnection;
 public class GetEntrpsInfo {
 
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
+		
+		File file = new File(args[0]);
 
 		Connection conn = null; // DB연결된 상태(세션)을 담은 객체
 		PreparedStatement pstm = null; // SQL 문을 나타내는 객체
@@ -55,6 +62,30 @@ public class GetEntrpsInfo {
 				
 				System.out.println("registNo::"+registNo[i]+"::insttNm::"+insttNm[i]+"::spcsSeNm::"+spcsSeNm[i]+"::entrpsNm::"+entrpsNm[i]+"::rprntNm::"+rprntNm[i]);
 				//System.out.println("registNo::"+registNo[i]);
+				
+				// step 4. 파일에 쓰기
+				try {
+					PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
+
+					pw.write(registNo[i]);
+					pw.write("|^");
+					pw.write(insttNm[i]); // 연돌명
+					pw.write("|^");
+					pw.write(spcsSeNm[i]); // 주소
+					pw.write("|^");
+					pw.write(entrpsNm[i]); // X좌표
+					pw.write("|^");
+					pw.write(rprntNm[i]); // Y좌표
+					pw.println();
+					pw.flush();
+					pw.close();
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				
+				
 				 i++;
 				
 			}
