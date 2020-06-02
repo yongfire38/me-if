@@ -10,6 +10,7 @@ import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import common.JsonParser;
 //import common.TransSftp;
@@ -39,18 +40,23 @@ public class GetSgisDrinkWaterList {
 					File file = new File(JsonParser.getProperty("file_path") + "PRI/TIF_PRI_02.dat");
 
 					// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
+					String json = "";
 
 					int pageNo = 0;
 					int pageCount = 0;
 					
+					json = JsonParser.parsePriJson_drinkWater(service_url, service_key, String.valueOf(pageNo), args);
+					
 					//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 					//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
 					//공통 클래스로 로직 빼 놓음
-					/*if(json.indexOf("</") > -1){
+					// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+					if(json.indexOf("</") > -1){
 						json ="{\"getSgisDrinkWaterList\":{\"header\":{\"code\":\"03\",\"message\":\"NODATA_ERROR\"}}}";
-					}*/
+					}
 
-					JSONObject count_obj = JsonParser.parsePriJson_drinkWater_obj(service_url, service_key, String.valueOf(pageNo), args);
+					JSONParser count_parser = new JSONParser();
+					JSONObject count_obj = (JSONObject) count_parser.parse(json);
 
 					JSONObject count_getSgisDrinkWaterList = (JSONObject) count_obj.get("getSgisDrinkWaterList");
 
@@ -58,12 +64,13 @@ public class GetSgisDrinkWaterList {
 					String count_resultCode = count_header.get("code").toString().trim();
 					String count_resultMsg = count_header.get("message").toString().trim();
 
-					if ((!(count_resultCode.equals("00")) && !(count_resultCode.equals("03")))) {
+					
+					if((count_resultCode.equals("03"))){
+						System.out.println("data not exist!!");
+					} else if ((!(count_resultCode.equals("00")) && !(count_resultCode.equals("03")))) {
 						System.out.println(
 								"공공데이터 서버 비정상 응답!!::resultCode::" + count_resultCode + "::resultMsg::" + count_resultMsg);
-						throw new Exception();
-					} else if (count_resultCode.equals("03")){
-						pageCount = 1;
+						//throw new Exception();
 					} else {
 						int numOfRows = ((Long) count_getSgisDrinkWaterList.get("numOfRows")).intValue();
 						int totalCount = ((Long) count_getSgisDrinkWaterList.get("totalCount")).intValue();
@@ -77,12 +84,15 @@ public class GetSgisDrinkWaterList {
 
 					for (int i = 1; i <= pageCount; i++) {
 						
+						json = JsonParser.parsePriJson_drinkWater(service_url, service_key, String.valueOf(i), args);
+						
 						//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 						//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
 						//공통 클래스로 로직 빼 놓음
-						/*if(json.indexOf("</") > -1){
+						// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+						if(json.indexOf("</") > -1){
 							json ="{\"getSgisDrinkWaterList\":{\"header\":{\"code\":\"03\",\"message\":\"NODATA_ERROR\"}}}";
-						}*/
+						}
 
 						JSONObject obj = JsonParser.parsePriJson_drinkWater_obj(service_url, service_key, String.valueOf(i), args);
 
@@ -103,7 +113,7 @@ public class GetSgisDrinkWaterList {
 						} else if ((!(resultCode_col.equals("00")) && !(resultCode_col.equals("03")))) {
 							System.out.println(
 									"공공데이터 서버 비정상 응답!!::resultCode::" + resultCode_col + "::resultMsg::" + resultCode_col);
-							throw new Exception();
+							//throw new Exception();
 						} else if (resultCode_col.toString().equals("00")) {
 							
 							String numOfRows =  " "; // 한 페이지 결과 수

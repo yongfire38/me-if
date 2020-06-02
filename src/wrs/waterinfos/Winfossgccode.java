@@ -10,6 +10,7 @@ import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import common.JsonParser;
 //import common.TransSftp;
@@ -39,17 +40,21 @@ public class Winfossgccode {
 					File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_10.dat");
 
 					// step 2. 전체 파싱
+					String json = "";
 
 					// 추가 파라미터가 없으므로 기존 메서드 이용
+					json = JsonParser.parseWriJson(service_url, service_key);
 					
 					//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 					//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
 					//공통 클래스로 로직 빼 놓음
-					/*if(json.indexOf("</") > -1){
+					// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+					if(json.indexOf("</") > -1){
 						json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
-					}*/
+					}
 
-					JSONObject obj = JsonParser.parseWriJson_obj(service_url, service_key);
+					JSONParser parser = new JSONParser();
+					JSONObject obj = (JSONObject) parser.parse(json);
 					JSONObject response = (JSONObject) obj.get("response");
 
 					JSONObject body = (JSONObject) response.get("body");
@@ -60,7 +65,7 @@ public class Winfossgccode {
 
 					if ((!(resultCode.equals("00")) && !(resultCode.equals("03")))) {
 						System.out.println("공공데이터 서버 비정상 응답!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
-						throw new Exception();
+						//throw new Exception();
 					} else if ((resultCode.equals("00") && body.get("items") instanceof String)||(resultCode.equals("03"))) {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {

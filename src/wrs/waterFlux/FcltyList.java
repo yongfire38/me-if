@@ -10,6 +10,7 @@ import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import common.JsonParser;
 //import common.TransSftp;
@@ -39,21 +40,25 @@ public class FcltyList {
 					File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_02.dat");
 
 					// step 2. 전체 파싱
+					String json = "";
 
 					// 파라미터 1개만 받으므로 환경영향평가 쪽 메서드 이용
+					json = JsonParser.parseEiaJson(service_url, service_key, args[0]);
 					
 					//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 					//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
 					
 					//이 api는 전체가 다 조회되어야 하므로 한번이라도 비정상응답이 되면 익셉션 발생 처리
 					//공통 클래스로 로직 빼 놓음
-					/*if(json.indexOf("</") > -1){
-						//json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
-						System.out.println("공공데이터 서버 측 비정상 응답");
-						throw new Exception();
-					}*/
+					// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+					if(json.indexOf("</") > -1){
+						json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
+						System.out.println("공공데이터 서버 측 비 Json 응답");
+						//throw new Exception();
+					}
 
-					JSONObject obj = JsonParser.parseEiaJson_obj(service_url, service_key, args[0]);
+					JSONParser parser = new JSONParser();
+					JSONObject obj = (JSONObject) parser.parse(json);
 					JSONObject response = (JSONObject) obj.get("response");
 
 					JSONObject body = (JSONObject) response.get("body");
@@ -64,7 +69,7 @@ public class FcltyList {
 
 					if ((!(resultCode.equals("00")) && !(resultCode.equals("03")))) {
 						System.out.println("공공데이터 서버 비정상 응답!!::resultCode::" + resultCode + "::resultMsg::" + resultMsg);
-						throw new Exception();
+						//throw new Exception();
 					} else if ((resultCode.equals("00") && body.get("items") instanceof String)||(resultCode.equals("03"))) {
 						System.out.println("data not exist!!");
 					} else if (resultCode.equals("00") && !(body.get("items") instanceof String)) {

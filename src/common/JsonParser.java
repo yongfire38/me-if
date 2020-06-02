@@ -571,7 +571,7 @@ public class JsonParser {
 
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -595,7 +595,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -614,16 +615,18 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : mgtNo :" + mgtNo);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : mgtNo :" + mgtNo);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -745,7 +748,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -769,7 +772,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -788,16 +792,18 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : code :" + code + ": type :" + type);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : code :" + code + ": type :" + type);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -917,7 +923,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -941,7 +947,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -960,16 +967,18 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : pageNo :" + pageNo + ": code :" + code);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : pageNo :" + pageNo + ": code :" + code);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -1091,7 +1100,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -1115,7 +1124,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -1134,16 +1144,18 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : center_X :" + center_X + ": center_Y :" + center_Y);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : center_X :" + center_X + ": center_Y :" + center_Y);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -1269,7 +1281,7 @@ public class JsonParser {
 
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -1293,7 +1305,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -1312,16 +1325,18 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
 
-				if (returnFlag.equals("Y")) {
+				System.out.println("JSON 요청 에러 : year :" + year + ": month :" + month);
+				
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : year :" + year + ": month :" + month);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -1443,7 +1458,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -1467,7 +1482,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -1486,16 +1502,18 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : pageNo :" + pageNo);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : pageNo :" + pageNo);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -1809,7 +1827,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -1833,7 +1851,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -1853,17 +1872,20 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : ptNoList :" + ptNoList + ": wmyrList :" + wmyrList + ": wmodList :"
+						+ wmodList);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : ptNoList :" + ptNoList + ": wmyrList :" + wmyrList + ": wmodList :"
 							+ wmodList);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -2010,7 +2032,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -2034,7 +2056,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -2053,16 +2076,18 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : yyyy :" + yyyy);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : yyyy :" + yyyy);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -2197,7 +2222,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -2221,7 +2246,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -2240,16 +2266,18 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : startDate :" + startDate + ": endDate :" + endDate);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : startDate :" + startDate + ": endDate :" + endDate);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -2387,7 +2415,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -2411,7 +2439,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -2430,16 +2459,18 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -2581,7 +2612,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -2605,7 +2636,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -2624,16 +2656,18 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -2775,7 +2809,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -2799,7 +2833,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -2818,16 +2853,18 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -2971,7 +3008,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -2995,7 +3032,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -3015,17 +3053,20 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : tdate :" + tdate + ": ldate :" + ldate + ": vdate :" + vdate
+						+ ": vtime :" + vtime);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : tdate :" + tdate + ": ldate :" + ldate + ": vdate :" + vdate
 							+ ": vtime :" + vtime);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -3173,7 +3214,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -3197,7 +3238,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -3217,17 +3259,20 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+						+ ": etime :" + etime + ": excll :" + excll);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
 							+ ": etime :" + etime + ": excll :" + excll);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -3375,7 +3420,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -3399,7 +3444,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -3419,17 +3465,20 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+						+ ": etime :" + etime + ": damcode :" + damcode + ": excll :" + excll);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
 							+ ": etime :" + etime + ": damcode :" + damcode + ": excll :" + excll);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -3577,7 +3626,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -3601,7 +3650,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -3621,17 +3671,20 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+						+ ": etime :" + etime + ": damcode :" + damcode + ": wal :" + wal);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
 							+ ": etime :" + etime + ": damcode :" + damcode + ": wal :" + wal);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -3766,7 +3819,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -3790,7 +3843,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -3809,16 +3863,18 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 ");
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 ");
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -3950,7 +4006,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -3974,7 +4030,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -3994,17 +4051,20 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println(
+						"JSON 요청 에러 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt + ": edTm :" + edTm);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println(
 							"JSON 요청 에러 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt + ": edTm :" + edTm);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -4139,7 +4199,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -4163,7 +4223,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -4182,16 +4243,18 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : code :" + code);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : code :" + code);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -4323,7 +4386,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -4347,7 +4410,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -4366,16 +4430,18 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -4517,7 +4583,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -4541,7 +4607,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -4560,16 +4627,18 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt + ": sgccd :" + sgccd);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt + ": sgccd :" + sgccd);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -4702,7 +4771,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -4726,7 +4795,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -4745,16 +4815,18 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : stdt :" + stdt + ": damcd :" + damcd);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": damcd :" + damcd);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
