@@ -604,7 +604,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : mgtNo :" + mgtNo);
+						System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -690,7 +690,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : mgtNo :" + mgtNo);
+						System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -778,7 +778,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : code :" + code + ": type :" + type);
+						System.out.print("공공데이터 서버 비 JSON 응답 : code :" + code + ": type :" + type);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -863,7 +863,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : code :" + code + ": type :" + type);
+						System.out.print("공공데이터 서버 비 JSON 응답 : code :" + code + ": type :" + type);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -950,7 +950,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : pageNo :" + pageNo + ": code :" + code);
+						System.out.print("공공데이터 서버 비 JSON 응답 : pageNo :" + pageNo + ": code :" + code);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -1035,7 +1035,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : pageNo :" + pageNo + ": code :" + code);
+						System.out.print("공공데이터 서버 비 JSON 응답 : pageNo :" + pageNo + ": code :" + code);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -1124,7 +1124,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : center_X :" + center_X + ": center_Y :" + center_Y);
+						System.out.print("공공데이터 서버 비 JSON 응답 : center_X :" + center_X + ": center_Y :" + center_Y);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -1212,7 +1212,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : center_X :" + center_X + ": center_Y :" + center_Y);
+						System.out.print("공공데이터 서버 비 JSON 응답 : center_X :" + center_X + ": center_Y :" + center_Y);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -1302,7 +1302,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : year :" + year + ": month :" + month);
+						System.out.print("공공데이터 서버 비 JSON 응답 : year :" + year + ": month :" + month);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -1389,7 +1389,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : year :" + year + ": month :" + month);
+						System.out.print("공공데이터 서버 비 JSON 응답 : year :" + year + ": month :" + month);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -1476,7 +1476,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : pageNo :" + pageNo);
+						System.out.print("공공데이터 서버 비 JSON 응답 : pageNo :" + pageNo);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -1561,7 +1561,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : pageNo :" + pageNo);
+						System.out.print("공공데이터 서버 비 JSON 응답 : pageNo :" + pageNo);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -1651,7 +1651,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : siteId :" + siteId + ": ptNoList :" + ptNoList);
+						System.out.print("공공데이터 서버 비 JSON 응답 : siteId :" + siteId + ": ptNoList :" + ptNoList);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -1738,7 +1738,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : siteId :" + siteId + ": ptNoList :" + ptNoList);
+						System.out.print("공공데이터 서버 비 JSON 응답 : siteId :" + siteId + ": ptNoList :" + ptNoList);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -1842,7 +1842,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : ptNoList :" + ptNoList + ": wmyrList :" + wmyrList
+						System.out.print("공공데이터 서버 비 JSON 응답 : ptNoList :" + ptNoList + ": wmyrList :" + wmyrList
 								+ ": wmodList :" + wmodList);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
@@ -1946,7 +1946,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : ptNoList :" + ptNoList + ": wmyrList :" + wmyrList
+						System.out.print("공공데이터 서버 비 JSON 응답 : ptNoList :" + ptNoList + ": wmyrList :" + wmyrList
 								+ ": wmodList :" + wmodList);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
@@ -2043,7 +2043,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : yyyy :" + yyyy);
+						System.out.print("공공데이터 서버 비 JSON 응답 : yyyy :" + yyyy);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -2136,7 +2136,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : yyyy :" + yyyy);
+						System.out.print("공공데이터 서버 비 JSON 응답 : yyyy :" + yyyy);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -2230,7 +2230,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : startDate :" + startDate + ": endDate :" + endDate);
+						System.out.print("공공데이터 서버 비 JSON 응답 : startDate :" + startDate + ": endDate :" + endDate);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -2322,7 +2322,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : startDate :" + startDate + ": endDate :" + endDate);
+						System.out.print("공공데이터 서버 비 JSON 응답 : startDate :" + startDate + ": endDate :" + endDate);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -2420,7 +2420,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": eddt :" + eddt);
+						System.out.print("공공데이터 서버 비 JSON 응답 : stdt :" + stdt + ": eddt :" + eddt);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -2516,7 +2516,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": eddt :" + eddt);
+						System.out.print("공공데이터 서버 비 JSON 응답 : stdt :" + stdt + ": eddt :" + eddt);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -2614,7 +2614,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+						System.out.print("공공데이터 서버 비 JSON 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -2710,7 +2710,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+						System.out.print("공공데이터 서버 비 JSON 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -2808,7 +2808,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+						System.out.print("공공데이터 서버 비 JSON 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -2904,7 +2904,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+						System.out.print("공공데이터 서버 비 JSON 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -3004,7 +3004,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : tdate :" + tdate + ": ldate :" + ldate + ": vdate :" + vdate
+						System.out.print("공공데이터 서버 비 JSON 응답 : tdate :" + tdate + ": ldate :" + ldate + ": vdate :" + vdate
 								+ ": vtime :" + vtime);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
@@ -3104,7 +3104,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : tdate :" + tdate + ": ldate :" + ldate + ": vdate :" + vdate
+						System.out.print("공공데이터 서버 비 JSON 응답 : tdate :" + tdate + ": ldate :" + ldate + ": vdate :" + vdate
 								+ ": vtime :" + vtime);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
@@ -3206,7 +3206,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+						System.out.print("공공데이터 서버 비 JSON 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
 								+ ": etime :" + etime + ": excll :" + excll);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
@@ -3306,7 +3306,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+						System.out.print("공공데이터 서버 비 JSON 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
 								+ ": etime :" + etime + ": excll :" + excll);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
@@ -3408,7 +3408,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+						System.out.print("공공데이터 서버 비 JSON 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
 								+ ": etime :" + etime + ": damcode :" + damcode + ": excll :" + excll);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
@@ -3508,7 +3508,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+						System.out.print("공공데이터 서버 비 JSON 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
 								+ ": etime :" + etime + ": damcode :" + damcode + ": excll :" + excll);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
@@ -3610,7 +3610,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+						System.out.print("공공데이터 서버 비 JSON 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
 								+ ": etime :" + etime + ": damcode :" + damcode + ": wal :" + wal);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
@@ -3710,7 +3710,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+						System.out.print("공공데이터 서버 비 JSON 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
 								+ ": etime :" + etime + ": damcode :" + damcode + ": wal :" + wal);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
@@ -3799,7 +3799,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답");
+						System.out.print("공공데이터 서버 비 JSON 응답");
 						System.out.print("호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -3884,7 +3884,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답");
+						System.out.print("공공데이터 서버 비 JSON 응답");
 						System.out.print("호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -3983,7 +3983,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt
+						System.out.print("공공데이터 서버 비 JSON 응답 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt
 								+ ": edTm :" + edTm);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
@@ -4082,7 +4082,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt
+						System.out.print("공공데이터 서버 비 JSON 응답 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt
 								+ ": edTm :" + edTm);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
@@ -4172,7 +4172,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : code :" + code);
+						System.out.print("공공데이터 서버 비 JSON 응답 : code :" + code);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -4258,7 +4258,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : code :" + code);
+						System.out.print("공공데이터 서버 비 JSON 응답 : code :" + code);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -4356,7 +4356,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": eddt :" + eddt);
+						System.out.print("공공데이터 서버 비 JSON 응답 : stdt :" + stdt + ": eddt :" + eddt);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -4452,7 +4452,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": eddt :" + eddt);
+						System.out.print("공공데이터 서버 비 JSON 응답 : stdt :" + stdt + ": eddt :" + eddt);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -4550,7 +4550,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": eddt :" + eddt + ": sgccd :" + sgccd);
+						System.out.print("공공데이터 서버 비 JSON 응답 : stdt :" + stdt + ": eddt :" + eddt + ": sgccd :" + sgccd);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -4646,7 +4646,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": eddt :" + eddt + ": sgccd :" + sgccd);
+						System.out.print("공공데이터 서버 비 JSON 응답 : stdt :" + stdt + ": eddt :" + eddt + ": sgccd :" + sgccd);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -4735,7 +4735,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": damcd :" + damcd);
+						System.out.print("공공데이터 서버 비 JSON 응답 : stdt :" + stdt + ": damcd :" + damcd);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
@@ -4822,7 +4822,7 @@ public class JsonParser {
 					for (int i = a.length - 1; i > 0; i--) {
 						System.out.println("비정상 응답 : json :" + json);
 
-						System.out.print("공공데이터 서버 비정상 응답 : stdt :" + stdt + ": damcd :" + damcd);
+						System.out.print("공공데이터 서버 비 JSON 응답 : stdt :" + stdt + ": damcd :" + damcd);
 						System.out.print(", 호출 클래스 - " + a[i].getClassName());
 						System.out.print(", 메소드 - " + a[i].getMethodName());
 						System.out.print(", 라인 - " + a[i].getLineNumber());
