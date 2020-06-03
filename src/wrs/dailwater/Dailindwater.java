@@ -55,6 +55,7 @@ public class Dailindwater {
 						//공통 클래스로 로직 빼 놓음
 						// 2020.06.02 : 빈 Json을 리턴하도록 롤백
 						if(json.indexOf("</") > -1){
+							System.out.print("공공데이터 서버 비 JSON 응답, fcode :" + args[0] + ": stdt :" + args[1] + ": eddt :" + args[2]);
 							json ="{\"response\":{\"header\":{\"resultCode\":\"03\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
 						}
 
@@ -94,6 +95,7 @@ public class Dailindwater {
 							//공통 클래스로 로직 빼 놓음
 							// 2020.06.02 : 빈 Json을 리턴하도록 롤백
 							if(json.indexOf("</") > -1){
+								System.out.print("공공데이터 서버 비 JSON 응답, fcode :" + args[0] + ": stdt :" + args[1] + ": eddt :" + args[2]);
 								json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
 							}
 
@@ -339,7 +341,7 @@ public class Dailindwater {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("클래스명 : "+ Thread.currentThread().getStackTrace()[1].getClassName() + "fcode :" + args[0] + ": stdt :" + args[1] + ": eddt :" + args[2]);
+				System.out.println("클래스명 : "+ Thread.currentThread().getStackTrace()[1].getClassName() + ", fcode :" + args[0] + ": stdt :" + args[1] + ": eddt :" + args[2]);
 				System.exit(-1);
 			}
 

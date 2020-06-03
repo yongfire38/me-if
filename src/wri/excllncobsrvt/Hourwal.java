@@ -67,6 +67,8 @@ public class Hourwal {
 						//공통 클래스로 로직 빼 놓음
 						// 2020.06.02 : 빈 Json을 리턴하도록 롤백
 						if(json.indexOf("</") > -1){
+							System.out.print("공공데이터 서버 비 JSON 응답, sdate :" + args[0] + ": stime :" + args[1] + ": edate :" + args[2] + ": etime :"
+									+ args[3] + ": damcode :" + args[4] + ": wal :" + args[5]);
 							json ="{\"response\":{\"header\":{\"resultCode\":\"03\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
 						}
 
@@ -106,6 +108,8 @@ public class Hourwal {
 							//공통 클래스로 로직 빼 놓음
 							// 2020.06.02 : 빈 Json을 리턴하도록 롤백
 							if(json.indexOf("</") > -1){
+								System.out.print("공공데이터 서버 비 JSON 응답, sdate :" + args[0] + ": stime :" + args[1] + ": edate :" + args[2] + ": etime :"
+										+ args[3] + ": damcode :" + args[4] + ": wal :" + args[5]);
 								json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
 							}
 
@@ -285,7 +289,7 @@ public class Hourwal {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("클래스명 : "+ Thread.currentThread().getStackTrace()[1].getClassName() + "sdate :" + args[0] + ": stime :" + args[1] + ": edate :" + args[2] + ": etime :"
+				System.out.println("클래스명 : "+ Thread.currentThread().getStackTrace()[1].getClassName() + ", sdate :" + args[0] + ": stime :" + args[1] + ": edate :" + args[2] + ": etime :"
 						+ args[3] + ": damcode :" + args[4] + ": wal :" + args[5]);
 				System.exit(-1);
 			}

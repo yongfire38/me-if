@@ -53,6 +53,7 @@ public class DamCode {
 					//공통 클래스로 로직 빼 놓음
 					// 2020.06.02 : 빈 Json을 리턴하도록 롤백
 					if(json.indexOf("</") > -1){
+						System.out.print("공공데이터 서버 비 JSON 응답 ");
 						json ="{\"response\":{\"header\":{\"resultCode\":\"03\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
 					}
 
@@ -91,6 +92,7 @@ public class DamCode {
 						//공통 클래스로 로직 빼 놓음
 						// 2020.06.02 : 빈 Json을 리턴하도록 롤백
 						if(json.indexOf("</") > -1){
+							System.out.print("공공데이터 서버 비 JSON 응답 ");
 							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
 						}
 

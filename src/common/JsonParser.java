@@ -1546,6 +1546,7 @@ public class JsonParser {
 
 	// 상수도 정보 시스템 파싱 (페이지 번호를 받아서 파싱)
 	// 요청 형식이 동일한 경우 다른 시스템에서도 사용 가능 - 페이지 번호 외에는 요청 파라미터가 없는 경우
+	// JSONObject 버전
 	public static JSONObject parseWatJson_obj(String service_url, String service_key, String pageNo) throws Exception {
 
 		int retry = 0;
@@ -1650,7 +1651,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -1674,7 +1675,8 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
-				if (json.indexOf("</") > -1) {
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				/*if (json.indexOf("</") > -1) {
 
 					returnFlag = "Y";
 
@@ -1693,16 +1695,18 @@ public class JsonParser {
 
 					throw new Exception();
 
-				}
+				}*/
 
 				return json;
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : siteId :" + siteId + ": ptNoList :" + ptNoList);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : siteId :" + siteId + ": ptNoList :" + ptNoList);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;

@@ -57,6 +57,7 @@ public class WaterPressureList {
 						//공통 클래스로 로직 빼 놓음
 						// 2020.06.02 : 빈 Json을 리턴하도록 롤백
 						if(json.indexOf("</") > -1){
+							System.out.print("공공데이터 서버 비 JSON 응답, stDt :" + args[0] + ": stTm :" + args[1] + ": edDt :" + args[2] + ": edTm :" + args[3]);
 							json ="{\"response\":{\"header\":{\"resultCode\":\"03\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
 						}
 
@@ -96,6 +97,7 @@ public class WaterPressureList {
 							//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
 							//공통 클래스로 로직 빼 놓음
 							if(json.indexOf("</") > -1){
+								System.out.print("공공데이터 서버 비 JSON 응답, stDt :" + args[0] + ": stTm :" + args[1] + ": edDt :" + args[2] + ": edTm :" + args[3]);
 								json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
 							}
 
@@ -312,7 +314,7 @@ public class WaterPressureList {
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println(
-						"클래스명 : "+ Thread.currentThread().getStackTrace()[1].getClassName() + "stDt :" + args[0] + ": stTm :" + args[1] + ": edDt :" + args[2] + ": edTm :" + args[3]);
+						"클래스명 : "+ Thread.currentThread().getStackTrace()[1].getClassName() + ", stDt :" + args[0] + ": stTm :" + args[1] + ": edDt :" + args[2] + ": edTm :" + args[3]);
 				System.exit(-1);
 			}
 

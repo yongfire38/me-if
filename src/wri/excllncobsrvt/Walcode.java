@@ -10,6 +10,7 @@ import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import common.JsonParser;
 //import common.TransSftp;
@@ -50,10 +51,12 @@ public class Walcode {
 					//공통 클래스로 로직 빼 놓음
 					// 2020.06.02 : 빈 Json을 리턴하도록 롤백
 					if(json.indexOf("</") > -1){
+						System.out.print("공공데이터 서버 비 JSON 응답, damcode :" + args[0]);
 						json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
 					}
 
-					JSONObject obj = JsonParser.parseEiaJson_obj(service_url, service_key, args[0]);
+					JSONParser parser = new JSONParser();
+					JSONObject obj = (JSONObject) parser.parse(json);
 					JSONObject response = (JSONObject) obj.get("response");
 
 					JSONObject body = (JSONObject) response.get("body");
@@ -177,7 +180,7 @@ public class Walcode {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("클래스명 : "+ Thread.currentThread().getStackTrace()[1].getClassName() + "damcode :" + args[0]);
+				System.out.println("클래스명 : "+ Thread.currentThread().getStackTrace()[1].getClassName() + ", damcode :" + args[0]);
 				System.exit(-1);
 			}
 
