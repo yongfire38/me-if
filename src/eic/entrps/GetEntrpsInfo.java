@@ -15,6 +15,7 @@ import common.JsonParser;
 
 public class GetEntrpsInfo {
 
+	//환경영향평가 경력 관리 시스템 - 환경영향평가업체정보
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
 		if (args.length == 1) {
@@ -27,7 +28,7 @@ public class GetEntrpsInfo {
 
 				// SQL 문장을 만들고 만약 문장이 질의어(SELECT문)라면
 				// 그 결과를 담을 ResulSet 객체를 준비한 후 실행시킨다.
-				// String quary = "SELECT * FROM ESXDB1.V_ENTRPS_INFO";
+				// String quary = "SELECT * FROM CMS.V_ENTRPS_INFO WHERE REGIST_NO IS NOT NULL";
 				String query = DBConnection.getProperty("eic_oracle_table_query");
 				System.out.println("query :::" + query);
 
@@ -164,7 +165,7 @@ public class GetEntrpsInfo {
 						/*System.out.println("registNo::" + registNo[i] + "::insttNm::" + insttNm[i] + "::spcsSeNm::"
 								+ spcsSeNm[i] + "::entrpsNm::" + entrpsNm[i] + "::rprntNm::" + rprntNm[i]);*/
 
-						// step 4. 파일에 쓰기
+						// 파일에 쓰기
 						try {
 							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
