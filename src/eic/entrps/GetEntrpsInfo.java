@@ -123,6 +123,8 @@ public class GetEntrpsInfo {
 						i++;
 
 					}
+					
+					System.out.println("EIC SELECT 프로세스 종료.");	
 
 				} else {
 
@@ -236,7 +238,7 @@ public class GetEntrpsInfo {
 						System.out.println("파일이 생성되지 않았습니다.");
 					}
 					
-					System.out.println("EIC SELECT 프로세스 종료.");		
+					System.out.println("EIC SELECT 파일 생성 프로세스 종료.");		
 					
 				}
 
