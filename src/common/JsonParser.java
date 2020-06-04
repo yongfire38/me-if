@@ -395,6 +395,19 @@ public class JsonParser {
 
 			return content;
 		}
+		
+		// eic에서 쓰기 위한 String 널 값 변환 반환
+		public static String colWrite_String_epe(String content) {
+
+			if (!(JsonParser.isEmpty(content))) {
+				content = content.toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ").replaceAll("(\\s{2,}|\\t{2,})",
+						" ").replace("&gt;", ">").replace("&apos;", "'").replace("&quot;", "\"").replace("&#8231;", "‧").replace("&#65378;", "｢").replace("&#65379;", "｣");
+			} else {
+				content = " ";
+			}
+
+			return content;
+		}
 	
 
 	// dms to decimal, latitude
