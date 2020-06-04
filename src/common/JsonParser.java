@@ -396,7 +396,7 @@ public class JsonParser {
 			return content;
 		}
 		
-		// eic에서 쓰기 위한 String 널 값 변환 반환
+		// epe에서 쓰기 위한 String 널 값 변환 반환
 		public static String colWrite_String_epe(String content) {
 
 			if (!(JsonParser.isEmpty(content))) {
