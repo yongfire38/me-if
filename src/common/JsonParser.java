@@ -401,7 +401,7 @@ public class JsonParser {
 
 			if (!(JsonParser.isEmpty(content))) {
 				content = content.toString().trim().replaceAll("(\r\n|\r|\n|\n\r)", " ").replaceAll("(\\s{2,}|\\t{2,})",
-						" ").replace("&gt;", ">").replace("&apos;", "'").replace("&quot;", "\"").replace("&#8231;", "‧").replace("&#65378;", "｢").replace("&#65379;", "｣");
+						" ").replace("&lt;", "<").replace("&gt;", ">").replace("&apos;", "'").replace("&quot;", "\"").replace("&#8231;", "‧").replace("&#65378;", "｢").replace("&#65379;", "｣");
 			} else {
 				content = " ";
 			}
