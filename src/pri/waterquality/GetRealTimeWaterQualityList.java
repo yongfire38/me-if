@@ -10,7 +10,6 @@ import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import common.JsonParser;
 //import common.TransSftp;
@@ -41,25 +40,26 @@ public class GetRealTimeWaterQualityList {
 					File file = new File(JsonParser.getProperty("file_path") + "PRI/TIF_PRI_03.dat");
 
 					// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
-					String json = "";
+					//String json = "";
 
 					int pageNo = 0;
 					int pageCount = 0;
 
 					// 수질자동측정망 운영결과 DB API에서는 ptNoList는 필요 없음
-					json = JsonParser.parsePriJson_realTimeWater(service_url, service_key, String.valueOf(pageNo), args[0], args[1]);
+					//json = JsonParser.parsePriJson_realTimeWater(service_url, service_key, String.valueOf(pageNo), args[0], args[1]);
 					
 					//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 					//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
 					//공통 클래스로 로직 빼 놓음
 					// 2020.06.02 : 빈 Json을 리턴하도록 롤백
-					if(json.indexOf("</") > -1){
+					// 2020.06.05 : String 리턴으로 잡았더니 에러 남.. JSONObject리턴으로 수정하고, 해당 메서드에 빈 json 로직을 넣음
+					//해당 api하나에만 사용하는 메서드라 가능했음..다른 메서드에서도 사용되면 빈 json 형태가 제각각이라 어려움.
+					/*if(json.indexOf("</") > -1){
 						System.out.print("공공데이터 서버 비 JSON 응답 , startDate :" + args[0]+", endDate :" + args[1]);
 						json ="{\"getRealTimeWaterQualityList\":{\"header\":{\"code\":\"03\",\"message\":\"NODATA_ERROR\"}}}";
-					}
+					}*/
 
-					JSONParser count_parser = new JSONParser();
-					JSONObject count_obj = (JSONObject) count_parser.parse(json);
+					JSONObject count_obj = JsonParser.parsePriJson_realTimeWater_obj(service_url, service_key, String.valueOf(pageNo), args[0], args[1]);
 
 					JSONObject count_getRealTimeWaterQualityList = (JSONObject) count_obj
 							.get("getRealTimeWaterQualityList");
@@ -88,19 +88,19 @@ public class GetRealTimeWaterQualityList {
 					for (int i = 1; i <= pageCount; i++) {
 
 						// 수질자동측정망 운영결과 DB API에서는 ptNoList는 필요 없음
-						json = JsonParser.parsePriJson_realTimeWater(service_url, service_key, String.valueOf(i), args[0], args[1]);
+						//json = JsonParser.parsePriJson_realTimeWater(service_url, service_key, String.valueOf(i), args[0], args[1]);
 						
 						//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 						//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
-						//공통 클래스로 로직 빼 놓음
 						// 2020.06.02 : 빈 Json을 리턴하도록 롤백
-						if(json.indexOf("</") > -1){
+						// 2020.06.05 : String 리턴으로 잡았더니 에러 남.. JSONObject리턴으로 수정하고, 해당 메서드에 빈 json 로직을 넣음
+						//해당 api하나에만 사용하는 메서드라 가능했음..다른 메서드에서도 사용되면 빈 json 형태가 제각각이라 어려움.
+						/*if(json.indexOf("</") > -1){
 							System.out.print("공공데이터 서버 비 JSON 응답 , startDate :" + args[0]+", endDate :" + args[1]);
 							json ="{\"getRealTimeWaterQualityList\":{\"header\":{\"code\":\"03\",\"message\":\"NODATA_ERROR\"}}}";
-						}
+						}*/
 
-						JSONParser parser = new JSONParser();
-						JSONObject obj = (JSONObject) parser.parse(json);
+						JSONObject obj = JsonParser.parsePriJson_realTimeWater_obj(service_url, service_key, String.valueOf(i), args[0], args[1]);
 
 						JSONObject getRealTimeWaterQualityList = (JSONObject) obj.get("getRealTimeWaterQualityList");
 

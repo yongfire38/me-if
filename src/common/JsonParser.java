@@ -1935,6 +1935,7 @@ public class JsonParser {
 	// 수질 DB 정보 시스템 파싱 (페이지 번호와 측정소 코드, 측정년도, 측정월을 받아서 파싱)
 	// 페이지 번호만 필수값 (값이 없으면 메서드를 부르는 쪽에서 공백값으로 치환)
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parsePriJson_waterMeasuring_obj(String service_url, String service_key, String pageNo,
 			String... params) throws Exception {
 
@@ -1966,7 +1967,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -1990,9 +1991,10 @@ public class JsonParser {
 				urlconnection.disconnect();
 
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -2008,7 +2010,28 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					
+					StackTraceElement[] a = new Throwable().getStackTrace();
+					
+					//getWaterMeasuringList, getWaterMeasuringListMavg 두 군데에서 이걸 같이 부른다....
+					//빈 값의 리턴 json이 달라져야 하므로 호출 클래스명으로 구분
+					for (int i = a.length - 1; i > 0; i--) {
+						
+						if(a[i].getClassName().indexOf("avg") > -1){
+							
+							System.out.print("공공데이터 서버 비 JSON 응답  , ptNoList :" + params[0]);
+							json ="{\"getWaterMeasuringListMavg\":{\"header\":{\"code\":\"03\",\"message\":\"NODATA_ERROR\"}}}";
+							
+						} else {
+							
+							System.out.print("공공데이터 서버 비 JSON 응답  , ptNoList :" + params[0]);
+							json ="{\"getWaterMeasuringList\":{\"header\":{\"code\":\"03\",\"message\":\"NODATA_ERROR\"}}}";
+							
+						}
+						
+					}
 
 				}
 
@@ -2019,11 +2042,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : ptNoList :" + ptNoList + ": wmyrList :" + wmyrList + ": wmodList :"
+						+ wmodList);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : ptNoList :" + ptNoList + ": wmyrList :" + wmyrList + ": wmodList :"
 							+ wmodList);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -2137,6 +2163,7 @@ public class JsonParser {
 	// 수질 DB 정보 시스템 - 토양지하수 먹는물 공동시설 운영결과 파싱 (년도를 받아서 파싱, 필수값은 아님)
 	// 페이지 번호만 필수값 (값이 없으면 메서드를 부르는 쪽에서 공백값으로 치환)
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parsePriJson_drinkWater_obj(String service_url, String service_key, String pageNo,
 			String... params) throws Exception {
 
@@ -2159,7 +2186,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -2185,7 +2212,7 @@ public class JsonParser {
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -2200,7 +2227,10 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					System.out.print("공공데이터 서버 비 JSON 응답 ");
+					json ="{\"getSgisDrinkWaterList\":{\"header\":{\"code\":\"03\",\"message\":\"NODATA_ERROR\"}}}";
 
 				}
 
@@ -2211,10 +2241,12 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : yyyy :" + yyyy);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : yyyy :" + yyyy);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -2327,6 +2359,7 @@ public class JsonParser {
 	// 수질 DB 정보 시스템 - 수질자동측정망 운영결과 DB 파싱 (년도를 받아서 파싱, 필수값은 아님)
 	// 페이지 번호만 필수값 (값이 없으면 메서드를 부르는 쪽에서 공백값으로 치환)
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parsePriJson_realTimeWater_obj(String service_url, String service_key, String pageNo,
 			String startDate, String endDate) throws Exception {
 
@@ -2348,7 +2381,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -2374,7 +2407,7 @@ public class JsonParser {
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -2389,7 +2422,10 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					System.out.print("공공데이터 서버 비 JSON 응답 , startDate :" + startDate+", endDate :" + endDate);
+					json ="{\"getRealTimeWaterQualityList\":{\"header\":{\"code\":\"03\",\"message\":\"NODATA_ERROR\"}}}";
 
 				}
 
@@ -2400,10 +2436,12 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : startDate :" + startDate + ": endDate :" + endDate);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : startDate :" + startDate + ": endDate :" + endDate);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -2418,6 +2456,112 @@ public class JsonParser {
 		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
 
 	}
+	
+	
+	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
+	// 원래 wat 메서드를 썼지만 특정 json이 리턴되어야 하므로 따로 뺌
+	public static JSONObject parsePriJson_radioActive_obj(String service_url, String service_key, String pageNo) throws Exception {
+
+		int retry = 0;
+
+		String urlstr = service_url + "&serviceKey=" + service_key + "&pageNo=" + pageNo + "&numOfRows=999";
+
+		while (retry < 5) {
+
+			BufferedReader br = null;
+			String json = "";
+
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+
+			//String returnFlag = "N";
+
+			try {
+
+				urlconnection.setRequestMethod("GET");
+				urlconnection.setRequestProperty("Accept", "application/json");
+
+				int responseCode = urlconnection.getResponseCode();
+
+				if (responseCode == 200 || responseCode == 201) {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
+				} else {
+					br = new BufferedReader(new InputStreamReader(urlconnection.getErrorStream(), "UTF-8"));
+				}
+
+				String line;
+
+				while ((line = br.readLine()) != null) {
+					json = json + line + "\n";
+				}
+
+				urlconnection.disconnect();
+
+				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
+				// 2020.06.02 : 빈 Json을 리턴하도록 롤백
+				if (json.indexOf("</") > -1) {
+
+					/*returnFlag = "Y";
+
+					StackTraceElement[] a = new Throwable().getStackTrace();
+
+					for (int i = a.length - 1; i > 0; i--) {
+						System.out.println("비정상 응답 : json :" + json);
+
+						System.out.print("공공데이터 서버 비 JSON 응답 : pageNo :" + pageNo);
+						System.out.print(", 호출 클래스 - " + a[i].getClassName());
+						System.out.print(", 메소드 - " + a[i].getMethodName());
+						System.out.print(", 라인 - " + a[i].getLineNumber());
+
+						System.out.println();
+					}
+
+					throw new Exception();*/
+					
+					System.out.print("공공데이터 서버 비 JSON 응답");
+					json ="{\"getRadioActiveMaterList\":{\"header\":{\"code\":\"03\",\"message\":\"NODATA_ERROR\"}}}";
+
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(json);
+
+				return obj;
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : pageNo :" + pageNo);
+
+				/*if (returnFlag.equals("Y")) {
+					System.out.println("JSON 요청 에러 : pageNo :" + pageNo);
+				}*/
+
+				urlconnection.disconnect();
+				retry++;
+				Thread.sleep(3000);
+
+				System.out.println(retry + "번째 재시도..");
+			}
+
+		}
+
+		System.out.println("재시도 회수 초과");
+
+		throw new Exception(); // 최대 재시도 횟수를 넘기면 직접 예외 발생
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// 시작 날짜랑 끝 날짜를 받아서 파싱, 형식은 yyyymmdd
 	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
