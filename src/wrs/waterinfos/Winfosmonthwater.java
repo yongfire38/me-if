@@ -39,10 +39,10 @@ public class Winfosmonthwater {
 						// step 1.파일의 작성
 						File file = new File(JsonParser.getProperty("file_path") + "WRS/TIF_WRS_14.dat");
 
-						// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
+						// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 1으로 파싱
 						//String json = "";
 
-						int pageNo = 0;
+						int pageNo = 1;
 						int pageCount = 0;
 
 						// yyyyMM이므로 기존 메서드 이용 불가능.. 하나 새로 만들어서 처리

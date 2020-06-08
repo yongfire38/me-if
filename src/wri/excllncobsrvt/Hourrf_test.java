@@ -42,10 +42,10 @@ public class Hourrf_test {
 						// step 1.파일의 작성
 						File file = new File("TIF_WRI_13_2101210.dat");
 
-						// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱지금ㅁ
+						// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 1으로 파싱
 						String json = "";
 
-						int pageNo = 0;
+						int pageNo = 1;
 						int pageCount = 0;
 						
 						List<String>damCodeList = new ArrayList<String>();

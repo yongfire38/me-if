@@ -40,9 +40,9 @@ public class GetRealTimeWaterQualityList_all {
 					// step 1.파일의 작성
 					File file = new File(JsonParser.getProperty("file_path") + "PRI/TIF_PRI_03.dat");
 
-					// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
+					// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 1으로 파싱
 
-					int pageNo = 0;
+					int pageNo = 1;
 					int pageCount = 0;
 					
 					//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
