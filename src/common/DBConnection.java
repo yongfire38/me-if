@@ -110,6 +110,7 @@ public class DBConnection {
 
 	}
 	
+	//외부 시스템 오라클 커넥션
 	public static Connection getOraConnection(String sysNm) throws SQLException, ClassNotFoundException {
 		
 		 Connection conn = null;
@@ -133,7 +134,8 @@ public class DBConnection {
 		 }
        
         try {
-        	       	
+        	
+        	//드라이버는 어느 시스템이든 오라클이면 동일
             Class.forName(getProperty("eic_oracle_driver"));        
             conn = DriverManager.getConnection(url, user, pw);
             
@@ -152,6 +154,42 @@ public class DBConnection {
 
 	}
 	
-	
+	//외부시스템 postgresql 커넥션
+	public static Connection getPostConnection(String sysNm) throws SQLException, ClassNotFoundException {
+		
+		 Connection conn = null;
+		 
+		 String user = "";
+        String pw = "";
+        String url = "";
+		 
+		 if(sysNm.equals("eco")){
+			 
+			  user = getProperty("eco_post_username");
+	          pw = getProperty("eco_post_password");
+	          url = getProperty("eco_post_url");
+	          
+		 } 
+      
+       try {
+       	       	
+    	   //드라이버는 어느 시스템이든 postgresql 이면 동일
+           Class.forName(getProperty("eco_post_driver"));        
+           conn = DriverManager.getConnection(url, user, pw);
+           
+           System.out.println("Database에 연결되었습니다.\n");
+           
+       } catch (ClassNotFoundException cnfe) {
+           System.out.println("DB 드라이버 로딩 실패 :"+ cnfe.toString());
+       } catch (SQLException sqle) {
+           System.out.println("DB 접속실패 : "+ sqle.toString());
+           System.out.println("DB 접속시도 정보  user :"+ user +": pw : "+ pw +": url :"+ url);
+       } catch (Exception e) {
+           System.out.println("Unkonwn error");
+           e.printStackTrace();
+       }
+       return conn;   
+
+	}
 
 }
