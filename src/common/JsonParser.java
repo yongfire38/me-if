@@ -672,6 +672,7 @@ public class JsonParser {
 
 	// 환경영향평가 파싱 (사업코드 하나를 파라미터로 받아서 파싱)
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parseEiaJson_obj(String service_url, String service_key, String mgtNo) throws Exception {
 
 		int retry = 0;
@@ -687,7 +688,7 @@ public class JsonParser {
 
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -713,7 +714,7 @@ public class JsonParser {
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -728,7 +729,151 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					StackTraceElement[] a = new Throwable().getStackTrace();
+					
+					//빈 값의 리턴 json이 달라져야 하므로 호출 클래스명으로 구분
+					for (int i = a.length - 1; i > 0; i--) {
+						
+						if(a[i].getClassName().indexOf("eia.airquality.GetIvstg") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";		
+						} else if(a[i].getClassName().indexOf("eia.airquality.GetPredict") > -1) {	
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.airquality.GetStackStdr") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.beffatStrtgySmallScaleDscssSttusInfoInqireService.GetBsnsStrtgySmallScaleDscssBsnsDetailIngInfoInqire") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : perCd :" + mgtNo);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.beffatStrtgySmallScaleDscssSttusInfoInqireService.GetBsnsStrtgySmallScaleDscssBsnsDetailInfoInqire") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : perCd :" + mgtNo);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.ecoCycle.GetInfo") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.envrnAffcEvlDecsnCnInfoInqireService.GetDecsnCnIngbtntOpinionDetailInfoInqire") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : resultCd :" + mgtNo);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":\"\"}}";	
+						} else if(a[i].getClassName().indexOf("eia.envrnAffcEvlDraftDsplayInfoInqireService.GetDraftPblancDsplaybtntOpinionDetailInfoInqire") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : eiaCd :" + mgtNo);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":\"\"}}";	
+						} else if(a[i].getClassName().indexOf("eia.envrnAffcEvlDraftDsplayInfoInqireService.GetStrategyDraftPblancDsplaybtntOpinionDetailInfoInqire") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : perCd :" + mgtNo);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":\"\"}}";	
+						} else if(a[i].getClassName().indexOf("eia.envrnAffcEvlDscssSttusInfoInqireService.GetDscssSttusDscssChngIngDetailInfoInqire") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : eiaCd :" + mgtNo);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.envrnAffcEvlDscssSttusInfoInqireService.GetDscssSttusDscssOpinionDetailInfoInqire") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : eiaCd :" + mgtNo);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":\"\"}}";	
+						} else if(a[i].getClassName().indexOf("eia.envrnAffcSelfDgnssLocplcInfoInqireService.GetEnvrnExmntInfoInqire") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : buBun :" + mgtNo);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.floraFauna.GetGreen") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.floraFauna.GetIvstg") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.floraFauna.GetScope") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.foulsmell.GetIvstg") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.foulsmell.GetPredict") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.geological.GetAl") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.geological.GetInfo") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.geological.GetIvstg") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.geological.GetMine") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.geological.GetNtrfs") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.geological.GetRidge") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.geological.GetSlr") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.geological.GetSlt") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.greenhouseGas.GetInfo") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.hydraulics.GetArea") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.hydraulics.GetRiver") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.landUse.GetCategory") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.landUse.GetInfo") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.landUse.GetSpfc") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.maritime.GetAmplt") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.maritime.GetAmpltNm") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.maritime.GetIvstg") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.maritime.GetModel") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.noiseVibration.GetInfo") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.population.GetIvstg") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.population.GetPredict") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.sntPbh.GetInfo") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.soil.GetInfo") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.waterquality.GetInfo") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("eia.waterquality.GetIvstg") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : mgtNo :" + mgtNo);
+							json ="{\"response\": {\"header\": {\"resultCode\": \"03\",\"resultMsg\": \"NODATA_ERROR\"}}}";	
+						} else if(a[i].getClassName().indexOf("wri.excllncobsrvt.Excllcode") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : damcode :" + mgtNo);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";	
+						} else if(a[i].getClassName().indexOf("wri.excllncobsrvt.Walcode") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : damcode :" + mgtNo);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";	
+						} else if(a[i].getClassName().indexOf("wrs.waterFlux.FcltyList") > -1) {
+							System.out.print("공공데이터 서버 비 JSON 응답 : damcode :" + mgtNo);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";	
+						}
+						
+					}
 
 				}
 
@@ -739,10 +884,12 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : mgtNo :" + mgtNo);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : mgtNo :" + mgtNo);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -848,6 +995,7 @@ public class JsonParser {
 
 	// 환경영향평가 파싱 (타입 구분자와 코드 하나를 파라미터로 받아서 파싱)
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parseEiaJson_obj(String service_url, String service_key, String code, String type)
 			throws Exception {
 
@@ -863,7 +1011,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -889,7 +1037,7 @@ public class JsonParser {
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -904,7 +1052,22 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					StackTraceElement[] a = new Throwable().getStackTrace();
+					
+					//빈 값의 리턴 json이 달라져야 하므로 호출 클래스명으로 구분
+					for (int i = a.length - 1; i > 0; i--) {
+						
+						if(a[i].getClassName().indexOf("eia.envrnAffcEvlDecsnCnInfoInqireService.GetFileInfoInqire") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : code :" + code + ": type :" + type);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\"}}}";		
+						} else if(a[i].getClassName().indexOf("eia.envrnAffcSelfDgnssLocplcInfoInqireService.GetSelfDgnssLocplcInfoLegaldongAdstrdManageInfoInqire") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : addr :" + code + ": type :" + type);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\"}}}";		
+						} 
+						
+					}
 
 				}
 
@@ -915,10 +1078,12 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : code :" + code + ": type :" + type);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : code :" + code + ": type :" + type);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -1023,6 +1188,7 @@ public class JsonParser {
 
 	// 환경영향평가 파싱 (반경 수치와 페이지 번호를 받아서 파싱)
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parseEiaJson_distance_obj(String service_url, String service_key, String pageNo,
 			String code) throws Exception {
 
@@ -1038,7 +1204,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -1064,7 +1230,7 @@ public class JsonParser {
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -1079,7 +1245,19 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					StackTraceElement[] a = new Throwable().getStackTrace();
+					
+					//빈 값의 리턴 json이 달라져야 하므로 호출 클래스명으로 구분
+					for (int i = a.length - 1; i > 0; i--) {
+						
+						if(a[i].getClassName().indexOf("eia.envrnAffcSelfDgnssLocplcInfoInqireService.GetBeffatEnvrnExmntBeffatBsnsPlaceInfoInqire") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : pageNo :" + pageNo + ": code :" + code);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\"}}}";		
+						} 
+						
+					}
 
 				}
 
@@ -1090,10 +1268,12 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : pageNo :" + pageNo + ": code :" + code);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : pageNo :" + pageNo + ": code :" + code);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -1202,6 +1382,7 @@ public class JsonParser {
 	// 페이지 번호와 x,y 좌표를 받아서 조회
 	// 환경영향평가 정보 서비스
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parseEiaJson_obj(String service_url, String service_key, String pageNo, String center_X,
 			String center_Y) throws Exception {
 
@@ -1218,7 +1399,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -1244,7 +1425,7 @@ public class JsonParser {
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -1259,7 +1440,19 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					StackTraceElement[] a = new Throwable().getStackTrace();
+					
+					//빈 값의 리턴 json이 달라져야 하므로 호출 클래스명으로 구분
+					for (int i = a.length - 1; i > 0; i--) {
+						
+						if(a[i].getClassName().indexOf("eia.envrnAffcEvlInfoInqireService.GetBsnsPlaceLnMyeonInfoInqire") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : center_X :" + center_X + ": center_Y :" + center_Y);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\"}}}";		
+						} 
+						
+					}
 
 				}
 
@@ -1270,10 +1463,12 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : center_X :" + center_X + ": center_Y :" + center_Y);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : center_X :" + center_X + ": center_Y :" + center_Y);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -1381,6 +1576,7 @@ public class JsonParser {
 
 	// 상수도 정보 시스템 파싱 (년과 월, 페이지 번호를 받아서 파싱)
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parseWatJson_obj(String service_url, String service_key, String year, String month,
 			String pageNo) throws Exception {
 
@@ -1398,7 +1594,7 @@ public class JsonParser {
 
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -1424,7 +1620,7 @@ public class JsonParser {
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -1439,7 +1635,19 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					StackTraceElement[] a = new Throwable().getStackTrace();
+					
+					//빈 값의 리턴 json이 달라져야 하므로 호출 클래스명으로 구분
+					for (int i = a.length - 1; i > 0; i--) {
+						
+						if(a[i].getClassName().indexOf("wat.monPurification_api.MonPurification") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : year :" + year + ": month :" + month);
+							json ="{\"OPERATION\":\"MonPurification\",\"response\":{\"body\":{\"itemsInfo\":{\"totalCount\":0,\"pageNo\":\"1\",\"numberOfRows\":100},\"items\":[],\"measurementItems\":null},\"header\":{\"resultMsg\":\"NODATA_ERROR\",\"resultCode\":\"03\"}}}";		
+						}  
+						
+					}
 
 				}
 
@@ -1450,10 +1658,12 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : year :" + year + ": month :" + month);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : year :" + year + ": month :" + month);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -1560,6 +1770,7 @@ public class JsonParser {
 	// 상수도 정보 시스템 파싱 (페이지 번호를 받아서 파싱)
 	// 요청 형식이 동일한 경우 다른 시스템에서도 사용 가능 - 페이지 번호 외에는 요청 파라미터가 없는 경우
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parseWatJson_obj(String service_url, String service_key, String pageNo) throws Exception {
 
 		int retry = 0;
@@ -1574,7 +1785,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -1600,7 +1811,7 @@ public class JsonParser {
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -1615,7 +1826,55 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					StackTraceElement[] a = new Throwable().getStackTrace();
+					
+					//빈 값의 리턴 json이 달라져야 하므로 호출 클래스명으로 구분
+					for (int i = a.length - 1; i > 0; i--) {
+						
+						if(a[i].getClassName().indexOf("eia.beffatStrtgySmallScaleDscssSttusInfoInqireService.GetBsnsStrtgySmallScaleDscssListInfoInqire") > -1){
+							System.out.print("공공데이터 서버 비 JSON 응답");
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":\"\"}}}";
+						} else if(a[i].getClassName().indexOf("eia.envrnAffcEvlDraftDsplayInfoInqireService.GetDraftPblancDsplayListInfoInqire") > -1){
+							System.out.print("공공데이터 서버 비 JSON 응답");
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\"}}}";
+						} else if(a[i].getClassName().indexOf("eia.envrnAffcEvlDraftDsplayInfoInqireService.GetStrategyDraftPblancDsplayListInfoInqire") > -1){
+							System.out.print("공공데이터 서버 비 JSON 응답");
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\"}}}";
+						} else if(a[i].getClassName().indexOf("eia.envrnAffcEvlDscssSttusInfoInqireService.GetDscssBsnsListInfoInqire") > -1){
+							System.out.print("공공데이터 서버 비 JSON 응답");
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\"}}}";
+						} else if(a[i].getClassName().indexOf("wat.fcltySvc_api.GetCwpFclty") > -1){
+							System.out.print("공공데이터 서버 비 JSON 응답");
+							json ="{\"operation\":\"getCwpFclty\",\"response\":{\"body\":{\"itemsInfo\":{\"totalCount\":0,\"pageNo\":\"0\",\"numberOfRows\":0},\"items\":[]},\"header\":{\"resultMsg\":\"NODATA_ERROR\",\"resultCode\":\"03\"}}}";
+						} else if(a[i].getClassName().indexOf("wat.fcltySvc_api.GetItkFclty") > -1){
+							System.out.print("공공데이터 서버 비 JSON 응답");
+							json ="{\"operation\":\"getItkFclty\",\"response\":{\"body\":{\"itemsInfo\":{\"totalCount\":0,\"pageNo\":\"0\",\"numberOfRows\":0},\"items\":[]},\"header\":{\"resultMsg\":\"NODATA_ERROR\",\"resultCode\":\"03\"}}}";
+						} else if(a[i].getClassName().indexOf("wat.fcltySvc_api.GetPressFclty") > -1){
+							System.out.print("공공데이터 서버 비 JSON 응답");
+							json ="{\"operation\":\"getPressFclty\",\"response\":{\"body\":{\"itemsInfo\":{\"totalCount\":0,\"pageNo\":\"0\",\"numberOfRows\":0},\"items\":[]},\"header\":{\"resultMsg\":\"NODATA_ERROR\",\"resultCode\":\"03\"}}}";
+						} else if(a[i].getClassName().indexOf("wri.droughtInfo.MultidamdidamCode") > -1){
+							System.out.print("공공데이터 서버 비 JSON 응답");
+							json ="{\"response\":{\"header\":{\"resultCode\":\"03\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":{\"item\":[]}}}}";
+						} else if(a[i].getClassName().indexOf("wri.droughtInfo.Multidamdilist") > -1){
+							System.out.print("공공데이터 서버 비 JSON 응답");
+							json ="{\"response\":{\"header\":{\"resultCode\":\"03\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":{\"item\":[]}}}}";
+						} else if(a[i].getClassName().indexOf("wrs.dailwater.Indfltplt") > -1){
+							System.out.print("공공데이터 서버 비 JSON 응답");
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
+						} else if(a[i].getClassName().indexOf("wrs.dailwater.Waterfltplt") > -1){
+							System.out.print("공공데이터 서버 비 JSON 응답");
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
+						} else if(a[i].getClassName().indexOf("wrs.effluent.DamCode") > -1){
+							System.out.print("공공데이터 서버 비 JSON 응답");
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
+						} else if(a[i].getClassName().indexOf("wrs.waterQuality.SupplyLgldCodeList") > -1){
+							System.out.print("공공데이터 서버 비 JSON 응답");
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";
+						}
+						
+					}
 
 				}
 
@@ -1626,10 +1885,12 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : pageNo :" + pageNo);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : pageNo :" + pageNo);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -2664,6 +2925,7 @@ public class JsonParser {
 	// 시작 날짜랑 끝 날짜를 받아서 파싱, 형식은 yyyymmdd
 	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parseWriJson_obj(String service_url, String service_key, String pageNo, String stdt,
 			String eddt) throws Exception {
 
@@ -2689,7 +2951,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -2715,7 +2977,7 @@ public class JsonParser {
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -2730,7 +2992,25 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					StackTraceElement[] a = new Throwable().getStackTrace();
+					
+					//빈 값의 리턴 json이 달라져야 하므로 호출 클래스명으로 구분
+					for (int i = a.length - 1; i > 0; i--) {
+						
+						if(a[i].getClassName().indexOf("wri.sihwavalue.Sihwavalue") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : stdt :" + stdt + ": eddt :" + eddt);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"03\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} else if(a[i].getClassName().indexOf("wrs.waterinfos.Winfosdaywater") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : stdt :" + stdt + ": eddt :" + eddt);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} else if(a[i].getClassName().indexOf("wrs.waterinfos.Winfosweekwater") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : stdt :" + stdt + ": eddt :" + eddt);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} 
+						
+					}
 
 				}
 
@@ -2741,10 +3021,12 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -2861,6 +3143,7 @@ public class JsonParser {
 	// 코드 1개와 시작 날짜랑 끝 날짜를 받아서 파싱, 형식은 yyyymmdd
 	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parseWriJson_obj(String service_url, String service_key, String pageNo, String code,
 			String stdt, String eddt) throws Exception {
 
@@ -2886,7 +3169,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -2912,7 +3195,7 @@ public class JsonParser {
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -2927,7 +3210,32 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					StackTraceElement[] a = new Throwable().getStackTrace();
+					
+					//빈 값의 리턴 json이 달라져야 하므로 호출 클래스명으로 구분
+					for (int i = a.length - 1; i > 0; i--) {
+						
+						if(a[i].getClassName().indexOf("wri.sluicePresentCondition.De") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} else if(a[i].getClassName().indexOf("wri.sluicePresentCondition.Hour") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} else if(a[i].getClassName().indexOf("wri.sluicePresentCondition.Mnt") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} else if(a[i].getClassName().indexOf("wrs.dailwater.Dailindwater") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} else if(a[i].getClassName().indexOf("wrs.dailwater.Dailwater") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						}
+						
+					}
+					
 
 				}
 
@@ -2938,10 +3246,12 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -3058,6 +3368,7 @@ public class JsonParser {
 	// 코드 1개와 시작 날짜랑 끝 날짜를 받아서 파싱, 형식은 yyyymm
 	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parseWriJson_month_obj(String service_url, String service_key, String pageNo, String code,
 			String stdt, String eddt) throws Exception {
 
@@ -3083,7 +3394,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -3109,7 +3420,7 @@ public class JsonParser {
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -3124,7 +3435,28 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					StackTraceElement[] a = new Throwable().getStackTrace();
+					
+					//빈 값의 리턴 json이 달라져야 하므로 호출 클래스명으로 구분
+					for (int i = a.length - 1; i > 0; i--) {
+						
+						if(a[i].getClassName().indexOf("wrs.dailwater.Dmntindstry") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} else if(a[i].getClassName().indexOf("wrs.dailwater.Dmntwater") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} else if(a[i].getClassName().indexOf("wrs.dailwater.Wikindwater") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} else if(a[i].getClassName().indexOf("wrs.dailwater.Wikwater") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} 
+						
+					}
 
 				}
 
@@ -3135,10 +3467,12 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : code :" + code + ": stdt :" + stdt + ": eddt :" + eddt);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -3260,6 +3594,7 @@ public class JsonParser {
 	// 전일 날짜, 전년날짜, 검색날짜 (yyyyMMdd), 검색 시간(2자리)를 받아서 파싱
 	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parseWriJson_obj(String service_url, String service_key, String pageNo, String tdate,
 			String ldate, String vdate, String vtime) throws Exception {
 
@@ -3287,7 +3622,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -3313,7 +3648,7 @@ public class JsonParser {
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -3329,7 +3664,29 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					StackTraceElement[] a = new Throwable().getStackTrace();
+					
+					//빈 값의 리턴 json이 달라져야 하므로 호출 클래스명으로 구분
+					for (int i = a.length - 1; i > 0; i--) {
+						
+						if(a[i].getClassName().indexOf("wri.multiFunctionBarrier.MultiFunctionBarrier") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : tdate :" + tdate + ": ldate :" + ldate + ": vdate :" + vdate
+									+ ": vtime :" + vtime);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"03\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":{\"item\":[]}}}}";		
+						} else if(a[i].getClassName().indexOf("wri.multiPoseDam.MultiPoseDam") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : tdate :" + tdate + ": ldate :" + ldate + ": vdate :" + vdate
+									+ ": vtime :" + vtime);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"03\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} else if(a[i].getClassName().indexOf("wri.waterDam.WaterDam") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : tdate :" + tdate + ": ldate :" + ldate + ": vdate :" + vdate
+									+ ": vtime :" + vtime);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SRVICE\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						}
+						
+					}
+					
 
 				}
 
@@ -3340,11 +3697,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : tdate :" + tdate + ": ldate :" + ldate + ": vdate :" + vdate
+						+ ": vtime :" + vtime);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : tdate :" + tdate + ": ldate :" + ldate + ": vdate :" + vdate
 							+ ": vtime :" + vtime);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -3467,6 +3827,7 @@ public class JsonParser {
 	// 받아서 파싱
 	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parseWriJson_obj(String service_url, String service_key, String pageNo, String sdate,
 			String stime, String edate, String etime, String excll) throws Exception {
 
@@ -3493,7 +3854,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -3519,7 +3880,7 @@ public class JsonParser {
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -3535,7 +3896,22 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					StackTraceElement[] a = new Throwable().getStackTrace();
+					
+					//빈 값의 리턴 json이 달라져야 하므로 호출 클래스명으로 구분
+					for (int i = a.length - 1; i > 0; i--) {
+						
+						if(a[i].getClassName().indexOf("wri.excllncobsrvt.Mntrf") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+						+ ": etime :" + etime + ": excll :" + excll);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} 
+						
+					}
+					
+					
 
 				}
 
@@ -3546,11 +3922,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+						+ ": etime :" + etime + ": excll :" + excll);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
 							+ ": etime :" + etime + ": excll :" + excll);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -3673,6 +4052,7 @@ public class JsonParser {
 	// 코드를 받아서 파싱
 	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parseWriJson_excll_obj(String service_url, String service_key, String pageNo, String sdate,
 			String stime, String edate, String etime, String damcode, String excll) throws Exception {
 
@@ -3699,7 +4079,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -3725,7 +4105,7 @@ public class JsonParser {
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -3741,7 +4121,21 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					StackTraceElement[] a = new Throwable().getStackTrace();
+					
+					//빈 값의 리턴 json이 달라져야 하므로 호출 클래스명으로 구분
+					for (int i = a.length - 1; i > 0; i--) {
+						
+						if(a[i].getClassName().indexOf("wri.excllncobsrvt.Hourrf") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+									+ ": etime :" + etime + ": damcode :" + damcode + ": excll :" + excll);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} 
+						
+					}
+					
 
 				}
 
@@ -3752,11 +4146,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+						+ ": etime :" + etime + ": damcode :" + damcode + ": excll :" + excll);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
 							+ ": etime :" + etime + ": damcode :" + damcode + ": excll :" + excll);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -3879,6 +4276,7 @@ public class JsonParser {
 	// 코드를 받아서 파싱
 	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parseWriJson_wal_obj(String service_url, String service_key, String pageNo, String sdate,
 			String stime, String edate, String etime, String damcode, String wal) throws Exception {
 
@@ -3905,7 +4303,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -3931,7 +4329,7 @@ public class JsonParser {
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -3947,7 +4345,25 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					StackTraceElement[] a = new Throwable().getStackTrace();
+					
+					//빈 값의 리턴 json이 달라져야 하므로 호출 클래스명으로 구분
+					for (int i = a.length - 1; i > 0; i--) {
+						
+						if(a[i].getClassName().indexOf("wri.excllncobsrvt.Hourwal") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+									+ ": etime :" + etime + ": damcode :" + damcode + ": wal :" + wal);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} else if(a[i].getClassName().indexOf("wri.excllncobsrvt.Mntwal") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+									+ ": etime :" + etime + ": damcode :" + damcode + ": wal :" + wal);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} 
+						
+					}
+					
 
 				}
 
@@ -3958,11 +4374,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
+						+ ": etime :" + etime + ": damcode :" + damcode + ": wal :" + wal);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : sdate :" + sdate + ": stime :" + stime + ": edate :" + edate
 							+ ": etime :" + etime + ": damcode :" + damcode + ": wal :" + wal);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -4068,6 +4487,7 @@ public class JsonParser {
 	// url과 서비스 키 이외 추가 파라미터 없이 파싱
 	// 수자원통합(WRIS)-운영통합시스템(댐보발전통합)
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parseWriJson_obj(String service_url, String service_key) throws Exception {
 
 		int retry = 0;
@@ -4082,7 +4502,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -4108,7 +4528,7 @@ public class JsonParser {
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -4123,7 +4543,31 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					StackTraceElement[] a = new Throwable().getStackTrace();
+					
+					//빈 값의 리턴 json이 달라져야 하므로 호출 클래스명으로 구분
+					for (int i = a.length - 1; i > 0; i--) {
+						
+						if(a[i].getClassName().indexOf("eia.envrnAffcEvlDecsnCnInfoInqireService.GetComCodeInfoInqire") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답");
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\"}}}";		
+						} else if(a[i].getClassName().indexOf("wri.dataPresent.DamCode") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답");
+							json ="{\"response\":{\"header\":{\"resultCode\":\"03\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":{\"item\":[]}}}}";		
+						} else if(a[i].getClassName().indexOf("wri.dataPresent.Mnt") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답");
+							json ="{\"response\":{\"header\":{\"resultCode\":\"03\",\"resultMsg\":\"NODATA_ERROR\"},\"body\":{\"items\":{\"item\":[]}}}}";		
+						} else if(a[i].getClassName().indexOf("wrs.waterinfos.Winfossgccode") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답");
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} else if(a[i].getClassName().indexOf("wrs.waterinfos.Winfossitecode") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답");
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} 
+						
+					}
 
 				}
 
@@ -4134,10 +4578,12 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 ");
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 ");
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -4259,6 +4705,7 @@ public class JsonParser {
 	// 코드를 받아서 파싱
 	// 수도통합(WIS)-운영통합시스템(댐보발전통합)
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parseWrsJson_obj(String service_url, String service_key, String pageNo, String stDt,
 			String stTm, String edDt, String edTm) throws Exception {
 
@@ -4284,7 +4731,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -4310,7 +4757,7 @@ public class JsonParser {
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -4326,7 +4773,28 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					StackTraceElement[] a = new Throwable().getStackTrace();
+					
+					//빈 값의 리턴 json이 달라져야 하므로 호출 클래스명으로 구분
+					for (int i = a.length - 1; i > 0; i--) {
+						
+						if(a[i].getClassName().indexOf("wrs.waterFlux.WaterFluxList") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt + ": edTm :" + edTm);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} else if(a[i].getClassName().indexOf("wrs.waterLevel.WaterLevelList") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt + ": edTm :" + edTm);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} else if(a[i].getClassName().indexOf("wrs.waterPressure.WaterPressureList") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt + ": edTm :" + edTm);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} else if(a[i].getClassName().indexOf("wrs.waterQuality.WaterQualityList") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt + ": edTm :" + edTm);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} 
+						
+					}
 
 				}
 
@@ -4337,11 +4805,14 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println(
+						"JSON 요청 에러 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt + ": edTm :" + edTm);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println(
 							"JSON 요청 에러 : stDt :" + stDt + ": stTm :" + stTm + ": edDt :" + edDt + ": edTm :" + edTm);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -4448,6 +4919,7 @@ public class JsonParser {
 	// 구분코드 와 페이지 번호를 받아서 파싱
 	// 수도통합(WIS)-운영통합시스템(댐보발전통합)
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parseWrsJson_obj(String service_url, String service_key, String pageNo, String code)
 			throws Exception {
 
@@ -4463,7 +4935,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -4489,7 +4961,7 @@ public class JsonParser {
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -4504,8 +4976,32 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					StackTraceElement[] a = new Throwable().getStackTrace();
 
+					//빈 값의 리턴 json이 달라져야 하므로 호출 클래스명으로 구분
+					for (int i = a.length - 1; i > 0; i--) {
+						
+						if(a[i].getClassName().indexOf("eia.envrnAffcEvlDecsnCnInfoInqireService.GetDecsnCnListInfoInqire") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : code :" + code);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\"}}}";		
+						} else if(a[i].getClassName().indexOf("eia.envrnAffcEvlDscssSttusInfoInqireService.GetDscssSttusDscssIngDetailInfoInqire") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : eiaCd :" + code);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} else if(a[i].getClassName().indexOf("wrs.waterLevel.FcltyList") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : eiaCd :" + code);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} else if(a[i].getClassName().indexOf("wrs.waterPressure.FcltyList") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : fcltyDivCode :" + code);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} else if(a[i].getClassName().indexOf("wrs.waterQuality.FcltyList") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : fcltyDivCode :" + code);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} 
+						
+					}
+					
 				}
 
 				JSONParser parser = new JSONParser();
@@ -4515,10 +5011,12 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : code :" + code);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : code :" + code);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -4635,6 +5133,7 @@ public class JsonParser {
 	// 시작 날짜랑 끝 날짜를 받아서 파싱, 형식은 yyyymm
 	// 수자원통합(WIS)-운영통합시스템(댐보발전통합)
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parseWrsJson_obj(String service_url, String service_key, String pageNo, String stdt,
 			String eddt) throws Exception {
 
@@ -4660,7 +5159,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -4686,7 +5185,7 @@ public class JsonParser {
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -4701,7 +5200,19 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					StackTraceElement[] a = new Throwable().getStackTrace();
+					
+					//빈 값의 리턴 json이 달라져야 하므로 호출 클래스명으로 구분
+					for (int i = a.length - 1; i > 0; i--) {
+						
+						if(a[i].getClassName().indexOf("wrs.waterinfos.Winfosmonthwater") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : stdt :" + stdt + ": eddt :" + eddt);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} 
+						
+					}
 
 				}
 
@@ -4712,10 +5223,12 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -4832,6 +5345,7 @@ public class JsonParser {
 	// 시작 날짜랑 끝 날짜, 지자체코드를 받아서 파싱, 날짜형식은 yyyymm
 	// 수자원통합(WIS)-운영통합시스템(댐보발전통합)
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parseWrsJson_obj(String service_url, String service_key, String pageNo, String stdt,
 			String eddt, String sgccd) throws Exception {
 
@@ -4857,7 +5371,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -4883,7 +5397,7 @@ public class JsonParser {
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -4898,7 +5412,22 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					StackTraceElement[] a = new Throwable().getStackTrace();
+					
+					//빈 값의 리턴 json이 달라져야 하므로 호출 클래스명으로 구분
+					for (int i = a.length - 1; i > 0; i--) {
+						
+						if(a[i].getClassName().indexOf("wrs.waterinfos.Winfosmonthqtrwater") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : stdt :" + stdt + ": eddt :" + eddt + ": sgccd :" + sgccd);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} else if(a[i].getClassName().indexOf("wrs.waterinfos.Winfosmonthqtrwater") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : stdt :" + stdt + ": eddt :" + eddt + ": sgccd :" + sgccd);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} 
+						
+					}
 
 				}
 
@@ -4909,10 +5438,12 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt + ": sgccd :" + sgccd);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": eddt :" + eddt + ": sgccd :" + sgccd);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;
@@ -5020,6 +5551,7 @@ public class JsonParser {
 	// 시작년도(yyyy)와 댐 코드를 받아서 파싱
 	// 수도통합(WIS)-운영통합시스템(댐보발전통합)
 	// JSONObject 버전
+	// 2020.06.05 : 빈 Json 리턴해서 스킵시키는 로직 넣음
 	public static JSONObject parseWrsJson_eff_obj(String service_url, String service_key, String pageNo, String stdt,
 			String damcd) throws Exception {
 
@@ -5036,7 +5568,7 @@ public class JsonParser {
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 
-			String returnFlag = "N";
+			//String returnFlag = "N";
 
 			try {
 
@@ -5062,7 +5594,7 @@ public class JsonParser {
 				// http error로 xml형태의 데이터가 나왔다면 에러를 발생시켜 재시도 로직으로. 재시도는 최대 5회
 				if (json.indexOf("</") > -1) {
 
-					returnFlag = "Y";
+					/*returnFlag = "Y";
 
 					StackTraceElement[] a = new Throwable().getStackTrace();
 
@@ -5077,7 +5609,19 @@ public class JsonParser {
 						System.out.println();
 					}
 
-					throw new Exception();
+					throw new Exception();*/
+					
+					StackTraceElement[] a = new Throwable().getStackTrace();
+					
+					//빈 값의 리턴 json이 달라져야 하므로 호출 클래스명으로 구분
+					for (int i = a.length - 1; i > 0; i--) {
+						
+						if(a[i].getClassName().indexOf("wrs.effluent.DamEffluent") > -1){	
+							System.out.println("공공데이터 서버 비 JSON 응답 : stdt :" + stdt + ": damcd :" + damcd);
+							json ="{\"response\":{\"header\":{\"resultCode\":\"00\",\"resultMsg\":\"NORMAL SERVICE.\"},\"body\":{\"items\":\"\",\"numOfRows\":10,\"pageNo\":1,\"totalCount\":0}}}";		
+						} 
+						
+					}
 
 				}
 
@@ -5088,10 +5632,12 @@ public class JsonParser {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				
+				System.out.println("JSON 요청 에러 : stdt :" + stdt + ": damcd :" + damcd);
 
-				if (returnFlag.equals("Y")) {
+				/*if (returnFlag.equals("Y")) {
 					System.out.println("JSON 요청 에러 : stdt :" + stdt + ": damcd :" + damcd);
-				}
+				}*/
 
 				urlconnection.disconnect();
 				retry++;

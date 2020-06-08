@@ -10,7 +10,6 @@ import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import common.JsonParser;
 //import common.TransSftp;
@@ -39,26 +38,26 @@ public class GetCwpFclty {
 					File file = new File(JsonParser.getProperty("file_path") + "WAT/TIF_WAT_02.dat");	
 
 					// step 2. 전체 데이터 숫자 파악을 위해 페이지 수 0으로 파싱
-					String json = "";
+					//String json = "";
 
 					int pageNo = 0;
 					int pageCount = 0;
 					String numberOfRows_str = "";
 					String totalCount_str = "";
 					
-					json = JsonParser.parseWatJson(service_url, service_key, String.valueOf(pageNo));
+					//json = JsonParser.parseWatJson(service_url, service_key, String.valueOf(pageNo));
 					
 					//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 					//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
 					//공통 클래스로 로직 빼 놓음
 					// 2020.06.02 : 빈 Json을 리턴하도록 롤백
-					if(json.indexOf("</") > -1){
+					// 2020.06.05 : String 리턴으로 잡았더니 에러 남.. JSONObject리턴으로 수정하고, 해당 메서드에 빈 json 로직을 넣음
+					/*if(json.indexOf("</") > -1){
 						System.out.print("공공데이터 서버 비 JSON 응답");
 						json ="{\"operation\":\"getCwpFclty\",\"response\":{\"body\":{\"itemsInfo\":{\"totalCount\":0,\"pageNo\":\"0\",\"numberOfRows\":0},\"items\":[]},\"header\":{\"resultMsg\":\"NODATA_ERROR\",\"resultCode\":\"03\"}}}";
-					}
+					}*/
 
-					JSONParser count_parser = new JSONParser();
-					JSONObject count_obj = (JSONObject) count_parser.parse(json);
+					JSONObject count_obj = JsonParser.parseWatJson_obj(service_url, service_key, String.valueOf(pageNo));
 					JSONObject count_response = (JSONObject) count_obj.get("response");
 
 					JSONObject count_body = (JSONObject) count_response.get("body");
@@ -90,19 +89,19 @@ public class GetCwpFclty {
 
 					for (int i = 1; i <= pageCount; ++i) {
 						
-						json = JsonParser.parseWatJson(service_url, service_key, String.valueOf(i));
+						//json = JsonParser.parseWatJson(service_url, service_key, String.valueOf(i));
 						
 						//서버 이슈로 에러가 나서 xml 타입으로 리턴되면 그냥 데이터 없는 json으로 변경해서 리턴하도록 처리
 						//원래 에러 처리하려고 했지만 하나라도 에러가 나면 시스템 전체에서 에러로 판단하기에...
 						//공통 클래스로 로직 빼 놓음
 						// 2020.06.02 : 빈 Json을 리턴하도록 롤백
-						if(json.indexOf("</") > -1){
+						// 2020.06.05 : String 리턴으로 잡았더니 에러 남.. JSONObject리턴으로 수정하고, 해당 메서드에 빈 json 로직을 넣음
+						/*if(json.indexOf("</") > -1){
 							System.out.print("공공데이터 서버 비 JSON 응답");
 							json ="{\"operation\":\"getCwpFclty\",\"response\":{\"body\":{\"itemsInfo\":{\"totalCount\":0,\"pageNo\":\"0\",\"numberOfRows\":0},\"items\":[]},\"header\":{\"resultMsg\":\"NODATA_ERROR\",\"resultCode\":\"03\"}}}";
-						}
+						}*/
 
-						JSONParser parser = new JSONParser();
-						JSONObject obj = (JSONObject) parser.parse(json);
+						JSONObject obj = JsonParser.parseWatJson_obj(service_url, service_key, String.valueOf(i));
 						JSONObject response = (JSONObject) obj.get("response");
 
 						JSONObject body = (JSONObject) response.get("body");
