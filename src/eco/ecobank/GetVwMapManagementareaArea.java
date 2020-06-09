@@ -42,53 +42,52 @@ public class GetVwMapManagementareaArea {
 				int rowCount = rs.getRow();
 
 				System.out.println("전체 건 수 :::" + Integer.toString(rowCount) + " 건");
-
-				// 전체 레코드 개수만큼의 배열
-				String[] managementarea_id = new String[rowCount]; //관리지역_아이디
-				String[] ntrmn = new String[rowCount]; //천연기념울
-				String[] mtst_olfl = new String[rowCount]; //산림_유전
-				String[] wldns_amplt = new String[rowCount]; //야생_동식물
-				String[] marn_resrce = new String[rowCount]; //수산_자원
-				String[] smld_prtc = new String[rowCount]; //습지_보호
-				String[] bgts = new String[rowCount]; //백두대간
-				String[] eclgy_scene = new String[rowCount]; //생태_경관
-				String[] natn_park = new String[rowCount]; //국립_공원
-				String[] prvc_park = new String[rowCount]; //도립_공원
-				String[] cntry_park = new String[rowCount]; //군립_공원
-				String[] ntfc_de_se = new String[rowCount]; //고시_일자_구분
-				String[] geom = new String[rowCount]; //지오메트리
 				
 				// 다시 처음부터 조회해야 하므로 커서는 초기화
 				rs.beforeFirst();
 
-				int i = 0;
 				
 				if (args[0].equals("_tset")) {
 					
 					while (rs.next()) {
 						
-						managementarea_id[i] = rs.getString(1);
-						ntrmn[i] = rs.getString(2);
-						mtst_olfl[i] = rs.getString(3);
-						wldns_amplt[i] = rs.getString(4);
-						marn_resrce[i] = rs.getString(5);
-						smld_prtc[i] = rs.getString(6);
-						bgts[i] = rs.getString(7);
-						eclgy_scene[i] = rs.getString(8);
-						natn_park[i] = rs.getString(9);
-						prvc_park[i] = rs.getString(10);
-						cntry_park[i] = rs.getString(11);
-						ntfc_de_se[i] = rs.getString(12);
-						geom[i] = rs.getString(13);
+						// 전체 레코드 개수
+						String managementarea_id = " "; //관리지역_아이디
+						String ntrmn = " "; //천연기념울
+						String mtst_olfl = " "; //산림_유전
+						String wldns_amplt = " "; //야생_동식물
+						String marn_resrce = " "; //수산_자원
+						String smld_prtc = " "; //습지_보호
+						String bgts = " "; //백두대간
+						String eclgy_scene = " "; //생태_경관
+						String natn_park = " "; //국립_공원
+						String prvc_park = " "; //도립_공원
+						String cntry_park = " "; //군립_공원
+						String ntfc_de_se = " "; //고시_일자_구분
+						String geom = " "; //지오메트리
 						
-						System.out.println("managementarea_id::" + managementarea_id[i] + "::ntrmn::" + ntrmn[i] + "::mtst_olfl::"
-								+ mtst_olfl[i] + "::wldns_amplt::" + wldns_amplt[i] + "::marn_resrce::"
-								+ marn_resrce[i] + "::smld_prtc::" + smld_prtc[i] + "::bgts::"
-								+ bgts[i] + "::eclgy_scene::" + eclgy_scene[i] + "::natn_park::"
-								+ natn_park[i] + "::prvc_park::" + prvc_park[i] + "::cntry_park::"
-								+ cntry_park[i] + "::ntfc_de_se::" + ntfc_de_se[i] + "::geom::" + geom[i]);
+						managementarea_id = rs.getString(1);
+						ntrmn = rs.getString(2);
+						mtst_olfl = rs.getString(3);
+						wldns_amplt = rs.getString(4);
+						marn_resrce = rs.getString(5);
+						smld_prtc = rs.getString(6);
+						bgts = rs.getString(7);
+						eclgy_scene = rs.getString(8);
+						natn_park = rs.getString(9);
+						prvc_park = rs.getString(10);
+						cntry_park = rs.getString(11);
+						ntfc_de_se = rs.getString(12);
+						//geom = rs.getString(13);
 						
-						i++;
+						System.out.println("managementarea_id::" + managementarea_id + "::ntrmn::" + ntrmn + "::mtst_olfl::"
+								+ mtst_olfl + "::wldns_amplt::" + wldns_amplt + "::marn_resrce::"
+								+ marn_resrce + "::smld_prtc::" + smld_prtc + "::bgts::"
+								+ bgts + "::eclgy_scene::" + eclgy_scene + "::natn_park::"
+								+ natn_park + "::prvc_park::" + prvc_park + "::cntry_park::"
+								+ cntry_park + "::ntfc_de_se::" + ntfc_de_se + "::geom::" + geom);
+						
+						
 					}
 					
 					System.out.println("ECO_02 SELECT 프로세스 종료.");
@@ -101,49 +100,64 @@ public class GetVwMapManagementareaArea {
 					
 					while (rs.next()) {
 						
-						managementarea_id[i] = JsonParser.colWrite_String_eic(rs.getString(1));
-						ntrmn[i] = JsonParser.colWrite_String_eic(rs.getString(2));
-						mtst_olfl[i] = JsonParser.colWrite_String_eic(rs.getString(3));
-						wldns_amplt[i] = JsonParser.colWrite_String_eic(rs.getString(4));
-						marn_resrce[i] = JsonParser.colWrite_String_eic(rs.getString(5));
-						smld_prtc[i] = JsonParser.colWrite_String_eic(rs.getString(6));
-						bgts[i] = JsonParser.colWrite_String_eic(rs.getString(7));
-						eclgy_scene[i] = JsonParser.colWrite_String_eic(rs.getString(8));
-						natn_park[i] = JsonParser.colWrite_String_eic(rs.getString(9));
-						prvc_park[i] = JsonParser.colWrite_String_eic(rs.getString(10));
-						cntry_park[i] = JsonParser.colWrite_String_eic(rs.getString(11));
-						ntfc_de_se[i] = JsonParser.colWrite_String_eic(rs.getString(12));
-						geom[i] = JsonParser.colWrite_String_eic(rs.getString(13));
+						// 전체 레코드 개수
+						String managementarea_id = " "; //관리지역_아이디
+						String ntrmn = " "; //천연기념울
+						String mtst_olfl = " "; //산림_유전
+						String wldns_amplt = " "; //야생_동식물
+						String marn_resrce = " "; //수산_자원
+						String smld_prtc = " "; //습지_보호
+						String bgts = " "; //백두대간
+						String eclgy_scene = " "; //생태_경관
+						String natn_park = " "; //국립_공원
+						String prvc_park = " "; //도립_공원
+						String cntry_park = " "; //군립_공원
+						String ntfc_de_se = " "; //고시_일자_구분
+						String geom = " "; //지오메트리
+						
+						managementarea_id = JsonParser.colWrite_String_eic(rs.getString(1));
+						ntrmn = JsonParser.colWrite_String_eic(rs.getString(2));
+						mtst_olfl = JsonParser.colWrite_String_eic(rs.getString(3));
+						wldns_amplt = JsonParser.colWrite_String_eic(rs.getString(4));
+						marn_resrce = JsonParser.colWrite_String_eic(rs.getString(5));
+						smld_prtc = JsonParser.colWrite_String_eic(rs.getString(6));
+						bgts = JsonParser.colWrite_String_eic(rs.getString(7));
+						eclgy_scene = JsonParser.colWrite_String_eic(rs.getString(8));
+						natn_park = JsonParser.colWrite_String_eic(rs.getString(9));
+						prvc_park = JsonParser.colWrite_String_eic(rs.getString(10));
+						cntry_park = JsonParser.colWrite_String_eic(rs.getString(11));
+						ntfc_de_se = JsonParser.colWrite_String_eic(rs.getString(12));
+						//geom = JsonParser.colWrite_String_eic(rs.getString(13));
 						
 						// 파일에 쓰기
 						try {
 							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-							pw.write(managementarea_id[i]);
+							pw.write(managementarea_id);
 							pw.write("|^");
-							pw.write(ntrmn[i]);
+							pw.write(ntrmn);
 							pw.write("|^");
-							pw.write(mtst_olfl[i]);
+							pw.write(mtst_olfl);
 							pw.write("|^");
-							pw.write(wldns_amplt[i]);
+							pw.write(wldns_amplt);
 							pw.write("|^");
-							pw.write(marn_resrce[i]);
+							pw.write(marn_resrce);
 							pw.write("|^");
-							pw.write(smld_prtc[i]);
+							pw.write(smld_prtc);
 							pw.write("|^");
-							pw.write(bgts[i]);
+							pw.write(bgts);
 							pw.write("|^");
-							pw.write(eclgy_scene[i]);
+							pw.write(eclgy_scene);
 							pw.write("|^");
-							pw.write(natn_park[i]);
+							pw.write(natn_park);
 							pw.write("|^");
-							pw.write(prvc_park[i]);
+							pw.write(prvc_park);
 							pw.write("|^");
-							pw.write(cntry_park[i]);
+							pw.write(cntry_park);
 							pw.write("|^");
-							pw.write(ntfc_de_se[i]);
+							pw.write(ntfc_de_se);
 							pw.write("|^");
-							pw.write(geom[i]);
+							pw.write(geom);
 							pw.println();
 							pw.flush();
 							pw.close();
@@ -152,7 +166,6 @@ public class GetVwMapManagementareaArea {
 							e.printStackTrace();
 						}
 
-						i++;
 						
 					}
 					

@@ -36,22 +36,20 @@ public class ConnectionTest {
 
 			System.out.println("전체 건 수 :::" + Integer.toString(rowCount) + " 건");
 
-			// 전체 레코드 개수만큼의 배열
-			String[] table_schema = new String[rowCount];
-			String[] table_name = new String[rowCount];
-
 			// 다시 처음부터 조회해야 하므로 커서는 초기화
 			rs.beforeFirst();
 
-			int i = 0;
-
 			while (rs.next()) {
+				
+				// 전체 레코드 개수만큼
+				String table_schema = " ";
+				String table_name = " ";
 
-				table_schema[i] = rs.getString(1);
-				table_name[i] = rs.getString(2);
+				table_schema = rs.getString(1);
+				table_name = rs.getString(2);
 
-				System.out.println("table_schema::" + table_schema[i] + "::table_name::" + table_name[i]);
-				i++;
+				System.out.println("table_schema::" + table_schema + "::table_name::" + table_name);
+
 			}
 
 		} catch (SQLException sqle) {

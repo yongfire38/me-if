@@ -43,64 +43,61 @@ public class GetVwMapNteeVtnPyn {
 
 				System.out.println("전체 건 수 :::" + Integer.toString(rowCount) + " 건");
 
-				// 전체 레코드 개수만큼의 배열
-				String[] spce_id = new String[rowCount]; // 공간_아이디
-				String[] examin_year = new String[rowCount]; // 조사_년도
-				String[] tme = new String[rowCount]; // 회차
-				String[] examin_begin_de = new String[rowCount]; // 조사_시작_일자
-				String[] examin_end_de = new String[rowCount]; // 조사_종료_일자
-				String[] gnrl_examin_charger_nm = new String[rowCount]; // 일반_조사_담당자_성명
-				String[] rspnsbl_examin_charger_nm = new String[rowCount]; // 책임_조사_담당자_성명
-				String[] partclr_matter = new String[rowCount]; // 특이_사항
-				String[] lrge_dstrct = new String[rowCount]; // 대_권역
-				String[] lclas = new String[rowCount]; // 대분류
-				String[] small_dstrct = new String[rowCount]; // 소_권역
-				String[] evl_unit = new String[rowCount]; // 평가_단위
-				String[] cln_symbl = new String[rowCount]; // 군락_기호
-				String[] plnt_cln_ttle = new String[rowCount]; // 식물_군락_명칭
-				String[] presv_grad = new String[rowCount]; // 보전_등급
-				String[] area = new String[rowCount]; // 지역
-				String[] rm = new String[rowCount]; // 비고
-				String[] geom = new String[rowCount]; // 지오메트리
-
 				// 다시 처음부터 조회해야 하므로 커서는 초기화
 				rs.beforeFirst();
 
-				int i = 0;
 
 				if (args[0].equals("_tset")) {
 
 					while (rs.next()) {
+						
+						// 전체 레코드 개수만큼
+						String spce_id = " "; // 공간_아이디
+						String examin_year = " "; // 조사_년도
+						String tme = " "; // 회차
+						String examin_begin_de = " "; // 조사_시작_일자
+						String examin_end_de = " "; // 조사_종료_일자
+						String gnrl_examin_charger_nm = " "; // 일반_조사_담당자_성명
+						String rspnsbl_examin_charger_nm = " "; // 책임_조사_담당자_성명
+						String partclr_matter = " "; // 특이_사항
+						String lrge_dstrct = " "; // 대_권역
+						String lclas = " "; // 대분류
+						String small_dstrct = " "; // 소_권역
+						String evl_unit = " "; // 평가_단위
+						String cln_symbl = " "; // 군락_기호
+						String plnt_cln_ttle = " "; // 식물_군락_명칭
+						String presv_grad = " "; // 보전_등급
+						String area = " "; // 지역
+						String rm = " "; // 비고
+						String geom = " "; // 지오메트리
 
-						spce_id[i] = rs.getString(1);
-						examin_year[i] = rs.getString(2);
-						tme[i] = rs.getString(3);
-						examin_begin_de[i] = rs.getString(4);
-						examin_end_de[i] = rs.getString(5);
-						gnrl_examin_charger_nm[i] = rs.getString(6);
-						rspnsbl_examin_charger_nm[i] = rs.getString(7);
-						partclr_matter[i] = rs.getString(8);
-						lrge_dstrct[i] = rs.getString(9);
-						lclas[i] = rs.getString(10);
-						small_dstrct[i] = rs.getString(11);
-						evl_unit[i] = rs.getString(12);
-						cln_symbl[i] = rs.getString(13);
-						plnt_cln_ttle[i] = rs.getString(14);
-						presv_grad[i] = rs.getString(15);
-						area[i] = rs.getString(16);
-						rm[i] = rs.getString(17);
-						geom[i] = rs.getString(18);
+						spce_id = rs.getString(1);
+						examin_year = rs.getString(2);
+						tme = rs.getString(3);
+						examin_begin_de = rs.getString(4);
+						examin_end_de = rs.getString(5);
+						gnrl_examin_charger_nm = rs.getString(6);
+						rspnsbl_examin_charger_nm = rs.getString(7);
+						partclr_matter = rs.getString(8);
+						lrge_dstrct = rs.getString(9);
+						lclas = rs.getString(10);
+						small_dstrct = rs.getString(11);
+						evl_unit = rs.getString(12);
+						cln_symbl = rs.getString(13);
+						plnt_cln_ttle = rs.getString(14);
+						presv_grad = rs.getString(15);
+						area = rs.getString(16);
+						rm = rs.getString(17);
+						//geom = rs.getString(18);
 
-						System.out.println("spce_id::" + spce_id[i] + "::examin_year::" + examin_year[i] + "::tme::"
-								+ tme[i] + "::examin_begin_de::" + examin_begin_de[i] + "::examin_end_de::"
-								+ examin_end_de[i] + "::gnrl_examin_charger_nm::" + gnrl_examin_charger_nm[i]
-								+ "::rspnsbl_examin_charger_nm::" + rspnsbl_examin_charger_nm[i] + "::partclr_matter::"
-								+ partclr_matter[i] + "::lrge_dstrct::" + lrge_dstrct[i] + "::lclas::" + lclas[i]
-								+ "::small_dstrct::" + small_dstrct[i] + "::evl_unit::" + evl_unit[i] + "::cln_symbl::"
-								+ cln_symbl[i] + "::plnt_cln_ttle::" + plnt_cln_ttle[i] + "::presv_grad::"
-								+ presv_grad[i] + "::area::" + area[i] + "::rm::" + rm[i] + "::geom::" + geom[i]);
-
-						i++;
+						System.out.println("spce_id::" + spce_id + "::examin_year::" + examin_year + "::tme::"
+								+ tme + "::examin_begin_de::" + examin_begin_de + "::examin_end_de::"
+								+ examin_end_de + "::gnrl_examin_charger_nm::" + gnrl_examin_charger_nm
+								+ "::rspnsbl_examin_charger_nm::" + rspnsbl_examin_charger_nm + "::partclr_matter::"
+								+ partclr_matter + "::lrge_dstrct::" + lrge_dstrct + "::lclas::" + lclas
+								+ "::small_dstrct::" + small_dstrct + "::evl_unit::" + evl_unit + "::cln_symbl::"
+								+ cln_symbl + "::plnt_cln_ttle::" + plnt_cln_ttle + "::presv_grad::"
+								+ presv_grad + "::area::" + area + "::rm::" + rm + "::geom::" + geom);
 
 					}
 					
@@ -114,64 +111,84 @@ public class GetVwMapNteeVtnPyn {
 					
 					while (rs.next()) {
 						
-						spce_id[i] = JsonParser.colWrite_String_eic(rs.getString(1));
-						examin_year[i] = JsonParser.colWrite_String_eic(rs.getString(2));
-						tme[i] = JsonParser.colWrite_String_eic(rs.getString(3)); 
-						examin_begin_de[i] = JsonParser.colWrite_String_eic(rs.getString(4)); 
-						examin_end_de[i] = JsonParser.colWrite_String_eic(rs.getString(5));
-						gnrl_examin_charger_nm[i] = JsonParser.colWrite_String_eic(rs.getString(6));
-						rspnsbl_examin_charger_nm[i] = JsonParser.colWrite_String_eic(rs.getString(7));
-						partclr_matter[i] = JsonParser.colWrite_String_eic(rs.getString(8));
-						lrge_dstrct[i] = JsonParser.colWrite_String_eic(rs.getString(9));
-						lclas[i] = JsonParser.colWrite_String_eic(rs.getString(10));
-						small_dstrct[i] = JsonParser.colWrite_String_eic(rs.getString(11));
-						evl_unit[i] = JsonParser.colWrite_String_eic(rs.getString(12));
-						cln_symbl[i] = JsonParser.colWrite_String_eic(rs.getString(13));
-						plnt_cln_ttle[i] = JsonParser.colWrite_String_eic(rs.getString(14));
-						presv_grad[i] = JsonParser.colWrite_String_eic(rs.getString(15));
-						area[i] = JsonParser.colWrite_String_eic(rs.getString(16));
-						rm[i] = JsonParser.colWrite_String_eic(rs.getString(17));
-						geom[i] = JsonParser.colWrite_String_eic(rs.getString(18));
+						// 전체 레코드 개수만큼의 배열
+						String spce_id = " "; // 공간_아이디
+						String examin_year = " "; // 조사_년도
+						String tme = " "; // 회차
+						String examin_begin_de = " "; // 조사_시작_일자
+						String examin_end_de = " "; // 조사_종료_일자
+						String gnrl_examin_charger_nm = " "; // 일반_조사_담당자_성명
+						String rspnsbl_examin_charger_nm = " "; // 책임_조사_담당자_성명
+						String partclr_matter = " "; // 특이_사항
+						String lrge_dstrct = " "; // 대_권역
+						String lclas = " "; // 대분류
+						String small_dstrct = " "; // 소_권역
+						String evl_unit = " "; // 평가_단위
+						String cln_symbl = " "; // 군락_기호
+						String plnt_cln_ttle = " "; // 식물_군락_명칭
+						String presv_grad = " "; // 보전_등급
+						String area = " "; // 지역
+						String rm = " "; // 비고
+						String geom = " "; // 지오메트리
+						
+						spce_id = JsonParser.colWrite_String_eic(rs.getString(1));
+						examin_year = JsonParser.colWrite_String_eic(rs.getString(2));
+						tme = JsonParser.colWrite_String_eic(rs.getString(3)); 
+						examin_begin_de = JsonParser.colWrite_String_eic(rs.getString(4)); 
+						examin_end_de = JsonParser.colWrite_String_eic(rs.getString(5));
+						gnrl_examin_charger_nm = JsonParser.colWrite_String_eic(rs.getString(6));
+						rspnsbl_examin_charger_nm = JsonParser.colWrite_String_eic(rs.getString(7));
+						partclr_matter = JsonParser.colWrite_String_eic(rs.getString(8));
+						lrge_dstrct = JsonParser.colWrite_String_eic(rs.getString(9));
+						lclas = JsonParser.colWrite_String_eic(rs.getString(10));
+						small_dstrct = JsonParser.colWrite_String_eic(rs.getString(11));
+						evl_unit = JsonParser.colWrite_String_eic(rs.getString(12));
+						cln_symbl = JsonParser.colWrite_String_eic(rs.getString(13));
+						plnt_cln_ttle = JsonParser.colWrite_String_eic(rs.getString(14));
+						presv_grad = JsonParser.colWrite_String_eic(rs.getString(15));
+						area = JsonParser.colWrite_String_eic(rs.getString(16));
+						rm = JsonParser.colWrite_String_eic(rs.getString(17));
+						//geom = JsonParser.colWrite_String_eic(rs.getString(18));
 						
 						// 파일에 쓰기
 						try {
 							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-							pw.write(spce_id[i]);
+							pw.write(spce_id);
 							pw.write("|^");
-							pw.write(examin_year[i]); 
+							pw.write(examin_year); 
 							pw.write("|^");
-							pw.write(tme[i]);
+							pw.write(tme);
 							pw.write("|^");
-							pw.write(examin_begin_de[i]);
+							pw.write(examin_begin_de);
 							pw.write("|^");
-							pw.write(examin_end_de[i]);
+							pw.write(examin_end_de);
 							pw.write("|^");
-							pw.write(gnrl_examin_charger_nm[i]);
+							pw.write(gnrl_examin_charger_nm);
 							pw.write("|^");
-							pw.write(rspnsbl_examin_charger_nm[i]);
+							pw.write(rspnsbl_examin_charger_nm);
 							pw.write("|^");
-							pw.write(partclr_matter[i]);
+							pw.write(partclr_matter);
 							pw.write("|^");
-							pw.write(lrge_dstrct[i]);
+							pw.write(lrge_dstrct);
 							pw.write("|^");
-							pw.write(lclas[i]);
+							pw.write(lclas);
 							pw.write("|^");
-							pw.write(small_dstrct[i]);
+							pw.write(small_dstrct);
 							pw.write("|^");
-							pw.write(evl_unit[i]);
+							pw.write(evl_unit);
 							pw.write("|^");
-							pw.write(cln_symbl[i]);
+							pw.write(cln_symbl);
 							pw.write("|^");
-							pw.write(plnt_cln_ttle[i]);
+							pw.write(plnt_cln_ttle);
 							pw.write("|^");
-							pw.write(presv_grad[i]);
+							pw.write(presv_grad);
 							pw.write("|^");
-							pw.write(area[i]);
+							pw.write(area);
 							pw.write("|^");
-							pw.write(rm[i]);
+							pw.write(rm);
 							pw.write("|^");
-							pw.write(geom[i]);
+							pw.write(geom);
 							pw.println();
 							pw.flush();
 							pw.close();
@@ -180,7 +197,6 @@ public class GetVwMapNteeVtnPyn {
 							e.printStackTrace();
 						}
 
-						i++;
 					}
 
 				}

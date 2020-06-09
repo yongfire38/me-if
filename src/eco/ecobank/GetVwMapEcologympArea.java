@@ -33,7 +33,7 @@ public class GetVwMapEcologympArea {
 				String query = DBConnection.getProperty("eco_post_eco01_query");
 				System.out.println("query :::" + query);
 
-				pstm = conn.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+				pstm = conn.prepareStatement(query , ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 				rs = pstm.executeQuery();
 
 				// 전체 레코드 수를 구하기 위해 커서를 마지막으로 이동
@@ -43,128 +43,147 @@ public class GetVwMapEcologympArea {
 
 				System.out.println("전체 건 수 :::" + Integer.toString(rowCount) + " 건");
 
-				// 전체 레코드 개수만큼의 배열
-				String[] eclgyzmp_id = new String[rowCount]; // 생태자연도_아이디
-				String[] lclas = new String[rowCount]; // 대분류
-				String[] clny_symbl = new String[rowCount]; // 군락_기호
-				String[] plnt_clny_nm = new String[rowCount]; // 식물_군락_명칭
-				String[] presv_grad = new String[rowCount]; // 보전_등급
-				String[] vtn_evl_grad = new String[rowCount]; // 식생_평가_등급
-				String[] amplt_evl_grad = new String[rowCount]; // 동식물_평가_등급
-				String[] smld_evl_grad = new String[rowCount]; // 습지_평가_등급
-				String[] tpgrph_evl_grad = new String[rowCount]; // 지형_평가_등급
-				String[] tage_grad = new String[rowCount]; // 수령_등급
-				String[] eclgyzmp_grad = new String[rowCount]; // 생태자연도_등급
-				String[] tpgrph_nm = new String[rowCount]; // 지형_명칭
-				String[] ntfc_no = new String[rowCount]; // 고시_번호
-				String[] ntfc_de = new String[rowCount]; // 고시_일자
-				String[] ntfc_de_se = new String[rowCount]; // 고시_일자_구분
-				String[] mapdmc_no = new String[rowCount]; // 도엽_번호
-				String[] geom = new String[rowCount]; // 지오메트리
-
 				// 다시 처음부터 조회해야 하므로 커서는 초기화
 				rs.beforeFirst();
-
-				int i = 0;
 
 				if (args[0].equals("_tset")) {
 
 					while (rs.next()) {
+						
+						// 전체 레코드 개수
+						String eclgyzmp_id = " "; // 생태자연도_아이디
+						String lclas = " "; // 대분류
+						String clny_symbl = " "; // 군락_기호
+						String plnt_clny_nm = " "; // 식물_군락_명칭
+						String presv_grad = " "; // 보전_등급
+						String vtn_evl_grad = " "; // 식생_평가_등급
+						String amplt_evl_grad = " "; // 동식물_평가_등급
+						String smld_evl_grad = " "; // 습지_평가_등급
+						String tpgrph_evl_grad = " "; // 지형_평가_등급
+						String tage_grad = " "; // 수령_등급
+						String eclgyzmp_grad = " "; // 생태자연도_등급
+						String tpgrph_nm = " "; // 지형_명칭
+						String ntfc_no = " "; // 고시_번호
+						String ntfc_de = " "; // 고시_일자
+						String ntfc_de_se = " "; // 고시_일자_구분
+						String mapdmc_no = " "; // 도엽_번호
+						String geom = " "; // 지오메트리
 
-						eclgyzmp_id[i] = rs.getString(1);
-						lclas[i] = rs.getString(2);
-						clny_symbl[i] = rs.getString(3);
-						plnt_clny_nm[i] = rs.getString(4);
-						presv_grad[i] = rs.getString(5);
-						vtn_evl_grad[i] = rs.getString(6);
-						amplt_evl_grad[i] = rs.getString(7);
-						smld_evl_grad[i] = rs.getString(8);
-						tpgrph_evl_grad[i] = rs.getString(9);
-						tage_grad[i] = rs.getString(10);
-						eclgyzmp_grad[i] = rs.getString(11);
-						tpgrph_nm[i] = rs.getString(12);
-						ntfc_no[i] = rs.getString(13);
-						ntfc_de[i] = rs.getString(14);
-						ntfc_de_se[i] = rs.getString(15);
-						mapdmc_no[i] = rs.getString(16);
-						geom[i] = rs.getString(17);
+						eclgyzmp_id = rs.getString(1);
+						lclas = rs.getString(2);
+						clny_symbl = rs.getString(3);
+						plnt_clny_nm = rs.getString(4);
+						presv_grad = rs.getString(5);
+						vtn_evl_grad = rs.getString(6);
+						amplt_evl_grad = rs.getString(7);
+						smld_evl_grad = rs.getString(8);
+						tpgrph_evl_grad = rs.getString(9);
+						tage_grad = rs.getString(10);
+						eclgyzmp_grad = rs.getString(11);
+						tpgrph_nm = rs.getString(12);
+						ntfc_no = rs.getString(13);
+						ntfc_de = rs.getString(14);
+						ntfc_de_se = rs.getString(15);
+						mapdmc_no = rs.getString(16);
+						//geom = rs.getString(17);
 
-						System.out.println("eclgyzmp_id::" + eclgyzmp_id[i] + "::lclas::" + lclas[i] + "::clny_symbl::"
-								+ clny_symbl[i] + "::plnt_clny_nm::" + plnt_clny_nm[i] + "::presv_grad::"
-								+ presv_grad[i] + "::vtn_evl_grad::" + vtn_evl_grad[i] + "::amplt_evl_grad::"
-								+ amplt_evl_grad[i] + "::smld_evl_grad::" + smld_evl_grad[i] + "::tpgrph_evl_grad::"
-								+ tpgrph_evl_grad[i] + "::tpgrph_evl_grad::" + tpgrph_evl_grad[i] + "::tage_grad::"
-								+ tage_grad[i] + "::eclgyzmp_grad::" + eclgyzmp_grad[i] + "::tpgrph_nm::" + tpgrph_nm[i]
-								+ "::ntfc_no::" + ntfc_no[i] + "::ntfc_de::" + ntfc_de[i] + "::ntfc_de_se::"
-								+ ntfc_de_se[i] + "::mapdmc_no::" + mapdmc_no[i] + "::geom::" + geom[i]);
-						i++;
+						System.out.println("eclgyzmp_id::" + eclgyzmp_id + "::lclas::" + lclas + "::clny_symbl::"
+								+ clny_symbl + "::plnt_clny_nm::" + plnt_clny_nm + "::presv_grad::"
+								+ presv_grad + "::vtn_evl_grad::" + vtn_evl_grad + "::amplt_evl_grad::"
+								+ amplt_evl_grad + "::smld_evl_grad::" + smld_evl_grad + "::tpgrph_evl_grad::"
+								+ tpgrph_evl_grad + "::tpgrph_evl_grad::" + tpgrph_evl_grad + "::tage_grad::"
+								+ tage_grad + "::eclgyzmp_grad::" + eclgyzmp_grad + "::tpgrph_nm::" + tpgrph_nm
+								+ "::ntfc_no::" + ntfc_no + "::ntfc_de::" + ntfc_de + "::ntfc_de_se::"
+								+ ntfc_de_se + "::mapdmc_no::" + mapdmc_no + "::geom::" + geom);
+						
 					}
 
 					System.out.println("ECO_01 SELECT 프로세스 종료.");
 
 				} else {
+					
+					System.out.println("ECO_01 파일 작성 시작");
 
 					File file = null;
 
 					file = new File(args[0]);
 
 					while (rs.next()) {
-
-						eclgyzmp_id[i] = JsonParser.colWrite_String_eic(rs.getString(1));
-						lclas[i] = JsonParser.colWrite_String_eic(rs.getString(2));
-						clny_symbl[i] = JsonParser.colWrite_String_eic(rs.getString(3));
-						plnt_clny_nm[i] = JsonParser.colWrite_String_eic(rs.getString(4));
-						presv_grad[i] = JsonParser.colWrite_String_eic(rs.getString(5));
-						vtn_evl_grad[i] = JsonParser.colWrite_String_eic(rs.getString(6));
-						amplt_evl_grad[i] = JsonParser.colWrite_String_eic(rs.getString(7));
-						smld_evl_grad[i] = JsonParser.colWrite_String_eic(rs.getString(8));
-						tpgrph_evl_grad[i] = JsonParser.colWrite_String_eic(rs.getString(9));
-						tage_grad[i] = JsonParser.colWrite_String_eic(rs.getString(10));
-						eclgyzmp_grad[i] = JsonParser.colWrite_String_eic(rs.getString(11));
-						tpgrph_nm[i] = JsonParser.colWrite_String_eic(rs.getString(12));
-						ntfc_no[i] = JsonParser.colWrite_String_eic(rs.getString(13));
-						ntfc_de[i] = JsonParser.colWrite_String_eic(rs.getString(14));
-						ntfc_de_se[i] = JsonParser.colWrite_String_eic(rs.getString(15));
-						mapdmc_no[i] = JsonParser.colWrite_String_eic(rs.getString(16));
-						geom[i] = JsonParser.colWrite_String_eic(rs.getString(17));
+						
+						// 전체 레코드 개수
+						String eclgyzmp_id = " "; // 생태자연도_아이디
+						String lclas = " "; // 대분류
+						String clny_symbl = " "; // 군락_기호
+						String plnt_clny_nm = " "; // 식물_군락_명칭
+						String presv_grad = " "; // 보전_등급
+						String vtn_evl_grad = " "; // 식생_평가_등급
+						String amplt_evl_grad = " "; // 동식물_평가_등급
+						String smld_evl_grad = " "; // 습지_평가_등급
+						String tpgrph_evl_grad = " "; // 지형_평가_등급
+						String tage_grad = " "; // 수령_등급
+						String eclgyzmp_grad = " "; // 생태자연도_등급
+						String tpgrph_nm = " "; // 지형_명칭
+						String ntfc_no = " "; // 고시_번호
+						String ntfc_de = " "; // 고시_일자
+						String ntfc_de_se = " "; // 고시_일자_구분
+						String mapdmc_no = " "; // 도엽_번호
+						String geom = " "; // 지오메트리
+						
+						eclgyzmp_id = JsonParser.colWrite_String_eic(rs.getString(1));
+						lclas = JsonParser.colWrite_String_eic(rs.getString(2));
+						clny_symbl = JsonParser.colWrite_String_eic(rs.getString(3));
+						plnt_clny_nm = JsonParser.colWrite_String_eic(rs.getString(4));
+						presv_grad = JsonParser.colWrite_String_eic(rs.getString(5));
+						vtn_evl_grad = JsonParser.colWrite_String_eic(rs.getString(6));
+						amplt_evl_grad = JsonParser.colWrite_String_eic(rs.getString(7));
+						smld_evl_grad = JsonParser.colWrite_String_eic(rs.getString(8));
+						tpgrph_evl_grad = JsonParser.colWrite_String_eic(rs.getString(9));
+						tage_grad = JsonParser.colWrite_String_eic(rs.getString(10));
+						eclgyzmp_grad = JsonParser.colWrite_String_eic(rs.getString(11));
+						tpgrph_nm = JsonParser.colWrite_String_eic(rs.getString(12));
+						ntfc_no = JsonParser.colWrite_String_eic(rs.getString(13));
+						ntfc_de = JsonParser.colWrite_String_eic(rs.getString(14));
+						ntfc_de_se = JsonParser.colWrite_String_eic(rs.getString(15));
+						mapdmc_no = JsonParser.colWrite_String_eic(rs.getString(16));
+						//geom = JsonParser.colWrite_String_eic(rs.getString(17));
 
 						// 파일에 쓰기
 						try {
 							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-							pw.write(eclgyzmp_id[i]);
+							pw.write(eclgyzmp_id);
 							pw.write("|^");
-							pw.write(lclas[i]);
+							pw.write(lclas);
 							pw.write("|^");
-							pw.write(clny_symbl[i]);
+							pw.write(clny_symbl);
 							pw.write("|^");
-							pw.write(plnt_clny_nm[i]);
+							pw.write(plnt_clny_nm);
 							pw.write("|^");
-							pw.write(presv_grad[i]);
+							pw.write(presv_grad);
 							pw.write("|^");
-							pw.write(vtn_evl_grad[i]);
+							pw.write(vtn_evl_grad);
 							pw.write("|^");
-							pw.write(amplt_evl_grad[i]);
+							pw.write(amplt_evl_grad);
 							pw.write("|^");
-							pw.write(smld_evl_grad[i]);
+							pw.write(smld_evl_grad);
 							pw.write("|^");
-							pw.write(tpgrph_evl_grad[i]);
+							pw.write(tpgrph_evl_grad);
 							pw.write("|^");
-							pw.write(tage_grad[i]);
+							pw.write(tage_grad);
 							pw.write("|^");
-							pw.write(eclgyzmp_grad[i]);
+							pw.write(eclgyzmp_grad);
 							pw.write("|^");
-							pw.write(tpgrph_nm[i]);
+							pw.write(tpgrph_nm);
 							pw.write("|^");
-							pw.write(ntfc_no[i]);
+							pw.write(ntfc_no);
 							pw.write("|^");
-							pw.write(ntfc_de[i]);
+							pw.write(ntfc_de);
 							pw.write("|^");
-							pw.write(ntfc_de_se[i]);
+							pw.write(ntfc_de_se);
 							pw.write("|^");
-							pw.write(mapdmc_no[i]);
+							pw.write(mapdmc_no);
 							pw.write("|^");
-							pw.write(geom[i]);
+							pw.write(geom);
 							pw.println();
 							pw.flush();
 							pw.close();
@@ -172,8 +191,6 @@ public class GetVwMapEcologympArea {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-
-						i++;
 
 					}
 

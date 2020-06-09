@@ -43,111 +43,108 @@ public class GetVwMapNteeMmlPoint {
 
 				System.out.println("전체 건 수 :::" + Integer.toString(rowCount) + " 건");
 				
-				// 전체 레코드 개수만큼의 배열
-				String[] spce_id = new String[rowCount]; // 공간_아이디
-				String[] examin_year = new String[rowCount]; // 조사_년도
-				String[] tme = new String[rowCount]; // 회차
-				String[] examin_begin_de = new String[rowCount]; // 조사_시작_일자
-				String[] examin_end_de = new String[rowCount]; // 조사_종료_일자
-				String[] gnrl_examin_charger_nm = new String[rowCount]; // 일반_조사_담당자_성명
-				String[] rspnsbl_examin_charger_nm = new String[rowCount]; // 책임_조사_담당자_성명
-				String[] spcs_korean_ttle = new String[rowCount]; // 종_한글_명칭
-				String[] spcs_eng_ttle = new String[rowCount]; // 종_영문_명칭
-				String[] idvd_qy = new String[rowCount]; // 개체_수
-				String[] partclr_matter = new String[rowCount]; // 특이_사항
-				String[] wethr = new String[rowCount]; // 날씨
-				String[] photo_file_ttle = new String[rowCount]; // 사진_파일_명칭
-				String[] observ_cn = new String[rowCount]; // 관찰_내용
-				String[] observ_de = new String[rowCount]; // 관찰_일자
-				String[] observ_place = new String[rowCount]; // 관찰_장소
-				String[] ecsystm_ty = new String[rowCount]; // 생태계_유형
-				String[] cnfirm_mth = new String[rowCount]; // 확인_방법
-				String[] grid_no = new String[rowCount]; // 격자_번호
-				String[] fml_eng_ttle = new String[rowCount]; // 과_영문_명칭
-				String[] fml_korean_ttle = new String[rowCount]; // 과_한글_명칭
-				String[] ordr_eng_ttle = new String[rowCount]; // 목_영문_명칭
-				String[] ordr_korean_ttle = new String[rowCount]; // 목_한글_명칭
-				String[] spcs_schlshp_ttle = new String[rowCount]; // 종_학술_명칭
-				String[] mml_observ_observ_qy = new String[rowCount]; // 표유류_관찰_관찰_수
-				String[] mml_observ_den_qy = new String[rowCount]; // 표유류_관찰_굴_수
-				String[] mml_observ_etc_marks_dc = new String[rowCount]; //표유류_관찰_기타_흔적_설명
-				String[] mml_observ_exct_qy = new String[rowCount]; // 표유류_관찰_배설물_수
-				String[] mml_observ_prar_qy = new String[rowCount]; // 표유류_관찰_번식지_수
-				String[] mml_observ_crcs_qy = new String[rowCount]; // 표유류_관찰_사체_수
-				String[] mml_observ_ankr_qy = new String[rowCount]; // 표유류_관찰_식흔_수
-				String[] mml_observ_mark_qy = new String[rowCount]; // 표유류_관찰_족적_수
-				String[] mml_observ_hair_qy = new String[rowCount]; // 표유류_관찰_털_수
-				String[] mml_observ_capt_qy = new String[rowCount]; // 표유류_관찰_포획_수
-				String[] mml_examin_cryn_qy = new String[rowCount]; // 표유류_조사_울음_수
-				String[] geom = new String[rowCount]; // 지오메트리
-				
 				// 다시 처음부터 조회해야 하므로 커서는 초기화
 				rs.beforeFirst();
-
-				int i = 0;
 				
 				if (args[0].equals("_tset")) {
 					
 					while (rs.next()) {
 						
-						spce_id[i] = rs.getString(1); 
-						examin_year[i] = rs.getString(2); 
-						tme[i] = rs.getString(3); 
-						examin_begin_de[i] = rs.getString(4); 
-						examin_end_de[i] = rs.getString(5); 
-						gnrl_examin_charger_nm[i] = rs.getString(6); 
-						rspnsbl_examin_charger_nm[i] = rs.getString(7); 
-						spcs_korean_ttle[i] = rs.getString(8); 
-						spcs_eng_ttle[i] = rs.getString(9); 
-						idvd_qy[i] = rs.getString(10); 
-						partclr_matter[i] = rs.getString(11); 
-						wethr[i] = rs.getString(12); 
-						photo_file_ttle[i] = rs.getString(13); 
-						observ_cn[i] = rs.getString(14); 
-						observ_de[i] = rs.getString(15); 
-						observ_place[i] = rs.getString(16); 
-						ecsystm_ty[i] = rs.getString(17); 
-						cnfirm_mth[i] = rs.getString(18); 
-						grid_no[i] = rs.getString(19); 
-						fml_eng_ttle[i] = rs.getString(20); 
-						fml_korean_ttle[i] = rs.getString(21); 
-						ordr_eng_ttle[i] = rs.getString(22); 
-						ordr_korean_ttle[i] = rs.getString(23); 
-						spcs_schlshp_ttle[i] = rs.getString(24); 
-						mml_observ_observ_qy[i] = rs.getString(25); 
-						mml_observ_den_qy[i] = rs.getString(26); 
-						mml_observ_etc_marks_dc[i] = rs.getString(27); 
-						mml_observ_exct_qy[i] = rs.getString(28); 
-						mml_observ_prar_qy[i] = rs.getString(29); 
-						mml_observ_crcs_qy[i] = rs.getString(30); 
-						mml_observ_ankr_qy[i] = rs.getString(31); 
-						mml_observ_mark_qy[i] = rs.getString(32); 
-						mml_observ_hair_qy[i] = rs.getString(33); 
-						mml_observ_capt_qy[i] = rs.getString(34); 
-						mml_examin_cryn_qy[i] = rs.getString(35); 
-						geom[i] = rs.getString(36); 
+						// 전체 레코드 개수만큼
+						String spce_id = " "; // 공간_아이디
+						String examin_year = " "; // 조사_년도
+						String tme = " "; // 회차
+						String examin_begin_de = " "; // 조사_시작_일자
+						String examin_end_de = " "; // 조사_종료_일자
+						String gnrl_examin_charger_nm = " "; // 일반_조사_담당자_성명
+						String rspnsbl_examin_charger_nm = " "; // 책임_조사_담당자_성명
+						String spcs_korean_ttle = " "; // 종_한글_명칭
+						String spcs_eng_ttle = " "; // 종_영문_명칭
+						String idvd_qy = " "; // 개체_수
+						String partclr_matter = " "; // 특이_사항
+						String wethr = " "; // 날씨
+						String photo_file_ttle = " "; // 사진_파일_명칭
+						String observ_cn = " "; // 관찰_내용
+						String observ_de = " "; // 관찰_일자
+						String observ_place = " "; // 관찰_장소
+						String ecsystm_ty = " "; // 생태계_유형
+						String cnfirm_mth = " "; // 확인_방법
+						String grid_no = " "; // 격자_번호
+						String fml_eng_ttle = " "; // 과_영문_명칭
+						String fml_korean_ttle = " "; // 과_한글_명칭
+						String ordr_eng_ttle = " "; // 목_영문_명칭
+						String ordr_korean_ttle = " "; // 목_한글_명칭
+						String spcs_schlshp_ttle = " "; // 종_학술_명칭
+						String mml_observ_observ_qy = " "; // 표유류_관찰_관찰_수
+						String mml_observ_den_qy = " "; // 표유류_관찰_굴_수
+						String mml_observ_etc_marks_dc = " "; //표유류_관찰_기타_흔적_설명
+						String mml_observ_exct_qy = " "; // 표유류_관찰_배설물_수
+						String mml_observ_prar_qy = " "; // 표유류_관찰_번식지_수
+						String mml_observ_crcs_qy = " "; // 표유류_관찰_사체_수
+						String mml_observ_ankr_qy = " "; // 표유류_관찰_식흔_수
+						String mml_observ_mark_qy = " "; // 표유류_관찰_족적_수
+						String mml_observ_hair_qy = " "; // 표유류_관찰_털_수
+						String mml_observ_capt_qy = " "; // 표유류_관찰_포획_수
+						String mml_examin_cryn_qy = " "; // 표유류_조사_울음_수
+						String geom = " "; // 지오메트리
 						
-						System.out.println("spce_id::" + spce_id[i] + "::examin_year::" + examin_year[i] + "::tme::"
-								+ tme[i] + "::examin_begin_de::" + examin_begin_de[i] + "::examin_end_de::"
-								+ examin_end_de[i] + "::gnrl_examin_charger_nm::" + gnrl_examin_charger_nm[i]
-								+ "::rspnsbl_examin_charger_nm::" + rspnsbl_examin_charger_nm[i]
-								+ "::spcs_korean_ttle::" + spcs_korean_ttle[i] + "::spcs_eng_ttle::" + spcs_eng_ttle[i]
-								+ "::idvd_qy::" + idvd_qy[i] + "::partclr_matter::" + partclr_matter[i] + "::wethr::"
-								+ wethr[i] + "::photo_file_ttle::" + photo_file_ttle[i] + "::observ_cn::" + observ_cn[i] + "::observ_de::"
-								+ observ_de[i] + "::observ_place::" + observ_place[i] + "::ecsystm_ty::" + ecsystm_ty[i]
-								+ "::cnfirm_mth::" + cnfirm_mth[i] + "::grid_no::" + grid_no[i]
-								+ "::fml_eng_ttle::" + fml_eng_ttle[i] + "::fml_korean_ttle::"
-								+ fml_korean_ttle[i] + "::ordr_eng_ttle::" + ordr_eng_ttle[i] + "::ordr_korean_ttle::" + ordr_korean_ttle[i]
-								+ "::spcs_schlshp_ttle::" + spcs_schlshp_ttle[i] + "::mml_observ_observ_qy::"
-								+ mml_observ_observ_qy[i] + "::mml_observ_den_qy::" + mml_observ_den_qy[i]
-								+ "::mml_observ_etc_marks_dc::" + mml_observ_etc_marks_dc[i] + "::mml_observ_exct_qy::"
-								+ mml_observ_exct_qy[i] + "::mml_observ_prar_qy::" + mml_observ_prar_qy[i] + "::mml_observ_crcs_qy::"
-								+ mml_observ_crcs_qy[i] + "::mml_observ_ankr_qy::" + mml_observ_ankr_qy[i] + "::mml_observ_mark_qy::"
-								+ mml_observ_mark_qy[i] + "::mml_observ_hair_qy::" + mml_observ_hair_qy[i]
-								+ "::mml_observ_capt_qy::" + mml_observ_capt_qy[i] + "::mml_examin_cryn_qy::" + mml_examin_cryn_qy[i]
-								+ "::geom::" + geom[i]);
+						spce_id = rs.getString(1); 
+						examin_year = rs.getString(2); 
+						tme = rs.getString(3); 
+						examin_begin_de = rs.getString(4); 
+						examin_end_de = rs.getString(5); 
+						gnrl_examin_charger_nm = rs.getString(6); 
+						rspnsbl_examin_charger_nm = rs.getString(7); 
+						spcs_korean_ttle = rs.getString(8); 
+						spcs_eng_ttle = rs.getString(9); 
+						idvd_qy = rs.getString(10); 
+						partclr_matter = rs.getString(11); 
+						wethr = rs.getString(12); 
+						photo_file_ttle = rs.getString(13); 
+						observ_cn = rs.getString(14); 
+						observ_de = rs.getString(15); 
+						observ_place = rs.getString(16); 
+						ecsystm_ty = rs.getString(17); 
+						cnfirm_mth = rs.getString(18); 
+						grid_no = rs.getString(19); 
+						fml_eng_ttle = rs.getString(20); 
+						fml_korean_ttle = rs.getString(21); 
+						ordr_eng_ttle = rs.getString(22); 
+						ordr_korean_ttle = rs.getString(23); 
+						spcs_schlshp_ttle = rs.getString(24); 
+						mml_observ_observ_qy = rs.getString(25); 
+						mml_observ_den_qy = rs.getString(26); 
+						mml_observ_etc_marks_dc = rs.getString(27); 
+						mml_observ_exct_qy = rs.getString(28); 
+						mml_observ_prar_qy = rs.getString(29); 
+						mml_observ_crcs_qy = rs.getString(30); 
+						mml_observ_ankr_qy = rs.getString(31); 
+						mml_observ_mark_qy = rs.getString(32); 
+						mml_observ_hair_qy = rs.getString(33); 
+						mml_observ_capt_qy = rs.getString(34); 
+						mml_examin_cryn_qy = rs.getString(35); 
+						//geom = rs.getString(36); 
+						
+						System.out.println("spce_id::" + spce_id + "::examin_year::" + examin_year + "::tme::"
+								+ tme + "::examin_begin_de::" + examin_begin_de + "::examin_end_de::"
+								+ examin_end_de + "::gnrl_examin_charger_nm::" + gnrl_examin_charger_nm
+								+ "::rspnsbl_examin_charger_nm::" + rspnsbl_examin_charger_nm
+								+ "::spcs_korean_ttle::" + spcs_korean_ttle + "::spcs_eng_ttle::" + spcs_eng_ttle
+								+ "::idvd_qy::" + idvd_qy + "::partclr_matter::" + partclr_matter + "::wethr::"
+								+ wethr + "::photo_file_ttle::" + photo_file_ttle + "::observ_cn::" + observ_cn + "::observ_de::"
+								+ observ_de + "::observ_place::" + observ_place + "::ecsystm_ty::" + ecsystm_ty
+								+ "::cnfirm_mth::" + cnfirm_mth + "::grid_no::" + grid_no
+								+ "::fml_eng_ttle::" + fml_eng_ttle + "::fml_korean_ttle::"
+								+ fml_korean_ttle + "::ordr_eng_ttle::" + ordr_eng_ttle + "::ordr_korean_ttle::" + ordr_korean_ttle
+								+ "::spcs_schlshp_ttle::" + spcs_schlshp_ttle + "::mml_observ_observ_qy::"
+								+ mml_observ_observ_qy + "::mml_observ_den_qy::" + mml_observ_den_qy
+								+ "::mml_observ_etc_marks_dc::" + mml_observ_etc_marks_dc + "::mml_observ_exct_qy::"
+								+ mml_observ_exct_qy + "::mml_observ_prar_qy::" + mml_observ_prar_qy + "::mml_observ_crcs_qy::"
+								+ mml_observ_crcs_qy + "::mml_observ_ankr_qy::" + mml_observ_ankr_qy + "::mml_observ_mark_qy::"
+								+ mml_observ_mark_qy + "::mml_observ_hair_qy::" + mml_observ_hair_qy
+								+ "::mml_observ_capt_qy::" + mml_observ_capt_qy + "::mml_examin_cryn_qy::" + mml_examin_cryn_qy
+								+ "::geom::" + geom);
 
-						i++;
 					}
 					
 					System.out.println("ECO_09 SELECT 프로세스 종료.");
@@ -160,118 +157,156 @@ public class GetVwMapNteeMmlPoint {
 					
 					while (rs.next()) {
 						
-						spce_id[i] = JsonParser.colWrite_String_eic(rs.getString(1)); 
-						examin_year[i] = JsonParser.colWrite_String_eic(rs.getString(2)); 
-						tme[i] = JsonParser.colWrite_String_eic(rs.getString(3)); 
-						examin_begin_de[i] = JsonParser.colWrite_String_eic(rs.getString(4)); 
-						examin_end_de[i] = JsonParser.colWrite_String_eic(rs.getString(5)); 
-						gnrl_examin_charger_nm[i] = JsonParser.colWrite_String_eic(rs.getString(6)); 
-						rspnsbl_examin_charger_nm[i] = JsonParser.colWrite_String_eic(rs.getString(7)); 
-						spcs_korean_ttle[i] = JsonParser.colWrite_String_eic(rs.getString(8)); 
-						spcs_eng_ttle[i] = JsonParser.colWrite_String_eic(rs.getString(9)); 
-						idvd_qy[i] = JsonParser.colWrite_String_eic(rs.getString(10)); 
-						partclr_matter[i] = JsonParser.colWrite_String_eic(rs.getString(11)); 
-						wethr[i] = JsonParser.colWrite_String_eic(rs.getString(12)); 
-						photo_file_ttle[i] = JsonParser.colWrite_String_eic(rs.getString(13)); 
-						observ_cn[i] = JsonParser.colWrite_String_eic(rs.getString(14)); 
-						observ_de[i] = JsonParser.colWrite_String_eic(rs.getString(15)); 
-						observ_place[i] = JsonParser.colWrite_String_eic(rs.getString(16)); 
-						ecsystm_ty[i] = JsonParser.colWrite_String_eic(rs.getString(17)); 
-						cnfirm_mth[i] = JsonParser.colWrite_String_eic(rs.getString(18)); 
-						grid_no[i] = JsonParser.colWrite_String_eic(rs.getString(19)); 
-						fml_eng_ttle[i] = JsonParser.colWrite_String_eic(rs.getString(20)); 
-						fml_korean_ttle[i] = JsonParser.colWrite_String_eic(rs.getString(21)); 
-						ordr_eng_ttle[i] = JsonParser.colWrite_String_eic(rs.getString(22)); 
-						ordr_korean_ttle[i] = JsonParser.colWrite_String_eic(rs.getString(23)); 
-						spcs_schlshp_ttle[i] = JsonParser.colWrite_String_eic(rs.getString(24)); 
-						mml_observ_observ_qy[i] = JsonParser.colWrite_String_eic(rs.getString(25)); 
-						mml_observ_den_qy[i] = JsonParser.colWrite_String_eic(rs.getString(26)); 
-						mml_observ_etc_marks_dc[i] = JsonParser.colWrite_String_eic(rs.getString(27)); 
-						mml_observ_exct_qy[i] = JsonParser.colWrite_String_eic(rs.getString(28)); 
-						mml_observ_prar_qy[i] = JsonParser.colWrite_String_eic(rs.getString(29)); 
-						mml_observ_crcs_qy[i] = JsonParser.colWrite_String_eic(rs.getString(30)); 
-						mml_observ_ankr_qy[i] = JsonParser.colWrite_String_eic(rs.getString(31)); 
-						mml_observ_mark_qy[i] = JsonParser.colWrite_String_eic(rs.getString(32)); 
-						mml_observ_hair_qy[i] = JsonParser.colWrite_String_eic(rs.getString(33)); 
-						mml_observ_capt_qy[i] = JsonParser.colWrite_String_eic(rs.getString(34)); 
-						mml_examin_cryn_qy[i] = JsonParser.colWrite_String_eic(rs.getString(35)); 
-						geom[i] = JsonParser.colWrite_String_eic(rs.getString(36)); 
+						// 전체 레코드 개수만큼
+						String spce_id = " "; // 공간_아이디
+						String examin_year = " "; // 조사_년도
+						String tme = " "; // 회차
+						String examin_begin_de = " "; // 조사_시작_일자
+						String examin_end_de = " "; // 조사_종료_일자
+						String gnrl_examin_charger_nm = " "; // 일반_조사_담당자_성명
+						String rspnsbl_examin_charger_nm = " "; // 책임_조사_담당자_성명
+						String spcs_korean_ttle = " "; // 종_한글_명칭
+						String spcs_eng_ttle = " "; // 종_영문_명칭
+						String idvd_qy = " "; // 개체_수
+						String partclr_matter = " "; // 특이_사항
+						String wethr = " "; // 날씨
+						String photo_file_ttle = " "; // 사진_파일_명칭
+						String observ_cn = " "; // 관찰_내용
+						String observ_de = " "; // 관찰_일자
+						String observ_place = " "; // 관찰_장소
+						String ecsystm_ty = " "; // 생태계_유형
+						String cnfirm_mth = " "; // 확인_방법
+						String grid_no = " "; // 격자_번호
+						String fml_eng_ttle = " "; // 과_영문_명칭
+						String fml_korean_ttle = " "; // 과_한글_명칭
+						String ordr_eng_ttle = " "; // 목_영문_명칭
+						String ordr_korean_ttle = " "; // 목_한글_명칭
+						String spcs_schlshp_ttle = " "; // 종_학술_명칭
+						String mml_observ_observ_qy = " "; // 표유류_관찰_관찰_수
+						String mml_observ_den_qy = " "; // 표유류_관찰_굴_수
+						String mml_observ_etc_marks_dc = " "; //표유류_관찰_기타_흔적_설명
+						String mml_observ_exct_qy = " "; // 표유류_관찰_배설물_수
+						String mml_observ_prar_qy = " "; // 표유류_관찰_번식지_수
+						String mml_observ_crcs_qy = " "; // 표유류_관찰_사체_수
+						String mml_observ_ankr_qy = " "; // 표유류_관찰_식흔_수
+						String mml_observ_mark_qy = " "; // 표유류_관찰_족적_수
+						String mml_observ_hair_qy = " "; // 표유류_관찰_털_수
+						String mml_observ_capt_qy = " "; // 표유류_관찰_포획_수
+						String mml_examin_cryn_qy = " "; // 표유류_조사_울음_수
+						String geom = " "; // 지오메트리
+						
+						spce_id = JsonParser.colWrite_String_eic(rs.getString(1)); 
+						examin_year = JsonParser.colWrite_String_eic(rs.getString(2)); 
+						tme = JsonParser.colWrite_String_eic(rs.getString(3)); 
+						examin_begin_de = JsonParser.colWrite_String_eic(rs.getString(4)); 
+						examin_end_de = JsonParser.colWrite_String_eic(rs.getString(5)); 
+						gnrl_examin_charger_nm = JsonParser.colWrite_String_eic(rs.getString(6)); 
+						rspnsbl_examin_charger_nm = JsonParser.colWrite_String_eic(rs.getString(7)); 
+						spcs_korean_ttle = JsonParser.colWrite_String_eic(rs.getString(8)); 
+						spcs_eng_ttle = JsonParser.colWrite_String_eic(rs.getString(9)); 
+						idvd_qy = JsonParser.colWrite_String_eic(rs.getString(10)); 
+						partclr_matter = JsonParser.colWrite_String_eic(rs.getString(11)); 
+						wethr = JsonParser.colWrite_String_eic(rs.getString(12)); 
+						photo_file_ttle = JsonParser.colWrite_String_eic(rs.getString(13)); 
+						observ_cn = JsonParser.colWrite_String_eic(rs.getString(14)); 
+						observ_de = JsonParser.colWrite_String_eic(rs.getString(15)); 
+						observ_place = JsonParser.colWrite_String_eic(rs.getString(16)); 
+						ecsystm_ty = JsonParser.colWrite_String_eic(rs.getString(17)); 
+						cnfirm_mth = JsonParser.colWrite_String_eic(rs.getString(18)); 
+						grid_no = JsonParser.colWrite_String_eic(rs.getString(19)); 
+						fml_eng_ttle = JsonParser.colWrite_String_eic(rs.getString(20)); 
+						fml_korean_ttle = JsonParser.colWrite_String_eic(rs.getString(21)); 
+						ordr_eng_ttle = JsonParser.colWrite_String_eic(rs.getString(22)); 
+						ordr_korean_ttle = JsonParser.colWrite_String_eic(rs.getString(23)); 
+						spcs_schlshp_ttle = JsonParser.colWrite_String_eic(rs.getString(24)); 
+						mml_observ_observ_qy = JsonParser.colWrite_String_eic(rs.getString(25)); 
+						mml_observ_den_qy = JsonParser.colWrite_String_eic(rs.getString(26)); 
+						mml_observ_etc_marks_dc = JsonParser.colWrite_String_eic(rs.getString(27)); 
+						mml_observ_exct_qy = JsonParser.colWrite_String_eic(rs.getString(28)); 
+						mml_observ_prar_qy = JsonParser.colWrite_String_eic(rs.getString(29)); 
+						mml_observ_crcs_qy = JsonParser.colWrite_String_eic(rs.getString(30)); 
+						mml_observ_ankr_qy = JsonParser.colWrite_String_eic(rs.getString(31)); 
+						mml_observ_mark_qy = JsonParser.colWrite_String_eic(rs.getString(32)); 
+						mml_observ_hair_qy = JsonParser.colWrite_String_eic(rs.getString(33)); 
+						mml_observ_capt_qy = JsonParser.colWrite_String_eic(rs.getString(34)); 
+						mml_examin_cryn_qy = JsonParser.colWrite_String_eic(rs.getString(35)); 
+						//geom = JsonParser.colWrite_String_eic(rs.getString(36)); 
 						
 						// 파일에 쓰기
 						try {
 							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-							pw.write(spce_id[i]); 
+							pw.write(spce_id); 
 							pw.write("|^");
-							pw.write(examin_year[i]); 
+							pw.write(examin_year); 
 							pw.write("|^");
-							pw.write(tme[i]); 
+							pw.write(tme); 
 							pw.write("|^");
-							pw.write(examin_begin_de[i]); 
+							pw.write(examin_begin_de); 
 							pw.write("|^");
-							pw.write(examin_end_de[i]);
+							pw.write(examin_end_de);
 							pw.write("|^");
-							pw.write(gnrl_examin_charger_nm[i]); 
+							pw.write(gnrl_examin_charger_nm); 
 							pw.write("|^");
-							pw.write(rspnsbl_examin_charger_nm[i]); 
+							pw.write(rspnsbl_examin_charger_nm); 
 							pw.write("|^");
-							pw.write(spcs_korean_ttle[i]); 
+							pw.write(spcs_korean_ttle); 
 							pw.write("|^");
-							pw.write(spcs_eng_ttle[i]);
+							pw.write(spcs_eng_ttle);
 							pw.write("|^");
-							pw.write(idvd_qy[i]); 
+							pw.write(idvd_qy); 
 							pw.write("|^");
-							pw.write(partclr_matter[i]); 
+							pw.write(partclr_matter); 
 							pw.write("|^");
-							pw.write(wethr[i]); 
+							pw.write(wethr); 
 							pw.write("|^");
-							pw.write(photo_file_ttle[i]); 
+							pw.write(photo_file_ttle); 
 							pw.write("|^");
-							pw.write(observ_cn[i]);
+							pw.write(observ_cn);
 							pw.write("|^");
-							pw.write(observ_de[i]); 
+							pw.write(observ_de); 
 							pw.write("|^");
-							pw.write(observ_place[i]); 
+							pw.write(observ_place); 
 							pw.write("|^");
-							pw.write(ecsystm_ty[i]); 
+							pw.write(ecsystm_ty); 
 							pw.write("|^");
-							pw.write(cnfirm_mth[i]); 
+							pw.write(cnfirm_mth); 
 							pw.write("|^");
-							pw.write(grid_no[i]); 
+							pw.write(grid_no); 
 							pw.write("|^");
-							pw.write(fml_eng_ttle[i]); 
+							pw.write(fml_eng_ttle); 
 							pw.write("|^");
-							pw.write(fml_korean_ttle[i]); 
+							pw.write(fml_korean_ttle); 
 							pw.write("|^");
-							pw.write(ordr_eng_ttle[i]); 
+							pw.write(ordr_eng_ttle); 
 							pw.write("|^");
-							pw.write(ordr_korean_ttle[i]); 
+							pw.write(ordr_korean_ttle); 
 							pw.write("|^");
-							pw.write(spcs_schlshp_ttle[i]);
+							pw.write(spcs_schlshp_ttle);
 							pw.write("|^");
-							pw.write(mml_observ_observ_qy[i]);
+							pw.write(mml_observ_observ_qy);
 							pw.write("|^");
-							pw.write(mml_observ_den_qy[i]);
+							pw.write(mml_observ_den_qy);
 							pw.write("|^");
-							pw.write(mml_observ_etc_marks_dc[i]);
+							pw.write(mml_observ_etc_marks_dc);
 							pw.write("|^");
-							pw.write(mml_observ_exct_qy[i]);
+							pw.write(mml_observ_exct_qy);
 							pw.write("|^");
-							pw.write(mml_observ_prar_qy[i]);
+							pw.write(mml_observ_prar_qy);
 							pw.write("|^");
-							pw.write(mml_observ_crcs_qy[i]);
+							pw.write(mml_observ_crcs_qy);
 							pw.write("|^");
-							pw.write(mml_observ_ankr_qy[i]);
+							pw.write(mml_observ_ankr_qy);
 							pw.write("|^");
-							pw.write(mml_observ_mark_qy[i]); 
+							pw.write(mml_observ_mark_qy); 
 							pw.write("|^");
-							pw.write(mml_observ_hair_qy[i]); 
+							pw.write(mml_observ_hair_qy); 
 							pw.write("|^");
-							pw.write(mml_observ_capt_qy[i]);
+							pw.write(mml_observ_capt_qy);
 							pw.write("|^");
-							pw.write(mml_examin_cryn_qy[i]);
+							pw.write(mml_examin_cryn_qy);
 							pw.write("|^");
-							pw.write(geom[i]);
+							pw.write(geom);
 							pw.println();
 							pw.flush();
 							pw.close();
@@ -279,9 +314,6 @@ public class GetVwMapNteeMmlPoint {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-
-						i++;
-						
 						
 					}
 					
