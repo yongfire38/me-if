@@ -19,7 +19,7 @@ public class ConnectionTest {
 		try {
 
 			Class.forName(DBConnection.getProperty("eco_post_driver"));
-			conn = DBConnection.getOraConnection("eco");
+			conn = DBConnection.getPostConnection("eco");
 			// SQL 문장을 만들고 만약 문장이 질의어(SELECT문)라면
 			// 그 결과를 담을 ResulSet 객체를 준비한 후 실행시킨다.
 			// String query = DBConnection.getProperty("");
