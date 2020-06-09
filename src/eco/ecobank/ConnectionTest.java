@@ -7,9 +7,9 @@ import java.sql.SQLException;
 
 import common.DBConnection;
 
-public class GetWpMapEcologympArea {
+public class ConnectionTest {
 
-	// 에코뱅크 - 생태자연도_면
+	//에코뱅크 - 커넥션 테스트
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
 		Connection conn = null; // DB연결된 상태(세션)을 담은 객체
