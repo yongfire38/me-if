@@ -33,18 +33,18 @@ public class GetVwMapManagementareaArea {
 				String query = DBConnection.getProperty("eco_post_eco02_query");
 				System.out.println("query :::" + query);
 
-				pstm = conn.prepareStatement(query);
+				pstm = conn.prepareStatement(query, ResultSet.TYPE_FORWARD_ONLY);
 				rs = pstm.executeQuery();
 				
 				// 전체 레코드 수를 구하기 위해 커서를 마지막으로 이동
-				rs.last();
+				/*rs.last();
 
 				int rowCount = rs.getRow();
 
 				System.out.println("전체 건 수 :::" + Integer.toString(rowCount) + " 건");
 				
 				// 다시 처음부터 조회해야 하므로 커서는 초기화
-				rs.beforeFirst();
+				rs.beforeFirst();*/
 
 				
 				if (args[0].equals("_tset")) {
@@ -166,8 +166,8 @@ public class GetVwMapManagementareaArea {
 							e.printStackTrace();
 						}
 
-						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "/" + Integer.toString(rowCount) + " 건");
-						
+						//System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "/" + Integer.toString(rowCount) + " 건");
+						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) +"번째 줄");
 					}
 					
 					if (file.exists()) {
