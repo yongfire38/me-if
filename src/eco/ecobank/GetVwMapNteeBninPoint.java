@@ -33,7 +33,7 @@ public class GetVwMapNteeBninPoint {
 				String query = DBConnection.getProperty("eco_post_eco05_query");
 				System.out.println("query :::" + query);
 
-				pstm = conn.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+				pstm = conn.prepareStatement(query);
 				rs = pstm.executeQuery();
 
 				// 전체 레코드 수를 구하기 위해 커서를 마지막으로 이동
