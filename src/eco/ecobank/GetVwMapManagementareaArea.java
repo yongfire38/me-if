@@ -32,9 +32,17 @@ public class GetVwMapManagementareaArea {
 				// 그 결과를 담을 ResulSet 객체를 준비한 후 실행시킨다.
 				String query = DBConnection.getProperty("eco_post_eco02_query");
 				System.out.println("query :::" + query);
+				
+				conn.setAutoCommit(false);
 
-				pstm = conn.prepareStatement(query, ResultSet.TYPE_FORWARD_ONLY);
+				pstm = conn.prepareStatement(query);
+				pstm.setFetchSize(1);
+				
+				System.out.println("start query");
 				rs = pstm.executeQuery();
+				System.out.println("done query");
+				
+				rs.setFetchSize(1);
 				
 				// 전체 레코드 수를 구하기 위해 커서를 마지막으로 이동
 				/*rs.last();

@@ -22,33 +22,39 @@ public class ConnectionTest {
 			conn = DBConnection.getPostConnection("eco");
 			// SQL 문장을 만들고 만약 문장이 질의어(SELECT문)라면
 			// 그 결과를 담을 ResulSet 객체를 준비한 후 실행시킨다.
-			// String query = DBConnection.getProperty("");
-			String query = "SELECT table_schema,table_name FROM information_schema.tables ORDER BY table_schema,table_name";
+			String query = DBConnection.getProperty("eco_post_eco00_query");
+			//String query = "SELECT table_schema,table_name FROM information_schema.tables ORDER BY table_schema,table_name";
 			System.out.println("query :::" + query);
+			
+			conn.setAutoCommit(false);
 
-			pstm = conn.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			pstm = conn.prepareStatement(query);
+			pstm.setFetchSize(1);
+			
+			System.out.println("start query");
 			rs = pstm.executeQuery();
+			System.out.println("done query");
+			
+			rs.setFetchSize(1);
 
 			// 전체 레코드 수를 구하기 위해 커서를 마지막으로 이동
-			rs.last();
+/*			rs.last();
 
 			int rowCount = rs.getRow();
 
 			System.out.println("전체 건 수 :::" + Integer.toString(rowCount) + " 건");
 
 			// 다시 처음부터 조회해야 하므로 커서는 초기화
-			rs.beforeFirst();
+			rs.beforeFirst();*/
 
 			while (rs.next()) {
 				
 				// 전체 레코드 개수만큼
-				String table_schema = " ";
-				String table_name = " ";
+				String col = " ";
 
-				table_schema = rs.getString(1);
-				table_name = rs.getString(2);
+				col = rs.getString(1);
 
-				System.out.println("table_schema::" + table_schema + "::table_name::" + table_name);
+				System.out.println("전체 숫자::" + col);
 
 			}
 
