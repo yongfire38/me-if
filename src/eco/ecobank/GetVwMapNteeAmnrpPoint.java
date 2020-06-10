@@ -315,8 +315,9 @@ public class GetVwMapNteeAmnrpPoint {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-
 						
+						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "/" + Integer.toString(rowCount) + " 건");
+		
 					}
 					
 					if (file.exists()) {

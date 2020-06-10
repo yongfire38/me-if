@@ -42,39 +42,35 @@ public class GetAlgaeAlertHistory {
 
 				System.out.println("전체 건 수 :::" + Integer.toString(rowCount) + " 건");
 
-				// 전체 레코드 개수만큼의 배열
-				String[] alertObject = new String[rowCount]; // 경보대상
-				String[] alertPoint = new String[rowCount]; // 지점
-				String[] alertInstitute = new String[rowCount]; // 발령기관
-				String[] alertDate = new String[rowCount]; // 발령일
-				String[] stage = new String[rowCount]; // 단계
-				String[] etc = new String[rowCount]; // 비고
-				String[] instId = new String[rowCount]; //입력일
-				String[] instDate = new String[rowCount]; //입력일자  
-
 				// 다시 처음부터 조회해야 하므로 커서는 초기화
 				rs.beforeFirst();
-
-				int i = 0;
 
 				if (args[0].equals("_tset")) {
 
 					while (rs.next()) {
+						
+						// 전체 레코드 개수만큼
+						String alertObject = " "; // 경보대상
+						String alertPoint = " "; // 지점
+						String alertInstitute = " "; // 발령기관
+						String alertDate = " "; // 발령일
+						String stage = " "; // 단계
+						String etc = " "; // 비고
+						String instId = " "; //입력일
+						String instDate = " "; //입력일자  
 
-						alertObject[i] = rs.getString(1);
-						alertPoint[i] = rs.getString(2);
-						alertInstitute[i] = rs.getString(3);
-						alertDate[i] = rs.getString(4);
-						stage[i] = rs.getString(5);
-						etc[i] = rs.getString(6);
-						instId[i] = rs.getString(7);
-						instDate[i] = rs.getString(8);
+						alertObject = rs.getString(1);
+						alertPoint = rs.getString(2);
+						alertInstitute = rs.getString(3);
+						alertDate = rs.getString(4);
+						stage = rs.getString(5);
+						etc = rs.getString(6);
+						instId = rs.getString(7);
+						instDate = rs.getString(8);
 
-						System.out.println("alertObject::" + alertObject[i] + "::alertPoint::" + alertPoint[i] + "::alertInstitute::" + alertInstitute[i]
-								+ "alertDate::" + alertDate[i] + "stage::" + stage[i] + "etc::"
-								+ etc[i] + "instId::" + instId[i] + "instDate::" + instDate[i]);
-
-						i++;
+						System.out.println("alertObject::" + alertObject + "::alertPoint::" + alertPoint + "::alertInstitute::" + alertInstitute
+								+ "alertDate::" + alertDate + "stage::" + stage + "etc::"
+								+ etc + "instId::" + instId + "instDate::" + instDate);
 
 					}
 
@@ -87,35 +83,45 @@ public class GetAlgaeAlertHistory {
 					file = new File(args[0]);
 
 					while (rs.next()) {
+						
+						// 전체 레코드 개수만큼
+						String alertObject = " "; // 경보대상
+						String alertPoint = " "; // 지점
+						String alertInstitute = " "; // 발령기관
+						String alertDate = " "; // 발령일
+						String stage = " "; // 단계
+						String etc = " "; // 비고
+						String instId = " "; //입력일
+						String instDate = " "; //입력일자  
 
-						alertObject[i] = JsonParser.colWrite_String_eic(rs.getString(1));
-						alertPoint[i] = JsonParser.colWrite_String_eic(rs.getString(2));
-						alertInstitute[i] = JsonParser.colWrite_String_eic(rs.getString(3));
-						alertDate[i] = JsonParser.colWrite_String_eic(rs.getString(4));
-						stage[i] = JsonParser.colWrite_String_eic(rs.getString(5));
-						etc[i] = JsonParser.colWrite_String_eic(rs.getString(6));
-						instId[i] = JsonParser.colWrite_String_eic(rs.getString(7));
-						instDate[i] = JsonParser.colWrite_String_eic(rs.getString(8));
+						alertObject = JsonParser.colWrite_String_eic(rs.getString(1));
+						alertPoint = JsonParser.colWrite_String_eic(rs.getString(2));
+						alertInstitute = JsonParser.colWrite_String_eic(rs.getString(3));
+						alertDate = JsonParser.colWrite_String_eic(rs.getString(4));
+						stage = JsonParser.colWrite_String_eic(rs.getString(5));
+						etc = JsonParser.colWrite_String_eic(rs.getString(6));
+						instId = JsonParser.colWrite_String_eic(rs.getString(7));
+						instDate = JsonParser.colWrite_String_eic(rs.getString(8));
 
 						// 파일에 쓰기
 						try {
 							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-							pw.write(alertObject[i]);
+							pw.write(alertObject);
 							pw.write("|^");
-							pw.write(alertPoint[i]);
+							pw.write(alertPoint);
 							pw.write("|^");
-							pw.write(alertInstitute[i]);
+							pw.write(alertInstitute);
 							pw.write("|^");
-							pw.write(alertDate[i]);
+							pw.write(alertDate);
 							pw.write("|^");
-							pw.write(stage[i]);
+							pw.write(stage);
 							pw.write("|^");
-							pw.write(etc[i]);
+							pw.write(etc);
 							pw.write("|^");
-							pw.write(instId[i]);
+							pw.write(instId);
 							pw.write("|^");
-							pw.write(instDate[i]);
+							pw.write(instDate);
 							pw.println();
 							pw.flush();
 							pw.close();
@@ -124,7 +130,7 @@ public class GetAlgaeAlertHistory {
 							e.printStackTrace();
 						}
 
-						i++;
+						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "/" + Integer.toString(rowCount) + " 건");
 
 					}
 

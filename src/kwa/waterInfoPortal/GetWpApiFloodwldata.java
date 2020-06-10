@@ -42,35 +42,31 @@ public class GetWpApiFloodwldata {
 
 				System.out.println("전체 건 수 :::" + Integer.toString(rowCount) + " 건");
 
-				// 전체 레코드 개수만큼의 배열
-				String[] wlobscd = new String[rowCount]; //수위관측소 코드
-				String[] ymdhm = new String[rowCount]; //년월일시분(yyyyMMddHHmm)
-				String[] wl = new String[rowCount]; //수위자료(단위:m)
-				String[] fw = new String[rowCount]; //유량자료(단위:m3/S)
-				String[] rgsdt = new String[rowCount]; //등록일자
-				String[] upddt = new String[rowCount]; //수정일자
-
 				// 다시 처음부터 조회해야 하므로 커서는 초기화
 				rs.beforeFirst();
-
-				int i = 0;
 
 				if (args[0].equals("_tset")) {
 
 					while (rs.next()) {
+						
+						// 전체 레코드 개수만큼
+						String wlobscd = " "; //수위관측소 코드
+						String ymdhm = " "; //년월일시분(yyyyMMddHHmm)
+						String wl = " "; //수위자료(단위:m)
+						String fw = " "; //유량자료(단위:m3/S)
+						String rgsdt = " "; //등록일자
+						String upddt = " "; //수정일자
 
-						wlobscd[i] = rs.getString(1);
-						ymdhm[i] = rs.getString(2);
-						wl[i] = rs.getString(3);
-						fw[i] = rs.getString(4);
-						rgsdt[i] = rs.getString(5);
-						upddt[i] = rs.getString(6);
+						wlobscd = rs.getString(1);
+						ymdhm = rs.getString(2);
+						wl = rs.getString(3);
+						fw = rs.getString(4);
+						rgsdt = rs.getString(5);
+						upddt = rs.getString(6);
 
-						System.out.println("wlobscd::" + wlobscd[i] + "::ymdhm::" + ymdhm[i] + "::wl::" + wl[i]
-								+ "fw::" + fw[i] + "rgsdt::" + rgsdt[i] + "upddt::"
-								+ upddt[i]);
-
-						i++;
+						System.out.println("wlobscd::" + wlobscd + "::ymdhm::" + ymdhm + "::wl::" + wl
+								+ "fw::" + fw + "rgsdt::" + rgsdt + "upddt::"
+								+ upddt);
 
 					}
 
@@ -83,29 +79,37 @@ public class GetWpApiFloodwldata {
 					file = new File(args[0]);
 
 					while (rs.next()) {
+						
+						// 전체 레코드 개수만큼
+						String wlobscd = " "; //수위관측소 코드
+						String ymdhm = " "; //년월일시분(yyyyMMddHHmm)
+						String wl = " "; //수위자료(단위:m)
+						String fw = " "; //유량자료(단위:m3/S)
+						String rgsdt = " "; //등록일자
+						String upddt = " "; //수정일자
 
-						wlobscd[i] = JsonParser.colWrite_String_eic(rs.getString(1));
-						ymdhm[i] = JsonParser.colWrite_String_eic(rs.getString(2));
-						wl[i] = JsonParser.colWrite_String_eic(rs.getString(3));
-						fw[i] = JsonParser.colWrite_String_eic(rs.getString(4));
-						rgsdt[i] = JsonParser.colWrite_String_eic(rs.getString(5));
-						upddt[i] = JsonParser.colWrite_String_eic(rs.getString(6));
+						wlobscd = JsonParser.colWrite_String_eic(rs.getString(1));
+						ymdhm = JsonParser.colWrite_String_eic(rs.getString(2));
+						wl = JsonParser.colWrite_String_eic(rs.getString(3));
+						fw = JsonParser.colWrite_String_eic(rs.getString(4));
+						rgsdt = JsonParser.colWrite_String_eic(rs.getString(5));
+						upddt = JsonParser.colWrite_String_eic(rs.getString(6));
 
 						// 파일에 쓰기
 						try {
 							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-							pw.write(wlobscd[i]);
+							pw.write(wlobscd);
 							pw.write("|^");
-							pw.write(ymdhm[i]);
+							pw.write(ymdhm);
 							pw.write("|^");
-							pw.write(wl[i]);
+							pw.write(wl);
 							pw.write("|^");
-							pw.write(fw[i]);
+							pw.write(fw);
 							pw.write("|^");
-							pw.write(rgsdt[i]);
+							pw.write(rgsdt);
 							pw.write("|^");
-							pw.write(upddt[i]);
+							pw.write(upddt);
 							pw.println();
 							pw.flush();
 							pw.close();
@@ -114,7 +118,7 @@ public class GetWpApiFloodwldata {
 							e.printStackTrace();
 						}
 
-						i++;
+						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "/" + Integer.toString(rowCount) + " 건");
 
 					}
 

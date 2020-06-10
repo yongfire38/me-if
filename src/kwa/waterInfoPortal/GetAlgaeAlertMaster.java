@@ -42,46 +42,42 @@ public class GetAlgaeAlertMaster {
 
 				System.out.println("전체 건 수 :::" + Integer.toString(rowCount) + " 건");
 
-				// 전체 레코드 개수만큼의 배열
-				String[] sidoNm = new String[rowCount]; // 시도명
-				String[] cggNm = new String[rowCount]; // 시군구명
-				String[] umdNm = new String[rowCount]; // 읍면동명
-				String[] regionCd = new String[rowCount]; // 법정동코드
-				String[] alertObject = new String[rowCount]; // 경보대상
-				String[] alertPoint = new String[rowCount]; // 지점
-				String[] pointCode = new String[rowCount]; // 지점코드
-				String[] alertInstitute = new String[rowCount]; // 발령기관
-				String[] alertDate = new String[rowCount]; // 발령일
-				String[] stage = new String[rowCount]; // 단계
-				String[] etc = new String[rowCount]; // 비고
-
 				// 다시 처음부터 조회해야 하므로 커서는 초기화
 				rs.beforeFirst();
-
-				int i = 0;
 
 				if (args[0].equals("_tset")) {
 
 					while (rs.next()) {
+						
+						// 전체 레코드 개수만큼
+						String sidoNm = " "; // 시도명
+						String cggNm = " "; // 시군구명
+						String umdNm = " "; // 읍면동명
+						String regionCd = " "; // 법정동코드
+						String alertObject = " "; // 경보대상
+						String alertPoint = " "; // 지점
+						String pointCode = " "; // 지점코드
+						String alertInstitute = " "; // 발령기관
+						String alertDate = " "; // 발령일
+						String stage = " "; // 단계
+						String etc = " "; // 비고
 
-						sidoNm[i] = rs.getString(1);
-						cggNm[i] = rs.getString(2);
-						umdNm[i] = rs.getString(3);
-						regionCd[i] = rs.getString(4);
-						alertObject[i] = rs.getString(5);
-						alertPoint[i] = rs.getString(6);
-						pointCode[i] = rs.getString(7);
-						alertInstitute[i] = rs.getString(8);
-						alertDate[i] = rs.getString(9);
-						stage[i] = rs.getString(10);
-						etc[i] = rs.getString(11);
+						sidoNm = rs.getString(1);
+						cggNm = rs.getString(2);
+						umdNm = rs.getString(3);
+						regionCd = rs.getString(4);
+						alertObject = rs.getString(5);
+						alertPoint = rs.getString(6);
+						pointCode = rs.getString(7);
+						alertInstitute = rs.getString(8);
+						alertDate = rs.getString(9);
+						stage = rs.getString(10);
+						etc = rs.getString(11);
 
-						System.out.println("sidoNm::" + sidoNm[i] + "::cggNm::" + cggNm[i] + "::umdNm::" + umdNm[i]
-								+ "regionCd::" + regionCd[i] + "alertObject::" + alertObject[i] + "alertPoint::"
-								+ alertPoint[i] + "pointCode::" + pointCode[i] + "alertInstitute::" + alertInstitute[i]
-								+ "alertDate::" + alertDate[i] + "stage::" + stage[i] + "etc::" + etc[i]);
-
-						i++;
+						System.out.println("sidoNm::" + sidoNm + "::cggNm::" + cggNm + "::umdNm::" + umdNm
+								+ "regionCd::" + regionCd + "alertObject::" + alertObject + "alertPoint::"
+								+ alertPoint + "pointCode::" + pointCode + "alertInstitute::" + alertInstitute
+								+ "alertDate::" + alertDate + "stage::" + stage + "etc::" + etc);
 
 					}
 
@@ -94,44 +90,57 @@ public class GetAlgaeAlertMaster {
 					file = new File(args[0]);
 
 					while (rs.next()) {
+						
+						// 전체 레코드 개수만큼
+						String sidoNm = " "; // 시도명
+						String cggNm = " "; // 시군구명
+						String umdNm = " "; // 읍면동명
+						String regionCd = " "; // 법정동코드
+						String alertObject = " "; // 경보대상
+						String alertPoint = " "; // 지점
+						String pointCode = " "; // 지점코드
+						String alertInstitute = " "; // 발령기관
+						String alertDate = " "; // 발령일
+						String stage = " "; // 단계
+						String etc = " "; // 비고
 
-						sidoNm[i] = JsonParser.colWrite_String_eic(rs.getString(1));
-						cggNm[i] = JsonParser.colWrite_String_eic(rs.getString(2));
-						umdNm[i] = JsonParser.colWrite_String_eic(rs.getString(3));
-						regionCd[i] = JsonParser.colWrite_String_eic(rs.getString(4));
-						alertObject[i] = JsonParser.colWrite_String_eic(rs.getString(5));
-						alertPoint[i] = JsonParser.colWrite_String_eic(rs.getString(6));
-						pointCode[i] = JsonParser.colWrite_String_eic(rs.getString(7));
-						alertInstitute[i] = JsonParser.colWrite_String_eic(rs.getString(8));
-						alertDate[i] = JsonParser.colWrite_String_eic(rs.getString(9));
-						stage[i] = JsonParser.colWrite_String_eic(rs.getString(10));
-						etc[i] = JsonParser.colWrite_String_eic(rs.getString(11));
+						sidoNm = JsonParser.colWrite_String_eic(rs.getString(1));
+						cggNm = JsonParser.colWrite_String_eic(rs.getString(2));
+						umdNm = JsonParser.colWrite_String_eic(rs.getString(3));
+						regionCd = JsonParser.colWrite_String_eic(rs.getString(4));
+						alertObject = JsonParser.colWrite_String_eic(rs.getString(5));
+						alertPoint = JsonParser.colWrite_String_eic(rs.getString(6));
+						pointCode = JsonParser.colWrite_String_eic(rs.getString(7));
+						alertInstitute = JsonParser.colWrite_String_eic(rs.getString(8));
+						alertDate = JsonParser.colWrite_String_eic(rs.getString(9));
+						stage = JsonParser.colWrite_String_eic(rs.getString(10));
+						etc = JsonParser.colWrite_String_eic(rs.getString(11));
 
 						// 파일에 쓰기
 						try {
 							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-							pw.write(sidoNm[i]);
+							pw.write(sidoNm);
 							pw.write("|^");
-							pw.write(cggNm[i]);
+							pw.write(cggNm);
 							pw.write("|^");
-							pw.write(umdNm[i]);
+							pw.write(umdNm);
 							pw.write("|^");
-							pw.write(regionCd[i]);
+							pw.write(regionCd);
 							pw.write("|^");
-							pw.write(alertObject[i]);
+							pw.write(alertObject);
 							pw.write("|^");
-							pw.write(alertPoint[i]);
+							pw.write(alertPoint);
 							pw.write("|^");
-							pw.write(pointCode[i]);
+							pw.write(pointCode);
 							pw.write("|^");
-							pw.write(alertInstitute[i]);
+							pw.write(alertInstitute);
 							pw.write("|^");
-							pw.write(alertDate[i]);
+							pw.write(alertDate);
 							pw.write("|^");
-							pw.write(stage[i]);
+							pw.write(stage);
 							pw.write("|^");
-							pw.write(etc[i]);
+							pw.write(etc);
 							pw.println();
 							pw.flush();
 							pw.close();
@@ -140,7 +149,7 @@ public class GetAlgaeAlertMaster {
 							e.printStackTrace();
 						}
 
-						i++;
+						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "/" + Integer.toString(rowCount) + " 건");
 
 					}
 

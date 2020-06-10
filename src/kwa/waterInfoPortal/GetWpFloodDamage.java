@@ -42,44 +42,40 @@ public class GetWpFloodDamage {
 
 				System.out.println("전체 건 수 :::" + Integer.toString(rowCount) + " 건");
 
-				// 전체 레코드 개수만큼의 배열
-				String[] num = new String[rowCount]; //일련번호
-				String[] tabNo = new String[rowCount]; //탭번호
-				String[] rowNo = new String[rowCount]; //행번호
-				String[] odr = new String[rowCount]; //정렬순서
-				String[] colVal = new String[rowCount]; //내용
-				String[] colSpan = new String[rowCount]; //병합갯수
-				String[] rowSpan = new String[rowCount]; //행병합갯수
-				String[] thYn = new String[rowCount]; //TH_YN
-				String[] colEnd = new String[rowCount]; //컬럼구분
-				String[] clsExist = new String[rowCount]; //문단구분
-
 				// 다시 처음부터 조회해야 하므로 커서는 초기화
 				rs.beforeFirst();
-
-				int i = 0;
 
 				if (args[0].equals("_tset")) {
 
 					while (rs.next()) {
+						
+						// 전체 레코드 개수만큼
+						String num = " "; //일련번호
+						String tabNo = " "; //탭번호
+						String rowNo = " "; //행번호
+						String odr = " "; //정렬순서
+						String colVal = " "; //내용
+						String colSpan = " "; //병합갯수
+						String rowSpan = " "; //행병합갯수
+						String thYn = " "; //TH_YN
+						String colEnd = " "; //컬럼구분
+						String clsExist = " "; //문단구분
 
-						num[i] = rs.getString(1);
-						tabNo[i] = rs.getString(2);
-						rowNo[i] = rs.getString(3);
-						odr[i] = rs.getString(4);
-						colVal[i] = rs.getString(5);
-						colSpan[i] = rs.getString(6);
-						rowSpan[i] = rs.getString(7);
-						thYn[i] = rs.getString(8);
-						colEnd[i] = rs.getString(9);
-						clsExist[i] = rs.getString(10);
+						num = rs.getString(1);
+						tabNo = rs.getString(2);
+						rowNo = rs.getString(3);
+						odr = rs.getString(4);
+						colVal = rs.getString(5);
+						colSpan = rs.getString(6);
+						rowSpan = rs.getString(7);
+						thYn = rs.getString(8);
+						colEnd = rs.getString(9);
+						clsExist = rs.getString(10);
 
-						System.out.println("num::" + num[i] + "::tabNo::" + tabNo[i] + "::rowNo::" + rowNo[i]
-								+ "odr::" + odr[i] + "colVal::" + colVal[i] + "colSpan::"
-								+ colSpan[i] + "::rowSpan::" + rowSpan[i]+ "::thYn::" + thYn[i] + "::colEnd::" + colEnd[i] 
-										+ "::clsExist::" + clsExist[i]);
-
-						i++;
+						System.out.println("num::" + num + "::tabNo::" + tabNo + "::rowNo::" + rowNo
+								+ "odr::" + odr + "colVal::" + colVal + "colSpan::"
+								+ colSpan + "::rowSpan::" + rowSpan+ "::thYn::" + thYn + "::colEnd::" + colEnd 
+										+ "::clsExist::" + clsExist);
 
 					}
 
@@ -92,41 +88,53 @@ public class GetWpFloodDamage {
 					file = new File(args[0]);
 
 					while (rs.next()) {
+						
+						// 전체 레코드 개수만큼
+						String num = " "; //일련번호
+						String tabNo = " "; //탭번호
+						String rowNo = " "; //행번호
+						String odr = " "; //정렬순서
+						String colVal = " "; //내용
+						String colSpan = " "; //병합갯수
+						String rowSpan = " "; //행병합갯수
+						String thYn = " "; //TH_YN
+						String colEnd = " "; //컬럼구분
+						String clsExist = " "; //문단구분
 
-						num[i] = JsonParser.colWrite_String_eic(rs.getString(1));
-						tabNo[i] = JsonParser.colWrite_String_eic(rs.getString(2));
-						rowNo[i] = JsonParser.colWrite_String_eic(rs.getString(3));
-						odr[i] = JsonParser.colWrite_String_eic(rs.getString(4));
-						colVal[i] = JsonParser.colWrite_String_eic(rs.getString(5));
-						colSpan[i] = JsonParser.colWrite_String_eic(rs.getString(6));
-						rowSpan[i] = JsonParser.colWrite_String_eic(rs.getString(7));
-						thYn[i] = JsonParser.colWrite_String_eic(rs.getString(8));
-						colEnd[i] = JsonParser.colWrite_String_eic(rs.getString(9));
-						clsExist[i] = JsonParser.colWrite_String_eic(rs.getString(10));
+						num = JsonParser.colWrite_String_eic(rs.getString(1));
+						tabNo = JsonParser.colWrite_String_eic(rs.getString(2));
+						rowNo = JsonParser.colWrite_String_eic(rs.getString(3));
+						odr = JsonParser.colWrite_String_eic(rs.getString(4));
+						colVal = JsonParser.colWrite_String_eic(rs.getString(5));
+						colSpan = JsonParser.colWrite_String_eic(rs.getString(6));
+						rowSpan = JsonParser.colWrite_String_eic(rs.getString(7));
+						thYn = JsonParser.colWrite_String_eic(rs.getString(8));
+						colEnd = JsonParser.colWrite_String_eic(rs.getString(9));
+						clsExist = JsonParser.colWrite_String_eic(rs.getString(10));
 
 						// 파일에 쓰기
 						try {
 							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-							pw.write(num[i]);
+							pw.write(num);
 							pw.write("|^");
-							pw.write(tabNo[i]);
+							pw.write(tabNo);
 							pw.write("|^");
-							pw.write(rowNo[i]);
+							pw.write(rowNo);
 							pw.write("|^");
-							pw.write(odr[i]);
+							pw.write(odr);
 							pw.write("|^");
-							pw.write(colVal[i]);
+							pw.write(colVal);
 							pw.write("|^");
-							pw.write(colSpan[i]);
+							pw.write(colSpan);
 							pw.write("|^");
-							pw.write(rowSpan[i]);
+							pw.write(rowSpan);
 							pw.write("|^");
-							pw.write(thYn[i]);
+							pw.write(thYn);
 							pw.write("|^");
-							pw.write(colEnd[i]);
+							pw.write(colEnd);
 							pw.write("|^");
-							pw.write(clsExist[i]);
+							pw.write(clsExist);
 							pw.println();
 							pw.flush();
 							pw.close();
@@ -135,7 +143,7 @@ public class GetWpFloodDamage {
 							e.printStackTrace();
 						}
 
-						i++;
+						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "/" + Integer.toString(rowCount) + " 건");
 
 					}
 

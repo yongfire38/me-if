@@ -42,39 +42,35 @@ public class GetAlgaeAlertCoordinate {
 				
 				System.out.println("전체 건 수 :::" + Integer.toString(rowCount)+" 건");
 				
-				// 전체 레코드 개수만큼의 배열
-				String[] alertPointCode = new String[rowCount]; //지점코드
-				String[] latitude = new String[rowCount]; //위도
-				String[] longgityde = new String[rowCount]; //경도
-				String[] mobileUseYn = new String[rowCount]; //모바일사용여부
-				String[] regId = new String[rowCount]; //등록자
-				String[] regDt = new String[rowCount]; //등록일자
-				String[] modId = new String[rowCount]; //수정자
-				String[] modDt = new String[rowCount]; //수정일자
-				
 				// 다시 처음부터 조회해야 하므로 커서는 초기화
 				rs.beforeFirst();
-
-				int i = 0;
 				
 				if (args[0].equals("_tset")) {
 					
 					while (rs.next()) {
 						
-						alertPointCode[i] = rs.getString(1);
-						latitude[i] = rs.getString(2);
-						longgityde[i] = rs.getString(3);
-						mobileUseYn[i] = rs.getString(4);
-						regId[i] = rs.getString(5);
-						regDt[i] = rs.getString(6);
-						modId[i] = rs.getString(7);
-						modDt[i] = rs.getString(8);
+						// 전체 레코드 개수만큼
+						String alertPointCode = " "; //지점코드
+						String latitude = " "; //위도
+						String longgityde = " "; //경도
+						String mobileUseYn = " "; //모바일사용여부
+						String regId = " "; //등록자
+						String regDt = " "; //등록일자
+						String modId = " "; //수정자
+						String modDt = " "; //수정일자
 						
-						System.out.println("alertPointCode::" + alertPointCode[i] + "::latitude::" + latitude[i] + "::longgityde::" + longgityde[i]
-								+ "mobileUseYn::" + mobileUseYn[i] + "regId::" + regId[i] + "regDt::" + regDt[i] + "modId::" + modId[i] 
-								+ "modDt::" + modDt[i]);
+						alertPointCode = rs.getString(1);
+						latitude = rs.getString(2);
+						longgityde = rs.getString(3);
+						mobileUseYn = rs.getString(4);
+						regId = rs.getString(5);
+						regDt = rs.getString(6);
+						modId = rs.getString(7);
+						modDt = rs.getString(8);
 						
-						i++;
+						System.out.println("alertPointCode::" + alertPointCode + "::latitude::" + latitude + "::longgityde::" + longgityde
+								+ "mobileUseYn::" + mobileUseYn + "regId::" + regId + "regDt::" + regDt + "modId::" + modId 
+								+ "modDt::" + modDt);
 						
 					}
 					
@@ -88,34 +84,44 @@ public class GetAlgaeAlertCoordinate {
 					
 					while (rs.next()) {
 						
-						alertPointCode[i] = JsonParser.colWrite_String_eic(rs.getString(1));
-						latitude[i] = JsonParser.colWrite_String_eic(rs.getString(2));
-						longgityde[i] = JsonParser.colWrite_String_eic(rs.getString(3));
-						mobileUseYn[i] = JsonParser.colWrite_String_eic(rs.getString(4));
-						regId[i] = JsonParser.colWrite_String_eic(rs.getString(5));
-						regDt[i] = JsonParser.colWrite_String_eic(rs.getString(6));
-						modId[i] = JsonParser.colWrite_String_eic(rs.getString(7));
-						modDt[i] = JsonParser.colWrite_String_eic(rs.getString(8));
+						// 전체 레코드 개수만큼
+						String alertPointCode = " "; //지점코드
+						String latitude = " "; //위도
+						String longgityde = " "; //경도
+						String mobileUseYn = " "; //모바일사용여부
+						String regId = " "; //등록자
+						String regDt = " "; //등록일자
+						String modId = " "; //수정자
+						String modDt = " "; //수정일자
+						
+						alertPointCode = JsonParser.colWrite_String_eic(rs.getString(1));
+						latitude = JsonParser.colWrite_String_eic(rs.getString(2));
+						longgityde = JsonParser.colWrite_String_eic(rs.getString(3));
+						mobileUseYn = JsonParser.colWrite_String_eic(rs.getString(4));
+						regId = JsonParser.colWrite_String_eic(rs.getString(5));
+						regDt = JsonParser.colWrite_String_eic(rs.getString(6));
+						modId = JsonParser.colWrite_String_eic(rs.getString(7));
+						modDt = JsonParser.colWrite_String_eic(rs.getString(8));
 						
 						// 파일에 쓰기
 						try {
 							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
-							pw.write(alertPointCode[i]);
+							pw.write(alertPointCode);
 							pw.write("|^");
-							pw.write(latitude[i]);
+							pw.write(latitude);
 							pw.write("|^");
-							pw.write(longgityde[i]);
+							pw.write(longgityde);
 							pw.write("|^");
-							pw.write(mobileUseYn[i]);
+							pw.write(mobileUseYn);
 							pw.write("|^");
-							pw.write(regId[i]);
+							pw.write(regId);
 							pw.write("|^");
-							pw.write(regDt[i]);
+							pw.write(regDt);
 							pw.write("|^");
-							pw.write(modId[i]);
+							pw.write(modId);
 							pw.write("|^");
-							pw.write(modDt[i]);
+							pw.write(modDt);
 							pw.println();
 							pw.flush();
 							pw.close();
@@ -124,7 +130,7 @@ public class GetAlgaeAlertCoordinate {
 							e.printStackTrace();
 						}
 
-						i++;
+						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "/" + Integer.toString(rowCount) + " 건");
 						
 					}
 					

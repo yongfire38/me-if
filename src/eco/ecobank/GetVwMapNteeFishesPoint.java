@@ -427,6 +427,7 @@ public class GetVwMapNteeFishesPoint {
 							e.printStackTrace();
 						}
 						
+						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "/" + Integer.toString(rowCount) + " 건");
 						
 					}
 					

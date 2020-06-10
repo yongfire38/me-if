@@ -191,6 +191,8 @@ public class GetVwMapEcologympArea {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
+						
+						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "/" + Integer.toString(rowCount) + " 건");
 
 					}
 
