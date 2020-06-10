@@ -26,24 +26,33 @@ public class GetWpApiFloodwlobs {
 
 			try {
 
+				conn = DBConnection.getOraConnection("kwa");
+				
 				// SQL 문장을 만들고 만약 문장이 질의어(SELECT문)라면
 				// 그 결과를 담을 ResulSet 객체를 준비한 후 실행시킨다.
 				String query = DBConnection.getProperty("kwa_oracle_kwa05_query");
 				System.out.println("query :::" + query);
 
-				conn = DBConnection.getOraConnection("kwa");
+				conn.setAutoCommit(false);
+				
 				pstm = conn.prepareStatement(query);
+				pstm.setFetchSize(1);
+				
+				System.out.println("start query");
 				rs = pstm.executeQuery();
+				System.out.println("done query");
+				
+				rs.setFetchSize(1);
 
 				// 전체 레코드 수를 구하기 위해 커서를 마지막으로 이동
-				rs.last();
+				/*rs.last();
 
 				int rowCount = rs.getRow();
 
 				System.out.println("전체 건 수 :::" + Integer.toString(rowCount) + " 건");
 
 				// 다시 처음부터 조회해야 하므로 커서는 초기화
-				rs.beforeFirst();
+				rs.beforeFirst();*/
 				
 				if (args[0].equals("_tset")) {
 
@@ -161,8 +170,8 @@ public class GetWpApiFloodwlobs {
 							e.printStackTrace();
 						}
 
-						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "/" + Integer.toString(rowCount) + " 건");
-
+						//System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "/" + Integer.toString(rowCount) + " 건");
+						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) +"번째 줄");
 					}
 
 					if (file.exists()) {
