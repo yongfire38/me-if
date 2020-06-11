@@ -18,7 +18,7 @@ public class GetVwMapEcologympArea {
 	// 에코뱅크 - 생태자연도_면
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-		if (args.length == 1) {
+		if (args.length == 2) {
 
 			Connection conn = null; // DB연결된 상태(세션)을 담은 객체
 			PreparedStatement pstm = null; // SQL 문을 나타내는 객체
@@ -26,23 +26,22 @@ public class GetVwMapEcologympArea {
 
 			try {
 
-				Class.forName(DBConnection.getProperty("eco_post_driver"));
 				conn = DBConnection.getPostConnection("eco");
 				// SQL 문장을 만들고 만약 문장이 질의어(SELECT문)라면
 				// 그 결과를 담을 ResulSet 객체를 준비한 후 실행시킨다.
-				String query = DBConnection.getProperty("eco_post_eco01_query");
+				String query = DBConnection.getProperty("eco_post_eco01_query") + "'" + args[1] +"'";
 				System.out.println("query :::" + query);
 
 				conn.setAutoCommit(false);
 				
 				pstm = conn.prepareStatement(query);
-				pstm.setFetchSize(1);
+				pstm.setFetchSize(10000);
 				
 				System.out.println("start query");
 				rs = pstm.executeQuery();
 				System.out.println("done query");
 				
-				rs.setFetchSize(1);
+				rs.setFetchSize(10000);
 
 				// 전체 레코드 수를 구하기 위해 커서를 마지막으로 이동
 				/*rs.last();
