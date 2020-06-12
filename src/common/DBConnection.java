@@ -44,6 +44,7 @@ public class DBConnection {
 			return value;
 		}
 		
+		//과학원은 절대경로가 어떻게 될 지 모르므로 상대경로로 작성
 		public static String getScienceProperty(String keyName) {
 
 			String os = System.getProperty("os.name").toLowerCase();
@@ -162,12 +163,24 @@ public class DBConnection {
 	          pw = getProperty("kwa_oracle_pw");
 	          url = getProperty("kwa_oracle_url");
 	          
+		 } else if(sysNm.equals("sgs")){
+			 
+			  user = getScienceProperty("sgs_oracle_user");
+	          pw = getScienceProperty("sgs_oracle_pw");
+	          url = getScienceProperty("sgs_oracle_url");
+	          
+		 } else if(sysNm.equals("wem")){
+			 
+			  user = getScienceProperty("wem_oracle_user");
+	          pw = getScienceProperty("wem_oracle_pw");
+	          url = getScienceProperty("wem_oracle_url");
+	          
 		 }
        
         try {
         	
         	//드라이버는 어느 시스템이든 오라클이면 동일
-            Class.forName(getProperty("eic_oracle_driver"));        
+            Class.forName(getScienceProperty("eic_oracle_driver"));        
             conn = DriverManager.getConnection(url, user, pw);
             
             System.out.println("Database에 연결되었습니다.\n");
@@ -205,7 +218,7 @@ public class DBConnection {
        try {
        	       	
     	   //드라이버는 어느 시스템이든 postgresql 이면 동일
-           Class.forName(getProperty("eco_post_driver"));        
+           Class.forName(getScienceProperty("eco_post_driver"));        
            conn = DriverManager.getConnection(url, user, pw);
            
            System.out.println("Database에 연결되었습니다.\n");
