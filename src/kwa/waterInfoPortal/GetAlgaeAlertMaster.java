@@ -33,16 +33,16 @@ public class GetAlgaeAlertMaster {
 				String query = DBConnection.getProperty("kwa_oracle_kwa02_query");
 				System.out.println("query :::" + query);
 
-				conn.setAutoCommit(false);
+				//conn.setAutoCommit(false);
 				
 				pstm = conn.prepareStatement(query);
-				pstm.setFetchSize(1);
+				pstm.setFetchSize(100);
 				
 				System.out.println("start query");
 				rs = pstm.executeQuery();
 				System.out.println("done query");
 				
-				rs.setFetchSize(1);
+				rs.setFetchSize(100);
 
 				// 전체 레코드 수를 구하기 위해 커서를 마지막으로 이동
 				/*rs.last();

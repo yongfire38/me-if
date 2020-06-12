@@ -43,6 +43,37 @@ public class DBConnection {
 			}
 			return value;
 		}
+		
+		public static String getScienceProperty(String keyName) {
+
+			String os = System.getProperty("os.name").toLowerCase();
+
+			String value = "";
+			String resource = "";
+
+			if (os.indexOf("windows") > -1) {
+				// 윈도우면 현재 실행위치 내 conf 폴더 안
+				resource = System.getProperty("user.dir") + "\\conf\\apiConfig.properties";
+			} else {
+				// 윈도우 외에는 (사실상 리눅스 서버) 한 단계 올라가서 conf 폴더 밑
+				resource = "../conf/apiConfig.properties";
+			}
+
+			try {
+				Properties props = new Properties();
+				FileInputStream fis = new FileInputStream(resource);
+
+				// 프로퍼티 파일 로딩
+				props.load(new java.io.BufferedInputStream(fis));
+
+				value = props.getProperty(keyName).trim();
+
+				fis.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return value;
+		}
 
 	public static Connection getConnection() throws SQLException, ClassNotFoundException {
 		
