@@ -1,6 +1,8 @@
 package common;
 
 import java.io.FileInputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -51,14 +53,19 @@ public class DBConnection {
 
 			String value = "";
 			String resource = "";
+			
+			Path relativePath = Paths.get("");
+		    String path = relativePath.toAbsolutePath().getParent().toString();
 
 			if (os.indexOf("windows") > -1) {
 				// 윈도우면 현재 실행위치 내 conf 폴더 안
 				resource = System.getProperty("user.dir") + "\\conf\\apiConfig.properties";
 			} else {
 				// 윈도우 외에는 (사실상 리눅스 서버) 한 단계 올라가서 conf 폴더 밑
-				resource = "../conf/apiConfig.properties";
+				resource = path + "/conf/apiConfig.properties";
 			}
+			
+			System.out.println("resource::" + resource);
 
 			try {
 				Properties props = new Properties();
@@ -218,7 +225,7 @@ public class DBConnection {
        try {
        	       	
     	   //드라이버는 어느 시스템이든 postgresql 이면 동일
-           Class.forName(getScienceProperty("eco_post_driver"));        
+           Class.forName(getProperty("eco_post_driver"));        
            conn = DriverManager.getConnection(url, user, pw);
            
            System.out.println("Database에 연결되었습니다.\n");
