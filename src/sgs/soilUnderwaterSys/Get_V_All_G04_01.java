@@ -65,23 +65,23 @@ if (args.length == 1) {
 					
 					while (rs.next()) {
 						
-						String SPOT_STD_CODE = " ";
-						String YEAR = " ";
-						String GOLFCLUB_NAME = " ";
-						String ADDRESS = " ";
-						String HOLE_CNT = " ";
-						String SIDO = " ";
-						String REG_YEAR = " ";
-						String GOLF_TYPE_NAME = " ";
-						String PES_GROUND = " ";
-						String TOTAL_GROUND = " ";
-						String NONE_GROUND = " ";
-						String SPRAY_GROUND = " ";
-						String REAL_SUPPLY = " ";
-						String HA_REAL = " ";
-						String HA_SPRAY = " ";
-						String THA_REAL = " ";
-						String THA_SPRAY = " ";
+						String SPOT_STD_CODE = " "; // 지점표준코드
+						String YEAR = " "; // 입력년도
+						String GOLFCLUB_NAME = " "; // 골프장명
+						String ADDRESS = " "; // 소재지
+						String HOLE_CNT = " "; // 홀수
+						String SIDO = " "; // 시도
+						String REG_YEAR = " "; // 개장년도
+						String GOLF_TYPE_NAME = " "; // 형태
+						String PES_GROUND = " "; // 면적총계(m2)
+						String TOTAL_GROUND = " "; // 농약사용면적(m2)
+						String NONE_GROUND = " "; // 농약미사용면적(m2)
+						String SPRAY_GROUND = " "; // 총사용량_실물량(kg)
+						String REAL_SUPPLY = " "; // 총사용량_성분량(kg)
+						String HA_REAL = " "; // 농약사용_ha_성분량(kg)
+						String HA_SPRAY = " "; // 농약사용_ha_실물량(kg)
+						String THA_REAL = " "; // 전체면적대비_ha_성분량(kg)
+						String THA_SPRAY = " "; // 전체면적대비_ha_실물량(kg)
 						
 						SPOT_STD_CODE = JsonParser.colWrite_String_eic(rs.getString(1));
 						YEAR = JsonParser.colWrite_String_eic(rs.getString(2));

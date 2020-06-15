@@ -16,6 +16,7 @@ import common.JsonParser;
 public class GetVwMapEcologympArea {
 
 	// 에코뱅크 - 생태자연도_면
+	// 파라미터는 경로와 첫 컬럼의 마지막 문자 (0~9)
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
 		if (args.length == 2) {
@@ -29,7 +30,7 @@ public class GetVwMapEcologympArea {
 				conn = DBConnection.getPostConnection("eco");
 				// SQL 문장을 만들고 만약 문장이 질의어(SELECT문)라면
 				// 그 결과를 담을 ResulSet 객체를 준비한 후 실행시킨다.
-				String query = DBConnection.getProperty("eco_post_eco01_query") + "'" + args[1] +"'";
+				String query = DBConnection.getProperty("eco_post_eco01_query") + "'%" + args[1] +"%'";
 				System.out.println("query :::" + query);
 
 				conn.setAutoCommit(false);
