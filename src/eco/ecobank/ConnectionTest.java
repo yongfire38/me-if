@@ -28,13 +28,13 @@ public class ConnectionTest {
 			conn.setAutoCommit(false);
 
 			pstm = conn.prepareStatement(query);
-			pstm.setFetchSize(10000);
+			pstm.setFetchSize(1);
 			
 			System.out.println("start query");
 			rs = pstm.executeQuery();
 			System.out.println("done query");
 			
-			rs.setFetchSize(10000);
+			rs.setFetchSize(1);
 
 			// 전체 레코드 수를 구하기 위해 커서를 마지막으로 이동
 /*			rs.last();
@@ -50,10 +50,12 @@ public class ConnectionTest {
 				
 				// 전체 레코드 개수만큼
 				String col = " ";
+				String col2 = " ";
 
 				col = rs.getString(1);
+				col2 = rs.getString(2);
 
-				System.out.println("전체 숫자::" + col);
+				System.out.println("데이터 1::" + col + "데이터 2::" + col2);
 
 			}
 
