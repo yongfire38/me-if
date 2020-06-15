@@ -30,7 +30,7 @@ public class GetVwMapEcologympArea {
 				conn = DBConnection.getPostConnection("eco");
 				// SQL 문장을 만들고 만약 문장이 질의어(SELECT문)라면
 				// 그 결과를 담을 ResulSet 객체를 준비한 후 실행시킨다.
-				String query = DBConnection.getProperty("eco_post_eco01_query") + "'%" + args[1] +"%'";
+				String query = DBConnection.getProperty("eco_post_eco01_query") + "'%" + args[1] +"'";
 				System.out.println("query :::" + query);
 
 				conn.setAutoCommit(false);
