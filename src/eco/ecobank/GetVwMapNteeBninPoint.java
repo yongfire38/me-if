@@ -24,6 +24,9 @@ public class GetVwMapNteeBninPoint {
 			PreparedStatement pstm = null; // SQL 문을 나타내는 객체
 			ResultSet rs = null; // 쿼리문을 날린것에 대한 반환값을 담을 객체
 
+			// sql 쿼리 에러시 로그 확인용 변수
+			String cf = "N";
+
 			try {
 
 				conn = DBConnection.getPostConnection("eco");
@@ -36,27 +39,29 @@ public class GetVwMapNteeBninPoint {
 
 				pstm = conn.prepareStatement(query);
 				pstm.setFetchSize(1);
-				
+
 				System.out.println("start query");
 				rs = pstm.executeQuery();
 				System.out.println("done query");
-				
+
 				rs.setFetchSize(1);
 
 				// 전체 레코드 수를 구하기 위해 커서를 마지막으로 이동
-				/*rs.last();
-
-				int rowCount = rs.getRow();
-
-				System.out.println("전체 건 수 :::" + Integer.toString(rowCount) + " 건");
-
-				// 다시 처음부터 조회해야 하므로 커서는 초기화
-				rs.beforeFirst();*/
+				/*
+				 * rs.last();
+				 * 
+				 * int rowCount = rs.getRow();
+				 * 
+				 * System.out.println("전체 건 수 :::" + Integer.toString(rowCount)
+				 * + " 건");
+				 * 
+				 * // 다시 처음부터 조회해야 하므로 커서는 초기화 rs.beforeFirst();
+				 */
 
 				if (args[0].equals("_tset")) {
 
 					while (rs.next()) {
-						
+
 						// 전체 레코드 개수만큼
 						String spce_id = " "; // 공간_아이디
 						String examin_year = " "; // 조사_년도
@@ -158,50 +163,47 @@ public class GetVwMapNteeBninPoint {
 						examin_area_ttle = rs.getString(47);
 						examin_odr = rs.getString(48);
 						spcs_schlshp_ttle = rs.getString(49);
-						//geom = rs.getString(50);
+						// geom = rs.getString(50);
 
-						System.out.println("spce_id::" + spce_id + "::examin_year::" + examin_year + "::tme::"
-								+ tme + "::examin_begin_de::" + examin_begin_de + "::examin_end_de::"
-								+ examin_end_de + "::gnrl_examin_charger_nm::" + gnrl_examin_charger_nm
-								+ "::rspnsbl_examin_charger_nm::" + rspnsbl_examin_charger_nm
-								+ "::spcs_korean_ttle::" + spcs_korean_ttle + "::spcs_eng_ttle::" + spcs_eng_ttle
-								+ "::idvd_qy::" + idvd_qy + "::partclr_matter::" + partclr_matter
-								+ "::lvb_abndnc_degree::" + lvb_abndnc_degree + "::wrssm_ar::" + wrssm_ar
-								+ "::wtsd_grdnt::" + wtsd_grdnt + "::qltwtr_trbd::" + qltwtr_trbd
-								+ "::dgr_lad_use::" + dgr_lad_use + "::river_ttle::" + river_ttle
+						System.out.println("spce_id::" + spce_id + "::examin_year::" + examin_year + "::tme::" + tme
+								+ "::examin_begin_de::" + examin_begin_de + "::examin_end_de::" + examin_end_de
+								+ "::gnrl_examin_charger_nm::" + gnrl_examin_charger_nm
+								+ "::rspnsbl_examin_charger_nm::" + rspnsbl_examin_charger_nm + "::spcs_korean_ttle::"
+								+ spcs_korean_ttle + "::spcs_eng_ttle::" + spcs_eng_ttle + "::idvd_qy::" + idvd_qy
+								+ "::partclr_matter::" + partclr_matter + "::lvb_abndnc_degree::" + lvb_abndnc_degree
+								+ "::wrssm_ar::" + wrssm_ar + "::wtsd_grdnt::" + wtsd_grdnt + "::qltwtr_trbd::"
+								+ qltwtr_trbd + "::dgr_lad_use::" + dgr_lad_use + "::river_ttle::" + river_ttle
 								+ "::river_stle::" + river_stle + "::ar::" + ar + "::dpwt::" + dpwt
 								+ "::dgr_rhtbnk_lad_use_sttus::" + dgr_rhtbnk_lad_use_sttus
-								+ "::dgr_lftbnk_lad_use_sttus::" + dgr_lftbnk_lad_use_sttus
-								+ "::river_rhtbnk_dike_ty::" + river_rhtbnk_dike_ty + "::river_lftbnk_dike_ty::"
-								+ river_lftbnk_dike_ty + "::tmprt::" + tmprt + "::wttm::" + wttm
-								+ "::river_rhtbnk_grdnt::" + river_rhtbnk_grdnt + "::river_lftbnk_grdnt::"
-								+ river_lftbnk_grdnt + "::dstrb_fctr::" + dstrb_fctr + "::examin_mth::"
-								+ examin_mth + "::rvbd_partcl::" + rvbd_partcl + "::rvbd_partcl_stn_lrge_rate::"
-								+ rvbd_partcl_stn_lrge_rate + "::rvbd_partcl_stn_middl_rate::"
-								+ rvbd_partcl_stn_middl_rate + "::rvbd_partcl_sand_rate::" + rvbd_partcl_sand_rate
-								+ "::rvbd_partcl_pbbls_rate::" + rvbd_partcl_pbbls_rate
-								+ "::rvbd_partcl_pbbls_small_rate::" + rvbd_partcl_pbbls_small_rate
-								+ "::rvbd_partcl_all_rate::" + rvbd_partcl_all_rate + "::grid_no::" + grid_no
-								+ "::fml_eng_ttle::" + fml_eng_ttle + "::fml_korean_ttle::" + fml_korean_ttle
-								+ "::dstrb_fctr_detail::" + dstrb_fctr_detail + "::etc::" + etc
+								+ "::dgr_lftbnk_lad_use_sttus::" + dgr_lftbnk_lad_use_sttus + "::river_rhtbnk_dike_ty::"
+								+ river_rhtbnk_dike_ty + "::river_lftbnk_dike_ty::" + river_lftbnk_dike_ty + "::tmprt::"
+								+ tmprt + "::wttm::" + wttm + "::river_rhtbnk_grdnt::" + river_rhtbnk_grdnt
+								+ "::river_lftbnk_grdnt::" + river_lftbnk_grdnt + "::dstrb_fctr::" + dstrb_fctr
+								+ "::examin_mth::" + examin_mth + "::rvbd_partcl::" + rvbd_partcl
+								+ "::rvbd_partcl_stn_lrge_rate::" + rvbd_partcl_stn_lrge_rate
+								+ "::rvbd_partcl_stn_middl_rate::" + rvbd_partcl_stn_middl_rate
+								+ "::rvbd_partcl_sand_rate::" + rvbd_partcl_sand_rate + "::rvbd_partcl_pbbls_rate::"
+								+ rvbd_partcl_pbbls_rate + "::rvbd_partcl_pbbls_small_rate::"
+								+ rvbd_partcl_pbbls_small_rate + "::rvbd_partcl_all_rate::" + rvbd_partcl_all_rate
+								+ "::grid_no::" + grid_no + "::fml_eng_ttle::" + fml_eng_ttle + "::fml_korean_ttle::"
+								+ fml_korean_ttle + "::dstrb_fctr_detail::" + dstrb_fctr_detail + "::etc::" + etc
 								+ "::ordr_eng_ttle::" + ordr_eng_ttle + "::ordr_korean_ttle::" + ordr_korean_ttle
 								+ "::examin_de_frst::" + examin_de_frst + "::examin_de_scd::" + examin_de_scd
 								+ "::examin_area_ttle::" + examin_area_ttle + "::examin_odr::" + examin_odr
 								+ "::spcs_schlshp_ttle::" + spcs_schlshp_ttle + "::geom::" + geom);
 
-
 					}
-					
+
 					System.out.println("ECO_05 SELECT 프로세스 종료.");
 
 				} else {
-					
+
 					File file = null;
 
 					file = new File(args[0]);
-					
+
 					while (rs.next()) {
-						
+
 						// 전체 레코드 개수만큼
 						String spce_id = " "; // 공간_아이디
 						String examin_year = " "; // 조사_년도
@@ -253,26 +255,26 @@ public class GetVwMapNteeBninPoint {
 						String examin_odr = " "; // 조사_차수
 						String spcs_schlshp_ttle = " "; // 종_학술_명칭
 						String geom = " "; // 지오메트리
-						
-						spce_id = JsonParser.colWrite_String_eic(rs.getString(1)); 
-						examin_year = JsonParser.colWrite_String_eic(rs.getString(2)); 
-						tme = JsonParser.colWrite_String_eic(rs.getString(3)); 
-						examin_begin_de = JsonParser.colWrite_String_eic(rs.getString(4)); 
-						examin_end_de = JsonParser.colWrite_String_eic(rs.getString(5)); 
-						gnrl_examin_charger_nm = JsonParser.colWrite_String_eic(rs.getString(6)); 
-						rspnsbl_examin_charger_nm = JsonParser.colWrite_String_eic(rs.getString(7)); 
-						spcs_korean_ttle = JsonParser.colWrite_String_eic(rs.getString(8)); 
-						spcs_eng_ttle = JsonParser.colWrite_String_eic(rs.getString(9)); 
-						idvd_qy = JsonParser.colWrite_String_eic(rs.getString(10)); 
-						partclr_matter = JsonParser.colWrite_String_eic(rs.getString(11)); 
-						lvb_abndnc_degree = JsonParser.colWrite_String_eic(rs.getString(12)); 
-						wrssm_ar = JsonParser.colWrite_String_eic(rs.getString(13)); 
-						wtsd_grdnt = JsonParser.colWrite_String_eic(rs.getString(14)); 
-						qltwtr_trbd = JsonParser.colWrite_String_eic(rs.getString(15)); 
-						dgr_lad_use = JsonParser.colWrite_String_eic(rs.getString(16)); 
-						river_ttle = JsonParser.colWrite_String_eic(rs.getString(17)); 
-						river_stle = JsonParser.colWrite_String_eic(rs.getString(18)); 
-						ar = JsonParser.colWrite_String_eic(rs.getString(19)); 
+
+						spce_id = JsonParser.colWrite_String_eic(rs.getString(1));
+						examin_year = JsonParser.colWrite_String_eic(rs.getString(2));
+						tme = JsonParser.colWrite_String_eic(rs.getString(3));
+						examin_begin_de = JsonParser.colWrite_String_eic(rs.getString(4));
+						examin_end_de = JsonParser.colWrite_String_eic(rs.getString(5));
+						gnrl_examin_charger_nm = JsonParser.colWrite_String_eic(rs.getString(6));
+						rspnsbl_examin_charger_nm = JsonParser.colWrite_String_eic(rs.getString(7));
+						spcs_korean_ttle = JsonParser.colWrite_String_eic(rs.getString(8));
+						spcs_eng_ttle = JsonParser.colWrite_String_eic(rs.getString(9));
+						idvd_qy = JsonParser.colWrite_String_eic(rs.getString(10));
+						partclr_matter = JsonParser.colWrite_String_eic(rs.getString(11));
+						lvb_abndnc_degree = JsonParser.colWrite_String_eic(rs.getString(12));
+						wrssm_ar = JsonParser.colWrite_String_eic(rs.getString(13));
+						wtsd_grdnt = JsonParser.colWrite_String_eic(rs.getString(14));
+						qltwtr_trbd = JsonParser.colWrite_String_eic(rs.getString(15));
+						dgr_lad_use = JsonParser.colWrite_String_eic(rs.getString(16));
+						river_ttle = JsonParser.colWrite_String_eic(rs.getString(17));
+						river_stle = JsonParser.colWrite_String_eic(rs.getString(18));
+						ar = JsonParser.colWrite_String_eic(rs.getString(19));
 						dpwt = JsonParser.colWrite_String_eic(rs.getString(20));
 						dgr_rhtbnk_lad_use_sttus = JsonParser.colWrite_String_eic(rs.getString(21));
 						dgr_lftbnk_lad_use_sttus = JsonParser.colWrite_String_eic(rs.getString(22));
@@ -303,8 +305,9 @@ public class GetVwMapNteeBninPoint {
 						examin_area_ttle = JsonParser.colWrite_String_eic(rs.getString(47));
 						examin_odr = JsonParser.colWrite_String_eic(rs.getString(48));
 						spcs_schlshp_ttle = JsonParser.colWrite_String_eic(rs.getString(49));
-						//geom = JsonParser.colWrite_String_eic(rs.getString(50));
-						
+						// geom =
+						// JsonParser.colWrite_String_eic(rs.getString(50));
+
 						// 파일에 쓰기
 						try {
 							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
@@ -415,11 +418,13 @@ public class GetVwMapNteeBninPoint {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						
-						//System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "/" + Integer.toString(rowCount) + " 건");
-						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) +"번째 줄");
+
+						// System.out.println("진행도 :::" +
+						// Integer.toString(rs.getRow()) + "/" +
+						// Integer.toString(rowCount) + " 건");
+						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "번째 줄");
 					}
-					
+
 					if (file.exists()) {
 						System.out.println("파일이 생성되었습니다.");
 					} else {
@@ -433,6 +438,8 @@ public class GetVwMapNteeBninPoint {
 			} catch (SQLException sqle) {
 
 				System.out.println("SELECT문에서 예외 발생");
+
+				cf = "Y";
 				sqle.printStackTrace();
 
 			} finally {
@@ -449,6 +456,11 @@ public class GetVwMapNteeBninPoint {
 					}
 				} catch (Exception e) {
 					throw new RuntimeException(e.getMessage());
+				}
+
+				// 쿼리에서 에러 발생시에는 종료로 빠진다.
+				if (cf.equals("Y")) {
+					System.exit(-1);
 				}
 
 			}

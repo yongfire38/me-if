@@ -14,16 +14,19 @@ import common.DBConnection;
 import common.JsonParser;
 
 public class GetVwMapNteeTpscPyn {
-	
+
 	// 에코뱅크 - 지형경관_면
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
 		if (args.length == 1) {
-			
+
 			Connection conn = null; // DB연결된 상태(세션)을 담은 객체
 			PreparedStatement pstm = null; // SQL 문을 나타내는 객체
 			ResultSet rs = null; // 쿼리문을 날린것에 대한 반환값을 담을 객체
-			
+
+			// sql 쿼리 에러시 로그 확인용 변수
+			String cf = "N";
+
 			try {
 
 				conn = DBConnection.getPostConnection("eco");
@@ -36,27 +39,29 @@ public class GetVwMapNteeTpscPyn {
 
 				pstm = conn.prepareStatement(query);
 				pstm.setFetchSize(1);
-				
+
 				System.out.println("start query");
 				rs = pstm.executeQuery();
 				System.out.println("done query");
-				
+
 				rs.setFetchSize(1);
 
 				// 전체 레코드 수를 구하기 위해 커서를 마지막으로 이동
-				/*rs.last();
+				/*
+				 * rs.last();
+				 * 
+				 * int rowCount = rs.getRow();
+				 * 
+				 * System.out.println("전체 건 수 :::" + Integer.toString(rowCount)
+				 * + " 건");
+				 * 
+				 * // 다시 처음부터 조회해야 하므로 커서는 초기화 rs.beforeFirst();
+				 */
 
-				int rowCount = rs.getRow();
-
-				System.out.println("전체 건 수 :::" + Integer.toString(rowCount) + " 건");
-
-				// 다시 처음부터 조회해야 하므로 커서는 초기화
-				rs.beforeFirst();*/
-				
 				if (args[0].equals("_tset")) {
-					
+
 					while (rs.next()) {
-						
+
 						// 전체 레코드 개수만큼
 						String spce_id = " "; // 공간_아이디
 						String examin_year = " "; // 조사_년도
@@ -80,54 +85,53 @@ public class GetVwMapNteeTpscPyn {
 						String frmatn_actn = " "; // 형성_작용
 						String spclty_examin_charger_nm = " "; // 전문_조사_담당자_성명
 						String geom = " "; // 지오메트리
-						
-						spce_id = rs.getString(1);  
-						examin_year = rs.getString(2);  
-						tme = rs.getString(3);  
-						examin_begin_de = rs.getString(4);  
-						examin_end_de = rs.getString(5);  
-						gnrl_examin_charger_nm = rs.getString(6);  
-						rspnsbl_examin_charger_nm = rs.getString(7);  
-						partclr_matter = rs.getString(8);  
-						width = rs.getString(9);  
-						scene_sttus_se = rs.getString(10);  
-						scale = rs.getString(11);  
-						ncm = rs.getString(12);  
-						vrticl = rs.getString(13);  
-						land_beach_se = rs.getString(14);  
-						tpgrph_scene_ttle = rs.getString(15);  
-						grad = rs.getString(16);  
-						eclgy_valu_dc = rs.getString(17);  
-						lc = rs.getString(18);  
-						frmatn_era = rs.getString(19);  
-						frmatn_actn = rs.getString(20);  
-						spclty_examin_charger_nm = rs.getString(21);  
-						//geom = rs.getString(22); 
-						
-						System.out.println("spce_id::" + spce_id + "::examin_year::" + examin_year + "::tme::"
-								+ tme + "::examin_begin_de::" + examin_begin_de + "::examin_end_de::"
-								+ examin_end_de + "::gnrl_examin_charger_nm::" + gnrl_examin_charger_nm
-								+ "::rspnsbl_examin_charger_nm::" + rspnsbl_examin_charger_nm
-								+ "::partclr_matter::" + partclr_matter + "::width::" + width
-								+ "::scene_sttus_se::" + scene_sttus_se + "::scale::" + scale + "::ncm::"
-								+ ncm + "::vrticl::" + vrticl + "::land_beach_se::" + land_beach_se + "::tpgrph_scene_ttle::"
-								+ tpgrph_scene_ttle + "::grad::" + grad + "::eclgy_valu_dc::" + eclgy_valu_dc
-								+ "::lc::" + lc + "::frmatn_era::" + frmatn_era
+
+						spce_id = rs.getString(1);
+						examin_year = rs.getString(2);
+						tme = rs.getString(3);
+						examin_begin_de = rs.getString(4);
+						examin_end_de = rs.getString(5);
+						gnrl_examin_charger_nm = rs.getString(6);
+						rspnsbl_examin_charger_nm = rs.getString(7);
+						partclr_matter = rs.getString(8);
+						width = rs.getString(9);
+						scene_sttus_se = rs.getString(10);
+						scale = rs.getString(11);
+						ncm = rs.getString(12);
+						vrticl = rs.getString(13);
+						land_beach_se = rs.getString(14);
+						tpgrph_scene_ttle = rs.getString(15);
+						grad = rs.getString(16);
+						eclgy_valu_dc = rs.getString(17);
+						lc = rs.getString(18);
+						frmatn_era = rs.getString(19);
+						frmatn_actn = rs.getString(20);
+						spclty_examin_charger_nm = rs.getString(21);
+						// geom = rs.getString(22);
+
+						System.out.println("spce_id::" + spce_id + "::examin_year::" + examin_year + "::tme::" + tme
+								+ "::examin_begin_de::" + examin_begin_de + "::examin_end_de::" + examin_end_de
+								+ "::gnrl_examin_charger_nm::" + gnrl_examin_charger_nm
+								+ "::rspnsbl_examin_charger_nm::" + rspnsbl_examin_charger_nm + "::partclr_matter::"
+								+ partclr_matter + "::width::" + width + "::scene_sttus_se::" + scene_sttus_se
+								+ "::scale::" + scale + "::ncm::" + ncm + "::vrticl::" + vrticl + "::land_beach_se::"
+								+ land_beach_se + "::tpgrph_scene_ttle::" + tpgrph_scene_ttle + "::grad::" + grad
+								+ "::eclgy_valu_dc::" + eclgy_valu_dc + "::lc::" + lc + "::frmatn_era::" + frmatn_era
 								+ "::frmatn_actn::" + frmatn_actn + "::spclty_examin_charger_nm::"
 								+ spclty_examin_charger_nm + "::geom::" + geom);
 
 					}
-					
+
 					System.out.println("ECO_11 SELECT 프로세스 종료.");
-					
+
 				} else {
-					
+
 					File file = null;
 
 					file = new File(args[0]);
-					
+
 					while (rs.next()) {
-						
+
 						// 전체 레코드 개수만큼
 						String spce_id = " "; // 공간_아이디
 						String examin_year = " "; // 조사_년도
@@ -151,30 +155,31 @@ public class GetVwMapNteeTpscPyn {
 						String frmatn_actn = " "; // 형성_작용
 						String spclty_examin_charger_nm = " "; // 전문_조사_담당자_성명
 						String geom = " "; // 지오메트리
-						
-						spce_id = JsonParser.colWrite_String_eic(rs.getString(1));  
-						examin_year = JsonParser.colWrite_String_eic(rs.getString(2));  
-						tme = JsonParser.colWrite_String_eic(rs.getString(3));  
-						examin_begin_de = JsonParser.colWrite_String_eic(rs.getString(4));  
-						examin_end_de = JsonParser.colWrite_String_eic(rs.getString(5));  
-						gnrl_examin_charger_nm = JsonParser.colWrite_String_eic(rs.getString(6));  
-						rspnsbl_examin_charger_nm = JsonParser.colWrite_String_eic(rs.getString(7));  
-						partclr_matter = JsonParser.colWrite_String_eic(rs.getString(8));  
-						width = JsonParser.colWrite_String_eic(rs.getString(9));  
-						scene_sttus_se = JsonParser.colWrite_String_eic(rs.getString(10));  
-						scale = JsonParser.colWrite_String_eic(rs.getString(11));  
-						ncm = JsonParser.colWrite_String_eic(rs.getString(12));  
-						vrticl = JsonParser.colWrite_String_eic(rs.getString(13));  
-						land_beach_se = JsonParser.colWrite_String_eic(rs.getString(14));  
-						tpgrph_scene_ttle = JsonParser.colWrite_String_eic(rs.getString(15));  
-						grad = JsonParser.colWrite_String_eic(rs.getString(16));  
-						eclgy_valu_dc = JsonParser.colWrite_String_eic(rs.getString(17));  
-						lc = JsonParser.colWrite_String_eic(rs.getString(18));  
-						frmatn_era = JsonParser.colWrite_String_eic(rs.getString(19));  
-						frmatn_actn = JsonParser.colWrite_String_eic(rs.getString(20));  
-						spclty_examin_charger_nm = JsonParser.colWrite_String_eic(rs.getString(21));  
-						//geom = JsonParser.colWrite_String_eic(rs.getString(22));  
-						
+
+						spce_id = JsonParser.colWrite_String_eic(rs.getString(1));
+						examin_year = JsonParser.colWrite_String_eic(rs.getString(2));
+						tme = JsonParser.colWrite_String_eic(rs.getString(3));
+						examin_begin_de = JsonParser.colWrite_String_eic(rs.getString(4));
+						examin_end_de = JsonParser.colWrite_String_eic(rs.getString(5));
+						gnrl_examin_charger_nm = JsonParser.colWrite_String_eic(rs.getString(6));
+						rspnsbl_examin_charger_nm = JsonParser.colWrite_String_eic(rs.getString(7));
+						partclr_matter = JsonParser.colWrite_String_eic(rs.getString(8));
+						width = JsonParser.colWrite_String_eic(rs.getString(9));
+						scene_sttus_se = JsonParser.colWrite_String_eic(rs.getString(10));
+						scale = JsonParser.colWrite_String_eic(rs.getString(11));
+						ncm = JsonParser.colWrite_String_eic(rs.getString(12));
+						vrticl = JsonParser.colWrite_String_eic(rs.getString(13));
+						land_beach_se = JsonParser.colWrite_String_eic(rs.getString(14));
+						tpgrph_scene_ttle = JsonParser.colWrite_String_eic(rs.getString(15));
+						grad = JsonParser.colWrite_String_eic(rs.getString(16));
+						eclgy_valu_dc = JsonParser.colWrite_String_eic(rs.getString(17));
+						lc = JsonParser.colWrite_String_eic(rs.getString(18));
+						frmatn_era = JsonParser.colWrite_String_eic(rs.getString(19));
+						frmatn_actn = JsonParser.colWrite_String_eic(rs.getString(20));
+						spclty_examin_charger_nm = JsonParser.colWrite_String_eic(rs.getString(21));
+						// geom =
+						// JsonParser.colWrite_String_eic(rs.getString(22));
+
 						// 파일에 쓰기
 						try {
 							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
@@ -189,11 +194,11 @@ public class GetVwMapNteeTpscPyn {
 							pw.write("|^");
 							pw.write(examin_end_de);
 							pw.write("|^");
-							pw.write(gnrl_examin_charger_nm); 
+							pw.write(gnrl_examin_charger_nm);
 							pw.write("|^");
 							pw.write(rspnsbl_examin_charger_nm);
 							pw.write("|^");
-							pw.write(partclr_matter); 
+							pw.write(partclr_matter);
 							pw.write("|^");
 							pw.write(width);
 							pw.write("|^");
@@ -229,11 +234,13 @@ public class GetVwMapNteeTpscPyn {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						
-						//System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "/" + Integer.toString(rowCount) + " 건");
-						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) +"번째 줄");
+
+						// System.out.println("진행도 :::" +
+						// Integer.toString(rs.getRow()) + "/" +
+						// Integer.toString(rowCount) + " 건");
+						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "번째 줄");
 					}
-					
+
 					if (file.exists()) {
 						System.out.println("파일이 생성되었습니다.");
 					} else {
@@ -241,12 +248,14 @@ public class GetVwMapNteeTpscPyn {
 					}
 
 					System.out.println("ECO_11 SELECT 파일 생성 프로세스 종료.");
-					
+
 				}
-				
+
 			} catch (SQLException sqle) {
 
 				System.out.println("SELECT문에서 예외 발생");
+
+				cf = "Y";
 				sqle.printStackTrace();
 
 			} finally {
@@ -265,8 +274,13 @@ public class GetVwMapNteeTpscPyn {
 					throw new RuntimeException(e.getMessage());
 				}
 
+				// 쿼리에서 에러 발생시에는 종료로 빠진다.
+				if (cf.equals("Y")) {
+					System.exit(-1);
+				}
+
 			}
-			
+
 		} else {
 			System.out.println("파라미터 개수 에러!!");
 			System.exit(-1);

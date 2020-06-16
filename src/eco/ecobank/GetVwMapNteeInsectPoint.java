@@ -24,6 +24,9 @@ public class GetVwMapNteeInsectPoint {
 			PreparedStatement pstm = null; // SQL 문을 나타내는 객체
 			ResultSet rs = null; // 쿼리문을 날린것에 대한 반환값을 담을 객체
 
+			// sql 쿼리 에러시 로그 확인용 변수
+			String cf = "N";
+
 			try {
 
 				conn = DBConnection.getPostConnection("eco");
@@ -36,27 +39,29 @@ public class GetVwMapNteeInsectPoint {
 
 				pstm = conn.prepareStatement(query);
 				pstm.setFetchSize(1);
-				
+
 				System.out.println("start query");
 				rs = pstm.executeQuery();
 				System.out.println("done query");
-				
+
 				rs.setFetchSize(1);
 
 				// 전체 레코드 수를 구하기 위해 커서를 마지막으로 이동
-				/*rs.last();
-
-				int rowCount = rs.getRow();
-
-				System.out.println("전체 건 수 :::" + Integer.toString(rowCount) + " 건");
-
-				// 다시 처음부터 조회해야 하므로 커서는 초기화
-				rs.beforeFirst();*/
+				/*
+				 * rs.last();
+				 * 
+				 * int rowCount = rs.getRow();
+				 * 
+				 * System.out.println("전체 건 수 :::" + Integer.toString(rowCount)
+				 * + " 건");
+				 * 
+				 * // 다시 처음부터 조회해야 하므로 커서는 초기화 rs.beforeFirst();
+				 */
 
 				if (args[0].equals("_tset")) {
 
 					while (rs.next()) {
-						
+
 						// 전체 레코드 개수만큼
 						String spce_id = " "; // 공간_아이디
 						String examin_year = " "; // 조사_년도
@@ -138,25 +143,24 @@ public class GetVwMapNteeInsectPoint {
 						examin_tpgrph = rs.getString(37);
 						examin_tpgrph_etc = rs.getString(38);
 						spcs_schlshp_ttle = rs.getString(39);
-						//geom = rs.getString(40);
+						// geom = rs.getString(40);
 
-						System.out.println("spce_id::" + spce_id + "::examin_year::" + examin_year + "::tme::"
-								+ tme + "::examin_begin_de::" + examin_begin_de + "::examin_end_de::"
-								+ examin_end_de + "::gnrl_examin_charger_nm::" + gnrl_examin_charger_nm
-								+ "::rspnsbl_examin_charger_nm::" + rspnsbl_examin_charger_nm
-								+ "::spcs_korean_ttle::" + spcs_korean_ttle + "::spcs_eng_ttle::" + spcs_eng_ttle
-								+ "::idvd_qy::" + idvd_qy + "::partclr_matter::" + partclr_matter + "::wethr::"
-								+ wethr + "::idmn_nm::" + idmn_nm + "::al::" + al + "::observ_cn::"
-								+ observ_cn + "::ecsystm_ty::" + ecsystm_ty + "::examin_mtn::" + examin_mtn
-								+ "::examin_time::" + examin_time + "::examin_area_lc::" + examin_area_lc
-								+ "::lvb_resrce_prcuse_at::" + lvb_resrce_prcuse_at + "::spcs_irds_trnd::"
-								+ spcs_irds_trnd + "::cllc_mth::" + cllc_mth + "::examin_area::" + examin_area
-								+ "::insect_observ_imago_qy::" + insect_observ_imago_qy + "::insect_observ_sbmg_qy::"
-								+ insect_observ_sbmg_qy + "::insect_observ_egg_qy::" + insect_observ_egg_qy
-								+ "::insect_observ_lavl_qy::" + insect_observ_lavl_qy + "::fml_schlshp_ttle::"
-								+ fml_schlshp_ttle + "::fml_korean_ttle::" + fml_korean_ttle + "::wethr_clr_at::"
-								+ wethr_clr_at + "::wethr_cldy_at::" + wethr_cldy_at + "::wethr_rain_at::"
-								+ wethr_rain_at + "::ordr_schlshp_ttle::" + ordr_schlshp_ttle
+						System.out.println("spce_id::" + spce_id + "::examin_year::" + examin_year + "::tme::" + tme
+								+ "::examin_begin_de::" + examin_begin_de + "::examin_end_de::" + examin_end_de
+								+ "::gnrl_examin_charger_nm::" + gnrl_examin_charger_nm
+								+ "::rspnsbl_examin_charger_nm::" + rspnsbl_examin_charger_nm + "::spcs_korean_ttle::"
+								+ spcs_korean_ttle + "::spcs_eng_ttle::" + spcs_eng_ttle + "::idvd_qy::" + idvd_qy
+								+ "::partclr_matter::" + partclr_matter + "::wethr::" + wethr + "::idmn_nm::" + idmn_nm
+								+ "::al::" + al + "::observ_cn::" + observ_cn + "::ecsystm_ty::" + ecsystm_ty
+								+ "::examin_mtn::" + examin_mtn + "::examin_time::" + examin_time + "::examin_area_lc::"
+								+ examin_area_lc + "::lvb_resrce_prcuse_at::" + lvb_resrce_prcuse_at
+								+ "::spcs_irds_trnd::" + spcs_irds_trnd + "::cllc_mth::" + cllc_mth + "::examin_area::"
+								+ examin_area + "::insect_observ_imago_qy::" + insect_observ_imago_qy
+								+ "::insect_observ_sbmg_qy::" + insect_observ_sbmg_qy + "::insect_observ_egg_qy::"
+								+ insect_observ_egg_qy + "::insect_observ_lavl_qy::" + insect_observ_lavl_qy
+								+ "::fml_schlshp_ttle::" + fml_schlshp_ttle + "::fml_korean_ttle::" + fml_korean_ttle
+								+ "::wethr_clr_at::" + wethr_clr_at + "::wethr_cldy_at::" + wethr_cldy_at
+								+ "::wethr_rain_at::" + wethr_rain_at + "::ordr_schlshp_ttle::" + ordr_schlshp_ttle
 								+ "::ordr_korean_ttle::" + ordr_korean_ttle + "::updt_matter::" + updt_matter
 								+ "::examin_pd::" + examin_pd + "::examin_tpgrph::" + examin_tpgrph
 								+ "::examin_tpgrph_etc::" + examin_tpgrph_etc + "::spcs_schlshp_ttle::"
@@ -167,13 +171,13 @@ public class GetVwMapNteeInsectPoint {
 					System.out.println("ECO_08 SELECT 프로세스 종료.");
 
 				} else {
-					
+
 					File file = null;
 
 					file = new File(args[0]);
-					
+
 					while (rs.next()) {
-						
+
 						// 전체 레코드 개수만큼
 						String spce_id = " "; // 공간_아이디
 						String examin_year = " "; // 조사_년도
@@ -215,48 +219,49 @@ public class GetVwMapNteeInsectPoint {
 						String examin_tpgrph_etc = " "; // 조사_지형_기타
 						String spcs_schlshp_ttle = " "; // 종_학술_명칭
 						String geom = " "; // 지오메트리
-						
-						spce_id = JsonParser.colWrite_String_eic(rs.getString(1)); 
-						examin_year = JsonParser.colWrite_String_eic(rs.getString(2)); 
-						tme = JsonParser.colWrite_String_eic(rs.getString(3)); 
+
+						spce_id = JsonParser.colWrite_String_eic(rs.getString(1));
+						examin_year = JsonParser.colWrite_String_eic(rs.getString(2));
+						tme = JsonParser.colWrite_String_eic(rs.getString(3));
 						examin_begin_de = JsonParser.colWrite_String_eic(rs.getString(4));
-						examin_end_de = JsonParser.colWrite_String_eic(rs.getString(5)); 
-						gnrl_examin_charger_nm = JsonParser.colWrite_String_eic(rs.getString(6)); 
-						rspnsbl_examin_charger_nm = JsonParser.colWrite_String_eic(rs.getString(7)); 
-						spcs_korean_ttle = JsonParser.colWrite_String_eic(rs.getString(8)); 
-						spcs_eng_ttle = JsonParser.colWrite_String_eic(rs.getString(9)); 
-						idvd_qy = JsonParser.colWrite_String_eic(rs.getString(10)); 
-						partclr_matter = JsonParser.colWrite_String_eic(rs.getString(11)); 
-						wethr = JsonParser.colWrite_String_eic(rs.getString(12)); 
-						idmn_nm = JsonParser.colWrite_String_eic(rs.getString(13)); 
-						al = JsonParser.colWrite_String_eic(rs.getString(14)); 
-						observ_cn = JsonParser.colWrite_String_eic(rs.getString(15)); 
-						ecsystm_ty = JsonParser.colWrite_String_eic(rs.getString(16)); 
-						examin_mtn = JsonParser.colWrite_String_eic(rs.getString(17)); 
-						examin_time = JsonParser.colWrite_String_eic(rs.getString(18)); 
-						examin_area_lc = JsonParser.colWrite_String_eic(rs.getString(19)); 
-						lvb_resrce_prcuse_at = JsonParser.colWrite_String_eic(rs.getString(20)); 
-						spcs_irds_trnd = JsonParser.colWrite_String_eic(rs.getString(21)); 
-						cllc_mth = JsonParser.colWrite_String_eic(rs.getString(22)); 
-						examin_area = JsonParser.colWrite_String_eic(rs.getString(23)); 
-						insect_observ_imago_qy = JsonParser.colWrite_String_eic(rs.getString(24)); 
-						insect_observ_sbmg_qy = JsonParser.colWrite_String_eic(rs.getString(25)); 
-						insect_observ_egg_qy = JsonParser.colWrite_String_eic(rs.getString(26)); 
-						insect_observ_lavl_qy = JsonParser.colWrite_String_eic(rs.getString(27)); 
-						fml_schlshp_ttle = JsonParser.colWrite_String_eic(rs.getString(28)); 
-						fml_korean_ttle = JsonParser.colWrite_String_eic(rs.getString(29)); 
-						wethr_clr_at = JsonParser.colWrite_String_eic(rs.getString(30)); 
-						wethr_cldy_at = JsonParser.colWrite_String_eic(rs.getString(31)); 
-						wethr_rain_at = JsonParser.colWrite_String_eic(rs.getString(32)); 
-						ordr_schlshp_ttle = JsonParser.colWrite_String_eic(rs.getString(33)); 
-						ordr_korean_ttle = JsonParser.colWrite_String_eic(rs.getString(34)); 
-						updt_matter = JsonParser.colWrite_String_eic(rs.getString(35)); 
-						examin_pd = JsonParser.colWrite_String_eic(rs.getString(36)); 
-						examin_tpgrph = JsonParser.colWrite_String_eic(rs.getString(37)); 
-						examin_tpgrph_etc = JsonParser.colWrite_String_eic(rs.getString(38)); 
-						spcs_schlshp_ttle = JsonParser.colWrite_String_eic(rs.getString(39)); 
-						//geom = JsonParser.colWrite_String_eic(rs.getString(40));  
-						
+						examin_end_de = JsonParser.colWrite_String_eic(rs.getString(5));
+						gnrl_examin_charger_nm = JsonParser.colWrite_String_eic(rs.getString(6));
+						rspnsbl_examin_charger_nm = JsonParser.colWrite_String_eic(rs.getString(7));
+						spcs_korean_ttle = JsonParser.colWrite_String_eic(rs.getString(8));
+						spcs_eng_ttle = JsonParser.colWrite_String_eic(rs.getString(9));
+						idvd_qy = JsonParser.colWrite_String_eic(rs.getString(10));
+						partclr_matter = JsonParser.colWrite_String_eic(rs.getString(11));
+						wethr = JsonParser.colWrite_String_eic(rs.getString(12));
+						idmn_nm = JsonParser.colWrite_String_eic(rs.getString(13));
+						al = JsonParser.colWrite_String_eic(rs.getString(14));
+						observ_cn = JsonParser.colWrite_String_eic(rs.getString(15));
+						ecsystm_ty = JsonParser.colWrite_String_eic(rs.getString(16));
+						examin_mtn = JsonParser.colWrite_String_eic(rs.getString(17));
+						examin_time = JsonParser.colWrite_String_eic(rs.getString(18));
+						examin_area_lc = JsonParser.colWrite_String_eic(rs.getString(19));
+						lvb_resrce_prcuse_at = JsonParser.colWrite_String_eic(rs.getString(20));
+						spcs_irds_trnd = JsonParser.colWrite_String_eic(rs.getString(21));
+						cllc_mth = JsonParser.colWrite_String_eic(rs.getString(22));
+						examin_area = JsonParser.colWrite_String_eic(rs.getString(23));
+						insect_observ_imago_qy = JsonParser.colWrite_String_eic(rs.getString(24));
+						insect_observ_sbmg_qy = JsonParser.colWrite_String_eic(rs.getString(25));
+						insect_observ_egg_qy = JsonParser.colWrite_String_eic(rs.getString(26));
+						insect_observ_lavl_qy = JsonParser.colWrite_String_eic(rs.getString(27));
+						fml_schlshp_ttle = JsonParser.colWrite_String_eic(rs.getString(28));
+						fml_korean_ttle = JsonParser.colWrite_String_eic(rs.getString(29));
+						wethr_clr_at = JsonParser.colWrite_String_eic(rs.getString(30));
+						wethr_cldy_at = JsonParser.colWrite_String_eic(rs.getString(31));
+						wethr_rain_at = JsonParser.colWrite_String_eic(rs.getString(32));
+						ordr_schlshp_ttle = JsonParser.colWrite_String_eic(rs.getString(33));
+						ordr_korean_ttle = JsonParser.colWrite_String_eic(rs.getString(34));
+						updt_matter = JsonParser.colWrite_String_eic(rs.getString(35));
+						examin_pd = JsonParser.colWrite_String_eic(rs.getString(36));
+						examin_tpgrph = JsonParser.colWrite_String_eic(rs.getString(37));
+						examin_tpgrph_etc = JsonParser.colWrite_String_eic(rs.getString(38));
+						spcs_schlshp_ttle = JsonParser.colWrite_String_eic(rs.getString(39));
+						// geom =
+						// JsonParser.colWrite_String_eic(rs.getString(40));
+
 						// 파일에 쓰기
 						try {
 							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
@@ -273,7 +278,7 @@ public class GetVwMapNteeInsectPoint {
 							pw.write("|^");
 							pw.write(gnrl_examin_charger_nm);
 							pw.write("|^");
-							pw.write(rspnsbl_examin_charger_nm); 
+							pw.write(rspnsbl_examin_charger_nm);
 							pw.write("|^");
 							pw.write(spcs_korean_ttle);
 							pw.write("|^");
@@ -347,11 +352,13 @@ public class GetVwMapNteeInsectPoint {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						
-						//System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "/" + Integer.toString(rowCount) + " 건");
-						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) +"번째 줄");
+
+						// System.out.println("진행도 :::" +
+						// Integer.toString(rs.getRow()) + "/" +
+						// Integer.toString(rowCount) + " 건");
+						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "번째 줄");
 					}
-					
+
 					if (file.exists()) {
 						System.out.println("파일이 생성되었습니다.");
 					} else {
@@ -365,6 +372,8 @@ public class GetVwMapNteeInsectPoint {
 			} catch (SQLException sqle) {
 
 				System.out.println("SELECT문에서 예외 발생");
+
+				cf = "Y";
 				sqle.printStackTrace();
 
 			} finally {
@@ -381,6 +390,11 @@ public class GetVwMapNteeInsectPoint {
 					}
 				} catch (Exception e) {
 					throw new RuntimeException(e.getMessage());
+				}
+
+				// 쿼리에서 에러 발생시에는 종료로 빠진다.
+				if (cf.equals("Y")) {
+					System.exit(-1);
 				}
 
 			}

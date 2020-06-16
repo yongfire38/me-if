@@ -20,7 +20,7 @@ public class ConnectionTest {
 
 			conn = DBConnection.getOraConnection("sgs");
 
-			String query = DBConnection.getScienceProperty("sgs_oracle_sgs01_query");
+			String query = DBConnection.getScienceProperty("sgs_oracle_sgs00_query");
 			System.out.println("query :::" + query);
 
 			pstm = conn.prepareStatement(query);

@@ -24,6 +24,9 @@ public class GetVwMapNteeVtnPyn {
 			PreparedStatement pstm = null; // SQL 문을 나타내는 객체
 			ResultSet rs = null; // 쿼리문을 날린것에 대한 반환값을 담을 객체
 
+			// sql 쿼리 에러시 로그 확인용 변수
+			String cf = "N";
+
 			try {
 
 				conn = DBConnection.getPostConnection("eco");
@@ -36,28 +39,29 @@ public class GetVwMapNteeVtnPyn {
 
 				pstm = conn.prepareStatement(query);
 				pstm.setFetchSize(1);
-				
+
 				System.out.println("start query");
 				rs = pstm.executeQuery();
 				System.out.println("done query");
-				
+
 				rs.setFetchSize(1);
 
 				// 전체 레코드 수를 구하기 위해 커서를 마지막으로 이동
-				/*rs.last();
-
-				int rowCount = rs.getRow();
-
-				System.out.println("전체 건 수 :::" + Integer.toString(rowCount) + " 건");
-
-				// 다시 처음부터 조회해야 하므로 커서는 초기화
-				rs.beforeFirst();*/
-
+				/*
+				 * rs.last();
+				 * 
+				 * int rowCount = rs.getRow();
+				 * 
+				 * System.out.println("전체 건 수 :::" + Integer.toString(rowCount)
+				 * + " 건");
+				 * 
+				 * // 다시 처음부터 조회해야 하므로 커서는 초기화 rs.beforeFirst();
+				 */
 
 				if (args[0].equals("_tset")) {
 
 					while (rs.next()) {
-						
+
 						// 전체 레코드 개수만큼
 						String spce_id = " "; // 공간_아이디
 						String examin_year = " "; // 조사_년도
@@ -95,29 +99,29 @@ public class GetVwMapNteeVtnPyn {
 						presv_grad = rs.getString(15);
 						area = rs.getString(16);
 						rm = rs.getString(17);
-						//geom = rs.getString(18);
+						// geom = rs.getString(18);
 
-						System.out.println("spce_id::" + spce_id + "::examin_year::" + examin_year + "::tme::"
-								+ tme + "::examin_begin_de::" + examin_begin_de + "::examin_end_de::"
-								+ examin_end_de + "::gnrl_examin_charger_nm::" + gnrl_examin_charger_nm
+						System.out.println("spce_id::" + spce_id + "::examin_year::" + examin_year + "::tme::" + tme
+								+ "::examin_begin_de::" + examin_begin_de + "::examin_end_de::" + examin_end_de
+								+ "::gnrl_examin_charger_nm::" + gnrl_examin_charger_nm
 								+ "::rspnsbl_examin_charger_nm::" + rspnsbl_examin_charger_nm + "::partclr_matter::"
 								+ partclr_matter + "::lrge_dstrct::" + lrge_dstrct + "::lclas::" + lclas
 								+ "::small_dstrct::" + small_dstrct + "::evl_unit::" + evl_unit + "::cln_symbl::"
-								+ cln_symbl + "::plnt_cln_ttle::" + plnt_cln_ttle + "::presv_grad::"
-								+ presv_grad + "::area::" + area + "::rm::" + rm + "::geom::" + geom);
+								+ cln_symbl + "::plnt_cln_ttle::" + plnt_cln_ttle + "::presv_grad::" + presv_grad
+								+ "::area::" + area + "::rm::" + rm + "::geom::" + geom);
 
 					}
-					
+
 					System.out.println("ECO_12 SELECT 프로세스 종료.");
 
 				} else {
-					
+
 					File file = null;
 
 					file = new File(args[0]);
-					
+
 					while (rs.next()) {
-						
+
 						// 전체 레코드 개수만큼의 배열
 						String spce_id = " "; // 공간_아이디
 						String examin_year = " "; // 조사_년도
@@ -137,11 +141,11 @@ public class GetVwMapNteeVtnPyn {
 						String area = " "; // 지역
 						String rm = " "; // 비고
 						String geom = " "; // 지오메트리
-						
+
 						spce_id = JsonParser.colWrite_String_eic(rs.getString(1));
 						examin_year = JsonParser.colWrite_String_eic(rs.getString(2));
-						tme = JsonParser.colWrite_String_eic(rs.getString(3)); 
-						examin_begin_de = JsonParser.colWrite_String_eic(rs.getString(4)); 
+						tme = JsonParser.colWrite_String_eic(rs.getString(3));
+						examin_begin_de = JsonParser.colWrite_String_eic(rs.getString(4));
 						examin_end_de = JsonParser.colWrite_String_eic(rs.getString(5));
 						gnrl_examin_charger_nm = JsonParser.colWrite_String_eic(rs.getString(6));
 						rspnsbl_examin_charger_nm = JsonParser.colWrite_String_eic(rs.getString(7));
@@ -155,15 +159,16 @@ public class GetVwMapNteeVtnPyn {
 						presv_grad = JsonParser.colWrite_String_eic(rs.getString(15));
 						area = JsonParser.colWrite_String_eic(rs.getString(16));
 						rm = JsonParser.colWrite_String_eic(rs.getString(17));
-						//geom = JsonParser.colWrite_String_eic(rs.getString(18));
-						
+						// geom =
+						// JsonParser.colWrite_String_eic(rs.getString(18));
+
 						// 파일에 쓰기
 						try {
 							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
 
 							pw.write(spce_id);
 							pw.write("|^");
-							pw.write(examin_year); 
+							pw.write(examin_year);
 							pw.write("|^");
 							pw.write(tme);
 							pw.write("|^");
@@ -203,9 +208,11 @@ public class GetVwMapNteeVtnPyn {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						
-						//System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "/" + Integer.toString(rowCount) + " 건");
-						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) +"번째 줄");
+
+						// System.out.println("진행도 :::" +
+						// Integer.toString(rs.getRow()) + "/" +
+						// Integer.toString(rowCount) + " 건");
+						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "번째 줄");
 					}
 
 				}
@@ -213,6 +220,8 @@ public class GetVwMapNteeVtnPyn {
 			} catch (SQLException sqle) {
 
 				System.out.println("SELECT문에서 예외 발생");
+
+				cf = "Y";
 				sqle.printStackTrace();
 
 			} finally {
@@ -229,6 +238,11 @@ public class GetVwMapNteeVtnPyn {
 					}
 				} catch (Exception e) {
 					throw new RuntimeException(e.getMessage());
+				}
+
+				// 쿼리에서 에러 발생시에는 종료로 빠진다.
+				if (cf.equals("Y")) {
+					System.exit(-1);
 				}
 
 			}

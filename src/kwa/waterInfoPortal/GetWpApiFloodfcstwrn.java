@@ -23,6 +23,9 @@ public class GetWpApiFloodfcstwrn {
 			Connection conn = null; // DB연결된 상태(세션)을 담은 객체
 			PreparedStatement pstm = null; // SQL 문을 나타내는 객체
 			ResultSet rs = null; // 쿼리문을 날린것에 대한 반환값을 담을 객체
+			
+			//sql 쿼리 에러시 로그 확인용 변수
+			String cf = "N";
 
 			try {
 				
@@ -250,6 +253,8 @@ public class GetWpApiFloodfcstwrn {
 			} catch (SQLException sqle) {
 
 				System.out.println("SELECT문에서 예외 발생");
+				
+				cf = "Y";
 				sqle.printStackTrace();
 
 			} finally {
@@ -266,6 +271,11 @@ public class GetWpApiFloodfcstwrn {
 					}
 				} catch (Exception e) {
 					throw new RuntimeException(e.getMessage());
+				}
+				
+				//쿼리에서 에러 발생시에는 종료로 빠진다.
+				if(cf.equals("Y")) {
+					System.exit(-1);
 				}
 
 			}

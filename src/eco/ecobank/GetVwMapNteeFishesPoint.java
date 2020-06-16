@@ -24,6 +24,9 @@ public class GetVwMapNteeFishesPoint {
 			PreparedStatement pstm = null; // SQL 문을 나타내는 객체
 			ResultSet rs = null; // 쿼리문을 날린것에 대한 반환값을 담을 객체
 
+			// sql 쿼리 에러시 로그 확인용 변수
+			String cf = "N";
+
 			try {
 
 				conn = DBConnection.getPostConnection("eco");
@@ -36,27 +39,29 @@ public class GetVwMapNteeFishesPoint {
 
 				pstm = conn.prepareStatement(query);
 				pstm.setFetchSize(1);
-				
+
 				System.out.println("start query");
 				rs = pstm.executeQuery();
 				System.out.println("done query");
-				
+
 				rs.setFetchSize(1);
 
 				// 전체 레코드 수를 구하기 위해 커서를 마지막으로 이동
-				/*rs.last();
-
-				int rowCount = rs.getRow();
-
-				System.out.println("전체 건 수 :::" + Integer.toString(rowCount) + " 건");
-
-				// 다시 처음부터 조회해야 하므로 커서는 초기화
-				rs.beforeFirst();*/
+				/*
+				 * rs.last();
+				 * 
+				 * int rowCount = rs.getRow();
+				 * 
+				 * System.out.println("전체 건 수 :::" + Integer.toString(rowCount)
+				 * + " 건");
+				 * 
+				 * // 다시 처음부터 조회해야 하므로 커서는 초기화 rs.beforeFirst();
+				 */
 
 				if (args[0].equals("_tset")) {
 
 					while (rs.next()) {
-						
+
 						// 전체 레코드 개수만큼
 						String spce_id = " "; // 공간_아이디
 						String examin_year = " "; // 조사_년도
@@ -164,50 +169,48 @@ public class GetVwMapNteeFishesPoint {
 						examin_de_scd = rs.getString(50);
 						examin_odr = rs.getString(51);
 						spcs_schlshp_ttle = rs.getString(52);
-						//geom = rs.getString(53);
+						// geom = rs.getString(53);
 
-						System.out.println("spce_id::" + spce_id + "::examin_year::" + examin_year + "::tme::"
-								+ tme + "::examin_begin_de::" + examin_begin_de + "::examin_end_de::"
-								+ examin_end_de + "::gnrl_examin_charger_nm::" + gnrl_examin_charger_nm
-								+ "::rspnsbl_examin_charger_nm::" + rspnsbl_examin_charger_nm
-								+ "::spcs_korean_ttle::" + spcs_korean_ttle + "::spcs_eng_ttle::" + spcs_eng_ttle
-								+ "::idvd_qy::" + idvd_qy + "::partclr_matter::" + partclr_matter + "::photo_dc::"
-								+ photo_dc + "::photo_file_ttle::" + photo_file_ttle + "::ar::" + ar
-								+ "::sml_envrn::" + sml_envrn + "::wrssm_ar::" + wrssm_ar + "::wtsd_grdnt::"
-								+ wtsd_grdnt + "::wtsd_vtn::" + wtsd_vtn + "::dpwt::" + dpwt + "::undw_plnt::"
-								+ undw_plnt + "::qltwtr_trbd::" + qltwtr_trbd + "::dgr_rhtbnk_lad_use_sttus::"
-								+ dgr_rhtbnk_lad_use_sttus + "::dgr_lftbnk_lad_use_sttus::"
-								+ dgr_lftbnk_lad_use_sttus + "::dgr_lad_use::" + dgr_lad_use
-								+ "::floor_sml_envrn::" + floor_sml_envrn + "::river_ttle::" + river_ttle
+						System.out.println("spce_id::" + spce_id + "::examin_year::" + examin_year + "::tme::" + tme
+								+ "::examin_begin_de::" + examin_begin_de + "::examin_end_de::" + examin_end_de
+								+ "::gnrl_examin_charger_nm::" + gnrl_examin_charger_nm
+								+ "::rspnsbl_examin_charger_nm::" + rspnsbl_examin_charger_nm + "::spcs_korean_ttle::"
+								+ spcs_korean_ttle + "::spcs_eng_ttle::" + spcs_eng_ttle + "::idvd_qy::" + idvd_qy
+								+ "::partclr_matter::" + partclr_matter + "::photo_dc::" + photo_dc
+								+ "::photo_file_ttle::" + photo_file_ttle + "::ar::" + ar + "::sml_envrn::" + sml_envrn
+								+ "::wrssm_ar::" + wrssm_ar + "::wtsd_grdnt::" + wtsd_grdnt + "::wtsd_vtn::" + wtsd_vtn
+								+ "::dpwt::" + dpwt + "::undw_plnt::" + undw_plnt + "::qltwtr_trbd::" + qltwtr_trbd
+								+ "::dgr_rhtbnk_lad_use_sttus::" + dgr_rhtbnk_lad_use_sttus
+								+ "::dgr_lftbnk_lad_use_sttus::" + dgr_lftbnk_lad_use_sttus + "::dgr_lad_use::"
+								+ dgr_lad_use + "::floor_sml_envrn::" + floor_sml_envrn + "::river_ttle::" + river_ttle
 								+ "::river_rhtbnk_dike_ty::" + river_rhtbnk_dike_ty + "::river_lftbnk_dike_ty::"
-								+ river_lftbnk_dike_ty + "::river_stle::" + river_stle + "::dstrb_fctr::"
-								+ dstrb_fctr + "::capt_etc::" + capt_etc + "::capt_sknt::" + capt_sknt
-								+ "::capt_csnt::" + capt_csnt + "::rvbd_sml_envrn::" + rvbd_sml_envrn
-								+ "::rvbd_partcl::" + rvbd_partcl + "::rvbd_partcl_stn_lrge_rate::"
-								+ rvbd_partcl_stn_lrge_rate + "::rvbd_partcl_stn_middl_rate::"
-								+ rvbd_partcl_stn_middl_rate + "::rvbd_partcl_sand_rate::" + rvbd_partcl_sand_rate
-								+ "::rvbd_partcl_pbbls_rate::" + rvbd_partcl_pbbls_rate
-								+ "::rvbd_partcl_pbbls_small_rate::" + rvbd_partcl_pbbls_small_rate
-								+ "::rvbd_partcl_all_rate::" + rvbd_partcl_all_rate + "::grid_no::" + grid_no
-								+ "::fml_eng_ttle::" + fml_eng_ttle + "::fml_korean_ttle::" + fml_korean_ttle
-								+ "::ordr_eng_ttle::" + ordr_eng_ttle + "::ordr_korean_ttle::" + ordr_korean_ttle
-								+ "::runwt_bt::" + runwt_bt + "::dgr_river_bt::" + dgr_river_bt
+								+ river_lftbnk_dike_ty + "::river_stle::" + river_stle + "::dstrb_fctr::" + dstrb_fctr
+								+ "::capt_etc::" + capt_etc + "::capt_sknt::" + capt_sknt + "::capt_csnt::" + capt_csnt
+								+ "::rvbd_sml_envrn::" + rvbd_sml_envrn + "::rvbd_partcl::" + rvbd_partcl
+								+ "::rvbd_partcl_stn_lrge_rate::" + rvbd_partcl_stn_lrge_rate
+								+ "::rvbd_partcl_stn_middl_rate::" + rvbd_partcl_stn_middl_rate
+								+ "::rvbd_partcl_sand_rate::" + rvbd_partcl_sand_rate + "::rvbd_partcl_pbbls_rate::"
+								+ rvbd_partcl_pbbls_rate + "::rvbd_partcl_pbbls_small_rate::"
+								+ rvbd_partcl_pbbls_small_rate + "::rvbd_partcl_all_rate::" + rvbd_partcl_all_rate
+								+ "::grid_no::" + grid_no + "::fml_eng_ttle::" + fml_eng_ttle + "::fml_korean_ttle::"
+								+ fml_korean_ttle + "::ordr_eng_ttle::" + ordr_eng_ttle + "::ordr_korean_ttle::"
+								+ ordr_korean_ttle + "::runwt_bt::" + runwt_bt + "::dgr_river_bt::" + dgr_river_bt
 								+ "::examin_de_frst::" + examin_de_frst + "::examin_de_scd::" + examin_de_scd
 								+ "::examin_odr::" + examin_odr + "::spcs_schlshp_ttle::" + spcs_schlshp_ttle
 								+ "::geom::" + geom);
 
 					}
-					
+
 					System.out.println("ECO_06 SELECT 프로세스 종료.");
 
 				} else {
-					
+
 					File file = null;
 
 					file = new File(args[0]);
-					
+
 					while (rs.next()) {
-						
+
 						// 전체 레코드 개수만큼
 						String spce_id = " "; // 공간_아이디
 						String examin_year = " "; // 조사_년도
@@ -262,7 +265,7 @@ public class GetVwMapNteeFishesPoint {
 						String examin_odr = " "; // 조사_차수
 						String spcs_schlshp_ttle = " "; // 종_학술_명칭
 						String geom = " "; // 지오메트리
-						
+
 						spce_id = JsonParser.colWrite_String_eic(rs.getString(1));
 						examin_year = JsonParser.colWrite_String_eic(rs.getString(2));
 						tme = JsonParser.colWrite_String_eic(rs.getString(3));
@@ -315,8 +318,9 @@ public class GetVwMapNteeFishesPoint {
 						examin_de_scd = JsonParser.colWrite_String_eic(rs.getString(50));
 						examin_odr = JsonParser.colWrite_String_eic(rs.getString(51));
 						spcs_schlshp_ttle = JsonParser.colWrite_String_eic(rs.getString(52));
-						//geom = JsonParser.colWrite_String_eic(rs.getString(53));
-						
+						// geom =
+						// JsonParser.colWrite_String_eic(rs.getString(53));
+
 						// 파일에 쓰기
 						try {
 							PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file, true)));
@@ -433,11 +437,13 @@ public class GetVwMapNteeFishesPoint {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						
-						//System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "/" + Integer.toString(rowCount) + " 건");
-						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) +"번째 줄");
+
+						// System.out.println("진행도 :::" +
+						// Integer.toString(rs.getRow()) + "/" +
+						// Integer.toString(rowCount) + " 건");
+						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "번째 줄");
 					}
-					
+
 					if (file.exists()) {
 						System.out.println("파일이 생성되었습니다.");
 					} else {
@@ -451,6 +457,8 @@ public class GetVwMapNteeFishesPoint {
 			} catch (SQLException sqle) {
 
 				System.out.println("SELECT문에서 예외 발생");
+
+				cf = "Y";
 				sqle.printStackTrace();
 
 			} finally {
@@ -467,6 +475,11 @@ public class GetVwMapNteeFishesPoint {
 					}
 				} catch (Exception e) {
 					throw new RuntimeException(e.getMessage());
+				}
+
+				// 쿼리에서 에러 발생시에는 종료로 빠진다.
+				if (cf.equals("Y")) {
+					System.exit(-1);
 				}
 
 			}
