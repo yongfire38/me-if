@@ -186,6 +186,12 @@ public class DBConnection {
 	          pw = getScienceProperty("wem_oracle_pw");
 	          url = getScienceProperty("wem_oracle_url");
 	          
+		 } else if(sysNm.equals("tmd")){
+			 
+			  user = getScienceProperty("tmd_oracle_user");
+	          pw = getScienceProperty("tmd_oracle_pw");
+	          url = getScienceProperty("tmd_oracle_url");
+	          
 		 }
        
         try {
