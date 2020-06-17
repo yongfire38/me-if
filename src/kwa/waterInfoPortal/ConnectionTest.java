@@ -40,10 +40,12 @@ public class ConnectionTest {
 				
 				// 전체 레코드 개수만큼
 				String col = " ";
+				String col2 = " ";
 
 				col = rs.getString(1);
+				col2 = rs.getString(2);
 
-				System.out.println("데이터::" + col);
+				System.out.println("데이터::" + col + " 데이터2::" + col2);
 
 			}
 			

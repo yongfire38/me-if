@@ -16,9 +16,10 @@ import common.JsonParser;
 public class GetWpApiFloodwldata {
 
 	//물정보포털 - 수위관측소 수위(10분단위) 정보
+	// 파라미터는 경로와 년월일시(yyyymmdd)
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-		if (args.length == 1) {
+		if (args.length == 2) {
 
 			Connection conn = null; // DB연결된 상태(세션)을 담은 객체
 			PreparedStatement pstm = null; // SQL 문을 나타내는 객체
@@ -33,7 +34,7 @@ public class GetWpApiFloodwldata {
 
 				// SQL 문장을 만들고 만약 문장이 질의어(SELECT문)라면
 				// 그 결과를 담을 ResulSet 객체를 준비한 후 실행시킨다.
-				String query = DBConnection.getProperty("kwa_oracle_kwa06_query");
+				String query = DBConnection.getProperty("kwa_oracle_kwa06_query") + "'%" + args[1] +"'";
 				System.out.println("query :::" + query);
 
 				//conn.setAutoCommit(false);

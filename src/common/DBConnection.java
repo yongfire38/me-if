@@ -55,6 +55,10 @@ public class DBConnection {
 			String resource = "";
 			
 			Path relativePath = Paths.get("");
+			
+			//현재 실행 경로의 절대 경로
+			System.out.println("execute path:: " + relativePath.toAbsolutePath().toString());
+			
 		    String path = relativePath.toAbsolutePath().getParent().toString();
 
 			if (os.indexOf("windows") > -1) {
@@ -186,8 +190,13 @@ public class DBConnection {
        
         try {
         	
-        	//드라이버는 어느 시스템이든 오라클이면 동일
-            Class.forName(getScienceProperty("eic_oracle_driver"));        
+        	
+        	if(sysNm.equals("eic") || sysNm.equals("kwa")) {
+        		 Class.forName(getProperty("eic_oracle_driver"));    
+        	} else {
+        		 Class.forName(getScienceProperty("eic_oracle_driver"));    
+        	}
+            
             conn = DriverManager.getConnection(url, user, pw);
             
             System.out.println("Database에 연결되었습니다.\n");
