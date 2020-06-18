@@ -132,7 +132,10 @@ public class GetWpApiFloodwldata {
 						}
 
 						//System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "/" + Integer.toString(rowCount) + " 건");
-						System.out.println("진행도 :::" + Integer.toString(rs.getRow()) +"번째 줄");
+
+						if(rs.getRow() % 10000 == 0){
+							System.out.println("진행도 :::" + Integer.toString(rs.getRow()) + "번째 줄");
+						}
 					}
 
 					if (file.exists()) {
