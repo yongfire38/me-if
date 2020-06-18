@@ -54,12 +54,9 @@ public class DBConnection {
 			String value = "";
 			String resource = "";
 			
-			Path relativePath = Paths.get("");
+			Path relativePath = Paths.get(System.getenv("APP_ROOT"));
 			
-			//현재 실행 경로의 절대 경로
-			System.out.println("execute path:: " + relativePath.toAbsolutePath().toString());
-			
-		    String path = relativePath.toAbsolutePath().getParent().toString();
+		    String path = relativePath.toString();
 
 			if (os.indexOf("windows") > -1) {
 				// 윈도우면 현재 실행위치 내 conf 폴더 안
