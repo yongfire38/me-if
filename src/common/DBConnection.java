@@ -54,6 +54,7 @@ public class DBConnection {
 			String value = "";
 			String resource = "";
 			
+			// OS 환경변수에서 받은 경로
 			Path relativePath = Paths.get(System.getenv("APP_ROOT"));
 			
 		    String path = relativePath.toString();
@@ -62,7 +63,7 @@ public class DBConnection {
 				// 윈도우면 현재 실행위치 내 conf 폴더 안
 				resource = System.getProperty("user.dir") + "\\conf\\apiConfig.properties";
 			} else {
-				// 윈도우 외에는 (사실상 리눅스 서버) 한 단계 올라가서 conf 폴더 밑
+				// 윈도우 외에는 (사실상 리눅스 서버) OS 환경변수에서 받은 경로 아래 conf 폴더 밑
 				resource = path + "/conf/apiConfig.properties";
 			}
 			
