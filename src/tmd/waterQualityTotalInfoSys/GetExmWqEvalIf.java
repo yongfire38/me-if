@@ -67,17 +67,21 @@ public class GetExmWqEvalIf {
 
 					while (rs.next()) {
 
-						String WATERDGR_CD = " "; // 지점번호
-						String TA_LEVEL = " "; // 지점명
-						String UNITDGR_CD = " "; // 지점표준코드
-						String P_ITEM = " "; // 정보생성기관명칭
-						String TARGET_WQ = " "; // 특성분류_대분류
+						String WATERDGR_CD = " "; // 수계코드
+						String WATERDGR_NM = " "; // 수계명칭
+						String TA_LEVEL = " "; // 총량단계
+						String UNITDGR_CD = " "; // 단위유역코드
+						String UNITDGR_NM = " "; // 단위유역명칭
+						String P_ITEM = " "; // 대상물질
+						String TARGET_WQ = " "; // 목표수질
 
 						WATERDGR_CD = JsonParser.colWrite_String_eic(rs.getString(1));
-						TA_LEVEL = JsonParser.colWrite_String_eic(rs.getString(2));
-						UNITDGR_CD = JsonParser.colWrite_String_eic(rs.getString(3));
-						P_ITEM = JsonParser.colWrite_String_eic(rs.getString(4));
-						TARGET_WQ = JsonParser.colWrite_String_eic(rs.getString(5));
+						WATERDGR_NM = JsonParser.colWrite_String_eic(rs.getString(2));
+						TA_LEVEL = JsonParser.colWrite_String_eic(rs.getString(3));
+						UNITDGR_CD = JsonParser.colWrite_String_eic(rs.getString(4));
+						UNITDGR_NM = JsonParser.colWrite_String_eic(rs.getString(5));
+						P_ITEM = JsonParser.colWrite_String_eic(rs.getString(6));
+						TARGET_WQ = JsonParser.colWrite_String_eic(rs.getString(7));
 
 						// 파일에 쓰기
 						try {
@@ -85,9 +89,13 @@ public class GetExmWqEvalIf {
 
 							pw.write(WATERDGR_CD);
 							pw.write("|^");
+							pw.write(WATERDGR_NM);
+							pw.write("|^");
 							pw.write(TA_LEVEL);
 							pw.write("|^");
 							pw.write(UNITDGR_CD);
+							pw.write("|^");
+							pw.write(UNITDGR_NM);
 							pw.write("|^");
 							pw.write(P_ITEM);
 							pw.write("|^");
